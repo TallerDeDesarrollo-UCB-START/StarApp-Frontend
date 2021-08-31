@@ -4,9 +4,6 @@
 
 <img alt="Logo" align="right" src="https://create-react-app.dev/img/logo.svg" width="20%" />
 
-Create React apps with no build configuration.
-
-- [Crear una App](#creating-an-app) – Como crear una nueva app.
 
 ## Comandos para instalar
 
