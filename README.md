@@ -8,7 +8,12 @@
 ## Comandos para instalar
 
 ```sh
-npx create-react-app my-app
-cd my-app
-npm start
+Abrir una ventana de comandos CMD
+Ejecutar los siguientes comandos para verificar la instalacion
+    node --version
+    npm --version
+Crear un proyecto con React Js
+    npx create-react-app "Nombre de la aplicacion"
+Abrir Visual studio Code y ejecutar el siguiente comando
+    npm start
 ```
