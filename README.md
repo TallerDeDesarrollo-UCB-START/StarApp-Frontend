@@ -6,8 +6,7 @@
 
 Create React apps with no build configuration.
 
-- [Crear una App](#creating-an-app) – How to create a new app.
-- [Manual de Usuario](https://facebook.github.io/create-react-app/) – How to develop apps bootstrapped with Create React App.
+- [Crear una App](#creating-an-app) – Como crear una nueva app.
 
 ## Comandos para instalar
 
