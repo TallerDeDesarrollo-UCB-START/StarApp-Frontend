@@ -12,7 +12,6 @@ function App() {
         <Profile />
         <Home />
       </div>
-      <Route path='/profile' component={Profile} />
     </Router>
   );
 }
