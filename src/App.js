@@ -4,15 +4,17 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Profile from './components/Profile';
 import Home from './components/Home';
 
-function App() {
+
+const App = () => {
+
   return (
     <Router>
 
-      <div className="App">
-        <Profile />
-        <Home />
-      </div>
-    </Router>
+      {/* <div className="App"> */}
+      <Profile />
+      <Home />
+      {/* </div> */}
+    </Router >
   );
 }
 

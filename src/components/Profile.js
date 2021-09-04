@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { Button } from '@material-ui/core';
+import './Profile.css';
+
 
 const Profile = () => {
     const location = useLocation()
@@ -11,23 +14,29 @@ const Profile = () => {
             <div>
                 {location.pathname != '/' && (
                     <div>
-                        <h2>Nombre completo</h2>
-                        <p>Pequeña descripción de la persona</p>
-                        <button>Datos personales</button>
-                        <button>Eventos asistidos</button>
-                        <section class="container">
+
+                        <div class="picture">
+
+
+                        </div>
+                        <div class="name">
+                            <h2>Nombre completo</h2>
+                            <p>Pequeña descripción de la persona</p>
+                        </div>
+                        <Button color="primary">Datos personales</Button>
+                        <Button color="primary">Eventos asistidos</Button>
+                        <div class="container">
                             <div class="btn-container">
-                                <h2>CUADRADO</h2>
-                                <h2>CUADRADO</h2>
-                                <h2>CUADRADO</h2>
+
+
                             </div>
                             <div class="gen-info-container">
-                                <p>Proyectos en los que participa</p>
-                                <p>Clasificación</p>
-                                <p>Horas acumuladas</p>
-                                <p>Insignias</p>
+                                <p><strong>Proyectos en los que participa:</strong></p>
+                                <p><strong>Clasificación:</strong></p>
+                                <p><strong>Horas acumuladas:</strong></p>
+                                <p><strong>Insignias:</strong></p>
                             </div>
-                        </section>
+                        </div>
 
                     </div>
 
