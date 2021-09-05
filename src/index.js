@@ -4,10 +4,63 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { createTheme , ThemeProvider } from '@material-ui/core/styles'
+
+const theme = createTheme ({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#6599BC',
+    },
+    secondary: {
+      main: '#B3DA3F',
+    },
+  },
+  typography: {
+    fontFamily: "Miriam Libre",
+    fontSize: 18,
+    fontWeight: 'normal',
+  },
+})
+
+theme.typography.h1 = {
+  fontStyle: 'normal',
+  fontWeight: 'bold',
+  fontSize: '30px',
+  '@media (min-width:768px)': {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '42px',
+    lineHeight: '55px',
+  },
+};
+theme.typography.h2 = {
+  fontStyle: 'normal',
+  fontWeight: 'bold',
+  fontSize: '26px',
+  '@media (min-width:768px)': {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '36px',
+    lineHeight: '55px',
+  },
+};
+theme.typography.h3 = {
+  fontStyle: 'normal',
+  fontWeight: '400px',
+  fontSize: '18px',
+  '@media (min-width:768px)': {
+    fontStyle: 'normal',
+    fontWeight: '400px',
+    fontSize: '27px',
+    lineHeight: '55px',
+  },
+};
+
 ReactDOM.render(
-  <React.StrictMode>
+  <ThemeProvider theme={theme}>
     <App />
-  </React.StrictMode>,
+  </ThemeProvider>,
   document.getElementById('root')
 );
 
