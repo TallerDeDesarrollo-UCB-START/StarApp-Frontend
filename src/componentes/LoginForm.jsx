@@ -6,6 +6,7 @@ import InputTextbox from './InputTextbox'
 import { Form } from "react-final-form"
 import {useMediaQuery, Button, Link} from '@material-ui/core'
 import { validEmail} from './RegEx'
+//import AxiosClient from './AxiosClient'
 
 const useStyles = makeStyles(theme => ({
     loginContainer : {
@@ -58,8 +59,18 @@ const LoginForm = () => {
         }
         return errors
     }
-    const onSubmit = () => {
-        alert('Hola mundo')
+    //const URL = process.env.REACT_APP_API
+    const onSubmit = async values => {
+        // return AxiosClient.post(`${URL}products/`, values)
+        //     .then(response => {
+        //         if ((response.status = 201)) {
+        //             console.log(response.data.data)
+        //         }
+        //     })
+        //     .catch(() => {
+        //         console.log(response.status)
+        //     })
+        alert('*inicio de sesión*')
     }
     return (
         <div className = {classes.loginContainer}>
