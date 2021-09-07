@@ -29,14 +29,14 @@ class Event extends React.Component {
                 <div>
                     <Link to="/events/event/attendance">Validar asitencia de voluntarios</Link>
                 </div>
+                <div>
+                    <Link to="/events/event/registroAEvento">Participar en el evento</Link>
+                </div>
 
             </div>
 
 
-
-
-
-        );
+         );
     }
 }
 

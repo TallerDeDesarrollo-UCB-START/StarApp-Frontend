@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Home from './components/Home';
 import EventsList from './components/EventsList';
 import Event from './components/Event';
+import FormularioRegistroEvento from './components/FormularioRegistroEvento';
 
 
 
@@ -38,6 +39,10 @@ function App() {
 
           <Route path="/events/event" exact>
             <Event />
+          </Route>
+
+          <Route path="/events/event/registroAEvento" exact>
+            <FormularioRegistroEvento />
           </Route>
 
         </Switch>
