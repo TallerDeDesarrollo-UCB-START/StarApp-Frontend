@@ -1,13 +1,50 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import Home from './components/Home';
+import EventsList from './components/EventsList';
+import Event from './components/Event';
+
+
+
 
 function App() {
+  // const location = useLocation()
   return (
-    <div className="App">
-      <header className="App-header">
-        Hello World!
-      </header>
-    </div>
+    <Router>
+      <div className="container">
+        <h1>Navbar...</h1>
+
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+
+        <div>
+          <Link to="/events">Eventos</Link>
+        </div>
+
+
+
+
+
+        <Switch>
+
+          <Route path="/events" exact>
+            <EventsList />
+          </Route>
+
+          <Route path="/" exact>
+            <Home />
+          </Route>
+
+          <Route path="/events/event" exact>
+            <Event />
+          </Route>
+
+        </Switch>
+
+      </div>
+    </Router>
+
   );
 }
 
