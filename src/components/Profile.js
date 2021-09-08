@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core';
 import FormEditUser from "./FormEditUser"
 import './Profile.css';
-import Formulario from './EditProfile/EditProfile';
+import FormEditPerfil from './EditProfile/EditProfile';
 
 var volunteer={
     name: 'Juanito',
@@ -81,12 +81,6 @@ const Profile = (onClick) => {
         </div>
     );
 
-    const body1 = (
-        <div style={modalStyle} className={classes.paper}>
-          <h2 id="simple-modal-title">Editar Usuario</h2>
-            <Formulario volunteerst={volunteer} />      
-        </div>
-    );
    
     return (
         <div>            
@@ -114,17 +108,7 @@ const Profile = (onClick) => {
                             >
                                 {body}
                             </Modal>
-                            <div>
-                            <Button type="button" onClick={handleOpen} variant="contained" color="primary" >Editar Perfil</Button>
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="simple-modal-title"
-                                aria-describedby="simple-modal-description"
-                            >
-                                {body1}
-                            </Modal>
-                            </div>
+                            
                         </div>
 
                         <Button onClick={showData} color="primary" borderRadius="20%">Datos personales</Button>

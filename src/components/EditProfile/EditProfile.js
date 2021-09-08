@@ -1,137 +1,76 @@
-import React, { Fragment, useState } from "react";
-import { Button, TextField, Checkbox, FormControlLabel, Grid} from "@material-ui/core";
+import React, {Fragment,useState} from 'react';
+import { FormControl, Input, InputLabel, FormHelperText } from '@material-ui/core';
 
-function Formulario({enviar, validador, termosDeUso}) {
-  const [name, setName] = useState("");
-  const [lastName, setSobreome] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [checkBox, setCheckBox] = useState("");
-  const [errorname, setErro] = useState({ name: { valido: true, texto: "" } });
-  const [errorLastName, setErroLastName] = useState({
-    lastName: { valido: true, texto: "" },
-  });
-  const [errorEmail, setErroEmail] = useState({
-    email: { valido: true, texto: "" },
-  });
-  const [errorAge, setErroage] = useState({
-    age: { valido: true, texto: "" },
-  });
-  // const [errorCheckBox, setErroCheckBox]= useState({
-  //   checkBox:{valido: true, texto: "" }, 
-  // });
-  return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        enviar({ name, lastName, email, age, checkBox });
-      }}
-      
-    >
-      <Fragment>
-        <TextField
-          value={name}
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-          onBlur={(event) => {
-            const validar = validador(name);
-            setErro({ name: validar });
-          }}
-          error={!errorname.name.valido}
-          helperText={errorname.name.texto}
-          margin="normal"
-          id="name"
-          label="name"
-          variant="outlined"
-          fullWidth
-        />
-        <TextField
-          value={lastName}
-          onChange={(event) => {
-            setSobreome(event.target.value);
-          }}
-          onBlur={(event) => {
-            const validar = validador(lastName);
-            setErroLastName({ lastName: validar });
-          }}
-          error={!errorLastName.lastName.valido}
-          helperText={errorLastName.lastName.texto}
-          margin="normal"
-          id="lastName"
-          label="lastName"
-          variant="outlined"
-          fullWidth
-        />
-        <TextField
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-          onBlur={(event) => {
-            const validar = validador(email);
-            setErroEmail({ email: validar });
-          }}
-          error={!errorEmail.email.valido}
-          helperText={errorEmail.email.texto}
-          margin="normal"
-          id="email"
-          label="E-mail"
-          variant="outlined"
-          fullWidth
-        />
-        <TextField
-          value={age}
-          onChange={(event) => {
-            setAge(event.target.value);
-          }}
-          onBlur={(event) => {
-            const validar = validador(age);
-            setErroage({ age: validar });
-          }}
-          error={!errorAge.age.valido}
-          helperText={errorAge.age.texto}
-          margin="normal"
-          id="age"
-          label="age"
-          variant="outlined"
-          fullWidth
-        />
+const FormEditPerfil = ({volunteerts}) => {
+    
+    //const customData = require('./customData.json');
+    /*var volunteer={
+        nombre: 'pepe',
+        email: 'pepe@gmail.com',
+        fecNac: '12/12/12',
+        edad: '12',
+        
+    }*/
+    const {nombre ,email, fecNac, edad }=volunteerts;
 
-        <Grid container direction="row" justifyContent="space-between">
-          <FormControlLabel
-            id="checkBox"
-            margin="normal"
-            label="esta seguro de cambiar sus datos"
+    const [datos, setDatos] = useState({
+        usernombre: nombre,
+        useremail: email,
+        userfecNac: fecNac,
+        useredad: edad
+    })
+
+    const handleInputChange = (event) => {
+        // console.log(event.target.name)
+        console.log(event.target.value)
+        setDatos({
+            ...datos,
+            [event.target.name] : event.target.value
+        })
+    }
+
+    const enviarDatos = (event) => {
+        event.preventDefault()
+        console.log('enviando datos...' + datos.usernombre + ' ' + datos.useremail + ' ' + datos.userfecNac + ' ' + datos.useredad)
+    }
+
+    return (
+        <Fragment>
+            <FormControl>
+                <div>
+                    <InputLabel htmlFor="my-input">Email address</InputLabel>
+                    <Input id="my-input" aria-describedby="my-helper-text" />
+                    <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
+                </div>
+                
+            </FormControl>
+            <h1>Editar Perfil</h1>
+            <form onSubmit={enviarDatos}>
+                <div >
+                    <input value={datos.usernombre}></input>
+                    <input  type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="nombre"></input>
+                </div>
+                <div value={datos.useremail}>
+                    <input  type="text" placeholder="Email" className="form-control" onChange={handleInputChange} name="email"></input>
+                </div>
+                <div value={datos.userfecNac}>
+                    <input type="text" placeholder="Fecha de Nacimiento" className="form-control" onChange={handleInputChange} name="fecNac"></input>
+                </div>
+                <div value={datos.useredad}>
+                    <input  type="text" placeholder="Edad" className="form-control" onChange={handleInputChange} name="edad"></input>
+                </div>
+                <button type="submit" className="btn btn-primary">Guardar</button>
+                <button type="submit" className="btn btn-primary">Cancelar</button>
+            </form>
             
-            control={
-              <Checkbox
-              
-                color="primary"
-                value={checkBox}
-                onChange={(event) => {
-                  setCheckBox(event.target.checked);
-                }}
-                // onClick={(event) => {
-                //   const validar = termosDeUso(checkBox);
-                //   setErroCheckBox({ checkBox: validar });
-                // }}
-                // error={!errorCheckBox.checkBox.valido}
-                // helperText={errorCheckBox.checkBox.texto} 
-                 
-              />
-            }
-          />
-            <Button type="submit" variant="outlined" color="primary">
-                Guardar
-            </Button>
-            <Button type="submit" variant="outlined" color="primary">
-                Cancelar
-            </Button>
-        </Grid>
-      </Fragment>
-    </form>
-  );
+            <ul>
+                <li>{datos.usernombre}</li>
+                <li>{datos.useremail}</li>
+                <li>{datos.userfecNac}</li>
+                <li>{datos.useredad}</li>
+            </ul>
+        </Fragment>
+    );
 }
-
-export default Formulario;
+ 
+export default FormEditPerfil
