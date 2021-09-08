@@ -11,6 +11,8 @@ img {
 
 .header-menu {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header-menu-option {
