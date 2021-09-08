@@ -34,7 +34,7 @@ const InputTextbox = ({title, placeholder, type, name}) => {
     const classes = useStyles()
     return (
         <div className = {classes.textboxContainer}>
-            <label for={name} className = {classes.textboxLabel}>
+            <label htmlFor={name} className = {classes.textboxLabel}>
                 <Typography> {title} </Typography> 
             </label>
             <Field

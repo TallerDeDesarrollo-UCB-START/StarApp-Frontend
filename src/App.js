@@ -1,6 +1,5 @@
 import './App.css'
 
-import LoginForm from './componentes/LoginForm'
 import RegisterForm from './componentes/RegisterForm'
 
 
