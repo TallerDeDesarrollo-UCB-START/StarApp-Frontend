@@ -16,4 +16,7 @@ Crear un proyecto con React Js
     npx create-react-app "Nombre de la aplicacion"
 Abrir Visual studio Code y ejecutar el siguiente comando
     npm start
+Comandos adicionales crear evento 
+    npm i react-router-dom
+    npm i reactstrap
 ```
