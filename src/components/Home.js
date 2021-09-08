@@ -22,29 +22,39 @@ const Home = () => {
         <div>
             {location.pathname === '/' && (
                 
-                <Card >
+                <Card className="cardHome">
                     
                         <CardMedia
                             style={{maxWidth: 500}}
-                            image="/static/images/cards/contemplative-reptile.jpg"
+                            image="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Home_Icon.svg/2048px-Home_Icon.svg.png"
                             title="Contemplative Reptile"
                         />
                         <CardContent>
                             <ThemeProvider theme={theme}>
-                                <Typography className="title" variant="h1" component="h2" gutterBottom >
+                                <Typography className="titleSeccion" variant="h1" component="h2" gutterBottom >
                                     HAZTE STARTER
-                                </Typography>
+                                </Typography>   
                             </ThemeProvider>
                             
                             <Typography className="textHome" variant="body2" color="textPrimary" component="p">
                                 Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                across all continents except Antarctica
+                                across all continents except Antarcticallllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll'''
+                                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                                across all continents except Antarcticallllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll'''
+                                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                                across all continents except Antarcticallllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll'''
                             </Typography>
                         </CardContent>
                    
                     <CardActions>
-                        <Button  className="button" size="large" color="primary" >
-                        Hazte START!
+                        <Button  variant="contained" className="button" size="large" color="primary" >
+                        START
                         </Button>
                     </CardActions>
                  </Card>

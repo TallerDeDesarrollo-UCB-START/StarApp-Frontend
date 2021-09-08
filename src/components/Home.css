@@ -1,10 +1,21 @@
-.title{
+.titleSeccion{
     text-align: center;
 }
 .button{
-    justify-content: right;
+  
+    height:50px; 
+    width:100px; 
+    margin: -50px -50px; 
+    position:relative;
+    top:80%; 
+    left:50%;
     color:black;
+
 }
 .textHome{
     text-align: center;
+}
+.cardHome{
+    height: 500px;
+
 }
