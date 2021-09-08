@@ -7,7 +7,7 @@ const Home = () => {
         <div>
             {location.pathname === '/' && (
                 <header className="App-header">
-                    <h3>Hello World</h3>
+                    <h3>Hello World page</h3>
                 </header>
             )}
         </div>
