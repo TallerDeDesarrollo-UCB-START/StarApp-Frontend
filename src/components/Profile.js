@@ -9,34 +9,50 @@ var volunteer = {
     age: 25,
     event: 'El Agua es Oro'
 }
-function showData() {
+function mostrarDatos() {
     document.getElementById('data').innerHTML = `<p><strong>Nombre </strong>${volunteer.name}</p> <p><strong>Edad </strong>${volunteer.age}</p>`
 }
-function showEvents() {
+function mostrarEventos() {
     document.getElementById('data').innerHTML = `<p><strong>Eventos: </strong>${volunteer.event}</p>`
+}
+function editarDatos() {
+    document.getElementById('data').innerHTML = `<p><strong>Editar datos </strong></p>`
 }
 
 const Profile = (onClick) => {
     const location = useLocation()
     return (
-        <div>
+        <div class="container">
+
             {location.pathname === '/' && (
                 <Link to='/profile'>Perfil</Link>
             )}
+
+             
             <div>
-                {location.pathname != '/' && (
+                
+                {location.pathname !== '/' && (
+                    
                     <div>
-
+                        <div class="tabs">
+                        <Link to='/' >Volver</Link>
+                        </div> 
                         <div class="picture">
-
+                        
 
                         </div>
+                        
                         <div class="name">
+                            
                             <h2>{volunteer.name}</h2>
                             <p>Pequeña descripción de la persona</p>
+                            
                         </div>
-                        <Button onClick={showData} color="primary" borderRadius="20%">Datos personales</Button>
-                        <Button onClick={showEvents} color="primary" borderRadius="20%">Eventos asistidos</Button>
+                        <Button onClick={mostrarDatos} color="primary" borderRadius="20%">Datos personales</Button>
+                        <Button onClick={mostrarEventos} color="primary" borderRadius="20%">Eventos asistidos</Button>
+                        <Button onClick={editarDatos} color="primary" borderRadius="30%">Editar Datos</Button>
+                        
+                        
                         <div class="container">
                             <div class="btn-container" id="data">
 

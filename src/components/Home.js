@@ -5,6 +5,7 @@ const Home = () => {
     const location = useLocation()
     return (
         <div>
+            
             {location.pathname === '/' && (
                 <header className="App-header">
                     <h3>Hello World</h3>
