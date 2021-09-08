@@ -1,15 +1,12 @@
-import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import Header from './Header/Header';
 
 const Home = () => {
     const location = useLocation()
     return (
         <div>
-            {location.pathname === '/' && (
-                <header className="App-header">
-                    <h3>Hello World page</h3>
-                </header>
-            )}
+            <Header/>
         </div>
     )
 }
