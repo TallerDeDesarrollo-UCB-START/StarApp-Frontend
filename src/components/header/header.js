@@ -4,13 +4,11 @@ import './Header.css';
 
 const Header = () =>{
     return(
-        <nav>
+        <div class="header-division">
             <div>
-                <div>
-                    <img src={Logo} />
-                </div>
+                <img src={Logo} />
             </div>
-        </nav>
+        </div>
     )
 }
 

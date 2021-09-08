@@ -1,4 +1,14 @@
-nav{
-    height: 50px;
-    background-color: gray;
+.header-division {
+    flex-direction:column;
+    width: 100%;
+    position: sticky;
+    background-color: #CDCDCD;
+}
+
+.header-icon {
+    height: 40px;
+}
+
+img {
+    height:40px;
 }
