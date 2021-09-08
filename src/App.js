@@ -2,6 +2,7 @@ import PaginaProyectos from "./components/PaginaProyectos"
 //import { makeStyles } from '@material-ui/core/styles';
 //States
 import {useState, useEffect} from 'react'
+import Proyectos from "./components/Proyectos"
 
 function App() {
   const [proyectos, setProyectos] = useState([])
@@ -23,7 +24,7 @@ function App() {
     
   return (
     <div>
-      <PaginaProyectos/>
+      <PaginaProyectos datos={proyectos}/>
     </div>
   );
 }

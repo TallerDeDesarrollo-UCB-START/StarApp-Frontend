@@ -1,7 +1,7 @@
 import {Box} from '@material-ui/core';
 
 
-function Proyectos() {
+function Proyectos(datos) {
     return (
         <div>
             <Box  style={styles}>
