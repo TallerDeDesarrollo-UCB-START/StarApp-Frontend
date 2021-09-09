@@ -1,13 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Routes from './routes/Routes'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        Hello World!
-      </header>
-    </div>
+    <Router>
+      <Switch>
+          {Routes.map(route => (
+            <Route exact path={route.path} key={route.path}>
+              <route.component />
+            </Route>
+          ))}
+      </Switch>
+    </Router>
   );
 }
 
