@@ -1,8 +1,6 @@
 
-import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
-import { useLocation } from 'react-router-dom';
 
 
 import Button from '@material-ui/core/Button';
@@ -113,17 +111,9 @@ const Home = () => {
                     </CardContent>
 
                 </Card>
-                
-
-
-                 
-                    
-            
-
-        <div>
         </div>
 
     )
 }
 
-export default Home
+export default Home;
