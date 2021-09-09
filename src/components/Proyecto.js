@@ -13,7 +13,7 @@ export default function Proyecto({proyecto}) {
                 <img style={imgStyles}></img>
                 <CardContent styles={cardStyles}>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {proyecto.titulo}
+                        {proyecto.nombre_proyecto}
                     </Typography>
                     <Typography variant="body2" component="p">
                         {proyecto.descripcion}
