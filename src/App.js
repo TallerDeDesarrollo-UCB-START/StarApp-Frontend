@@ -1,19 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Profile from './components/Profile';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Home from './components/Home';
+import EventsList from './components/EventsList';
+import Event from './components/Event';
+import Formulario from './components/Formulario-evento.component/Formulario';
 
-const App = () => {
 
+
+
+function App() {
+  // const location = useLocation()
   return (
     <Router>
+      <div className="container">
+        <h1>Navbar...</h1>
 
-      {/* <div className="App"> */}
-      <Profile />
-      <Home />
-      {/* </div> */}
-    </Router >
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+
+        <div>
+          <Link to="/events">Eventos</Link>
+        </div>
+
+        <Switch>
+
+          <Route path="/events" exact>
+            <EventsList />
+          </Route>
+
+          <Route path="/" exact>
+            <Home />
+          </Route>
+
+          <Route path="/events/event" exact>
+            <Event />
+          </Route>
+
+          <Route path="/events/event/registroAEvento" exact>
+            <Formulario />
+          </Route>
+
+        </Switch>
+
+      </div>
+    </Router>
+
   );
 }
 
