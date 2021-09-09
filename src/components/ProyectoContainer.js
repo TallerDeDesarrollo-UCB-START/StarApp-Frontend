@@ -34,6 +34,6 @@ function ProyectosContainer() {
 }
 
 
-const URLProyectos = 'http://localhost:5000/proyectos'
+const URLProyectos = 'http://localhost:5000/get_proyectos'
 
 export default ProyectosContainer;
