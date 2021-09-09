@@ -24,55 +24,46 @@ const Profile = (onClick) => {
     return (
         <div class="container">
 
-            {location.pathname === '/' && (
-                <Link to='/profile'>Perfil</Link>
-            )}
-
              
             <div>
-                
-                {location.pathname !== '/' && (
+                <div>
+                    <div class="tabs">
+                    <Link to='/' >Volver</Link>
+                    </div> 
+                    <div class="picture">
                     
-                    <div>
-                        <div class="tabs">
-                        <Link to='/' >Volver</Link>
-                        </div> 
-                        <div class="picture">
-                        
-
-                        </div>
-                        
-                        <div class="name">
-                            
-                            <h2>{volunteer.name}</h2>
-                            <p>Pequeña descripción de la persona</p>
-                            
-                        </div>
-                        <Button onClick={mostrarDatos} color="primary" borderRadius="20%">Datos personales</Button>
-                        <Button onClick={mostrarEventos} color="primary" borderRadius="20%">Eventos asistidos</Button>
-                        <Button onClick={editarDatos} color="primary" borderRadius="30%">Editar Datos</Button>
-                        
-                        
-                        <div class="container">
-                            <div class="btn-container" id="data">
-
-
-                            </div>
-                            <div class="gen-info-container">
-                                <p><strong>Proyectos en los que participa:</strong></p>
-                                <p><strong>Clasificación:</strong></p>
-                                <p><strong>Horas acumuladas:</strong></p>
-                                <p><strong>Insignias:</strong></p>
-                            </div>
-                        </div>
 
                     </div>
+                    
+                    <div class="name">
+                        
+                        <h2>{volunteer.name}</h2>
+                        <p>Pequeña descripción de la persona</p>
+                        
+                    </div>
+                    <Button onClick={mostrarDatos} color="primary" borderRadius="20%">Datos personales</Button>
+                    <Button onClick={mostrarEventos} color="primary" borderRadius="20%">Eventos asistidos</Button>
+                    <Button onClick={editarDatos} color="primary" borderRadius="30%">Editar Datos</Button>
+                    
+                    
+                    <div class="container">
+                        <div class="btn-container" id="data">
 
 
-                )}
+                        </div>
+                        <div class="gen-info-container">
+                            <p><strong>Proyectos en los que participa:</strong></p>
+                            <p><strong>Clasificación:</strong></p>
+                            <p><strong>Horas acumuladas:</strong></p>
+                            <p><strong>Insignias:</strong></p>
+                        </div>
+                    </div>
+
+    
+
+                </div>
             </div>
         </div>
-
     )
 }
 

@@ -12,9 +12,7 @@ class EventsList extends React.Component {
                     <h1> Bienvenido a Lista de eventos!</h1>
 
                 </div>
-                <div>
-                    <Link to="/events/event">Ver Evento</Link>
-                </div>
+
                 <div>
                     <Link to="/events/crearevento">Crear Evento</Link>
                 </div>
