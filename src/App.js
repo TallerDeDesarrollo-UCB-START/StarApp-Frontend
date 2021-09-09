@@ -3,6 +3,7 @@ import Routes from './routes/Routes'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
+  // const location = useLocation()
   return (
     <Router>
       <Switch>

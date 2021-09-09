@@ -1,0 +1,48 @@
+.container{
+    background-color: #ffffff;
+    color: #021a29;
+}
+
+.btn-container{
+    float: left;
+    border: 1px solid;
+    border-color: black;
+    width: 15cm;
+    height: 10cm;
+    background-color: #eff2f5;
+    margin-top: 1cm;
+    margin-left: 5cm;
+    
+
+}
+.gen-info-container{
+    border: 1px solid;
+    border-color: black;
+    background-color: #eff2f5;
+    float: right;
+    margin-right: 3cm;
+    margin-top: 1cm;
+    width: 10cm;
+    height: 10cm;
+    
+}
+.picture{
+    border: 1px solid;
+    border-color: black;
+    background-color: #EDF1F4;
+    border-radius: 60%;
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin-left: 20px;
+}
+.name{
+    /* float: right; */
+    margin-left: 6cm;
+    margin-bottom: 2cm;
+}
+.tabs{
+    /* float: right; */
+    margin-left: 1cm;
+    margin-bottom: 1cm;
+}
