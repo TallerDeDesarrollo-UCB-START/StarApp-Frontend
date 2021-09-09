@@ -1,5 +1,5 @@
 
-function Proyecto(datos) {
+function Proyecto(proyecto) {
     return (
         <div style={styles}>
             

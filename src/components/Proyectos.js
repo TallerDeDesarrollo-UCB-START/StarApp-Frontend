@@ -1,16 +1,15 @@
 import {Box} from '@material-ui/core';
+import Proyecto from './Proyecto';
 
-
-function Proyectos(datos) {
+function Proyectos(proyectos) {
     return (
         <div>
             <Box  style={styles}>
-                s
-                <br/>
-                s
-                {/*pROYECTO*/}
-                {/*pROYECTO*/}
-                {/*pROYECTO*/}
+                {
+                    proyectos.map(proyecto => (
+                        <Proyecto key={proyecto.id} proyecto={proyecto} />
+                    ))
+                }
             </Box>
         </div>
     );

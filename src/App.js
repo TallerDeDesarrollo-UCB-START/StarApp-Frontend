@@ -21,17 +21,20 @@ function App() {
 
       getProyectos()
     }, [] )
-    
+    //Elements
+    let componenteProyectos = <Proyectos proyectos={proyectos} />;
+    let mensajeAlternativo = 'No Tasks To Show';
+    let mostrarProyectos = tasks.length > 0 ? componenteProyectos : mensajeAlternativo
+
   return (
     <div>
-      <PaginaProyectos datos={proyectos}/>
+      {mostrarProyectos}
     </div>
   );
 }
 
-export default App;
-
 const URLProyectos = "http://localhost:5000/proyectos"
 
+export default App;
 
 // Container:  lg=large  md=medium = sm=small xs=xtrasmall   fixed
