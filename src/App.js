@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Profile from './components/Profile';
 import Home from './components/Home';
+import FormEditP from './components/EditProfile/EditProfile';
 
 const App = () => {
 
@@ -11,6 +12,7 @@ const App = () => {
 
       {/* <div className="App"> */}
       <Profile />
+      <FormEditP/>
       <Home />
       {/* </div> */}
     </Router >
