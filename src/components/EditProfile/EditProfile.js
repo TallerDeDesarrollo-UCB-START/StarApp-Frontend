@@ -75,6 +75,20 @@ class FormEditP extends React.Component {
     render(){
         return(
         <Fragment>
+            <tbody>
+              {this.state.data.map((dato) => (
+                <tr key={dato.id}>
+                  <td>
+                    <Button
+                      color="primary"
+                      onClick={() => this.mostrarModalActualizar(dato)}
+                    >
+                      Editar
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
             <Modal isOpen={this.state.modalActualizar}>
                 <ModalHeader>
                     <div><h3>Editar Perfil</h3></div>

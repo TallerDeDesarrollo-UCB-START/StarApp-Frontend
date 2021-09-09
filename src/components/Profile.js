@@ -108,6 +108,9 @@ const Profile = (onClick) => {
                             >
                                 {body}
                             </Modal>
+
+                            <Button type="button" onClick={handleOpen} variant="contained" color="primary" >Editar Perfil</Button>
+                            
                             
                         </div>
 
