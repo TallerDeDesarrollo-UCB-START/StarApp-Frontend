@@ -6,7 +6,8 @@ import InputTextbox from './InputTextbox'
 import { Form } from "react-final-form"
 import {useMediaQuery, Button} from '@material-ui/core'
 import { validEmail, validPassword} from './RegEx'
-//import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
+import AxiosClient from './AxiosClient'
 
 const useStyles = makeStyles(theme => ({
     registerContainer : {
@@ -50,6 +51,7 @@ const useStyles = makeStyles(theme => ({
 )
 
 const RegisterForm = () => {
+    const history = useHistory()
     const classes = useStyles()
     const smallScreen = useMediaQuery('(min-width:420px)')
     const validate = values => {
@@ -68,22 +70,26 @@ const RegisterForm = () => {
         }
         return errors
     }
-
+    const URL = process.env.REACT_APP_API
     const onSubmit = async values => {
-        values.username = `${values.username} ${values.lastname}`
-        // return AxiosClient.post(`${URL}products/`, values)
-        //     .then(response => {
-        //         if ((response.status = 201)) {
-        //             return <Redirect to="/login" />
-        //         }else{
-        //             alert('Registro fallido')
-        //             return <Redirect to="/register" />
-        //         }
-        //     })
-        //     .catch(() => {
-        //         console.log(response.status)
-        //     })
-        console.log(values)
+        const body = {
+            username:`${values.username} ${values.lastname}`,
+            email: values.email,
+            password: values.password
+        }
+        console.log(body)
+        return AxiosClient.post(`${URL}api/auth/signup`, body)
+            .then(response => {
+                if ((response.status === 200)) {
+                    history.push(`/login`)
+                }else{
+                    alert('Registro fallido')
+                    history.push(`/register`)
+                }
+            })
+            .catch((response) => {
+                console.log(response.status)
+            })
     }
 
     return (

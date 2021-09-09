@@ -5,8 +5,8 @@ import LogoStart from '../images/logoStart.png'
 import InputTextbox from './InputTextbox'
 import { Form } from "react-final-form"
 import {useMediaQuery, Button, Link} from '@material-ui/core'
-import { validEmail} from './RegEx'
-//import AxiosClient from './AxiosClient'
+//import { validEmail} from './RegEx'
+import AxiosClient from './AxiosClient'
 
 const useStyles = makeStyles(theme => ({
     loginContainer : {
@@ -54,23 +54,30 @@ const LoginForm = () => {
     const smallScreen = useMediaQuery('(min-width:420px)')
     const validate = values => {
         const errors = {}
-        if(!validEmail.test(values.email)){
-            errors.email = "Correo no valido"
+        // if(!validEmail.test(values.email)){
+        //     errors.email = "Correo no valido"
+        // }
+        if(!values.username){
+            errors.username = "Campo requerido"
+        }
+        if(!values.password){
+            errors.password = "Campo requerido"
         }
         return errors
     }
-    //const URL = process.env.REACT_APP_API
+    const URL = process.env.REACT_APP_API
     const onSubmit = async values => {
-        // return AxiosClient.post(`${URL}products/`, values)
-        //     .then(response => {
-        //         if ((response.status = 201)) {
-        //             console.log(response.data.data)
-        //         }
-        //     })
-        //     .catch(() => {
-        //         console.log(response.status)
-        //     })
-        alert('*inicio de sesión*')
+        return AxiosClient.post(`${URL}api/auth/signin`, values)
+            .then(response => {
+                if ((response.status = 201)) {
+                    console.log("logged")
+                    console.log(response.data)
+                }
+            })
+            .catch((response) => {
+                console.log(response.status)
+            })
+        //alert('*inicio de sesión*')
     }
     return (
         <div className = {classes.loginContainer}>
@@ -81,8 +88,8 @@ const LoginForm = () => {
                 <Form onSubmit={onSubmit} validate={validate} >
                     {({ handleSubmit }) => (
                         <form onSubmit={handleSubmit} noValidate>
-                            <InputTextbox title = "Correo Electrónico" name="email" type="text" placeholder = "ejemplo@gmail.com"/>
-                            <InputTextbox title = "Contraseña" name="passwd" type = "password"/>
+                            <InputTextbox title = "Nombre de usuario" name="username" type="text" placeholder = "Juan Casas"/>
+                            <InputTextbox title = "Contraseña" name="password" type = "password"/>
                             <div className = {classes.buttonContainer}>
                                 <Button variant="contained" color="secondary" className = {classes.loginButton} type = "submit">
                                     Iniciar Sesión

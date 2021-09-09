@@ -1,13 +1,18 @@
 import './App.css'
-
-import RegisterForm from './componentes/RegisterForm'
-
+import Routes from './routes/Routes'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <div>
-      <RegisterForm/>
-    </div>
+    <Router>
+      <Switch>
+          {Routes.map(route => (
+            <Route exact path={route.path} key={route.path}>
+              <route.component />
+            </Route>
+          ))}
+      </Switch>
+    </Router>
   );
 }
 
