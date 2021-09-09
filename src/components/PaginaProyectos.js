@@ -1,14 +1,16 @@
 import Proyectos from "./Proyectos"
 import {Container} from '@material-ui/core';
 
-function PaginaProyectos(datos) {
+function PaginaProyectos({proyectos}) {
+    
+    
     return (
         <div>
             {/*Header*/}
-            <Container  style={contstyles}>
+            <Container >
                 {/*Titulo*/}
-                <h1 style={h1styles}>TITULO</h1> 
-                <Proyectos datos={datos}/>
+                <h1 style={h1styles}>PROYECTOS</h1> 
+                <Proyectos proyectos={proyectos}/>
             </Container>
             {/*Footer*/}
         </div>
@@ -17,7 +19,6 @@ function PaginaProyectos(datos) {
 
 export default PaginaProyectos;
 
-const contstyles={border:"4px solid skyblue"}
 
 const h1styles={
     marginTop:"2%",

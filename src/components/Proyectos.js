@@ -1,9 +1,10 @@
 import {Box} from '@material-ui/core';
-import Proyecto from './Proyecto';
+import Proyecto from './Proyecto.js';
 
-function Proyectos(proyectos) {
+function Proyectos({proyectos}) {
+    console.log(proyectos.values)
     return (
-        <div>
+        <>
             <Box  style={styles}>
                 {
                     proyectos.map(proyecto => (
@@ -11,13 +12,12 @@ function Proyectos(proyectos) {
                     ))
                 }
             </Box>
-        </div>
+        </>
     );
 }
 
 const styles = {
-    border:"4px solid blue",
-    marginTop:"5%"
+    marginTop:"5%",
+    display: "flex"
 }
-
 export default Proyectos;
