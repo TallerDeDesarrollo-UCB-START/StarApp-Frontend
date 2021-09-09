@@ -2,13 +2,17 @@ import React,{useState,useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { Button } from '@material-ui/core';
+
 import axios from "axios";
+
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core';
+//import FormEditUser from "./FormEditUser"
 import './Profile.css';
 
 var volunteer={
-    id:'100',
+    id:'1000',
     name: 'Juanito',
     
 }
@@ -22,11 +26,8 @@ function showData() {
                                                  <p><strong>Edad </strong>${volunteer.age}</p>
                                                  `
 }
-function mostrarEventos() {
+function showEvents() {
     document.getElementById('data').innerHTML = `<p><strong>Eventos: </strong>${volunteer.event}</p>`
-}
-function editarDatos() {
-    document.getElementById('data').innerHTML = `<p><strong>Editar datos </strong></p>`
 }
 
 
@@ -68,7 +69,7 @@ const Profile = (onClick) => {
         userEx:false,
     });
     const [datos, setDatos]=useState({
-        id:'100',
+        id:'1000',
         username:'juanito',
         
     })
@@ -263,40 +264,17 @@ const Profile = (onClick) => {
       );
    
     return (
-        <div class="container">
-
-             
+        <div>            
+            {location.pathname === '/' && (
+                <Link to='/profile'>Perfil</Link>
+            )}
             <div>
-                <div>
-                    <div class="tabs">
-                    <Link to='/' >Volver</Link>
-                    </div> 
-                    <div class="picture">
-                    
+                {location.pathname != '/' && (
+                    <div>
 
-                    </div>
-                    
-                    <div class="name">
-                        
-                        <h2>{volunteer.name}</h2>
-                        <p>Pequeña descripción de la persona</p>
-                        
-                    </div>
-                    <Button onClick={mostrarDatos} color="primary" borderRadius="20%">Datos personales</Button>
-                    <Button onClick={mostrarEventos} color="primary" borderRadius="20%">Eventos asistidos</Button>
-                    <Button onClick={editarDatos} color="primary" borderRadius="30%">Editar Datos</Button>
-                    
-                    
-                    <div class="container">
-                        <div class="btn-container" id="data">
+                        <div class="picture">
 
 
-                        </div>
-                        <div class="gen-info-container">
-                            <p><strong>Proyectos en los que participa:</strong></p>
-                            <p><strong>Clasificación:</strong></p>
-                            <p><strong>Horas acumuladas:</strong></p>
-                            <p><strong>Insignias:</strong></p>
                         </div>
                         <div class="name">
                             <h2>{volunteer.name}</h2>
@@ -335,14 +313,12 @@ const Profile = (onClick) => {
 
                     </div>
 
-    
 
-                </div>
+                )}
             </div>
         </div>
+
     )
 }
 
 export default Profile
-
-
