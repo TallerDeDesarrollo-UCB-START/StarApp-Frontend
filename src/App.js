@@ -74,6 +74,5 @@ function App() {
 
 
 const URLProyectos = 'http://localhost:5000/proyectos'
-
-export default App;
 */
+export default App;

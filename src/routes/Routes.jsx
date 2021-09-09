@@ -1,4 +1,4 @@
-import LoginForm from '../componentes/LoginForm'
+import LoginForm from '../components/LoginForm'
 import Register from '../screens/Register'
 import EventsList from '../components/EventsList'
 import Home from '../components/Home'
