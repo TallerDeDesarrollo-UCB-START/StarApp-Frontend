@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../../assets/logo.png';
-import './Header.css';
+import './header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFacebook, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-icons'
 
@@ -9,7 +9,7 @@ const Header = () =>{
         <header class="header-division">
             <div class="header-logo">
                 <div>
-                    <img src={Logo} />
+                    <img src={Logo} alt=" "/>
                 </div>
             </div>
             <div class="header-menu">

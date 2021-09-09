@@ -27,12 +27,13 @@ const UtilizarFormulario = (callback, validate) => {
 
   useEffect(
     () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       if (Object.keys(errors).length === 0 && isSubmitting) {
         callback();
       }
     },
     [errors]
-  );
+  ) // eslint-disable-line react-hooks/exhaustive-deps
 
   return { handleChange, handleSubmit, values, errors };
 };

@@ -10,7 +10,7 @@ export default function Proyecto({proyecto}) {
     return (
         <Container>
             <Card style={styles2} className={classes.root} variant="outlined">
-                <img style={imgStyles}></img>
+                <img style={imgStyles} alt = " "></img>
                 <CardContent styles={cardStyles}>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
                         {proyecto.nombre_proyecto}

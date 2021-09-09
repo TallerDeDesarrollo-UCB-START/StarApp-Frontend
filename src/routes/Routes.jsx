@@ -8,7 +8,7 @@ import Formulario from '../components/Formulario-evento.component/Formulario'
 import Attendance from '../components/Attendance'
 import crearEvento from '../components/CrearEvento/crearEvento'
 import ProyectoContainer from '../components/ProyectoContainer'
-import Formulario from '../components/Formulario'
+import FormularioProyecto from '../components/Formulario'
 const Routes = [
   {
     path: '/login',
@@ -28,7 +28,7 @@ const Routes = [
   {
     path: '/createproject',
     name: 'CreateProject',
-    component: Formulario,
+    component: FormularioProyecto,
   },
   {
     path: '/events',

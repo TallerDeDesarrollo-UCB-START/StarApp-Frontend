@@ -1,6 +1,6 @@
 //States
 import {useState, useEffect} from 'react'
-
+import PaginaProyectos from './Proyectos'
 
 function ProyectosContainer() {
     const [proyectos, setProyectos] = useState([])

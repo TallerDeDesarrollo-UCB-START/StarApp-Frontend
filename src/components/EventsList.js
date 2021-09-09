@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import Event from './Event'
+import {Link } from 'react-router-dom'
 class EventsList extends React.Component {
 
 

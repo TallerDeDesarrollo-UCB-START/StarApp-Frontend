@@ -125,7 +125,9 @@ const Profile = (onClick) => {
       }
 
     
-    useEffect(()=>{axios.get(urlTablaExtensa+datos.id).then(response=>{
+    useEffect(()=>{
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        axios.get(urlTablaExtensa+datos.id).then(response=>{
     
         console.log(response.data.data)
         if(response.data.data){
@@ -143,7 +145,8 @@ const Profile = (onClick) => {
             console.log("no existe data")
             setUserExsit({ userEx: false})
         }
-        })},[]
+        })
+    },[]
     
     )
     
@@ -269,7 +272,7 @@ const Profile = (onClick) => {
                 <Link to='/profile'>Perfil</Link>
             )}
             <div>
-                {location.pathname != '/' && (
+                {location.pathname !== '/' && (
                     <div>
 
                         <div class="picture">
