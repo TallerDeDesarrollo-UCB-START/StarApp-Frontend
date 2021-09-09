@@ -3,7 +3,7 @@ import './Footer.css';
 
 const Footer = () =>{
     return(
-        <div class="footer-section">
+        <footer class="footer-section">
             <div class="footer-divicion">
             <div>
                 <span>Cochabamba - Bolivia</span>
@@ -12,7 +12,7 @@ const Footer = () =>{
                 <span>Cochabamba - Bolivia</span>
             </div>
             </div>
-        </div>
+        </footer>
     )
 }
 
