@@ -1,0 +1,38 @@
+.titleSeccion{
+    padding: 20px;
+    text-align: center;
+}
+.button{
+  
+    height:50px; 
+    width:100px; 
+    margin: -50px -50px; 
+    position:relative;
+    top:80%; 
+    left:50%;
+    color:black;
+
+}
+.textHome{
+    text-align: center;
+}
+.cardHome{
+    height: 700px;
+    background-color: rgb(203, 212, 224);
+
+}
+
+.imagenSeccion1{
+    padding: 10px; 
+    margin: 50px; 
+    float: right; 
+    height: 600px;
+    width: 1000px; 
+}
+.imagenSeccion2{
+    padding: 10px; 
+    margin: 50px; 
+    float: left; 
+    height: 600px;
+    width: 1000px; 
+}

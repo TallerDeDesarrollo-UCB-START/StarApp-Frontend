@@ -1,0 +1,22 @@
+{
+    "volunteers": [
+        {
+            "id": 1,
+            "name": "Juan Pérez",
+            "age": 26,
+            "events": [
+                "Evento 1",
+                "Evento 2"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Cristiano Ronaldo",
+            "age": 36,
+            "events": [
+                "Evento 1",
+                "Evento 3"
+            ]
+        }
+    ]
+}

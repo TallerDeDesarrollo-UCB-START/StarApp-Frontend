@@ -1,3 +1,10 @@
+import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Profile from './components/Profile';
+import Home from './components/Home';
+import Header from './components/Header/Header';
+import Footer from './components//Footer/Footer';
+
 import PaginaProyectos from "./components/PaginaProyectos"
 //States
 import {useState, useEffect} from 'react'
@@ -25,11 +32,28 @@ function App() {
     let mostrarProyectos = proyectos.length > 0 ? componenteProyectos : mensajeAlternativo
 
   return (
-    <div>
-      {mostrarProyectos}
+    
+    <div className="container">
+      <Router>
+        <Header onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask}/>
+        
+
+        <Route path='/' exact render={(props) => (
+          <>
+            {AddTaskComponent}
+            {TasksComponent}
+          </>
+        )}/>
+
+        <Route path='/about' component={About} />
+
+        <Footer />
+      </Router>
     </div>
+    
   );
 }
+
 
 const URLProyectos = 'http://localhost:5000/proyectos'
 
