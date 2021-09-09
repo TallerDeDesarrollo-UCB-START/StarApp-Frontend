@@ -6,7 +6,7 @@ import {faFacebook, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-i
 
 const Header = () =>{
     return(
-        <div class="header-division">
+        <header class="header-division">
             <div class="header-logo">
                 <div>
                     <img src={Logo} />
@@ -36,7 +36,7 @@ const Header = () =>{
                 </div>
                 
             </div>
-        </div>
+        </header>
     )
 }
 
