@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Home from './components/Home';
 import EventsList from './components/EventsList';
 import Event from './components/Event';
-import FormularioRegistroEvento from './components/FormularioRegistroEvento';
+import Formulario from './components/Formulario-evento.component/Formulario';
 
 
 
@@ -23,10 +23,6 @@ function App() {
           <Link to="/events">Eventos</Link>
         </div>
 
-
-
-
-
         <Switch>
 
           <Route path="/events" exact>
@@ -42,7 +38,7 @@ function App() {
           </Route>
 
           <Route path="/events/event/registroAEvento" exact>
-            <FormularioRegistroEvento />
+            <Formulario />
           </Route>
 
         </Switch>
