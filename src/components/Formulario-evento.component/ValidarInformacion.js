@@ -6,7 +6,7 @@ export default function validateInfo(values) {
   }
 
   if (!values.email) {
-    errors.email = 'Email required';
+    errors.email = 'Su correo electronico es requerido';
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
     errors.email = 'Su correo electronico tiene formato incorrecto';
   }
