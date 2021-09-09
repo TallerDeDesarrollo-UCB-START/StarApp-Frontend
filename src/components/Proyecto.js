@@ -6,24 +6,39 @@ import { Container } from '@material-ui/core';
 
 
 export default function Proyecto({proyecto}) {
-  const classes = styles;
-  return (
-    <Container>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {proyecto.titulo}
-        </Typography>
-        <Typography variant="body2" component="p">
-          {proyecto.descripcion}
-        </Typography>
-      </CardContent>
-    </Card>
-    </Container>
-  );
+    const classes = styles;
+    return (
+        <Container>
+            <Card style={styles2} className={classes.root} variant="outlined">
+                <img style={imgStyles}></img>
+                <CardContent styles={cardStyles}>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {proyecto.titulo}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        {proyecto.descripcion}
+                    </Typography>
+                </CardContent>
+                
+            </Card>
+        </Container>
+    );
 }
 
 const styles = {
     border:"4px solid blue",
     marginTop:"5%"
+}
+
+const styles2 = {
+    display: "flex"
+}
+
+const cardStyles = {
+    width: "50%"
+}
+
+const imgStyles = {
+    backgroundColor: "grey",
+    width: "50%"
 }
