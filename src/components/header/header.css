@@ -32,3 +32,10 @@ img {
 .icons {
     font-size: 1.1em;
 }
+
+.header-menu-option-icon {
+    margin: 5px;
+    text-align: center;
+    height: 30px;
+    width: 6%;
+}
