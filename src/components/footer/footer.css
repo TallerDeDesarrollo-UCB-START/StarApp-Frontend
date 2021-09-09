@@ -1,0 +1,11 @@
+.footer-divicion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-section {
+    width: 100%;
+    position: fixed; 
+    background-color: rgb(236, 12, 12);
+}
