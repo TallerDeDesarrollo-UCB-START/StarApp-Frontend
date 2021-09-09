@@ -1,6 +1,8 @@
 import React from 'react';
 import Logo from '../../assets/logo.png';
 import './Header.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faFacebook} from '@fortawesome/free-brands-svg-icons'
 
 const Header = () =>{
     return(
@@ -22,6 +24,11 @@ const Header = () =>{
                 </div>
                 <div class="header-menu-option">
                     <span>Perfil</span>
+                </div>
+                <div class="header-menu-option">
+                    <div class="icons">
+                        <FontAwesomeIcon icon={faFacebook}/>
+                    </div>
                 </div>
             </div>
         </div>
