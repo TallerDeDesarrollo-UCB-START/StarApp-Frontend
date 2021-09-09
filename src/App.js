@@ -5,8 +5,9 @@ import EventsList from './components/EventsList';
 import Event from './components/Event';
 import Formulario from './components/Formulario-evento.component/Formulario';
 import Attendace from './components/Attendance'
-
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./components/CrearEvento/crearEvento.css";
+import crearEvento from './components/CrearEvento/crearEvento';
 
 
 function App() {
@@ -46,10 +47,13 @@ function App() {
             <Attendace />
           </Route>
 
+          <Route exact path="/events/crearevento" component={crearEvento} />
+          
         </Switch>
 
       </div>
     </Router>
+
 
   );
 }
