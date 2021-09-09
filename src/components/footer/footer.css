@@ -1,0 +1,49 @@
+.footer-divicion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-section {
+    width: 100%;
+    position: fixed; 
+    background-color: black;
+}
+
+.footer-section-option {
+    margin: 5px;
+    text-align: center;
+    height: 30px;
+    width: 30%;
+}
+
+footer {
+    height: 80px;
+}
+
+.footer-text {
+    text-align: left;
+}
+
+span {
+    color: white;
+}
+
+.footer-section-option-icon {
+    margin: 5px;
+    text-align: center;
+    height: 30px;
+    width: 6%;
+}
+
+.footer-section-option-center {
+    margin: 5px;
+    text-align: center;
+    height: 30px;
+    width: 42%;
+}
+
+.icons {
+    font-size: 1.1em;
+    color: white;
+}
