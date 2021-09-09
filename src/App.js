@@ -4,6 +4,7 @@ import Home from './components/Home';
 import EventsList from './components/EventsList';
 import Event from './components/Event';
 import Formulario from './components/Formulario-evento.component/Formulario';
+import Attendace from './components/Attendance'
 
 
 
@@ -39,6 +40,10 @@ function App() {
 
           <Route path="/events/event/registroAEvento" exact>
             <Formulario />
+          </Route>
+
+          <Route path="/events/event/attendance" exact>
+            <Attendace />
           </Route>
 
         </Switch>
