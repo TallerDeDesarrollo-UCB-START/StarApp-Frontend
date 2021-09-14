@@ -56,10 +56,10 @@ const Home = () => {
                                 EVENTOS & ACTIVIDADES
                             </Typography>   
                         </ThemeProvider>                            
-                        <Typography  variant="subtitle1" color="textSecundary" component="p" gutterBottom>
+                        <Typography  variant="subtitle1" color="secondary" component="p" gutterBottom>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </Typography>
-                        <Typography  variant="subtitle1" color="textSecundary" component="p" gutterBottom>
+                        <Typography  variant="subtitle1" color="secondary" component="p" gutterBottom>
                             Participa en los eventos del proyecto de tu agrado
                         </Typography>
                         
@@ -75,10 +75,10 @@ const Home = () => {
                                 PROYECTOS START
                             </Typography>   
                         </ThemeProvider>                            
-                        <Typography  variant="subtitle1" color="textSecundary" component="p" gutterBottom>
+                        <Typography  variant="subtitle1" color="secondary" component="p" gutterBottom>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </Typography>
-                        <Typography  variant="subtitle1" color="textSecundary" component="p" gutterBottom>
+                        <Typography  variant="subtitle1" color="secondary" component="p" gutterBottom>
                             Participa en los eventos del proyecto de tu agrado
                         </Typography>
                         
@@ -94,10 +94,10 @@ const Home = () => {
                                 LOGROS & RECOMPENSAS
                             </Typography>   
                         </ThemeProvider>                            
-                        <Typography  variant="subtitle1" color="textSecundary" component="p" gutterBottom>
+                        <Typography  variant="subtitle1" color="secondary" component="p" gutterBottom>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </Typography>
-                        <Typography  variant="subtitle1" color="textSecundary" component="p" gutterBottom>
+                        <Typography  variant="subtitle1" color="secondary" component="p" gutterBottom>
                             Participa en los eventos del proyecto de tu agrado
                         </Typography>
                         

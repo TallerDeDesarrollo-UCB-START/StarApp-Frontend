@@ -25,15 +25,15 @@ const UtilizarFormulario = (callback, validate) => {
     setIsSubmitting(true);
   };
 
+  const callback_function = ()=>{
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+      callback();
+    }
+  }
   useEffect(
-    () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      if (Object.keys(errors).length === 0 && isSubmitting) {
-        callback();
-      }
-    },
-    [errors]
-  ) // eslint-disable-line react-hooks/exhaustive-deps
+    callback_function,
+    [errors, isSubmitting, callback]
+  ) 
 
   return { handleChange, handleSubmit, values, errors };
 };

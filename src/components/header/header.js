@@ -6,32 +6,32 @@ import {faFacebook, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-i
 
 const Header = () =>{
     return(
-        <header class="header-division">
-            <div class="header-logo">
+        <header className="header-division">
+            <div className="header-logo">
                 <div>
                     <img src={Logo} alt=" "/>
                 </div>
             </div>
-            <div class="header-menu">
-                <div class="header-menu-option">
+            <div className="header-menu">
+                <div className="header-menu-option">
                     <span>Home</span>
                 </div>
-                <div class="header-menu-option">
+                <div className="header-menu-option">
                     <span>Proyectos</span>
                 </div>
-                <div class="header-menu-option">
+                <div className="header-menu-option">
                     <span>Eventos</span>
                 </div>
-                <div class="header-menu-option">
+                <div className="header-menu-option">
                     <span>Perfil</span>
                 </div>
-                <div class="header-menu-option-icon icons">
+                <div className="header-menu-option-icon icons">
                     <FontAwesomeIcon icon={faFacebook}/>
                 </div>
-                <div class="header-menu-option-icon icons">
+                <div className="header-menu-option-icon icons">
                     <FontAwesomeIcon icon={faTwitter}/>
                 </div>
-                <div class="header-menu-option-icon icons">
+                <div className="header-menu-option-icon icons">
                     <FontAwesomeIcon icon={faInstagram}/>
                 </div>
                 

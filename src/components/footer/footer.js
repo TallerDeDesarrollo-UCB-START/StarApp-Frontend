@@ -5,9 +5,9 @@ import {faFacebook, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-i
 
 const Footer = () =>{
     return(
-        <footer class="footer-section">
-            <div class="footer-divicion">
-            <div class="footer-section-option footer-text">
+        <footer className="footer-section">
+            <div className="footer-divicion">
+            <div className="footer-section-option footer-text">
                 <div>
                     <span>Cochabamba - Bolivia</span>
                 </div>
@@ -18,18 +18,18 @@ const Footer = () =>{
                     <span>HORARIO</span>
                 </div>
             </div>
-            <div class="footer-section-option-center">
+            <div className="footer-section-option-center">
                 <div>
                     <span>START AMERICAS TOGETHER </span>
                 </div>
             </div>
-            <div class="footer-section-option-icon icons">
+            <div className="footer-section-option-icon icons">
                 <FontAwesomeIcon icon={faFacebook}/>
             </div>
-            <div class="footer-section-option-icon icons">
+            <div className="footer-section-option-icon icons">
                 <FontAwesomeIcon icon={faTwitter}/>
             </div>
-            <div class="footer-section-option-icon icons">
+            <div className="footer-section-option-icon icons">
                 <FontAwesomeIcon icon={faInstagram}/>
             </div>
             </div>
