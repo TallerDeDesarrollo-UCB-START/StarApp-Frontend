@@ -12,7 +12,7 @@ export default function Proyecto({proyecto}) {
             <Card style={styles2} className={classes.root} variant="outlined">
                 <img style={imgStyles} alt = " "></img>
                 <CardContent styles={cardStyles}>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    <Typography className={classes.title} color="secondary" gutterBottom>
                         {proyecto.nombre_proyecto}
                     </Typography>
                     <Typography variant="body2" component="p">

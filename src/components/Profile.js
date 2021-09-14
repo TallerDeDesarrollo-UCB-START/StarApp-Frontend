@@ -146,7 +146,7 @@ const Profile = (onClick) => {
             setUserExsit({ userEx: false})
         }
         })
-    },[]
+    },[datos.id]
     
     )
     
@@ -154,7 +154,7 @@ const Profile = (onClick) => {
 
 
     const location = useLocation();
-    const classes = useStyles();
+    const classNamees = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false); 
    
@@ -196,7 +196,7 @@ const Profile = (onClick) => {
     };
     
     const body = (
-        <div style={modalStyle} className={classes.paper}>
+        <div style={modalStyle} classNameName={classNamees.paper}>
           <h2 id="simple-modal-title">Editar Usuario</h2>
             {/* <FormEditUser volunteerst={volunteer} userExtend={userExtend} userEx={userExist.userEx} /> */}
             <div>
@@ -275,11 +275,11 @@ const Profile = (onClick) => {
                 {location.pathname !== '/' && (
                     <div>
 
-                        <div class="picture">
+                        <div className="picture">
 
 
                         </div>
-                        <div class="name">
+                        <div className="name">
                             <h2>{volunteer.name}</h2>
                             <p>Pequeña descripción de la persona</p>
                             {
@@ -301,12 +301,12 @@ const Profile = (onClick) => {
                         </div>
                         <Button onClick={showData} color="primary" borderRadius="20%">Datos personales</Button>
                         <Button onClick={showEvents} color="primary" borderRadius="20%">Eventos asistidos</Button>
-                        <div class="container">
-                            <div class="btn-container" id="data">
+                        <div className="container">
+                            <div className="btn-container" id="data">
 
                             
                             </div>
-                            <div class="gen-info-container">
+                            <div className="gen-info-container">
                                 <p><strong>Proyectos en los que participa:</strong></p>
                                 <p><strong>Clasificación:</strong></p>
                                 <p><strong>Horas acumuladas:</strong></p>
