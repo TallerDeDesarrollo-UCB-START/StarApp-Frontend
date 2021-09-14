@@ -70,7 +70,7 @@ const RegisterForm = () => {
         }
         return errors
     }
-    const URL = process.env.REACT_APP_API
+    const URL = process.env.REACT_APP_API_AUTH
     const onSubmit = async values => {
         const body = {
             username:`${values.username} ${values.lastname}`,

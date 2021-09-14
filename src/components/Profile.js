@@ -17,8 +17,8 @@ var volunteer={
     
 }
 
-
-const urlTablaExtensa="http://localhost:5000/extended_form/";
+const url = process.env.REACT_APP_API
+const urlTablaExtensa=`${url}extended_form/`;
 
 
 function showData() {
@@ -196,7 +196,7 @@ const Profile = (onClick) => {
     };
     
     const body = (
-        <div style={modalStyle} classNameName={classNamees.paper}>
+        <div style={modalStyle} className={classNamees.paper}>
           <h2 id="simple-modal-title">Editar Usuario</h2>
             {/* <FormEditUser volunteerst={volunteer} userExtend={userExtend} userEx={userExist.userEx} /> */}
             <div>
@@ -257,7 +257,7 @@ const Profile = (onClick) => {
                     
                 />
                 <br></br>
-                <Button onClick={sendForm} color="primary" variant="contained" borderRadius="20%">Guardar Cambios</Button>
+                <Button onClick={sendForm} color="primary" variant="contained" borderradius="20%">Guardar Cambios</Button>
                 
             </form>
         </div>
@@ -299,8 +299,8 @@ const Profile = (onClick) => {
                             </Modal>
                             
                         </div>
-                        <Button onClick={showData} color="primary" borderRadius="20%">Datos personales</Button>
-                        <Button onClick={showEvents} color="primary" borderRadius="20%">Eventos asistidos</Button>
+                        <Button onClick={showData} color="primary" borderradius="20%">Datos personales</Button>
+                        <Button onClick={showEvents} color="primary" borderradius="20%">Eventos asistidos</Button>
                         <div className="container">
                             <div className="btn-container" id="data">
 

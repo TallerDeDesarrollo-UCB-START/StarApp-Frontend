@@ -33,7 +33,7 @@ function ProyectosContainer() {
   );
 }
 
-
-const URLProyectos = 'http://localhost:5000/get_proyectos'
+const url = process.env.REACT_APP_API
+const URLProyectos = `${url}get_proyectos`
 
 export default ProyectosContainer;
