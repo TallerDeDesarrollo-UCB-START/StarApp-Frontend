@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import genericPicture from "../../assets/generic_picture.png";
 import {
   Table,
   Button,
@@ -9,23 +10,49 @@ import {
   ModalBody,
   FormGroup,
   ModalFooter,
+  Card,
 } from "reactstrap";
 
-const data = [
-  { id: 1, evento: "EVENTO 1", descripcion: "descripcion 1", lugar: "CBBA", fecha: "2021-09-01"},
-  { id: 2, evento: "EVENTO 2", descripcion: "descripcion 2",lugar: "CBBA", fecha: "2021-09-14" },
-  { id: 3, evento: "EVENTO 3", descripcion: "descripcion 3",lugar: "CBBA",fecha: "2021-09-14" },
+const events = [
+  {
+    id: 1,
+    imagen: "",
+    nombre: "EVENTO 1",
+    descripcion: "descripcion 1",
+    modalidad: "modalidad 1",
+    lugar: "CBBA",
+    fecha: "2021-09-01",
+  },
+  {
+    id: 2,
+    imagen: "",
+    nombre: "EVENTO 2",
+    descripcion: "descripcion 2",
+    modalidad: "modalidad 2",
+    lugar: "CBBA",
+    fecha: "2021-09-14",
+  },
+  {
+    id: 3,
+    imagen: "",
+    nombre: "EVENTO 3",
+    descripcion: "descripcion 3",
+    modalidad: "modalidad 3",
+    lugar: "CBBA",
+    fecha: "2021-09-14",
+  },
 ];
 
 class crearEvento extends React.Component {
   state = {
-    data: data,
+    events: events,
     modalActualizar: false,
     modalInsertar: false,
     form: {
-      id: "",
-      evento: "",
+      // id: "",
+      nombre: "",
       descripcion: "",
+      modalidad: "",
       lugar: "",
       fecha: "",
     },
@@ -41,15 +68,15 @@ class crearEvento extends React.Component {
     this.setState({ modalInsertar: false });
   };
 
-  insertar= ()=>{
+  insertar = () => {
     window.alert("Evento Guardado");
 
-    var valorNuevo= {...this.state.form};
-    valorNuevo.id=this.state.data.length+1;
-    var lista= this.state.data;
+    var valorNuevo = { ...this.state.form };
+    valorNuevo.id = this.state.events.length + 1;
+    var lista = this.state.events;
     lista.push(valorNuevo);
-    this.setState({ modalInsertar: false, data: lista });
-  }
+    this.setState({ modalInsertar: false, events: lista });
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -60,64 +87,63 @@ class crearEvento extends React.Component {
     });
   };
 
+  mostrarMensajeParticipacion = () => {
+    alert("Participación confirmada (NO HACE NADA)");
+  };
+
   render() {
-    
+    const listItems = events.map((event) => (
+      <div className="mt-1 mb-1">
+        <Card>
+          <div className="float-container">
+            <div className="float-child">
+              <img width="300px" height="400px" src={genericPicture} />
+            </div>
+            <div className="float-child">
+              <ul key={event.nombre}>{event.nombre}</ul>
+              <ul key={event.descripcion}>{event.descripcion}</ul>
+              <ul key={event.modalidad}>{event.modalidad}</ul>
+              <ul key={event.fecha}>{event.fecha}</ul>
+              <ul key={event.lugar}>{event.lugar}</ul>
+            </div>
+          </div>
+        </Card>
+      </div>
+    ));
     return (
       <>
         <Container>
-        <br />
-          <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
+          <br />
+          <Button color="success" onClick={() => this.mostrarModalInsertar()}>
+            Crear
+          </Button>
           <br />
           <br />
-          <Table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Evento</th>
-                <th>Descripción</th>
-                <th>Lugar</th>
-                <th>Fecha</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              {this.state.data.map((dato) => (
-                <tr key={dato.id}>
-                  <td>{dato.id}</td>
-                  <td>{dato.evento}</td>
-                  <td>{dato.descripcion}</td>
-                  <td>{dato.lugar}</td>
-                  <td>{dato.fecha}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <div>{listItems}</div>
         </Container>
 
-    
         <Modal isOpen={this.state.modalInsertar}>
           <ModalHeader>
-           <div><h3>Crear Evento</h3></div>
+            <div>
+              <h3>Crear Evento</h3>
+            </div>
           </ModalHeader>
 
           <ModalBody>
             <FormGroup>
-              <label>
-                Id: 
-              </label>
-              
+              <label>Id:</label>
+
               <input
                 className="form-control"
                 readOnly
                 type="text"
-                value={this.state.data.length+1}
+                value={this.state.events.length + 1}
               />
             </FormGroup>
-            
+
             <FormGroup>
-              <label>
-                Evento: 
-              </label>
+              <label>Evento:</label>
               <input
                 className="form-control"
                 name="evento"
@@ -125,11 +151,9 @@ class crearEvento extends React.Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            
+
             <FormGroup>
-              <label>
-                Descripción: 
-              </label>
+              <label>Descripción:</label>
               <input
                 className="form-control"
                 name="descripcion"
@@ -139,9 +163,7 @@ class crearEvento extends React.Component {
             </FormGroup>
 
             <FormGroup>
-              <label>
-                Lugar: 
-              </label>
+              <label>Lugar:</label>
               <input
                 className="form-control"
                 name="lugar"
@@ -149,11 +171,9 @@ class crearEvento extends React.Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            
+
             <FormGroup>
-              <label>
-                Fecha: 
-              </label>
+              <label>Fecha:</label>
               <input
                 className="form-control"
                 name="fecha"
@@ -161,14 +181,10 @@ class crearEvento extends React.Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              color="primary"
-              onClick={() => this.insertar()}
-            >
+            <Button color="primary" onClick={() => this.insertar()}>
               Guardar
             </Button>
             <Button

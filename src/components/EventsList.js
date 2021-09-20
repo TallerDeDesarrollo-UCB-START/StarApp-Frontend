@@ -1,31 +1,60 @@
-import React from 'react';
-import {Link } from 'react-router-dom'
-class EventsList extends React.Component {
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
+function EventList() {
+  const { id } = useParams();
+  const url = `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`;
+  const [evento, setEvento] = useState({
+    loading: false,
+    data: null,
+  });
 
-    render() {
+  let content = null;
 
-        return (
-            <div>
-                <div>
-                    <h1> Bienvenido a Lista de eventos!</h1>
+  useEffect(() => {
+    setEvento({
+      loading: true,
+      data: null,
+    });
 
-                </div>
+    axios
+      .get(url)
+      .then((response) => {
+        setEvento({
+          loading: false,
+          data: response,
+        });
+      })
+      .catch(() => {
+        setEvento({
+          loading: false,
+          data: null,
+          error: true,
+        });
+      });
+  }, [url]);
 
-                <div>
-                    <Link to="/events/crearevento">Crear Evento</Link>
-                </div>
-
-                <div>
-                    <Link to="/events/event">Ver Evento</Link>
-                </div>
-
-            </div>
-
-
-
-        );
-    }
+  if (evento.data) {
+    content = (
+      <div>
+        <h1>{evento.data.nombre}</h1>
+        <div>
+          <img src={evento.data.imgUrl} alt={evento.data.name} />
+        </div>
+        <div>
+          <img src={evento.data.modalidad} />
+        </div>
+        <div>
+          <img src={evento.data.fecha} />
+        </div>
+        <div>
+          <img src={evento.data.lugar} />
+        </div>
+      </div>
+    );
+  }
+  return <div>{content}</div>;
 }
-
-export default EventsList
+export default EventList;
