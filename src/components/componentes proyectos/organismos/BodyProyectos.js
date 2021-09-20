@@ -1,23 +1,18 @@
 // Componentes:
 import ProyectoVoluntario from '../moleculas/ProyectoVoluntario'
 // Librerias-Paquetes:
-import { Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 
-function BodyProyectos() {
+function BodyProyectos({proyectos}) {
     return (
-        <Container>
+        <Box>
             {
-             // Aqui se hara un MAP junto a un Fetch, para obtener
-             // todos los proyectos de la base de datos
-             // y se pasaran sus datos correspondientemente como
-             // props
+                proyectos.map(proyecto => (
+                    <ProyectoVoluntario key={proyecto.id} proyecto={proyecto} />
+                ))
             }
-            <ProyectoVoluntario />
-            <ProyectoVoluntario />
-            <ProyectoVoluntario />
-            <ProyectoVoluntario />
-        </Container>
+        </Box>
     );
 }
 

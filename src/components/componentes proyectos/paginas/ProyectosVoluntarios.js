@@ -3,18 +3,37 @@ import HeaderProyectos from '../organismos/HeaderProyectos'
 import BodyProyectos from '../organismos/BodyProyectos'
 // Librerias-Paquetes:
 import { Container } from '@material-ui/core';
+import {useState, useEffect} from 'react'
 
 
 function ProyectosVoluntarios() {
-    // Aqui arriba se hace el fetch para obtener los proyectos
-    // Estos proyectos seran pasados al BodyProyectos como una propiedad
-    // Preferiblemente usando el "useState hook" de react.
+    // Hooks
+    const [proyectos, setProyectos] = useState([])
+
+    useEffect(() => {
+        const getProyectos = async () => {
+        const proyectosDelServer =  await fetchProyectos()
+        setProyectos(proyectosDelServer)
+        }
+        getProyectos()
+    }, [] )
+
+    // HTTP requests & functions
+    async function fetchProyectos() {
+        const response = await fetch(URLProyectos)
+        const data = await response.json()
+        return data;
+    }
+    
     return (
         <Container>
             <HeaderProyectos />
-            <BodyProyectos />
+            <BodyProyectos proyectos={proyectos}/>
         </Container>
     );
 }
+
+const url = process.env.REACT_APP_API
+const URLProyectos = `${url}get_proyectos`
 
 export default ProyectosVoluntarios

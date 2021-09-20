@@ -6,11 +6,11 @@ import ContenidoProyecto from '../moleculas/ContenidoProyecto'
 import { Container } from '@material-ui/core';
 
 
-function ProyectoVoluntario() {
+function ProyectoVoluntario({proyecto}) {
     return (
         <Container>
             <BannerProyecto />
-            <ContenidoProyecto />
+            <ContenidoProyecto proyecto={proyecto}/>
         </Container>
     );
 }

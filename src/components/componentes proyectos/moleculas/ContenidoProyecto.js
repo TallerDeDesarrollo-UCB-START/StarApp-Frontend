@@ -4,7 +4,7 @@ import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn'
 import { Container } from '@material-ui/core';
 
 
-function ContenidoProyecto() {
+function ContenidoProyecto({proyecto}) {
     return (
         <Container>
             {
