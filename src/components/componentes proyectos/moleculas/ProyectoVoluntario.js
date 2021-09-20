@@ -5,7 +5,7 @@ import ContenidoProyecto from '../moleculas/ContenidoProyecto'
 // Librerias-Paquetes:
 import { Container } from '@material-ui/core';
 
-
+// Diego
 function ProyectoVoluntario({proyecto}) {
     return (
         <Container>
@@ -14,5 +14,5 @@ function ProyectoVoluntario({proyecto}) {
         </Container>
     );
 }
-
+//styles flex ...?
 export default ProyectoVoluntario

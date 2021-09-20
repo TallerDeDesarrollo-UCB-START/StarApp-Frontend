@@ -3,7 +3,7 @@ import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn'
 // Librerias-Paquetes:
 import { Container } from '@material-ui/core';
 
-
+// Merce y Vic
 function ContenidoProyecto({proyecto}) {
     return (
         <Container>
