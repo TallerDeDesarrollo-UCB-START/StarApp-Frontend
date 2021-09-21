@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../../assets/logo.png';
+import {Link } from 'react-router-dom'
 import './header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFacebook, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-icons'
@@ -20,7 +21,8 @@ const Header = () =>{
                     <span>Proyectos</span>
                 </div>
                 <div className="header-menu-option">
-                    <span>Eventos</span>
+                 <Link to="/eventos"><span>Eventos</span></Link>
+                    {/* <span>Eventos</span> */}
                 </div>
                 <div className="header-menu-option">
                     <span>Perfil</span>

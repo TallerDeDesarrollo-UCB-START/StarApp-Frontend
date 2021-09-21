@@ -10,6 +10,10 @@ import {
   FormGroup,
   ModalFooter,
 } from "reactstrap";
+import axios from "axios";
+
+
+const url = "http://localhost:3000/eventos/crearevento"
 
 const data = [
   { id: 1, evento: "EVENTO 1", descripcion: "descripcion 1", lugar: "CBBA", fecha: "2021-09-01"},
@@ -26,6 +30,7 @@ class crearEvento extends React.Component {
       id: "",
       evento: "",
       descripcion: "",
+      modalidad: "",
       lugar: "",
       fecha: "",
     },
@@ -36,6 +41,14 @@ class crearEvento extends React.Component {
       modalInsertar: true,
     });
   };
+
+  peticionPost=async ()=>{
+    await axios.post(url,this.state.form).then(response=>{
+      this.modalInsertar();
+    }).catch(error=>{
+      console.log(error.message);
+    })
+  }
 
   cerrarModalInsertar = () => {
     this.setState({ modalInsertar: false });
@@ -65,16 +78,14 @@ class crearEvento extends React.Component {
     return (
       <>
         <Container>
-        <br />
-          <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
-          <br />
-          <br />
+
           <Table>
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Evento</th>
                 <th>Descripción</th>
+                <th>Modalidad</th>
                 <th>Lugar</th>
                 <th>Fecha</th>
               </tr>
@@ -86,12 +97,14 @@ class crearEvento extends React.Component {
                   <td>{dato.id}</td>
                   <td>{dato.evento}</td>
                   <td>{dato.descripcion}</td>
+                  <td>{dato.modalidad}</td>
                   <td>{dato.lugar}</td>
                   <td>{dato.fecha}</td>
                 </tr>
               ))}
             </tbody>
           </Table>
+          <Button color="success"  onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
         </Container>
 
     
@@ -140,6 +153,18 @@ class crearEvento extends React.Component {
 
             <FormGroup>
               <label>
+                Modalidad: 
+              </label>
+              <input
+                className="form-control"
+                name="descripcion"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <label>
                 Lugar: 
               </label>
               <input
@@ -165,12 +190,7 @@ class crearEvento extends React.Component {
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              color="primary"
-              onClick={() => this.insertar()}
-            >
-              Guardar
-            </Button>
+            <Button color="primary" onClick={() => this.insertar()}> Registrar Evento </Button>
             <Button
               className="btn btn-danger"
               onClick={() => this.cerrarModalInsertar()}
