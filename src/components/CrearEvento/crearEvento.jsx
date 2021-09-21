@@ -1,5 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {Link } from 'react-router-dom';
+import axios from "axios";
+import './crearEvento.css';
+import {
+  Grid, Input
+} from '@material-ui/core';
+
 import {
   Table,
   Button,
@@ -9,10 +16,14 @@ import {
   ModalBody,
   FormGroup,
   ModalFooter,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
 } from "reactstrap";
-import axios from "axios";
 
 
+  
 const url = "http://localhost:3000/eventos/crearevento"
 
 const data = [
@@ -25,7 +36,7 @@ class crearEvento extends React.Component {
   state = {
     data: data,
     modalActualizar: false,
-    modalInsertar: false,
+    modalInsertar: true,
     form: {
       id_evento: "",
       nombre_evento: "",
@@ -79,127 +90,100 @@ class crearEvento extends React.Component {
     return (
       <>
         <Container>
+          
+          <Modal isOpen={this.state.modalInsertar}>
+            <ModalHeader>
+            <div><h3>Crear Evento</h3></div>
+            </ModalHeader>
 
-          <Table>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Modalidad</th>
-                <th>Lugar</th>
-                <th>Fecha</th>
-                <th>Proyecto</th>
-              </tr>
-            </thead>
+            <ModalBody>
 
-            <tbody>
-              {this.state.data.map((dato) => (
-                <tr key={dato.id_evento}>
-                  <td>{dato.nombre_evento}</td>
-                  <td>{dato.descripcion_evento}</td>
-                  <td>{dato.modalidad_evento}</td>
-                  <td>{dato.lugar_evento}</td>
-                  <td>{dato.fecha_evento}</td>
-                  <td>{dato.proyecto}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          <Button color="success"  onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
+              <FormGroup>
+                <label>
+                  Evento: 
+                </label>
+                <input
+                  className="form-control"
+                  name="nombre_evento"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              
+              <FormGroup>
+                <label>
+                  Descripción: 
+                </label>
+                <input
+                  className="form-control"
+                  name="descripcion_evento"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+
+              
+              <FormGroup>
+                  <label>Modalidad</label>
+                  <input type="select" name="modalidad_evento"
+                    
+                  />
+                    <option>Presencial</option>
+                    <option>Virtual</option>
+              </FormGroup>
+
+
+ 
+              <FormGroup>           
+                <label>
+                  Proyecto: 
+                </label>
+                <input
+                  className="form-control"
+                  name="proyecto"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+
+              <Grid  item xs={12}>
+                <Grid className="InLine Lugar" item xs={6}>
+                  <label>
+                    Lugar: 
+                  </label>
+                  <input
+                    className="form-control"
+                    name="lugar_evento"
+                    type="text"
+                    onChange={this.handleChange}
+                  />
+                </Grid>
+
+                <Grid className="InLine Fecha" item xs={6}>
+                  <label>
+                    Fecha: 
+                  </label>
+                  <input
+                    className="form-control"
+                    name="fecha_evento"
+                    type="date"
+                    onChange={this.handleChange}
+                  />
+                </Grid>
+              </Grid>
+              
+            </ModalBody>
+
+            <ModalFooter>
+              <Button className="BtnRegistrar" onClick={() => this.peticionPost()}> Registrar Evento </Button>
+              <Button className="BtnCancelar" ><Link to="/eventos"><span> Cancelar</span></Link> </Button>
+            </ModalFooter>
+          
+          </Modal>
         </Container>
 
     
-        <Modal isOpen={this.state.modalInsertar}>
-          <ModalHeader>
-           <div><h3>Crear Evento</h3></div>
-          </ModalHeader>
 
-          <ModalBody>
-
-            <FormGroup>
-              <label>
-                Evento: 
-              </label>
-              <input
-                className="form-control"
-                name="nombre_evento"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            
-            <FormGroup>
-              <label>
-                Descripción: 
-              </label>
-              <input
-                className="form-control"
-                name="descripcion_evento"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <label>
-                Modalidad: 
-              </label>
-              <input
-                className="form-control"
-                name="modalidad_evento"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <label>
-                Lugar: 
-              </label>
-              <input
-                className="form-control"
-                name="lugar_evento"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            
-            <FormGroup>
-              <label>
-                Fecha: 
-              </label>
-              <input
-                className="form-control"
-                name="fecha_evento"
-                type="date"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <label>
-                Proyecto: 
-              </label>
-              <input
-                className="form-control"
-                name="proyecto"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-
-          </ModalBody>
-
-          <ModalFooter>
-            <Button color="primary" onClick={() => this.peticionPost()}> Registrar Evento </Button>
-            <Button
-              className="btn btn-danger"
-              onClick={() => this.cerrarModalInsertar()}
-            >
-              Cancelar
-            </Button>
-          </ModalFooter>
-        </Modal>
       </>
     );
   }

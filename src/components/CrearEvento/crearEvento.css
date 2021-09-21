@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.BtnRegistrar{
+  background-color: #B3DA3F;
+
+}
+
+.BtnCancelar{
+  background-color: #ED2020;
+}
+
+.InLine{
+  display:inline-block
+}
+
+.Fecha{
+  width: 49%;
+  float: left;
+}
+
+.Lugar{
+  width: 49%;
+  float: right;
+}
