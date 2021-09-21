@@ -1,19 +1,16 @@
 // Componentes:
-
+import './HeaderProyectos.css';
 // Librerias-Paquetes:
 import { Container } from '@material-ui/core';
+
 
 // MERCE - VIC
 function HeaderProyectos() {
     return (
-        <Container style={styles}>
+        <Container class="header-container">
             <h1>PROYECTOS</h1>
         </Container>
     );
-}
-
-const styles = {
-
 }
 
 export default HeaderProyectos
