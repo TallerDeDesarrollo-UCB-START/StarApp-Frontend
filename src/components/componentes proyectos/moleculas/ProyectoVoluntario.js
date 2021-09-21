@@ -1,6 +1,7 @@
 // Componentes:
 import BannerProyecto from '../moleculas/BannerProyecto'
 import ContenidoProyecto from '../moleculas/ContenidoProyecto'
+import './ProyectoVoluntario.css';
 
 // Librerias-Paquetes:
 import { Container } from '@material-ui/core';
@@ -8,8 +9,8 @@ import { Container } from '@material-ui/core';
 // Diego
 function ProyectoVoluntario({proyecto}) {
     return (
-        <Container>
-            <BannerProyecto />
+        <Container class = "container">
+            <BannerProyecto/>
             <ContenidoProyecto proyecto={proyecto}/>
         </Container>
     );
