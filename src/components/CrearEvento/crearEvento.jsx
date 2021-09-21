@@ -1,11 +1,16 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Link } from 'react-router-dom';
+import {Link,Route } from 'react-router-dom';
 import axios from "axios";
 import './crearEvento.css';
 import {
-  Grid, Input
+  Grid,
+  Box,
+  FormControl,
+  InputLabel,
+  NativeSelect,
 } from '@material-ui/core';
+
 
 import {
   Table,
@@ -23,40 +28,34 @@ import {
 } from "reactstrap";
 
 
-  
 const url = "http://localhost:3000/eventos/crearevento"
-
-const data = [
-  { id_evento: 1, nombre_evento: "Pozo de Agua", descripcion_evento: "descripcion 1", modalidad_evento: "presencial", lugar_evento: "CBBA", fecha_evento: "2021-09-01", proyecto: "A1"},
-  { id_evento: 2, nombre_evento: "Recoleccion Dulces", descripcion_evento: "descripcion 2", modalidad_evento: "presencial", lugar_evento: "CBBA", fecha_evento: "2021-10-01", proyecto: "A2"},
-  { id_evento: 3, nombre_evento: "Una sonrisa", descripcion_evento: "descripcion 3", modalidad_evento: "virtual", lugar_evento: "CBBA", fecha_evento: "2021-11-01", proyecto: "A3"},
-];
 
 class crearEvento extends React.Component {
   state = {
-    data: data,
     modalActualizar: false,
     modalInsertar: true,
     form: {
       id_evento: "",
       nombre_evento: "",
       descripcion_evento: "",
-      modalidad_evento: "",
+      modalidad_evento: "Presencial",
       lugar_evento: "",
       fecha_evento: "",
-      proyecto: ""
+      proyecto: "Proyecto1"
     },
   };
 
   mostrarModalInsertar = () => {
     this.setState({
+     
       modalInsertar: true,
     });
   };
 
   peticionPost=async ()=>{
     await axios.post(url,this.state.form).then(response=>{
-      this.insertar();
+     this.insertar();
+      
     }).catch(error=>{
       console.log(error.message);
     })
@@ -68,12 +67,7 @@ class crearEvento extends React.Component {
 
   insertar= ()=>{
     window.alert("Evento Guardado");
-
-    var valorNuevo= {...this.state.form};
-    valorNuevo.id=this.state.data.length+1;
-    var lista= this.state.data;
-    lista.push(valorNuevo);
-    this.setState({ modalInsertar: false, data: lista });
+    window.location.href = "/eventos";
   }
 
   handleChange = (e) => {
@@ -98,7 +92,7 @@ class crearEvento extends React.Component {
 
             <ModalBody>
 
-              <FormGroup>
+              <Box item xs={12}>
                 <label>
                   Evento: 
                 </label>
@@ -108,9 +102,9 @@ class crearEvento extends React.Component {
                   type="text"
                   onChange={this.handleChange}
                 />
-              </FormGroup>
+              </Box>
               
-              <FormGroup>
+              <Box item xs={12} mt={0.8}>
                 <label>
                   Descripción: 
                 </label>
@@ -120,34 +114,35 @@ class crearEvento extends React.Component {
                   type="text"
                   onChange={this.handleChange}
                 />
-              </FormGroup>
+              </Box>
 
-              
-              <FormGroup>
-                  <label>Modalidad</label>
-                  <input type="select" name="modalidad_evento"
-                    
-                  />
-                    <option>Presencial</option>
-                    <option>Virtual</option>
-              </FormGroup>
+              <Box item xs={12} mt={0.8}>
+                <Box className="InLine Modalidad" item xs={6}>
+                  <label>
+                    Modalidad: 
+                  </label>
 
+                  <select className="modalidad-input" name="modalidad_evento" onChange={this.handleChange}>
+                    <option value="Presencial" name="modalidad_evento" selected>Presencial</option>
+                    <option value="Virtual" name="modalidad_evento">Virtual</option>                
+                  </select>
+                </Box>
 
- 
-              <FormGroup>           
-                <label>
-                  Proyecto: 
-                </label>
-                <input
-                  className="form-control"
-                  name="proyecto"
-                  type="text"
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
+                <Box className="InLine Proyecto" item xs={6}>
+                  <label>
+                    Proyecto: 
+                  </label>
+                  <select className='proyecto-input' name="proyecto" onChange={this.handleChange}>
+                    <option value="Proyecto 1" name="proyecto" selected>Proyecto1</option>
+                    <option value="Proyecto 2" name="proyecto">Proyecto2</option>
+                  </select>
+                  
+                </Box>
 
-              <Grid  item xs={12}>
-                <Grid className="InLine Lugar" item xs={6}>
+              </Box>
+
+              <Box  item xs={12} mt={0.8}>
+                <Box className="InLine Lugar" item xs={6}>
                   <label>
                     Lugar: 
                   </label>
@@ -157,9 +152,9 @@ class crearEvento extends React.Component {
                     type="text"
                     onChange={this.handleChange}
                   />
-                </Grid>
+                </Box>
 
-                <Grid className="InLine Fecha" item xs={6}>
+                <Box className="InLine Fecha" item xs={6}>
                   <label>
                     Fecha: 
                   </label>
@@ -169,8 +164,8 @@ class crearEvento extends React.Component {
                     type="date"
                     onChange={this.handleChange}
                   />
-                </Grid>
-              </Grid>
+                </Box>
+              </Box>
               
             </ModalBody>
 
