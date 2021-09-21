@@ -12,7 +12,6 @@ function BodyProyectos({proyectos}) {
                     <ProyectoVoluntario key={proyecto.id} proyecto={proyecto} />
                 ))
             }
-            <ProyectoVoluntario />
         </Box>
     );
 }
