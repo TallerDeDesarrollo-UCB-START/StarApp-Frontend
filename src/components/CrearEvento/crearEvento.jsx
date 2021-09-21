@@ -116,7 +116,6 @@ class crearEvento extends React.Component {
 
           <ModalBody>
 
-            
             <FormGroup>
               <label>
                 Evento: 
