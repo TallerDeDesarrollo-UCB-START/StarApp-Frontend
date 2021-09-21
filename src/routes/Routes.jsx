@@ -31,7 +31,7 @@ const Routes = [
     component: FormularioProyecto,
   },
   {
-    path: "/events",
+    path: "/eventos",
     name: "EventsList",
     component: EventsList,
   },
@@ -61,7 +61,7 @@ const Routes = [
     component: Attendance,
   },
   {
-    path: "/eventos",
+    path: "/crearevento",
     name: "Eventos",
     component: crearEvento,
   },

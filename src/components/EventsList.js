@@ -1,60 +1,74 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Table, Container, Card } from "reactstrap";
 
-function EventList() {
-  const { id } = useParams();
-  const url = `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`;
-  const [evento, setEvento] = useState({
-    loading: false,
-    data: null,
-  });
+const api = axios.create({
+  baseURL: `http://localhost:5000/eventos`,
+});
 
-  let content = null;
-
-  useEffect(() => {
-    setEvento({
-      loading: true,
-      data: null,
+class EventsList extends Component {
+  state = {
+    events: [],
+  };
+  constructor() {
+    super();
+    api.get("/").then((res) => {
+      console.log(res.data);
+      this.setState({ events: res.data });
     });
+  }
 
-    axios
-      .get(url)
-      .then((response) => {
-        setEvento({
-          loading: false,
-          data: response,
-        });
-      })
-      .catch(() => {
-        setEvento({
-          loading: false,
-          data: null,
-          error: true,
-        });
-      });
-  }, [url]);
-
-  if (evento.data) {
-    content = (
+  render() {
+    return (
       <div>
-        <h1>{evento.data.nombre}</h1>
         <div>
-          <img src={evento.data.imgUrl} alt={evento.data.name} />
+          <h1> Bienvenido a Lista de eventos!</h1>
         </div>
+
         <div>
-          <img src={evento.data.modalidad} />
+          <Link to="/events/crearevento">Crear Evento</Link>
         </div>
+
         <div>
-          <img src={evento.data.fecha} />
+          <Link to="/events/event">Ver Evento</Link>
         </div>
+
         <div>
-          <img src={evento.data.lugar} />
+          <Container>
+            <Card>
+              {this.state.events.map((event) => (
+                <table width="60%" align="center" cellPadding="0">
+                  <tr key={event.id}>
+                    <td rowspan="5">
+                      <img
+                        height="100%"
+                        width="100%"
+                        src="http://jorge-zientarski.com/imgs/Events2.jpg"
+                      ></img>
+                    </td>
+                    <td>Nombre: {event.nombre_evento}</td>
+                  </tr>
+                  <tr>
+                    <td>Modalidad: {event.modalidad_evento}</td>
+                  </tr>
+                  <tr>
+                    <td>Fecha: {event.fecha_evento}</td>
+                  </tr>
+                  <tr>
+                    <td>Lugar: {event.lugar_evento}</td>
+                  </tr>
+                  <tr>
+                    <td>Descripcion: {event.descripcion_evento}</td>
+                  </tr>
+                </table>
+              ))}
+            </Card>
+          </Container>
         </div>
       </div>
     );
   }
-  return <div>{content}</div>;
 }
-export default EventList;
+export default EventsList;

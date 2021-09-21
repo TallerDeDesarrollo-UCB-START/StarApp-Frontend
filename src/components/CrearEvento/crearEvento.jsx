@@ -1,6 +1,5 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import genericPicture from "../../assets/generic_picture.png";
 import {
   Table,
   Button,
@@ -10,34 +9,27 @@ import {
   ModalBody,
   FormGroup,
   ModalFooter,
-  Card,
 } from "reactstrap";
 
-const events = [
+const data = [
   {
     id: 1,
-    imagen: "",
-    nombre: "EVENTO 1",
+    evento: "EVENTO 1",
     descripcion: "descripcion 1",
-    modalidad: "modalidad 1",
     lugar: "CBBA",
     fecha: "2021-09-01",
   },
   {
     id: 2,
-    imagen: "",
-    nombre: "EVENTO 2",
+    evento: "EVENTO 2",
     descripcion: "descripcion 2",
-    modalidad: "modalidad 2",
     lugar: "CBBA",
     fecha: "2021-09-14",
   },
   {
     id: 3,
-    imagen: "",
-    nombre: "EVENTO 3",
+    evento: "EVENTO 3",
     descripcion: "descripcion 3",
-    modalidad: "modalidad 3",
     lugar: "CBBA",
     fecha: "2021-09-14",
   },
@@ -45,14 +37,13 @@ const events = [
 
 class crearEvento extends React.Component {
   state = {
-    events: events,
+    data: data,
     modalActualizar: false,
     modalInsertar: false,
     form: {
-      // id: "",
-      nombre: "",
+      id: "",
+      evento: "",
       descripcion: "",
-      modalidad: "",
       lugar: "",
       fecha: "",
     },
@@ -72,10 +63,10 @@ class crearEvento extends React.Component {
     window.alert("Evento Guardado");
 
     var valorNuevo = { ...this.state.form };
-    valorNuevo.id = this.state.events.length + 1;
-    var lista = this.state.events;
+    valorNuevo.id = this.state.data.length + 1;
+    var lista = this.state.data;
     lista.push(valorNuevo);
-    this.setState({ modalInsertar: false, events: lista });
+    this.setState({ modalInsertar: false, data: lista });
   };
 
   handleChange = (e) => {
@@ -87,29 +78,7 @@ class crearEvento extends React.Component {
     });
   };
 
-  mostrarMensajeParticipacion = () => {
-    alert("Participación confirmada (NO HACE NADA)");
-  };
-
   render() {
-    const listItems = events.map((event) => (
-      <div className="mt-1 mb-1">
-        <Card>
-          <div className="float-container">
-            <div className="float-child">
-              <img width="300px" height="400px" src={genericPicture} />
-            </div>
-            <div className="float-child">
-              <ul key={event.nombre}>{event.nombre}</ul>
-              <ul key={event.descripcion}>{event.descripcion}</ul>
-              <ul key={event.modalidad}>{event.modalidad}</ul>
-              <ul key={event.fecha}>{event.fecha}</ul>
-              <ul key={event.lugar}>{event.lugar}</ul>
-            </div>
-          </div>
-        </Card>
-      </div>
-    ));
     return (
       <>
         <Container>
@@ -119,8 +88,29 @@ class crearEvento extends React.Component {
           </Button>
           <br />
           <br />
+          <Table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Evento</th>
+                <th>Descripción</th>
+                <th>Lugar</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
 
-          <div>{listItems}</div>
+            <tbody>
+              {this.state.data.map((dato) => (
+                <tr key={dato.id}>
+                  <td>{dato.id}</td>
+                  <td>{dato.evento}</td>
+                  <td>{dato.descripcion}</td>
+                  <td>{dato.lugar}</td>
+                  <td>{dato.fecha}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </Container>
 
         <Modal isOpen={this.state.modalInsertar}>
@@ -138,7 +128,7 @@ class crearEvento extends React.Component {
                 className="form-control"
                 readOnly
                 type="text"
-                value={this.state.events.length + 1}
+                value={this.state.data.length + 1}
               />
             </FormGroup>
 

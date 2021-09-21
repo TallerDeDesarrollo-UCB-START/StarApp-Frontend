@@ -36,10 +36,3 @@
     transform: rotate(360deg);
   }
 }
-.float-container {
-  /* height: 400px;
-  width: 400px; */
-}
-.float-child {
-  float: left;
-}
