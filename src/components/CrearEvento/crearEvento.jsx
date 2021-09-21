@@ -16,9 +16,9 @@ import axios from "axios";
 const url = "http://localhost:3000/eventos/crearevento"
 
 const data = [
-  { id: 1, evento: "EVENTO 1", descripcion: "descripcion 1", lugar: "CBBA", fecha: "2021-09-01"},
-  { id: 2, evento: "EVENTO 2", descripcion: "descripcion 2",lugar: "CBBA", fecha: "2021-09-14" },
-  { id: 3, evento: "EVENTO 3", descripcion: "descripcion 3",lugar: "CBBA",fecha: "2021-09-14" },
+  { id_evento: 1, nombre_evento: "Pozo de Agua", descripcion_evento: "descripcion 1", modalidad_evento: "presencial", lugar_evento: "CBBA", fecha_evento: "2021-09-01", proyecto: "A1"},
+  { id_evento: 2, nombre_evento: "Recoleccion Dulces", descripcion_evento: "descripcion 2", modalidad_evento: "presencial", lugar_evento: "CBBA", fecha_evento: "2021-10-01", proyecto: "A2"},
+  { id_evento: 3, nombre_evento: "Una sonrisa", descripcion_evento: "descripcion 3", modalidad_evento: "virtual", lugar_evento: "CBBA", fecha_evento: "2021-11-01", proyecto: "A3"},
 ];
 
 class crearEvento extends React.Component {
@@ -27,12 +27,13 @@ class crearEvento extends React.Component {
     modalActualizar: false,
     modalInsertar: false,
     form: {
-      id: "",
-      evento: "",
-      descripcion: "",
-      modalidad: "",
-      lugar: "",
-      fecha: "",
+      id_evento: "",
+      nombre_evento: "",
+      descripcion_evento: "",
+      modalidad_evento: "",
+      lugar_evento: "",
+      fecha_evento: "",
+      proyecto: ""
     },
   };
 
@@ -44,7 +45,7 @@ class crearEvento extends React.Component {
 
   peticionPost=async ()=>{
     await axios.post(url,this.state.form).then(response=>{
-      this.modalInsertar();
+      this.insertar();
     }).catch(error=>{
       console.log(error.message);
     })
@@ -82,24 +83,24 @@ class crearEvento extends React.Component {
           <Table>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Evento</th>
+                <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Modalidad</th>
                 <th>Lugar</th>
                 <th>Fecha</th>
+                <th>Proyecto</th>
               </tr>
             </thead>
 
             <tbody>
               {this.state.data.map((dato) => (
-                <tr key={dato.id}>
-                  <td>{dato.id}</td>
-                  <td>{dato.evento}</td>
-                  <td>{dato.descripcion}</td>
-                  <td>{dato.modalidad}</td>
-                  <td>{dato.lugar}</td>
-                  <td>{dato.fecha}</td>
+                <tr key={dato.id_evento}>
+                  <td>{dato.nombre_evento}</td>
+                  <td>{dato.descripcion_evento}</td>
+                  <td>{dato.modalidad_evento}</td>
+                  <td>{dato.lugar_evento}</td>
+                  <td>{dato.fecha_evento}</td>
+                  <td>{dato.proyecto}</td>
                 </tr>
               ))}
             </tbody>
@@ -114,18 +115,7 @@ class crearEvento extends React.Component {
           </ModalHeader>
 
           <ModalBody>
-            <FormGroup>
-              <label>
-                Id: 
-              </label>
-              
-              <input
-                className="form-control"
-                readOnly
-                type="text"
-                value={this.state.data.length+1}
-              />
-            </FormGroup>
+
             
             <FormGroup>
               <label>
@@ -133,7 +123,7 @@ class crearEvento extends React.Component {
               </label>
               <input
                 className="form-control"
-                name="evento"
+                name="nombre_evento"
                 type="text"
                 onChange={this.handleChange}
               />
@@ -145,7 +135,7 @@ class crearEvento extends React.Component {
               </label>
               <input
                 className="form-control"
-                name="descripcion"
+                name="descripcion_evento"
                 type="text"
                 onChange={this.handleChange}
               />
@@ -157,7 +147,7 @@ class crearEvento extends React.Component {
               </label>
               <input
                 className="form-control"
-                name="descripcion"
+                name="modalidad_evento"
                 type="text"
                 onChange={this.handleChange}
               />
@@ -169,7 +159,7 @@ class crearEvento extends React.Component {
               </label>
               <input
                 className="form-control"
-                name="lugar"
+                name="lugar_evento"
                 type="text"
                 onChange={this.handleChange}
               />
@@ -181,8 +171,20 @@ class crearEvento extends React.Component {
               </label>
               <input
                 className="form-control"
-                name="fecha"
+                name="fecha_evento"
                 type="date"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <label>
+                Proyecto: 
+              </label>
+              <input
+                className="form-control"
+                name="proyecto"
+                type="text"
                 onChange={this.handleChange}
               />
             </FormGroup>
@@ -190,7 +192,7 @@ class crearEvento extends React.Component {
           </ModalBody>
 
           <ModalFooter>
-            <Button color="primary" onClick={() => this.insertar()}> Registrar Evento </Button>
+            <Button color="primary" onClick={() => this.peticionPost()}> Registrar Evento </Button>
             <Button
               className="btn btn-danger"
               onClick={() => this.cerrarModalInsertar()}
