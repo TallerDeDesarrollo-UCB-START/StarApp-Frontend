@@ -2,7 +2,7 @@
 import HeaderProyectos from '../organismos/HeaderProyectos'
 import BodyProyectos from '../organismos/BodyProyectos'
 // Librerias-Paquetes:
-import { Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import {useState, useEffect} from 'react'
 
 // DIEGO
@@ -26,14 +26,19 @@ function ProyectosVoluntarios() {
     }
     
     return (
-        <Container>
+        <Box style={styles}>
             <HeaderProyectos />
             <BodyProyectos proyectos={proyectos}/>
-        </Container>
+        </Box>
     );
 }
 
 const url = process.env.REACT_APP_API
 const URLProyectos = `${url}get_proyectos`
+
+const styles= {
+    minHeight: "650px",
+    border: "4px solid orange"
+}
 
 export default ProyectosVoluntarios

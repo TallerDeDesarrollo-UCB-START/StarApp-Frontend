@@ -4,16 +4,22 @@ import ContenidoProyecto from '../moleculas/ContenidoProyecto'
 import './ProyectoVoluntario.css';
 
 // Librerias-Paquetes:
-import { Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 // Diego
 function ProyectoVoluntario({proyecto}) {
     return (
-        <Container class = "container">
-            <BannerProyecto/>
+        <Box style={styles}>
+            <BannerProyecto />
             <ContenidoProyecto proyecto={proyecto}/>
-        </Container>
+        </Box>
     );
 }
-//styles flex ...?
+
+const styles = {
+    border: "6px solid yellow",
+    height: "150px",
+    marginBottom: "2%"
+}
+
 export default ProyectoVoluntario
