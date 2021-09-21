@@ -65,7 +65,7 @@ const LoginForm = () => {
         }
         return errors
     }
-    const URL = process.env.REACT_APP_API
+    const URL = process.env.REACT_APP_API_AUTH
     const onSubmit = async values => {
         return AxiosClient.post(`${URL}api/auth/signin`, values)
             .then(response => {
