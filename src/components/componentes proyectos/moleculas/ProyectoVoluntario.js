@@ -3,16 +3,22 @@ import BannerProyecto from '../moleculas/BannerProyecto'
 import ContenidoProyecto from '../moleculas/ContenidoProyecto'
 
 // Librerias-Paquetes:
-import { Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 // Diego
 function ProyectoVoluntario({proyecto}) {
     return (
-        <Container>
+        <Box style={styles}>
             <BannerProyecto />
             <ContenidoProyecto proyecto={proyecto}/>
-        </Container>
+        </Box>
     );
 }
-//styles flex ...?
+
+const styles = {
+    border: "6px solid yellow",
+    height: "150px",
+    marginBottom: "2%"
+}
+
 export default ProyectoVoluntario
