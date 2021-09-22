@@ -5,8 +5,9 @@
     background-color: #CDCDCD;
 }
 
-img {
+.header-image {
     height:40px;
+    width: 100px;
 }
 
 .header-menu {
