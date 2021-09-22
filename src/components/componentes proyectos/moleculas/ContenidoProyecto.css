@@ -8,3 +8,7 @@ p {
     border: 6px solid yellow;
     margin: 2%;
 }
+
+.button-container {
+    margin-left: 80%;
+}
