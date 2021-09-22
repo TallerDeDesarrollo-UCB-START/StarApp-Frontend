@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+
+.BtnRegistrar{
+  background-color: #B3DA3F;
+
+}
+
+.BtnCancelar{
+  background-color: #ED2020;
+}
+
+.InLine{
+  display:inline-block
+}
+
+.Fecha{
+  width: 49%;
+  float: left;
+}
+
+.Lugar{
+  width: 49%;
+  float: right;
+}
+
+.Proyecto{
+  width: 49%;
+  float: right;
+
+}
+
+.Modalidad{
+  width: 49%;
+
+}
+
+.modalidad-input{
+  
+  width: 100%;
+}
+
+.proyecto-input{
+  
+  width: 100%;
+}
+
+a {
+  color: #ED2020;
+  text-decoration: none;
+}

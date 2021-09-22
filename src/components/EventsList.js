@@ -36,7 +36,7 @@ class EventsList extends Component {
             <h1> Bienvenido a Lista de eventos!</h1>
           </div>
           <div style={{ display: "flex" }}>
-            <Button style={{ marginLeft: "auto" }} href="/events/crearevento">
+            <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
               Crear Evento
             </Button>
           </div>
