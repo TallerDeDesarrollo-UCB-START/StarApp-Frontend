@@ -1,0 +1,10 @@
+p {
+    color: black;
+    font-size: 25px;
+}
+
+.content-container {
+    width: 70%;
+    border: 6px solid yellow;
+    margin: 2%;
+}
