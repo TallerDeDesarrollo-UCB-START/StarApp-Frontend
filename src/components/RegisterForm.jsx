@@ -87,27 +87,39 @@ const RegisterForm = () => {
     }
     return errors;
   };
-  const URL = process.env.REACT_APP_API_AUTH;
+  const URL_AUTH = process.env.REACT_APP_API_AUTH
+  const URL = process.env.REACT_APP_API
   const onSubmit = async (values) => {
-    const body = {
-      username: `${values.username} ${values.lastname}`,
+    const bodyAuth = {
       email: values.email,
-      phone: values.phone,
       password: values.password,
     };
-    console.log(body);
-    return AxiosClient.post(`${URL}api/auth/signup`, body)
+    console.log(bodyAuth);
+    AxiosClient.post(`${URL_AUTH}api/auth/signup`, bodyAuth)
       .then((response) => {
         if (response.status === 200) {
-          history.push(`/login`);
-        } else {
-          alert("Registro fallido");
-          history.push(`/register`);
+          console.log("auth register done")
         }
       })
       .catch((response) => {
         console.log(response.status);
       });
+    const body = {
+      nombre: values.username,
+      apellido: values.lastname,
+      telefono: `+591 ${values.phone}`,
+    };
+    console.log(body);
+    AxiosClient.post(`${URL}extended_form`, body)
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("user register done")
+        }
+      })
+      .catch((response) => {
+        console.log(response.status);
+      });
+    history.push(`/login`);
   };
   return (
     <div className={classes.registerContainer}>
