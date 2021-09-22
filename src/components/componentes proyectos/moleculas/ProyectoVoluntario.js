@@ -9,17 +9,11 @@ import { Box } from '@material-ui/core';
 // Diego
 function ProyectoVoluntario({proyecto}) {
     return (
-        <Box style={styles}>
+        <Box class="box-container">
             <BannerProyecto />
             <ContenidoProyecto proyecto={proyecto}/>
         </Box>
     );
-}
-
-const styles = {
-    border: "6px solid yellow",
-    height: "150px",
-    marginBottom: "2%"
 }
 
 export default ProyectoVoluntario

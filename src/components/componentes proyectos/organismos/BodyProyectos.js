@@ -7,11 +7,12 @@ import { Box } from '@material-ui/core';
 // diego
 function BodyProyectos({proyectos}) {
     return (
-        <Box class="box-container">
+        <Box>
             {
+                /*
                 proyectos.map(proyecto => (
                     <ProyectoVoluntario key={proyecto.id} proyecto={proyecto} />
-                ))
+                ))*/
             }
         </Box>
     );
