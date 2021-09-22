@@ -7,7 +7,7 @@ import Event from '../components/Event'
 import Formulario from '../components/Formulario-evento.component/Formulario'
 import Attendance from '../components/Attendance'
 import crearEvento from '../components/CrearEvento/crearEvento'
-import ProyectosVoluntarios from '../components/componentes proyectos/paginas/ProyectosVoluntarios'
+import ProyectosAdmins from '../components/componentes proyectos/paginas/ProyectosAdmins'
 import FormularioProyecto from '../components/Formulario'
 const Routes = [
   {
@@ -23,7 +23,7 @@ const Routes = [
   {
     path: '/projects',
     name: 'ShowProjects',
-    component: ProyectosVoluntarios,
+    component: ProyectosAdmins,
   },
   {
     path: '/createproject',
