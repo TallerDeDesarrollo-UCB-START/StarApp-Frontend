@@ -9,7 +9,7 @@ import { Box } from '@material-ui/core';
 // Diego
 function ProyectoVoluntario({proyecto}) {
     return (
-        <Box class="box-container">
+        <Box class="proyect-container">
             <BannerProyecto />
             <ContenidoProyecto proyecto={proyecto}/>
         </Box>
