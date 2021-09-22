@@ -10,12 +10,15 @@ img {
 }
 
 .header-menu {
+    margin-top: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .header-menu-option {
+    color:black;
+    text-decoration: none;
     margin: 5px;
     text-align: center;
     height: 30px;

@@ -24,10 +24,12 @@ const theme = createTheme ({
 })
 
 theme.typography.h1 = {
+  fontFamily: "Miriam Libre",
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: '30px',
   '@media (min-width:768px)': {
+    fontFamily: "Miriam Libre",
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '42px',
@@ -35,10 +37,12 @@ theme.typography.h1 = {
   },
 };
 theme.typography.h2 = {
+  fontFamily: "Miriam Libre",
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: '26px',
   '@media (min-width:768px)': {
+    fontFamily: "Miriam Libre",
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '36px',
@@ -46,10 +50,12 @@ theme.typography.h2 = {
   },
 };
 theme.typography.h3 = {
+  fontFamily: "Miriam Libre",
   fontStyle: 'normal',
   fontWeight: '400px',
   fontSize: '18px',
   '@media (min-width:768px)': {
+    fontFamily: "Miriam Libre",
     fontStyle: 'normal',
     fontWeight: '400px',
     fontSize: '27px',
