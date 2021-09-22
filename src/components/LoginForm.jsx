@@ -55,9 +55,8 @@ const useStyles = makeStyles(theme => ({
     loginButton : {
         width: '400px',
         color: 'white',
-        marginBottom: '10px',
         fontWeight: 'bold',
-
+        marginBottom: "10px",
     },
     CreateButton : {
         marginTop: '20px',
@@ -96,17 +95,18 @@ const LoginForm = () => {
             .then(response => {
                 if ((response.status = 201)) {
                     console.log("logged")
-                    console.log(response.data)
+                    const jwt = response.data.accessToken
+                    const id_auth = response.data.id
+                    sessionStorage.setItem("jwt", jwt)
+                    sessionStorage.setItem("id", id_auth)
                     history.push(`/`)
-                }else{
-                    alert('correo o contraseña invalidos')
-                    history.push(`/login`)
                 }
             })
             .catch((response) => {
                 console.log(response.status)
+                alert('correo o contraseña invalidos')
+                history.push(`/login`)
             })
-        //alert('*inicio de sesión*')
     }
     return (
         <div className={classes.Container}>
@@ -123,7 +123,7 @@ const LoginForm = () => {
                                 <InputTextbox name="email" type="text" placeholder = "Correo Electronico o Telefono"/>
                                 <InputTextbox name="password" type = "password" placeholder = "Contraseña"/>
                                 <div className = {classes.buttonContainer}>
-                                    <Button marginBottom = "10px" variant="contained" color="primary" className = {classes.loginButton} type = "submit">
+                                    <Button variant="contained" color="primary" className = {classes.loginButton} type = "submit">
                                         Iniciar Sesión
                                     </Button>
                                     <Button variant="contained" color="secondary" className = {classes.CreateButton} type = "submit">
