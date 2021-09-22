@@ -2,13 +2,16 @@
 
 // Librerias-Paquetes:
 import { Container } from '@material-ui/core';
+import Banner from '../../../assets/ejemploBannerProyecto.jpeg';
+import { Box } from '@material-ui/core';
+import './BannerProyecto.css';
 
 // Merce Vic
 function BannerProyecto() {
     return (
-        <Container>
-            
-        </Container>
+        <Box class="banner-container">
+            <img src={Banner} alt=" "/>
+        </Box>
     );
 }
 
