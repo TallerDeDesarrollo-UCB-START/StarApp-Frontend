@@ -99,26 +99,31 @@ const RegisterForm = () => {
       .then((response) => {
         if (response.status === 200) {
           console.log("auth register done")
+          const id_auth = response.data.id_autenticacion
+          const body = {
+            nombre: values.username,
+            apellido: values.lastname,
+            telefono: `+591 ${values.phone}`,
+            id_autenticacion: parseInt(id_auth),
+          };
+          console.log(body);
+          AxiosClient.post(`${URL}extended_form`, body)
+            .then((response) => {
+              if (response.status === 200) {
+                console.log("user register done")
+              }
+            })
+            .catch((response) => {
+              console.log(response.status);
+            });
+        }else{
+          console.log(response.status)
         }
-      })
+      }) 
       .catch((response) => {
         console.log(response.status);
       });
-    const body = {
-      nombre: values.username,
-      apellido: values.lastname,
-      telefono: `+591 ${values.phone}`,
-    };
-    console.log(body);
-    AxiosClient.post(`${URL}extended_form`, body)
-      .then((response) => {
-        if (response.status === 200) {
-          console.log("user register done")
-        }
-      })
-      .catch((response) => {
-        console.log(response.status);
-      });
+    
     history.push(`/login`);
   };
   return (
