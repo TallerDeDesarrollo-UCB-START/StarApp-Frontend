@@ -5,10 +5,15 @@ p {
 
 .content-container {
     width: 70%;
-    border: 6px solid yellow;
     margin: 2%;
 }
 
 .button-container {
     margin-left: 80%;
+}
+
+.info-container {
+    border: 3px solid black;
+    border-radius: 25px;
+    padding: 20px;
 }
