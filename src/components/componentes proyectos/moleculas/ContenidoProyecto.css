@@ -9,7 +9,12 @@ p {
 }
 
 .button-container {
-    margin-left: 80%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.space-button {
+    width: 90%;
 }
 
 .info-container {
