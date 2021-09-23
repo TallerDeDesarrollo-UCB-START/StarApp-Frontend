@@ -12,6 +12,7 @@ const api = axios.create({
 class EventsList extends Component {
   state = {
     events: [],
+    showMe:true
   };
 
   constructor() {
@@ -27,6 +28,12 @@ class EventsList extends Component {
       console.log(err);
     }
   };
+
+  archivar(){
+    this.setState({
+      showMe:!this.state.showMe
+    })
+  }
 
   render() {
     return (
@@ -45,6 +52,8 @@ class EventsList extends Component {
           <Card>
             {this.state.events.map((event) => (
               <div class="card w-70">
+                {
+                this.state.showMe?  
                 <div class="row no-gutters">
                   <div class="col-auto">
                     <img
@@ -71,6 +80,10 @@ class EventsList extends Component {
                     </div>
                   </div>
                 </div>
+                :null
+                }
+                aca vienen los botones
+                <Button color="primary" onClick={()=>this.archivar()}>Archivar</Button>
                 <div class="card-footer w-100 text-muted"></div>
               </div>
             ))}
