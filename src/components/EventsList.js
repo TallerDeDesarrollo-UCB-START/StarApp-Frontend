@@ -67,6 +67,7 @@ class EventsList extends Component {
                       <p class="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
+                      <Button>Participar</Button>
                     </div>
                   </div>
                 </div>
