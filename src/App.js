@@ -1,6 +1,6 @@
 import Routes from './routes/Routes'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Header from './components/header/header';
+import Header from './components/header/header.jsx';
 
 function App() {
   // const location = useLocation()

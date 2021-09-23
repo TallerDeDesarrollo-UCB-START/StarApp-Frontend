@@ -126,7 +126,7 @@ const LoginForm = () => {
                                     <Button variant="contained" color="primary" className = {classes.loginButton} type = "submit">
                                         Iniciar Sesión
                                     </Button>
-                                    <Button variant="contained" color="secondary" className = {classes.CreateButton} type = "submit">
+                                    <Button variant="contained" color="secondary" className = {classes.CreateButton} onClick = {()=> history.push("/register")}>
                                         Crear cuenta nueva
                                     </Button>
                                 </div>
