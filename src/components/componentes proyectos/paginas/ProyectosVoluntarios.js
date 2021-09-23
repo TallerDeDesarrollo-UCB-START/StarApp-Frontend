@@ -16,8 +16,8 @@ function ProyectosVoluntarios({proyectos}) {
 }
 
 const styles= {
-    minHeight: "650px",
-    border: "4px solid orange"
+    minHeight: "650px"
+    //border: "4px solid orange"
 }
 
 export default ProyectosVoluntarios

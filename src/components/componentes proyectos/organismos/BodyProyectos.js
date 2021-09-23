@@ -13,6 +13,7 @@ function BodyProyectos({proyectos}) {
                     <ProyectoVoluntario key={proyecto.id} proyecto={proyecto} />
                 ))
             }
+            <ProyectoVoluntario key={1} proyecto={{}} />
         </Box>
     );
 }
