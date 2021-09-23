@@ -1,7 +1,16 @@
 .header-container {
     width: 100%;
-    text-align: center;
     border: 6px solid green;
     padding-top: 20px;
     padding-bottom: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.textHeader-container {
+    width: 76%;
+    text-align: center;
+}
+.borderHeader-conatiner {
+    width: 12%;
 }

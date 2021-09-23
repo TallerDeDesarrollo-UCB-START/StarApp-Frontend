@@ -1,15 +1,15 @@
 // Componentes:
-import HeaderProyectos from '../organismos/HeaderProyectos'
+import HeaderProyectosAdmin from '../organismos/HeaderProyectosAdmin'
 import BodyProyectos from '../organismos/BodyProyectos'
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
-// DIEGO
-function ProyectosVoluntarios({proyectos}) {
+
+function ProyectosAdmins({proyectos}) {
 
     return (
         <Box style={styles}>
-            <HeaderProyectos />
+            <HeaderProyectosAdmin />
             <BodyProyectos proyectos={proyectos}/>
         </Box>
     );
@@ -20,4 +20,4 @@ const styles= {
     border: "4px solid orange"
 }
 
-export default ProyectosVoluntarios
+export default ProyectosAdmins
