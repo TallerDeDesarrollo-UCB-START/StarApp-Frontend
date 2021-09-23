@@ -111,20 +111,18 @@ const RegisterForm = () => {
             .then((response) => {
               if (response.status === 200) {
                 console.log("user register done")
+                
               }
             })
             .catch((response) => {
-              console.log(response.status);
+              console.log(response)
             });
-        }else{
-          console.log(response.status)
         }
       }) 
       .catch((response) => {
-        console.log(response.status);
+        console.log(response);
       });
-    
-    history.push(`/login`);
+      history.push(`/login`)
   };
   return (
     <div className={classes.registerContainer}>

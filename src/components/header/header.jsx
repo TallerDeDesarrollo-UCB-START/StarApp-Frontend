@@ -37,7 +37,7 @@ const Header = () =>{
     const routes = {
         "/": 0,
         "/projects": 1,
-        "/events": 2,
+        "/eventos": 2,
         "/perfil": 3,
     }
     const keysRoutes = Object.keys(routes)
@@ -46,7 +46,7 @@ const Header = () =>{
     const classes = useStyles()
     const [value, setValue] = React.useState(routes[location.pathname])
     useEffect(() => {
-        if(!Boolean(sessionStorage.getItem("jwt")) && location.pathname !== "/"){
+        if(!Boolean(sessionStorage.getItem("jwt")) && location.pathname !== "/" && location.pathname !== "/register"){
             history.push("/login")
         }
         setLogged(Boolean(sessionStorage.getItem("jwt")))
@@ -61,7 +61,11 @@ const Header = () =>{
                 <Button 
                     className={classes.loginButton} 
                     variant={(logged)?"filled": "outlined"}
-                    onClick={()=>history.push("/login")}>
+                    onClick={(logged)?
+                        ()=>{
+                            sessionStorage.removeItem("jwt")
+                            window.location.reload()
+                        }:()=>history.push("/login")}>
                         {(logged)?"Log out": "Login"}
                 </Button>
             </div>
