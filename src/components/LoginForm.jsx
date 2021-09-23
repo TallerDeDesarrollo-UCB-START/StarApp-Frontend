@@ -120,7 +120,7 @@ const LoginForm = () => {
                     <Form onSubmit={onSubmit} validate={validate} >
                         {({ handleSubmit }) => (
                             <form onSubmit={handleSubmit} noValidate>
-                                <InputTextbox name="email" type="text" placeholder = "Correo Electronico o Telefono"/>
+                                <InputTextbox name="email" type="text" placeholder = "Correo Electrónico"/>
                                 <InputTextbox name="password" type = "password" placeholder = "Contraseña"/>
                                 <div className = {classes.buttonContainer}>
                                     <Button variant="contained" color="primary" className = {classes.loginButton} type = "submit">
