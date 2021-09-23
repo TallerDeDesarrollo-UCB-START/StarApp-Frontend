@@ -12,7 +12,10 @@ import { Container } from '@material-ui/core';
 function HeaderProyectosAdmin() {
     return (
         <Container class="header-container">
-            <h1>PROYECTOS</h1>
+            <div class="borderHeader-conatiner"></div>
+            <div class="textHeader-container">
+                <h1>PROYECTOS</h1>
+            </div>
             <CrearProyectoBtn />
         </Container>
     );
