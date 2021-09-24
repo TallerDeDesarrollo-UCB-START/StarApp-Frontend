@@ -6,6 +6,7 @@ import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css"  
 import { makeStyles ,withStyles} from '@material-ui/core/styles';
 import './Profile.css';
+import Grid from '@material-ui/core/Grid';
 
 const volunteer={
     id:'1',
@@ -89,6 +90,19 @@ function showEvents() {
         position:'relative',
         left:'12%',     
     },
+    checkintereses:{
+        width: '76%',
+        padding: '3px 5px',
+        margin:'7px 0px 7px 0px',
+        position:'relative',
+        left:'12%',
+    },
+    titulos:{
+        width: '76%',
+        position:'relative',
+        
+        left:'12%',
+    },
     root: {
         width: '100%',
         '& > * + *': {
@@ -122,7 +136,7 @@ const Profile = (onClick) => {
         genero:'',
         estado_de_cuenta:'',
         rol:'',
-        //intereses_generales:[],
+        intereses:[],
         id_autenticacion:'',
     })
     const [datosEdit,setDatosEdit]=useState({        
@@ -139,46 +153,46 @@ const Profile = (onClick) => {
         genero:'',
         estado_de_cuenta:'',
         rol:'',
-        //intereses_generales:[],
+        intereses:[],
         id_autenticacion:'',
     })
-    // const handleChange = (event) => {
+    const handleChange = (event) => {
 
-    //     var nuevosInt=''
-    //     const tikeado=!event.target.checked
-    //     console.log("esta tikeado?")
-    //     console.log(tikeado)
-    //     console.log("tipo de dato intereses grales")
-    //     console.log(typeof(datosEdit.intereses_generales))
-    //     if(typeof(datosEdit.intereses_generales)===typeof("string")){
-    //         console.log("entro a tipo string")
-    //         if(tikeado){
-    //             nuevosInt=datosEdit.intereses_generales.split(/[,"}{]/).filter(Boolean).filter(i=>i!==event.target.value)
+        var nuevosInt=''
+        const tikeado=!event.target.checked
+        console.log("esta tikeado?")
+        console.log(tikeado)
+        console.log("tipo de dato intereses grales")
+        console.log(typeof(datosEdit.intereses))
+        if(typeof(datosEdit.intereses)===typeof("string")){
+            console.log("entro a tipo string")
+            if(tikeado){
+                nuevosInt=datosEdit.intereses.split(/[,"}{]/).filter(Boolean).filter(i=>i!==event.target.value)
                 
-    //         }else{
-    //             nuevosInt=datosEdit.intereses_generales.split(/[,"}{]/).filter(Boolean).concat(event.target.value)
-    //         }
+            }else{
+                nuevosInt=datosEdit.intereses.split(/[,"}{]/).filter(Boolean).concat(event.target.value)
+            }
             
-    //     }else{
-    //         console.log("entro a tipo array")
-    //         if(tikeado){
+        }else{
+            console.log("entro a tipo array")
+            if(tikeado){
                 
-    //             nuevosInt=datosEdit.intereses_generales.filter(i=>i!==event.target.value)
-    //         }
-    //         else{
-    //             const aux=datosEdit.intereses_generales
-    //             aux.push(event.target.value)
-    //             nuevosInt=aux
-    //         }
-    //     }
-    //     console.log("nueva lista de intereses generales")
-    //     console.log(nuevosInt)
+                nuevosInt=datosEdit.intereses.filter(i=>i!==event.target.value)
+            }
+            else{
+                const aux=datosEdit.intereses
+                aux.push(event.target.value)
+                nuevosInt=aux
+            }
+        }
+        console.log("nueva lista de intereses generales")
+        console.log(nuevosInt)
 
-    //     setDatosEdit({...datosEdit,[event.target.name]:nuevosInt})
+        setDatosEdit({...datosEdit,[event.target.name]:nuevosInt})
 
-    //     console.log("lista de datos")
-    //     console.log(datosEdit)
-    //   };
+        console.log("lista de datos")
+        console.log(datosEdit)
+      };
 
 
 
@@ -200,9 +214,9 @@ const Profile = (onClick) => {
         })
       }
     var peticionPut = (asignaciones)=>{
-        
+        console.log("esta actualizadno")
         axios.put(urlTablaExtensa+datos.id_usuario, asignaciones).then(response=>{
-            alert(response.message)
+            alert("intentando actualizar")
         })
         
         
@@ -303,8 +317,8 @@ const Profile = (onClick) => {
           
             
             <div>
-            <form >
-                {/*<label htmlFor="nombre">Nombre</label>*/}
+            <form className="fomrExt">
+                <label className={classNamees.titulos} htmlFor="nombre">Nombre:</label>
                 <input
                     className={classNamees.intputs}
                     value={datosEdit.nombre}
@@ -313,7 +327,7 @@ const Profile = (onClick) => {
                     name="nombre" id='nombre' type='text'
                 /><br></br>
                 
-                {/*<label htmlFor="fecha_de_nacimiento">Fecha de nacimiento:</label>*/}
+                <label className={classNamees.titulos} htmlFor="fecha_de_nacimiento">Fecha de nacimiento:</label>
                 <input 
                     
                     className={classNamees.intputs} 
@@ -321,26 +335,9 @@ const Profile = (onClick) => {
                     name="fecha_de_nacimiento" 
                     value={datosEdit.fecha_de_nacimiento.split('T')[0]}
                     onChange={handleInputChange}/>
-                    {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        
-                            <KeyboardDatePicker
-                            className={classNamees.intputs}
-                            disableToolbar
-                            variant="inline"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            
-                            value={datosEdit.fecha_de_nacimiento.split('T')[0]}
-                            onChange={handleInputChange}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                            />                           
-                        
-                    </MuiPickersUtilsProvider> */}
+                    
                 
-                {/*<label htmlFor="nivel_de_estudios">Grado de Estudios:</label>*/}
+                <label className={classNamees.titulos} htmlFor="nivel_de_estudios">Grado de Estudios:</label>
                 <select name="nivel_de_estudios" value={datosEdit.nivel_de_estudios} onChange={handleInputChange} className={classNamees.intputs}>
                     <option value="Primaria">Primaria</option>
                     <option value="Secundaria">Secundaria</option>
@@ -349,7 +346,7 @@ const Profile = (onClick) => {
                     <option value="PostGrado">Post-Grado</option>
                 </select>
 
-                {/*<label htmlFor="carrera">Profesion u oficio:</label>*/}
+                <label className={classNamees.titulos} htmlFor="carrera">Profesion u oficio:</label>
                 <input
                     className={classNamees.intputs}
                     value={datosEdit.carrera}
@@ -358,51 +355,79 @@ const Profile = (onClick) => {
                     name="carrera" id='carrera' type='text'
                 />
                 <br></br>
-                 <label>Mis intereses:</label><br></br>
-                <input
-                    /*checked={/*datosEdit.intereses_generales.includes("Animales")true}
-                    /*onChange={handleChange}*/
-                    value="Animales"
-                    name="intereses_generales" id='AnimalesCheck' type='checkbox'
-                /><label htmlFor="AnimalesCheck">Animales</label>
-                <input
-                    /*checked={datosEdit.intereses_generales.includes("Niños")false}
-                    onChange={/*handleChange}*/
-                    value="Niños"
-                    name="intereses_generales" id='NiñosCheck' type='checkbox'
-                /><label htmlFor="NiñosCheck">Niños</label><br></br>
-                <input
-                    /*checked={/*datosEdit.intereses_generales.includes("Medio_Ambiente")false}
-                    onChange={/*handleChange}*/
-                    value="Medio_Ambiente"
-                    name="intereses_generales" id='MedioAmbcheck' type='checkbox'
-                /><label htmlFor="MedioAmbcheck">Medio Ambiente</label>
-                <input
-                    /*checked={/*datosEdit.intereses_generales.includes("Humanidad")true}
-                    onChange={/*handleChange}*/
-                    value="Humanidad"
-                    name="intereses_generales" id='HumanidadCheck' type='checkbox'
-                /><label htmlFor="HumanidadCheck">Humanidad</label> 
-                {/*<label htmlFor="pais_de_recidencia">Pais:</label>*/}
+                <label  className={classNamees.titulos}>Mis intereses:</label><br></br>
+                <div className={classNamees.checkintereses}>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                    <input
+                        checked={datosEdit.intereses.includes("Asilos")}
+                        onChange={handleChange}
+                        value="Asilos"
+                        name="intereses" id='AsilosCheck' type='checkbox'
+                    /><label htmlFor="AsilosCheck">Asilos</label>
+                    </Grid>
+                    <Grid item xs={6}>
+                    <input
+                        checked={datosEdit.intereses.includes("Niños y niñas")}
+                        onChange={handleChange}
+                        value="Niños y niñas"
+                        name="intereses" id='NiñosCheck' type='checkbox'
+                    /><label htmlFor="NiñosCheck">Niños</label>
+                    </Grid>
+                    <Grid item xs={6}>
+                    <input
+                        checked={datosEdit.intereses.includes("Refugios")}
+                        onChange={handleChange}
+                        value="Refugios"
+                        name="intereses" id='MedioAmbcheck' type='checkbox'
+                    /><label htmlFor="MedioAmbcheck">Refugios</label>
+                    </Grid>
+                    <Grid item xs={6}>
+                    <input
+                        checked={datosEdit.intereses.includes("Educacion")}
+                        onChange={handleChange}
+                        value="Educacion"
+                        name="intereses" id='EducacionCheck' type='checkbox'
+                    /><label htmlFor="EducacionCheck">Educacion</label>
+                    </Grid>
+                    
+                </Grid>          
+
+                </div>
+                
+                <label className={classNamees.titulos} htmlFor="pais_de_recidencia">Pais de recidencia:</label>
                 <input
                     className={classNamees.intputs}
                     value={datosEdit.pais_de_recidencia}
                     onChange={handleInputChange}
+                    placeholder='Pais de recidencia'
                     name="pais_de_recidencia" id='pais_de_recidencia' type='text'
                 />
                 <br></br>
 
-                {/*<label htmlFor="ciudad_de_recidencia">Ciudad:</label>*/}
+                <label className={classNamees.titulos} htmlFor="ciudad_de_recidencia">Ciudad de recidencia:</label>
                 <input
                     className={classNamees.intputs}
                     value={datosEdit.ciudad_de_recidencia}
                     onChange={handleInputChange}
-                    placeholder='Ciudad'
+                    placeholder='Ciudad de recidencia'
                     name="ciudad_de_recidencia" id='ciudad_de_recidencia' type='text'
                 />
                 <br></br>
+                <label className={classNamees.titulos} htmlFor="telefono">Telefono:</label>
+                <input
+                    className={classNamees.intputs}
+                    value={datosEdit.telefono}
+                    onChange={handleInputChange}
+                    placeholder='Telefono
+                    '
+                    name="telefono" id='telefono' type='text'
+                />
+                <br></br>
 
+                <label className={classNamees.titulos} htmlFor="genero">Genero:</label>
                 <select name="genero" value={datosEdit.genero} onChange={handleInputChange}  className={classNamees.intputs}>
+                    <option value="">Genero</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
                     <option value="Otro">Otro</option>
@@ -413,9 +438,8 @@ const Profile = (onClick) => {
 
                 
 
-                {/*<label htmlFor="descripcion_personal">Descripcion:</label>*/}
+                <label className={classNamees.titulos} htmlFor="descripcion_personal">Descripcion:</label>
                 <textarea
-                    label='Fecha de nacimiento'
                     className={classNamees.intputextaera}  
                     value={datosEdit.descripcion_personal}
                     onChange={handleInputChange}
