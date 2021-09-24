@@ -1,14 +1,14 @@
-import LoginForm from "../components/LoginForm";
-import Register from "../screens/Register";
-import EventsList from "../components/EventsList";
-import Home from "../components/Home";
-import Profile from "../components/Profile";
-import Event from "../components/Event";
-import Formulario from "../components/Formulario-evento.component/Formulario";
-import Attendance from "../components/Attendance";
-import crearEvento from "../components/CrearEvento/crearEvento";
-import ProyectoContainer from "../components/ProyectoContainer";
-import FormularioProyecto from "../components/Formulario";
+import LoginForm from '../components/LoginForm'
+import Register from '../screens/Register'
+import EventsList from '../components/EventsList'
+import Home from '../components/Home'
+import Profile from '../components/Profile'
+import Event from '../components/Event'
+import Formulario from '../components/Formulario-evento.component/Formulario'
+import Attendance from '../components/Attendance'
+import crearEvento from '../components/CrearEvento/crearEvento'
+import VistaProyectos from '../components/componentes proyectos/paginas/VistaProyectos'
+import FormularioProyecto from '../components/Formulario'
 const Routes = [
   {
     path: "/login",
@@ -21,9 +21,9 @@ const Routes = [
     component: Register,
   },
   {
-    path: "/projects",
-    name: "ShowProjects",
-    component: ProyectoContainer,
+    path: '/projects',
+    name: 'ShowProjects',
+    component: VistaProyectos,
   },
   {
     path: "/createproject",
