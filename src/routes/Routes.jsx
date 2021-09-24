@@ -9,6 +9,7 @@ import Attendance from "../components/Attendance";
 import crearEvento from "../components/CrearEvento/crearEvento";
 import ProyectoContainer from "../components/ProyectoContainer";
 import FormularioProyecto from "../components/Formulario";
+import Evento from "../components/Evento";
 const Routes = [
   {
     path: "/login",
@@ -31,8 +32,8 @@ const Routes = [
     component: FormularioProyecto,
   },
   {
-    path: '/eventos',
-    name: 'EventsList',
+    path: "/eventos",
+    name: "EventsList",
     component: EventsList,
   },
   {
@@ -46,8 +47,8 @@ const Routes = [
     component: Profile,
   },
   {
-    path: '/eventos/event',
-    name: 'Evento',
+    path: "/eventos/event",
+    name: "Evento",
     component: Event,
   },
   {
@@ -61,9 +62,14 @@ const Routes = [
     component: Attendance,
   },
   {
-    path: '/eventos/crearevento',
-    name: 'crearEvento',
+    path: "/eventos/crearevento",
+    name: "crearEvento",
     component: crearEvento,
+  },
+  {
+    path: "/eventos/:id",
+    name: "Evento",
+    component: Evento,
   },
 ];
 export default Routes;
