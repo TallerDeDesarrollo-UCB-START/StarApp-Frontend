@@ -31,7 +31,6 @@ class crearEvento extends React.Component {
       modalidad_evento: "Presencial",
       lugar_evento: "",
       fecha_evento: "",
-      proyecto: "Proyecto1"
     },
   };
 
@@ -106,7 +105,7 @@ class crearEvento extends React.Component {
               </Box>
 
               <Box item xs={12} mt={0.8}>
-                <Box className="InLine Modalidad" item xs={6}>
+        
                   <label>
                     Modalidad: 
                   </label>
@@ -115,18 +114,7 @@ class crearEvento extends React.Component {
                     <option value="Presencial" name="modalidad_evento" selected>Presencial</option>
                     <option value="Virtual" name="modalidad_evento">Virtual</option>                
                   </select>
-                </Box>
-
-                <Box className="InLine Proyecto" item xs={6}>
-                  <label>
-                    Proyecto: 
-                  </label>
-                  <select className='proyecto-input' name="proyecto" onChange={this.handleChange}>
-                    <option value="Proyecto 1" name="proyecto" selected>Proyecto1</option>
-                    <option value="Proyecto 2" name="proyecto">Proyecto2</option>
-                  </select>
-                  
-                </Box>
+              
 
               </Box>
 
