@@ -22,10 +22,8 @@ const url = "http://localhost:5000/eventos/crearevento"
 
 class crearEvento extends React.Component {
   state = {
-    modalActualizar: false,
     modalInsertar: true,
     form: {
-      id_evento: "",
       nombre_evento: "",
       descripcion_evento: "",
       modalidad_evento: "Presencial",
@@ -36,7 +34,6 @@ class crearEvento extends React.Component {
 
   mostrarModalInsertar = () => {
     this.setState({
-     
       modalInsertar: true,
     });
   };
@@ -72,90 +69,78 @@ class crearEvento extends React.Component {
     return (
       <>
         <Container>
-          
-          <Modal isOpen={this.state.modalInsertar}>
-            <ModalHeader>
-            <div><h3>Crear Evento</h3></div>
-            </ModalHeader>
 
-            <ModalBody>
+          <form>
 
-              <Box item xs={12}>
+            <Box xs={12}>
+              <label>
+                Evento: 
+              </label>
+              <input
+                className="form-control"
+                name="nombre_evento"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </Box>
+            
+            <Box xs={12} mt={0.8}>
+              <label>
+                Descripción: 
+              </label>
+              <input
+                className="form-control"
+                name="descripcion_evento"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </Box>
+
+            <Box xs={12} mt={0.8}>     
+              <label>
+                Modalidad: 
+              </label>
+              <select className="modalidad-input" name="modalidad_evento" onChange={this.handleChange}>
+                <option value="Presencial" name="modalidad_evento">Presencial</option>
+                <option value="Virtual" name="modalidad_evento">Virtual</option>                
+              </select>
+            </Box>
+
+            <Box  xs={12} mt={0.8}>
+              <Box className="InLine Lugar" xs={6}>
                 <label>
-                  Evento: 
+                  Lugar: 
                 </label>
                 <input
                   className="form-control"
-                  name="nombre_evento"
+                  name="lugar_evento"
                   type="text"
                   onChange={this.handleChange}
                 />
               </Box>
-              
-              <Box item xs={12} mt={0.8}>
+
+              <Box className="InLine Fecha" xs={6}>
                 <label>
-                  Descripción: 
+                  Fecha: 
                 </label>
                 <input
                   className="form-control"
-                  name="descripcion_evento"
-                  type="text"
+                  name="fecha_evento"
+                  type="date"
                   onChange={this.handleChange}
                 />
               </Box>
+            </Box>
 
-              <Box item xs={12} mt={0.8}>
-        
-                  <label>
-                    Modalidad: 
-                  </label>
-
-                  <select className="modalidad-input" name="modalidad_evento" onChange={this.handleChange}>
-                    <option value="Presencial" name="modalidad_evento" selected>Presencial</option>
-                    <option value="Virtual" name="modalidad_evento">Virtual</option>                
-                  </select>
-              
-
-              </Box>
-
-              <Box  item xs={12} mt={0.8}>
-                <Box className="InLine Lugar" item xs={6}>
-                  <label>
-                    Lugar: 
-                  </label>
-                  <input
-                    className="form-control"
-                    name="lugar_evento"
-                    type="text"
-                    onChange={this.handleChange}
-                  />
-                </Box>
-
-                <Box className="InLine Fecha" item xs={6}>
-                  <label>
-                    Fecha: 
-                  </label>
-                  <input
-                    className="form-control"
-                    name="fecha_evento"
-                    type="date"
-                    onChange={this.handleChange}
-                  />
-                </Box>
-              </Box>
-              
-            </ModalBody>
-
-            <ModalFooter>
+            <Box xs={12} mt={0.8}> 
               <Button className="BtnRegistrar" onClick={() => this.peticionPost()}> Registrar Evento </Button>
-              <Button className="BtnCancelar" ><Link to="/eventos"><span> Cancelar</span></Link> </Button>
-            </ModalFooter>
-          
-          </Modal>
+              <Button className="BtnCancelar" ><Link to="/eventos"> Cancelar</Link> </Button>
+            </Box>
+
+
+          </form>
+
         </Container>
-
-    
-
       </>
     );
   }

@@ -1,4 +1,4 @@
-.crearEvento {
+/* .crearEvento {
   text-align: center;
 }
 
@@ -35,7 +35,25 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
+
+/* .Proyecto{
+  width: 49%;
+  float: right;
+
+} */
+
+/* .Modalidad{
+  width: 49%;
+
+} */
+
+
+
+/* .proyecto-input{ 
+  width: 100%;
+} */
+
 
 .BtnRegistrar{
   background-color: #B3DA3F;
@@ -60,24 +78,7 @@
   float: right;
 }
 
-.Proyecto{
-  width: 49%;
-  float: right;
-
-}
-
-.Modalidad{
-  width: 49%;
-
-}
-
-.modalidad-input{
-  
-  width: 100%;
-}
-
-.proyecto-input{
-  
+.modalidad-input{ 
   width: 100%;
 }
 
