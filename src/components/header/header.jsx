@@ -45,12 +45,12 @@ const Header = () =>{
     const history = useHistory()
     const classes = useStyles()
     const [value, setValue] = React.useState(routes[location.pathname])
-    useEffect(() => {
+    /*useEffect(() => {
         if(!Boolean(sessionStorage.getItem("jwt")) && location.pathname !== "/" && location.pathname !== "/register"){
             history.push("/login")
         }
         setLogged(Boolean(sessionStorage.getItem("jwt")))
-      },[history, location.pathname]);
+      },[history, location.pathname]);*/
     return(
         <header className="header-division">
             <div className="header-logo">

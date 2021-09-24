@@ -3,9 +3,9 @@ import './CrearProyectoBtn.css';
 // Librerias-Paquetes-Estilos:
 import { Container } from '@material-ui/core';
 
-function CrearProyectoBtn() {
+function CrearProyectoBtn({onActivarForm}) {
     return (
-        <button class="createButton">
+        <button class="createButton" onClick={onActivarForm}>
             Crear proyecto
         </button>
     )
