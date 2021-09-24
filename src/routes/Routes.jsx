@@ -11,13 +11,13 @@ import VistaProyectos from '../components/componentes proyectos/paginas/VistaPro
 import FormularioProyecto from '../components/Formulario'
 const Routes = [
   {
-    path: '/login',
-    name: 'Inicio de sesion',
+    path: "/login",
+    name: "Inicio de sesion",
     component: LoginForm,
   },
   {
-    path: '/register',
-    name: 'Registro',
+    path: "/register",
+    name: "Registro",
     component: Register,
   },
   {
@@ -26,46 +26,44 @@ const Routes = [
     component: VistaProyectos,
   },
   {
-    path: '/createproject',
-    name: 'CreateProject',
+    path: "/createproject",
+    name: "CreateProject",
     component: FormularioProyecto,
   },
   {
-    path: '/events',
+    path: '/eventos',
     name: 'EventsList',
     component: EventsList,
   },
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
   },
   {
-    path: '/perfil',
-    name: 'Perfil',
+    path: "/perfil",
+    name: "Perfil",
     component: Profile,
   },
   {
-    path: '/events/event',
+    path: '/eventos/event',
     name: 'Evento',
     component: Event,
   },
   {
-    path: '/events/event/registroAEvento',
-    name: 'Formulario',
-    component: Formulario ,
+    path: "/events/event/registroAEvento",
+    name: "Formulario",
+    component: Formulario,
   },
   {
-    path: '/events/event/attendance',
-    name: 'Attendace',
+    path: "/events/event/attendance",
+    name: "Attendace",
     component: Attendance,
   },
   {
-    path: '/events/crearevento',
+    path: '/eventos/crearevento',
     name: 'crearEvento',
     component: crearEvento,
   },
-
-  
-]
-export default Routes
+];
+export default Routes;
