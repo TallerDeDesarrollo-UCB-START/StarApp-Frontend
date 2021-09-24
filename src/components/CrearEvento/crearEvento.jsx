@@ -11,10 +11,6 @@ import {
 import {
   Button,
   Container,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
 } from "reactstrap";
 
 
@@ -68,13 +64,14 @@ class crearEvento extends React.Component {
   render() {
     return (
       <>
-        <Container>
+        <Container className="Container">
 
           <form>
 
-            <Box xs={12}>
+          
+            <Box className="evento" xs={6}>
               <label>
-                Evento: 
+                Nombre del Evento: 
               </label>
               <input
                 className="form-control"
@@ -83,33 +80,34 @@ class crearEvento extends React.Component {
                 onChange={this.handleChange}
               />
             </Box>
-            
-            <Box xs={12} mt={0.8}>
+          
+            <Box className="descripcion" xs={6} mt={0.8}>
               <label>
                 Descripción: 
               </label>
-              <input
-                className="form-control"
+              <textarea  className="form-control descripcion-input" cols="30" rows="10"  
                 name="descripcion_evento"
                 type="text"
-                onChange={this.handleChange}
-              />
+                onChange={this.handleChange}>
+              </textarea>  
             </Box>
 
-            <Box xs={12} mt={0.8}>     
-              <label>
-                Modalidad: 
-              </label>
-              <select className="modalidad-input" name="modalidad_evento" onChange={this.handleChange}>
-                <option value="Presencial" name="modalidad_evento">Presencial</option>
-                <option value="Virtual" name="modalidad_evento">Virtual</option>                
-              </select>
-            </Box>
 
-            <Box  xs={12} mt={0.8}>
-              <Box className="InLine Lugar" xs={6}>
+            <Box  className="CamposInferiores" xs={12} mt={0.8}>
+
+              <Box className="InLine Modalidad" xs={4}>     
                 <label>
-                  Lugar: 
+                  Modalidad 
+                </label>
+                <select className=" form-control" name="modalidad_evento" onChange={this.handleChange}>
+                  <option value="Presencial" name="modalidad_evento">Presencial</option>
+                  <option value="Virtual" name="modalidad_evento">Virtual</option>                
+                </select>
+              </Box>
+
+              <Box className="InLine Lugar" xs={4}>
+                <label>
+                  Lugar
                 </label>
                 <input
                   className="form-control"
@@ -119,9 +117,9 @@ class crearEvento extends React.Component {
                 />
               </Box>
 
-              <Box className="InLine Fecha" xs={6}>
+              <Box className="InLine Fecha" xs={4}>
                 <label>
-                  Fecha: 
+                  Fecha
                 </label>
                 <input
                   className="form-control"
@@ -132,9 +130,13 @@ class crearEvento extends React.Component {
               </Box>
             </Box>
 
-            <Box xs={12} mt={0.8}> 
-              <Button className="BtnRegistrar" onClick={() => this.peticionPost()}> Registrar Evento </Button>
+            <div className="CamposBotones">
+            <Button className="BtnRegistrar" onClick={() => this.peticionPost()}> Registrar Evento </Button>
               <Button className="BtnCancelar" ><Link to="/eventos"> Cancelar</Link> </Button>
+
+            </div>
+            <Box   xs={12} mt={2}> 
+              
             </Box>
 
 
