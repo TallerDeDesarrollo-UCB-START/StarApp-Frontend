@@ -27,6 +27,12 @@ class EventsList extends Component {
     }
   };
 
+  mensajeConfirmacionParticipacion(event) {
+    window.alert(
+      `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
+    );
+  }
+
   render() {
     return (
       <div>
@@ -67,7 +73,14 @@ class EventsList extends Component {
                       <p class="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
-                      <Button>Participar</Button>
+                      <Button
+                        onClick={() => {
+                          // this.mensajeConfirmacionParticipacion(event); //descomentar cuando se guarde en DB
+                        }}
+                      >
+                        Participar
+                      </Button>
+                      <Button>Ver Participantes</Button>
                     </div>
                   </div>
                 </div>
