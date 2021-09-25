@@ -49,6 +49,6 @@ function VistaProyectos() {
 
 const url = process.env.REACT_APP_API
 const URLProyectos = 'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
-const URLCrearProy = 'http://localhost:5000/create_proyectos'
+const URLCrearProy = 'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
 
 export default VistaProyectos
