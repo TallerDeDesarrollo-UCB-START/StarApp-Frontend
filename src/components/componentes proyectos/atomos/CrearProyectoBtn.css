@@ -1,5 +1,8 @@
 .createButton {
     height: fit-content;
-    margin-top: auto;
-    margin-bottom: auto;
+    background-color: #B3DA3F;
+    border: none;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
 }
