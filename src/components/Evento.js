@@ -13,20 +13,25 @@ class Evento extends Component {
   state = {
     events: [],
   };
+
   constructor() {
     super();
-    // this.getId();
-    this.getEvneto(18);
+    var thisUrl = window.location.href;
+    var ids = this.getId(thisUrl);
+    console.log("ID", ids);
+    this.getEvneto(ids);
   }
 
-  // getId() {
-  //   this.id = useParams();
-  // }
+  getId(thisUrl) {
+    console.log("URL", thisUrl.substring(thisUrl.length - 1));
+    return thisUrl.substring(thisUrl.length - 1);
+  }
 
   getEvneto = async (id) => {
     try {
       let data = await api.get(`/${id}`).then(({ data }) => data);
       this.setState({ events: data });
+      // console.log("this url", );
     } catch (err) {
       console.log(err);
     }
