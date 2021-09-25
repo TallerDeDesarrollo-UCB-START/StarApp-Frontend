@@ -6,7 +6,7 @@ import './ParticiparEnProyectoBtn.css';
 // Merce Vic
 function ContenidoProyecto() {
     return (
-        <button>Participar</button>
+        <button className="participarButton">Participar</button>
     );
 }
 
