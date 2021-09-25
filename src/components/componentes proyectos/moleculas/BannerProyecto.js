@@ -9,7 +9,7 @@ import './BannerProyecto.css';
 // Merce Vic
 function BannerProyecto() {
     return (
-        <Box class="banner-container">
+        <Box className="banner-container">
             <img src={Banner} alt=" "/>
         </Box>
     );

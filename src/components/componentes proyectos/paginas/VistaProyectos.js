@@ -24,21 +24,18 @@ function VistaProyectos() {
         return data;
     }
 
-    const crearProyecto = async (proyecto) => {
+    const crearProyecto = async (nuevoProyecto) => {
+        debugger;
         const response = await fetch(
-            URLProyectos,
+            URLCrearProy,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify(proyecto)
+                body: JSON.stringify(nuevoProyecto)
             })
         const data = await response.json()
-    
+        console.log(data)
         setProyectos([...proyectos, data])
-        /* Without using an API backend:
-        const id = Math.floor(Math.random() * 10000) + 1
-        const newTask = { id, ...task } //object with id and the rest of task fields
-        setTasks([...tasks, newTask])*/
     }
     
     const rol = 'admin'
@@ -53,6 +50,6 @@ function VistaProyectos() {
 
 const url = process.env.REACT_APP_API
 const URLProyectos = 'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
-
+const URLCrearProy = 'http://localhost:5000/create_proyectos'
 
 export default VistaProyectos

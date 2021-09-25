@@ -7,13 +7,11 @@ import { Container } from '@material-ui/core';
 
 
 // MERCE - VIC
-// Acomoden el h1  y  el  boton  como esta en el figma
-// en la seccion de historias de usuario
 function HeaderProyectosAdmin({onActivarForm}) {
     return (
-        <Container class="header-container">
-            <div class="borderHeader-conatiner"></div>
-            <div class="textHeader-container">
+        <Container className="header-container">
+            <div className="borderHeader-conatiner"></div>
+            <div className="textHeader-container">
                 <h1>PROYECTOS</h1>
             </div>
             <CrearProyectoBtn onActivarForm={onActivarForm}/>

@@ -5,7 +5,7 @@ import { Container } from '@material-ui/core';
 
 function CrearProyectoBtn({onActivarForm}) {
     return (
-        <button class="createButton" onClick={onActivarForm}>
+        <button className="createButton" onClick={onActivarForm}>
             Crear proyecto
         </button>
     )

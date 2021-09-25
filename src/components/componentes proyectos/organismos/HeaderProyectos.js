@@ -7,7 +7,7 @@ import { Container } from '@material-ui/core';
 // MERCE - VIC
 function HeaderProyectos() {
     return (
-        <Container class="header-container">
+        <Container className="header-container">
             <h1>PROYECTOS</h1>
         </Container>
     );

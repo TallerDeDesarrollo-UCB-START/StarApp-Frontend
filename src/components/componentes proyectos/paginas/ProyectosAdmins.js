@@ -18,7 +18,7 @@ function ProyectosAdmins({proyectos, onCrearProy}) {
     }
 
     //Componentes
-    const FormularioCrear = mostrarFormCrear==true ? <FormularioCrearProyecto onCrearProy={onCrearProy}/> : <></>
+    const FormularioCrear = mostrarFormCrear==true ? <FormularioCrearProyecto onCrearProy={onCrearProy} onActivarForm={activarFormCrear}/> : <></>
 
     return (
         <Box style={styles}>
