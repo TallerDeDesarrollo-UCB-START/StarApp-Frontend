@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const api = axios.create({
   baseURL: `http://localhost:5000/eventos`,
@@ -80,7 +81,7 @@ class EventsList extends Component {
                       >
                         Participar
                       </Button>
-                      <Button>Ver Participantes</Button>
+                      <Link to="eventos/1">Ver Participantes</Link>
                     </div>
                   </div>
                 </div>

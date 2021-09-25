@@ -25,5 +25,9 @@ class Evento extends Component {
       console.log(err);
     }
   };
+
+  render() {
+    return <div>Evento 1</div>;
+  }
 }
 export default Evento;
