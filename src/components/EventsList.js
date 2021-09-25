@@ -35,6 +35,12 @@ class EventsList extends Component {
     })
   }
 
+  deleteEvento = async (id) => {
+    console.log(id)
+    await axios.delete('http://localhost:5000/eventos/' + id);
+    this.getEvents();
+  }
+
   render() {
     return (
       <div>
@@ -79,6 +85,9 @@ class EventsList extends Component {
                       </p>
                     </div>
                   </div>
+                  <button className="btn btn-danger" onClick={() => this.deleteEvento(event.id)}>
+                    Eliminar
+                  </button>
                 </div>
                 :null
                 }
