@@ -41,7 +41,21 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
         console.log(nuevoProyecto)
         onCrearProy(nuevoProyecto) // callback invocation
         resetStates()
+        onActivarForm() // Oculta el formulario
     }
+    
+    /* Esto servira para cancelar formulario haciendo click fuera del formulario
+    allbody.addEventListener('click', (e) => {  
+        const allbody = document.querySelector('#root .MuiBox-root')
+        const formu = allbody.querySelector('#gen-form') 
+        if (formu){
+            if (!formu.contains(e.target)){
+                // Clicked outside box
+                console.log('adadas')
+                onActivarForm()
+            } 
+        } 
+    });*/
 
     const onChangeTitulo = (e) => setTitulo(e.target.value)
     const onChangeDescrip = (e) => setDescripcion(e.target.value)
@@ -49,7 +63,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
     const onChangeLider = (e) => setLider(e.target.value)
 
     return (
-        <div className="gen-form">
+        <div id="gen-form">
             <form  onSubmit={onSubmit}>
                 {/*<div className="underlayer-proy">dads</div>*/}
                 <h3 style={{margin: "auto", width: "50%"}}>CREAR PROYECTO</h3>
@@ -75,11 +89,11 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
                                 onChange={onChangeLider}
                                 />
 
-                    <input type='submit' value='Crear' className='btn-proy btn-proy-block'/>
+                    <input type='submit' value='Crear' className='btn-proy btn-proy-block' style={{backgroundColor: 'lime'}}/>
 
                 </div>
             </form>
-            <button className='btn-proy btn-proy-block' onClick={onActivarForm}> Cancelar </button>
+            <button className='btn-proy btn-proy-block' onClick={onActivarForm} style={{backgroundColor: 'grey'}}> Cancelar </button>
         </div>
         
     );

@@ -25,7 +25,6 @@ function VistaProyectos() {
     }
 
     const crearProyecto = async (nuevoProyecto) => {
-        debugger;
         const response = await fetch(
             URLCrearProy,
             {

@@ -27,13 +27,13 @@
   width: 45%;
 }
 
-.gen-form {
+#gen-form {
   position: fixed;
   bottom: 22%;
   right: 31%;
   width: 35%;
   margin: 3% auto;
-  background-color: whitesmoke;
+  background-color: rgb(250, 250, 250);
   /*border: 1px solid grey;*/
   border-radius: 7%;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 15px rgba(0,0,0,0.22);
