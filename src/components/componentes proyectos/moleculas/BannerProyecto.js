@@ -2,7 +2,7 @@
 
 // Librerias-Paquetes:
 import { Container } from '@material-ui/core';
-import Banner from '../../../assets/ejemploBannerProyecto.jpeg';
+import Banner from '../../../assets/generic_picture.png';
 import { Box } from '@material-ui/core';
 import './BannerProyecto.css';
 
