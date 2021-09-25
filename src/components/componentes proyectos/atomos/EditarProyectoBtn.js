@@ -1,5 +1,5 @@
 // Componentes:
-import './EditarProyectoBtn.css';
+import './EditarProyectoBtn.css'
 // Librerias-Paquetes-Estilos:
 import { Container } from '@material-ui/core';
 
