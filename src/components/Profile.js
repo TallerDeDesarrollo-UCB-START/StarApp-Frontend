@@ -160,12 +160,9 @@ const Profile = (onClick) => {
 
         var nuevosInt=''
         const tikeado=!event.target.checked
-        console.log("esta tikeado?")
-        console.log(tikeado)
-        console.log("tipo de dato intereses grales")
-        console.log(typeof(datosEdit.intereses))
+        
         if(typeof(datosEdit.intereses)===typeof("string")){
-            console.log("entro a tipo string")
+            
             if(tikeado){
                 nuevosInt=datosEdit.intereses.split(/[,"}{]/).filter(Boolean).filter(i=>i!==event.target.value)
                 
@@ -174,7 +171,7 @@ const Profile = (onClick) => {
             }
             
         }else{
-            console.log("entro a tipo array")
+            
             if(tikeado){
                 
                 nuevosInt=datosEdit.intereses.filter(i=>i!==event.target.value)
@@ -185,13 +182,12 @@ const Profile = (onClick) => {
                 nuevosInt=aux
             }
         }
-        console.log("nueva lista de intereses generales")
-        console.log(nuevosInt)
-
+        
+        nuevosInt=nuevosInt.toString()
+        
         setDatosEdit({...datosEdit,[event.target.name]:nuevosInt})
 
-        console.log("lista de datos")
-        console.log(datosEdit)
+        
       };
 
 
@@ -214,9 +210,9 @@ const Profile = (onClick) => {
         })
       }
     var peticionPut = (asignaciones)=>{
-        console.log("esta actualizadno")
+        
         axios.put(urlTablaExtensa+datos.id_usuario, asignaciones).then(response=>{
-            alert("intentando actualizar")
+            alert("Actualizado")
         })
         
         
@@ -239,6 +235,7 @@ const Profile = (onClick) => {
             genero:datosEdit.genero,
             estado_de_cuenta: datosEdit.estado_de_cuenta,
             rol:datosEdit.rol,
+            intereses:datosEdit.intereses,
             id_autenticacion:datosEdit.id_autenticacion
 
            }
@@ -263,13 +260,13 @@ const Profile = (onClick) => {
             correo_electronico:"aaaaaaa@gmail.com",
             telefono:'74701750'}
 
-        console.log(urlTablaExtensa+responseAutenticacion.id_autenticacion)
+        
         
         axios.get(urlTablaExtensa+responseAutenticacion.id_autenticacion).then(response=>{
     
         
         if(response.data.data){
-            console.log("hay datosssssssssss")
+            
             
             setUserExsit({userEx: true })
             
@@ -281,7 +278,7 @@ const Profile = (onClick) => {
                             
             
         }else{
-            console.log("no existe data")
+            
             setUserExsit({ userEx: false})
         }
         
@@ -379,8 +376,8 @@ const Profile = (onClick) => {
                         checked={datosEdit.intereses.includes("Refugios")}
                         onChange={handleChange}
                         value="Refugios"
-                        name="intereses" id='MedioAmbcheck' type='checkbox'
-                    /><label htmlFor="MedioAmbcheck">Refugios</label>
+                        name="intereses" id='RefugiosCheck' type='checkbox'
+                    /><label htmlFor="RefugiosCheck">Refugios</label>
                     </Grid>
                     <Grid item xs={6}>
                     <input
@@ -438,7 +435,7 @@ const Profile = (onClick) => {
 
                 
 
-                <label className={classNamees.titulos} htmlFor="descripcion_personal">Descripcion:</label>
+                <label className={classNamees.titulos} htmlFor="descripcion_personal">Mi pequeña descripcion:</label>
                 <textarea
                     className={classNamees.intputextaera}  
                     value={datosEdit.descripcion_personal}
