@@ -5,7 +5,6 @@ import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn'
 import { Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
-// Kevin y Pame
 function FormularioCrearProyecto() {
     return (
 
