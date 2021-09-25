@@ -9,12 +9,27 @@ function BodyProyectos({proyectos}) {
     return (
         <Box class="body-container">
             {
-                proyectos.map(proyecto => (
+                proyectos2.map(proyecto => (
                     <ProyectoVoluntario key={proyecto.id} proyecto={proyecto} />
                 ))
             }
         </Box>
     );
 }
+
+const proyectos2 = [
+    {
+        titulo: 'el agua es oro',
+        descripcion: 'blablablalbalablbala',
+        objetivo: 'blablablab',
+        lider: 'pepe'
+    },
+    {
+        titulo: 'el chirimbito',
+        descripcion: 'blablablalbalablbala',
+        objetivo: 'blablablab',
+        lider: 'pedro'
+    }
+]
 
 export default BodyProyectos

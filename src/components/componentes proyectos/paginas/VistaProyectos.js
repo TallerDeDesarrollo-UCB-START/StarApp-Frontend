@@ -23,9 +23,26 @@ function VistaProyectos() {
         const data = await response.json()
         return data;
     }
+
+    const crearProyecto = async (proyecto) => {
+        const response = await fetch(
+            URLProyectos,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(proyecto)
+            })
+        const data = await response.json()
+    
+        setProyectos([...proyectos, data])
+        /* Without using an API backend:
+        const id = Math.floor(Math.random() * 10000) + 1
+        const newTask = { id, ...task } //object with id and the rest of task fields
+        setTasks([...tasks, newTask])*/
+    }
     
     const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos}/> : <ProyectosVoluntarios proyectos={proyectos}/>
+    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
     return (
         <>
