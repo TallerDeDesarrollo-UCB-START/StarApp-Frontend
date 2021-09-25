@@ -12,6 +12,7 @@ const api = axios.create({
 class Evento extends Component {
   state = {
     events: [],
+    participants: [],
   };
 
   constructor() {

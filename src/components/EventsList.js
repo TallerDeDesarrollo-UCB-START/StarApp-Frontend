@@ -82,8 +82,9 @@ class EventsList extends Component {
                       >
                         Participar
                       </Button>
-
-                      <Link to={"eventos/" + event.id}>Ver Evento</Link>
+                      <Button>
+                        <Link to={"eventos/" + event.id}>Ver Evento</Link>
+                      </Button>
                     </div>
                   </div>
                 </div>
