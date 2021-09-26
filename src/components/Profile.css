@@ -75,8 +75,9 @@
 }
 .name{
     /* float: right; */
-    margin-left: 6cm;
-    margin-bottom: 2cm;
+    position:absolute;
+    bottom: 1cm;
+    right: 11.2cm;
 }
 .tabs{
     /* float: right; */

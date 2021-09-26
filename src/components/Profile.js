@@ -488,6 +488,9 @@ const Profile = (onClick) => {
       <div>
         {location.pathname !== "/" && (
           <div>
+            <ProfileImage getDataProfile={datosEdit} />
+            <ChipPerfil getDataProfile={datosEdit} />
+            <ProfileCard getDataProfile={datosEdit} />
             <div className="name">
               {userExist.userEx ? (
                 <Button
@@ -503,7 +506,7 @@ const Profile = (onClick) => {
                   type="button"
                   onClick={handleOpen}
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                 >
                   Completar Perfil
                 </Button>
@@ -518,9 +521,7 @@ const Profile = (onClick) => {
                 {body}
               </Modal>
             </div>
-            <ProfileImage getDataProfile={datosEdit} />
-            <ChipPerfil getDataProfile={datosEdit} />
-            <ProfileCard getDataProfile={datosEdit} />
+            
           </div>
         )}
       </div>

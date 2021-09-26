@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Card, Divider } from "@material-ui/core";
+import { Typography, Card, Divider,Button } from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
@@ -82,9 +82,13 @@ const ProfileCard = ({ getDataProfile }) => {
                   Pais de residencia:{getDataProfile.pais_de_recidencia}
                 </Typography>
               </Paper>
+              <Button variant="contained" style={{backgroundColor:'#d15c5a',}}>
+                    Eliminar Perfil
+              </Button>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid >
+       
       </CardContent>
       <CardActions></CardActions>
     </Card>

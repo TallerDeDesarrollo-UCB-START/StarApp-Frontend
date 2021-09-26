@@ -15,6 +15,9 @@ const theme = createTheme ({
     secondary: {
       main: '#B3DA3F',
     },
+    warning:{
+      main:'#FF0000',
+    },
   },
   typography: {
     fontFamily: "Miriam Libre",
