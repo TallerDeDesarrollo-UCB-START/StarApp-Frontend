@@ -27,6 +27,9 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
     function agregarRequerido(element){
         element.classList.add('requerido')
     }
+    function removerRequerido(element){
+        element.classList.remove('requerido')
+    }
 
     function validarCampos(event) {
         if (!titulo || !descripcion || !objetivo || !lider) {
@@ -38,13 +41,14 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
             if (!lider) agregarRequerido(event.currentTarget[3])
             return false
         }
+        return true
     }
 
     const onSubmit = (event) => {
         event.preventDefault() // To avoid submitting to an actual page
         const lideres = [lider]
         const objetivos = [objetivo]
-        if (!validarCampos(event)) {
+        if (validarCampos(event) == false) {
             return
         }
         const nuevoProyecto = {
@@ -72,10 +76,10 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
         } 
     });*/
 
-    const onChangeTitulo = (e) => setTitulo(e.target.value)
-    const onChangeDescrip = (e) => setDescripcion(e.target.value)
-    const onChangeObjetivo = (e) => setObjetivo(e.target.value)
-    const onChangeLider = (e) => setLider(e.target.value)
+    const onChangeTitulo = (e) => {setTitulo(e.target.value); removerRequerido(e.target)}
+    const onChangeDescrip = (e) => {setDescripcion(e.target.value); removerRequerido(e.target)}
+    const onChangeObjetivo = (e) => {setObjetivo(e.target.value); removerRequerido(e.target)}
+    const onChangeLider = (e) => {setLider(e.target.value); removerRequerido(e.target)}
 
     return (
         <div id="gen-form">
