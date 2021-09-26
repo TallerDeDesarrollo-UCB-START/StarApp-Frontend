@@ -5,12 +5,12 @@ import './BodyProyectos.css';
 import { Box } from '@material-ui/core';
 
 // diego
-function BodyProyectos({proyectos}) {
+function BodyProyectos({proyectos, onEliminarProy}) {
     return (
         <Box className="body-container">
             {
                 proyectos.map(proyecto => (
-                    <ProyectoVoluntario key={proyecto.id} proyecto={proyecto} />
+                    <ProyectoVoluntario key={proyecto.id} proyecto={proyecto} onEliminarProy={onEliminarProy}/>
                 ))
             }
         </Box>

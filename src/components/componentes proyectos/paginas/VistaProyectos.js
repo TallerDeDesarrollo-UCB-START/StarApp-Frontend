@@ -15,7 +15,7 @@ function VistaProyectos() {
         setProyectos(proyectosDelServer)
         }
         getProyectos()
-    }, [] )
+    }, [proyectos.length] )
 
     // HTTP requests & functions
     async function fetchProyectos() {
@@ -35,10 +35,23 @@ function VistaProyectos() {
         const data = await response.json()
         console.log(data)
         setProyectos([...proyectos, data])
+    
     }
     
+    const eliminarProyecto = async (id) => { 
+        await fetch(
+        `${URLEliminarProy}/${id}`,
+        { 
+            method: 'DELETE'
+        })
+    
+        setProyectos(proyectos.filter((proy) => proy.id !== id));
+        useEffect
+    }
+    
+
     const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
+    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
     return (
         <>
@@ -50,5 +63,6 @@ function VistaProyectos() {
 const url = process.env.REACT_APP_API
 const URLProyectos = 'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
 const URLCrearProy = 'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
+const URLEliminarProy = 'http://localhost:5000/delete_proyecto'//`${url}delete_proyecto`
 
 export default VistaProyectos
