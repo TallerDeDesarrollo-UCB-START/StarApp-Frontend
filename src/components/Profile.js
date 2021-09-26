@@ -183,7 +183,7 @@ const Profile = (onClick) => {
             }
         }
         
-        nuevosInt=nuevosInt.toString()
+        
         
         setDatosEdit({...datosEdit,[event.target.name]:nuevosInt})
 
@@ -210,10 +210,13 @@ const Profile = (onClick) => {
         })
       }
     var peticionPut = (asignaciones)=>{
-        
+        console.log(asignaciones)
         axios.put(urlTablaExtensa+datos.id_usuario, asignaciones).then(response=>{
-            alert("Actualizado")
+            alert(response.message)
         })
+        .catch(error=>{
+            alert(error.message);
+          })
         
         
     }
@@ -221,7 +224,8 @@ const Profile = (onClick) => {
     function sendForm(){
         setDatos(datosEdit)
         //putTablaAutenticacion
-
+        
+        
         const asignaciones= {
             nombre:datosEdit.nombre,
             apellido:datosEdit.apellido,
@@ -235,7 +239,7 @@ const Profile = (onClick) => {
             genero:datosEdit.genero,
             estado_de_cuenta: datosEdit.estado_de_cuenta,
             rol:datosEdit.rol,
-            intereses:datosEdit.intereses,
+            intereses:datosEdit.intereses.toString(),
             id_autenticacion:datosEdit.id_autenticacion
 
            }
@@ -250,6 +254,13 @@ const Profile = (onClick) => {
         
     }
    
+    function removeNulls(model){
+        
+        for (var value of Object.keys(model)){
+          model[value] = (model[value])?model[value]:'';
+        }
+        return model;
+      }
      
     
     useEffect(()=>{
@@ -273,8 +284,8 @@ const Profile = (onClick) => {
             //setDatos({...response.data.data,...responseAutenticacion})
             //setDatosEdit({...response.data.data,...responseAutenticacion})
             
-            setDatos({...response.data.data})
-            setDatosEdit({...response.data.data})
+            setDatos({...removeNulls(response.data.data)})
+            setDatosEdit({...removeNulls(response.data.data)})
                             
             
         }else{
@@ -355,31 +366,47 @@ const Profile = (onClick) => {
                 <label  className={classNamees.titulos}>Mis intereses:</label><br></br>
                 <div className={classNamees.checkintereses}>
                 <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                     <input
-                        checked={datosEdit.intereses.includes("Asilos")}
+                        checked={datosEdit.intereses.includes("Medio ambiente")}
                         onChange={handleChange}
-                        value="Asilos"
-                        name="intereses" id='AsilosCheck' type='checkbox'
-                    /><label htmlFor="AsilosCheck">Asilos</label>
+                        value="Medio ambiente"
+                        name="intereses" id='MedioambienteCheck' type='checkbox'
+                    /><label htmlFor="MedioambienteCheck">Medio ambiente</label>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                     <input
-                        checked={datosEdit.intereses.includes("Niños y niñas")}
+                        checked={datosEdit.intereses.includes("Desarrollo sostenible")}
                         onChange={handleChange}
-                        value="Niños y niñas"
-                        name="intereses" id='NiñosCheck' type='checkbox'
-                    /><label htmlFor="NiñosCheck">Niños</label>
+                        value="Desarrollo sostenible"
+                        name="intereses" id='DesarrollosostenibleCheck' type='checkbox'
+                    /><label htmlFor="DesarrollosostenibleCheck">Desarrollo sostenible</label>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                     <input
-                        checked={datosEdit.intereses.includes("Refugios")}
+                        checked={datosEdit.intereses.includes("Trabajo social")}
                         onChange={handleChange}
-                        value="Refugios"
-                        name="intereses" id='RefugiosCheck' type='checkbox'
-                    /><label htmlFor="RefugiosCheck">Refugios</label>
+                        value="Trabajo social"
+                        name="intereses" id='TrabajosocialCheck' type='checkbox'
+                    /><label htmlFor="TrabajosocialCheck">Trabajo social</label>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
+                    <input
+                        checked={datosEdit.intereses.includes("Empoderamiento")}
+                        onChange={handleChange}
+                        value="Empoderamiento"
+                        name="intereses" id='EmpoderamientoCheck' type='checkbox'
+                    /><label htmlFor="EmpoderamientoCheck">Empoderamiento</label>
+                    </Grid>
+                    <Grid item xs={12}>
+                    <input
+                        checked={datosEdit.intereses.includes("Perritos callejeros")}
+                        onChange={handleChange}
+                        value="Perritos callejeros"
+                        name="intereses" id='PerritoscallejerosCheck' type='checkbox'
+                    /><label htmlFor="PerritoscallejerosCheck">Perritos callejeros</label>
+                    </Grid>
+                    <Grid item xs={12}>
                     <input
                         checked={datosEdit.intereses.includes("Educacion")}
                         onChange={handleChange}
@@ -478,7 +505,7 @@ const Profile = (onClick) => {
                         
                         </div>
                         <div className="name">
-                            <h2>{datosEdit.nombre}</h2>
+                            <h2>{datosEdit.intereses}</h2>
                             <p>Pequeña descripción de la persona</p>
                             {
                                 userExist.userEx?
