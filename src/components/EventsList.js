@@ -12,7 +12,8 @@ const api = axios.create({
 class EventsList extends Component {
   state = {
     events: [],
-    showMe:true
+    divcontainer: true,
+    
   };
 
   constructor() {
@@ -29,12 +30,6 @@ class EventsList extends Component {
     }
   };
 
-  archivar(){
-    this.setState({
-      showMe:!this.state.showMe
-    })
-  }
-
   deleteEvento = async (id) => {
     console.log(id)
     await axios.delete('http://localhost:5000/eventos/' + id);
@@ -42,6 +37,13 @@ class EventsList extends Component {
   }
 
   render() {
+    
+    var Handlechange = e =>{
+      this.setState({divcontainer:!this.state.divcontainer});
+    }
+
+    const x=this.state.divcontainer;
+
     return (
       <div>
         <div>
@@ -58,8 +60,8 @@ class EventsList extends Component {
           <Card>
             {this.state.events.map((event) => (
               <div class="card w-70">
-                {
-                this.state.showMe?  
+                <button onClick={Handlechange}>{x ? 'Archivar' : 'Mostrar'}</button>{
+                x && (
                 <div class="row no-gutters">
                   <div class="col-auto">
                     <img
@@ -85,14 +87,13 @@ class EventsList extends Component {
                       </p>
                     </div>
                   </div>
+                  
                   <button className="btn btn-danger" onClick={() => this.deleteEvento(event.id)}>
                     Eliminar
                   </button>
                 </div>
-                :null
-                }
-                aca vienen los botones
-                <Button color="primary" onClick={()=>this.archivar()}>Archivar</Button>
+                )}
+                
                 <div class="card-footer w-100 text-muted"></div>
               </div>
             ))}
