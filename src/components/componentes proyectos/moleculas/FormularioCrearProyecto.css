@@ -58,6 +58,10 @@
   border-radius: 5px;
 }
 
+.form-control-proy .requerido {
+  border: 3px solid red ;
+}
+
 .form-control-check {
   display: flex;
   align-items: center;
@@ -72,6 +76,8 @@
   flex: 2;
   height: 20px;
 }
+
+
 
 .underlayer-proy {
   width: 100%;

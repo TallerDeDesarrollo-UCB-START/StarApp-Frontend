@@ -24,12 +24,27 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
         setLider('')
     }
 
+    function agregarRequerido(element){
+        element.classList.add('requerido')
+    }
+
+    function validarCampos(event) {
+        if (!titulo || !descripcion || !objetivo || !lider) {
+            alert('Porfavor llene los campos')
+            console.log(event)
+            if (!titulo) agregarRequerido(event.currentTarget[0])
+            if (!descripcion) agregarRequerido(event.currentTarget[1])
+            if (!objetivo) agregarRequerido(event.currentTarget[2])
+            if (!lider) agregarRequerido(event.currentTarget[3])
+            return false
+        }
+    }
+
     const onSubmit = (event) => {
         event.preventDefault() // To avoid submitting to an actual page
         const lideres = [lider]
         const objetivos = [objetivo]
-        if (!titulo || !descripcion || !objetivo || !lider) {
-            alert('Porfavor llene los campos')
+        if (!validarCampos(event)) {
             return
         }
         const nuevoProyecto = {
