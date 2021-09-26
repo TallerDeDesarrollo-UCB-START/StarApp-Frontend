@@ -1,72 +1,94 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import TabsProfile from './TabsProfile';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography, Card, Divider } from "@material-ui/core";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import TabsProfile from "./TabsProfile";
+import { withRouter } from "react-router";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position: "absolute",
+    left: "50%",
+    top: "80vh",
+    transform: "translate(-50%, -50%)",
+    width: "60%",
+    height: "60%",
+    backgroundColor: "#6599BC",
+  },
+  paper: {
+    marginTop: 15,
+  },
+}));
 
-const useStyles = makeStyles((theme)=>({
-    root: {
-      position: 'absolute',
-      left: '50%', top: '80vh',
-      transform: 'translate(-50%, -50%)',
-      width: '60%',
-      height: '60%',
-      backgroundColor: '#6599BC',
-      display:'inline',
-    },
-    pos: {
-      marginBottom: 12,
-      marginTop:24,
-      backgroundColor: '#cfe8fc',
-      height: '6vh',
-      width: '50vh',
-    },
-    rol:{
-      marginTop:15,
-      padding:'10px',
-      height:'30px',
-    },
-    paper:{
-      padding:'10px',
-      height:'150px',
-    },
-  }));
+const ProfileCard = ({ getDataProfile }) => {
+  const classes = useStyles();
 
-function ProfileCard() {
-    const classes = useStyles();
-    return (
+  return (
     <Card className={classes.root}>
       <CardContent>
-         <TabsProfile/>
-         <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Paper className={classes.rol}>
-           Rol
-          </Paper>
+        <TabsProfile />
+        <Grid container item xs={12} spacing={3}>
+          <Grid item xs={6} className={classes.paper}>
+            <Grid>
+              <Paper>
+                <Typography> Rol: {getDataProfile.rol} </Typography>
+              </Paper>
+            </Grid>
+
+            <Grid className={classes.paper}>
+              <Paper>
+                <Typography>Descripcion:</Typography>
+                {getDataProfile.descripcion_personal}
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
+                magni, iusto reprehenderit voluptatem ut eos esse cumque amet
+                totam commodi excepturi dicta dolor odio necessitatibus
+                possimus. Ut culpa impedit laborum eos? Autem quis, velit quos
+                praesentium dolorum amet repellat porro esse quibusdam odio a
+                nihil nesciunt? Culpa est eius numquam, odio assumenda
+                perspiciatis aliquam natus velit minus alias itaque quam
+                repellendus autem nostrum iste sequi officia molestias, eos,
+                temporibus iure libero vel optio veniam vero! Nemo veritatis ea
+                quia facere dignissimos. Eveniet alias praesentium dolorum
+                asperiores, cupiditate corporis similique blanditiis minima
+                deleniti atque ut eos consectetur voluptatibus ex rem debitis.
+              </Paper>
+            </Grid>
+          </Grid>
+          <Grid item xs={6} className={classes.paper}>
+            <Grid>
+              <Paper>
+                <Typography>Datos Personales:</Typography>
+                <Divider variant="middle" />
+                <Typography>
+                  Nombre: {getDataProfile.nombre}
+                  {getDataProfile.apellido}
+                </Typography>
+                <Typography>Edad: </Typography>
+                <Typography>Genero: {getDataProfile.genero}</Typography>
+                <Typography>
+                  Nivel de estudio: {getDataProfile.nivel_de_estudios}
+                </Typography>
+                <Typography>Carrera:{getDataProfile.carrera}</Typography>
+                <Typography>Telefono:{getDataProfile.telefono}</Typography>
+                <Typography>C.I.:</Typography>
+                <Typography>E-mail:</Typography>
+                <Typography>
+                  Ciudad de residencia: {getDataProfile.ciudad_de_recidencia}
+                </Typography>
+                <Typography>
+                  Pais de residencia:{getDataProfile.pais_de_recidencia}
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            Descripcion Personal
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            Datos Personales
-          </Paper>
-        </Grid>
-      </Grid>
       </CardContent>
-      <CardActions>
-      </CardActions>
+      <CardActions></CardActions>
     </Card>
   );
-}
+};
 
-export default ProfileCard
-
+export default withRouter(ProfileCard);
