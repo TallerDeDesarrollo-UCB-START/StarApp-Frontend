@@ -9,9 +9,9 @@ function BodyProyectosNormal({proyectos}) {
     return (
         <Box className="body-container">
             {
-            proyectos.map(proyecto => (
-                <ProyectoVoluntarioNormal key={proyecto.id} proyecto={proyecto} onEliminarProy={onEliminarProy}/>
-            ))
+                proyectos.map(proyecto => (
+                    <ProyectoVoluntarioNormal key={proyecto.id} proyecto={proyecto}/>
+                ))
             }
         </Box>
     );
