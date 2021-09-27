@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Card, Button } from "reactstrap";
+import { Container, Card, Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
 
 const api = axios.create({
   baseURL: `http://localhost:5000/eventos`,
@@ -13,12 +13,16 @@ class EventsList extends Component {
   state = {
     events: [],
     divcontainer: true,
-    
+    abierto: false,
   };
 
   constructor() {
     super();
     this.getEvents();
+  }
+
+  abrirModal=()=>{
+    this.setState({abierto: !this.state.abierto});
   }
 
   getEvents = async () => {
@@ -30,10 +34,11 @@ class EventsList extends Component {
     }
   };
 
-  deleteEvento = async (id) => {
-    console.log(id)
-    await axios.delete('http://localhost:5000/eventos/' + id);
+  deleteEvento = async (event) => {
+    console.log(event.id)
+    await axios.delete('http://localhost:5000/eventos/' + event.id);
     this.getEvents();
+    this.abrirModal();
   }
 
   render() {
@@ -43,6 +48,13 @@ class EventsList extends Component {
     }
 
     const x=this.state.divcontainer;
+
+    const modalStyles={
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: 'translate(-50%,-50%)'
+    }
 
     return (
       <div>
@@ -88,9 +100,20 @@ class EventsList extends Component {
                     </div>
                   </div>
                   
-                  <button className="btn btn-danger" onClick={() => this.deleteEvento(event.id)}>
-                    Eliminar
-                  </button>
+                  <div className="principal">
+                    <div className="secundario">
+                      <Button color="success" onClick={this.abrirModal}>Eliminar</Button>
+                      </div ></div>
+
+                      <Modal isOpen={this.state.abierto} style={modalStyles}>
+                        <ModalHeader>
+                          Esta seguro de eliminar este evento ??                    
+                        </ModalHeader>
+                        <ModalFooter>
+                          <Button color="primary" onClick={() => this.deleteEvento(event)}>Aceptar</Button>
+                          <Button color="secondary" onClick={this.abrirModal}>Cancelar</Button>
+                        </ModalFooter>
+                      </Modal>
                 </div>
                 )}
                 
