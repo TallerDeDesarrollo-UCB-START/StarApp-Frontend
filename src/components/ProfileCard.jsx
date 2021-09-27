@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Card, Divider,Button } from "@material-ui/core";
+import { Typography, Card, Divider, Button } from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
@@ -10,13 +10,11 @@ import { withRouter } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: "absolute",
-    left: "50%",
-    top: "80vh",
-    transform: "translate(-50%, -50%)",
-    width: "60%",
-    height: "60%",
-    backgroundColor: "#6599BC",
+    justifyContent: "center",
+    alignItems: "center",
+    direction: "row",
+    backgroundColor: "#AAB6C5",
+    margin: "3% 10% 5% 10%"
   },
   paper: {
     marginTop: 15,
@@ -37,7 +35,6 @@ const ProfileCard = ({ getDataProfile }) => {
                 <Typography> Rol: {getDataProfile.rol} </Typography>
               </Paper>
             </Grid>
-
             <Grid className={classes.paper}>
               <Paper>
                 <Typography>Descripcion:</Typography>
@@ -60,35 +57,39 @@ const ProfileCard = ({ getDataProfile }) => {
           <Grid item xs={6} className={classes.paper}>
             <Grid>
               <Paper>
-                <Typography>Datos Personales:</Typography>
-                <Divider variant="middle" />
-                <Typography>
-                  Nombre: {getDataProfile.nombre}
-                  {getDataProfile.apellido}
-                </Typography>
-                <Typography>Edad: </Typography>
-                <Typography>Genero: {getDataProfile.genero}</Typography>
-                <Typography>
-                  Nivel de estudio: {getDataProfile.nivel_de_estudios}
-                </Typography>
-                <Typography>Carrera:{getDataProfile.carrera}</Typography>
-                <Typography>Telefono:{getDataProfile.telefono}</Typography>
-                <Typography>C.I.:</Typography>
-                <Typography>E-mail:</Typography>
-                <Typography>
-                  Ciudad de residencia: {getDataProfile.ciudad_de_recidencia}
-                </Typography>
-                <Typography>
-                  Pais de residencia:{getDataProfile.pais_de_recidencia}
-                </Typography>
+                <Typography variant="h6">Datos Personales</Typography>
+                <Grid>
+                  <Divider style={{ borderColor: "black" }} />
+                  <Typography>Nombre: {getDataProfile.nombre} {getDataProfile.apellido}</Typography>
+                  <Typography>Edad: </Typography>
+                  <Typography>Genero: {getDataProfile.genero}</Typography>
+                  <Typography>
+                    Nivel de estudio: {getDataProfile.nivel_de_estudios}
+                  </Typography>
+                  <Typography>Carrera:{getDataProfile.carrera}</Typography>
+                  <Typography>Telefono:{getDataProfile.telefono}</Typography>
+                  <Typography>C.I.:</Typography>
+                  <Typography>E-mail:</Typography>
+                  <Typography>
+                    Ciudad de residencia: {getDataProfile.ciudad_de_recidencia}
+                  </Typography>
+                  <Typography>
+                    Pais de residencia:{getDataProfile.pais_de_recidencia}
+                  </Typography>
+                </Grid>
               </Paper>
-              <Button variant="contained" style={{backgroundColor:'#d15c5a',}}>
-                    Eliminar Perfil
-              </Button>
+              <Grid container justifyContent="flex-end">
+                <Button
+                  className={classes.paper}
+                  variant="contained"
+                  style={{ backgroundColor: "#ED2020", color: "#FFFFFF" }}
+                >
+                  Eliminar perfil
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid >
-       
+        </Grid>
       </CardContent>
       <CardActions></CardActions>
     </Card>

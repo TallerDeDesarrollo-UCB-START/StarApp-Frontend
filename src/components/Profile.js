@@ -9,7 +9,6 @@ import "./Profile.css";
 import Grid from "@material-ui/core/Grid";
 import ProfileCard from "./ProfileCard";
 import ProfileImage from "./ProfileImage";
-import ChipPerfil from "./ChipPerfil";
 
 const volunteer = {
   id: "1",
@@ -489,7 +488,6 @@ const Profile = (onClick) => {
         {location.pathname !== "/" && (
           <div>
             <ProfileImage getDataProfile={datosEdit} />
-            <ChipPerfil getDataProfile={datosEdit} />
             <ProfileCard getDataProfile={datosEdit} />
             <div className="name">
               {userExist.userEx ? (
@@ -497,7 +495,7 @@ const Profile = (onClick) => {
                   type="button"
                   onClick={handleOpen}
                   variant="contained"
-                  color="primary"
+                  style={{backgroundColor: "#B3DA3F", color: "#FFFFFF"}}
                 >
                   Editar Perfil
                 </Button>
