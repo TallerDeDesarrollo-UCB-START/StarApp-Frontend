@@ -486,40 +486,30 @@ const Profile = (onClick) => {
       {location.pathname === "/" && <Link to="/profile">Perfil</Link>}
       <div>
         {location.pathname !== "/" && (
-          <div>
+          <div className={classNamees.name}>
             <ProfileImage getDataProfile={datosEdit} />
             <ProfileCard getDataProfile={datosEdit} />
-            <div className="name">
-              {userExist.userEx ? (
-                <Button
-                  type="button"
-                  onClick={handleOpen}
-                  variant="contained"
-                  style={{backgroundColor: "#B3DA3F", color: "#FFFFFF"}}
-                >
-                  Editar Perfil
-                </Button>
-              ) : (
-                <Button
-                  type="button"
-                  onClick={handleOpen}
-                  variant="contained"
-                  color="secondary"
-                >
-                  Completar Perfil
-                </Button>
-              )}
-
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-descripcion_personal"
-              >
-                {body}
-              </Modal>
-            </div>
-            
+            <Button
+              type="button"
+              onClick={handleOpen}
+              variant="contained"
+              color="primary"
+              style={{
+                position: "absolute",
+                top: "22.9cm",
+                right: "21.2cm",
+              }}
+            >
+              Editar Perfil
+            </Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-descripcion_personal"
+            >
+              {body}
+            </Modal>
           </div>
         )}
       </div>
