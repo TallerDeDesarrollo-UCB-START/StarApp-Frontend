@@ -72,8 +72,7 @@ class EventsList extends Component {
           <Card>
             {this.state.events.map((event) => (
               <div class="card w-70">
-                <button onClick={Handlechange}>{x ? 'Archivar' : 'Mostrar'}</button>{
-                x && (
+                
                 <div class="row no-gutters">
                   <div class="col-auto">
                     <img
@@ -115,7 +114,7 @@ class EventsList extends Component {
                         </ModalFooter>
                       </Modal>
                 </div>
-                )}
+           
                 
                 <div class="card-footer w-100 text-muted"></div>
               </div>
