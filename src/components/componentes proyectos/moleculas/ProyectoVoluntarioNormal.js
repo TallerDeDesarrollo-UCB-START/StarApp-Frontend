@@ -6,8 +6,8 @@ import './ProyectoVoluntario.css';
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
-
-function ProyectoVoluntarioNormal({proyecto, onEliminarProy}) {
+// Victor y Merce
+function ProyectoVoluntarioNormal({proyecto}) {
     return (
         <Box className="proyect-container">
             <BannerProyecto />
