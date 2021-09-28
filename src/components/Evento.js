@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Card, Button } from "reactstrap";
-import { useParams } from "react-router-dom";
+import { Container, Card } from "reactstrap";
 
 const api = axios.create({
   baseURL: `http://localhost:5000/eventos/`,
@@ -22,14 +21,11 @@ class Evento extends Component {
 
   getIdLength(thisURL) {
     var idLength = thisURL.length - 30;
-    console.log("idLenght", idLength);
     return idLength;
   }
 
   getIdFromURL(thisUrl) {
     var idLength = this.getIdLength(thisUrl);
-    console.log("ID LEN", idLength);
-    console.log("URL", thisUrl.substring(thisUrl - idLength));
     return thisUrl.substring(thisUrl.length - idLength);
   }
 
@@ -50,7 +46,7 @@ class Evento extends Component {
       <Container>
         <Card>
           {this.state.events.map((event) => (
-            <div class="card w-70">
+            <div class="card w-70" key={event.id}>
               <div class="row no-gutters">
                 <div class="col-auto">
                   <img
