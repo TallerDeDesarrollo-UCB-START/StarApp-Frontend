@@ -19,19 +19,6 @@ const volunteer = {
 //const urlTablaExtensa=`${url}extended_form/`;
 const urlTablaExtensa = "http://localhost:5000/extended_form/";
 
-function showData() {
-  document.getElementById(
-    "data"
-  ).innerHTML = `<p><strong>Nombre </strong>${volunteer.name}</p> 
-                                                 <p><strong>Edad </strong>${volunteer.age}</p>
-                                                 `;
-}
-function showEvents() {
-  document.getElementById(
-    "data"
-  ).innerHTML = `<p><strong>Eventos: </strong>${volunteer.event}</p>`;
-}
-
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -176,8 +163,6 @@ const Profile = (onClick) => {
       }
     }
 
-    nuevosInt = nuevosInt.toString();
-
     setDatosEdit({ ...datosEdit, [event.target.name]: nuevosInt });
   };
 
@@ -201,13 +186,15 @@ const Profile = (onClick) => {
     axios
       .put(urlTablaExtensa + datos.id_usuario, asignaciones)
       .then((response) => {
-        alert("Actualizado");
+        alert(response.message);
+      })
+      .catch((error) => {
+        alert(error.message);
       });
   };
 
   function sendForm() {
     setDatos(datosEdit);
-    //putTablaAutenticacion
 
     const asignaciones = {
       nombre: datosEdit.nombre,
@@ -222,7 +209,7 @@ const Profile = (onClick) => {
       genero: datosEdit.genero,
       estado_de_cuenta: datosEdit.estado_de_cuenta,
       rol: datosEdit.rol,
-      intereses: datosEdit.intereses,
+      intereses: datosEdit.intereses.toString(),
       id_autenticacion: datosEdit.id_autenticacion,
     };
 
@@ -233,6 +220,13 @@ const Profile = (onClick) => {
       peticionPost(asignaciones);
       setOpen(false);
     }
+  }
+
+  function removeNulls(model) {
+    for (var value of Object.keys(model)) {
+      model[value] = model[value] ? model[value] : "";
+    }
+    return model;
   }
 
   useEffect(() => {
@@ -250,11 +244,8 @@ const Profile = (onClick) => {
         if (response.data.data) {
           setUserExsit({ userEx: true });
 
-          //setDatos({...response.data.data,...responseAutenticacion})
-          //setDatosEdit({...response.data.data,...responseAutenticacion})
-
-          setDatos({ ...response.data.data });
-          setDatosEdit({ ...response.data.data });
+          setDatos({ ...removeNulls(response.data.data) });
+          setDatosEdit({ ...removeNulls(response.data.data) });
         } else {
           setUserExsit({ userEx: false });
         }
@@ -276,10 +267,7 @@ const Profile = (onClick) => {
   };
 
   const body = (
-    <div
-      style={modalStyle}
-      /*className={classNamees.paper}*/ className="paperr"
-    >
+    <div style={modalStyle} className="paperr">
       <div>
         <form className="fomrExt">
           <label className={classNamees.titulos} htmlFor="nombre">
@@ -303,7 +291,7 @@ const Profile = (onClick) => {
             className={classNamees.intputs}
             type="date"
             name="fecha_de_nacimiento"
-            // value={datosEdit.fecha_de_nacimiento.split("T")[0]}
+            value={datosEdit.fecha_de_nacimiento.split("T")[0]}
             onChange={handleInputChange}
           />
 
@@ -342,36 +330,64 @@ const Profile = (onClick) => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <input
-                  checked={datosEdit.intereses.includes("Asilos")}
+                  checked={datosEdit.intereses.includes("Medio ambiente")}
                   onChange={handleChange}
-                  value="Asilos"
+                  value="Medio ambiente"
                   name="intereses"
-                  id="AsilosCheck"
+                  id="MedioambienteCheck"
                   type="checkbox"
                 />
-                <label htmlFor="AsilosCheck">Asilos</label>
+                <label htmlFor="MedioambienteCheck">Medio ambiente</label>
               </Grid>
               <Grid item xs={12}>
                 <input
-                  checked={datosEdit.intereses.includes("Niños y niñas")}
+                  checked={datosEdit.intereses.includes(
+                    "Desarrollo sostenible"
+                  )}
                   onChange={handleChange}
-                  value="Niños y niñas"
+                  value="Desarrollo sostenible"
                   name="intereses"
-                  id="NiñosCheck"
+                  id="DesarrollosostenibleCheck"
                   type="checkbox"
                 />
-                <label htmlFor="NiñosCheck">Niños</label>
+                <label htmlFor="DesarrollosostenibleCheck">
+                  Desarrollo sostenible
+                </label>
               </Grid>
               <Grid item xs={12}>
                 <input
-                  checked={datosEdit.intereses.includes("Refugios")}
+                  checked={datosEdit.intereses.includes("Trabajo social")}
                   onChange={handleChange}
-                  value="Refugios"
+                  value="Trabajo social"
                   name="intereses"
-                  id="RefugiosCheck"
+                  id="TrabajosocialCheck"
                   type="checkbox"
                 />
-                <label htmlFor="RefugiosCheck">Refugios</label>
+                <label htmlFor="TrabajosocialCheck">Trabajo social</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.intereses.includes("Empoderamiento")}
+                  onChange={handleChange}
+                  value="Empoderamiento"
+                  name="intereses"
+                  id="EmpoderamientoCheck"
+                  type="checkbox"
+                />
+                <label htmlFor="EmpoderamientoCheck">Empoderamiento</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.intereses.includes("Perritos callejeros")}
+                  onChange={handleChange}
+                  value="Perritos callejeros"
+                  name="intereses"
+                  id="PerritoscallejerosCheck"
+                  type="checkbox"
+                />
+                <label htmlFor="PerritoscallejerosCheck">
+                  Perritos callejeros
+                </label>
               </Grid>
               <Grid item xs={12}>
                 <input
@@ -382,7 +398,7 @@ const Profile = (onClick) => {
                   id="EducacionCheck"
                   type="checkbox"
                 />
-                <label htmlFor="EducacionCheck">Desarrollo sostenible</label>
+                <label htmlFor="EducacionCheck">Educacion</label>
               </Grid>
             </Grid>
           </div>
@@ -446,7 +462,7 @@ const Profile = (onClick) => {
           </select>
 
           <label className={classNamees.titulos} htmlFor="descripcion_personal">
-            Mi pequeña descripcion:
+            Mi pequeÃ±a descripcion:
           </label>
           <textarea
             className={classNamees.intputextaera}
@@ -474,9 +490,8 @@ const Profile = (onClick) => {
           className={classNamees.buttons}
           color="primary"
         >
-          Cancelar{" "}
+          Cancelar
         </CancelButton>
-        {/*<Button type="button" onClick={handleClose} variant="contained" color="secondary" >Cancelar</Button>*/}
       </div>
     </div>
   );
