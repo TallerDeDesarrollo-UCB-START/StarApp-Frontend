@@ -84,34 +84,36 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
         <div id="gen-form">
             <form  onSubmit={onSubmit}>
                 {/*<div className="underlayer-proy">dads</div>*/}
-                <h3 style={{margin: "auto", width: "50%"}}>CREAR PROYECTO</h3>
+                <div className="crear-container-title">
+                    <h3>CREAR PROYECTO</h3>
+                </div>
                 <div style={{padding: "3% 3% 0 3%"}}>
                     <InputTexto titulo='Titulo' 
-                                placeHolder='Coloque el titulo'
+                                placeHolder='Ingrese el titulo'
                                 value={titulo}
                                 onChange={onChangeTitulo}
                                 />
                     <InputTexto titulo='Descripcion' 
-                                placeHolder='Coloque la descripcion'
+                                placeHolder='Ingrese una descripcion'
                                 value={descripcion}
                                 onChange={onChangeDescrip}
                                 />
                     <InputTexto titulo='Objetivo' 
-                                placeHolder='Coloque el objetivo'
+                                placeHolder='Ingrese el objetivo'
                                 value={objetivo}
                                 onChange={onChangeObjetivo}
                                 />
                     <InputTexto titulo='Lider' 
-                                placeHolder='Coloque el lider'
+                                placeHolder='Escriba el nombre del lider'
                                 value={lider}
                                 onChange={onChangeLider}
                                 />
-
-                    <input type='submit' value='Crear' className='btn-proy btn-proy-block' style={{backgroundColor: 'lime'}}/>
-
+                    <div className="btn-crear-container">
+                        <input type='submit' value='Crear' className='btn-proy-crear btn-proy-block'/>
+                    </div>
                 </div>
             </form>
-            <button className='btn-proy btn-proy-block' onClick={onActivarForm} style={{backgroundColor: 'grey'}}> Cancelar </button>
+            <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
         </div>
         
     );

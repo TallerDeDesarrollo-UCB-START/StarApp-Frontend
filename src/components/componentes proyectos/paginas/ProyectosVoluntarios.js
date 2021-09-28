@@ -1,6 +1,6 @@
 // Componentes:
 import HeaderProyectos from '../organismos/HeaderProyectos'
-import BodyProyectos from '../organismos/BodyProyectos'
+import BodyProyectosNormal from '../organismos/BodyProyectosNormal'
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
@@ -10,7 +10,7 @@ function ProyectosVoluntarios({proyectos}) {
     return (
         <Box style={styles}>
             <HeaderProyectos />
-            <BodyProyectos proyectos={proyectos}/>
+            <BodyProyectosNormal proyectos={proyectos}/>
         </Box>
     );
 }

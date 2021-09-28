@@ -14,3 +14,8 @@
 .borderHeader-conatiner {
     width: 12%;
 }
+
+.textHeader-container_normal {
+    width: 100%;
+    text-align: center;
+}
