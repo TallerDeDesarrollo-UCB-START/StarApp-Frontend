@@ -46,7 +46,6 @@ function VistaProyectos() {
         })
     
         setProyectos(proyectos.filter((proy) => proy.id !== id));
-        useEffect
     }
     
 
@@ -61,8 +60,8 @@ function VistaProyectos() {
 }
 
 const url = process.env.REACT_APP_API
-const URLProyectos = 'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
-const URLCrearProy = 'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
-const URLEliminarProy = 'http://localhost:5000/delete_proyecto'//`${url}delete_proyecto`
+const URLProyectos =  `${url}get_proyectos` //'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
+const URLCrearProy = `${url}create_proyecto`//`${url}create_proyecto`
+const URLEliminarProy = `${url}delete_proyecto`//`${url}delete_proyecto`
 
 export default VistaProyectos

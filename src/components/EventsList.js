@@ -3,8 +3,10 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Button } from "reactstrap";
 
+const url = process.env.REACT_APP_API
+const urlDeploy=`${url}eventos`;
 const api = axios.create({
-  baseURL: `http://localhost:5000/eventos`,
+  baseURL: urlDeploy,//`http://localhost:5000/eventos`,
   //baseURL: `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`
 });
 
@@ -43,34 +45,34 @@ class EventsList extends Component {
         <Container>
           <Card>
             {this.state.events.map((event) => (
-              <div class="card w-70">
-                <div class="row no-gutters">
-                  <div class="col-auto">
+              <div className="card w-70" key={event.id}>
+                <div className="row no-gutters">
+                  <div className="col-auto">
                     <img
                       src="http://jorge-zientarski.com/imgs/Events2.jpg"
-                      class="img-fluid"
+                      className="img-fluid"
                       alt=""
                     />
                   </div>
-                  <div class="col">
-                    <div class="card-block px-1">
-                      <h4 class="card-title">{event.nombre_evento}</h4>
-                      <p class="card-text">
+                  <div className="col">
+                    <div className="card-block px-1">
+                      <h4 className="card-title">{event.nombre_evento}</h4>
+                      <p className="card-text">
                         <b>Description:</b> {event.descripcion_evento}
                       </p>
-                      <p class="card-text">
+                      <p className="card-text">
                         <b>Modalidad:</b> {event.modalidad_evento}
                       </p>
-                      <p class="card-text">
+                      <p className="card-text">
                         <b>Fecha:</b> {event.fecha_evento}
                       </p>
-                      <p class="card-text">
+                      <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="card-footer w-100 text-muted"></div>
+                <div className="card-footer w-100 text-muted"></div>
               </div>
             ))}
           </Card>

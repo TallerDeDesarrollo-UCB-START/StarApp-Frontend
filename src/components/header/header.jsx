@@ -45,22 +45,22 @@ const Header = () =>{
     const history = useHistory()
     const classes = useStyles()
     const [value, setValue] = React.useState(routes[location.pathname])
-    /*useEffect(() => {
+    useEffect(() => {
         if(!Boolean(sessionStorage.getItem("jwt")) && location.pathname !== "/" && location.pathname !== "/register"){
             history.push("/login")
         }
         setLogged(Boolean(sessionStorage.getItem("jwt")))
-      },[history, location.pathname]);*/
+      },[history, location.pathname]);
     return(
         <header className="header-division">
             <div className="header-logo">
                 <div style={{width:"10%"}}></div>
                 <div className={classes.containerLogo}>
-                    <img src={Logo} alt=" "/>
+                    <img src={Logo} alt=" " className = "header-image"/>
                 </div>
                 <Button 
                     className={classes.loginButton} 
-                    variant={(logged)?"filled": "outlined"}
+                    variant={(logged)?"contained": "outlined"}
                     onClick={(logged)?
                         ()=>{
                             sessionStorage.removeItem("jwt")

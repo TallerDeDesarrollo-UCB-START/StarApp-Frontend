@@ -18,7 +18,9 @@ import {
 } from "reactstrap";
 
 
-const url = "http://localhost:5000/eventos/crearevento"
+// const url = "http://localhost:5000/eventos/crearevento"
+const URL = process.env.REACT_APP_API
+const url = `${URL}eventos/crearevento`
 
 class crearEvento extends React.Component {
   state = {

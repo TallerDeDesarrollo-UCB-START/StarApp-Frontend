@@ -10,7 +10,7 @@ import './BannerProyecto.css';
 function BannerProyecto() {
     return (
         <Box className="banner-container">
-            <img src={Banner} alt=" "/>
+            <img className="banner-header"src={Banner} alt=" "/>
         </Box>
     );
 }
