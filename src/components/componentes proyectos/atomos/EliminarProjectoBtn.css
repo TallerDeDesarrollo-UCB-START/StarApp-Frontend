@@ -1,0 +1,8 @@
+.eliminarButton {
+    background-color: red;
+    border: none;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}

@@ -1,0 +1,10 @@
+.editarButton {
+    background-color: #989898;
+    border: none;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

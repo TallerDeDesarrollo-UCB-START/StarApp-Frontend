@@ -9,6 +9,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
+
 const Header = () => {
   return (
     <header className="header-division">
@@ -43,5 +44,6 @@ const Header = () => {
     </header>
   );
 };
+
 
 export default Header;
