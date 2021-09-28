@@ -68,7 +68,7 @@ class crearEvento extends React.Component {
       <>
         <Container className="Container">
 
-          <form>
+          <form className="FormEvento">
 
           
             <Box className="evento" xs={6}>

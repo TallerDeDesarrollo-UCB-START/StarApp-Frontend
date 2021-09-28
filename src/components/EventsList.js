@@ -43,12 +43,6 @@ class EventsList extends Component {
   }
 
   render() {
-    
-    var Handlechange = e =>{
-      this.setState({divcontainer:!this.state.divcontainer});
-    }
-
-    const x=this.state.divcontainer;
 
     const modalStyles={
       position: "absolute",
