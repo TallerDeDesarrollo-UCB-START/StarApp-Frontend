@@ -26,6 +26,43 @@
     height: 10cm;
     
 }
+
+.paperr{
+    overflow-y:scroll;
+    
+    position: absolute;
+    width: 400px;
+    height: 630px;
+    padding: 32px;
+    background: #F2F2F2;
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    
+}
+@media (max-width: 376px) {
+    .paperr{
+        width: 95%;
+    
+    }
+  }
+.paperr::-webkit-scrollbar {
+    
+    width: 8px;
+    background-color: transparent;
+    border-radius: 5px;
+}
+.paperr::-webkit-scrollbar-track{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+    
+
+.paperr::-webkit-scrollbar-thumb{    
+    border-radius: 5px;
+    width: 8px;
+    background-color: #b8b8b8;
+    
+}
 .picture{
     border: 1px solid;
     border-color: black;
@@ -34,12 +71,13 @@
     width: 150px;
     height: 150px;
     float: left;
-    margin-left: 20px;
+    margin-left: 47%;
 }
 .name{
     /* float: right; */
-    margin-left: 6cm;
-    margin-bottom: 2cm;
+    position:absolute;
+    top: 24.2cm;
+    right: 21.2cm;
 }
 .tabs{
     /* float: right; */
