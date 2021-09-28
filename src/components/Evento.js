@@ -7,7 +7,8 @@ const api = axios.create({
   baseURL: `http://localhost:5000/eventos/`,
   //baseURL: `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`
 });
-
+const urlDesarrollo = "http://localhost:3000/eventos/";
+const urlProduccion = "https://ucbstartfront.herokuapp.com/eventos/";
 class Evento extends Component {
   state = {
     events: [],
@@ -20,7 +21,9 @@ class Evento extends Component {
   }
 
   getIdLength(thisURL) {
-    var idLength = thisURL.length - 30;
+    // var idLength = thisURL.length - urlDesarrollo.length; //desarrollo
+    var idLength = thisURL.length - urlProduccion.length; //produccion
+
     return idLength;
   }
 
