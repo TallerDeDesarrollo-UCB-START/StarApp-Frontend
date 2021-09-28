@@ -52,7 +52,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
             objetivo: objetivos,
             lider: lideres
         }
-        // console.log(nuevoProyecto)
         onCrearProy(nuevoProyecto) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario
