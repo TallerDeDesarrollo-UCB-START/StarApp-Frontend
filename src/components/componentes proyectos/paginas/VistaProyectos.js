@@ -60,7 +60,7 @@ function VistaProyectos() {
         setProyectos([...proyectos, data])
     
     }
-        
+    
     const eliminarProyecto = async (id) => { 
         await fetch(
         `${URLEliminarProy}/${id}`,
