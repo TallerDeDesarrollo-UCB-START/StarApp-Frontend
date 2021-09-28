@@ -7,11 +7,14 @@ import './ProyectoVoluntario.css';
 import { Box } from '@material-ui/core';
 
 // Diego
-function ProyectoVoluntario({proyecto, onEliminarProy}) {
+function ProyectoVoluntario({proyecto, onEliminarProy, onActivarForm, obtenerProyecto}) {
     return (
         <Box className="proyect-container">
             <BannerProyecto />
-            <ContenidoProyecto proyecto={proyecto} onEliminarProy={onEliminarProy}/>
+            <ContenidoProyecto proyecto={proyecto} 
+                            onEliminarProy={onEliminarProy} 
+                            onActivarForm={onActivarForm}
+                            obtenerProyecto={obtenerProyecto}/>
         </Box>
     );
 }

@@ -8,6 +8,7 @@ import {useState, useEffect} from 'react'
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
+    const [proyecto, setProyecto] = useState({})
 
     useEffect(() => {
         const getProyectos = async () => {
@@ -37,6 +38,29 @@ function VistaProyectos() {
     
     }
     
+    const obtenerProyecto = async (idProyecto) => {
+        const response = await fetch(`${URLProyectos}/${idProyecto}`)
+        const data = await response.json()
+        setProyecto(data)
+        return data;
+    }
+
+    const editarProyecto = async (proyectoEditar) => {
+        const response = await fetch(
+            `${URLEditarProy}/${proyectoEditar.id}`,
+            {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(proyectoEditar)
+            })
+        
+        const data = await response.json()
+        //https://stackoverflow.com/questions/36326612/how-to-delete-an-item-from-state-array
+        //const proyectos2 = [...proyectos]
+        setProyectos([...proyectos, data])
+    
+    }
+    
     const eliminarProyecto = async (id) => { 
         await fetch(
         `${URLEliminarProy}/${id}`,
@@ -48,9 +72,10 @@ function VistaProyectos() {
         useEffect
     }
     
+    
 
     const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
+    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto} onEditarProy={editarProyecto} obtenerProyecto={obtenerProyecto} proyecto={proyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
     return (
         <>
@@ -61,7 +86,9 @@ function VistaProyectos() {
 
 const url = process.env.REACT_APP_API
 const URLProyectos = 'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
+const URLProyecto = 'http://localhost:5000/get_proyecto'//`${url}get_proyectos`
 const URLCrearProy = 'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
+const URLEditarProy = 'http://localhost:5000/edit_proyecto'//`${url}edit_proyecto`
 const URLEliminarProy = 'http://localhost:5000/delete_proyecto'//`${url}delete_proyecto`
 
 export default VistaProyectos

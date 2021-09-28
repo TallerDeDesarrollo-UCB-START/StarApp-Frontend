@@ -7,7 +7,7 @@ import './ProyectoVoluntario.css';
 import { Box } from '@material-ui/core';
 
 // Victor y Merce
-function ProyectoVoluntarioNormal({proyecto, onEliminarProy}) {
+function ProyectoVoluntarioNormal({proyecto}) {
     return (
         <Box className="proyect-container">
             <BannerProyecto />
