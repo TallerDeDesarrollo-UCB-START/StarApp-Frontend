@@ -56,8 +56,6 @@ function VistaProyectos() {
             })
         
         const data = await response.json()
-        //https://stackoverflow.com/questions/36326612/how-to-delete-an-item-from-state-array
-        //const proyectos2 = [proyectos.map(proy => proy.id === proyectoEditar.id)]
         setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data])
     
     }
