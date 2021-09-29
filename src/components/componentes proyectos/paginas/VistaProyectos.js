@@ -37,6 +37,16 @@ function VistaProyectos() {
         setProyectos([...proyectos, data])
     
     }
+
+    const ParticiparEnProyecto = async (id) => { 
+        const idSesion = sessionStorage.getItem("id");
+        await fetch(
+        `${URLParticiparProy}/${id}/session/${idSesion}`,
+        { 
+            method: 'PUT'
+        })
+        console.log(`${URLParticiparProy}/${id}/session/${idSesion}`);
+    }
     
     const eliminarProyecto = async (id) => { 
         await fetch(
@@ -63,5 +73,6 @@ const url = process.env.REACT_APP_API
 const URLProyectos =  `${url}get_proyectos` //'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
 const URLCrearProy = `${url}create_proyecto`//`${url}create_proyecto`
 const URLEliminarProy = `${url}delete_proyecto`//`${url}delete_proyecto`
+const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 
 export default VistaProyectos
