@@ -1,13 +1,17 @@
 // Componentes:
-
+import './ParticiparEnProyectoBtn.css';
 // Librerias-Paquetes:
 import { Container } from '@material-ui/core';
-import './ParticiparEnProyectoBtn.css';
+
 // Merce Vic
-function ContenidoProyecto() {
+function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy}) {
     return (
-        <button className="participarButton">Participar</button>
+        <button className="participarButton"
+            onClick={() => onPartiparProy(proyecto.id)}
+        >
+        Participar
+        </button>
     );
 }
 
-export default ContenidoProyecto
+export default ParticiparEnProyectoBtn

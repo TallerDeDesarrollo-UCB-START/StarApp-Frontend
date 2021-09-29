@@ -45,7 +45,6 @@ function VistaProyectos() {
         { 
             method: 'PUT'
         })
-        console.log(`${URLParticiparProy}/${id}/session/${idSesion}`);
     }
     
     const eliminarProyecto = async (id) => { 
