@@ -1,15 +1,10 @@
 // Componentes:
-import InputCrearProyecto from '../atomos/InputCrearProyecto'
-import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn'
-import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
 import InputTexto from '../moleculas/InputTexto'
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
-//import { Container, FormControl, InputLabel, Input, FormHelperText, Grid, Box } from '@material-ui/core';
-//import Typography from '@material-ui/core/Typography';
 
-// Kevin y Pame
+
 function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
     // States
     const [titulo, setTitulo] = useState('')
@@ -48,7 +43,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
         event.preventDefault() // To avoid submitting to an actual page
         const lideres = [lider]
         const objetivos = [objetivo]
-        if (validarCampos(event) == false) {
+        if (validarCampos(event) === false) {
             return
         }
         const nuevoProyecto = {
@@ -57,24 +52,11 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
             objetivo: objetivos,
             lider: lideres
         }
-        console.log(nuevoProyecto)
+        // console.log(nuevoProyecto)
         onCrearProy(nuevoProyecto) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario
     }
-    
-    /* Esto servira para cancelar formulario haciendo click fuera del formulario
-    allbody.addEventListener('click', (e) => {  
-        const allbody = document.querySelector('#root .MuiBox-root')
-        const formu = allbody.querySelector('#gen-form') 
-        if (formu){
-            if (!formu.contains(e.target)){
-                // Clicked outside box
-                console.log('adadas')
-                onActivarForm()
-            } 
-        } 
-    });*/
 
     const onChangeTitulo = (e) => {setTitulo(e.target.value); removerRequerido(e.target)}
     const onChangeDescrip = (e) => {setDescripcion(e.target.value); removerRequerido(e.target)}

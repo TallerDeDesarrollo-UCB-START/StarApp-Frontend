@@ -4,11 +4,10 @@ import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 
 // Librerias-Paquetes:
-import { Container } from '@material-ui/core';
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 
-// Merce y Vic
+
 function ContenidoProyecto({proyecto, onEliminarProy}) {
     return (
         <Box className="content-container">
