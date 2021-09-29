@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Card, Button } from "reactstrap";
+import { Container, Card, Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
 
 const url = process.env.REACT_APP_API
 const urlDeploy=`${url}eventos`;
@@ -13,11 +13,17 @@ const api = axios.create({
 class EventsList extends Component {
   state = {
     events: [],
+    divcontainer: true,
+    abierto: false,
   };
 
   constructor() {
     super();
     this.getEvents();
+  }
+
+  abrirModal=()=>{
+    this.setState({abierto: !this.state.abierto});
   }
 
   getEvents = async () => {
@@ -29,7 +35,22 @@ class EventsList extends Component {
     }
   };
 
+  deleteEvento = async (event) => {
+    console.log(event.id)
+    await axios.delete('http://localhost:5000/eventos/' + event.id);
+    this.getEvents();
+    this.abrirModal();
+  }
+
   render() {
+
+    const modalStyles={
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: 'translate(-50%,-50%)'
+    }
+
     return (
       <div>
         <div>
@@ -71,6 +92,21 @@ class EventsList extends Component {
                       </p>
                     </div>
                   </div>
+                  
+                  <div className="principal">
+                    <div className="secundario">
+                      <Button color="success" onClick={this.abrirModal}>Eliminar</Button>
+                      </div ></div>
+
+                      <Modal isOpen={this.state.abierto} style={modalStyles}>
+                        <ModalHeader>
+                          Esta seguro de eliminar este evento ??                    
+                        </ModalHeader>
+                        <ModalFooter>
+                          <Button color="primary" onClick={() => this.deleteEvento(event)}>Aceptar</Button>
+                          <Button color="secondary" onClick={this.abrirModal}>Cancelar</Button>
+                        </ModalFooter>
+                      </Modal>
                 </div>
                 <div className="card-footer w-100 text-muted"></div>
               </div>
