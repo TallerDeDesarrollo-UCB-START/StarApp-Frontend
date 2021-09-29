@@ -29,6 +29,7 @@ class EventsList extends Component {
   getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
+      data = data.filter((event)=> event.estado == 1);
       this.setState({ events: data });
     } catch (err) {
       console.log(err);
@@ -40,6 +41,17 @@ class EventsList extends Component {
     await axios.delete('http://localhost:5000/eventos/' + event.id);
     this.getEvents();
     this.abrirModal();
+  }
+
+  peticionArchivar =  async (event) => {
+    await axios.put('http://localhost:5000/eventos/archivar_evento/'+ event.id);
+    this.getEventsArchivados();
+    window.location.reload();
+  }
+
+  peticionMostrar =  async (event) => {
+    await axios.put('http://localhost:5000/eventos/mostrar_evento/'+ event.id);
+    //this.getEvents();
   }
 
   render() {
@@ -60,7 +72,8 @@ class EventsList extends Component {
           <div style={{ display: "flex" }}>
             <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
               Crear Evento
-            </Button>
+            </Button> 
+            <Button onClick={()=>this.getEventsArchivados()}>Mostrar Eventos Archivados</Button>
           </div>
         </div>
         <Container>
@@ -95,6 +108,7 @@ class EventsList extends Component {
                   
                   <div className="principal">
                     <div className="secundario">
+                      <Button onClick={()=> this.peticionArchivar(event)}>Archivar</Button>
                       <Button color="success" onClick={this.abrirModal}>Eliminar</Button>
                       </div ></div>
 
