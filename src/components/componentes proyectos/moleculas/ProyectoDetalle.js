@@ -14,5 +14,4 @@ function ProyectoDetalle({proyecto}) {
     );
 }
 
-
 export default ProyectoDetalle
