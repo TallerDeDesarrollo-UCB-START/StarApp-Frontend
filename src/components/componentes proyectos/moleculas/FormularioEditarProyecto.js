@@ -3,10 +3,8 @@ import InputTexto from '../moleculas/InputTexto'
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
-//import { Container, FormControl, InputLabel, Input, FormHelperText, Grid, Box } from '@material-ui/core';
-//import Typography from '@material-ui/core/Typography';
 
-// Kevin y Pame
+
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
     // States
     const [titulo, setTitulo] = useState(proyecto.titulo)

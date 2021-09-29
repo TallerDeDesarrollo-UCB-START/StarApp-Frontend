@@ -65,6 +65,11 @@ function VistaProyectos() {
             })
         
         const data = await response.json()
+<<<<<<< HEAD
+=======
+        //https://stackoverflow.com/questions/36326612/how-to-delete-an-item-from-state-array
+        //const proyectos2 = [proyectos.map(proy => proy.id === proyectoEditar.id)]
+>>>>>>> a9ea3b7 (ft-25-s1v2/Editar funcionando)
         setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data])
     
     }
@@ -92,11 +97,19 @@ function VistaProyectos() {
 }
 
 const url = process.env.REACT_APP_API
+<<<<<<< HEAD
 const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 const URLProyectos = `${url}get_proyectos`//'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
 const URLProyecto = `${url}get_proyecto`//'http://localhost:5000/get_proyecto'//`${url}get_proyectos`
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
 const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_proyecto'//`${url}edit_proyecto`
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//`${url}delete_proyecto`
+=======
+const URLProyectos = `${url}get_proyectos` //'http://localhost:5000/get_proyectos'
+const URLProyecto = `${url}get_proyecto` //'http://localhost:5000/get_proyecto'
+const URLCrearProy = `${url}create_proyecto` //'http://localhost:5000/create_proyecto'
+const URLEditarProy = `${url}update_proyecto` //'http://localhost:5000/edit_proyecto'
+const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'
+>>>>>>> a9ea3b7 (ft-25-s1v2/Editar funcionando)
 
 export default VistaProyectos

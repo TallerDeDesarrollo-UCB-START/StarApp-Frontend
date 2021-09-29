@@ -17,10 +17,10 @@ function BodyProyectos({proyectos, onEliminarProy,  onPartiparProy, onActivarFor
                     onPartiparProy={onPartiparProy}/>
                 ))
             }
-            <ProyectoVoluntario key={5} 
+            {/*<ProyectoVoluntario key={5} 
                     proyecto={proyecto1} 
                     onEliminarProy={onEliminarProy}
-                    onActivarForm={onActivarForm}/>
+        onActivarForm={onActivarForm}/>*/}
         </Box>
     );
 }
