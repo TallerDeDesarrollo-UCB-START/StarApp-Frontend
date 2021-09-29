@@ -5,7 +5,7 @@ import './BodyProyectos.css';
 import { Box } from '@material-ui/core';
 
 // diego
-function BodyProyectos({proyectos, onEliminarProy, onActivarForm, obtenerProyecto}) {
+function BodyProyectos({proyectos, onEliminarProy, onActivarForm}) {
     return (
         <Box className="body-container">
             {
@@ -13,8 +13,7 @@ function BodyProyectos({proyectos, onEliminarProy, onActivarForm, obtenerProyect
                     <ProyectoVoluntario key={proyecto.id} 
                     proyecto={proyecto} 
                     onEliminarProy={onEliminarProy}
-                    onActivarForm={onActivarForm}
-                    obtenerProyecto={obtenerProyecto}/>
+                    onActivarForm={onActivarForm}/>
                 ))
             }
             {/*<ProyectoVoluntario key={5} 
@@ -24,10 +23,5 @@ function BodyProyectos({proyectos, onEliminarProy, onActivarForm, obtenerProyect
         </Box>
     );
 }
-const proyecto1 = {
-    titulo: 'a',
-    descripcion: 'a',
-    objetivo: 'a',
-    lider: 'a'
-}
+
 export default BodyProyectos

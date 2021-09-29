@@ -37,12 +37,12 @@ function VistaProyectos() {
     
     }
     
-    const obtenerProyecto = async (idProyecto) => {
+    /*const obtenerProyecto = async (idProyecto) => {
         const response = await fetch(`${URLProyectos}/${idProyecto}`)
         const data = await response.json()
         setProyecto(data)
         return data;
-    }
+    }*/
 
     const editarProyecto = async (proyectoEditar) => {
         debugger;
@@ -76,8 +76,7 @@ function VistaProyectos() {
                                                 proyectos={proyectos} 
                                                 onCrearProy={crearProyecto}
                                                 onEliminarProy={eliminarProyecto} 
-                                                onEditarProy={editarProyecto} 
-                                                obtenerProyecto={obtenerProyecto} 
+                                                onEditarProy={editarProyecto}
                                                 proyecto={proyecto}/> 
                                                 : 
                                                 <ProyectosVoluntarios proyectos={proyectos}/>
@@ -91,7 +90,7 @@ function VistaProyectos() {
 
 const url = process.env.REACT_APP_API
 const URLProyectos = `${url}get_proyectos` //'http://localhost:5000/get_proyectos'
-const URLProyecto = `${url}get_proyecto` //'http://localhost:5000/get_proyecto'
+//const URLProyecto = `${url}get_proyecto` //'http://localhost:5000/get_proyecto'
 const URLCrearProy = `${url}create_proyecto` //'http://localhost:5000/create_proyecto'
 const URLEditarProy = `${url}update_proyecto` //'http://localhost:5000/update_proyecto'
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'
