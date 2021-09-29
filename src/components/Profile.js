@@ -186,7 +186,7 @@ const Profile = (onClick) => {
     axios
       .put(urlTablaExtensa + datos.id_usuario, asignaciones)
       .then((response) => {
-        alert(response.message);
+        alert("actualizado correctamente");
       })
       .catch((error) => {
         alert(error.message);
@@ -232,10 +232,11 @@ const Profile = (onClick) => {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
 
+    const idsessionstorage=sessionStorage.getItem("id")
+    console.log(idsessionstorage);
     const responseAutenticacion = {
+    // id_autenticacion: idsessionstorage descomentanto esta linea y eliminando la linea de abajo deberia recuperar los datos del logueado
       id_autenticacion: "1",
-      correo_electronico: "aaaaaaa@gmail.com",
-      telefono: "74701750",
     };
 
     axios
@@ -258,6 +259,7 @@ const Profile = (onClick) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
+      console.log("abriendo modal")
     setOpen(true);
   };
 
@@ -503,20 +505,8 @@ const Profile = (onClick) => {
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
             <ProfileImage getDataProfile={datosEdit} />
-            <ProfileCard getDataProfile={datosEdit} />
-            <Button
-              type="button"
-              onClick={handleOpen}
-              variant="contained"
-              color="primary"
-              style={{
-                position: "absolute",
-                top: "22.9cm",
-                right: "21.2cm",
-              }}
-            >
-              Editar Perfil
-            </Button>
+            <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen}/>
+            
             <Modal
               open={open}
               onClose={handleClose}

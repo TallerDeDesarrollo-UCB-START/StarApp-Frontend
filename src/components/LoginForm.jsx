@@ -97,6 +97,7 @@ const LoginForm = () => {
                     console.log("logged")
                     const jwt = response.data.accessToken
                     const id_auth = response.data.id
+                    console.log(response)
                     sessionStorage.setItem("jwt", jwt)
                     sessionStorage.setItem("id", id_auth)
                     history.push(`/`)

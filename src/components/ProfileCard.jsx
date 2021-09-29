@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles ,withStyles} from "@material-ui/core/styles";
 import { Typography, Card, Divider, Button } from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,6 +8,15 @@ import Paper from "@material-ui/core/Paper";
 import TabsProfile from "./TabsProfile";
 import { withRouter } from "react-router";
 
+const DeteleButton = withStyles((theme) => ({
+  root: {
+    backgroundColor: "#ED2020",
+    color: "#FFFFFF",
+    "&:hover": {
+      backgroundColor: "#a90e0e",
+    },
+  },
+}))(Button);
 const useStyles = makeStyles((theme) => ({
   root: {
     justifyContent: "center",
@@ -21,9 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfileCard = ({ getDataProfile }) => {
+const ProfileCard = (props) => {
   const classes = useStyles();
-
+  const {getDataProfile,handleOpenprop}=props;
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -66,14 +75,22 @@ const ProfileCard = ({ getDataProfile }) => {
                   </Typography>
                 </Grid>
               </Paper>
-              <Grid container justifyContent="flex-end">
+              <Grid container justifyContent="space-between">                
                 <Button
+                  type="button"
+                  className={classes.paper}
+                  onClick={handleOpenprop}
+                  variant="contained"
+                  color="primary"
+                >
+                  Editar Perfil
+                </Button>
+                <DeteleButton
                   className={classes.paper}
                   variant="contained"
-                  style={{ backgroundColor: "#ED2020", color: "#FFFFFF" }}
-                >
+                  >
                   Eliminar perfil
-                </Button>
+                </DeteleButton>
               </Grid>
             </Grid>
           </Grid>
