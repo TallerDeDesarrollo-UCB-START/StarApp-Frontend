@@ -4,7 +4,7 @@ import BodyProyectosNormal from '../organismos/BodyProyectosNormal'
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
-// DIEGO
+
 function ProyectosVoluntarios({proyectos}) {
 
     return (

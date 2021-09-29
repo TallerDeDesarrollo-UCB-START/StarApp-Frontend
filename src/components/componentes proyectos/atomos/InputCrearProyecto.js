@@ -1,8 +1,8 @@
 // Componentes:
 
 // Librerias-Paquetes:
-import { Box, colors } from '@material-ui/core';
-import {TextField, Text} from '@material-ui/core';
+import { Box } from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 
 function InputCrearProyecto({name}) {
     return (

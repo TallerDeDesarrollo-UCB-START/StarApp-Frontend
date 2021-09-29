@@ -4,7 +4,7 @@ import './BodyProyectos.css';
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
-// diego
+
 function BodyProyectosNormal({proyectos}) {
     return (
         <Box className="body-container">

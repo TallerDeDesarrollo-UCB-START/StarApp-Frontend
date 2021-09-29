@@ -1,12 +1,9 @@
 // Componentes:
 import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
-
 // Librerias-Paquetes-Estilos:
 import './HeaderProyectos.css';
-import { Container } from '@material-ui/core';
 
 
-// MERCE - VIC
 function HeaderProyectosAdmin({onActivarForm}) {
     return (
         <div className="header-container">

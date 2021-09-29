@@ -4,7 +4,7 @@ import ProyectosVoluntarios from './ProyectosVoluntarios'
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
 
-// DIEGO
+
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
@@ -33,7 +33,6 @@ function VistaProyectos() {
                 body: JSON.stringify(nuevoProyecto)
             })
         const data = await response.json()
-        console.log(data)
         setProyectos([...proyectos, data])
     
     }
