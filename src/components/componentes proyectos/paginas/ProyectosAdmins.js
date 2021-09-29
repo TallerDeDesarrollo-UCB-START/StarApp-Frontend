@@ -13,7 +13,6 @@ function ProyectosAdmins({proyectos, onCrearProy, onEliminarProy, onPartiparProy
 
     // Funciones
     const activarFormCrear = () => {
-        console.log('Hola')
         setMostrarFormCrear(!mostrarFormCrear);
     }
 
