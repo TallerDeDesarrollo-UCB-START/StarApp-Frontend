@@ -46,12 +46,12 @@ function VistaProyectos() {
         })
     }
     
-    const obtenerProyecto = async (idProyecto) => {
+    /*const obtenerProyecto = async (idProyecto) => {
         const response = await fetch(`${URLProyectos}/${idProyecto}`)
         const data = await response.json()
         setProyecto(data)
         return data;
-    }
+    }*/
 
     const editarProyecto = async (proyectoEditar) => {
         debugger;
