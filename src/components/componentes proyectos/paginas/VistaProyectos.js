@@ -74,7 +74,15 @@ function VistaProyectos() {
     
 
     const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto} onEditarProy={editarProyecto} obtenerProyecto={obtenerProyecto} proyecto={proyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
+    const componenteProyectos = rol=='admin' ? <ProyectosAdmins 
+                                                proyectos={proyectos} 
+                                                onCrearProy={crearProyecto}
+                                                onEliminarProy={eliminarProyecto} 
+                                                onEditarProy={editarProyecto} 
+                                                obtenerProyecto={obtenerProyecto} 
+                                                proyecto={proyecto}/> 
+                                                : 
+                                                <ProyectosVoluntarios proyectos={proyectos}/>
 
     return (
         <>
@@ -84,10 +92,10 @@ function VistaProyectos() {
 }
 
 const url = process.env.REACT_APP_API
-const URLProyectos = 'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
-const URLProyecto = 'http://localhost:5000/get_proyecto'//`${url}get_proyectos`
-const URLCrearProy = 'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
-const URLEditarProy = 'http://localhost:5000/edit_proyecto'//`${url}edit_proyecto`
-const URLEliminarProy = 'http://localhost:5000/delete_proyecto'//`${url}delete_proyecto`
+const URLProyectos = `${url}get_proyectos` //'http://localhost:5000/get_proyectos'
+const URLProyecto = `${url}get_proyecto` //'http://localhost:5000/get_proyecto'
+const URLCrearProy = `${url}create_proyecto` //'http://localhost:5000/create_proyecto'
+const URLEditarProy = `${url}edit_proyecto` //'http://localhost:5000/edit_proyecto'
+const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'
 
 export default VistaProyectos
