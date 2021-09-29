@@ -7,7 +7,6 @@ import Evento from "./Evento";
 
 const api = axios.create({
   baseURL: `http://localhost:5000/eventos`,
-  //baseURL: `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`
 });
 
 const urlParticipacion = "http://localhost:5000/eventos/participate_evento/";
