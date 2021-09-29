@@ -4,7 +4,6 @@ import ProyectosVoluntarios from './ProyectosVoluntarios'
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
 
-
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
