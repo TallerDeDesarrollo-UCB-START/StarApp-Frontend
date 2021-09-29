@@ -94,13 +94,6 @@ class EventsList extends Component {
                       <p class="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
-                      <Button
-                        onClick={() => {
-                          this.postParticipacion(event); //descomentar cuando se guarde en DB
-                        }}
-                      >
-                        Participar
-                      </Button>
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
                       </Button>
