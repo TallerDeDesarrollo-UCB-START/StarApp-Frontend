@@ -1,5 +1,4 @@
 // Componentes:
-
 // Librerias-Paquetes:
 import Banner from '../../../assets/generic_picture.png';
 import { Box } from '@material-ui/core';
