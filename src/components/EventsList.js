@@ -33,7 +33,7 @@ class EventsList extends Component {
   getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
-      data = data.filter((event)=> event.estado == 1);
+      data = data.filter((event)=> event.estado === 1);
       this.setState({ events: data });
     } catch (err) {
       console.log(err);
@@ -47,7 +47,7 @@ class EventsList extends Component {
       this.state.botonMostrarEventosNoArchivados= true;
       this.state.botonMostrarEventosArchivados= false;
       let data = await api.get("/").then(({ data }) => data);
-      data = data.filter((event)=> event.estado == 0);
+      data = data.filter((event)=> event.estado === 0);
       this.setState({ events: data });
     } catch (err) {
       console.log(err);
