@@ -5,10 +5,8 @@ import { Container, Card } from "reactstrap";
 
 const api = axios.create({
   baseURL: `http://localhost:5000/eventos/`,
-  //baseURL: `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`
+  //baseURL: `https://ucbstartfront.herokuapp.com/eventos/`   url produccion
 });
-const urlDesarrollo = "http://localhost:3000/eventos/";
-const urlProduccion = "https://ucbstartfront.herokuapp.com/eventos/";
 class Evento extends Component {
   state = {
     events: [],
@@ -19,17 +17,10 @@ class Evento extends Component {
     super();
     this.getEvneto();
   }
-
-  getIdLength(thisURL) {
-    // var idLength = thisURL.length - urlDesarrollo.length; //desarrollo
-    var idLength = thisURL.length - urlProduccion.length; //produccion
-
-    return idLength;
-  }
-
   getIdFromURL(thisUrl) {
-    var idLength = this.getIdLength(thisUrl);
-    return thisUrl.substring(thisUrl.length - idLength);
+    var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
+    id = thisUrl.split("/").pop();
+    return id;
   }
 
   getEvneto = async () => {
