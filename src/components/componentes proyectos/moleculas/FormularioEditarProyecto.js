@@ -1,26 +1,22 @@
 // Componentes:
-import InputCrearProyecto from '../atomos/InputCrearProyecto'
-import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn'
-import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
 import InputTexto from '../moleculas/InputTexto'
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
-//import { Container, FormControl, InputLabel, Input, FormHelperText, Grid, Box } from '@material-ui/core';
-//import Typography from '@material-ui/core/Typography';
 
-// Kevin y Pame
+
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
     // States
-    const [titulo, setTitulo] = useState('')
-    const [descripcion, setDescripcion] = useState('')
-    const [objetivo, setObjetivo] = useState('')
-    const [lider, setLider] = useState('')
+    const [titulo, setTitulo] = useState(proyecto.titulo)
+    const [descripcion, setDescripcion] = useState(proyecto.descripcion)
+    const [objetivo, setObjetivo] = useState(proyecto.objetivo)
+    const [lider, setLider] = useState(proyecto.lider)
 
-    setTitulo(proyecto.titulo)
+    //console.log(proyecto.titulo)
+    /*setTitulo(proyecto.titulo)
     setDescripcion(proyecto.descripcion)
     setObjetivo(proyecto.objetivo)
-    setLider(proyecto.lider)
+    setLider(proyecto.lider)*/
 
     function resetStates() {
         setTitulo('')
@@ -54,6 +50,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
         const lideres = [lider]
         const objetivos = [objetivo]
         const proyectoEditar = {
+            id: proyecto.id,
             titulo: titulo,
             descripcion: descripcion,
             objetivo: objetivos,

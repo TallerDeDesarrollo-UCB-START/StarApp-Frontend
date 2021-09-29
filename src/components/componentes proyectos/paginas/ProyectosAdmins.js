@@ -12,20 +12,27 @@ function ProyectosAdmins({proyectos, onCrearProy, onEliminarProy, onEditarProy, 
     // Hooks
     const [mostrarFormCrear, setMostrarFormCrear] = useState(false)
     const [mostrarFormEditar, setMostrarFormEditar] = useState(false)
+    const [proyectoEditar, setProyectoEditar] = useState({})
 
     // Funciones
     const activarFormCrear = () => {
         setMostrarFormCrear(!mostrarFormCrear);
     }
 
-    const activarFormEditar = () => {
-        console.log('Hola')
+    const activarFormEditar = (proyecto) => {
+        setProyectoEditar(proyecto)
+        //console.log(proyectoEditar)
         setMostrarFormEditar(!mostrarFormEditar);
     }
 
     //Componentes
-    const FormularioCrear = mostrarFormCrear==true ? <FormularioCrearProyecto onCrearProy={onCrearProy} onActivarForm={activarFormCrear}/> : <></>
-    const FormularioEditar = mostrarFormEditar==true ? <FormularioEditarProyecto onEditarProy={onEditarProy} onActivarForm={activarFormEditar} proyecto={proyecto}/> : <></>
+    const FormularioCrear = mostrarFormCrear==true ? <FormularioCrearProyecto 
+                                                        onCrearProy={onCrearProy} 
+                                                        onActivarForm={activarFormCrear}/> : <></>
+    const FormularioEditar = mostrarFormEditar==true ? <FormularioEditarProyecto 
+                                                        onEditarProy={onEditarProy} 
+                                                        onActivarForm={activarFormEditar} 
+                                                        proyecto={proyectoEditar}/> : <></>
 
     return (
         <Box style={styles}>

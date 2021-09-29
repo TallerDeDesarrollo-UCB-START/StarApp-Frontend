@@ -46,6 +46,7 @@ function VistaProyectos() {
     }
 
     const editarProyecto = async (proyectoEditar) => {
+        debugger;
         const response = await fetch(
             `${URLEditarProy}/${proyectoEditar.id}`,
             {
@@ -56,8 +57,8 @@ function VistaProyectos() {
         
         const data = await response.json()
         //https://stackoverflow.com/questions/36326612/how-to-delete-an-item-from-state-array
-        //const proyectos2 = [...proyectos]
-        setProyectos([...proyectos, data])
+        //const proyectos2 = [proyectos.map(proy => proy.id === proyectoEditar.id)]
+        setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data])
     
     }
         
@@ -95,7 +96,7 @@ const url = process.env.REACT_APP_API
 const URLProyectos = `${url}get_proyectos` //'http://localhost:5000/get_proyectos'
 const URLProyecto = `${url}get_proyecto` //'http://localhost:5000/get_proyecto'
 const URLCrearProy = `${url}create_proyecto` //'http://localhost:5000/create_proyecto'
-const URLEditarProy = `${url}edit_proyecto` //'http://localhost:5000/edit_proyecto'
+const URLEditarProy = `${url}update_proyecto` //'http://localhost:5000/edit_proyecto'
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'
 
 export default VistaProyectos

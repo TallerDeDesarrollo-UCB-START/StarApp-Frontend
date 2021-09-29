@@ -2,10 +2,9 @@
 import './EditarProyectoBtn.css'
 // Librerias-Paquetes-Estilos:
 
-function EditarProyectoBtn({onActivarForm, obtenerProyecto, key}) {
+function EditarProyectoBtn({onActivarForm, proyecto}) {
     const click = () => {
-        onActivarForm()
-        obtenerProyecto(key)
+        onActivarForm(proyecto)
     }
     return (
         <button className="editarButton" onClick={click}>
