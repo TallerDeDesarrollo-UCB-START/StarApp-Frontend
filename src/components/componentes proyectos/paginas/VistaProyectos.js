@@ -38,7 +38,7 @@ function VistaProyectos() {
     
     }
 
-    const ParticiparEnProyecto = async (id) => { 
+    const participarEnProyecto = async (id) => { 
         const idSesion = sessionStorage.getItem("id");
         await fetch(
         `${URLParticiparProy}/${id}/session/${idSesion}`,
@@ -60,7 +60,7 @@ function VistaProyectos() {
     
 
     const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
+    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto} onPartiparProy={participarEnProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
     return (
         <>
