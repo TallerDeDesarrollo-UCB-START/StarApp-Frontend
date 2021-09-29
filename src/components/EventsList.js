@@ -15,6 +15,10 @@ class EventsList extends Component {
     events: [],
     divcontainer: true,
     abierto: false,
+    botonMostrar: false,
+    botonArchivar: true,
+    botonMostrarEventosNoArchivados: false,
+    botonMostrarEventosArchivados: true,
   };
 
   constructor() {
@@ -36,6 +40,20 @@ class EventsList extends Component {
     }
   };
 
+  getEventsArchivados = async () => {
+    try {
+      this.state.botonMostrar= true;
+      this.state.botonArchivar= false;
+      this.state.botonMostrarEventosNoArchivados= true;
+      this.state.botonMostrarEventosArchivados= false;
+      let data = await api.get("/").then(({ data }) => data);
+      data = data.filter((event)=> event.estado == 0);
+      this.setState({ events: data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   deleteEvento = async (event) => {
     console.log(event.id)
     await axios.delete('http://localhost:5000/eventos/' + event.id);
@@ -50,8 +68,12 @@ class EventsList extends Component {
   }
 
   peticionMostrar =  async (event) => {
+    this.state.botonMostrar= false;
+    this.state.botonArchivar= true;
+    this.state.botonMostrarEventosNoArchivados= false;
+    this.state.botonMostrarEventosArchivados= true;
     await axios.put('http://localhost:5000/eventos/mostrar_evento/'+ event.id);
-    //this.getEvents();
+    this.getEvents();
   }
 
   render() {
@@ -70,10 +92,9 @@ class EventsList extends Component {
             <h1> Bienvenido a Lista de eventos!</h1>
           </div>
           <div style={{ display: "flex" }}>
-            <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
-              Crear Evento
-            </Button> 
-            <Button onClick={()=>this.getEventsArchivados()}>Mostrar Eventos Archivados</Button>
+            <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento"> Crear Evento </Button> 
+            <Button style={{ display: this.state.botonMostrarEventosArchivados ? "block" : "none" }} onClick={()=>this.getEventsArchivados()}>Eventos Archivados</Button>
+            <Button style={{ display: this.state.botonMostrarEventosNoArchivados ? "block" : "none" }} href="/eventos">Volver</Button>
           </div>
         </div>
         <Container>
@@ -108,7 +129,8 @@ class EventsList extends Component {
                   
                   <div className="principal">
                     <div className="secundario">
-                      <Button onClick={()=> this.peticionArchivar(event)}>Archivar</Button>
+                      <Button style={{ display: this.state.botonMostrar ? "block" : "none" }} onClick={()=> this.peticionMostrar(event)}>Mostrar</Button>
+                      <Button style={{ display: this.state.botonArchivar ? "block" : "none" }} onClick={()=> this.peticionArchivar(event)}>Archivar</Button>
                       <Button color="success" onClick={this.abrirModal}>Eliminar</Button>
                       </div ></div>
 
