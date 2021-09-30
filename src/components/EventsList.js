@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
+import { Link, Route, BrowserRouter } from "react-router-dom";
+import Evento from "./Evento";
 
 const url = process.env.REACT_APP_API
 const urlDeploy=`${url}eventos`;
@@ -9,6 +11,8 @@ const api = axios.create({
   baseURL: urlDeploy,//`http://localhost:5000/eventos`,
   //baseURL: `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`
 });
+
+const urlParticipacion = "http://localhost:5000/eventos/participate_evento/";
 
 class EventsList extends Component {
   state = {
@@ -20,6 +24,8 @@ class EventsList extends Component {
     botonMostrarEventosNoArchivados: false,
     botonMostrarEventosArchivados: true,
   };
+
+  oject = {};
 
   constructor() {
     super();
@@ -75,6 +81,27 @@ class EventsList extends Component {
     await axios.put('http://localhost:5000/eventos/mostrar_evento/'+ event.id);
     this.getEvents();
   }
+  mensajeConfirmacionParticipacion(event) {
+    window.alert(
+      `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
+    );
+  }
+  postParticipacion = async (event) => {
+    let newUrl =
+      urlParticipacion + event.id + "/sesion/" + window.sessionStorage.id;
+    console.log("URL", newUrl);
+    await axios
+      .post(newUrl, {
+        id: event.id,
+        id_autenticacion: window.sessionStorage.id,
+      })
+      .then((response) => {
+        this.mensajeConfirmacionParticipacion();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   render() {
 
@@ -124,6 +151,9 @@ class EventsList extends Component {
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
+                      <Button>
+                        <Link to={"eventos/" + event.id}>Ver Evento</Link>
+                      </Button>
                     </div>
                   </div>
                   
