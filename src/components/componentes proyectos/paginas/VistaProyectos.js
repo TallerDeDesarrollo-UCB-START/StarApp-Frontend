@@ -36,6 +36,15 @@ function VistaProyectos() {
         setProyectos([...proyectos, data])
     
     }
+
+    const participarEnProyecto = async (id) => { 
+        const idSesion = sessionStorage.getItem("id");
+        await fetch(
+        `${URLParticiparProy}/${id}/session/${idSesion}`,
+        { 
+            method: 'PUT'
+        })
+    }
     
     const eliminarProyecto = async (id) => { 
         await fetch(
@@ -49,7 +58,7 @@ function VistaProyectos() {
     
 
     const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
+    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto} onPartiparProy={participarEnProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
     return (
         <>
@@ -62,5 +71,6 @@ const url = process.env.REACT_APP_API
 const URLProyectos =  `${url}get_proyectos` //'http://localhost:5000/get_proyectos'//`${url}get_proyectos`
 const URLCrearProy = `${url}create_proyecto`//`${url}create_proyecto`
 const URLEliminarProy = `${url}delete_proyecto`//`${url}delete_proyecto`
+const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 
 export default VistaProyectos

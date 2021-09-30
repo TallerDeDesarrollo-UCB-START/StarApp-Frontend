@@ -1,13 +1,30 @@
 // Componentes:
-
-// Librerias-Paquetes:
 import './ParticiparEnProyectoBtn.css';
+// Librerias-Paquetes:
+import { Container } from '@material-ui/core';
+import React, { useState } from "react";
 
 
-function ContenidoProyecto() {
+// Merce Vic
+function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy}) {
+    
+    // States
+    //const [titulo, setTitulo] = useState('')
+    function agregarRequerido(element){
+        element.classList.add('button-hide')
+    }
+    const onClick = (event) => {
+        onPartiparProy(proyecto.id); 
+        alert('Registered participation'); 
+        agregarRequerido(event.currentTarget);
+    }
     return (
-        <button className="participarButton">Participar</button>
+        <button className="participarButton"
+            onClick={onClick}
+        >
+        Participar
+        </button>
     );
 }
 
-export default ContenidoProyecto
+export default ParticiparEnProyectoBtn

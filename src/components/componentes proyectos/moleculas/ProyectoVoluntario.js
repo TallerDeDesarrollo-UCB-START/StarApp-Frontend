@@ -6,12 +6,12 @@ import './ProyectoVoluntario.css';
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
-
-function ProyectoVoluntario({proyecto, onEliminarProy}) {
+// Diego
+function ProyectoVoluntario({proyecto, onEliminarProy,  onPartiparProy}) {
     return (
         <Box className="proyect-container">
             <BannerProyecto />
-            <ContenidoProyecto proyecto={proyecto} onEliminarProy={onEliminarProy}/>
+            <ContenidoProyecto proyecto={proyecto} onEliminarProy={onEliminarProy} onPartiparProy={onPartiparProy}/>
         </Box>
     );
 }
