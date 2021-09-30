@@ -7,7 +7,7 @@ import {useState, useEffect} from 'react'
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
-    const [proyecto, setProyecto] = useState({})
+    //const [proyecto, setProyecto] = useState({})
 
     useEffect(() => {
         const getProyectos = async () => {
@@ -76,8 +76,7 @@ function VistaProyectos() {
                                                 proyectos={proyectos} 
                                                 onCrearProy={crearProyecto}
                                                 onEliminarProy={eliminarProyecto} 
-                                                onEditarProy={editarProyecto}
-                                                proyecto={proyecto}/> 
+                                                onEditarProy={editarProyecto}/> 
                                                 : 
                                                 <ProyectosVoluntarios proyectos={proyectos}/>
 
