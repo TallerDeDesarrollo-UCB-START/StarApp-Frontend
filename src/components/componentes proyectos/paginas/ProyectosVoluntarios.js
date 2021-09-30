@@ -4,13 +4,13 @@ import BodyProyectosNormal from '../organismos/BodyProyectosNormal'
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
-
-function ProyectosVoluntarios({proyectos}) {
-
+// DIEGO
+//victor y Merce
+function ProyectosVoluntarios({proyectos, onPartiparProy}) {
     return (
         <Box style={styles}>
             <HeaderProyectos />
-            <BodyProyectosNormal proyectos={proyectos}/>
+            <BodyProyectosNormal proyectos={proyectos} onPartiparProy={onPartiparProy}/>
         </Box>
     );
 }

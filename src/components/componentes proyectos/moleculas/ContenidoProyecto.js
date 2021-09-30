@@ -7,8 +7,8 @@ import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 
-
-function ContenidoProyecto({proyecto, onEliminarProy}) {
+// Merce y Vic
+function ContenidoProyecto({proyecto, onEliminarProy,  onPartiparProy}) {
     return (
         <Box className="content-container">
             
@@ -19,7 +19,7 @@ function ContenidoProyecto({proyecto, onEliminarProy}) {
 
             <div className="button-container">
                 <div className="space-button"></div>
-                <ParticiparEnProyectoBtn/>
+                <ParticiparEnProyectoBtn proyecto={proyecto} onPartiparProy={onPartiparProy}/>
                 <EditarProyectoBtn/>
                 <EliminarProjectoBtn proyecto={proyecto} onEliminarProy={onEliminarProy}/>
             </div>

@@ -4,13 +4,13 @@ import './BodyProyectos.css';
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
-
-function BodyProyectosNormal({proyectos}) {
+// diego
+function BodyProyectosNormal({proyectos,  onPartiparProy}) {
     return (
         <Box className="body-container">
             {
                 proyectos.map(proyecto => (
-                    <ProyectoVoluntarioNormal key={proyecto.id} proyecto={proyecto}/>
+                    <ProyectoVoluntarioNormal key={proyecto.id} proyecto={proyecto} onPartiparProy={onPartiparProy}/>
                 ))
             }
         </Box>
