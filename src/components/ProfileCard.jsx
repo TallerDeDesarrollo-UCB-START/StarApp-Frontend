@@ -29,6 +29,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
   },
 }));
+function calcularEdad(fecha) {
+  var hoy = new Date();
+  var cumpleanos = new Date(fecha);
+  var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+  var m = hoy.getMonth() - cumpleanos.getMonth();
+
+  if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+      edad--;
+  }
+
+  return edad;
+}
 
 const ProfileCard = (props) => {
   const classes = useStyles();
@@ -60,7 +72,7 @@ const ProfileCard = (props) => {
                   <Typography>
                     Nombre: {getDataProfile.nombre} {getDataProfile.apellido}
                   </Typography>
-                  <Typography>Edad: {getDataProfile.fecha_de_nacimiento}</Typography>
+                  <Typography>Edad: {calcularEdad(getDataProfile.fecha_de_nacimiento)} años</Typography>
                   <Typography>Genero: {getDataProfile.genero}</Typography>
                   <Typography>
                     Nivel de estudio: {getDataProfile.nivel_de_estudios}

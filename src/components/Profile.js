@@ -10,14 +10,14 @@ import Grid from "@material-ui/core/Grid";
 import ProfileCard from "./ProfileCard";
 import ProfileImage from "./ProfileImage";
 
-const volunteer = {
-  id: "1",
-  name: "Juanito",
-};
+// const volunteer = {
+//   id: "1",
+//   name: "Juanito",
+// };
 
-//const url = process.env.REACT_APP_API
-//const urlTablaExtensa=`${url}extended_form/`;
-const urlTablaExtensa = "http://localhost:5000/extended_form/";
+const url = process.env.REACT_APP_API
+const urlTablaExtensa=`${url}extended_form/`;
+//const urlTablaExtensa = "http://localhost:5000/extended_form/";
 
 function getModalStyle() {
   const top = 50;
@@ -233,10 +233,9 @@ const Profile = (onClick) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
 
     const idsessionstorage=sessionStorage.getItem("id")
-    console.log(idsessionstorage);
     const responseAutenticacion = {
-    // id_autenticacion: idsessionstorage descomentanto esta linea y eliminando la linea de abajo deberia recuperar los datos del logueado
-      id_autenticacion: "1",
+    id_autenticacion: idsessionstorage// descomentanto esta linea y eliminando la linea de abajo deberia recuperar los datos del logueado
+    //  id_autenticacion: "1",
     };
 
     axios
@@ -244,7 +243,6 @@ const Profile = (onClick) => {
       .then((response) => {
         if (response.data.data) {
           setUserExsit({ userEx: true });
-
           setDatos({ ...removeNulls(response.data.data) });
           setDatosEdit({ ...removeNulls(response.data.data) });
         } else {
@@ -259,7 +257,6 @@ const Profile = (onClick) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
-      console.log("abriendo modal")
     setOpen(true);
   };
 
