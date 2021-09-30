@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
-import { Link, Route, BrowserRouter } from "react-router-dom";
-import Evento from "./Evento";
+import { Link } from "react-router-dom";
+
 
 const url = process.env.REACT_APP_API
 const urlDeploy=`${url}eventos`;
