@@ -13,6 +13,21 @@
   height: fit-content;
 }
 
+.btn-proy-editar {
+  display: inline-block;
+  background-color: #0D6296;
+  color: #fff;
+  border: none;
+  margin: 3% auto;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  border-radius: 10px;
+  padding: 8px;
+  font-weight: bold;
+  height: fit-content;
+}
+
 .btn-proy-cancelar {
   display: inline-block;
   background-color: #989898;
