@@ -17,13 +17,11 @@ function BodyProyectos({proyectos, onEliminarProy,  onPartiparProy, onActivarFor
                     onPartiparProy={onPartiparProy}/>
                 ))
             }
+            <ProyectoVoluntario key={5} 
+                    proyecto={proyecto1} 
+                    onEliminarProy={onEliminarProy}
+                    onActivarForm={onActivarForm}/>
         </Box>
     );
-}
-const proyecto1 = {
-    titulo: 'a',
-    descripcion: 'a',
-    objetivo: 'a',
-    lider: 'a'
 }
 export default BodyProyectos
