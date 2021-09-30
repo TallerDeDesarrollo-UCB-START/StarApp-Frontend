@@ -7,7 +7,7 @@ import Event from "../components/Event";
 import Formulario from "../components/Formulario-evento.component/Formulario";
 import Attendance from "../components/Attendance";
 import crearEvento from "../components/CrearEvento/crearEvento";
-import ProyectoContainer from "../components/ProyectoContainer";
+import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
 import FormularioProyecto from "../components/Formulario";
 import Evento from "../components/Evento";
 const Routes = [
