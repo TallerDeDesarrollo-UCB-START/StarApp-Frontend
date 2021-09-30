@@ -8,7 +8,7 @@ import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 
 // Merce y Vic
-function ContenidoProyecto({proyecto, onEliminarProy,  onPartiparProy}) {
+function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparProy}) {
     return (
         <Box className="content-container">
             
@@ -20,7 +20,7 @@ function ContenidoProyecto({proyecto, onEliminarProy,  onPartiparProy}) {
             <div className="button-container">
                 <div className="space-button"></div>
                 <ParticiparEnProyectoBtn proyecto={proyecto} onPartiparProy={onPartiparProy}/>
-                <EditarProyectoBtn/>
+                <EditarProyectoBtn  onActivarForm={onActivarForm} proyecto={proyecto}/>
                 <EliminarProjectoBtn proyecto={proyecto} onEliminarProy={onEliminarProy}/>
             </div>
         </Box>

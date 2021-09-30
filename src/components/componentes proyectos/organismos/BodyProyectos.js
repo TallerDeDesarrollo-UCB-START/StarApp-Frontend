@@ -5,16 +5,25 @@ import './BodyProyectos.css';
 import { Box } from '@material-ui/core';
 
 // diego
-function BodyProyectos({proyectos, onEliminarProy,  onPartiparProy}) {
+function BodyProyectos({proyectos, onEliminarProy,  onPartiparProy, onActivarForm}) {
     return (
         <Box className="body-container">
             {
                 proyectos.map(proyecto => (
-                    <ProyectoVoluntario key={proyecto.id} proyecto={proyecto} onEliminarProy={onEliminarProy} onPartiparProy={onPartiparProy}/>
+                    <ProyectoVoluntario key={proyecto.id} 
+                    proyecto={proyecto} 
+                    onEliminarProy={onEliminarProy}
+                    onActivarForm={onActivarForm}
+                    onPartiparProy={onPartiparProy}/>
                 ))
             }
         </Box>
     );
 }
-
+const proyecto1 = {
+    titulo: 'a',
+    descripcion: 'a',
+    objetivo: 'a',
+    lider: 'a'
+}
 export default BodyProyectos
