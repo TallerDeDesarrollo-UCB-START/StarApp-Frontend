@@ -3,8 +3,11 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card } from "reactstrap";
 
+const url = process.env.REACT_APP_API;
+const urlDeploy = `${url}eventos`;
+
 const api = axios.create({
-  baseURL: `http://localhost:5000/eventos/`,
+  baseURL: urlDeploy,
   //baseURL: `https://ucbstartfront.herokuapp.com/eventos/`   url produccion
 });
 class Evento extends Component {
@@ -43,7 +46,11 @@ class Evento extends Component {
             <div className="card w-70" key={event.id}>
               <div className="row no-gutters">
                 <div className="col-auto">
-                  <img src="http://jorge-zientarski.com/imgs/Events2.jpg" className="img-fluid" alt="" />
+                  <img
+                    src="http://jorge-zientarski.com/imgs/Events2.jpg"
+                    className="img-fluid"
+                    alt=""
+                  />
                 </div>
                 <div className="col">
                   <div className="card-block px-1">
