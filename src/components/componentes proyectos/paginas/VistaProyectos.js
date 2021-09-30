@@ -54,7 +54,6 @@ function VistaProyectos() {
     }*/
 
     const editarProyecto = async (proyectoEditar) => {
-        debugger;
         const response = await fetch(
             `${URLEditarProy}/${proyectoEditar.id}`,
             {
