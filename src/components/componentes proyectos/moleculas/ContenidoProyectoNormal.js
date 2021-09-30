@@ -2,7 +2,6 @@
 import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 
 // Librerias-Paquetes:
-import { Container } from '@material-ui/core';
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 

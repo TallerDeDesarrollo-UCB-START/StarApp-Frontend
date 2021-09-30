@@ -10,14 +10,14 @@ import Grid from "@material-ui/core/Grid";
 import ProfileCard from "./ProfileCard";
 import ProfileImage from "./ProfileImage";
 
-const volunteer = {
-  id: "1",
-  name: "Juanito",
-};
+// const volunteer = {
+//   id: "1",
+//   name: "Juanito",
+// };
 
-//const url = process.env.REACT_APP_API
-//const urlTablaExtensa=`${url}extended_form/`;
-const urlTablaExtensa = "http://localhost:5000/extended_form/";
+const url = process.env.REACT_APP_API
+const urlTablaExtensa=`${url}extended_form/`;
+//const urlTablaExtensa = "http://localhost:5000/extended_form/";
 
 function getModalStyle() {
   const top = 50;
@@ -186,7 +186,7 @@ const Profile = (onClick) => {
     axios
       .put(urlTablaExtensa + datos.id_usuario, asignaciones)
       .then((response) => {
-        alert(response.message);
+        alert("actualizado correctamente");
       })
       .catch((error) => {
         alert(error.message);
@@ -232,10 +232,10 @@ const Profile = (onClick) => {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
 
+    const idsessionstorage=sessionStorage.getItem("id")
     const responseAutenticacion = {
-      id_autenticacion: "1",
-      correo_electronico: "aaaaaaa@gmail.com",
-      telefono: "74701750",
+    id_autenticacion: idsessionstorage// descomentanto esta linea y eliminando la linea de abajo deberia recuperar los datos del logueado
+    //  id_autenticacion: "1",
     };
 
     axios
@@ -243,7 +243,6 @@ const Profile = (onClick) => {
       .then((response) => {
         if (response.data.data) {
           setUserExsit({ userEx: true });
-
           setDatos({ ...removeNulls(response.data.data) });
           setDatosEdit({ ...removeNulls(response.data.data) });
         } else {
@@ -503,20 +502,8 @@ const Profile = (onClick) => {
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
             <ProfileImage getDataProfile={datosEdit} />
-            <ProfileCard getDataProfile={datosEdit} />
-            <Button
-              type="button"
-              onClick={handleOpen}
-              variant="contained"
-              color="primary"
-              style={{
-                position: "absolute",
-                top: "22.9cm",
-                right: "21.2cm",
-              }}
-            >
-              Editar Perfil
-            </Button>
+            <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen}/>
+            
             <Modal
               open={open}
               onClose={handleClose}

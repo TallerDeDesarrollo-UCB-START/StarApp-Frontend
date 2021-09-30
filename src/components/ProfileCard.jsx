@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles ,withStyles} from "@material-ui/core/styles";
 import { Typography, Card, Divider, Button } from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,6 +8,15 @@ import Paper from "@material-ui/core/Paper";
 import TabsProfile from "./TabsProfile";
 import { withRouter } from "react-router";
 
+const DeteleButton = withStyles((theme) => ({
+  root: {
+    backgroundColor: "#ED2020",
+    color: "#FFFFFF",
+    "&:hover": {
+      backgroundColor: "#a90e0e",
+    },
+  },
+}))(Button);
 const useStyles = makeStyles((theme) => ({
   root: {
     justifyContent: "center",
@@ -20,10 +29,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
   },
 }));
+function calcularEdad(fecha) {
+  var hoy = new Date();
+  var cumpleanos = new Date(fecha);
+  var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+  var m = hoy.getMonth() - cumpleanos.getMonth();
 
-const ProfileCard = ({ getDataProfile }) => {
+  if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+      edad--;
+  }
+
+  return edad;
+}
+
+const ProfileCard = (props) => {
   const classes = useStyles();
-
+  const {getDataProfile,handleOpenprop}=props;
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -51,7 +72,7 @@ const ProfileCard = ({ getDataProfile }) => {
                   <Typography>
                     Nombre: {getDataProfile.nombre} {getDataProfile.apellido}
                   </Typography>
-                  <Typography>Edad: {getDataProfile.fecha_de_nacimiento}</Typography>
+                  <Typography>Edad: {calcularEdad(getDataProfile.fecha_de_nacimiento)} años</Typography>
                   <Typography>Genero: {getDataProfile.genero}</Typography>
                   <Typography>
                     Nivel de estudio: {getDataProfile.nivel_de_estudios}
@@ -66,14 +87,22 @@ const ProfileCard = ({ getDataProfile }) => {
                   </Typography>
                 </Grid>
               </Paper>
-              <Grid container justifyContent="flex-end">
+              <Grid container justifyContent="space-between">                
                 <Button
+                  type="button"
+                  className={classes.paper}
+                  onClick={handleOpenprop}
+                  variant="contained"
+                  color="primary"
+                >
+                  Editar Perfil
+                </Button>
+                <DeteleButton
                   className={classes.paper}
                   variant="contained"
-                  style={{ backgroundColor: "#ED2020", color: "#FFFFFF" }}
-                >
+                  >
                   Eliminar perfil
-                </Button>
+                </DeteleButton>
               </Grid>
             </Grid>
           </Grid>

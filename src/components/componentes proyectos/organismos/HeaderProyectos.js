@@ -1,10 +1,8 @@
 // Componentes:
 import './HeaderProyectos.css';
 // Librerias-Paquetes:
-import { Container } from '@material-ui/core';
 
 
-// MERCE - VIC
 function HeaderProyectos() {
     return (
         <div className="header-container">

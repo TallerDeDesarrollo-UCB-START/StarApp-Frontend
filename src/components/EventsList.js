@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
+import { Link, Route, BrowserRouter } from "react-router-dom";
+import Evento from "./Evento";
 
 const url = process.env.REACT_APP_API
 const urlDeploy=`${url}eventos`;
@@ -10,12 +12,20 @@ const api = axios.create({
   //baseURL: `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`
 });
 
+const urlParticipacion = "http://localhost:5000/eventos/participate_evento/";
+
 class EventsList extends Component {
   state = {
     events: [],
     divcontainer: true,
     abierto: false,
+    botonMostrar: false,
+    botonArchivar: true,
+    botonMostrarEventosNoArchivados: false,
+    botonMostrarEventosArchivados: true,
   };
+
+  oject = {};
 
   constructor() {
     super();
@@ -29,6 +39,21 @@ class EventsList extends Component {
   getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
+      data = data.filter((event)=> (event.estado === '1'));
+      this.setState({ events: data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  getEventsArchivados = async () => {
+    try {
+      this.state.botonMostrar= true;
+      this.state.botonArchivar= false;
+      this.state.botonMostrarEventosNoArchivados= true;
+      this.state.botonMostrarEventosArchivados= false;
+      let data = await api.get("/").then(({ data }) => data);
+      data = data.filter((event)=> (event.estado === '0'));
       this.setState({ events: data });
     } catch (err) {
       console.log(err);
@@ -41,6 +66,42 @@ class EventsList extends Component {
     this.getEvents();
     this.abrirModal();
   }
+
+  peticionArchivar =  async (event) => {
+    await axios.put('http://localhost:5000/eventos/archivar_evento/'+ event.id);
+    this.getEventsArchivados();
+    window.location.reload();
+  }
+
+  peticionMostrar =  async (event) => {
+    this.state.botonMostrar= false;
+    this.state.botonArchivar= true;
+    this.state.botonMostrarEventosNoArchivados= false;
+    this.state.botonMostrarEventosArchivados= true;
+    await axios.put('http://localhost:5000/eventos/mostrar_evento/'+ event.id);
+    this.getEvents();
+  }
+  mensajeConfirmacionParticipacion(event) {
+    window.alert(
+      `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
+    );
+  }
+  postParticipacion = async (event) => {
+    let newUrl =
+      urlParticipacion + event.id + "/sesion/" + window.sessionStorage.id;
+    console.log("URL", newUrl);
+    await axios
+      .post(newUrl, {
+        id: event.id,
+        id_autenticacion: window.sessionStorage.id,
+      })
+      .then((response) => {
+        this.mensajeConfirmacionParticipacion();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   render() {
 
@@ -58,9 +119,9 @@ class EventsList extends Component {
             <h1> Bienvenido a Lista de eventos!</h1>
           </div>
           <div style={{ display: "flex" }}>
-            <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
-              Crear Evento
-            </Button>
+            <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento"> Crear Evento </Button> 
+            <Button style={{ display: this.state.botonMostrarEventosArchivados ? "block" : "none" }} onClick={()=>this.getEventsArchivados()}>Eventos Archivados</Button>
+            <Button style={{ display: this.state.botonMostrarEventosNoArchivados ? "block" : "none" }} href="/eventos">Volver</Button>
           </div>
         </div>
         <Container>
@@ -90,11 +151,16 @@ class EventsList extends Component {
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
+                      <Button>
+                        <Link to={"eventos/" + event.id}>Ver Evento</Link>
+                      </Button>
                     </div>
                   </div>
                   
                   <div className="principal">
                     <div className="secundario">
+                      <Button style={{ display: this.state.botonMostrar ? "block" : "none" }} onClick={()=> this.peticionMostrar(event)}>Mostrar</Button>
+                      <Button style={{ display: this.state.botonArchivar ? "block" : "none" }} onClick={()=> this.peticionArchivar(event)}>Archivar</Button>
                       <Button color="success" onClick={this.abrirModal}>Eliminar</Button>
                       </div ></div>
 

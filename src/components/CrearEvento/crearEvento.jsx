@@ -37,8 +37,9 @@ class crearEvento extends React.Component {
   };
 
   peticionPost=async ()=>{
+    console.log(this.state.form);
     await axios.post(url,this.state.form).then(response=>{
-     this.insertar();
+      this.insertar();
       
     }).catch(error=>{
       console.log(error.message);
