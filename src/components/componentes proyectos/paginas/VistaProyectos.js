@@ -7,7 +7,7 @@ import {useState, useEffect} from 'react'
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
-    const [proyecto, setProyecto] = useState({})
+    //const [proyecto, setProyecto] = useState({})
 
     useEffect(() => {
         const getProyectos = async () => {

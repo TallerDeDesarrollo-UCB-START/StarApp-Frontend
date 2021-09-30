@@ -99,7 +99,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
                                 onChange={onChangeLider}
                                 />
                     <div className="btn-crear-container">
-                        <input type='submit' value='Editar' className='btn-proy-crear btn-proy-block'/>
+                        <input type='submit' value='Editar' className='btn-proy-editar btn-proy-block'/>
                     </div>
                 </div>
             </form>
