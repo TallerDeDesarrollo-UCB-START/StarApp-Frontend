@@ -34,7 +34,6 @@ class EventsList extends Component {
   oject = {};
 
   constructor() {
-    console.log("URL DEPLOY", urlDeploy);
     super();
     this.getEvents();
   }
