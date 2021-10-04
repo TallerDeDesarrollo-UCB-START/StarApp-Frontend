@@ -1,327 +1,522 @@
-import React,{useState,useEffect} from 'react';
-import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
-import { Button } from '@material-ui/core';
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { Button, Modal } from "@material-ui/core";
 import axios from "axios";
+import "react-datepicker/dist/react-datepicker.css";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import "./Profile.css";
+import Grid from "@material-ui/core/Grid";
+import ProfileCard from "./ProfileCard";
+import ProfileImage from "./ProfileImage";
 
-
-import { makeStyles } from '@material-ui/core/styles';
-import { Modal } from '@material-ui/core';
-//import FormEditUser from "./FormEditUser"
-import './Profile.css';
-
-var volunteer={
-    id:'1000',
-    name: 'Juanito',
-    
-}
+// const volunteer = {
+//   id: "1",
+//   name: "Juanito",
+// };
 
 const url = process.env.REACT_APP_API
 const urlTablaExtensa=`${url}extended_form/`;
+//const urlTablaExtensa = "http://localhost:5000/extended_form/";
 
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
 
-function showData() {
-    document.getElementById('data').innerHTML = `<p><strong>Nombre </strong>${volunteer.name}</p> 
-                                                 <p><strong>Edad </strong>${volunteer.age}</p>
-                                                 `
-}
-function showEvents() {
-    document.getElementById('data').innerHTML = `<p><strong>Eventos: </strong>${volunteer.event}</p>`
-}
-
-
-  
-  function getModalStyle() {
-    const top = 50 ;
-    const left = 50 ;
-  
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
-  
-  const useStyles = makeStyles((theme) => ({
-    paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
+  return {
+    "@media (maxWidth: 375px)": {
+      top: 0,
+      left: 0,
     },
-    root: {
-        width: '100%',
-        '& > * + *': {
-          marginTop: theme.spacing(2),
-        },
-      }
-  }));
-  
-  
-    
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+const CancelButton = withStyles((theme) => ({
+  root: {
+    color: "white",
+    backgroundColor: "#a8a8a8",
+    "&:hover": {
+      backgroundColor: "#818181",
+    },
+  },
+}))(Button);
+const useStyles = makeStyles((theme) => ({
+  containerbuttons: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  buttons: {
+    width: "36%",
+    height: "30px",
+    margin: "7px",
+  },
+  intputextaera: {
+    width: "76%",
+    height: "100px",
+    background: "#FFFFFF",
+    border: "1px solid #C4C4C4",
+    boxSizing: "border-box",
+    borderRadius: "6px",
+    padding: "3px 5px",
+    margin: "7px 0px 7px 0px",
+    position: "relative",
+    left: "12%",
+    resize: "none",
+  },
+  intputs: {
+    width: "76%",
+    height: "38px",
+    background: "#FFFFFF",
+    border: "1px solid #C4C4C4",
+    boxSizing: "border-box",
+    borderRadius: "6px",
+    padding: "3px 5px",
+    margin: "7px 0px 7px 0px",
+    position: "relative",
+    left: "12%",
+  },
+  checkintereses: {
+    width: "76%",
+    padding: "3px 5px",
+    margin: "7px 0px 7px 0px",
+    position: "relative",
+    left: "12%",
+  },
+  titulos: {
+    width: "76%",
+    position: "relative",
+
+    left: "12%",
+  },
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const Profile = (onClick) => {
+  const [userExist, setUserExsit] = useState({
+    userEx: false,
+  });
 
-    const [userExist,setUserExsit]=useState({
-        userEx:false,
+  const [datos, setDatos] = useState({
+    id_usuario: "",
+    nombre: "",
+    apellido: "",
+    fecha_de_nacimiento: "",
+    pais_de_recidencia: "",
+    ciudad_de_recidencia: "",
+    carrera: "",
+    nivel_de_estudios: "",
+    descripcion_personal: "",
+    telefono: "",
+    genero: "",
+    estado_de_cuenta: "",
+    rol: "",
+    intereses: [],
+    id_autenticacion: "",
+  });
+  const [datosEdit, setDatosEdit] = useState({
+    id_usuario: "",
+    nombre: "",
+    apellido: "",
+    fecha_de_nacimiento: "",
+    pais_de_recidencia: "",
+    ciudad_de_recidencia: "",
+    carrera: "",
+    nivel_de_estudios: "",
+    descripcion_personal: "",
+    telefono: "",
+    genero: "",
+    estado_de_cuenta: "",
+    rol: "",
+    intereses: [],
+    id_autenticacion: "",
+  });
+  const handleChange = (event) => {
+    var nuevosInt = "";
+    const tikeado = !event.target.checked;
+
+    if (typeof datosEdit.intereses === typeof "string") {
+      if (tikeado) {
+        nuevosInt = datosEdit.intereses
+          .split(/[,"}{]/)
+          .filter(Boolean)
+          .filter((i) => i !== event.target.value);
+      } else {
+        nuevosInt = datosEdit.intereses
+          .split(/[,"}{]/)
+          .filter(Boolean)
+          .concat(event.target.value);
+      }
+    } else {
+      if (tikeado) {
+        nuevosInt = datosEdit.intereses.filter((i) => i !== event.target.value);
+      } else {
+        const aux = datosEdit.intereses;
+        aux.push(event.target.value);
+        nuevosInt = aux;
+      }
+    }
+
+    setDatosEdit({ ...datosEdit, [event.target.name]: nuevosInt });
+  };
+
+  const handleInputChange = (event) => {
+    setDatosEdit({
+      ...datosEdit,
+      [event.target.name]: event.target.value,
     });
-    const [datos, setDatos]=useState({
-        id:'1000',
-        username:'juanito',
-        
-    })
-    const [datosExtend,serDatosExtend]=useState({
-        birth_date:'',
-        degree:'',
-        carrer:'',
-        general_interest:[],
-        city:'',
-        country:'',
-        description:''
-    })
+  };
+  var peticionPost = async (asignaciones) => {
+    await axios
+      .post(urlTablaExtensa, asignaciones)
+      .then((response) => {
+        alert("actualizado correctamente");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  var peticionPut = (asignaciones) => {
+    axios
+      .put(urlTablaExtensa + datos.id_usuario, asignaciones)
+      .then((response) => {
+        alert("actualizado correctamente");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
 
-    const handleInputChange =(event)=>{
-        console.log(event.target.value)
-        setDatos({
-            ...datos,[event.target.name]:event.target.value
-        })
-        serDatosExtend({
-            ...datosExtend,[event.target.name]:event.target.value
-        })
-    }
-    var peticionPost=async()=>{
-        serDatosExtend({ birth_date: reformatDateString(datosExtend.birth_date)})
-        
-       await axios.post(urlTablaExtensa,datosExtend).then(response=>{
-            alert('actualizado correctamente');
-        }).catch(error=>{
-          console.log(error.message);
-        })
-      }
-    var peticionPut = ()=>{
-        
-        axios.put(urlTablaExtensa+datosExtend.volunteer_id, datosExtend).then(response=>{
-            alert('actualizado correctamente');
-        })
-    }
+  function sendForm() {
+    setDatos(datosEdit);
 
-    function sendForm(){
-        if(userExist.userEx){
-            peticionPut();
-            
-            handleClose()
-        }else{
-            console.log("enviando datos nuevos")
-            peticionPost()
-            handleClose()
-        }
-    }
-    function reformatDateString(s) {
-        var b = s.split(/\D/);
-        return b.reverse().join('-');
-      }
-
-    
-    useEffect(()=>{
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        axios.get(urlTablaExtensa+datos.id).then(response=>{
-    
-        console.log(response.data.data)
-        if(response.data.data){
-            console.log("hay datos ")
-            setUserExsit({userEx: true })
-            serDatosExtend({ volunteer_id:response.data.data.volunteer_id,
-                            birth_date:response.data.data.birth_date,
-                            carrer:response.data.data.career,
-                            degree:response.data.data.degree,
-                            general_interest:response.data.data.general_interest,
-                            city:response.data.data.city,
-                            description:response.data.data.description})
-            
-        }else{
-            console.log("no existe data")
-            setUserExsit({ userEx: false})
-        }
-        })
-    },[datos.id]
-    
-    )
-    
-
-
-
-    const location = useLocation();
-    const classNamees = useStyles();
-    const [modalStyle] = React.useState(getModalStyle);
-    const [open, setOpen] = React.useState(false); 
-   
-    
-      
-
-    const handleOpen = () => {
-        setOpen(true);
+    const asignaciones = {
+      nombre: datosEdit.nombre,
+      apellido: datosEdit.apellido,
+      fecha_de_nacimiento: datosEdit.fecha_de_nacimiento,
+      pais_de_recidencia: datosEdit.pais_de_recidencia,
+      ciudad_de_recidencia: datosEdit.ciudad_de_recidencia,
+      carrera: datosEdit.carrera,
+      nivel_de_estudios: datosEdit.nivel_de_estudios,
+      descripcion_personal: datosEdit.descripcion_personal,
+      telefono: datosEdit.telefono,
+      genero: datosEdit.genero,
+      estado_de_cuenta: datosEdit.estado_de_cuenta,
+      rol: datosEdit.rol,
+      intereses: datosEdit.intereses.toString(),
+      id_autenticacion: datosEdit.id_autenticacion,
     };
 
-    const handleClose = () => {
-        axios.get(urlTablaExtensa+datos.id).then(response=>{
-    
-            console.log(response.data.data)
-            if(response.data.data){
-                console.log("hay datos ")
-                setUserExsit({userEx: true })
-                serDatosExtend({ volunteer_id:response.data.data.volunteer_id,
-                                birth_date:response.data.data.birth_date,
-                                carrer:response.data.data.career,
-                                degree:response.data.data.degree,
-                                general_interest:response.data.data.general_interest,
-                                city:response.data.data.city,
-                                description:response.data.data.description})
-                
-            }else{
-                serDatosExtend({ volunteer_id:'',
-                    birth_date:'',
-                    carrer:'',
-                    degree:'',
-                    general_interest:[],
-                    city:'',
-                    description:''})
-                console.log("no existe data")
-                setUserExsit({ userEx: false})
-            }
-            })
-        setOpen(false);
+    if (userExist.userEx) {
+      peticionPut(asignaciones);
+      setOpen(false);
+    } else {
+      peticionPost(asignaciones);
+      setOpen(false);
+    }
+  }
+
+  function removeNulls(model) {
+    for (var value of Object.keys(model)) {
+      model[value] = model[value] ? model[value] : "";
+    }
+    return model;
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    const idsessionstorage=sessionStorage.getItem("id")
+    const responseAutenticacion = {
+    id_autenticacion: idsessionstorage// descomentanto esta linea y eliminando la linea de abajo deberia recuperar los datos del logueado
+    //  id_autenticacion: "1",
     };
-    
-    const body = (
-        <div style={modalStyle} className={classNamees.paper}>
-          <h2 id="simple-modal-title">Editar Usuario</h2>
-            {/* <FormEditUser volunteerst={volunteer} userExtend={userExtend} userEx={userExist.userEx} /> */}
-            <div>
-            <form>
-                <label htmlFor="username">Nombre</label>
+
+    axios
+      .get(urlTablaExtensa + responseAutenticacion.id_autenticacion)
+      .then((response) => {
+        if (response.data.data) {
+          setUserExsit({ userEx: true });
+          setDatos({ ...removeNulls(response.data.data) });
+          setDatosEdit({ ...removeNulls(response.data.data) });
+        } else {
+          setUserExsit({ userEx: false });
+        }
+      });
+  }, [datos.id]);
+
+  const location = useLocation();
+  const classNamees = useStyles();
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setDatosEdit(datos);
+    setOpen(false);
+  };
+
+  const body = (
+    <div style={modalStyle} className="paperr">
+      <div>
+        <form className="fomrExt">
+          <label className={classNamees.titulos} htmlFor="nombre">
+            Nombre:
+          </label>
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.nombre}
+            onChange={handleInputChange}
+            placeholder="Nombre"
+            name="nombre"
+            id="nombre"
+            type="text"
+          />
+          <br></br>
+
+          <label className={classNamees.titulos} htmlFor="fecha_de_nacimiento">
+            Fecha de nacimiento:
+          </label>
+          <input
+            className={classNamees.intputs}
+            type="date"
+            name="fecha_de_nacimiento"
+            value={datosEdit.fecha_de_nacimiento.split("T")[0]}
+            onChange={handleInputChange}
+          />
+
+          <label className={classNamees.titulos} htmlFor="nivel_de_estudios">
+            Grado de Estudios:
+          </label>
+          <select
+            name="nivel_de_estudios"
+            value={datosEdit.nivel_de_estudios}
+            onChange={handleInputChange}
+            className={classNamees.intputs}
+          >
+            <option value="Primaria">Primaria</option>
+            <option value="Secundaria">Secundaria</option>
+            <option value="Bachiller">Bachiller</option>
+            <option value="Licenciatura">Licenciatura</option>
+            <option value="PostGrado">Post-Grado</option>
+          </select>
+
+          <label className={classNamees.titulos} htmlFor="carrera">
+            Profesion u oficio:
+          </label>
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.carrera}
+            onChange={handleInputChange}
+            placeholder="Profecion u Oficio"
+            name="carrera"
+            id="carrera"
+            type="text"
+          />
+          <br></br>
+          <label className={classNamees.titulos}>Mis intereses:</label>
+          <br></br>
+          <div className={classNamees.checkintereses}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
                 <input
-                    value={datos.username}
-                    onChange={handleInputChange}
-                    name="username" id='username' type='text'
+                  checked={datosEdit.intereses.includes("Medio ambiente")}
+                  onChange={handleChange}
+                  value="Medio ambiente"
+                  name="intereses"
+                  id="MedioambienteCheck"
+                  type="checkbox"
                 />
-                <br></br>
-                
-                <label htmlFor="degree">Grado de Estudios:</label>
+                <label htmlFor="MedioambienteCheck">Medio ambiente</label>
+              </Grid>
+              <Grid item xs={12}>
                 <input
-                    value={datosExtend.degree}
-                    onChange={handleInputChange}
-                    name="degree" id='degree' type='text'
+                  checked={datosEdit.intereses.includes(
+                    "Desarrollo sostenible"
+                  )}
+                  onChange={handleChange}
+                  value="Desarrollo sostenible"
+                  name="intereses"
+                  id="DesarrollosostenibleCheck"
+                  type="checkbox"
                 />
-                <br></br>
-
-                <label htmlFor="carrer">Profesion u oficio:</label>
+                <label htmlFor="DesarrollosostenibleCheck">
+                  Desarrollo sostenible
+                </label>
+              </Grid>
+              <Grid item xs={12}>
                 <input
-                    value={datosExtend.carrer}
-                    onChange={handleInputChange}
-                    name="carrer" id='carrer' type='text'
+                  checked={datosEdit.intereses.includes("Trabajo social")}
+                  onChange={handleChange}
+                  value="Trabajo social"
+                  name="intereses"
+                  id="TrabajosocialCheck"
+                  type="checkbox"
                 />
-                <br></br>
-
-                <label htmlFor="city">Ciudad:</label>
+                <label htmlFor="TrabajosocialCheck">Trabajo social</label>
+              </Grid>
+              <Grid item xs={12}>
                 <input
-                    value={datosExtend.city}
-                    onChange={handleInputChange}
-                    name="city" id='city' type='text'
+                  checked={datosEdit.intereses.includes("Empoderamiento")}
+                  onChange={handleChange}
+                  value="Empoderamiento"
+                  name="intereses"
+                  id="EmpoderamientoCheck"
+                  type="checkbox"
                 />
-                <br></br>
-
-                <label htmlFor="country">Pais:</label>
+                <label htmlFor="EmpoderamientoCheck">Empoderamiento</label>
+              </Grid>
+              <Grid item xs={12}>
                 <input
-                    value={datosExtend.country}
-                    onChange={handleInputChange}
-                    name="country" id='country' type='text'
+                  checked={datosEdit.intereses.includes("Perritos callejeros")}
+                  onChange={handleChange}
+                  value="Perritos callejeros"
+                  name="intereses"
+                  id="PerritoscallejerosCheck"
+                  type="checkbox"
                 />
-                <br></br>
-
-                <label htmlFor="descroption">Descripcion:</label>
+                <label htmlFor="PerritoscallejerosCheck">
+                  Perritos callejeros
+                </label>
+              </Grid>
+              <Grid item xs={12}>
                 <input
-                    value={datosExtend.Descripcion}
-                    onChange={handleInputChange}
-                    name="Descripcion" id='Descripcion' type='text'
+                  checked={datosEdit.intereses.includes("Educacion")}
+                  onChange={handleChange}
+                  value="Educacion"
+                  name="intereses"
+                  id="EducacionCheck"
+                  type="checkbox"
                 />
-                <br></br>
+                <label htmlFor="EducacionCheck">Educacion</label>
+              </Grid>
+            </Grid>
+          </div>
 
-                <label htmlFor="birth_date">Fecha de nacimiento:</label>
-                <input
-                    value={datosExtend.birth_date}
-                    onChange={handleInputChange}
-                    name="birth_date" id='birth_date' type='text'
-                    
-                />
-                <br></br>
-                <Button onClick={sendForm} color="primary" variant="contained" borderradius="20%">Guardar Cambios</Button>
-                
-            </form>
-        </div>
-            <Button type="button" onClick={handleClose} variant="contained" color="secondary" >Cancelar</Button>
-          
-        </div>
-      );
-   
-    return (
-        <div>            
-            {location.pathname === '/' && (
-                <Link to='/profile'>Perfil</Link>
-            )}
-            <div>
-                {location.pathname !== '/' && (
-                    <div>
+          <label className={classNamees.titulos} htmlFor="pais_de_recidencia">
+            Pais de recidencia:
+          </label>
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.pais_de_recidencia}
+            onChange={handleInputChange}
+            placeholder="Pais de recidencia"
+            name="pais_de_recidencia"
+            id="pais_de_recidencia"
+            type="text"
+          />
+          <br></br>
 
-                        <div className="picture">
+          <label className={classNamees.titulos} htmlFor="ciudad_de_recidencia">
+            Ciudad de recidencia:
+          </label>
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.ciudad_de_recidencia}
+            onChange={handleInputChange}
+            placeholder="Ciudad de recidencia"
+            name="ciudad_de_recidencia"
+            id="ciudad_de_recidencia"
+            type="text"
+          />
+          <br></br>
+          <label className={classNamees.titulos} htmlFor="telefono">
+            Telefono:
+          </label>
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.telefono}
+            onChange={handleInputChange}
+            placeholder="Telefono
+                    "
+            name="telefono"
+            id="telefono"
+            type="text"
+          />
+          <br></br>
 
+          <label className={classNamees.titulos} htmlFor="genero">
+            Genero:
+          </label>
+          <select
+            name="genero"
+            value={datosEdit.genero}
+            onChange={handleInputChange}
+            className={classNamees.intputs}
+          >
+            <option value="">Genero</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
+            <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+          </select>
 
-                        </div>
-                        <div className="name">
-                            <h2>{volunteer.name}</h2>
-                            <p>Pequeña descripción de la persona</p>
-                            {
-                                userExist.userEx?
-                                <Button type="button" onClick={handleOpen} variant="contained" color="primary" >Editar Perfil</Button>:
-                                <Button type="button" onClick={handleOpen} variant="contained" color="primary" >Completar Perfil</Button>
-                            }
-                            
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="simple-modal-title"
-                                aria-describedby="simple-modal-description"
-                            >
-                                {body}
-                                
-                            </Modal>
-                            
-                        </div>
-                        <Button onClick={showData} color="primary" borderradius="20%">Datos personales</Button>
-                        <Button onClick={showEvents} color="primary" borderradius="20%">Eventos asistidos</Button>
-                        <div className="container">
-                            <div className="btn-container" id="data">
+          <label className={classNamees.titulos} htmlFor="descripcion_personal">
+            Mi pequeÃ±a descripcion:
+          </label>
+          <textarea
+            className={classNamees.intputextaera}
+            value={datosEdit.descripcion_personal}
+            onChange={handleInputChange}
+            name="descripcion_personal"
+            id="descripcion_personal"
+          ></textarea>
+          <br></br>
+        </form>
+      </div>
+      <div className={classNamees.containerbuttons}>
+        <Button
+          onClick={sendForm}
+          color="primary"
+          className={classNamees.buttons}
+          variant="contained"
+          borderradius="20%"
+        >
+          Guardar
+        </Button>
+        <CancelButton
+          variant="contained"
+          onClick={handleClose}
+          className={classNamees.buttons}
+          color="primary"
+        >
+          Cancelar
+        </CancelButton>
+      </div>
+    </div>
+  );
 
-                            
-                            </div>
-                            <div className="gen-info-container">
-                                <p><strong>Proyectos en los que participa:</strong></p>
-                                <p><strong>Clasificación:</strong></p>
-                                <p><strong>Horas acumuladas:</strong></p>
-                                <p><strong>Insignias:</strong></p>
-                            </div>
-                        </div>
+  return (
+    <div>
+      {location.pathname === "/" && <Link to="/profile">Perfil</Link>}
+      <div>
+        {location.pathname !== "/" && (
+          <div className={classNamees.name}>
+            <ProfileImage getDataProfile={datosEdit} />
+            <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen}/>
+            
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-descripcion_personal"
+            >
+              {body}
+            </Modal>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
-                    </div>
-
-
-                )}
-            </div>
-        </div>
-
-    )
-}
-
-export default Profile
+export default Profile;

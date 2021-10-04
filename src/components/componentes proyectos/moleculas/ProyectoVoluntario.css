@@ -1,0 +1,5 @@
+.proyect-container{
+    margin: 5px;
+    display: flex;
+    flex-wrap: nowrap;
+}

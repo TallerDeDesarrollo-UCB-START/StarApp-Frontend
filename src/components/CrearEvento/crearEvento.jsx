@@ -1,33 +1,32 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {Link} from 'react-router-dom';
+import axios from "axios";
+import './crearEvento.css';
 import {
-  Table,
+  Box,
+} from '@material-ui/core';
+
+
+import {
   Button,
   Container,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  FormGroup,
-  ModalFooter,
 } from "reactstrap";
 
-const data = [
-  { id: 1, evento: "EVENTO 1", descripcion: "descripcion 1", lugar: "CBBA", fecha: "2021-09-01"},
-  { id: 2, evento: "EVENTO 2", descripcion: "descripcion 2",lugar: "CBBA", fecha: "2021-09-14" },
-  { id: 3, evento: "EVENTO 3", descripcion: "descripcion 3",lugar: "CBBA",fecha: "2021-09-14" },
-];
+
+// const url = "http://localhost:5000/eventos/crearevento"
+const URL = process.env.REACT_APP_API
+const url = `${URL}eventos/crearevento`
 
 class crearEvento extends React.Component {
   state = {
-    data: data,
-    modalActualizar: false,
-    modalInsertar: false,
+    modalInsertar: true,
     form: {
-      id: "",
-      evento: "",
-      descripcion: "",
-      lugar: "",
-      fecha: "",
+      nombre_evento: "",
+      descripcion_evento: "",
+      modalidad_evento: "Presencial",
+      lugar_evento: "",
+      fecha_evento: "",
     },
   };
 
@@ -37,18 +36,23 @@ class crearEvento extends React.Component {
     });
   };
 
+  peticionPost=async ()=>{
+    console.log(this.state.form);
+    await axios.post(url,this.state.form).then(response=>{
+      this.insertar();
+      
+    }).catch(error=>{
+      console.log(error.message);
+    })
+  }
+
   cerrarModalInsertar = () => {
     this.setState({ modalInsertar: false });
   };
 
-  insertar= ()=>{
+  insertar = () => {
     window.alert("Evento Guardado");
-
-    var valorNuevo= {...this.state.form};
-    valorNuevo.id=this.state.data.length+1;
-    var lista= this.state.data;
-    lista.push(valorNuevo);
-    this.setState({ modalInsertar: false, data: lista });
+    window.location.href = "/eventos";
   }
 
   handleChange = (e) => {
@@ -61,124 +65,87 @@ class crearEvento extends React.Component {
   };
 
   render() {
-    
     return (
       <>
-        <Container>
-        <br />
-          <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
-          <br />
-          <br />
-          <Table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Evento</th>
-                <th>Descripción</th>
-                <th>Lugar</th>
-                <th>Fecha</th>
-              </tr>
-            </thead>
+        <Container className="Container">
 
-            <tbody>
-              {this.state.data.map((dato) => (
-                <tr key={dato.id}>
-                  <td>{dato.id}</td>
-                  <td>{dato.evento}</td>
-                  <td>{dato.descripcion}</td>
-                  <td>{dato.lugar}</td>
-                  <td>{dato.fecha}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Container>
+          <form className="FormEvento">
 
-    
-        <Modal isOpen={this.state.modalInsertar}>
-          <ModalHeader>
-           <div><h3>Crear Evento</h3></div>
-          </ModalHeader>
-
-          <ModalBody>
-            <FormGroup>
+          
+            <Box className="evento" xs={6}>
               <label>
-                Id: 
-              </label>
-              
-              <input
-                className="form-control"
-                readOnly
-                type="text"
-                value={this.state.data.length+1}
-              />
-            </FormGroup>
-            
-            <FormGroup>
-              <label>
-                Evento: 
+                Nombre del Evento: 
               </label>
               <input
                 className="form-control"
-                name="evento"
+                name="nombre_evento"
                 type="text"
                 onChange={this.handleChange}
               />
-            </FormGroup>
-            
-            <FormGroup>
+            </Box>
+          
+            <Box className="descripcion" xs={6} mt={0.8}>
               <label>
                 Descripción: 
               </label>
-              <input
-                className="form-control"
-                name="descripcion"
+              <textarea  className="form-control descripcion-input" cols="30" rows="10"  
+                name="descripcion_evento"
                 type="text"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
+                onChange={this.handleChange}>
+              </textarea>  
+            </Box>
 
-            <FormGroup>
-              <label>
-                Lugar: 
-              </label>
-              <input
-                className="form-control"
-                name="lugar"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            
-            <FormGroup>
-              <label>
-                Fecha: 
-              </label>
-              <input
-                className="form-control"
-                name="fecha"
-                type="date"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
 
-          </ModalBody>
+            <Box  className="CamposInferiores" xs={12} mt={0.8}>
 
-          <ModalFooter>
-            <Button
-              color="primary"
-              onClick={() => this.insertar()}
-            >
-              Guardar
-            </Button>
-            <Button
-              className="btn btn-danger"
-              onClick={() => this.cerrarModalInsertar()}
-            >
-              Cancelar
-            </Button>
-          </ModalFooter>
-        </Modal>
+              <Box className="InLine Modalidad" xs={4}>     
+                <label>
+                  Modalidad 
+                </label>
+                <select className=" form-control" name="modalidad_evento" onChange={this.handleChange}>
+                  <option value="Presencial" name="modalidad_evento">Presencial</option>
+                  <option value="Virtual" name="modalidad_evento">Virtual</option>                
+                </select>
+              </Box>
+
+              <Box className="InLine Lugar" xs={4}>
+                <label>
+                  Lugar
+                </label>
+                <input
+                  className="form-control"
+                  name="lugar_evento"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </Box>
+
+              <Box className="InLine Fecha" xs={4}>
+                <label>
+                  Fecha
+                </label>
+                <input
+                  className="form-control"
+                  name="fecha_evento"
+                  type="date"
+                  onChange={this.handleChange}
+                />
+              </Box>
+            </Box>
+
+            <div className="CamposBotones">
+            <Button className="BtnRegistrar" onClick={() => this.peticionPost()}> Registrar Evento </Button>
+              <Button className="BtnCancelar" ><Link to="/eventos"> Cancelar</Link> </Button>
+
+            </div>
+            <Box   xs={12} mt={2}> 
+              
+            </Box>
+
+
+          </form>
+
+        </Container>
       </>
     );
   }

@@ -6,19 +6,19 @@ import { TextField } from "final-form-material-ui";
 
 const useStyles = makeStyles(theme => ({
     textboxContainer : {
-        marginTop:'32px',
+        marginTop:'15px',
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
     },
     textboxLabel: {
         width: '76%',
-        height: '42px',
+        height: '12px', 
     },
     textbox : {
         width: '76%',
         height: '42px',
-        background: '#FFFFF',
+        background: '#FFFFFF',
         border: '1px solid #C4C4C4',
         boxSizing: 'border-box',
         borderRadius: '6px',
