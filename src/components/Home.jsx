@@ -1,6 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography} from '@material-ui/core';
 
+import WriteInExcel from './DownloadExcelButton'
+
 const useStyles = makeStyles(theme => ({
     title: {
         marginTop: "160px",
@@ -21,6 +23,7 @@ const Home = () =>{
             <Typography className = {classes.subtitle} variant="h3">
                 Aplicación interna para voluntarios
             </Typography>
+            <WriteInExcel/>
         </section>
     )
 }
