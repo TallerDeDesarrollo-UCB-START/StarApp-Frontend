@@ -63,7 +63,7 @@ const Header = () =>{
                 <BottomNavigationAction 
                     label="Inicio" 
                     className={(currentPath===routes[0].path)?classes.activeNavButton:classes.navButton} 
-                    onClick={()=>(history.push(logged?routes[0].path:routes[4].path))} />
+                    onClick={()=>(history.push(routes[0].path))} />
                 <BottomNavigationAction
                     label="Proyectos" 
                     className={(currentPath===routes[1].path)?classes.activeNavButton:classes.navButton} 
