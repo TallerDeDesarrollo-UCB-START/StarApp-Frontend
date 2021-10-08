@@ -6,7 +6,9 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { useHistory } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
-import Button from '@material-ui/core/Button';
+import routes from '../../routes/Routes'
+import LoggoutButton from './logoutButton'
+import verifier from '../../routes/AuthRoutesVerifier'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import {faFacebook, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-icons'
 
@@ -26,31 +28,20 @@ const useStyles = makeStyles((theme)=> ({
         display: "flex",
         justifyContent:"center"
     },
-    loginButton: {
-        width:"10%", 
-        marginRight:"30px",
-    },
   }));
 
 const Header = () =>{
     const [logged, setLogged] = React.useState(false)
-    const routes = {
-        "/": 0,
-        "/projects": 1,
-        "/eventos": 2,
-        "/perfil": 3,
-    }
-    const keysRoutes = Object.keys(routes)
     let location = useLocation()
     const history = useHistory()
     const classes = useStyles()
-    const [value, setValue] = React.useState(routes[location.pathname])
+    const [currentPath, setCurrentPath] = React.useState(location.pathname)
     useEffect(() => {
-        if(!Boolean(sessionStorage.getItem("jwt")) && location.pathname !== "/" && location.pathname !== "/register"){
-            history.push("/login")
+        if(!Boolean(sessionStorage.getItem("jwt")) && verifier(currentPath).needLoggin){
+            history.push(routes[4].path)
         }
         setLogged(Boolean(sessionStorage.getItem("jwt")))
-      },[history, location.pathname]);
+      },[history, currentPath]);
     return(
         <header className="header-division">
             <div className="header-logo">
@@ -58,42 +49,33 @@ const Header = () =>{
                 <div className={classes.containerLogo}>
                     <img src={Logo} alt=" " className = "header-image"/>
                 </div>
-                <Button 
-                    className={classes.loginButton} 
-                    variant={(logged)?"contained": "outlined"}
-                    onClick={(logged)?
-                        ()=>{
-                            sessionStorage.removeItem("jwt")
-                            window.location.reload()
-                        }:()=>history.push("/login")}>
-                        {(logged)?"Log out": "Login"}
-                </Button>
+                <LoggoutButton logged={logged}/>
             </div>
             <div className="header-menu">
             <BottomNavigation
-                value={value}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
+                currentPath={currentPath}
+                onChange={(event, newcurrentPath) => {
+                    setCurrentPath(newcurrentPath);
                 }}
                 showLabels
                 className={classes.root}
             >
                 <BottomNavigationAction 
                     label="Inicio" 
-                    className={(value===0)?classes.activeNavButton:classes.navButton} 
-                    onClick={()=>(history.push(keysRoutes[0]))} />
-                <BottomNavigationAction 
+                    className={(currentPath===routes[0].path)?classes.activeNavButton:classes.navButton} 
+                    onClick={()=>(history.push(logged?routes[0].path:routes[4].path))} />
+                <BottomNavigationAction
                     label="Proyectos" 
-                    className={(value===1)?classes.activeNavButton:classes.navButton} 
-                    onClick={()=>(history.push(keysRoutes[1]))} />
+                    className={(currentPath===routes[1].path)?classes.activeNavButton:classes.navButton} 
+                    onClick={()=>(history.push(logged?routes[1].path:routes[4].path))} />
                 <BottomNavigationAction 
                     label="Eventos" 
-                    className={(value===2)?classes.activeNavButton:classes.navButton} 
-                    onClick={()=>(history.push(keysRoutes[2]))} />
+                    className={(currentPath===routes[2].path)?classes.activeNavButton:classes.navButton} 
+                    onClick={()=>(history.push(logged?routes[2].path:routes[4].path))} />
                 <BottomNavigationAction 
                     label="Perfil" 
-                    className={(value===3)?classes.activeNavButton:classes.navButton} 
-                    onClick={()=>(history.push(keysRoutes[3]))} />
+                    className={(currentPath===routes[3].path)?classes.activeNavButton:classes.navButton} 
+                    onClick={()=>(history.push(logged?routes[3].path:routes[4].path))} />
             </BottomNavigation>
                 {/* <div className="header-menu-option-icon icons">
                     <FontAwesomeIcon icon={faFacebook}/>
