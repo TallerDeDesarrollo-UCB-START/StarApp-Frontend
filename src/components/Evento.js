@@ -14,12 +14,14 @@ class Evento extends Component {
   state = {
     events: [],
     participants: [],
+    nombreParticipante: "",
   };
 
   constructor() {
     super();
     this.getEvneto();
     this.getParticipantes();
+    // this.getNombreParticipante(9);
   }
   getIdFromURL(thisUrl) {
     var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
@@ -39,13 +41,30 @@ class Evento extends Component {
     }
   };
   getParticipantes = async () => {
+    let thisUrl = window.location.href;
+    let id = this.getIdFromURL(thisUrl);
     try {
       let data = await api.get("/participantes").then(({ data }) => data);
+      data = data.filter((participant) => participant.id_evento === id);
       this.setState({ participants: data });
     } catch (err) {
       console.log(err);
     }
     console.log("PARTICIPANTES", this.participants);
+  };
+
+  getNombreParticipante = async (idUsuario) => {
+    console.log("entra");
+    try {
+      let data = await api
+        .get(`participantes/${idUsuario}`)
+        .then(({ data }) => data);
+      this.setState({ nombreParticipante: data });
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("NOMBRE", this.state.nombreParticipante);
+    return this.state.nombreParticipante;
   };
 
   render() {
@@ -98,7 +117,7 @@ class Evento extends Component {
                       <b>ID Evento:</b> {particpant.id_evento}
                     </p>
                     <p className="card-text">
-                      <b>ID Usuario:</b> {particpant.id_usuario}
+                      <b> ID Usuario:</b> {particpant.id_usuario}
                     </p>
                   </div>
                 </div>
