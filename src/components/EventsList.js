@@ -1,25 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Container,
-  Card,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalFooter,
-} from "reactstrap";
-import { Link } from "react-router-dom";
+import { Container, Card, Button } from "reactstrap";
+import { Link, Route, BrowserRouter } from "react-router-dom";
+import Evento from "./Evento";
+import Modal from "react-bootstrap/Modal";
+import ModalHeader from "react-bootstrap/ModalHeader";
+import ModalFooter from "react-bootstrap/ModalFooter";
 
-const url = process.env.REACT_APP_API;
-const urlDeploy = `${url}eventos`;
 const api = axios.create({
-  baseURL: urlDeploy, //`http://localhost:5000/eventos`,
-  //baseURL: `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`
+  baseURL: `http://localhost:5000/eventos`,
 });
-
-const urlParticipacion = `${url}eventos/participate_evento/`;
-
+const urlParticipacion = "http://localhost:5000/eventos/participate_evento/";
 class EventsList extends Component {
   state = {
     events: [],
@@ -68,13 +60,15 @@ class EventsList extends Component {
 
   deleteEvento = async (event) => {
     console.log(event.id);
-    await axios.delete(urlDeploy + "/" + event.id);
+    await axios.delete("http://localhost:5000/eventos" + "/" + event.id);
     this.getEvents();
     this.abrirModal();
   };
 
   peticionArchivar = async (event) => {
-    await axios.put(urlDeploy + "/archivar_evento/" + event.id);
+    await axios.put(
+      "http://localhost:5000/eventos" + "/archivar_evento/" + event.id
+    );
     this.getEventsArchivados();
     window.location.reload();
   };
@@ -84,7 +78,9 @@ class EventsList extends Component {
     this.state.botonArchivar = true;
     this.state.botonMostrarEventosNoArchivados = false;
     this.state.botonMostrarEventosArchivados = true;
-    await axios.put(urlDeploy + "/mostrar_evento/" + event.id);
+    await axios.put(
+      "http://localhost:5000/eventos" + "/mostrar_evento/" + event.id
+    );
     this.getEvents();
   };
   mensajeConfirmacionParticipacion(event) {
@@ -177,6 +173,13 @@ class EventsList extends Component {
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
+                      <Button
+                        onClick={() => {
+                          this.postParticipacion(event); //descomentar cuando se guarde en DB
+                        }}
+                      >
+                        Participar
+                      </Button>
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
                       </Button>

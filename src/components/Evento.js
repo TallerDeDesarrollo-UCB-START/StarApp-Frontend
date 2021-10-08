@@ -7,8 +7,8 @@ const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
 
 const api = axios.create({
-  baseURL: urlDeploy,
-  //baseURL: `https://ucbstartfront.herokuapp.com/eventos/`   url produccion
+  // baseURL: urlDeploy,
+  baseURL: `http://localhost:5000/eventos`, //url produccion
 });
 class Evento extends Component {
   state = {
@@ -19,6 +19,7 @@ class Evento extends Component {
   constructor() {
     super();
     this.getEvneto();
+    this.getParticipantes();
   }
   getIdFromURL(thisUrl) {
     var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
@@ -36,6 +37,15 @@ class Evento extends Component {
     } catch (err) {
       console.log(err);
     }
+  };
+  getParticipantes = async () => {
+    try {
+      let data = await api.get("/participantes").then(({ data }) => data);
+      this.setState({ participants: data });
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("PARTICIPANTES", this.participants);
   };
 
   render() {
@@ -66,6 +76,29 @@ class Evento extends Component {
                     </p>
                     <p className="card-text">
                       <b>Lugar:</b> {event.lugar_evento}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="card-footer w-100 text-muted"></div>
+            </div>
+          ))}
+        </Card>
+        <h1>Lista de participantes</h1>
+        <Card>
+          {this.state.participants.map((particpant) => (
+            <div
+              className="card w-70"
+              key={particpant.id_participantes_eventos}
+            >
+              <div className="row no-gutters">
+                <div className="col">
+                  <div className="card-block px-1">
+                    <p className="card-text">
+                      <b>ID Evento:</b> {particpant.id_evento}
+                    </p>
+                    <p className="card-text">
+                      <b>ID Usuario:</b> {particpant.id_usuario}
                     </p>
                   </div>
                 </div>
