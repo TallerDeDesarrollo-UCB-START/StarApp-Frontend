@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles ,withStyles} from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Typography, Card, Divider, Button } from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -36,7 +36,7 @@ function calcularEdad(fecha) {
   var m = hoy.getMonth() - cumpleanos.getMonth();
 
   if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
-      edad--;
+    edad--;
   }
 
   return edad;
@@ -44,7 +44,7 @@ function calcularEdad(fecha) {
 
 const ProfileCard = (props) => {
   const classes = useStyles();
-  const {getDataProfile,handleOpenprop}=props;
+  const { getDataProfile, handleOpenprop } = props;
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -62,6 +62,20 @@ const ProfileCard = (props) => {
                 {getDataProfile.descripcion_personal}
               </Paper>
             </Grid>
+            <Grid className={classes.paper}>
+              <Paper style={{ padding: "15px" }}>
+                <Typography>Contacto de emergencia:</Typography>
+                <Typography variant="body2">
+                  Nombre: Tu jefa
+                </Typography>
+                <Typography variant="body2">
+                  Relacion: todos los dias
+                </Typography>
+                <Typography variant="body2">
+                  Teléfono: 911
+                </Typography>
+              </Paper>
+            </Grid>
           </Grid>
           <Grid item xs={6} className={classes.paper}>
             <Grid>
@@ -72,7 +86,10 @@ const ProfileCard = (props) => {
                   <Typography>
                     Nombre: {getDataProfile.nombre} {getDataProfile.apellido}
                   </Typography>
-                  <Typography>Edad: {calcularEdad(getDataProfile.fecha_de_nacimiento)} años</Typography>
+                  <Typography>
+                    Edad: {calcularEdad(getDataProfile.fecha_de_nacimiento)}{" "}
+                    años
+                  </Typography>
                   <Typography>Genero: {getDataProfile.genero}</Typography>
                   <Typography>
                     Nivel de estudio: {getDataProfile.nivel_de_estudios}
@@ -87,7 +104,7 @@ const ProfileCard = (props) => {
                   </Typography>
                 </Grid>
               </Paper>
-              <Grid container justifyContent="space-between">                
+              <Grid container justifyContent="space-between">
                 <Button
                   type="button"
                   className={classes.paper}
@@ -97,10 +114,7 @@ const ProfileCard = (props) => {
                 >
                   Editar Perfil
                 </Button>
-                <DeteleButton
-                  className={classes.paper}
-                  variant="contained"
-                  >
+                <DeteleButton className={classes.paper} variant="contained">
                   Eliminar perfil
                 </DeteleButton>
               </Grid>
