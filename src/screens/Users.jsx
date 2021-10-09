@@ -3,13 +3,22 @@ import { DataGrid } from '@material-ui/data-grid';
 import { makeStyles, Button } from '@material-ui/core'
 import axios from 'axios';
 import SearchField from '../components/SearchByField'
+import {useMediaQuery} from '@material-ui/core'
 
 const useStyles = makeStyles((theme)=>({
     section: {
-
+        width:'60%',
+        margin:'50px auto',
     },
     containerSearchField:{
-
+        display: 'flex',
+        width:'100%',
+        justifyContent:'space-between'
+    },
+    smallContainerSearchField:{
+        display: 'flex',
+        width:'100%',
+        flexDirection: 'column',
     },
     containerTable:{
         height: 400,
@@ -21,28 +30,28 @@ const columns = [
     {
       field: 'nombre',
       headerName: 'Nombre(s)',
-      width: 250,
+      width: 200,
     },
     {
       field: 'apellido',
       headerName: 'Apellido(s)',
-      width: 250,
+      width: 200,
     },
     {
       field: 'telefono',
       headerName: 'Telefono',
       type: 'phone',
-      width: 250,
+      width: 200,
     },
     {
        field: 'rol',
        headerName: 'Rol',
-       width: 250,
+       width: 200,
     },
     {
        field: 'ciudad_de_recidencia',
        headerName: 'Ciudad',
-       width: 250,
+       width: 200,
      },
 ];
 
@@ -50,27 +59,23 @@ const columns = [
 const baseURL = "https://dev-back-startamericas.herokuapp.com/extended_form";
 
 function Users () {
-
     const classes = useStyles()
-
-    const [user, setUser] = useState([]);
-
-    const [fieldSelector, setFieldSelector] = useState('Nombre')
-
-
+    const [data, setData] = useState([])
+    const [originalData, setOriginalData] = useState([])
+    const smallScreen = useMediaQuery('(min-width:700px)')
     const usersGet = async() => (
         await axios.get(baseURL)
         .then( response => {
-            //console.log(response.data.data);
-            var data = response.data.data
+            var resp = response.data.data
             var ids = 0
-            data = data.map((person) => {
+            resp = resp.map((person) => {
                 ids = ids + 1
                 return {...person, id:ids}
             })
-            setUser(data);
+            setData(resp);
+            setOriginalData(resp);
         }).catch( error => {
-            console.log(error);
+            console.log(error)
         })
     )
 
@@ -80,14 +85,14 @@ function Users () {
 
     return (
         <section className={classes.section}>
-            <div className={classes.containerSearchField}>
-                <Button>Descargar</Button>
-                {/* <SearchField fieldSelector={fieldSelector} setFieldSelector={setFieldSelector} data={rows}/> */}
+            <div className={(smallScreen)?classes.containerSearchField: classes.smallContainerSearchField}>
+                <Button variant="outlined">Descargar</Button>
+                <SearchField data={data} setData={setData} originalData={originalData}/>
             </div>
             <div className={classes.containerTable}>
                 <DataGrid 
                     columns={columns}
-                    rows={user}
+                    rows={data}
                     pageSize={5}
                 /> 
             </div>
