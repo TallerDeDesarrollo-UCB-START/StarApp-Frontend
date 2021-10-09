@@ -53,6 +53,17 @@ function VistaProyectos() {
         return data;
     }*/
 
+    const obtenerParticipacionProyecto = async (idProyecto) => {
+        const idSesion = sessionStorage.getItem("id");
+        var response = idProyecto%2 ? true : false;
+        /*
+        const response = await fetch(`${URLParticpaVoluntario}/${idProyecto}/session/${idSesion}`,
+        { 
+            method: 'GET'
+        });*/
+        return response;
+    }
+
     const editarProyecto = async (proyectoEditar) => {
         const response = await fetch(
             `${URLEditarProy}/${proyectoEditar.id}`,
@@ -80,7 +91,9 @@ function VistaProyectos() {
     
 
     const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto} onPartiparProy={participarEnProyecto} onEditarProy={editarProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
+    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} 
+        onEliminarProy={eliminarProyecto} onPartiparProy={participarEnProyecto} onEditarProy={editarProyecto} 
+        onGetParticipacion={obtenerParticipacionProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
     return (
         <>
@@ -96,5 +109,6 @@ const URLProyecto = `${url}get_proyecto`//'http://localhost:5000/get_proyecto'//
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
 const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_proyecto'//`${url}edit_proyecto`
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//`${url}delete_proyecto`
+//const URLParticpaVoluntario = `${url}participar_url`//'http://localhost:5000/participar_url'//`${url}participar_url`
 
 export default VistaProyectos
