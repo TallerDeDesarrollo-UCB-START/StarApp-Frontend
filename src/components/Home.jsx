@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography} from '@material-ui/core';
-import Users from '../screens/Users'
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -22,7 +21,6 @@ const Home = () =>{
             <Typography className = {classes.subtitle} variant="h3">
                 Aplicación interna para voluntarios
             </Typography>
-            <Users/>
         </section>
     )
 }

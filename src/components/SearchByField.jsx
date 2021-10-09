@@ -1,97 +1,95 @@
-import React from 'react'
-import Input from '@material-ui/core/Input'
+import React, {useState} from 'react'
 import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import Chip from '@material-ui/core/Chip'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import { makeStyles} from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import {useMediaQuery} from '@material-ui/core'
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
 const useStyles = makeStyles((theme) => ({
-    fieldSelector: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-      maxWidth: 300,
-    },
-    chips: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    chip: {
-      margin: 2,
-    },
-    searchField:{
-
-    },
+  container:{
+    display: 'flex',
+    alignItems:'center',
+    justifyContent:'center',
+    width:'40%',
+    minWidth:'280px'
+  },
+  smallContainer:{
+    display: 'flex',
+    alignItems:'center',
+    flexDirection:'column',
+    width:'100%',
+  },
+  formControl: {
+    minWidth: 110,
+    margin: '10px',
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  searchField:{
+    width:'100%',
+    minWidth: 150,
+  },
 }))
-function getStyles(field, fieldSelector, theme) {
-    return {
-        fontWeight:
-        fieldSelector.indexOf(field) === -1
-            ? theme.typography.fontWeightRegular
-            : theme.typography.fontWeightMedium,
-    };
+const fields = {
+    'Nombre':'nombre',
+    'Apellido':'apellido',
+    'Teléfono':'telefono',
+    'Rol':'rol',
+    'Ciudad':'ciudad_de_recidencia',
 }
-const fields = [
-    'Nombre',
-    'Apellido',
-    'Teléfono',
-    'Rol',
-    'Ciudad',
-]
-const SearchByField = ({fieldSelector,setFieldSelector,data}) => {
+const SearchByField = ({data, setData, originalData}) => {
+    const idSearchInput = "search-input"
     const classes = useStyles()
-    const theme = useTheme();
+    const [fieldSelected, setFieldSelected] = useState('')
+    const smallScreen = useMediaQuery('(min-width:700px)')
     const handleChange = (event) => {
-        setFieldSelector(event.target.value);
-      };
+        setFieldSelected(event.target.value)
+    }
     return (
-        <section>
-            <FormControl className={classes.fieldSelector}>
-                <InputLabel id="demo-mutiple-chip-label">Buscar por</InputLabel>
-                <Select
-                labelId="demo-mutiple-chip-label"
-                id="demo-mutiple-chip"
-                multiple
-                value={fieldSelector}
+        <section className={(smallScreen)?classes.container:classes.smallContainer}>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="outlined-age-native-simple">Criterio</InputLabel>
+              <Select
+                native
+                value={fieldSelected}
                 onChange={handleChange}
-                input={<Input id="select-multiple-chip" />}
-                renderValue={(selected) => (
-                    <div className={classes.chips}>
-                    {selected.map((value) => (
-                        <Chip key={value} label={value} className={classes.chip} />
-                    ))}
-                    </div>
-                )}
-                MenuProps={MenuProps}
-                >
-                {fields.map((field) => (
-                    <MenuItem key={field} value={field} style={getStyles(field, fieldSelector, theme)}>
-                    {field}
-                    </MenuItem>
+                label="Buscar por"
+                inputProps={{
+                  name: 'searchBy',
+                  id: 'outlined-age-native-simple',
+                }}
+              >
+                <option aria-label="Ninguno" value="" />
+                {Object.keys(fields).map((field)=>(
+                    <option key={field} value={field}>{field}</option>
                 ))}
-                </Select>
+              </Select>
             </FormControl>
             <Autocomplete
                 className={classes.searchField}
-                id="free-solo-demo"
+                id={idSearchInput}
+                onChange={(event, newValue) => {
+                  const value = newValue
+                  if(value){
+                    if(value === 'Sin Datos'){
+                      setData(originalData.filter((user)=> user[fields[fieldSelected]]===null))
+                    }
+                    else{
+                      setData(originalData.filter((user)=> user[fields[fieldSelected]]===value))
+                    }
+                  }
+                  else{
+                    setData(originalData)
+                  }
+                }}
                 freeSolo
-                options={data.map((option) => option[fieldSelector])}
+                options={[...new Set(data.map((option) => (option[fields[fieldSelected]])?option[fields[fieldSelected]]:'Sin Datos'))]}
                 renderInput={(params) => (
-                <TextField {...params} label="freeSolo" margin="normal" variant="outlined" />
+                <TextField {...params} label="buscar" margin="normal" variant="outlined"/>
                 )}
             />
         </section>
