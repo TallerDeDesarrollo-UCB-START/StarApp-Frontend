@@ -67,6 +67,9 @@ class Evento extends Component {
                     <p className="card-text">
                       <b>Lugar:</b> {event.lugar_evento}
                     </p>
+                    <p className="card-text">
+                      <b>Categoría:</b> {event.categoria}
+                    </p>
                   </div>
                 </div>
               </div>

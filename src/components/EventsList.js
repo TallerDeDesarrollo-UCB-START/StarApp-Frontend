@@ -10,6 +10,7 @@ import {
   ModalFooter,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import FiltroEventos from "./FiltroEventos";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -29,9 +30,8 @@ class EventsList extends Component {
     botonArchivar: true,
     botonMostrarEventosNoArchivados: false,
     botonMostrarEventosArchivados: true,
+    categoriaFiltrada: "",
   };
-
-  oject = {};
 
   constructor() {
     super();
@@ -45,7 +45,16 @@ class EventsList extends Component {
   getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
-      data = data.filter((event) => event.estado === "1");
+      console.log(this.state.categoriaFiltrada);
+      if (this.state.categoriaFiltrada != "Todas") {
+        data = data.filter(
+          (event) =>
+            event.estado === "1" &&
+            event.categoria === this.state.categoriaFiltrada
+        );
+      } else {
+        data = data.filter((event) => event.estado === "1");
+      }
       this.setState({ events: data });
     } catch (err) {
       console.log(err);
@@ -108,6 +117,10 @@ class EventsList extends Component {
         console.log(error.message);
       });
   };
+  filterChangeHandler = (categoria) => {
+    this.setState({ categoriaFiltrada: categoria });
+    this.getEvents();
+  };
 
   render() {
     const modalStyles = {
@@ -122,6 +135,12 @@ class EventsList extends Component {
         <div>
           <div>
             <h1> Bienvenido a Lista de eventos!</h1>
+          </div>
+          <div>
+            <FiltroEventos
+              selected={this.state.categoriaFiltrada}
+              onChangeFilter={this.filterChangeHandler}
+            />
           </div>
           <div style={{ display: "flex" }}>
             <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
@@ -176,6 +195,9 @@ class EventsList extends Component {
                       </p>
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
+                      </p>
+                      <p className="card-text">
+                        <b>Categoría:</b> {event.categoria}
                       </p>
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
