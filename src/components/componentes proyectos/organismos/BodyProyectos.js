@@ -5,7 +5,7 @@ import './BodyProyectos.css';
 import { Box } from '@material-ui/core';
 
 // diego
-function BodyProyectos({proyectos, onEliminarProy,  onPartiparProy, onActivarForm}) {
+function BodyProyectos({proyectos, onEliminarProy,  onPartiparProy, onActivarForm, onGetParticipacion}) {
     return (
         <Box className="body-container">
             {
@@ -14,7 +14,8 @@ function BodyProyectos({proyectos, onEliminarProy,  onPartiparProy, onActivarFor
                     proyecto={proyecto} 
                     onEliminarProy={onEliminarProy}
                     onActivarForm={onActivarForm}
-                    onPartiparProy={onPartiparProy}/>
+                    onPartiparProy={onPartiparProy}
+                    onGetParticipacion={onGetParticipacion}/>
                 ))
             }
             {/*<ProyectoVoluntario key={5} 
