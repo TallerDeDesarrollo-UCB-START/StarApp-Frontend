@@ -6,11 +6,11 @@ import { Box } from '@material-ui/core';
 
 // DIEGO
 //victor y Merce
-function ProyectosVoluntarios({proyectos, onPartiparProy}) {
+function ProyectosVoluntarios({proyectos, onPartiparProy, onGetParticipacion}) {
     return (
         <Box style={styles}>
             <HeaderProyectos />
-            <BodyProyectosNormal proyectos={proyectos} onPartiparProy={onPartiparProy}/>
+            <BodyProyectosNormal proyectos={proyectos} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion}/>
         </Box>
     );
 }
