@@ -61,18 +61,22 @@ const Header = () =>{
                 className={classes.root}
             >
                 <BottomNavigationAction 
-                    label="Inicio" 
+                    disabled = {(currentPath===routes[0].path)}
+                    label="Home"
                     className={(currentPath===routes[0].path)?classes.activeNavButton:classes.navButton} 
                     onClick={()=>(history.push(routes[0].path))} />
                 <BottomNavigationAction
+                    disabled = {(currentPath===routes[1].path)}
                     label="Proyectos" 
                     className={(currentPath===routes[1].path)?classes.activeNavButton:classes.navButton} 
                     onClick={()=>(history.push(logged?routes[1].path:routes[4].path))} />
                 <BottomNavigationAction 
+                    disabled = {(currentPath===routes[2].path)}
                     label="Eventos" 
                     className={(currentPath===routes[2].path)?classes.activeNavButton:classes.navButton} 
                     onClick={()=>(history.push(logged?routes[2].path:routes[4].path))} />
                 <BottomNavigationAction 
+                    disabled = {(currentPath===routes[3].path)}
                     label="Perfil" 
                     className={(currentPath===routes[3].path)?classes.activeNavButton:classes.navButton} 
                     onClick={()=>(history.push(logged?routes[3].path:routes[4].path))} />
