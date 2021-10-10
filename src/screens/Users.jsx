@@ -55,8 +55,8 @@ const columns = [
      },
 ];
 
-
-const baseURL = "https://dev-back-startamericas.herokuapp.com/extended_form";
+const url = process.env.REACT_APP_API
+const baseURL=`${url}extended_form`
 
 function Users () {
     const classes = useStyles()
