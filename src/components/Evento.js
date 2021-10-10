@@ -21,7 +21,7 @@ class Evento extends Component {
     super();
     this.getEvneto();
     this.getParticipantes();
-    // this.getNombreParticipante(9);
+    this.getNombreParticipante();
   }
   getIdFromURL(thisUrl) {
     var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
@@ -45,26 +45,31 @@ class Evento extends Component {
     let id = this.getIdFromURL(thisUrl);
     try {
       let data = await api.get("/participantes").then(({ data }) => data);
-      data = data.filter((participant) => participant.id_evento === id);
+      // data = data.filter((participant) => participant.id_evento === id);
       this.setState({ participants: data });
+      console.log("PARTICIPANTES", this.participants);
     } catch (err) {
       console.log(err);
     }
-    console.log("PARTICIPANTES", this.participants);
   };
 
-  getNombreParticipante = async (idUsuario) => {
+  getNombreParticipante = async () => {
     console.log("entra");
+    let idUsuario = 9;
+    console.log("ID: ", idUsuario);
     try {
       let data = await api
-        .get(`participantes/${idUsuario}`)
+        .get(`/participantes/${idUsuario}`)
         .then(({ data }) => data);
-      this.setState({ nombreParticipante: data });
+      this.setState({
+        nombreParticipante: data[0].nombre + " " + data[0].apellido,
+      });
+      console.log("NOMBRE", this.state.nombreParticipante);
     } catch (err) {
       console.log(err);
     }
     console.log("NOMBRE", this.state.nombreParticipante);
-    return this.state.nombreParticipante;
+    // return this.state.nombreParticipante;
   };
 
   render() {
@@ -118,6 +123,7 @@ class Evento extends Component {
                     </p>
                     <p className="card-text">
                       <b> ID Usuario:</b> {particpant.id_usuario}
+                      <b> Nombre:</b> {this.state.nombreParticipante}
                     </p>
                   </div>
                 </div>
