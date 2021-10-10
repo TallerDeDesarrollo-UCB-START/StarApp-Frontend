@@ -3,11 +3,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import PerfilDefault from "../images/PerfilDefault.jpg";
-import { Chip, Grid, Box, Switch, FormControlLabel } from "@material-ui/core/";
+import {
+  Chip,
+  Grid,
+  Box,
+  Switch,
+  FormControlLabel,
+  Badge,
+} from "@material-ui/core/";
 
 const useStyles = makeStyles((theme) => ({
   large: {
-    marginTop: "30px",
+    marginTop: "5px",
     width: theme.spacing(20),
     height: theme.spacing(20),
     margin: "auto",
@@ -31,11 +38,23 @@ export default function ProfileImage({ getDataProfile }) {
 
   return (
     <Grid>
-      <Avatar
-        alt="Imagen de Perfil"
-        src={PerfilDefault}
-        className={classes.large}
-      />
+      <div className={classes.large}>
+        <Badge
+          overlap="circular"
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          badgeContent
+          color={`${state ? "secondary" : "cancel"}`}
+        >
+          <Avatar
+            alt="Imagen de Perfil"
+            src={PerfilDefault}
+            className={classes.large}
+          />
+        </Badge>
+      </div>
       <Box textAlign="center">
         <Grid>
           <Typography variant="h6">
@@ -58,7 +77,7 @@ export default function ProfileImage({ getDataProfile }) {
                 <Switch
                   checked={state}
                   onChange={handleChange}
-                  color="primary"
+                  color="secondary"
                 />
               }
               label={`${state ? "Estoy disponible" : "No disponible"}`}

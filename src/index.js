@@ -18,6 +18,9 @@ const theme = createTheme ({
     warning:{
       main:'#FF0000',
     },
+    cancel: {
+      main:'#989898'
+    }
   },
   typography: {
     fontFamily: "Miriam Libre",
