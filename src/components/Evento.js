@@ -15,13 +15,14 @@ class Evento extends Component {
     events: [],
     participants: [],
     nombreParticipante: "",
+    nombres: [],
   };
 
   constructor() {
     super();
     this.getEvneto();
     this.getParticipantes();
-    this.getNombreParticipante();
+    this.getNombreParticipante(11);
   }
   getIdFromURL(thisUrl) {
     var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
@@ -45,31 +46,30 @@ class Evento extends Component {
     let id = this.getIdFromURL(thisUrl);
     try {
       let data = await api.get("/participantes").then(({ data }) => data);
-      // data = data.filter((participant) => participant.id_evento === id);
+
+      console.log("data", typeof data);
+      console.log("participants", typeof participants);
       this.setState({ participants: data });
-      console.log("PARTICIPANTES", this.participants);
     } catch (err) {
       console.log(err);
     }
   };
 
-  getNombreParticipante = async () => {
-    console.log("entra");
-    let idUsuario = 9;
-    console.log("ID: ", idUsuario);
+  getNombreParticipante = async (idUsuario) => {
     try {
       let data = await api
         .get(`/participantes/${idUsuario}`)
         .then(({ data }) => data);
+      const nombre = data[0]["concat"];
+      console.log(data[0]["concat"]);
       this.setState({
-        nombreParticipante: data[0].nombre + " " + data[0].apellido,
+        nombreParticipante: nombre,
       });
-      console.log("NOMBRE", this.state.nombreParticipante);
     } catch (err) {
       console.log(err);
     }
     console.log("NOMBRE", this.state.nombreParticipante);
-    // return this.state.nombreParticipante;
+    return;
   };
 
   render() {
@@ -123,7 +123,9 @@ class Evento extends Component {
                     </p>
                     <p className="card-text">
                       <b> ID Usuario:</b> {particpant.id_usuario}
-                      <b> Nombre:</b> {this.state.nombreParticipante}
+                      <b> Nombre:</b>
+                      {/* {this.getNombreParticipante(particpant.id_usuario)} */}
+                      {this.state.nombreParticipante}
                     </p>
                   </div>
                 </div>
