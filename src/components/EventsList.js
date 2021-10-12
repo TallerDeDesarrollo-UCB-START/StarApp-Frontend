@@ -9,6 +9,7 @@ import ModalFooter from "react-bootstrap/ModalFooter";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
+//const urlDeploy = `http://localhost:3000/eventos`
 
 const api = axios.create({
   baseURL: urlDeploy,
@@ -17,6 +18,7 @@ const urlParticipacion = `${urlDeploy}/participate_evento/`;
 class EventsList extends Component {
   state = {
     events: [],
+    participaciones: [],
     divcontainer: true,
     abierto: false,
     botonMostrar: false,
@@ -29,6 +31,7 @@ class EventsList extends Component {
   constructor() {
     super();
     this.getEvents();
+    this.getParticipaciones();
   }
 
   abrirModal = () => {
@@ -44,6 +47,19 @@ class EventsList extends Component {
       console.log(err);
     }
   };
+
+  getParticipaciones= async () => {
+    try {
+      console.log("Id erick", window.sessionStorage.id);
+      let listParticipaciones = await api.get("/eventos/participante/"+ window.sessionStorage.id).then(({ listParticipaciones }) => listParticipaciones);
+      console.log("Erickkkkk",listParticipaciones);
+      this.setState({ participaciones: listParticipaciones });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
 
   getEventsArchivados = async () => {
     try {
@@ -202,6 +218,7 @@ class EventsList extends Component {
                       >
                         Archivar
                       </Button>
+                      <Button> Eliminar Participacion</Button>
                       <Button color="success" onClick={this.abrirModal}>
                         Eliminar
                       </Button>
