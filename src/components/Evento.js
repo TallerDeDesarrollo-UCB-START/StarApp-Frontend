@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card } from "reactstrap";
@@ -7,15 +7,13 @@ const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
 
 const api = axios.create({
-  // baseURL: urlDeploy,
-  baseURL: `http://localhost:5000/eventos`, //url produccion
+  baseURL: urlDeploy,
 });
 class Evento extends Component {
   state = {
     events: [],
     participants: [],
     nombreParticipante: "",
-    nombres: [],
   };
 
   constructor() {
