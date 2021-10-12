@@ -83,5 +83,10 @@ const Routes = [
     logginNeeded: true,
     component: crearEvento,
   },
+  {
+    path: "/projects/:id",
+    name: "Proyecto",
+    component: ProyectoDetalle,
+  },
 ];
 export default Routes;
