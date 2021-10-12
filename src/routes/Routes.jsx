@@ -1,16 +1,15 @@
-import LoginForm from "../components/LoginForm";
-import Register from "../screens/Register";
-import EventsList from "../components/EventsList";
-import Home from "../components/Home";
-import Profile from "../components/Profile";
-import Event from "../components/Event";
-import Formulario from "../components/Formulario-evento.component/Formulario";
-import Attendance from "../components/Attendance";
-import crearEvento from "../components/CrearEvento/crearEvento";
-import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
-import FormularioProyecto from "../components/Formulario";
-import Evento from "../components/Evento";
-import Users from "../screens/Users"
+import LoginForm from '../components/LoginForm'
+import Register from '../screens/Register'
+import EventsList from '../components/EventsList'
+import Home from '../components/Home'
+import Profile from '../components/Profile'
+import Event from '../components/Event'
+import Formulario from '../components/Formulario-evento.component/Formulario'
+import Attendance from '../components/Attendance'
+import crearEvento from '../components/CrearEvento/crearEvento'
+import VistaProyectos from '../components/componentes proyectos/paginas/VistaProyectos'
+import FormularioProyecto from '../components/Formulario'
+import ProyectoDetalle from '../components/componentes proyectos/moleculas/ProyectoDetalle'
 const Routes = [
   {
     path: "/",
@@ -85,10 +84,9 @@ const Routes = [
     component: crearEvento,
   },
   {
-    path: "/eventos/:id",
-    name: "Evento",
-    component: Evento,
-    logginNeeded: true,
+    path: "/projects/:id",
+    name: "Proyecto",
+    component: ProyectoDetalle,
   },
 ];
 export default Routes;
