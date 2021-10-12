@@ -68,7 +68,7 @@ const useStyles = makeStyles(theme => ({
 })
 )
 
-const LoginForm = () => {
+const LoginForm = ({sessionData, setSessionData}) => {
     const history = useHistory()
     const classes = useStyles()
     const smallScreen = useMediaQuery('(min-width:420px)')
@@ -85,13 +85,14 @@ const LoginForm = () => {
         }
         return errors
     }
-    const URL = process.env.REACT_APP_API_AUTH
+    const URL_AUTH = process.env.REACT_APP_API_AUTH
+    const URL_API = process.env.REACT_APP_API
     const onSubmit = async values => {
         const body = {
             email: values.email,
             password: values.password
         }
-        return AxiosClient.post(`${URL}api/auth/signin`, body)
+        return AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
             .then(response => {
                 if ((response.status = 201)) {
                     console.log("logged")
@@ -100,6 +101,16 @@ const LoginForm = () => {
                     console.log(response)
                     sessionStorage.setItem("jwt", jwt)
                     sessionStorage.setItem("id", id_auth)
+                    AxiosClient.get(`${URL_API}extended_form/${id_auth}`)
+                        .then(response => {
+                            console.log(response.data.data)
+                            setSessionData({role: response.data.data.rol, id: id_auth})
+                        })
+                        .catch((response)=>{
+                            console.log(response.status)
+                            alert('Inicio de sesión fallido')
+                            window.location.reload()
+                        })
                     history.push(`/`)
                 }
             })

@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom'
 import routes from '../../routes/Routes'
 import LoggoutButton from './logoutButton'
 import verifier from '../../routes/AuthRoutesVerifier'
+
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import {faFacebook, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-icons'
 
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme)=> ({
     },
   }));
 
-const Header = () =>{
+const Header = ({sessionData}) =>{
     const [logged, setLogged] = React.useState(false)
     let location = useLocation()
     const history = useHistory()
@@ -45,7 +46,7 @@ const Header = () =>{
     return(
         <header className="header-division">
             <div className="header-logo">
-                <div style={{width:"10%"}}></div>
+                <div style={{width:"10%"}}>{sessionData.role}</div>
                 <div className={classes.containerLogo}>
                     <img src={Logo} alt=" " className = "header-image"/>
                 </div>
@@ -53,7 +54,7 @@ const Header = () =>{
             </div>
             <div className="header-menu">
             <BottomNavigation
-                currentPath={currentPath}
+                currentpath={currentPath}
                 onChange={(event, newcurrentPath) => {
                     setCurrentPath(newcurrentPath);
                 }}
@@ -80,6 +81,14 @@ const Header = () =>{
                     label="Perfil" 
                     className={(currentPath===routes[3].path)?classes.activeNavButton:classes.navButton} 
                     onClick={()=>(history.push(logged?routes[3].path:routes[4].path))} />
+                {(sessionData.role !== 'voluntario')?
+                    <BottomNavigationAction 
+                        disabled = {(currentPath===routes[3].path)}
+                        label="Usuarios" 
+                        className={(currentPath===routes[3].path)?classes.activeNavButton:classes.navButton} 
+                        onClick={()=>(history.push(logged?routes[3].path:routes[4].path))} />
+                        : <i></i>
+                }
             </BottomNavigation>
                 {/* <div className="header-menu-option-icon icons">
                     <FontAwesomeIcon icon={faFacebook}/>
