@@ -7,12 +7,13 @@ import { Box } from '@material-ui/core';
 
 function ProyectoDetalle({proyecto}) {
     return (
-        <Box className="content-container-detalle"> {/*agregar estilos y tamaño de box*/}
-            <BannerProyectoDetalle></BannerProyectoDetalle>
-            {/*{proyecto.titulo}*/}
-            {/*{proyecto.objetivo}*/}
-            {/*{proyecto.descripcion}*/}
-            {/*{proyecto.lider}*/}
+        <Box className="content-container-detalle" class="box-proyecto">
+            <BannerProyectoDetalle>
+                <p>Proyecto: {proyecto.titulo}</p>
+                <p>Objetivo: {proyecto.objetivo}</p>
+                <p>Descripción: {proyecto.descripcion}</p>
+                <p>Líder: {proyecto.lider}</p>
+            </BannerProyectoDetalle>
         </Box>
     );
 }
