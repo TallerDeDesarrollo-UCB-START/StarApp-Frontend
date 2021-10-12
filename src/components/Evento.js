@@ -44,11 +44,10 @@ class Evento extends Component {
   getParticipantes = async () => {
     let thisUrl = window.location.href;
     let id = this.getIdFromURL(thisUrl);
-    console.log("id evento", id);
+
     try {
-      let data = await api.get("/participantes").then(({ data }) => data);
-      console.log("DATA", data);
-      data = data.filter((participant) => participant.id_evento === id);
+      let data = await api.get(`/participantes/${id}`).then(({ data }) => data);
+      console.log(data);
 
       this.setState({ participants: data });
     } catch (err) {
@@ -99,14 +98,9 @@ class Evento extends Component {
               <div className="row no-gutters">
                 <div className="col">
                   <div className="card-block px-1">
+                    <p className="card-text"></p>
                     <p className="card-text">
-                      {/* <b>ID Evento:</b> {particpant.id_evento} */}
-                    </p>
-                    <p className="card-text">
-                      {/* <b> ID Usuario:</b>  */}
                       <b> Nombre:</b> {particpant.nombre} {particpant.apellido}
-                      {/* {this.getNombreParticipante(particpant.id_usuario)} */}
-                      {/* {this.state.nombreParticipante} */}
                     </p>
                   </div>
                 </div>
