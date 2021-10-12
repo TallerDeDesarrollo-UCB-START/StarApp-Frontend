@@ -93,7 +93,7 @@ function Users () {
                 <DataGrid 
                     columns={columns}
                     rows={data}
-                    pageSize={5}
+                    pageSize={20}
                 /> 
             </div>
         </section>
