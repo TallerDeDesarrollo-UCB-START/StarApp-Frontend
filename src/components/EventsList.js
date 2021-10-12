@@ -1,25 +1,19 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Container,
-  Card,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalFooter,
-} from "reactstrap";
+import { Container, Card, Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import ModalHeader from "react-bootstrap/ModalHeader";
+import ModalFooter from "react-bootstrap/ModalFooter";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
+
 const api = axios.create({
-  baseURL: urlDeploy, //`http://localhost:5000/eventos`,
-  //baseURL: `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`
+  baseURL: urlDeploy,
 });
-
-const urlParticipacion = `${url}eventos/participate_evento/`;
-
+const urlParticipacion = `${urlDeploy}/participate_evento/`;
 class EventsList extends Component {
   state = {
     events: [],
@@ -29,9 +23,8 @@ class EventsList extends Component {
     botonArchivar: true,
     botonMostrarEventosNoArchivados: false,
     botonMostrarEventosArchivados: true,
+    success: false,
   };
-
-  oject = {};
 
   constructor() {
     super();
@@ -102,7 +95,7 @@ class EventsList extends Component {
         id_autenticacion: window.sessionStorage.id,
       })
       .then((response) => {
-        this.mensajeConfirmacionParticipacion();
+        this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
         console.log(error.message);
@@ -177,6 +170,14 @@ class EventsList extends Component {
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
+                      <Button
+                        onClick={() => {
+                          this.postParticipacion(event);
+                        }}
+                      >
+                        Participar
+                      </Button>
+
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
                       </Button>
