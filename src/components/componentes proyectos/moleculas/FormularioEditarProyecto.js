@@ -1,5 +1,6 @@
 // Componentes:
 import InputTexto from '../moleculas/InputTexto'
+import InputDropDown from '../atomos/InputDropDown'
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
@@ -11,12 +12,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)
     const [lider, setLider] = useState(proyecto.lider)
-
-    //console.log(proyecto.titulo)
-    /*setTitulo(proyecto.titulo)
-    setDescripcion(proyecto.descripcion)
-    setObjetivo(proyecto.objetivo)
-    setLider(proyecto.lider)*/
+    const [estado, setEstado] = useState("")//(proyecto.estado)
 
     function resetStates() {
         setTitulo('')
@@ -35,7 +31,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
     function validarCampos(event) {
         if (!titulo || !descripcion || !objetivo || !lider) {
             alert('Porfavor llene los campos')
-            console.log(event)
+            //console.log(event)
             if (!titulo) agregarRequerido(event.currentTarget[0])
             if (!descripcion) agregarRequerido(event.currentTarget[1])
             if (!objetivo) agregarRequerido(event.currentTarget[2])
@@ -49,6 +45,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
         event.preventDefault() // To avoid submitting to an actual page
         const lideres = [lider]
         const objetivos = [objetivo]
+        const estado = []
         const proyectoEditar = {
             id: proyecto.id,
             titulo: titulo,
@@ -56,6 +53,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
             objetivo: objetivos,
             lider: lideres
         }
+
         if (validarCampos(event) == false) {
             return
         }
@@ -69,6 +67,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
     const onChangeDescrip = (e) => {setDescripcion(e.target.value); removerRequerido(e.target)}
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value); removerRequerido(e.target)}
     const onChangeLider = (e) => {setLider(e.target.value); removerRequerido(e.target)}
+    const onChangeEstado = (e) => {setEstado(e.target.value)}
 
     return (
         <div id="gen-form">
@@ -98,6 +97,13 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
                                 value={lider}
                                 onChange={onChangeLider}
                                 />
+                    <InputDropDown labelId="estado-proyecto-select" 
+                                input_id="estado-proyecto"
+                                label="Estado"
+                                items={["Activado", "Desactivado"]}
+                                valueSelect={estado}
+                                onChangeEstado={onChangeEstado}
+                                />{/* value={estado} */}
                     <div className="btn-crear-container">
                         <input type='submit' value='Editar' className='btn-proy-editar btn-proy-block'/>
                     </div>
