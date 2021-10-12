@@ -15,8 +15,8 @@ import ProfileImage from "./ProfileImage";
 //   name: "Juanito",
 // };
 
-const url = process.env.REACT_APP_API
-const urlTablaExtensa=`${url}extended_form/`;
+const url = process.env.REACT_APP_API;
+const urlTablaExtensa = `${url}extended_form/`;
 //const urlTablaExtensa = "http://localhost:5000/extended_form/";
 
 function getModalStyle() {
@@ -119,6 +119,9 @@ const Profile = (onClick) => {
     rol: "",
     intereses: [],
     id_autenticacion: "",
+    nombre_contacto_de_emergencia: "",
+    numero_contacto_de_emergencia: "",
+    relacion_contacto_de_emergencia: "",
   });
   const [datosEdit, setDatosEdit] = useState({
     id_usuario: "",
@@ -136,6 +139,9 @@ const Profile = (onClick) => {
     rol: "",
     intereses: [],
     id_autenticacion: "",
+    nombre_contacto_de_emergencia: "",
+    numero_contacto_de_emergencia: "",
+    relacion_contacto_de_emergencia: "",
   });
   const handleChange = (event) => {
     var nuevosInt = "";
@@ -211,6 +217,10 @@ const Profile = (onClick) => {
       rol: datosEdit.rol,
       intereses: datosEdit.intereses.toString(),
       id_autenticacion: datosEdit.id_autenticacion,
+      nombre_contacto_de_emergencia: datosEdit.nombre_contacto_de_emergencia,
+      numero_contacto_de_emergencia: datosEdit.numero_contacto_de_emergencia,
+      relacion_contacto_de_emergencia:
+        datosEdit.relacion_contacto_de_emergencia,
     };
 
     if (userExist.userEx) {
@@ -232,10 +242,10 @@ const Profile = (onClick) => {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
 
-    const idsessionstorage=sessionStorage.getItem("id")
+    const idsessionstorage = sessionStorage.getItem("id");
     const responseAutenticacion = {
-    id_autenticacion: idsessionstorage// descomentanto esta linea y eliminando la linea de abajo deberia recuperar los datos del logueado
-    //  id_autenticacion: "1",
+      id_autenticacion: idsessionstorage, // descomentanto esta linea y eliminando la linea de abajo deberia recuperar los datos del logueado
+      //  id_autenticacion: "1",
     };
 
     axios
@@ -282,7 +292,19 @@ const Profile = (onClick) => {
             type="text"
           />
           <br></br>
-
+          <label className={classNamees.titulos} htmlFor="apellido">
+            Apellido:
+          </label>
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.apellido}
+            onChange={handleInputChange}
+            placeholder="Apellido"
+            name="apellido"
+            id="apellido"
+            type="text"
+          />
+          <br></br>
           <label className={classNamees.titulos} htmlFor="fecha_de_nacimiento">
             Fecha de nacimiento:
           </label>
@@ -460,8 +482,55 @@ const Profile = (onClick) => {
             <option value="Prefiero no decirlo">Prefiero no decirlo</option>
           </select>
 
+          <label
+            className={classNamees.titulos}
+            htmlFor="nombre_contacto_de_emergencia"
+          >
+            Nombre de contacto de emergencia:
+          </label>
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.nombre_contacto_de_emergencia}
+            onChange={handleInputChange}
+            placeholder="Nombre de contacto de emergencia"
+            name="nombre_contacto_de_emergencia"
+            id="nombre_contacto_de_emergencia"
+            type="text"
+          />
+          <label
+            className={classNamees.titulos}
+            htmlFor="relacion_contacto_de_emergencia"
+          >
+            Relación con contacto de emergencia:
+          </label>
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.relacion_contacto_de_emergencia}
+            onChange={handleInputChange}
+            placeholder="Relación de contacto de emergencia"
+            name="relacion_contacto_de_emergencia"
+            id="relacion_contacto_de_emergencia"
+            type="text"
+          />
+          <label
+            className={classNamees.titulos}
+            htmlFor="numero_contacto_de_emergencia"
+          >
+            Número de contacto de emergencia:
+          </label>
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.numero_contacto_de_emergencia}
+            onChange={handleInputChange}
+            placeholder="Número de contacto de emergencia"
+            name="numero_contacto_de_emergencia"
+            id="numero_contacto_de_emergencia"
+            type="text"
+          />
+          <br></br>
+
           <label className={classNamees.titulos} htmlFor="descripcion_personal">
-            Mi pequeÃ±a descripcion:
+            Mi pequeña descripcion:
           </label>
           <textarea
             className={classNamees.intputextaera}
@@ -502,8 +571,11 @@ const Profile = (onClick) => {
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
             <ProfileImage getDataProfile={datosEdit} />
-            <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen}/>
-            
+            <ProfileCard
+              getDataProfile={datosEdit}
+              handleOpenprop={handleOpen}
+            />
+
             <Modal
               open={open}
               onClose={handleClose}
