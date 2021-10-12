@@ -1,3 +1,9 @@
 .content-container-detalle{
     color: red;
 }
+
+.box-proyecto{
+    background-color: white;
+    border-radius: 5px;
+    border-color: black;
+}

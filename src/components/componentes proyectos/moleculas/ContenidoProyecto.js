@@ -19,7 +19,7 @@ function ContenidoProyecto({proyecto, onEliminarProy}) {
 
             <div className="button-container">
                 <div className="space-button"></div>
-                <ParticiparEnProyectoBtn/>
+                <VerProyectoBtn/>
                 <EditarProyectoBtn/>
                 <EliminarProjectoBtn proyecto={proyecto} onEliminarProy={onEliminarProy}/>
             </div>

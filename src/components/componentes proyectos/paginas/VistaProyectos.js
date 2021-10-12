@@ -49,7 +49,7 @@ function VistaProyectos() {
     
 
     const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
+    const componenteProyectos = rol==='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
     return (
         <>
