@@ -60,25 +60,33 @@ function VistaProyectos() {
     return data;
   };
 
-  const editarProyecto = async (proyectoEditar) => {
-    const response = await fetch(`${URLEditarProy}/${proyectoEditar.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(proyectoEditar),
-    });
-
-    const data = await response.json();
-    setProyectos([
-      ...proyectos.filter((proy) => proy.id !== proyectoEditar.id),
-      data,
-    ]);
-  };
-
-  const eliminarProyecto = async (id) => {
-    //debugger
-    await fetch(`${URLEliminarProy}/${id}`, {
-      method: "DELETE",
-    });
+    const editarProyecto = async (proyectoEditar) => {
+        const response = await fetch(
+            `${URLEditarProy}/${proyectoEditar.id}`,
+            {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(proyectoEditar)
+            })
+        
+        const data = await response.json()
+        setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data])
+    
+    }
+        
+    const eliminarProyecto = async (id) => { 
+        //debugger
+        await fetch(
+        `${URLEliminarProy}/${id}`,
+        { 
+            method: 'DELETE'
+        })
+    
+        setProyectos(proyectos.filter((proy) => proy.id !== id));
+    }
+    
+    const rol = 'admin'
+    const componenteProyectos = rol==='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
     setProyectos(proyectos.filter((proy) => proy.id !== id));
   };
@@ -99,7 +107,7 @@ function VistaProyectos() {
     );
 
   return <>{componenteProyectos}</>;
-}
+
 
 const url = process.env.REACT_APP_API;
 const URLParticiparProy = `${url}participate_proyecto`; //`http://localhost:5000/participate_proyecto`
