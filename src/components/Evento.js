@@ -93,14 +93,16 @@ class Evento extends Component {
         </Card>
         <h1>Lista de participantes</h1>
         <Card>
-          {this.state.participants.map((particpant) => (
-            <div className="card w-70" key={particpant.id}>
+          {this.state.participants.map((participant) => (
+            <div className="card w-70" key={participant.id}>
               <div className="row no-gutters">
                 <div className="col">
                   <div className="card-block px-1">
                     <p className="card-text"></p>
                     <p className="card-text">
-                      <b> Nombre:</b> {particpant.nombre} {particpant.apellido}
+                      <b> Nombre:</b> {participant.nombre}{" "}
+                      {participant.apellido}
+                      <b> Rol:</b> {participant.rol}
                     </p>
                   </div>
                 </div>
