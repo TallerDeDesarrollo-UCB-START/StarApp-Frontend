@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Miriam Libre',
-    sans-serif;
+    sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
