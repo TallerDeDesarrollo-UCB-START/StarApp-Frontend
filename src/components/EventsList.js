@@ -8,8 +8,8 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 
 const url = process.env.REACT_APP_API;
-const urlDeploy = `${url}eventos`;
-//const urlDeploy = `http://localhost:3000/eventos`
+//const urlDeploy = `${url}eventos`;
+const urlDeploy = `http://localhost:5000/eventos`
 
 const api = axios.create({
   baseURL: urlDeploy,
@@ -51,13 +51,19 @@ class EventsList extends Component {
   getParticipaciones= async () => {
     try {
       console.log("Id erick", window.sessionStorage.id);
-      let listParticipaciones = await api.get("/eventos/participante/"+ window.sessionStorage.id).then(({ listParticipaciones }) => listParticipaciones);
-      console.log("Erickkkkk",listParticipaciones);
-      this.setState({ participaciones: listParticipaciones });
+      let listParticipaciones = await api.get(`/participante/${window.sessionStorage.id}`).then(({ listParticipaciones }) => listParticipaciones);
+      //this.setState({ participaciones: listParticipaciones });
+      console.log(listParticipaciones);
     } catch (err) {
       console.log(err);
     }
   };
+
+
+    // let thisUrl = window.location.href;
+    // let id = this.getIdFromURL(thisUrl);
+
+
 
 
 
