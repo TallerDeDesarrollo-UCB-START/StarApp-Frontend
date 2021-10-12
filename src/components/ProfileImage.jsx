@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
@@ -11,6 +11,7 @@ import {
   FormControlLabel,
   Badge,
 } from "@material-ui/core/";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -27,10 +28,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const url = process.env.REACT_APP_API;
+//const baseURL = `${url}extended_form`;
+const baseURL = "http://localhost:5000/extended_form/";
+
 export default function ProfileImage({ getDataProfile }) {
   const classes = useStyles();
 
   const [state, setState] = React.useState(true);
+  const [available, setAvailable] = useState({
+    estado_de_disponibilidad: "",
+  });
+  const [availableEdit, setAvailableEdit] = useState({
+    estado_de_disponibilidad: "",
+  });
+
+  var peticionPut = (disponibilidad) => {
+    axios
+      .put(baseURL + available.id_usuario, disponibilidad)
+      .then((response) => {
+        alert("actualizado correctamente");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+  function sendAvailable() {
+    setAvailable(availableEdit);
+
+    const disponibilidad = {
+      estado_de_disponibilidad: availableEdit.estado_de_disponibilidad,
+    };
+  }
 
   const handleChange = () => {
     setState((stat) => !stat);
@@ -46,7 +75,7 @@ export default function ProfileImage({ getDataProfile }) {
             horizontal: "right",
           }}
           badgeContent
-          color={`${state ? "secondary" : "cancel"}`}
+          // color={`${state ? "secondary" : "primary"}`}
         >
           <Avatar
             alt="Imagen de Perfil"
@@ -76,6 +105,7 @@ export default function ProfileImage({ getDataProfile }) {
               control={
                 <Switch
                   checked={state}
+                  onClick={sendAvailable}
                   onChange={handleChange}
                   color="secondary"
                 />
