@@ -1,0 +1,8 @@
+.viewButton {
+    background-color: #8b8780;
+    border: none;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
