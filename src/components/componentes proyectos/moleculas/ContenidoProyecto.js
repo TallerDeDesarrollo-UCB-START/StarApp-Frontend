@@ -19,7 +19,6 @@ function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparP
 
             <div className="button-container">
                 <div className="space-button"></div>
-                <VerProyectoBtn/>
                 <EditarProyectoBtn/>
                 <EliminarProjectoBtn proyecto={proyecto} onEliminarProy={onEliminarProy}/>
             </div>
