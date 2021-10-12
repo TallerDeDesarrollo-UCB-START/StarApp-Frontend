@@ -64,15 +64,15 @@ const ProfileCard = (props) => {
             </Grid>
             <Grid className={classes.paper}>
               <Paper style={{ padding: "15px" }}>
-                <Typography>Contacto de emergencia:</Typography>
-                <Typography variant="body2">
-                  Nombre: Tu jefa
+                <Typography variant="h6">Contacto de emergencia:</Typography>
+                <Typography>
+                  Nombre: {getDataProfile.nombre_contacto_de_emergencia}
                 </Typography>
-                <Typography variant="body2">
-                  Relacion: todos los dias
+                <Typography>
+                  Relacion: {getDataProfile.relacion_contacto_de_emergencia}
                 </Typography>
-                <Typography variant="body2">
-                  Teléfono: 911
+                <Typography>
+                  Teléfono: {getDataProfile.numero_contacto_de_emergencia}
                 </Typography>
               </Paper>
             </Grid>
