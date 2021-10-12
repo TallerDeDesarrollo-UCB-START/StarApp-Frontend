@@ -1,7 +1,5 @@
 // Componentes:
 // Librerias-Paquetes:
-import './ProyectoDetalle.css';
-import '../moleculas/BannerProyectoDetalle'
 import { Box } from '@material-ui/core';
 import BannerProyectoDetalle from '../moleculas/BannerProyectoDetalle';
 import ContenidoProyecto from './ContenidoProyecto';
