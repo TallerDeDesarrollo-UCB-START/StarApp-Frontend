@@ -9,6 +9,7 @@ import Attendance from '../components/Attendance'
 import crearEvento from '../components/CrearEvento/crearEvento'
 import VistaProyectos from '../components/componentes proyectos/paginas/VistaProyectos'
 import FormularioProyecto from '../components/Formulario'
+import ProyectoDetalle from '../components/componentes proyectos/moleculas/ProyectoDetalle'
 const Routes = [
   {
     path: "/login",
@@ -64,6 +65,11 @@ const Routes = [
     path: '/eventos/crearevento',
     name: 'crearEvento',
     component: crearEvento,
+  },
+  {
+    path: "/projects/:id",
+    name: "Proyecto",
+    component: ProyectoDetalle,
   },
 ];
 export default Routes;

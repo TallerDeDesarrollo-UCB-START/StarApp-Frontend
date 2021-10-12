@@ -7,7 +7,6 @@ function BannerProyectoDetalle() {
     return (
         <Box className="banner-container-detalle">
             <img className="banner-header-detalle"src={Banner} alt=" "/>
-            {/*agregar estilos de imagen*/ }
         </Box>
     );
 }
