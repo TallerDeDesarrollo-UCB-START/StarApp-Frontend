@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card } from "reactstrap";
@@ -22,7 +22,7 @@ class Evento extends Component {
     super();
     this.getEvneto();
     this.getParticipantes();
-    this.getNombreParticipante(11);
+    // this.getNombreParticipante(9);
   }
   getIdFromURL(thisUrl) {
     var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
@@ -44,32 +44,16 @@ class Evento extends Component {
   getParticipantes = async () => {
     let thisUrl = window.location.href;
     let id = this.getIdFromURL(thisUrl);
+    console.log("id evento", id);
     try {
       let data = await api.get("/participantes").then(({ data }) => data);
+      console.log("DATA", data);
+      data = data.filter((participant) => participant.id_evento === id);
 
-      console.log("data", typeof data);
-      console.log("participants", typeof participants);
       this.setState({ participants: data });
     } catch (err) {
       console.log(err);
     }
-  };
-
-  getNombreParticipante = async (idUsuario) => {
-    try {
-      let data = await api
-        .get(`/participantes/${idUsuario}`)
-        .then(({ data }) => data);
-      const nombre = data[0]["concat"];
-      console.log(data[0]["concat"]);
-      this.setState({
-        nombreParticipante: nombre,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    console.log("NOMBRE", this.state.nombreParticipante);
-    return;
   };
 
   render() {
@@ -111,21 +95,18 @@ class Evento extends Component {
         <h1>Lista de participantes</h1>
         <Card>
           {this.state.participants.map((particpant) => (
-            <div
-              className="card w-70"
-              key={particpant.id_participantes_eventos}
-            >
+            <div className="card w-70" key={particpant.id}>
               <div className="row no-gutters">
                 <div className="col">
                   <div className="card-block px-1">
                     <p className="card-text">
-                      <b>ID Evento:</b> {particpant.id_evento}
+                      {/* <b>ID Evento:</b> {particpant.id_evento} */}
                     </p>
                     <p className="card-text">
-                      <b> ID Usuario:</b> {particpant.id_usuario}
-                      <b> Nombre:</b>
+                      {/* <b> ID Usuario:</b>  */}
+                      <b> Nombre:</b> {particpant.nombre} {particpant.apellido}
                       {/* {this.getNombreParticipante(particpant.id_usuario)} */}
-                      {this.state.nombreParticipante}
+                      {/* {this.state.nombreParticipante} */}
                     </p>
                   </div>
                 </div>
