@@ -22,7 +22,6 @@ class Evento extends Component {
     super();
     this.getEvneto();
     this.getParticipantes();
-    // this.getNombreParticipante(9);
   }
   getIdFromURL(thisUrl) {
     var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
@@ -102,7 +101,6 @@ class Evento extends Component {
                     <p className="card-text">
                       <b> Nombre:</b> {participant.nombre}{" "}
                       {participant.apellido}
-                      <b> Rol:</b> {participant.rol}
                     </p>
                   </div>
                 </div>
