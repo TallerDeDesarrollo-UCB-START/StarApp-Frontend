@@ -9,6 +9,7 @@ import ModalFooter from "react-bootstrap/ModalFooter";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
+//const urlDeploy = `http://localhost:5000/eventos`
 
 const api = axios.create({
   baseURL: urlDeploy,
@@ -17,6 +18,7 @@ const urlParticipacion = `${urlDeploy}/participate_evento/`;
 class EventsList extends Component {
   state = {
     events: [],
+    participaciones: [],
     divcontainer: true,
     abierto: false,
     botonMostrar: false,
@@ -29,6 +31,7 @@ class EventsList extends Component {
   constructor() {
     super();
     this.getEvents();
+    this.getParticipaciones();
   }
 
   abrirModal = () => {
@@ -60,12 +63,12 @@ class EventsList extends Component {
   };
 
   deleteEvento = async (event) => {
-    console.log(event.id);
     await axios.delete(urlDeploy + "/" + event.id);
     this.getEvents();
     this.abrirModal();
   };
 
+  //Peticiones pertenecientes a Archivar y Motrar
   peticionArchivar = async (event) => {
     await axios.put(urlDeploy + "/archivar_evento/" + event.id);
     this.getEventsArchivados();
@@ -80,15 +83,11 @@ class EventsList extends Component {
     await axios.put(urlDeploy + "/mostrar_evento/" + event.id);
     this.getEvents();
   };
-  mensajeConfirmacionParticipacion(event) {
-    window.alert(
-      `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
-    );
-  }
+
+  //Funciones pertenecientes a obtener Participacion
   postParticipacion = async (event) => {
     let newUrl =
       urlParticipacion + event.id + "/sesion/" + window.sessionStorage.id;
-    console.log("URL", newUrl);
     await axios
       .post(newUrl, {
         id: event.id,
@@ -100,7 +99,49 @@ class EventsList extends Component {
       .catch((error) => {
         console.log(error.message);
       });
+
   };
+  
+  getParticipaciones= async () => {
+    try {
+      var data = await api.get(`/participante/${window.sessionStorage.id}`).then(({ data }) => data);
+      this.setState({ participaciones: data});
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  mensajeConfirmacionParticipacion(event) {
+    window.alert(
+      `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
+    );
+    window.location.reload();
+  }
+
+  //Funciones pertenecientes a Eliminacion Participacion
+  eliminarParticipacion = async (event)=>{
+    await axios.delete(urlDeploy + "/eliminar_participacion/" + event.id + "/" + window.sessionStorage.id)
+    .then((response) => {
+      this.mensajeConfirmacionEliminacionParticipacion(event);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+
+
+  }
+
+  mensajeConfirmacionEliminacionParticipacion(event) {
+    window.alert(
+      `Tu participación en el evento ${event.nombre_evento} fue eliminada exitosamente!`
+    );
+    window.location.reload();
+  }
+
+  //Mostrar y Ocultar botones participacion
+  validarBotones(event){
+    return !this.state.participaciones.some(function(evento) { return evento.id_evento === event.id; });  
+  }
 
   render() {
     const modalStyles = {
@@ -170,14 +211,14 @@ class EventsList extends Component {
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
-                      <Button
-                        onClick={() => {
-                          this.postParticipacion(event);
-                        }}
-                      >
-                        Participar
-                      </Button>
 
+
+                      {this.validarBotones(event) ?
+                      <Button onClick={() => {this.postParticipacion(event);}} > Participar</Button> :
+                      <Button onClick={()=>{this.eliminarParticipacion(event)}}> Eliminar Participacion</Button>
+                      }
+
+                      
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
                       </Button>
@@ -202,6 +243,11 @@ class EventsList extends Component {
                       >
                         Archivar
                       </Button>
+
+                      
+
+
+
                       <Button color="success" onClick={this.abrirModal}>
                         Eliminar
                       </Button>
