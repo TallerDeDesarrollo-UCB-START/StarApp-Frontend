@@ -50,21 +50,16 @@ class EventsList extends Component {
 
   getParticipaciones= async () => {
     try {
+
       console.log("Id erick", window.sessionStorage.id);
-      let listParticipaciones = await api.get(`/participante/${window.sessionStorage.id}`).then(({ listParticipaciones }) => listParticipaciones);
-      //this.setState({ participaciones: listParticipaciones });
-      console.log(listParticipaciones);
+      let data = await api.get(`/participante/${window.sessionStorage.id}`).then(({ data }) => data);
+      console.log(data);
+      this.setState({ participaciones: data});
+      console.log(this.state.participaciones);
     } catch (err) {
       console.log(err);
     }
   };
-
-
-    // let thisUrl = window.location.href;
-    // let id = this.getIdFromURL(thisUrl);
-
-
-
 
 
   getEventsArchivados = async () => {
