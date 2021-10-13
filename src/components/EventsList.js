@@ -8,8 +8,8 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 
 const url = process.env.REACT_APP_API;
-//const urlDeploy = `${url}eventos`;
-const urlDeploy = `http://localhost:5000/eventos`
+const urlDeploy = `${url}eventos`;
+//const urlDeploy = `http://localhost:5000/eventos`
 
 const api = axios.create({
   baseURL: urlDeploy,
@@ -63,7 +63,6 @@ class EventsList extends Component {
   };
 
   deleteEvento = async (event) => {
-    console.log(event.id);
     await axios.delete(urlDeploy + "/" + event.id);
     this.getEvents();
     this.abrirModal();
@@ -89,7 +88,6 @@ class EventsList extends Component {
   postParticipacion = async (event) => {
     let newUrl =
       urlParticipacion + event.id + "/sesion/" + window.sessionStorage.id;
-    console.log("URL", newUrl);
     await axios
       .post(newUrl, {
         id: event.id,
