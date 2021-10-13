@@ -1,15 +1,26 @@
 // Componentes:
 import './EliminarProjectoBtn.css'
 // Librerias-Paquetes-Estilos:
+import { Button } from '@material-ui/core';
+import { makeStyles ,withStyles} from "@material-ui/core/styles";
 
 function EliminarProjectoBtn({proyecto, onEliminarProy}) {
     return (
-        <button className="eliminarButton" 
+        <DeleteButton variant="contained"
             onClick={() => onEliminarProy(proyecto.id)}
         >
             Eliminar
-        </button>
+        </DeleteButton>
     )
 }
 
+const DeleteButton = withStyles((theme) => ({
+    root: {
+      backgroundColor: "#ED2020",
+      color: "#FFFFFF",
+      "&:hover": {
+        backgroundColor: "#a90e0e",
+      },
+    },
+  }))(Button);
 export default EliminarProjectoBtn

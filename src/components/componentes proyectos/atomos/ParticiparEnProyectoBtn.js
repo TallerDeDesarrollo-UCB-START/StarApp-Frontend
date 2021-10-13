@@ -2,29 +2,46 @@
 import './ParticiparEnProyectoBtn.css';
 // Librerias-Paquetes:
 import { Container } from '@material-ui/core';
-import React, { useState } from "react";
+import React, { useState, useEffect, Component } from "react";
+import { render } from 'react-dom';
+import { Button } from '@material-ui/core';
+import { makeStyles, withStyles} from "@material-ui/core/styles";
 
 
 // Merce Vic
-function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy}) {
-    
+function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion}) {
+
     // States
-    //const [titulo, setTitulo] = useState('')
-    function agregarRequerido(element){
-        element.classList.add('button-hide')
-    }
+    //const [event, verificarParticipacion] = useState(0);
+    useEffect(function () {
+        onGetParticipacion(proyecto.id).then(state => 
+            {if(state) {
+                document.getElementById(proyecto.id).classList.add('button-hide');
+            }}
+        );
+    })
+
     const onClick = (event) => {
         onPartiparProy(proyecto.id); 
+        document.getElementById(proyecto.id).classList.add('button-hide');
         alert('Registered participation'); 
-        agregarRequerido(event.currentTarget);
     }
+
     return (
-        <button className="participarButton"
+        <div id={proyecto.id}>
+            <ParticipateButton variant="contained" color="secondary"
             onClick={onClick}
-        >
-        Participar
-        </button>
+            >
+                Participar
+            </ParticipateButton>
+        </div> 
     );
 }
+
+const ParticipateButton = withStyles((theme) => ({
+    root: {
+      color: "#FFFFFF",
+    },
+  }))(Button);
 
 export default ParticiparEnProyectoBtn
