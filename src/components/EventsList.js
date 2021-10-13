@@ -119,6 +119,13 @@ class EventsList extends Component {
       });
   };
 
+  eliminarParticipacion = async (event)=>{
+    console.log(event.id);
+    await axios.delete(urlDeploy + "/eliminar_participacion/" + event.id + "/" + window.sessionStorage.id);
+    window.location.reload();
+    //this.abrirModal();
+  }
+
   render() {
     const modalStyles = {
       position: "absolute",
@@ -195,6 +202,7 @@ class EventsList extends Component {
                         Participar
                       </Button>
 
+                      
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
                       </Button>
@@ -219,7 +227,12 @@ class EventsList extends Component {
                       >
                         Archivar
                       </Button>
-                      <Button> Eliminar Participacion</Button>
+
+                      <Button onClick={()=>{this.eliminarParticipacion(event)}}> Eliminar Participacion</Button>
+
+
+
+
                       <Button color="success" onClick={this.abrirModal}>
                         Eliminar
                       </Button>
