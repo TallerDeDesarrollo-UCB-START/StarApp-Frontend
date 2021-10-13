@@ -50,12 +50,8 @@ class EventsList extends Component {
 
   getParticipaciones= async () => {
     try {
-
-      console.log("Id erick", window.sessionStorage.id);
-      let data = await api.get(`/participante/${window.sessionStorage.id}`).then(({ data }) => data);
-      console.log(data);
+      var data = await api.get(`/participante/${window.sessionStorage.id}`).then(({ data }) => data);
       this.setState({ participaciones: data});
-      console.log(this.state.participaciones);
     } catch (err) {
       console.log(err);
     }
@@ -126,6 +122,28 @@ class EventsList extends Component {
     //this.abrirModal();
   }
 
+  validarBotones = async (event) =>{
+
+    try {
+      //var aux = this.state.participaciones.find(function (evento) { return evento.id_evento === event.id; });
+      var aux = this.state.participaciones.some( evento => evento.id_evento === event.id);
+      console.log("Auxiliar", aux);
+      // if (aux.lenght > 0)
+      // {  
+      //   console.log("Ok se puede");
+        
+      // }
+      // else
+      // {
+      //   console.log("Ok no se puede") 
+      // }
+
+    } catch (err) {
+      console.log(err);
+    }
+    
+  }
+
   render() {
     const modalStyles = {
       position: "absolute",
@@ -194,13 +212,16 @@ class EventsList extends Component {
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
+
+
+                      {this.validarBotones(event) ?
                       <Button
                         onClick={() => {
                           this.postParticipacion(event);
                         }}
                       >
                         Participar
-                      </Button>
+                      </Button> : null }
 
                       
                       <Button>
