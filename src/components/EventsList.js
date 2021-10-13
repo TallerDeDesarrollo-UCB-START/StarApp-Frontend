@@ -48,16 +48,6 @@ class EventsList extends Component {
     }
   };
 
-  getParticipaciones= async () => {
-    try {
-      var data = await api.get(`/participante/${window.sessionStorage.id}`).then(({ data }) => data);
-      this.setState({ participaciones: data});
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-
   getEventsArchivados = async () => {
     try {
       this.state.botonMostrar = true;
@@ -79,6 +69,7 @@ class EventsList extends Component {
     this.abrirModal();
   };
 
+  //Peticiones pertenecientes a Archivar y Motrar
   peticionArchivar = async (event) => {
     await axios.put(urlDeploy + "/archivar_evento/" + event.id);
     this.getEventsArchivados();
@@ -93,11 +84,8 @@ class EventsList extends Component {
     await axios.put(urlDeploy + "/mostrar_evento/" + event.id);
     this.getEvents();
   };
-  mensajeConfirmacionParticipacion(event) {
-    window.alert(
-      `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
-    );
-  }
+
+  //Funciones pertenecientes a obtener Participacion
   postParticipacion = async (event) => {
     let newUrl =
       urlParticipacion + event.id + "/sesion/" + window.sessionStorage.id;
@@ -113,35 +101,48 @@ class EventsList extends Component {
       .catch((error) => {
         console.log(error.message);
       });
+
   };
-
-  eliminarParticipacion = async (event)=>{
-    console.log(event.id);
-    await axios.delete(urlDeploy + "/eliminar_participacion/" + event.id + "/" + window.sessionStorage.id);
-    window.location.reload();
-    //this.abrirModal();
-  }
-
-  validarBotones = async (event) =>{
-
+  
+  getParticipaciones= async () => {
     try {
-      //var aux = this.state.participaciones.find(function (evento) { return evento.id_evento === event.id; });
-      var aux = this.state.participaciones.some( evento => evento.id_evento === event.id);
-      console.log("Auxiliar", aux);
-      // if (aux.lenght > 0)
-      // {  
-      //   console.log("Ok se puede");
-        
-      // }
-      // else
-      // {
-      //   console.log("Ok no se puede") 
-      // }
-
+      var data = await api.get(`/participante/${window.sessionStorage.id}`).then(({ data }) => data);
+      this.setState({ participaciones: data});
     } catch (err) {
       console.log(err);
     }
-    
+  };
+
+  mensajeConfirmacionParticipacion(event) {
+    window.alert(
+      `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
+    );
+    window.location.reload();
+  }
+
+  //Funciones pertenecientes a Eliminacion Participacion
+  eliminarParticipacion = async (event)=>{
+    await axios.delete(urlDeploy + "/eliminar_participacion/" + event.id + "/" + window.sessionStorage.id)
+    .then((response) => {
+      this.mensajeConfirmacionEliminacionParticipacion(event);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+
+
+  }
+
+  mensajeConfirmacionEliminacionParticipacion(event) {
+    window.alert(
+      `Tu participación en el evento ${event.nombre_evento} fue eliminada exitosamente!`
+    );
+    window.location.reload();
+  }
+
+  //Mostrar y Ocultar botones participacion
+  validarBotones(event){
+    return !this.state.participaciones.some(function(evento) { return evento.id_evento === event.id; });  
   }
 
   render() {
@@ -215,13 +216,9 @@ class EventsList extends Component {
 
 
                       {this.validarBotones(event) ?
-                      <Button
-                        onClick={() => {
-                          this.postParticipacion(event);
-                        }}
-                      >
-                        Participar
-                      </Button> : null }
+                      <Button onClick={() => {this.postParticipacion(event);}} > Participar</Button> :
+                      <Button onClick={()=>{this.eliminarParticipacion(event)}}> Eliminar Participacion</Button>
+                      }
 
                       
                       <Button>
@@ -249,8 +246,7 @@ class EventsList extends Component {
                         Archivar
                       </Button>
 
-                      <Button onClick={()=>{this.eliminarParticipacion(event)}}> Eliminar Participacion</Button>
-
+                      
 
 
 
