@@ -66,10 +66,5 @@ const Routes = [
     name: 'crearEvento',
     component: crearEvento,
   },
-  {
-    path: "/projects/:id",
-    name: "Proyecto",
-    component: ProyectoDetalle,
-  },
 ];
 export default Routes;
