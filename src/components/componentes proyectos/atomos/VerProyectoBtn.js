@@ -4,7 +4,7 @@ import './VerProyectoBtn.css';
 
 function VerProyectoBtn({onActivarForm}) {
     return (
-        <button className="viewButton" onClick={onActivarForm}>
+        <button className="createButton" onClick={onActivarForm}>
             Ver proyecto
         </button>
     )
