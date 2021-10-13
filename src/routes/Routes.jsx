@@ -10,6 +10,7 @@ import crearEvento from "../components/CrearEvento/crearEvento";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
 import FormularioProyecto from "../components/Formulario";
 import Evento from "../components/Evento";
+import Users from "../screens/Users"
 const Routes = [
   {
     path: "/",
@@ -46,6 +47,12 @@ const Routes = [
     name: "Registro",
     component: Register,
     logginNeeded: false,
+  },
+  {
+    path: "/users",
+    name: "Usuarios",
+    component: Users,
+    logginNeeded: true,
   },
   {
     path: "/createproject",

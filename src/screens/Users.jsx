@@ -1,9 +1,10 @@
 import React, { useEffect, useState} from 'react'
 import { DataGrid } from '@material-ui/data-grid';
-import { makeStyles, Button } from '@material-ui/core'
+import { makeStyles} from '@material-ui/core'
 import axios from 'axios';
 import SearchField from '../components/SearchByField'
 import {useMediaQuery} from '@material-ui/core'
+import DownloadButton from '../components/DownloadExcelButton'
 
 const useStyles = makeStyles((theme)=>({
     section: {
@@ -28,31 +29,31 @@ const useStyles = makeStyles((theme)=>({
 
 const columns = [
     {
-      field: 'nombre',
-      headerName: 'Nombre(s)',
-      width: 200,
+        field: 'nombre',
+        headerName: 'Nombre(s)',
+        width: 200,
     },
     {
-      field: 'apellido',
-      headerName: 'Apellido(s)',
-      width: 200,
+        field: 'apellido',
+        headerName: 'Apellido(s)',
+        width: 200,
     },
     {
-      field: 'telefono',
-      headerName: 'Telefono',
-      type: 'phone',
-      width: 200,
+        field: 'telefono',
+        headerName: 'Telefono',
+        type: 'phone',
+        width: 200,
     },
     {
-       field: 'rol',
-       headerName: 'Rol',
-       width: 200,
+        field: 'rol',
+        headerName: 'Rol',
+        width: 200,
     },
     {
-       field: 'ciudad_de_recidencia',
-       headerName: 'Ciudad',
-       width: 200,
-     },
+        field: 'ciudad_de_recidencia',
+        headerName: 'Ciudad',
+        width: 200,
+        },
 ];
 
 const url = process.env.REACT_APP_API
@@ -86,7 +87,7 @@ function Users () {
     return (
         <section className={classes.section}>
             <div className={(smallScreen)?classes.containerSearchField: classes.smallContainerSearchField}>
-                <Button variant="outlined">Descargar</Button>
+                <DownloadButton data={data}/>
                 <SearchField data={data} setData={setData} originalData={originalData}/>
             </div>
             <div className={classes.containerTable}>

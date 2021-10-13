@@ -46,7 +46,7 @@ const Header = ({sessionData}) =>{
     return(
         <header className="header-division">
             <div className="header-logo">
-                <div style={{width:"10%"}}>{sessionData.role}</div>
+                <div style={{width:"10%"}}></div>
                 <div className={classes.containerLogo}>
                     <img src={Logo} alt=" " className = "header-image"/>
                 </div>
@@ -83,10 +83,10 @@ const Header = ({sessionData}) =>{
                     onClick={()=>(history.push(logged?routes[3].path:routes[4].path))} />
                 {(sessionData.role !== 'voluntario')?
                     <BottomNavigationAction 
-                        disabled = {(currentPath===routes[3].path)}
+                        disabled = {(currentPath===routes[6].path)}
                         label="Usuarios" 
-                        className={(currentPath===routes[3].path)?classes.activeNavButton:classes.navButton} 
-                        onClick={()=>(history.push(logged?routes[3].path:routes[4].path))} />
+                        className={(currentPath===routes[6].path)?classes.activeNavButton:classes.navButton} 
+                        onClick={()=>(history.push(logged?routes[6].path:routes[4].path))} />
                         : <i></i>
                 }
             </BottomNavigation>

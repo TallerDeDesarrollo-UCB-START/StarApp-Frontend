@@ -3,12 +3,7 @@ import { Button } from '@material-ui/core'
 import XLSX from 'xlsx'
 
 
-const DownloadExcelButton = () => {
-    const data = [
-        {"name":"John", "city": "Seattle"},
-        {"name":"Mike", "city": "Los Angeles"},
-        {"name":"Zach", "city": "New York"}
-    ]
+const DownloadExcelButton = ({data}) => {
     const writeIntoFile = () => {
         var ws = XLSX.utils.json_to_sheet(data)
 
@@ -17,10 +12,10 @@ const DownloadExcelButton = () => {
         XLSX.utils.book_append_sheet(wb, ws, "People")
 
         /* generate an XLSX file */
-        XLSX.writeFile(wb, "sheetjs.xlsx")
+        XLSX.writeFile(wb, "usuarios.xlsx")
     }
     return (
-        <Button variant="contained" color="secondary" onClick={writeIntoFile}>
+        <Button variant="contained" color="secondary" onClick={writeIntoFile} style={{margin:'15px 0'}}>
             Descargar
         </Button>
     )
