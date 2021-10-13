@@ -170,7 +170,7 @@ class EventsList extends Component {
               }}
               onClick={() => this.getEventsArchivados()}
             >
-              Eventos Archivados
+              Eventos Pasados
             </Button>
             <Button
               style={{
