@@ -19,6 +19,9 @@ function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparP
 
             <div className="button-container">
                 <div className="space-button"></div>
+                <ParticiparEnProyectoBtn proyecto={proyecto} onPartiparProy={onPartiparProy}/>
+                <EditarProyectoBtn  onActivarForm={onActivarForm} proyecto={proyecto}/>
+                <VerProyectoBtn/>
                 <EditarProyectoBtn/>
                 <EliminarProjectoBtn proyecto={proyecto} onEliminarProy={onEliminarProy}/>
             </div>
