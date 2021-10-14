@@ -25,7 +25,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
     { estado: "ACABADO", valor: 10 },
     { estado: "EN CURSO", valor: 20 },
   ]);
-
   const [estadoVal, setEstadoVal] = useState(
     estadosDefault.find((item_estado) => item_estado.estado === proyecto.estado)
       .valor
@@ -36,6 +35,10 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
     setDescripcion("");
     setObjetivo("");
     setLider("");
+    setEstadosDefault([
+        { estado: "ACABADO", valor: 10 },
+        { estado: "EN CURSO", valor: 20 },
+      ]);
   }
 
   function agregarRequerido(element) {
