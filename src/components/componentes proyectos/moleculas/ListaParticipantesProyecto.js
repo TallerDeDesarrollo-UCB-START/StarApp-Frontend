@@ -1,8 +1,8 @@
 // Componentes:
 // Librerias-Paquetes:
-import { Box } from '@material-ui/core';
+import { Box ,Typography,List, ListItem,ListItemIcon,ListItemText} from '@material-ui/core';
 import { useState,useEffect } from 'react';
-import { Typography} from '@material-ui/core';
+import AccessAlarmsIcon from '@material-ui/icons';
 
 function ListaParticipantesProyecto({proyectoId}){
 
@@ -25,14 +25,21 @@ function ListaParticipantesProyecto({proyectoId}){
     return (
         <Box>
             <p>Participantes:</p>
+            <List>
             {
                 participantes.map(participante=>(
-                    <Typography  variant="h3">
-                        {participante.nombre}
-                    </Typography>
+                    <ListItem>
+                        <ListItemIcon>
+                            
+                         </ListItemIcon>
+                         <ListItemText primary={participante.nombre} />
+                    </ListItem>
                     
                 ))
             }
+
+            </List>
+            
 
         </Box>
 
