@@ -2,6 +2,7 @@
 import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
+import VerProyectoBtn from '../atomos/VerProyectoBtn';  
 
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';

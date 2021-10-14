@@ -9,7 +9,6 @@ import Attendance from '../components/Attendance'
 import crearEvento from '../components/CrearEvento/crearEvento'
 import VistaProyectos from '../components/componentes proyectos/paginas/VistaProyectos'
 import FormularioProyecto from '../components/Formulario'
-import ProyectoDetalle from '../components/componentes proyectos/moleculas/ProyectoDetalle'
 const Routes = [
   {
     path: "/",
@@ -47,12 +46,12 @@ const Routes = [
     component: Register,
     logginNeeded: false,
   },
-  {
+  /*{
     path: "/users",
     name: "Usuarios",
     component: Users,
     logginNeeded: true,
-  },
+  },*/
   {
     path: "/createproject",
     name: "CreateProject",
