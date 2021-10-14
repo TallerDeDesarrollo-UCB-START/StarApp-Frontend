@@ -45,6 +45,7 @@ function calcularEdad(fecha) {
 const ProfileCard = (props) => {
   const classes = useStyles();
   const { getDataProfile, handleOpenprop } = props;
+
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -74,6 +75,16 @@ const ProfileCard = (props) => {
                 <Typography>
                   Teléfono: {getDataProfile.numero_contacto_de_emergencia}
                 </Typography>
+              </Paper>
+            </Grid>
+            <Grid className={classes.paper}>
+              <Paper style={{ padding: "15px" }}>
+                <Typography>Intereses Generales:</Typography>
+                  {getDataProfile.intereses.map(interes => (
+                    <Typography variant="body2">
+                      {interes}
+                    </Typography>
+                  ))}
               </Paper>
             </Grid>
           </Grid>
