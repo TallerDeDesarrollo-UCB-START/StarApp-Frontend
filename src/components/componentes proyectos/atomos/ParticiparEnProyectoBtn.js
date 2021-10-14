@@ -3,7 +3,8 @@ import './ParticiparEnProyectoBtn.css';
 // Librerias-Paquetes:
 import React, {useEffect} from "react";
 import { Button } from '@material-ui/core';
-import {withStyles} from "@material-ui/core/styles";
+import { makeStyles, withStyles} from "@material-ui/core/styles";
+import AlertMessage from '../../../components/templates/AlertMessage';
 
 
 // Merce Vic
@@ -32,6 +33,7 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion
             >
                 Participar
             </ParticipateButton>
+            <AlertMessage message={'Registered participation'}></AlertMessage>
         </div> 
     );
 }
