@@ -7,8 +7,8 @@ import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 
-
-function ContenidoProyecto({proyecto, onEliminarProy}) {
+// Merce y Vic
+function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparProy}) {
     return (
         <Box className="content-container">
             
@@ -23,7 +23,6 @@ function ContenidoProyecto({proyecto, onEliminarProy}) {
                 <EditarProyectoBtn  onActivarForm={onActivarForm} proyecto={proyecto}/>
                 <VerProyectoBtn/>
                 <EditarProyectoBtn/>
-                <EliminarProjectoBtn proyecto={proyecto} onEliminarProy={onEliminarProy}/>
             </div>
         </Box>
     );
