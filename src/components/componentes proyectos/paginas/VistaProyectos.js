@@ -89,7 +89,7 @@ function VistaProyectos() {
     }
     
     const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} 
+    const componenteProyectos = rol==='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} 
         onEliminarProy={eliminarProyecto} onPartiparProy={participarEnProyecto} onEditarProy={editarProyecto} 
         onGetParticipacion={obtenerParticipacionProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
@@ -103,7 +103,7 @@ function VistaProyectos() {
 const url = process.env.REACT_APP_API
 const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 const URLProyectos = 'http://localhost:5000/get_proyectos'//`${url}get_proyectos`//
-const URLProyecto = `${url}get_proyecto`//'http://localhost:5000/get_proyecto'//`${url}get_proyectos`
+//const URLProyecto = `${url}get_proyecto`'http://localhost:5000/get_proyecto'//`${url}get_proyectos`
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
 const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_proyecto'//`${url}edit_proyecto`
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//`${url}delete_proyecto`

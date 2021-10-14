@@ -25,8 +25,8 @@ function ProyectosAdmins({proyectos, onCrearProy, onEliminarProy, onPartiparProy
     }
 
     //Componentes
-    const FormularioCrear = mostrarFormCrear==true ? <FormularioCrearProyecto onCrearProy={onCrearProy} onActivarForm={activarFormCrear}/> : <></>
-    const FormularioEditar = mostrarFormEditar==true ? <FormularioEditarProyecto onEditarProy={onEditarProy} onActivarForm={activarFormEditar} proyecto={proyectoEditar}/> : <></>
+    const FormularioCrear = mostrarFormCrear===true ? <FormularioCrearProyecto onCrearProy={onCrearProy} onActivarForm={activarFormCrear}/> : <></>
+    const FormularioEditar = mostrarFormEditar===true ? <FormularioEditarProyecto onEditarProy={onEditarProy} onActivarForm={activarFormEditar} proyecto={proyectoEditar}/> : <></>
 
     return (
         <Box style={styles}>

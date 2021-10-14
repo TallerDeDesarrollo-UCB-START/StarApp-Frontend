@@ -3,7 +3,7 @@ import InputTexto from '../moleculas/InputTexto'
 import InputDropDown from '../atomos/InputDropDown'
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {makeStyles} from '@material-ui/core'
 
 // Styles
@@ -21,7 +21,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto}) {
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)
     const [lider, setLider] = useState(proyecto.lider)
-    const [estadosDefault, setEstadosDefault] = useState([
+    const [estadosDefault] = useState([
         {estado:"ACABADO", valor:10},
         {estado:"EN CURSO", valor:20}
     ])
