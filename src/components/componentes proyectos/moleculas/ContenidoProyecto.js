@@ -2,6 +2,7 @@
 import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
+import ListaParticipantesProyecto from './ListaParticipantesProyecto';
 
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';
@@ -23,6 +24,7 @@ function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparP
                 <EditarProyectoBtn  onActivarForm={onActivarForm} proyecto={proyecto}/>
                 <EliminarProjectoBtn proyecto={proyecto} onEliminarProy={onEliminarProy}/>
             </div>
+            <ListaParticipantesProyecto proyectoId={proyecto.id}/>
         </Box>
     );
 }
