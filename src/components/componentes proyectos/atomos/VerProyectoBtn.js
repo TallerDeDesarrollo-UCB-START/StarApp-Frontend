@@ -8,6 +8,6 @@ function VerProyectoBtn({onActivarForm}) {
             Ver proyecto
         </button>
     )
-};
+}
 
 export default VerProyectoBtn

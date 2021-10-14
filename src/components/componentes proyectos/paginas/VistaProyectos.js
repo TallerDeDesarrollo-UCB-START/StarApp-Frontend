@@ -88,7 +88,6 @@ function VistaProyectos() {
     const rol = 'admin'
     const componenteProyectos = rol==='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} onEliminarProy={eliminarProyecto} onPartiparProy={participarEnProyecto} onEditarProy={editarProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
 
-
     setProyectos(proyectos.filter((proy) => proy.id !== id));
   };
 
