@@ -14,9 +14,9 @@ import {
 } from "reactstrap";
 
 
-// const url = "http://localhost:5000/eventos/crearevento"
+const url = "http://localhost:5000/eventos/crearevento"
 const URL = process.env.REACT_APP_API
-const url = `${URL}eventos/crearevento`
+//const url = `${URL}eventos/crearevento`
 
 class crearEvento extends React.Component {
   state = {
@@ -27,6 +27,11 @@ class crearEvento extends React.Component {
       modalidad_evento: "Presencial",
       lugar_evento: "",
       fecha_evento: "",
+      categoria: "",
+      estado: "1",
+      hora_inicio: "",
+      hora_fin: "",
+      lider: "",
     },
   };
 
@@ -95,6 +100,18 @@ class crearEvento extends React.Component {
               </textarea>  
             </Box>
 
+            <Box className="lider" xs={6}>
+              <label>
+                Lider: 
+              </label>
+              <input
+                className="form-control"
+                name="lider"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </Box>
+
 
             <Box  className="CamposInferiores" xs={12} mt={0.8}>
 
@@ -128,6 +145,44 @@ class crearEvento extends React.Component {
                   className="form-control"
                   name="fecha_evento"
                   type="date"
+                  onChange={this.handleChange}
+                />
+              </Box>
+            </Box>
+
+            <Box  className="CamposMedios" xs={12} mt={0.8}>
+              <Box className="InLine Categoria" xs={4}>     
+                <label>
+                  Categoria 
+                </label>
+                <input
+                  className="form-control"
+                  name="categoria"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </Box>
+
+              <Box className="InLine HoraInicio" xs={4}>
+                <label>
+                  Hora Inicio
+                </label>
+                <input
+                  className="form-control"
+                  name="hora_inicio"
+                  type="time"
+                  onChange={this.handleChange}
+                />
+              </Box>
+
+              <Box className="InLine HoraFin" xs={4}>
+                <label>
+                  Hora Fin
+                </label>
+                <input
+                  className="form-control"
+                  name="hora_fin"
+                  type="time"
                   onChange={this.handleChange}
                 />
               </Box>
