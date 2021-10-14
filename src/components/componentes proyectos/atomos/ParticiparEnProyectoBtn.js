@@ -1,11 +1,9 @@
 // Componentes:
 import './ParticiparEnProyectoBtn.css';
 // Librerias-Paquetes:
-import { Container } from '@material-ui/core';
-import React, { useState, useEffect, Component } from "react";
-import { render } from 'react-dom';
+import React, {useEffect} from "react";
 import { Button } from '@material-ui/core';
-import { makeStyles, withStyles} from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 
 
 // Merce Vic
