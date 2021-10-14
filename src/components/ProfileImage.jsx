@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
@@ -35,30 +35,20 @@ const baseURL = "http://localhost:5000/extended_form/";
 export default function ProfileImage({ getDataProfile }) {
   const classes = useStyles();
 
-  const [state, setState] = React.useState(true);
-  const [available, setAvailable] = useState({
-    estado_de_disponibilidad: "",
-  });
-  const [availableEdit, setAvailableEdit] = useState({
-    estado_de_disponibilidad: "",
-  });
+  const [state, setState] = React.useState(getDataProfile.estado_de_disponibilidad==="disponible");
 
-  var peticionPut = (disponibilidad) => {
+  var peticionPatch = (disponibilidad) => {
     axios
-      .put(baseURL + available.id_usuario, disponibilidad)
-      .then((response) => {
-        alert("actualizado correctamente");
-      })
+      .patch(baseURL + "update_availability/" + getDataProfile.id_usuario, disponibilidad)
       .catch((error) => {
         alert(error.message);
       });
   };
   function sendAvailable() {
-    setAvailable(availableEdit);
-
-    const disponibilidad = {
-      estado_de_disponibilidad: availableEdit.estado_de_disponibilidad,
+    const disponibilidad = {  
+      estado_de_disponibilidad: getDataProfile.estado_de_disponibilidad,
     };
+    peticionPatch(disponibilidad);
   }
 
   const handleChange = () => {
@@ -74,8 +64,8 @@ export default function ProfileImage({ getDataProfile }) {
             vertical: "bottom",
             horizontal: "right",
           }}
-          badgeContent
-          // color={`${state ? "secondary" : "primary"}`}
+          badgeContent={getDataProfile.estado_de_disponibilidad==="disponible"}
+          color={state ? "secondary" : "primary"}
         >
           <Avatar
             alt="Imagen de Perfil"
