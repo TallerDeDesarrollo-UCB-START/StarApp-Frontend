@@ -112,6 +112,7 @@ const Profile = (onClick) => {
     ciudad_de_recidencia: "",
     carrera: "",
     nivel_de_estudios: "",
+    //ocupacion: "",
     descripcion_personal: "",
     telefono: "",
     genero: "",
@@ -130,8 +131,8 @@ const Profile = (onClick) => {
     fecha_de_nacimiento: "",
     pais_de_recidencia: "",
     ciudad_de_recidencia: "",
-    carrera: "",
     nivel_de_estudios: "",
+    //ocupacion: "",
     descripcion_personal: "",
     telefono: "",
     genero: "",
@@ -209,6 +210,7 @@ const Profile = (onClick) => {
       pais_de_recidencia: datosEdit.pais_de_recidencia,
       ciudad_de_recidencia: datosEdit.ciudad_de_recidencia,
       carrera: datosEdit.carrera,
+      //ocupacion: datosEdit.ocupacion,
       nivel_de_estudios: datosEdit.nivel_de_estudios,
       descripcion_personal: datosEdit.descripcion_personal,
       telefono: datosEdit.telefono,
@@ -317,7 +319,7 @@ const Profile = (onClick) => {
           />
 
           <label className={classNamees.titulos} htmlFor="nivel_de_estudios">
-            Grado de Estudios:
+            Ocupación:
           </label>
           <select
             name="nivel_de_estudios"
@@ -325,15 +327,13 @@ const Profile = (onClick) => {
             onChange={handleInputChange}
             className={classNamees.intputs}
           >
-            <option value="Primaria">Primaria</option>
-            <option value="Secundaria">Secundaria</option>
-            <option value="Bachiller">Bachiller</option>
-            <option value="Licenciatura">Licenciatura</option>
-            <option value="PostGrado">Post-Grado</option>
+            <option value="Colegio">Colegio</option>
+            <option value="Universidad">Universidad</option>
+            <option value="Trabajando">Trabajando</option>
           </select>
 
           <label className={classNamees.titulos} htmlFor="carrera">
-            Profesion u oficio:
+            Profesión u oficio:
           </label>
           <input
             className={classNamees.intputs}
@@ -419,13 +419,13 @@ const Profile = (onClick) => {
                   id="EducacionCheck"
                   type="checkbox"
                 />
-                <label htmlFor="EducacionCheck">Educacion</label>
+                <label htmlFor="EducacionCheck">Educación</label>
               </Grid>
             </Grid>
           </div>
 
           <label className={classNamees.titulos} htmlFor="pais_de_recidencia">
-            Pais de recidencia:
+            Pais de residencia:
           </label>
           <input
             className={classNamees.intputs}
@@ -439,7 +439,7 @@ const Profile = (onClick) => {
           <br></br>
 
           <label className={classNamees.titulos} htmlFor="ciudad_de_recidencia">
-            Ciudad de recidencia:
+            Ciudad de residencia:
           </label>
           <input
             className={classNamees.intputs}
@@ -452,7 +452,7 @@ const Profile = (onClick) => {
           />
           <br></br>
           <label className={classNamees.titulos} htmlFor="telefono">
-            Telefono:
+            Teléfono:
           </label>
           <input
             className={classNamees.intputs}
@@ -467,7 +467,7 @@ const Profile = (onClick) => {
           <br></br>
 
           <label className={classNamees.titulos} htmlFor="genero">
-            Genero:
+            Género:
           </label>
           <select
             name="genero"
@@ -475,7 +475,7 @@ const Profile = (onClick) => {
             onChange={handleInputChange}
             className={classNamees.intputs}
           >
-            <option value="">Genero</option>
+            <option value="">Género</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
             <option value="Otro">Otro</option>
@@ -530,7 +530,7 @@ const Profile = (onClick) => {
           <br></br>
 
           <label className={classNamees.titulos} htmlFor="descripcion_personal">
-            Mi pequeña descripcion:
+            Mi pequeña descripción:
           </label>
           <textarea
             className={classNamees.intputextaera}
