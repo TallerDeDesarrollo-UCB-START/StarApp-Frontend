@@ -50,7 +50,8 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
             titulo: titulo,
             descripcion: descripcion,
             objetivo: objetivos,
-            lider: lideres
+            lider: lideres,
+            estado: "EN CURSO"
         }
         onCrearProy(nuevoProyecto) // callback invocation
         resetStates()
@@ -65,7 +66,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
     return (
         <div id="gen-form">
             <form  onSubmit={onSubmit}>
-                {/*<div className="underlayer-proy">dads</div>*/}
                 <div className="crear-container-title">
                     <h3>CREAR PROYECTO</h3>
                 </div>
