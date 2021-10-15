@@ -84,6 +84,13 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     left: "12%",
   },
+  checkcualidades: {
+    width: "76%",
+    padding: "3px 5px",
+    margin: "7px 0px 7px 0px",
+    position: "relative",
+    left: "12%",
+  },
   titulos: {
     width: "76%",
     position: "relative",
@@ -118,6 +125,7 @@ const Profile = (onClick) => {
     estado_de_cuenta: "",
     rol: "",
     intereses: [],
+    cualidades: [],
     id_autenticacion: "",
     nombre_contacto_de_emergencia: "",
     numero_contacto_de_emergencia: "",
@@ -137,6 +145,7 @@ const Profile = (onClick) => {
     estado_de_cuenta: "",
     rol: "",
     intereses: [],
+    cualidades: [],
     id_autenticacion: "",
     nombre_contacto_de_emergencia: "",
     numero_contacto_de_emergencia: "",
@@ -159,6 +168,37 @@ const Profile = (onClick) => {
     
 
     setDatosEdit({ ...datosEdit, [event.target.name]: nuevosInt });
+  };
+
+  const handleChangeCualidades = (event) => {
+    var nuevasCualidades = "";
+    const tikeado = !event.target.checked;
+
+    if (typeof datosEdit.cualidades === typeof "string") {
+      if (tikeado) {
+        nuevasCualidades = datosEdit.cualidades
+          .split(/[,"}{]/)
+          .filter(Boolean)
+          .filter((i) => i !== event.target.value);
+      } else {
+        nuevasCualidades = datosEdit.cualidades
+          .split(/[,"}{]/)
+          .filter(Boolean)
+          .concat(event.target.value);
+      }
+    } else {
+      if (tikeado) {
+        nuevasCualidades = datosEdit.cualidades.filter(
+          (i) => i !== event.target.value
+        );
+      } else {
+        const aux = datosEdit.cualidades;
+        aux.push(event.target.value);
+        nuevasCualidades = aux;
+      }
+    }
+
+    setDatosEdit({ ...datosEdit, [event.target.name]: nuevasCualidades });
   };
 
   const handleInputChange = (event) => {
@@ -205,6 +245,7 @@ const Profile = (onClick) => {
       estado_de_cuenta: datosEdit.estado_de_cuenta,
       rol: datosEdit.rol,
       intereses: datosEdit.intereses.toString(),
+      cualidades: datosEdit.cualidades.toString(),
       id_autenticacion: datosEdit.id_autenticacion,
       nombre_contacto_de_emergencia: datosEdit.nombre_contacto_de_emergencia,
       numero_contacto_de_emergencia: datosEdit.numero_contacto_de_emergencia,
@@ -403,10 +444,84 @@ const Profile = (onClick) => {
                   onChange={handleChange}
                   value="Educacion"
                   name="intereses"
-                  id="EducacionCheck"
+                  id="educacionCheck"
                   type="checkbox"
                 />
-                <label htmlFor="EducacionCheck">Educación</label>
+                <label htmlFor="educacionCheck">Educacion</label>
+              </Grid>
+            </Grid>
+          </div>
+          <label className={classNamees.titulos}>Mis Cualidades:</label>
+          <br></br>
+          <div className={classNamees.checkcualidades}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.cualidades.includes("Liderazgo")}
+                  onChange={handleChangeCualidades}
+                  value="Liderazgo"
+                  name="cualidades"
+                  id="liderazgo-check"
+                  type="checkbox"
+                />
+                <label htmlFor="liderazgo-check">Liderazgo</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.cualidades.includes("Organizacion")}
+                  onChange={handleChangeCualidades}
+                  value="Organizacion"
+                  name="cualidades"
+                  id="organizacion-check"
+                  type="checkbox"
+                />
+                <label htmlFor="organizacion-check">Organizacion</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.cualidades.includes("Aprendizaje rapido")}
+                  onChange={handleChangeCualidades}
+                  value="Aprendizaje rapido"
+                  name="cualidades"
+                  id="aprendizaje-rapido"
+                  type="checkbox"
+                />
+                <label htmlFor="aprendizaje-rapido">Aprendizaje rapido</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.cualidades.includes("Trabajo en equipo")}
+                  onChange={handleChangeCualidades}
+                  value="Trabajo en equipo"
+                  name="cualidades"
+                  id="trabajo-en-equipo-check"
+                  type="checkbox"
+                />
+                <label htmlFor="trabajo-en-equipo-check">
+                  Trabajo en equipo
+                </label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.cualidades.includes("Creatividad")}
+                  onChange={handleChangeCualidades}
+                  value="Creatividad"
+                  name="cualidades"
+                  id="creatividad-check"
+                  type="checkbox"
+                />
+                <label htmlFor="creatividad-check">Creatividad</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.cualidades.includes("Paciencia")}
+                  onChange={handleChangeCualidades}
+                  value="Paciencia"
+                  name="cualidades"
+                  id="paciencia-check"
+                  type="checkbox"
+                />
+                <label htmlFor="paciencia-check">Paciencia</label>
               </Grid>
             </Grid>
           </div>
