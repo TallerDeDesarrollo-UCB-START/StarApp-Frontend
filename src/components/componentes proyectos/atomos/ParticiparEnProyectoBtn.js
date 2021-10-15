@@ -3,9 +3,8 @@ import './ParticiparEnProyectoBtn.css';
 // Librerias-Paquetes:
 import React, {useEffect} from "react";
 import { Button } from '@material-ui/core';
-import { makeStyles, withStyles} from "@material-ui/core/styles";
-import AlertMessage from '../../../components/templates/AlertMessage';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 
 
 // Merce Vic

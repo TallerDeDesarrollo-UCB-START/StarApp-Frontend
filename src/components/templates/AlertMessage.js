@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 //Importar al componente todos estos elementos
-import { makeStyles, withStyles} from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 function AlertDialog() {
   //copiar este state al archivo
