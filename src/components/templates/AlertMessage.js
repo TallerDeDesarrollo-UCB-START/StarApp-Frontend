@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+//Importar al componente todos estos elementos
 import { makeStyles, withStyles} from "@material-ui/core/styles";
 
 function AlertDialog({message}) {
+  //copiar este state al archivo
   const [open, setOpen] = React.useState(false);
 
+  //Copiar estas funciones
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -13,6 +16,8 @@ function AlertDialog({message}) {
     setOpen(false);
   };
 
+  //El boton es un ejemplo, no se debe copiar
+  //Para ver un ejemplo de uso ver el archivo ParticiparEnProyectoBtn en 'componentes proyectos/atomos'
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -23,6 +28,7 @@ function AlertDialog({message}) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        
       >
         <DialogTitle id="alert-dialog-title">
           {message}
@@ -38,6 +44,8 @@ function AlertDialog({message}) {
     </div>
   );
 }
+
+//Copiar estilos del boton OK
 
 const OkButton = withStyles((theme) => ({
     root: {
