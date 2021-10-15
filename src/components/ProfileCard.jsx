@@ -7,7 +7,6 @@ import CardContent from "@material-ui/core/CardContent";
 
 import TabsProfile from "./TabsProfile";
 import { withRouter } from "react-router";
-import { red } from "@material-ui/core/colors";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,9 +42,11 @@ const ProfileCard = (props) => {
             <Grid className={classes.paper}>
               <Paper style={{ padding: "15px" }}>
                 <Typography>Descripcion:</Typography>
-                {getDataProfile.descripcion_personal
-                  ? getDataProfile.descripcion_personal
-                  : "Aun no tengo"}
+                {getDataProfile.descripcion_personal ? (
+                  getDataProfile.descripcion_personal
+                ) : (
+                  <span style={{ color: "red " }}>Sin llenar</span>
+                )}
               </Paper>
             </Grid>
             <Grid className={classes.paper}>
@@ -53,7 +54,7 @@ const ProfileCard = (props) => {
                 <Typography>Contacto de emergencia:</Typography>
 
                 <Typography variant="body2">
-                  Nombre:
+                  Nombre:{" "}
                   {getDataProfile.nombre_contacto_de_emergencia ? (
                     getDataProfile.nombre_contacto_de_emergencia
                   ) : (
@@ -61,7 +62,7 @@ const ProfileCard = (props) => {
                   )}
                 </Typography>
                 <Typography variant="body2">
-                  Relacion:
+                  Relacion:{" "}
                   {getDataProfile.relacion_contacto_de_emergencia ? (
                     getDataProfile.relacion_contacto_de_emergencia
                   ) : (
@@ -70,7 +71,7 @@ const ProfileCard = (props) => {
                 </Typography>
 
                 <Typography variant="body2">
-                  Teléfono:
+                  Teléfono:{" "}
                   {getDataProfile.numero_contacto_de_emergencia ? (
                     getDataProfile.numero_contacto_de_emergencia
                   ) : (
@@ -110,7 +111,7 @@ const ProfileCard = (props) => {
                     Nombre: {getDataProfile.nombre} {getDataProfile.apellido}
                   </Typography>
                   <Typography variant="body2">
-                    Edad:
+                    Edad:{" "}
                     {getDataProfile.fecha_de_nacimiento ? (
                       calcularEdad(
                         getDataProfile.fecha_de_nacimiento
@@ -127,26 +128,25 @@ const ProfileCard = (props) => {
                       <span style={{ color: "red " }}>Sin llenar</span>
                     )}
                   </Typography>
+
                   <Typography variant="body2">
-                    Nivel de estudio:
-                    {getDataProfile.nivel_de_estudios ? (
-                      getDataProfile.nivel_de_estudios
+                    Ocupación:{" "}
+                    {getDataProfile.ocupacion ? (
+                      getDataProfile.ocupacion
                     ) : (
                       <span style={{ color: "red " }}>Sin llenar</span>
                     )}
                   </Typography>
                   <Typography variant="body2">
-                    Carrera:
+                    Carrera:{" "}
                     {getDataProfile.carrera ? (
                       getDataProfile.carrera
                     ) : (
                       <span style={{ color: "red " }}>Sin llenar</span>
                     )}
                   </Typography>
-                  <Typography>Genero: {getDataProfile.genero}</Typography>
-                  <Typography>Ocupación: {getDataProfile.ocupacion}</Typography>
                   <Typography variant="body2">
-                    Telefono:
+                    Telefono:{" "}
                     {getDataProfile.telefono ? (
                       getDataProfile.telefono
                     ) : (
@@ -154,7 +154,7 @@ const ProfileCard = (props) => {
                     )}
                   </Typography>
                   <Typography variant="body2">
-                    Ciudad de residencia:
+                    Ciudad de residencia:{" "}
                     {getDataProfile.ciudad_de_recidencia ? (
                       getDataProfile.ciudad_de_recidencia
                     ) : (
@@ -162,7 +162,7 @@ const ProfileCard = (props) => {
                     )}
                   </Typography>
                   <Typography variant="body2">
-                    Pais de residencia:
+                    Pais de residencia:{" "}
                     {getDataProfile.pais_de_recidencia ? (
                       getDataProfile.pais_de_recidencia
                     ) : (
