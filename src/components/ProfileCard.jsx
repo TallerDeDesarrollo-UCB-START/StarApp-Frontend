@@ -103,7 +103,7 @@ const ProfileCard = (props) => {
                   </Typography>
                   <Typography>Genero: {getDataProfile.genero}</Typography>
                   <Typography>
-                    Nivel de estudio: {getDataProfile.nivel_de_estudios}
+                    Ocupación: {getDataProfile.ocupacion}
                   </Typography>
                   <Typography>Carrera: {getDataProfile.carrera}</Typography>
                   <Typography>Telefono: {getDataProfile.telefono}</Typography>
