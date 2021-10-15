@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 
 import TabsProfile from "./TabsProfile";
 import { withRouter } from "react-router";
+import { red } from "@material-ui/core/colors";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,30 +51,31 @@ const ProfileCard = (props) => {
             <Grid className={classes.paper}>
               <Paper style={{ padding: "15px" }}>
                 <Typography>Contacto de emergencia:</Typography>
-                {getDataProfile.nombre_contacto_de_emergencia ||
-                getDataProfile.relacion_contacto_de_emergencia ||
-                getDataProfile.numero_contacto_de_emergencia ? (
-                  <Typography variant="body2"></Typography>
-                ) : (
-                  <Typography variant="body2" color="error">
-                    No asignado
-                  </Typography>
-                )}
+
                 <Typography variant="body2">
-                  {"Nombre:" + getDataProfile.nombre_contacto_de_emergencia
-                    ? getDataProfile.nombre_contacto_de_emergencia
-                    : ""}
+                  Nombre:
+                  {getDataProfile.nombre_contacto_de_emergencia ? (
+                    getDataProfile.nombre_contacto_de_emergencia
+                  ) : (
+                    <span style={{ color: "red " }}>Sin llenar</span>
+                  )}
                 </Typography>
                 <Typography variant="body2">
-                  {"Relacion:" + getDataProfile.relacion_contacto_de_emergencia
-                    ? getDataProfile.relacion_contacto_de_emergencia
-                    : ""}
+                  Relacion:
+                  {getDataProfile.relacion_contacto_de_emergencia ? (
+                    getDataProfile.relacion_contacto_de_emergencia
+                  ) : (
+                    <span style={{ color: "red " }}>Sin llenar</span>
+                  )}
                 </Typography>
 
                 <Typography variant="body2">
-                  {"Teléfono:" + getDataProfile.numero_contacto_de_emergencia
-                    ? getDataProfile.numero_contacto_de_emergencia
-                    : ""}
+                  Teléfono:
+                  {getDataProfile.numero_contacto_de_emergencia ? (
+                    getDataProfile.numero_contacto_de_emergencia
+                  ) : (
+                    <span style={{ color: "red " }}>Sin llenar</span>
+                  )}
                 </Typography>
               </Paper>
             </Grid>
@@ -108,47 +110,64 @@ const ProfileCard = (props) => {
                     Nombre: {getDataProfile.nombre} {getDataProfile.apellido}
                   </Typography>
                   <Typography variant="body2">
-                    {getDataProfile.fecha_de_nacimiento
-                      ? "Edad: " +
-                        calcularEdad(
-                          getDataProfile.fecha_de_nacimiento
-                        ).toString() +
-                        " años"
-                      : ""}
+                    Edad:
+                    {getDataProfile.fecha_de_nacimiento ? (
+                      calcularEdad(
+                        getDataProfile.fecha_de_nacimiento
+                      ).toString() + " años"
+                    ) : (
+                      <span style={{ color: "red " }}>Sin llenar</span>
+                    )}
                   </Typography>
                   <Typography variant="body2">
-                    {getDataProfile.genero
-                      ? "Genero: " + getDataProfile.genero
-                      : ""}
+                    Genero:{" "}
+                    {getDataProfile.genero ? (
+                      getDataProfile.genero
+                    ) : (
+                      <span style={{ color: "red " }}>Sin llenar</span>
+                    )}
                   </Typography>
                   <Typography variant="body2">
-                    {getDataProfile.nivel_de_estudios
-                      ? "Nivel de estudio: " + getDataProfile.nivel_de_estudios
-                      : ""}
+                    Nivel de estudio:
+                    {getDataProfile.nivel_de_estudios ? (
+                      getDataProfile.nivel_de_estudios
+                    ) : (
+                      <span style={{ color: "red " }}>Sin llenar</span>
+                    )}
                   </Typography>
                   <Typography variant="body2">
-                    {getDataProfile.carrera
-                      ? "Carrera: " + getDataProfile.carrera
-                      : ""}
+                    Carrera:
+                    {getDataProfile.carrera ? (
+                      getDataProfile.carrera
+                    ) : (
+                      <span style={{ color: "red " }}>Sin llenar</span>
+                    )}
                   </Typography>
                   <Typography>Genero: {getDataProfile.genero}</Typography>
                   <Typography>Ocupación: {getDataProfile.ocupacion}</Typography>
                   <Typography variant="body2">
-                    {getDataProfile.telefono
-                      ? "Telefono: " + getDataProfile.telefono
-                      : ""}
+                    Telefono:
+                    {getDataProfile.telefono ? (
+                      getDataProfile.telefono
+                    ) : (
+                      <span style={{ color: "red " }}>Sin llenar</span>
+                    )}
                   </Typography>
                   <Typography variant="body2">
-                    {getDataProfile.ciudad_de_recidencia
-                      ? "Ciudad de residencia: " +
-                        getDataProfile.ciudad_de_recidencia
-                      : ""}
+                    Ciudad de residencia:
+                    {getDataProfile.ciudad_de_recidencia ? (
+                      getDataProfile.ciudad_de_recidencia
+                    ) : (
+                      <span style={{ color: "red " }}>Sin llenar</span>
+                    )}
                   </Typography>
                   <Typography variant="body2">
-                    {getDataProfile.pais_de_recidencia
-                      ? "Pais de residencia: " +
-                        getDataProfile.pais_de_recidencia
-                      : ""}
+                    Pais de residencia:
+                    {getDataProfile.pais_de_recidencia ? (
+                      getDataProfile.pais_de_recidencia
+                    ) : (
+                      <span style={{ color: "red " }}>Sin llenar</span>
+                    )}
                   </Typography>
                 </Grid>
               </Paper>
