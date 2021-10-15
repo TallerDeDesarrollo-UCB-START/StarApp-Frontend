@@ -2,13 +2,18 @@
 import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
+import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
 
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 
-// Merce y Vic
+
 function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion}) {
+    const participa =  true//onGetParticipacion().then(participacion => participacion)
+    //console.log
+    const tagParticipacion = participa === true?
+                            <EtiquetaParticipacion/> : ''
     return (
         <Box className="content-container">
             
@@ -19,6 +24,7 @@ function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparP
 
             <div className="button-container">
                 <div className="space-button"></div>
+                {tagParticipacion}
                 <ParticiparEnProyectoBtn proyecto={proyecto} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion}/>
                 <EditarProyectoBtn  onActivarForm={onActivarForm} proyecto={proyecto}/>
                 <EliminarProjectoBtn proyecto={proyecto} onEliminarProy={onEliminarProy}/>
