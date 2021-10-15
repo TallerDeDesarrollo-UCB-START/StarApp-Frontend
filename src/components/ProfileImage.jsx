@@ -93,16 +93,14 @@ export default function ProfileImage({ getDataProfile, setDataProfile }) {
           </Typography>
         </Grid>
         <Grid container justifyContent="center">
+          <Grid container justifyContent="center">
+            <Chip label={getDataProfile.rol} color="secondary" />
+          </Grid>
           <Grid
             className={classes.switchStyle}
             container
             justifyContent="flex-end"
           >
-            <Chip
-              className={classes.chipStyle}
-              label={getDataProfile.rol}
-              color="secondary"
-            />
             <FormControlLabel
               control={
                 <Switch
