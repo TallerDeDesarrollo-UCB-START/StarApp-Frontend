@@ -25,10 +25,16 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
     { estado: "ACABADO", valor: 10 },
     { estado: "EN CURSO", valor: 20 },
   ]);
-  const [estadoVal, setEstadoVal] = useState(
-    estadosDefault.find((item_estado) => item_estado.estado === proyecto.estado)
-      .valor
-  );
+  function obtenerEstadoActual(){
+    console.log(typeof(proyecto.estado) )
+    if(typeof(proyecto.estado) === 'string'){
+      return estadosDefault.find((item_estado) => item_estado.estado === proyecto.estado).valor
+    } else {
+      return ''
+    }
+    
+  }
+  const [estadoVal, setEstadoVal] = useState(obtenerEstadoActual());
 
   function resetStates() {
     setTitulo("");
