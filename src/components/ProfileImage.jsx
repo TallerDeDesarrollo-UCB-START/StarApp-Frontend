@@ -12,6 +12,7 @@ import {
   Badge,
 } from "@material-ui/core/";
 import axios from "axios";
+import { configOptions } from "final-form";
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -28,32 +29,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const url = process.env.REACT_APP_API;
+//const url = process.env.REACT_APP_API;
 //const baseURL = `${url}extended_form`;
+
 const baseURL = "http://localhost:5000/extended_form/";
 
-export default function ProfileImage({ getDataProfile }) {
+export default function ProfileImage({ getDataProfile, setDataProfile }) {
   const classes = useStyles();
 
-  const [state, setState] = React.useState(getDataProfile.estado_de_disponibilidad==="disponible");
-
-  var peticionPatch = (disponibilidad) => {
+  var peticionPut = (disponibilidad) => {
     axios
-      .patch(baseURL + "update_availability/" + getDataProfile.id_usuario, disponibilidad)
+      .put(baseURL + getDataProfile.id_usuario, disponibilidad)
       .catch((error) => {
         alert(error.message);
       });
   };
   function sendAvailable() {
-    const disponibilidad = {  
-      estado_de_disponibilidad: getDataProfile.estado_de_disponibilidad,
+    var stateAvailable = getDataProfile.estado_de_disponibilidad;
+    if (stateAvailable === "disponible") {
+      stateAvailable = "no disponible";
+    } else {
+      stateAvailable = "disponible";
+    }
+    setDataProfile({
+      ...getDataProfile,
+      estado_de_disponibilidad: stateAvailable,
+    });
+    const disponibilidad = {
+      estado_de_disponibilidad: stateAvailable,
     };
-    peticionPatch(disponibilidad);
+    peticionPut(disponibilidad);
   }
 
-  const handleChange = () => {
-    setState((stat) => !stat);
-  };
+  const handleChange = () => {};
 
   return (
     <Grid>
@@ -64,8 +72,12 @@ export default function ProfileImage({ getDataProfile }) {
             vertical: "bottom",
             horizontal: "right",
           }}
-          badgeContent={getDataProfile.estado_de_disponibilidad==="disponible"}
-          color={state ? "secondary" : "primary"}
+          badgeContent={getDataProfile.estado_de_disponibilidad ? "" : ""}
+          color={
+            getDataProfile.estado_de_disponibilidad === "disponible"
+              ? "secondary"
+              : "primary"
+          }
         >
           <Avatar
             alt="Imagen de Perfil"
@@ -94,13 +106,19 @@ export default function ProfileImage({ getDataProfile }) {
             <FormControlLabel
               control={
                 <Switch
-                  checked={state}
+                  checked={
+                    getDataProfile.estado_de_disponibilidad === "disponible"
+                  }
                   onClick={sendAvailable}
                   onChange={handleChange}
                   color="secondary"
                 />
               }
-              label={`${state ? "Estoy disponible" : "No disponible"}`}
+              label={`${
+                getDataProfile.estado_de_disponibilidad === "disponible"
+                  ? "Estoy disponible"
+                  : "No disponible"
+              }`}
             />
           </Grid>
         </Grid>

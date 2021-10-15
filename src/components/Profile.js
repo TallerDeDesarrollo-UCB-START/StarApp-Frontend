@@ -567,12 +567,9 @@ const Profile = (onClick) => {
       <div>
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
-            <ProfileImage getDataProfile={datosEdit} />
-            <ProfileCard
-              getDataProfile={datosEdit}
-              handleOpenprop={handleOpen}
-            />
-
+            <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} />
+            <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen}/>
+            
             <Modal
               open={open}
               onClose={handleClose}
