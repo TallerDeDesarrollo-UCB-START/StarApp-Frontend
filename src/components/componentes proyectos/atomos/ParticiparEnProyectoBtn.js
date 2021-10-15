@@ -8,18 +8,20 @@ import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/
 
 
 // Merce Vic
-function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion}) {
+function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion, onAsignarParticipacion}) {
 
     // States
-    const [open, setOpen] = React.useState(false);
-
-    useEffect(function () {
+    //const [event, verificarParticipacion] = useState(0);
+    useEffect(
+        function () {
         onGetParticipacion(proyecto.id).then(state => 
             {if(state) {
                 document.getElementById(proyecto.id).classList.add('button-hide');
+                onAsignarParticipacion()
             }}
         );
-    })
+        } 
+    )
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -31,8 +33,9 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion
 
     const onClick = (event) => {
         onPartiparProy(proyecto.id); 
-        document.getElementById(proyecto.id).classList.add('button-hide'); 
-        handleClickOpen();
+        document.getElementById(proyecto.id).classList.add('button-hide');
+        alert('Registered participation');
+        onAsignarParticipacion()
     }
 
     return (
