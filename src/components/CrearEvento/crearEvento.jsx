@@ -3,27 +3,33 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import './crearEvento.css';
-import {
-  Box,
-} from '@material-ui/core';
+import {Box,} from '@material-ui/core';
+import {Button,Container,} from "reactstrap";
 
 
-import {
-  Button,
-  Container,
-} from "reactstrap";
-
-
-const url = "http://localhost:5000/eventos/crearevento"
-const URL = process.env.REACT_APP_API
+const url = "http://localhost:5000/eventos/crearevento";
+const urlLideres = "http://localhost:5000/lideres";
+const URL = process.env.REACT_APP_API;
 //const url = `${URL}eventos/crearevento`
 
+
+const apiLideres = axios.create({
+  baseURL: urlLideres,
+});
+
+
 class crearEvento extends React.Component {
+  constructor(){
+    super();
+    this.getLideres();
+  }
+
   state = {
     modalInsertar: true,
     form: {
       nombre_evento: "",
       descripcion_evento: "",
+      lider: "",
       modalidad_evento: "Presencial",
       lugar_evento: "",
       fecha_evento: "",
@@ -31,9 +37,11 @@ class crearEvento extends React.Component {
       estado: "1",
       hora_inicio: "",
       hora_fin: "",
-      lider: "",
     },
+    lideres: [],
   };
+
+
 
   mostrarModalInsertar = () => {
     this.setState({
@@ -49,6 +57,18 @@ class crearEvento extends React.Component {
     }).catch(error=>{
       console.log(error.message);
     })
+  }
+
+  getLideres = async () =>{
+    try {
+      let data = await apiLideres.get("/").then(({ data }) => data);
+      let aux = data.map(item => {return item.nombre + " " + item.apellido});
+      aux.unshift("Sin Lider");
+      this.setState({ lideres: aux });
+
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   cerrarModalInsertar = () => {
@@ -69,11 +89,14 @@ class crearEvento extends React.Component {
     });
   };
 
+
+
+
   render() {
     return (
       <>
         <Container className="Container">
-
+                
           <form className="FormEvento">
 
           
@@ -100,16 +123,16 @@ class crearEvento extends React.Component {
               </textarea>  
             </Box>
 
-            <Box className="lider" xs={6}>
+            <Box className="lider" xs={6} mt={0.8}>
               <label>
                 Lider: 
               </label>
-              <input
-                className="form-control"
-                name="lider"
-                type="text"
-                onChange={this.handleChange}
-              />
+              <select  className=" form-control lider-input" name="lider" onChange={this.handleChange}>
+                {this.state.lideres.map(item => {
+                  return (<option key={item} value={item}>{item}</option>);
+                })}
+              </select>
+
             </Box>
 
 
