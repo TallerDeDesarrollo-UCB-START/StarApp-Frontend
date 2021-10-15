@@ -10,10 +10,10 @@ import {
   ModalFooter,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import FiltroEventos from "./FiltroEventos";
 
 const url = process.env.REACT_APP_API;
-const urlDeploy = `${url}eventos`;
+//const urlDeploy = `${url}eventos`;
+const urlDeploy = `http://localhost:5000/eventos`
 const api = axios.create({
   baseURL: urlDeploy, //`http://localhost:5000/eventos`,
   //baseURL: `https://5fc44b7b36bc7900163436cf.mockapi.io/api/Message/Eventos`
@@ -31,11 +31,13 @@ class EventsList extends Component {
     botonMostrarEventosNoArchivados: false,
     botonMostrarEventosArchivados: true,
     categoriaFiltrada: "",
+    categorias: [],
   };
 
   constructor() {
     super();
     this.getEvents();
+    this.getCategorias();
   }
 
   abrirModal = () => {
@@ -45,8 +47,7 @@ class EventsList extends Component {
   getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
-      console.log(this.state.categoriaFiltrada);
-      if (this.state.categoriaFiltrada != "Todas") {
+      if (this.state.categoriaFiltrada !== "Todas" && this.state.categoriaFiltrada !== "Otro" ) {
         data = data.filter(
           (event) =>
             event.estado === "1" &&
@@ -60,6 +61,16 @@ class EventsList extends Component {
       console.log(err);
     }
   };
+
+  getCategorias = async () => {
+    let data = await api.get("/categorias").then(({ data }) => data);
+    let aux = data.map(item => {return item.interes});
+    aux.unshift("Todas");
+    this.setState({ categoriaFiltrada: aux[0] });
+    this.setState({ categorias: aux });
+  };
+
+
 
   getEventsArchivados = async () => {
     try {
@@ -118,8 +129,8 @@ class EventsList extends Component {
       });
   };
   filterChangeHandler = (categoria) => {
-    this.setState({ categoriaFiltrada: categoria });
-    this.getEvents();
+    this.setState({ categoriaFiltrada: categoria.target.value });
+    this.getEvents();  
   };
 
   render() {
@@ -137,10 +148,11 @@ class EventsList extends Component {
             <h1> Bienvenido a Lista de eventos!</h1>
           </div>
           <div>
-            <FiltroEventos
-              selected={this.state.categoriaFiltrada}
-              onChangeFilter={this.filterChangeHandler}
-            />
+            <select  value={this.state.categoriaFiltrada} onChange={this.filterChangeHandler}>
+              {this.state.categorias.map(item => {
+                return (<option key={item} value={item}>{item}</option>);
+              })}
+            </select>
           </div>
           <div style={{ display: "flex" }}>
             <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
