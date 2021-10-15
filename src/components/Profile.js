@@ -112,8 +112,7 @@ const Profile = (onClick) => {
     ciudad_de_recidencia: "",
     carrera: "",
     nivel_de_estudios: "",
-    //ocupacion: "",
-    descripcion_personal: "",
+    ocupacion: "",
     telefono: "",
     genero: "",
     estado_de_cuenta: "",
@@ -132,8 +131,7 @@ const Profile = (onClick) => {
     pais_de_recidencia: "",
     ciudad_de_recidencia: "",
     nivel_de_estudios: "",
-    //ocupacion: "",
-    descripcion_personal: "",
+    ocupacion: "",
     telefono: "",
     genero: "",
     estado_de_cuenta: "",
@@ -210,8 +208,7 @@ const Profile = (onClick) => {
       pais_de_recidencia: datosEdit.pais_de_recidencia,
       ciudad_de_recidencia: datosEdit.ciudad_de_recidencia,
       carrera: datosEdit.carrera,
-      //ocupacion: datosEdit.ocupacion,
-      nivel_de_estudios: datosEdit.nivel_de_estudios,
+      ocupacion: datosEdit.ocupacion,
       descripcion_personal: datosEdit.descripcion_personal,
       telefono: datosEdit.telefono,
       genero: datosEdit.genero,
@@ -318,12 +315,12 @@ const Profile = (onClick) => {
             onChange={handleInputChange}
           />
 
-          <label className={classNamees.titulos} htmlFor="nivel_de_estudios">
+          <label className={classNamees.titulos} htmlFor="ocupacion">
             Ocupación:
           </label>
           <select
-            name="nivel_de_estudios"
-            value={datosEdit.nivel_de_estudios}
+            name="ocupacion"
+            value={datosEdit.ocupacion}
             onChange={handleInputChange}
             className={classNamees.intputs}
           >
