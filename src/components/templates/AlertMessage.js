@@ -3,7 +3,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 //Importar al componente todos estos elementos
 import { makeStyles, withStyles} from "@material-ui/core/styles";
 
-function AlertDialog({message}) {
+function AlertDialog() {
   //copiar este state al archivo
   const [open, setOpen] = React.useState(false);
 
@@ -31,7 +31,7 @@ function AlertDialog({message}) {
         
       >
         <DialogTitle id="alert-dialog-title">
-          {message}
+          Aqui va el mensaje del pop up
         </DialogTitle>
         <DialogContent>
         </DialogContent>
