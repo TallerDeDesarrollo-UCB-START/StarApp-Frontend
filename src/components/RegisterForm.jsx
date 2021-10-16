@@ -8,6 +8,9 @@ import { TextField } from "final-form-material-ui";
 import { validEmail, validPassword } from "./RegEx";
 import { useHistory } from "react-router-dom";
 import AxiosClient from "./AxiosClient";
+import { withStyles } from "@material-ui/core/styles";
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
@@ -61,9 +64,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+  const OkButton = withStyles((theme) => ({
+    root: {
+      marginRight: "auto",
+      marginLeft: "auto",
+    },
+    }))(Button);
 const RegisterForm = () => {
   const history = useHistory();
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
   const smallScreen = useMediaQuery("(min-width:420px)");
   const validate = (values) => {
     const errors = {};
@@ -87,6 +97,14 @@ const RegisterForm = () => {
     }
     return errors;
   };
+  const handleClickOpen = () => {
+    setOpen(true);
+    console.log("si funciona")
+  };
+  const handleClose = () => {
+    setOpen(false);
+    history.push(`/login`)
+  };
   const URL_AUTH = process.env.REACT_APP_API_AUTH
   const URL = process.env.REACT_APP_API
   const onSubmit = async (values) => {
@@ -94,6 +112,7 @@ const RegisterForm = () => {
       email: values.email,
       password: values.password,
     };
+    
     console.log(bodyAuth);
     AxiosClient.post(`${URL_AUTH}api/auth/signup`, bodyAuth)
       .then((response) => {
@@ -122,8 +141,9 @@ const RegisterForm = () => {
       .catch((response) => {
         console.log(response);
       });
-      history.push(`/login`)
+      handleClickOpen();
   };
+
   return (
     <div className={classes.registerContainer}>
       <div className={classes.logoContainer}>
@@ -214,6 +234,23 @@ const RegisterForm = () => {
                     Crear cuenta start
                   </Button>
                 </div>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                <DialogTitle id="alert-dialog-title">
+                  Su perfil fue creado satisfactoriamente
+                </DialogTitle>
+                <DialogContent>
+                </DialogContent>
+                <DialogActions>
+                  <OkButton variant="contained" color="primary" onClick={handleClose} autoFocus>
+                    Ok  
+                  </OkButton>
+                </DialogActions>
+                </Dialog>
               </form>
             )}
           </Form>
