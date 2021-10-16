@@ -7,10 +7,10 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from "@material-ui/core/Paper";
+import DatosPersonales from "./DatosPersonales";
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
+  const { getDataProfile, handleOpenprop,children, value, index, ...other } = props;
   return (
     <div
       role="tabpanel"
@@ -21,7 +21,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -52,38 +52,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TabsProfile() {
+export default function TabsProfile(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
+  const { getDataProfile, handleOpenprop } = props;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  /*
-  return (
-    <div>
-      <Paper className={classes.root} style={{margin: "1px 9px 1px 1px"}}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
-          <Tab className={classes.mytab} label="Datos Personales" />
-          <Tab className={classes.mytab} label="Mis Eventos" />
-          <Tab className={classes.mytab} label="Mis Proyectos" />
-        </Tabs>
-      </Paper>
-    </div>
-  );
-}
-  */
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Paper className={classes.root} style={{margin: "1px 9px 1px 1px"}}>
+        <Paper className={classes.root} >
           <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" centered>
             <Tab className={classes.mytab} label="Datos Personales" {...a11yProps(0)} />
             <Tab className={classes.mytab} label="Mis Eventos" {...a11yProps(1)} />
@@ -91,8 +71,11 @@ export default function TabsProfile() {
           </Tabs>
         </Paper>
       </AppBar>
-      <TabPanel  value={value} index={0}>
-        Poner aqui componente con datos personales
+      
+      <TabPanel  value={value} index={0} style={{background: "#AAB6C5"}}>
+        <DatosPersonales 
+        getDataProfile={getDataProfile}
+        handleOpenprop={handleOpenprop}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
