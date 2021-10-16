@@ -10,66 +10,85 @@ import crearEvento from "../components/CrearEvento/crearEvento";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
 import FormularioProyecto from "../components/Formulario";
 import Evento from "../components/Evento";
+import Users from "../screens/Users"
 const Routes = [
   {
-    path: "/login",
-    name: "Inicio de sesion",
-    component: LoginForm,
-  },
-  {
-    path: "/register",
-    name: "Registro",
-    component: Register,
+    path: "/",
+    name: "Home",
+    component: Home,
+    logginNeeded: false,
   },
   {
     path: '/projects',
     name: 'ShowProjects',
     component: VistaProyectos,
-  },
-  {
-    path: "/createproject",
-    name: "CreateProject",
-    component: FormularioProyecto,
+    logginNeeded: true,
   },
   {
     path: "/eventos",
     name: "EventsList",
     component: EventsList,
-  },
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
+    logginNeeded: true,
   },
   {
     path: "/perfil",
     name: "Perfil",
     component: Profile,
+    logginNeeded: true,
+  },
+  {
+    path: "/login",
+    name: "Inicio de sesion",
+    component: LoginForm,
+    logginNeeded: false,
+  },
+  {
+    path: "/register",
+    name: "Registro",
+    component: Register,
+    logginNeeded: false,
+  },
+  {
+    path: "/users",
+    name: "Usuarios",
+    component: Users,
+    logginNeeded: true,
+  },
+  {
+    path: "/createproject",
+    name: "CreateProject",
+    component: FormularioProyecto,
+    logginNeeded: true,
   },
   {
     path: "/eventos/event",
     name: "Evento",
     component: Event,
+    logginNeeded: true,
   },
   {
     path: "/events/event/registroAEvento",
     name: "Formulario",
     component: Formulario,
+    logginNeeded: true,
   },
   {
     path: "/events/event/attendance",
     name: "Attendace",
     component: Attendance,
+    logginNeeded: true,
   },
   {
     path: "/eventos/crearevento",
     name: "crearEvento",
+    logginNeeded: true,
     component: crearEvento,
   },
   {
     path: "/eventos/:id",
     name: "Evento",
     component: Evento,
+    logginNeeded: true,
   },
 ];
 export default Routes;

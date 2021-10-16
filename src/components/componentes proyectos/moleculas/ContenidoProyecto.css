@@ -1,7 +1,6 @@
 p {
     color: black;
     font-size: 20px;
-    font-family: 'miriam-libre';
 }
 
 .content-container {
@@ -10,6 +9,7 @@ p {
     border: 3px solid grey;
     border-radius: 12px;
     padding: 20px;
+    background-color: white;
 }
 
 .button-container {

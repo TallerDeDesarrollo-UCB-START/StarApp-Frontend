@@ -3,19 +3,23 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card } from "reactstrap";
 
+const url = process.env.REACT_APP_API;
+const urlDeploy = `${url}eventos`;
+
 const api = axios.create({
-  baseURL: `http://localhost:5000/eventos/`,
-  //baseURL: `https://ucbstartfront.herokuapp.com/eventos/`   url produccion
+  baseURL: urlDeploy,
 });
 class Evento extends Component {
   state = {
     events: [],
     participants: [],
+    nombreParticipante: "",
   };
 
   constructor() {
     super();
     this.getEvneto();
+    this.getParticipantes();
   }
   getIdFromURL(thisUrl) {
     var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
@@ -34,6 +38,19 @@ class Evento extends Component {
       console.log(err);
     }
   };
+  getParticipantes = async () => {
+    let thisUrl = window.location.href;
+    let id = this.getIdFromURL(thisUrl);
+
+    try {
+      let data = await api.get(`/participantes/${id}`).then(({ data }) => data);
+      console.log(data);
+
+      this.setState({ participants: data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   render() {
     return (
@@ -43,7 +60,11 @@ class Evento extends Component {
             <div className="card w-70" key={event.id}>
               <div className="row no-gutters">
                 <div className="col-auto">
-                  <img src="http://jorge-zientarski.com/imgs/Events2.jpg" className="img-fluid" alt="" />
+                  <img
+                    src="http://jorge-zientarski.com/imgs/Events2.jpg"
+                    className="img-fluid"
+                    alt=""
+                  />
                 </div>
                 <div className="col">
                   <div className="card-block px-1">
@@ -59,6 +80,25 @@ class Evento extends Component {
                     </p>
                     <p className="card-text">
                       <b>Lugar:</b> {event.lugar_evento}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="card-footer w-100 text-muted"></div>
+            </div>
+          ))}
+        </Card>
+        <h1>Lista de participantes</h1>
+        <Card>
+          {this.state.participants.map((participant) => (
+            <div className="card w-70" key={participant.id}>
+              <div className="row no-gutters">
+                <div className="col">
+                  <div className="card-block px-1">
+                    <p className="card-text"></p>
+                    <p className="card-text">
+                      <b> Nombre:</b> {participant.nombre}{" "}
+                      {participant.apellido}
                     </p>
                   </div>
                 </div>

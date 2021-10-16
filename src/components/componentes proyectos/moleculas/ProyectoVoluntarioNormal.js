@@ -7,11 +7,11 @@ import './ProyectoVoluntario.css';
 import { Box } from '@material-ui/core';
 
 // Victor y Merce
-function ProyectoVoluntarioNormal({proyecto,  onPartiparProy}) {
+function ProyectoVoluntarioNormal({proyecto,  onPartiparProy, onGetParticipacion}) {
     return (
         <Box className="proyect-container">
             <BannerProyecto />
-            <ContenidoProyectoNormal proyecto={proyecto} onPartiparProy={onPartiparProy}/>
+            <ContenidoProyectoNormal proyecto={proyecto} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion}/>
         </Box>
     );
 }
