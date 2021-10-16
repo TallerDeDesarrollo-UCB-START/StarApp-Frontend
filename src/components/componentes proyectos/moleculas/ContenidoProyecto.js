@@ -26,5 +26,5 @@ function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparP
         </Box>
     );
 }
-
+ 
 export default ContenidoProyecto
