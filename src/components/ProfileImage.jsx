@@ -29,10 +29,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//const url = process.env.REACT_APP_API;
-//const baseURL = `${url}extended_form`;
+const url = process.env.REACT_APP_API;
+const baseURL = `${url}extended_form/`;
 
-const baseURL = "http://localhost:5000/extended_form/";
+//const baseURL = "http://localhost:5000/extended_form/";
 
 export default function ProfileImage({ getDataProfile, setDataProfile }) {
   const classes = useStyles();
