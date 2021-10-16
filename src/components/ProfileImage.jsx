@@ -12,7 +12,6 @@ import {
   Badge,
 } from "@material-ui/core/";
 import axios from "axios";
-import { configOptions } from "final-form";
 
 const useStyles = makeStyles((theme) => ({
   large: {
