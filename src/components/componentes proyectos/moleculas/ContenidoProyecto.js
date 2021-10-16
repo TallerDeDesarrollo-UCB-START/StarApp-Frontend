@@ -12,21 +12,13 @@ import { useState} from "react";
 function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion}) {
     // States:
     const [participacion, setParticipacion] = useState(false)
-    /*useEffect(() =>{
-        onGetParticipacion(proyecto.id).then(participa => {
-            setParticipacion(participa)
-            })
-    })*/
+    // Functions:
     async function asignarParticipacion() {
-            //debugger
-        /*onGetParticipacion(proyecto.id).then(participa => {
-        setParticipacion(participa)
-        })*/
         const participa = await onGetParticipacion(proyecto.id)
-        //console.log(participa)
         setParticipacion(participa)  // Sale un warning de props mal pasadas al momento de hacer este set.
         return participa
     }
+    // Components:
     const tagParticipacion = participacion === true?
                             <EtiquetaParticipacion/> : ''
     return (

@@ -18,7 +18,7 @@ function handleClick(){}
 function ContenidoProyecto({}) {
     const classes = useStyles();
     return (
-        <Chip Filled label="Participando"
+        <Chip  label="Participando"
                 color="primary"
                 onClick={handleClick} 
                 className={classes.chip}/>
