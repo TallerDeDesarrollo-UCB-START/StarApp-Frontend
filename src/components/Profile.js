@@ -143,30 +143,20 @@ const Profile = (onClick) => {
     relacion_contacto_de_emergencia: "",
   });
   const handleChange = (event) => {
-    var nuevosInt = "";
+    console.log(event.target.checked)
+    var nuevosInt = [];
     const tikeado = !event.target.checked;
 
-    if (typeof datosEdit.intereses === typeof "string") {
-      if (tikeado) {
-        nuevosInt = datosEdit.intereses
-          .split(/[,"}{]/)
-          .filter(Boolean)
-          .filter((i) => i !== event.target.value);
-      } else {
-        nuevosInt = datosEdit.intereses
-          .split(/[,"}{]/)
-          .filter(Boolean)
-          .concat(event.target.value);
-      }
-    } else {
+    
       if (tikeado) {
         nuevosInt = datosEdit.intereses.filter((i) => i !== event.target.value);
       } else {
-        const aux = datosEdit.intereses;
-        aux.push(event.target.value);
-        nuevosInt = aux;
+        // const aux = datosEdit.intereses;
+        // aux.push(event.target.value);
+        // nuevosInt = aux;
+        nuevosInt = [...datosEdit.intereses, event.target.value];
       }
-    }
+    
 
     setDatosEdit({ ...datosEdit, [event.target.name]: nuevosInt });
   };
