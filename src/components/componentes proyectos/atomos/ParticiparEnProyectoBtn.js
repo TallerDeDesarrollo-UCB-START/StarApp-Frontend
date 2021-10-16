@@ -11,17 +11,16 @@ import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/
 function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion, onAsignarParticipacion}) {
 
     // States
-    //const [event, verificarParticipacion] = useState(0);
-    useEffect(
-        function () {
+    const [open, setOpen] = React.useState(false);
+
+    useEffect(function () {
         onGetParticipacion(proyecto.id).then(state => 
             {if(state) {
                 document.getElementById(proyecto.id).classList.add('button-hide');
-                onAsignarParticipacion()
+                onAsignarParticipacion() 
             }}
         );
-        } 
-    )
+    })
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -33,9 +32,8 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion
 
     const onClick = (event) => {
         onPartiparProy(proyecto.id); 
-        document.getElementById(proyecto.id).classList.add('button-hide');
-        alert('Registered participation');
-        onAsignarParticipacion()
+        document.getElementById(proyecto.id).classList.add('button-hide'); 
+        handleClickOpen();
     }
 
     return (

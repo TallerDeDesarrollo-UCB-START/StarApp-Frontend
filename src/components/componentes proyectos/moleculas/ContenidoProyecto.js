@@ -21,6 +21,7 @@ function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparP
     // Components:
     const tagParticipacion = participacion === true?
                             <EtiquetaParticipacion/> : ''
+    console.log(participacion)
     return (
         <Box className="content-container">
             
