@@ -1,27 +1,29 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import axios from "axios";
-import './crearEvento.css';
-import {Box,} from '@material-ui/core';
-import {Button,Container,} from "reactstrap";
-
+import "./crearEvento.css";
+import { Box } from "@material-ui/core";
+import { Button, Container } from "reactstrap";
 
 const url = "http://localhost:5000/eventos/crearevento";
 const urlLideres = "http://localhost:5000/lideres";
+const urlCategorias = "http://localhost:5000/eventos";
 const URL = process.env.REACT_APP_API;
 //const url = `${URL}eventos/crearevento`
-
 
 const apiLideres = axios.create({
   baseURL: urlLideres,
 });
-
+const apiCategorias = axios.create({
+  baseURL: urlCategorias,
+});
 
 class crearEvento extends React.Component {
-  constructor(){
+  constructor() {
     super();
     this.getLideres();
+    this.getCategorias();
   }
 
   state = {
@@ -39,9 +41,8 @@ class crearEvento extends React.Component {
       hora_fin: "",
     },
     lideres: [],
+    categorias: [],
   };
-
-
 
   mostrarModalInsertar = () => {
     this.setState({
@@ -49,27 +50,39 @@ class crearEvento extends React.Component {
     });
   };
 
-  peticionPost=async ()=>{
+  peticionPost = async () => {
     console.log(this.state.form);
-    await axios.post(url,this.state.form).then(response=>{
-      this.insertar();
-      
-    }).catch(error=>{
-      console.log(error.message);
-    })
-  }
+    await axios
+      .post(url, this.state.form)
+      .then((response) => {
+        this.insertar();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
-  getLideres = async () =>{
+  getLideres = async () => {
     try {
       let data = await apiLideres.get("/").then(({ data }) => data);
-      let aux = data.map(item => {return item.nombre + " " + item.apellido});
+      let aux = data.map((item) => {
+        return item.nombre + " " + item.apellido;
+      });
       aux.unshift("Sin Lider");
       this.setState({ lideres: aux });
-
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+  getCategorias = async () => {
+    let data = await apiCategorias.get("/categorias").then(({ data }) => data);
+    let aux = data.map((item) => {
+      return item.interes;
+    });
+    aux.unshift("Todas");
+    this.setState({ categoriaFiltrada: aux[0] });
+    this.setState({ categorias: aux });
+  };
 
   cerrarModalInsertar = () => {
     this.setState({ modalInsertar: false });
@@ -78,7 +91,7 @@ class crearEvento extends React.Component {
   insertar = () => {
     window.alert("Evento Guardado");
     window.location.href = "/eventos";
-  }
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -89,21 +102,13 @@ class crearEvento extends React.Component {
     });
   };
 
-
-
-
   render() {
     return (
       <>
         <Container className="Container">
-                
           <form className="FormEvento">
-
-          
             <Box className="evento" xs={6}>
-              <label>
-                Nombre del Evento: 
-              </label>
+              <label>Nombre del Evento:</label>
               <input
                 className="form-control"
                 name="nombre_evento"
@@ -111,47 +116,55 @@ class crearEvento extends React.Component {
                 onChange={this.handleChange}
               />
             </Box>
-          
+
             <Box className="descripcion" xs={6} mt={0.8}>
-              <label>
-                Descripción: 
-              </label>
-              <textarea  className="form-control descripcion-input" cols="30" rows="10"  
+              <label>Descripción:</label>
+              <textarea
+                className="form-control descripcion-input"
+                cols="30"
+                rows="10"
                 name="descripcion_evento"
                 type="text"
-                onChange={this.handleChange}>
-              </textarea>  
+                onChange={this.handleChange}
+              ></textarea>
             </Box>
 
             <Box className="lider" xs={6} mt={0.8}>
-              <label>
-                Lider: 
-              </label>
-              <select  className=" form-control lider-input" name="lider" onChange={this.handleChange}>
-                {this.state.lideres.map(item => {
-                  return (<option key={item} value={item}>{item}</option>);
+              <label>Lider:</label>
+              <select
+                className=" form-control lider-input"
+                name="lider"
+                onChange={this.handleChange}
+              >
+                {this.state.lideres.map((item) => {
+                  return (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  );
                 })}
               </select>
-
             </Box>
 
-
-            <Box  className="CamposInferiores" xs={12} mt={0.8}>
-
-              <Box className="InLine Modalidad" xs={4}>     
-                <label>
-                  Modalidad 
-                </label>
-                <select className=" form-control" name="modalidad_evento" onChange={this.handleChange}>
-                  <option value="Presencial" name="modalidad_evento">Presencial</option>
-                  <option value="Virtual" name="modalidad_evento">Virtual</option>                
+            <Box className="CamposInferiores" xs={12} mt={0.8}>
+              <Box className="InLine Modalidad" xs={4}>
+                <label>Modalidad</label>
+                <select
+                  className=" form-control"
+                  name="modalidad_evento"
+                  onChange={this.handleChange}
+                >
+                  <option value="Presencial" name="modalidad_evento">
+                    Presencial
+                  </option>
+                  <option value="Virtual" name="modalidad_evento">
+                    Virtual
+                  </option>
                 </select>
               </Box>
 
               <Box className="InLine Lugar" xs={4}>
-                <label>
-                  Lugar
-                </label>
+                <label>Lugar</label>
                 <input
                   className="form-control"
                   name="lugar_evento"
@@ -161,9 +174,7 @@ class crearEvento extends React.Component {
               </Box>
 
               <Box className="InLine Fecha" xs={4}>
-                <label>
-                  Fecha
-                </label>
+                <label>Fecha</label>
                 <input
                   className="form-control"
                   name="fecha_evento"
@@ -173,23 +184,26 @@ class crearEvento extends React.Component {
               </Box>
             </Box>
 
-            <Box  className="CamposMedios" xs={12} mt={0.8}>
-              <Box className="InLine Categoria" xs={4}>     
-                <label>
-                  Categoria 
-                </label>
-                <input
-                  className="form-control"
+            <Box className="CamposMedios" xs={12} mt={0.8}>
+              <Box className="InLine Categoria" xs={4}>
+                <label>Categoria</label>
+                <select
+                  className=" form-control categoria-input"
                   name="categoria"
-                  type="text"
                   onChange={this.handleChange}
-                />
+                >
+                  {this.state.categorias.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
               </Box>
 
               <Box className="InLine HoraInicio" xs={4}>
-                <label>
-                  Hora Inicio
-                </label>
+                <label>Hora Inicio</label>
                 <input
                   className="form-control"
                   name="hora_inicio"
@@ -199,9 +213,7 @@ class crearEvento extends React.Component {
               </Box>
 
               <Box className="InLine HoraFin" xs={4}>
-                <label>
-                  Hora Fin
-                </label>
+                <label>Hora Fin</label>
                 <input
                   className="form-control"
                   name="hora_fin"
@@ -212,17 +224,19 @@ class crearEvento extends React.Component {
             </Box>
 
             <div className="CamposBotones">
-            <Button className="BtnRegistrar" onClick={() => this.peticionPost()}> Registrar Evento </Button>
-              <Button className="BtnCancelar" ><Link to="/eventos"> Cancelar</Link> </Button>
-
+              <Button
+                className="BtnRegistrar"
+                onClick={() => this.peticionPost()}
+              >
+                {" "}
+                Registrar Evento{" "}
+              </Button>
+              <Button className="BtnCancelar">
+                <Link to="/eventos"> Cancelar</Link>{" "}
+              </Button>
             </div>
-            <Box   xs={12} mt={2}> 
-              
-            </Box>
-
-
+            <Box xs={12} mt={2}></Box>
           </form>
-
         </Container>
       </>
     );
