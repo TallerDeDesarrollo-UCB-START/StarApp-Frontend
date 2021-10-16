@@ -9,6 +9,8 @@ import {useMediaQuery, Button} from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { validEmail} from './RegEx'
 import AxiosClient from './AxiosClient'
+import { withStyles } from "@material-ui/core/styles";
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
 
@@ -67,10 +69,16 @@ const useStyles = makeStyles(theme => ({
     },
 })
 )
-
+const OkButton = withStyles((theme) => ({
+    root: {
+      marginRight: "auto",
+      marginLeft: "auto",
+    },
+    }))(Button);
 const LoginForm = ({sessionData, setSessionData}) => {
     const history = useHistory()
     const classes = useStyles()
+    const [open, setOpen] = React.useState(false);
     const smallScreen = useMediaQuery('(min-width:420px)')
     const validate = values => {
         const errors = {}
@@ -85,6 +93,14 @@ const LoginForm = ({sessionData, setSessionData}) => {
         }
         return errors
     }
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        history.push(`/login`)
+    };
     const URL_AUTH = process.env.REACT_APP_API_AUTH
     const URL_API = process.env.REACT_APP_API
     const onSubmit = async values => {
@@ -116,8 +132,7 @@ const LoginForm = ({sessionData, setSessionData}) => {
             })
             .catch((response) => {
                 console.log(response.status)
-                alert('correo o contraseña invalidos')
-                history.push(`/login`)
+                handleClickOpen();
             })
     }
     return (
@@ -142,6 +157,23 @@ const LoginForm = ({sessionData, setSessionData}) => {
                                         Crear cuenta nueva
                                     </Button>
                                 </div>
+                                <Dialog
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                >
+                                <DialogTitle id="alert-dialog-title">
+                                Credenciales incorrectos, porfavor intenta de nuevo!
+                                </DialogTitle>
+                                <DialogContent>
+                                </DialogContent>
+                                <DialogActions>
+                                    <OkButton variant="contained" color="primary" onClick={handleClose} autoFocus>
+                                        Ok  
+                                    </OkButton>
+                                </DialogActions>
+                                </Dialog>
                             </form>
                         )}
                     </Form>
