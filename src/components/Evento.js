@@ -125,6 +125,9 @@ class Evento extends Component {
                       <b> Nombre:</b> {participant.nombre}{" "}
                       {participant.apellido}
                     </p>
+                    <p className="card-text">
+                      <b>Categoría:</b> {event.categoria}
+                    </p>
                   </div>
                 </div>
               </div>

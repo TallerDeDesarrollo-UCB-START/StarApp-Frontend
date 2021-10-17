@@ -26,12 +26,15 @@ class EventsList extends Component {
     botonMostrarEventosNoArchivados: false,
     botonMostrarEventosArchivados: true,
     success: false,
+    categoriaFiltrada: "",
+    categorias: [],
   };
 
   constructor() {
     super();
     this.getEvents();
     this.getParticipaciones();
+    this.getCategorias();
   }
 
   abrirModal = () => {
@@ -41,12 +44,30 @@ class EventsList extends Component {
   getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
-      data = data.filter((event) => event.estado === "1");
+      if (this.state.categoriaFiltrada !== "Todas" && this.state.categoriaFiltrada !== "Otro" ) {
+        data = data.filter(
+          (event) =>
+            event.estado === "1" &&
+            event.categoria === this.state.categoriaFiltrada
+        );
+      } else {
+        data = data.filter((event) => event.estado === "1");
+      }
       this.setState({ events: data });
     } catch (err) {
       console.log(err);
     }
   };
+
+  getCategorias = async () => {
+    let data = await api.get("/categorias").then(({ data }) => data);
+    let aux = data.map(item => {return item.interes});
+    aux.unshift("Todas");
+    this.setState({ categoriaFiltrada: aux[0] });
+    this.setState({ categorias: aux });
+  };
+
+
 
   getEventsArchivados = async () => {
     try {
@@ -110,6 +131,10 @@ class EventsList extends Component {
       console.log(err);
     }
   };
+  filterChangeHandler = (categoria) => {
+    this.setState({ categoriaFiltrada: categoria.target.value });
+    this.getEvents();  
+  };
 
   mensajeConfirmacionParticipacion(event) {
     window.alert(
@@ -156,6 +181,13 @@ class EventsList extends Component {
         <div>
           <div>
             <h1> Bienvenido a Lista de eventos!</h1>
+          </div>
+          <div>
+            <select  value={this.state.categoriaFiltrada} onChange={this.filterChangeHandler}>
+              {this.state.categorias.map(item => {
+                return (<option key={item} value={item}>{item}</option>);
+              })}
+            </select>
           </div>
           <div style={{ display: "flex" }}>
             <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
@@ -219,6 +251,9 @@ class EventsList extends Component {
                       }
 
                       
+                      <p className="card-text">
+                        <b>Categoría:</b> {event.categoria}
+                      </p>
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
                       </Button>
