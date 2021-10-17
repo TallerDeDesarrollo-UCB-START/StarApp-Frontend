@@ -1,7 +1,6 @@
-import React from "react";
+import {React, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import LogoStart from "../images/logoStart.png";
 import { Form, Field } from "react-final-form";
 import { useMediaQuery, Button, Grid, Typography } from "@material-ui/core";
 import { TextField } from "final-form-material-ui";
@@ -15,39 +14,32 @@ import Slide from '@material-ui/core/Slide'
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
+    margin:'150px 0',
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    alignItems: "center",
-  },
-  logoContainer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
   },
   nameContainer: {
     display: "flex",
     justifyContent: "space-between",
   },
-  logo: {
-    width: "500px",
-    height: "200px",
-    marginTop: "5px",
+  smallNameContainer:{
+    display: "flex",
+    flexDirection: "column",
   },
   registerCard: {
     padding: "30px",
     width: "750px",
-    height: "500px",
     marginRight: "80px",
     background: "#F2F2F2",
     boxShadow:
       "0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.14), 0px 8px 10px -5px rgba(0, 0, 0, 0.2)",
     borderRadius: "6px 6px 0px 0px",
   },
-  respregisterCard: {
+  smallRegisterCard: {
+    padding: "10px",
     width: "100%",
-    height: "484px",
   },
   buttonContainer: {
     width: "100%",
@@ -124,7 +116,6 @@ const [transition, setTransition] = React.useState(undefined);
     AxiosClient.post(`${URL_AUTH}api/auth/signup`, bodyAuth)
       .then((response) => {
         if (response.status === 200) {
-          console.log("auth register done")
           const id_auth = response.data.id_autenticacion
           const body = {
             nombre: values.username,
@@ -132,42 +123,36 @@ const [transition, setTransition] = React.useState(undefined);
             telefono: `+591 ${values.phone}`,
             id_autenticacion: parseInt(id_auth),
           };
-          console.log(body);
           AxiosClient.post(`${URL}extended_form`, body)
             .then((response) => {
               if (response.status === 200) {
-                console.log("user register done")
-                
+                activeAlertMessage("Se ha registrado el usuario correctamente.", ()=>history.push(`/login`))
               }
             })
             .catch((response) => {
-              console.log(response)
+              activeAlertMessage(`${response}`, ()=>window.location.reload())
             });
         }
       }) 
       .catch((response) => {
-        console.log(response);
+        activeAlertMessage(`El correo: ${values.email} ya ha sido registrado.`, ()=>window.location.reload())
       });
       handleClickOpen(TransitionDown,{ vertical: 'top', horizontal: 'center' });
   };
 
   return (
     <div className={classes.registerContainer}>
-      <div className={classes.logoContainer}>
-        <img src={LogoStart} alt="logo Start" className={classes.logo} />
-        <Typography variant="h2" style={{ marginRight: "" }}>
-          Incubadora de proyectos sociales y ambientales
-        </Typography>
-      </div>
+      <AlertMessage message = {alertMessage.message} handleConfirm={alertMessage.handleConfirm} active={alertMessage.active}/>
+      <LogoAndSlogan/>
       <Grid>
-        <div style={{ textAlign: "center" }}>
-          <Typography variant="h3" style={{ marginRight: "80px" }}>
-            Formulario de registro
+        <div >
+          <Typography variant="h3" >
+            Llena tus datos
           </Typography>
         </div>
         <Card
           className={
-            smallScreen ? classes.registerCard : classes.respregisterCard
+            smallScreen ? classes.smallRegisterCard: classes.registerCard
           }
         >
           <Form onSubmit={onSubmit} validate={validate}>
@@ -183,9 +168,9 @@ const [transition, setTransition] = React.useState(undefined);
                   component={TextField}
                   required
                 />
-                <div className={classes.nameContainer}>
+                <div className={smallScreen? classes.smallNameContainer: classes.nameContainer}>
                   <Field
-                    style={{ width: "49%" }}
+                    style={{ width: smallScreen? "100%":"49%" }}
                     label="Ingresa tu nombre"
                     name="username"
                     type="text"
@@ -195,7 +180,7 @@ const [transition, setTransition] = React.useState(undefined);
                     required
                   />
                   <Field
-                    style={{ width: "49%" }}
+                    style={{ width: smallScreen? "100%":"49%" }}
                     label="Ingresa tu apellido"
                     name="lastname"
                     type="text"

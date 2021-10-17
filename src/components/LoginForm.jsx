@@ -1,8 +1,6 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
-import LogoStart from '../images/logoStart.png'
 import InputTextbox from './InputTextbox'
 import { Form } from "react-final-form"
 import {useMediaQuery, Button} from '@material-ui/core'
@@ -17,25 +15,21 @@ const useStyles = makeStyles(theme => ({
 
     Container : {
         display: 'flex',
-        paddingBottom: '5%'
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin:'250px 0',
+    },
+    smallContainer:{
+        isplay: 'flex',
+        flexDirection:'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin:'200px 0',
+        marginBottom: '0',
     },
     loginContainer : {
         display: 'flex',
-        justifyContent: 'right',
-        alignItems: 'center',
-        paddingTop: '5%',
-        paddingBottom: '5%',
-        marginRight: '2%'
-    },
-    logoContainer : {
-        display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-    },
-    logo : {
-        width: '70%',
-        height: '40%',
     },
     loginCard : {
         width: '450px',
@@ -115,22 +109,21 @@ const LoginForm = ({sessionData, setSessionData}) => {
             email: values.email,
             password: values.password
         }
+        setActiveProgressBar(true)
         return AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
             .then(response => {
                 if ((response.status = 201)) {
-                    console.log("logged")
                     const jwt = response.data.accessToken
                     const id_auth = response.data.id
-                    console.log(response)
                     sessionStorage.setItem("jwt", jwt)
                     sessionStorage.setItem("id", id_auth)
                     AxiosClient.get(`${URL_API}extended_form/${id_auth}`)
                         .then(response => {
-                            console.log(response.data.data)
+                            setActiveProgressBar(false)
                             setSessionData({role: response.data.data.rol, id: id_auth})
                         })
                         .catch((response)=>{
-                            console.log(response.status)
+                            setActiveProgressBar(false)
                             alert('Inicio de sesión fallido')
                             window.location.reload()
                         })
@@ -143,17 +136,14 @@ const LoginForm = ({sessionData, setSessionData}) => {
             })
     }
     return (
-        <div className={classes.Container}>
-            <div className = {classes.logoContainer}>
-                <img src={LogoStart} alt="logo Start" className = {classes.logo} />
-                <Typography> Incubadora de proyectos sociales y ambientales </Typography>
-            </div>
-
+        <div className={smallScreen?classes.smallContainer:classes.Container}>
+            <LogoAndSlogan/>
             <div className = {classes.loginContainer}>
-                <Card className = {(smallScreen)?classes.loginCard:classes.respLoginCard}>
+                <Card className = {(smallScreen)?classes.respLoginCard:classes.loginCard}>
                     <Form onSubmit={onSubmit} validate={validate} >
                         {({ handleSubmit }) => (
                             <form onSubmit={handleSubmit} noValidate>
+                                <LinearProgress style={{display:(activeProgressBar)?"":"none"}}/>
                                 <InputTextbox name="email" type="text" placeholder = "Correo Electrónico"/>
                                 <InputTextbox name="password" type = "password" placeholder = "Contraseña"/>
                                 <div className = {classes.buttonContainer}>

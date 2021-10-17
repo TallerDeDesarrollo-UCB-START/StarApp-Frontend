@@ -47,7 +47,7 @@ const Header = ({ sessionData }) => {
     setLogged(Boolean(sessionStorage.getItem("jwt")));
   }, [history, currentPath]);
   return (
-    <header className="header-division">
+    <header className="header-division" style={{ display: (currentPath===routes[4].path || currentPath===routes[5].path)? "none":"" }}>
       <div className="header-logo">
         <div style={{ width: "10%" }}></div>
         <div className={classes.containerLogo}>
