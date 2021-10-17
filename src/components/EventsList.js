@@ -15,11 +15,12 @@ const api = axios.create({
   baseURL: urlDeploy,
 });
 const urlParticipacion = `${urlDeploy}/participate_evento/`;
+
 class EventsList extends Component {
   state = {
     events: [],
     participaciones: [],
-    users: [],
+    user: "",
     divcontainer: true,
     abierto: false,
     botonMostrar: false,
@@ -37,6 +38,7 @@ class EventsList extends Component {
     this.getParticipaciones();
     this.getCategorias();
     this.getUsers();
+    this.getUserRol();
   }
 
   abrirModal = () => {
@@ -122,13 +124,14 @@ class EventsList extends Component {
       .catch((error) => {
         console.log(error.message);
       });
-
   };
-  
-  getParticipaciones= async () => {
+
+  getParticipaciones = async () => {
     try {
-      var data = await api.get(`/participante/${window.sessionStorage.id}`).then(({ data }) => data);
-      this.setState({ participaciones: data});
+      var data = await api
+        .get(`/participante/${window.sessionStorage.id}`)
+        .then(({ data }) => data);
+      this.setState({ participaciones: data });
     } catch (err) {
       console.log(err);
     }
@@ -146,17 +149,22 @@ class EventsList extends Component {
   }
 
   //Funciones pertenecientes a Eliminacion Participacion
-  eliminarParticipacion = async (event)=>{
-    await axios.delete(urlDeploy + "/eliminar_participacion/" + event.id + "/" + window.sessionStorage.id)
-    .then((response) => {
-      this.mensajeConfirmacionEliminacionParticipacion(event);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-
-
-  }
+  eliminarParticipacion = async (event) => {
+    await axios
+      .delete(
+        urlDeploy +
+          "/eliminar_participacion/" +
+          event.id +
+          "/" +
+          window.sessionStorage.id
+      )
+      .then((response) => {
+        this.mensajeConfirmacionEliminacionParticipacion(event);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   mensajeConfirmacionEliminacionParticipacion(event) {
     window.alert(
@@ -166,26 +174,22 @@ class EventsList extends Component {
   }
 
   //Mostrar y Ocultar botones participacion
-  validarBotones(event){
-    return !this.state.participaciones.some(function(evento) { return evento.id_evento === event.id; });  
+  validarBotones(event) {
+    return !this.state.participaciones.some(function (evento) {
+      return evento.id_evento === event.id;
+    });
   }
 
-  getUsers = async () => {
+  
+  getUserRol = async () => {
     try {
-      let data = await api.get(url+"/extended_form/").then(({ data }) => data);
-      this.setState({ users: data});
+      let data = await axios.get(url + "extended_form/" + window.sessionStorage.id);
+      let rol = await data.data.data.rol
+      this.setState({ user: rol });
     } catch (err) {
       console.log(err);
     }
   };
-
-  /*getUser = async (user) => {
-    if (sessionStorage.id === user.id){
-      let userRol = await axios.get(url + "/extended_form/" + user.id);
-      return userRol.json();
-    }
-    console.log(userRol.rol);
-  }*/
 
   render() {
     const modalStyles = {
@@ -194,9 +198,7 @@ class EventsList extends Component {
       left: "50%",
       transform: "translate(-50%,-50%)",
     };
-    
-    const rol = "lider";
-
+    const rolUser = this.state.user;
     return (
       <div>
         <div>
@@ -211,7 +213,7 @@ class EventsList extends Component {
             </select>
           </div>
           <div style={{ display: "flex" }}>
-            { rol === "lider" ? 
+            { rolUser === "lider" ? 
               <Fragment> 
                 <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
                 {" "}
@@ -219,7 +221,7 @@ class EventsList extends Component {
                 </Button>
               </Fragment> : <></>
             };
-            
+
             <Button
               style={{
                 display: this.state.botonMostrarEventosArchivados
@@ -274,6 +276,25 @@ class EventsList extends Component {
                         <b>Categoría:</b> {event.categoria}
                       </p>
 
+                      {this.validarBotones(event) ? (
+                        <Button
+                          onClick={() => {
+                            this.postParticipacion(event);
+                          }}
+                        >
+                          {" "}
+                          Participar
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            this.eliminarParticipacion(event);
+                          }}
+                        >
+                          {" "}
+                          Eliminar Participacion
+                        </Button>
+                      )}
 
                       {this.validarBotones(event) ?
                       <Button onClick={() => {this.postParticipacion(event);}} > Participar</Button> :
@@ -286,29 +307,30 @@ class EventsList extends Component {
                       </Button>
                     </div>
                   </div>
-                  { rol === "lider" ? 
+                  {rolUser === "lider" ? (
                     <Fragment>
                       <div className="principal">
-                    <div className="secundario">
-                      <Button
-                        style={{
-                          display: this.state.botonMostrar ? "block" : "none",
-                        }}
-                        onClick={() => this.peticionMostrar(event)}
-                      >
-                        Mostrar
-                      </Button>
-                      <Button
-                        style={{
-                          display: this.state.botonArchivar ? "block" : "none",
-                        }}
-                        onClick={() => this.peticionArchivar(event)}
-                      >
-                        Archivar
-                      </Button>
-
-                      
-
+                        <div className="secundario">
+                          <Button
+                            style={{
+                              display: this.state.botonMostrar
+                                ? "block"
+                                : "none",
+                            }}
+                            onClick={() => this.peticionMostrar(event)}
+                          >
+                            Mostrar
+                          </Button>
+                          <Button
+                            style={{
+                              display: this.state.botonArchivar
+                                ? "block"
+                                : "none",
+                            }}
+                            onClick={() => this.peticionArchivar(event)}
+                          >
+                            Archivar
+                          </Button>
 
 
                       <Button color="success" onClick={()=>this.deleteEvento(event)}>
@@ -316,10 +338,9 @@ class EventsList extends Component {
                       </Button>
                     </div>
                   </div>
-                    </Fragment> :
+                    </Fragment>):(
                     <></>
-                  }            
-                  
+                  )}
 
                   <Modal isOpen={this.state.abierto} style={modalStyles}>
                     <ModalHeader>
