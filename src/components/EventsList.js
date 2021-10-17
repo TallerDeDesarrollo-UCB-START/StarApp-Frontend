@@ -243,6 +243,10 @@ class EventsList extends Component {
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
+                                            
+                      <p className="card-text">
+                        <b>Categoría:</b> {event.categoria}
+                      </p>
 
 
                       {this.validarBotones(event) ?
@@ -250,10 +254,7 @@ class EventsList extends Component {
                       <Button onClick={()=>{this.eliminarParticipacion(event)}}> Eliminar Participacion</Button>
                       }
 
-                      
-                      <p className="card-text">
-                        <b>Categoría:</b> {event.categoria}
-                      </p>
+
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
                       </Button>
