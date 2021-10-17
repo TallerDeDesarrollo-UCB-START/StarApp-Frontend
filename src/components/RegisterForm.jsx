@@ -80,9 +80,6 @@ const [transition, setTransition] = React.useState(undefined);
     if (!values.username) {
       errors.username = "Campo requerido";
     }
-    if (!values.phone) {
-      errors.phone = "Campo requerido";
-    }
     if (!values.lastname) {
       errors.lastname = "Campo requerido";
     }

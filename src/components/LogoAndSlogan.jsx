@@ -3,8 +3,9 @@ import { makeStyles } from "@material-ui/core/styles"
 import LogoStart from "../images/logoStart.png"
 import { Typography } from '@material-ui/core'
 import {useMediaQuery} from '@material-ui/core'
-import Chip from '@material-ui/core/Chip'
+import Chip from '@material-ui/core/Chip';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+
 const useStyles = makeStyles((theme) => ({
   logo: {
     width: "500px",
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
       width:'100%',
       display:"flex",
       justifyContent:"flex-start",
+      margin:'20px 0',
   }
 }))
 
@@ -34,7 +36,9 @@ const LogoAndSlogan = () => {
     const smallScreen = !useMediaQuery('(min-width:700px)')
     return (
         <div className={classes.logoContainer}>
-            <div className={classes.backButton}><Chip variant="outlined" icon={<ArrowBackIosIcon />} label="Volver" clickable onClick={() => window.history.back()}/></div>
+            <div className={classes.backButton}>
+              <Chip color="primary" icon={<ArrowBackIosIcon />} label="Volver" clickable onClick={() => window.history.back()}/>
+            </div>
             <img src={LogoStart} alt="logo Start" className={(smallScreen)? classes.smallLogo: classes.logo} />
             <Typography variant="h2" style={{ textAlign: "center" }}>
             Incubadora de proyectos sociales y ambientales

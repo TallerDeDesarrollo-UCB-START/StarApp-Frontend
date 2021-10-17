@@ -53,7 +53,7 @@ const Header = ({ sessionData }) => {
         <div className={classes.containerLogo}>
           <img src={Logo} alt=" " className="header-image" />
         </div>
-        <LoggoutButton logged={logged} />
+        <LoggoutButton logged={logged} sessionData={sessionData}/>
       </div>
       <div className="header-menu">
         <BottomNavigation

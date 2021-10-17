@@ -69,6 +69,7 @@ function TransitionDown(props) {
   }
   
 const LoginForm = ({sessionData, setSessionData}) => {
+    const [alertMessage, setAlertMessage] = useState({active: false, message:"", handleConfirm:()=>{}})
     const history = useHistory()
     const classes = useStyles()
     const [state, setState] = React.useState({
@@ -120,11 +121,11 @@ const LoginForm = ({sessionData, setSessionData}) => {
                     AxiosClient.get(`${URL_API}extended_form/${id_auth}`)
                         .then(response => {
                             setActiveProgressBar(false)
-                            setSessionData({role: response.data.data.rol, id: id_auth})
+                            setSessionData({role: response.data.data.rol, id: id_auth, name:response.data.data.nombre})
                         })
                         .catch((response)=>{
                             setActiveProgressBar(false)
-                            alert('Inicio de sesión fallido')
+                            activeAlertMessage("Inicio de sesión fallido", ()=>window.location.reload())
                             window.location.reload()
                         })
                     history.push(`/`)
@@ -135,8 +136,12 @@ const LoginForm = ({sessionData, setSessionData}) => {
                 handleClickOpen(TransitionDown,{ vertical: 'top', horizontal: 'center' });
             })
     }
+    const activeAlertMessage = (message, handleConfirm)=>{
+        setAlertMessage({active:true,message, handleConfirm})
+      }
     return (
         <div className={smallScreen?classes.smallContainer:classes.Container}>
+            <AlertMessage message = {alertMessage.message} handleConfirm={alertMessage.handleConfirm} active={alertMessage.active}/>
             <LogoAndSlogan/>
             <div className = {classes.loginContainer}>
                 <Card className = {(smallScreen)?classes.respLoginCard:classes.loginCard}>
