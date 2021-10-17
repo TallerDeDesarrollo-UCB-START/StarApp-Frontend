@@ -66,21 +66,46 @@ class Evento extends Component {
                     alt=""
                   />
                 </div>
+
                 <div className="col">
-                  <div className="card-block px-1">
+                  <div className="row">
                     <h4 className="card-title">{event.nombre_evento}</h4>
-                    <p className="card-text">
-                      <b>Description:</b> {event.descripcion_evento}
-                    </p>
-                    <p className="card-text">
-                      <b>Modalidad:</b> {event.modalidad_evento}
-                    </p>
-                    <p className="card-text">
-                      <b>Fecha:</b> {event.fecha_evento}
-                    </p>
-                    <p className="card-text">
-                      <b>Lugar:</b> {event.lugar_evento}
-                    </p>
+                  </div>
+
+                  <div className="row">
+                    <div className="col">
+                      <div className="card-block px-1">
+                        <p className="card-text">
+                          <b>Description:</b> {event.descripcion_evento}
+                        </p>
+                        <p className="card-text">
+                          <b>Categoría:</b> {event.categoria}
+                        </p>
+                        <p className="card-text">
+                          <b>Modalidad:</b> {event.modalidad_evento}
+                        </p>
+                        <p className="card-text">
+                          <b>Fecha:</b> {event.fecha_evento}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="col">
+                      <div className="card-block px-1">
+                        <p className="card-text">
+                          <b>Lider:</b> {event.lider}
+                        </p>
+                        <p className="card-text">
+                          <b>Hora Inicio:</b> {event.hora_inicio}
+                        </p>
+                        <p className="card-text">
+                          <b>Hora Fin:</b> {event.hora_fin}
+                        </p>
+                        <p className="card-text">
+                          <b>Lugar:</b> {event.lugar_evento}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
