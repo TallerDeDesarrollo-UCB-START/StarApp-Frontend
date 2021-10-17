@@ -109,7 +109,7 @@ function VistaProyectos() {
         </>
     );
 }
-
+    
 const url = process.env.REACT_APP_API;
 const URLParticiparProy = `http://localhost:5000/participate_proyecto`
 const URLProyectos = 'http://localhost:5000/get_proyectos'
