@@ -7,7 +7,7 @@ import {useState, useEffect} from 'react'
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
-    //const [proyecto, setProyecto] = useState({})
+    const [rol, setRol] = useState('admin')
 
     useEffect(() => {
         const getProyectos = async () => {
@@ -88,10 +88,20 @@ function VistaProyectos() {
         setProyectos(proyectos.filter((proy) => proy.id !== id));
     }
     
-    const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? <ProyectosAdmins proyectos={proyectos} onCrearProy={crearProyecto} 
-        onEliminarProy={eliminarProyecto} onPartiparProy={participarEnProyecto} onEditarProy={editarProyecto} 
-        onGetParticipacion={obtenerParticipacionProyecto}/> : <ProyectosVoluntarios proyectos={proyectos}/>
+    //const rol = 'admin'
+    const componenteProyectos = rol=='admin' ? 
+    <ProyectosAdmins rol={rol}
+                    proyectos={proyectos} 
+                    onCrearProy={crearProyecto} 
+                    onEliminarProy={eliminarProyecto} 
+                    onPartiparProy={participarEnProyecto} 
+                    onEditarProy={editarProyecto} 
+                    onGetParticipacion={obtenerParticipacionProyecto}/> 
+    :
+    <ProyectosVoluntarios rol={rol}
+                    proyectos={proyectos}
+                    onPartiparProy={participarEnProyecto}
+                    onGetParticipacion={obtenerParticipacionProyecto}/>
 
     return (
         <>

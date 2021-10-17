@@ -16,7 +16,10 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion
     useEffect(function () {
         onGetParticipacion(proyecto.id).then(state => 
             {if(state) {
-                document.getElementById(proyecto.id).classList.add('button-hide');
+                // Coloque este if, porque a veces se renderiza un null y eso daba warning
+                if(document.getElementById(proyecto.id)){
+                    document.getElementById(proyecto.id).classList.add('button-hide');
+                }
                 onAsignarParticipacion() 
             }}
         );
@@ -33,6 +36,7 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion
     const onClick = (event) => {
         onPartiparProy(proyecto.id); 
         document.getElementById(proyecto.id).classList.add('button-hide'); 
+        onAsignarParticipacion()
         handleClickOpen();
     }
 

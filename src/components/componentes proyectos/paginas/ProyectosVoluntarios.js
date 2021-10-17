@@ -1,16 +1,19 @@
 // Componentes:
 import HeaderProyectos from '../organismos/HeaderProyectos'
-import BodyProyectosNormal from '../organismos/BodyProyectosNormal'
+import BodyProyectos from '../organismos/BodyProyectos'
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
 // DIEGO
 //victor y Merce
-function ProyectosVoluntarios({proyectos, onPartiparProy, onGetParticipacion}) {
+function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion}) {
     return (
         <Box style={styles}>
             <HeaderProyectos />
-            <BodyProyectosNormal proyectos={proyectos} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion}/>
+            <BodyProyectos rol = {rol}
+                            proyectos={proyectos}
+                            onPartiparProy={onPartiparProy}
+                            onGetParticipacion={onGetParticipacion}/>
         </Box>
     );
 }
