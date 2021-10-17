@@ -37,7 +37,6 @@ class EventsList extends Component {
     this.getEvents();
     this.getParticipaciones();
     this.getCategorias();
-    this.getUsers();
     this.getUserRol();
   }
 
@@ -276,29 +275,9 @@ class EventsList extends Component {
                         <b>Categoría:</b> {event.categoria}
                       </p>
 
-                      {this.validarBotones(event) ? (
-                        <Button
-                          onClick={() => {
-                            this.postParticipacion(event);
-                          }}
-                        >
-                          {" "}
-                          Participar
-                        </Button>
-                      ) : (
-                        <Button
-                          onClick={() => {
-                            this.eliminarParticipacion(event);
-                          }}
-                        >
-                          {" "}
-                          Eliminar Participacion
-                        </Button>
-                      )}
-
                       {this.validarBotones(event) ?
-                      <Button onClick={() => {this.postParticipacion(event);}} > Participar</Button> :
-                      <Button onClick={()=>{this.eliminarParticipacion(event)}}> Eliminar Participacion</Button>
+                        <Button onClick={() => {this.postParticipacion(event);}} > Participar</Button> :
+                        <Button onClick={()=>{this.eliminarParticipacion(event)}}> Eliminar Participacion</Button>
                       }
 
 
