@@ -6,11 +6,12 @@ import "./crearEvento.css";
 import { Box } from "@material-ui/core";
 import { Button, Container } from "reactstrap";
 
-const url = "http://localhost:5000/eventos/crearevento";
-const urlLideres = "http://localhost:5000/lideres";
-const urlCategorias = "http://localhost:5000/eventos";
+
 const URL = process.env.REACT_APP_API;
-//const url = `${URL}eventos/crearevento`
+
+const url = `${URL}eventos/crearevento`;
+const urlLideres = `${URL}lideres`;
+const urlCategorias = `${URL}eventos`;
 
 const apiLideres = axios.create({
   baseURL: urlLideres,
@@ -35,7 +36,7 @@ class crearEvento extends React.Component {
       modalidad_evento: "Presencial",
       lugar_evento: "",
       fecha_evento: "",
-      categoria: "",
+      categoria: "Todas",
       estado: "1",
       hora_inicio: "",
       hora_fin: "",
@@ -80,7 +81,6 @@ class crearEvento extends React.Component {
       return item.interes;
     });
     aux.unshift("Todas");
-    this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
   };
 
