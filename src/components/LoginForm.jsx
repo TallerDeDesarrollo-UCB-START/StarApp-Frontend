@@ -164,17 +164,15 @@ const LoginForm = ({sessionData, setSessionData}) => {
                                         Crear cuenta nueva
                                     </Button>
                                     <Snackbar
-                                        severity="error" 
                                         anchorOrigin={{ vertical, horizontal }}
                                         open={open}
                                         autoHideDuration={3000}
                                         onClose={handleClose}
                                         TransitionComponent={transition}
-                                        message="Credenciales incorrectos, intente de nuevo!"
                                         key={transition ? transition.name : ''}
                                     >
                                         <Alert onClose={handleClose} severity="error" variant="filled">
-                                            Credenciales Incorrectos, intente de nuevo!
+                                            Credenciales incorrectos, intente de nuevo!
                                         </Alert>
                                     </Snackbar>
                                 </div>                                
