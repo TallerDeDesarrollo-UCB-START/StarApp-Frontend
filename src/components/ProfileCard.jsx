@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {  Card } from "@material-ui/core";
+import {  Card} from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 
@@ -32,11 +32,10 @@ const ProfileCard = (props) => {
           getDataProfile={getDataProfile}
           handleOpenprop={handleOpenprop}
          />
-        
       </CardContent>
       <CardActions></CardActions>
     </Card>
   );
 };
-
 export default withRouter(ProfileCard);
+
