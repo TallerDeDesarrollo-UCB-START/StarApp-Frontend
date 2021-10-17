@@ -9,8 +9,9 @@ import {useMediaQuery, Button} from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { validEmail} from './RegEx'
 import AxiosClient from './AxiosClient'
-import { withStyles } from "@material-ui/core/styles";
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
 
 const useStyles = makeStyles(theme => ({
 
@@ -69,16 +70,21 @@ const useStyles = makeStyles(theme => ({
     },
 })
 )
-const OkButton = withStyles((theme) => ({
-    root: {
-      marginRight: "auto",
-      marginLeft: "auto",
-    },
-    }))(Button);
+function TransitionDown(props) {
+    return <Slide {...props} direction="down" />;
+  }
+  
 const LoginForm = ({sessionData, setSessionData}) => {
     const history = useHistory()
     const classes = useStyles()
-    const [open, setOpen] = React.useState(false);
+    const [state, setState] = React.useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+      });
+      const { vertical, horizontal, open } = state;
+    const [transition, setTransition] = React.useState(undefined);
+
     const smallScreen = useMediaQuery('(min-width:420px)')
     const validate = values => {
         const errors = {}
@@ -93,12 +99,13 @@ const LoginForm = ({sessionData, setSessionData}) => {
         }
         return errors
     }
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleClickOpen = (Transition,newState) => {
+        setTransition(() => Transition);
+        setState({ open: true, ...newState });
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setState({ ...state, open: false });
         history.push(`/login`)
     };
     const URL_AUTH = process.env.REACT_APP_API_AUTH
@@ -132,7 +139,7 @@ const LoginForm = ({sessionData, setSessionData}) => {
             })
             .catch((response) => {
                 console.log(response.status)
-                handleClickOpen();
+                handleClickOpen(TransitionDown,{ vertical: 'top', horizontal: 'center' });
             })
     }
     return (
@@ -156,24 +163,21 @@ const LoginForm = ({sessionData, setSessionData}) => {
                                     <Button variant="contained" color="secondary" className = {classes.CreateButton} onClick = {()=> history.push("/register")}>
                                         Crear cuenta nueva
                                     </Button>
-                                </div>
-                                <Dialog
-                                    open={open}
-                                    onClose={handleClose}
-                                    aria-labelledby="alert-dialog-title"
-                                    aria-describedby="alert-dialog-description"
-                                >
-                                <DialogTitle id="alert-dialog-title">
-                                Credenciales incorrectos, porfavor intenta de nuevo!
-                                </DialogTitle>
-                                <DialogContent>
-                                </DialogContent>
-                                <DialogActions>
-                                    <OkButton variant="contained" color="primary" onClick={handleClose} autoFocus>
-                                        Ok  
-                                    </OkButton>
-                                </DialogActions>
-                                </Dialog>
+                                    <Snackbar
+                                        severity="error" 
+                                        anchorOrigin={{ vertical, horizontal }}
+                                        open={open}
+                                        autoHideDuration={3000}
+                                        onClose={handleClose}
+                                        TransitionComponent={transition}
+                                        message="Credenciales incorrectos, intente de nuevo!"
+                                        key={transition ? transition.name : ''}
+                                    >
+                                        <Alert onClose={handleClose} severity="error" variant="filled">
+                                            Credenciales Incorrectos, intente de nuevo!
+                                        </Alert>
+                                    </Snackbar>
+                                </div>                                
                             </form>
                         )}
                     </Form>
