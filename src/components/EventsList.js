@@ -47,7 +47,10 @@ class EventsList extends Component {
   getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
-      if (this.state.categoriaFiltrada !== "Todas" && this.state.categoriaFiltrada !== "Otro" ) {
+      if (
+        this.state.categoriaFiltrada !== "Todas" &&
+        this.state.categoriaFiltrada !== "Otro"
+      ) {
         data = data.filter(
           (event) =>
             event.estado === "1" &&
@@ -64,13 +67,13 @@ class EventsList extends Component {
 
   getCategorias = async () => {
     let data = await api.get("/categorias").then(({ data }) => data);
-    let aux = data.map(item => {return item.interes});
+    let aux = data.map((item) => {
+      return item.interes;
+    });
     aux.unshift("Todas");
     this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
   };
-
-
 
   getEventsArchivados = async () => {
     try {
@@ -137,7 +140,7 @@ class EventsList extends Component {
   };
   filterChangeHandler = (categoria) => {
     this.setState({ categoriaFiltrada: categoria.target.value });
-    this.getEvents();  
+    this.getEvents();
   };
 
   mensajeConfirmacionParticipacion(event) {
@@ -179,11 +182,12 @@ class EventsList extends Component {
     });
   }
 
-  
   getUserRol = async () => {
     try {
-      let data = await axios.get(url + "extended_form/" + window.sessionStorage.id);
-      let rol = await data.data.data.rol
+      let data = await axios.get(
+        url + "extended_form/" + window.sessionStorage.id
+      );
+      let rol = await data.data.data.rol;
       this.setState({ user: rol });
     } catch (err) {
       console.log(err);
@@ -205,32 +209,61 @@ class EventsList extends Component {
             <h1> Bienvenido a Lista de eventos!</h1>
           </div>
           <div>
-            <select  value={this.state.categoriaFiltrada} onChange={this.filterChangeHandler}>
-              {this.state.categorias.map(item => {
-                return (<option key={item} value={item}>{item}</option>);
+            <select
+              value={this.state.categoriaFiltrada}
+              onChange={this.filterChangeHandler}
+            >
+              {this.state.categorias.map((item) => {
+                return (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                );
               })}
             </select>
           </div>
           <div style={{ display: "flex" }}>
-            { rolUser === "lider" ? 
-              <Fragment> 
-                <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
-                {" "}
+            {rolUser === "lider" ? (
+              <Fragment>
+                <Button
+                  style={{ marginLeft: "auto" }}
+                  href="/eventos/crearevento"
+                >
+                  {" "}
                   Crear Evento{" "}
                 </Button>
-              </Fragment> : <></>
-            };
+                <Button
+                  style={{
+                    display: this.state.botonMostrarEventosArchivados
+                      ? "block"
+                      : "none",
+                  }}
+                  onClick={() => this.getEventsArchivados()}
+                >
+                  Eventos Pasados
+                </Button>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Button
+                  style={{ marginLeft: "auto"}} 
+                  color="#ffffff"
+                >
+                  
+                </Button>
+                <Button
+                  style={{
+                    display: this.state.botonMostrarEventosArchivados
+                      ? "block"
+                      : "none",
+                  }}
+                  onClick={() => this.getEventsArchivados()}
+                >
+                  Eventos Pasados
+                </Button>
+              </Fragment>
+            )}
 
-            <Button
-              style={{
-                display: this.state.botonMostrarEventosArchivados
-                  ? "block"
-                  : "none",
-              }}
-              onClick={() => this.getEventsArchivados()}
-            >
-              Eventos Pasados
-            </Button>
             <Button
               style={{
                 display: this.state.botonMostrarEventosNoArchivados
@@ -270,16 +303,30 @@ class EventsList extends Component {
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
-                                            
+
                       <p className="card-text">
                         <b>Categoría:</b> {event.categoria}
                       </p>
 
-                      {this.validarBotones(event) ?
-                        <Button onClick={() => {this.postParticipacion(event);}} > Participar</Button> :
-                        <Button onClick={()=>{this.eliminarParticipacion(event)}}> Eliminar Participacion</Button>
-                      }
-
+                      {this.validarBotones(event) ? (
+                        <Button
+                          onClick={() => {
+                            this.postParticipacion(event);
+                          }}
+                        >
+                          {" "}
+                          Participar
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            this.eliminarParticipacion(event);
+                          }}
+                        >
+                          {" "}
+                          Eliminar Participacion
+                        </Button>
+                      )}
 
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
@@ -311,13 +358,16 @@ class EventsList extends Component {
                             Archivar
                           </Button>
 
-
-                      <Button color="success" onClick={()=>this.deleteEvento(event)}>
-                        Eliminar
-                      </Button>
-                    </div>
-                  </div>
-                    </Fragment>):(
+                          <Button
+                            color="success"
+                            onClick={() => this.deleteEvento(event)}
+                          >
+                            Eliminar
+                          </Button>
+                        </div>
+                      </div>
+                    </Fragment>
+                  ) : (
                     <></>
                   )}
 
