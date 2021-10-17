@@ -192,9 +192,7 @@ const Profile = (onClick) => {
           (i) => i !== event.target.value
         );
       } else {
-        const aux = datosEdit.cualidades;
-        aux.push(event.target.value);
-        nuevasCualidades = aux;
+        nuevasCualidades = [...datosEdit.cualidades, event.target.value];
       }
     }
 
@@ -386,6 +384,7 @@ const Profile = (onClick) => {
                   id="MedioambienteCheck"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="MedioambienteCheck">Medio ambiente</label>
               </Grid>
               <Grid item xs={12}>
@@ -399,6 +398,7 @@ const Profile = (onClick) => {
                   id="DesarrollosostenibleCheck"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="DesarrollosostenibleCheck">
                   Desarrollo sostenible
                 </label>
@@ -412,6 +412,7 @@ const Profile = (onClick) => {
                   id="TrabajosocialCheck"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="TrabajosocialCheck">Trabajo social</label>
               </Grid>
               <Grid item xs={12}>
@@ -423,6 +424,7 @@ const Profile = (onClick) => {
                   id="EmpoderamientoCheck"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="EmpoderamientoCheck">Empoderamiento</label>
               </Grid>
               <Grid item xs={12}>
@@ -434,6 +436,7 @@ const Profile = (onClick) => {
                   id="PerritoscallejerosCheck"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="PerritoscallejerosCheck">
                   Perritos callejeros
                 </label>
@@ -447,6 +450,7 @@ const Profile = (onClick) => {
                   id="educacionCheck"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="educacionCheck">Educacion</label>
               </Grid>
             </Grid>
@@ -464,6 +468,7 @@ const Profile = (onClick) => {
                   id="liderazgo-check"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="liderazgo-check">Liderazgo</label>
               </Grid>
               <Grid item xs={12}>
@@ -475,6 +480,7 @@ const Profile = (onClick) => {
                   id="organizacion-check"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="organizacion-check">Organizacion</label>
               </Grid>
               <Grid item xs={12}>
@@ -486,6 +492,7 @@ const Profile = (onClick) => {
                   id="aprendizaje-rapido"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="aprendizaje-rapido">Aprendizaje rapido</label>
               </Grid>
               <Grid item xs={12}>
@@ -497,6 +504,7 @@ const Profile = (onClick) => {
                   id="trabajo-en-equipo-check"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="trabajo-en-equipo-check">
                   Trabajo en equipo
                 </label>
@@ -510,6 +518,7 @@ const Profile = (onClick) => {
                   id="creatividad-check"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="creatividad-check">Creatividad</label>
               </Grid>
               <Grid item xs={12}>
@@ -521,6 +530,7 @@ const Profile = (onClick) => {
                   id="paciencia-check"
                   type="checkbox"
                 />
+                {` `}
                 <label htmlFor="paciencia-check">Paciencia</label>
               </Grid>
             </Grid>
