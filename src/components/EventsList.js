@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Button } from "reactstrap";
@@ -19,6 +19,7 @@ class EventsList extends Component {
   state = {
     events: [],
     participaciones: [],
+    users: [],
     divcontainer: true,
     abierto: false,
     botonMostrar: false,
@@ -35,6 +36,7 @@ class EventsList extends Component {
     this.getEvents();
     this.getParticipaciones();
     this.getCategorias();
+    this.getUsers();
   }
 
   abrirModal = () => {
@@ -168,6 +170,23 @@ class EventsList extends Component {
     return !this.state.participaciones.some(function(evento) { return evento.id_evento === event.id; });  
   }
 
+  getUsers = async () => {
+    try {
+      let data = await api.get(url+"/extended_form/").then(({ data }) => data);
+      this.setState({ users: data});
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /*getUser = async (user) => {
+    if (sessionStorage.id === user.id){
+      let userRol = await axios.get(url + "/extended_form/" + user.id);
+      return userRol.json();
+    }
+    console.log(userRol.rol);
+  }*/
+
   render() {
     const modalStyles = {
       position: "absolute",
@@ -175,6 +194,8 @@ class EventsList extends Component {
       left: "50%",
       transform: "translate(-50%,-50%)",
     };
+    
+    const rol = "lider";
 
     return (
       <div>
@@ -190,10 +211,15 @@ class EventsList extends Component {
             </select>
           </div>
           <div style={{ display: "flex" }}>
-            <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
-              {" "}
-              Crear Evento{" "}
-            </Button>
+            { rol === "lider" ? 
+              <Fragment> 
+                <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
+                {" "}
+                  Crear Evento{" "}
+                </Button>
+              </Fragment> : <></>
+            };
+            
             <Button
               style={{
                 display: this.state.botonMostrarEventosArchivados
@@ -260,8 +286,9 @@ class EventsList extends Component {
                       </Button>
                     </div>
                   </div>
-
-                  <div className="principal">
+                  { rol === "lider" ? 
+                    <Fragment>
+                      <div className="principal">
                     <div className="secundario">
                       <Button
                         style={{
@@ -289,6 +316,10 @@ class EventsList extends Component {
                       </Button>
                     </div>
                   </div>
+                    </Fragment> :
+                    <></>
+                  }            
+                  
 
                   <Modal isOpen={this.state.abierto} style={modalStyles}>
                     <ModalHeader>
