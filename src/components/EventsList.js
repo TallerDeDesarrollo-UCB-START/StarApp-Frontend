@@ -248,7 +248,7 @@ class EventsList extends Component {
 
 
 
-                      <Button color="success" onClick={this.abrirModal}>
+                      <Button color="success" onClick={()=>this.deleteEvento(event)}>
                         Eliminar
                       </Button>
                     </div>
