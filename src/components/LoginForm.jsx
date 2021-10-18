@@ -9,6 +9,9 @@ import {useMediaQuery, Button} from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { validEmail} from './RegEx'
 import AxiosClient from './AxiosClient'
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
 
 const useStyles = makeStyles(theme => ({
 
@@ -67,10 +70,21 @@ const useStyles = makeStyles(theme => ({
     },
 })
 )
-
+function TransitionDown(props) {
+    return <Slide {...props} direction="down" />;
+  }
+  
 const LoginForm = ({sessionData, setSessionData}) => {
     const history = useHistory()
     const classes = useStyles()
+    const [state, setState] = React.useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+      });
+      const { vertical, horizontal, open } = state;
+    const [transition, setTransition] = React.useState(undefined);
+
     const smallScreen = useMediaQuery('(min-width:420px)')
     const validate = values => {
         const errors = {}
@@ -85,6 +99,15 @@ const LoginForm = ({sessionData, setSessionData}) => {
         }
         return errors
     }
+    const handleClickOpen = (Transition,newState) => {
+        setTransition(() => Transition);
+        setState({ open: true, ...newState });
+    };
+
+    const handleClose = () => {
+        setState({ ...state, open: false });
+        window.location.reload();
+    };
     const URL_AUTH = process.env.REACT_APP_API_AUTH
     const URL_API = process.env.REACT_APP_API
     const onSubmit = async values => {
@@ -116,8 +139,7 @@ const LoginForm = ({sessionData, setSessionData}) => {
             })
             .catch((response) => {
                 console.log(response.status)
-                alert('correo o contraseña invalidos')
-                history.push(`/login`)
+                handleClickOpen(TransitionDown,{ vertical: 'top', horizontal: 'center' });
             })
     }
     return (
@@ -141,7 +163,19 @@ const LoginForm = ({sessionData, setSessionData}) => {
                                     <Button variant="contained" color="secondary" className = {classes.CreateButton} onClick = {()=> history.push("/register")}>
                                         Crear cuenta nueva
                                     </Button>
-                                </div>
+                                    <Snackbar
+                                        anchorOrigin={{ vertical, horizontal }}
+                                        open={open}
+                                        autoHideDuration={3000}
+                                        onClose={handleClose}
+                                        TransitionComponent={transition}
+                                        key={transition ? transition.name : ''}
+                                    >
+                                        <Alert onClose={handleClose} severity="error" variant="filled">
+                                            Credenciales incorrectos, intente de nuevo!
+                                        </Alert>
+                                    </Snackbar>
+                                </div>                                
                             </form>
                         )}
                     </Form>
