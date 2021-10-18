@@ -1,6 +1,9 @@
 // Componentes:
 import ProyectosAdmins from './ProyectosAdmins'
 import ProyectosVoluntarios from './ProyectosVoluntarios'
+// Permisos/Roles:
+import PuertaPermisos from '../organismos/PuertaPermisos';
+import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
 
@@ -110,23 +113,26 @@ function VistaProyectos() {
     
     //const rol = 'admin'
     //console.log(rol)
-    const componenteProyectos = rol==='core team' ? 
-    <ProyectosAdmins rol={rol}
-                    proyectos={proyectos} 
-                    onCrearProy={crearProyecto} 
-                    onEliminarProy={eliminarProyecto} 
-                    onPartiparProy={participarEnProyecto} 
-                    onEditarProy={editarProyecto} 
-                    onGetParticipacion={obtenerParticipacionProyecto}/> 
-    :
-    <ProyectosVoluntarios rol={rol}
-                    proyectos={proyectos}
-                    onPartiparProy={participarEnProyecto}
-                    onGetParticipacion={obtenerParticipacionProyecto}/>
-
+    
+//<PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
     return (
         <>
-            {componenteProyectos}
+            <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
+                <ProyectosAdmins rol={rol}
+                        proyectos={proyectos} 
+                        onCrearProy={crearProyecto} 
+                        onEliminarProy={eliminarProyecto} 
+                        onPartiparProy={participarEnProyecto} 
+                        onEditarProy={editarProyecto} 
+                        onGetParticipacion={obtenerParticipacionProyecto}/> 
+            </PuertaPermisos>
+            
+            <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
+                <ProyectosVoluntarios rol={rol}
+                        proyectos={proyectos}
+                        onPartiparProy={participarEnProyecto}
+                        onGetParticipacion={obtenerParticipacionProyecto}/>
+            </PuertaPermisos>
         </>
     );
 }
