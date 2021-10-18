@@ -5,12 +5,15 @@ import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
 import VerProyectoBtn from '../atomos/VerProyectoBtn';
 
+// Permisos/Roles:
+import PuertaPermisos from '../organismos/PuertaPermisos';
+import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 import { useState } from "react";
 
-function ContenidoProyecto({proyecto, rol, onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion}) {
+function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion}) {
     // States:
     const [participacion, setParticipacion] = useState(false)
     /*useEffect(() => {
@@ -34,14 +37,14 @@ function ContenidoProyecto({proyecto, rol, onEliminarProy, onActivarForm, onPart
                             onGetParticipacion={onGetParticipacion}
                             onAsignarParticipacion={asignarParticipacion}/>
                             : ''
-    const botonEditarProyecto = rol === 'admin'?
-                            <EditarProyectoBtn  onActivarForm={onActivarForm}
+    const botonEditarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
+                                    <EditarProyectoBtn  onActivarForm={onActivarForm}
                                                 proyecto={proyecto}/>
-                            : ''
-    const botonEliminarProyecto = rol === 'admin'?
-                            <EliminarProjectoBtn proyecto={proyecto}
-                                                onEliminarProy={onEliminarProy}/>
-                            : ''
+                                </PuertaPermisos>
+    const botonEliminarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
+                                        <EliminarProjectoBtn proyecto={proyecto}
+                                                            onEliminarProy={onEliminarProy}/>
+                                    </PuertaPermisos>
 
     return (
         <Box className="content-container">
@@ -58,6 +61,8 @@ function ContenidoProyecto({proyecto, rol, onEliminarProy, onActivarForm, onPart
                 {botonParticiparProyecto}
                 {botonEditarProyecto}
                 {botonEliminarProyecto}
+                
+                
             </div>
         </Box>
     );
