@@ -35,6 +35,7 @@ function VistaProyectoIndividual() {
 
     return (
         <div>
+            
             {proyecto.titulo} 
         </div>
     );
