@@ -7,15 +7,21 @@ import {useState, useEffect} from 'react'
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
-    const [rol, setRol] = useState('admin')
+    const [rol, setRol] = useState('')
 
     useEffect(() => {
         const getProyectos = async () => {
-        const proyectosDelServer =  await fetchProyectos()
-        setProyectos(proyectosDelServer)
+            const proyectosDelServer =  await fetchProyectos()
+            setProyectos(proyectosDelServer)
+        }
+        const asignarRol = async () => {
+            const rolObtenido =  await obtenerRol()
+            console.log(rolObtenido)
+            setRol(rolObtenido)
         }
         getProyectos()
-        setRol('admin') // Set Dummy, para evitar warning de momento... (se arreglara al obtener roles del backend en otra historia)
+        asignarRol()
+         // Set Dummy, para evitar warning de momento... (se arreglara al obtener roles del backend en otra historia)
     }, [proyectos.length] )
 
     // HTTP requests & functions
@@ -88,9 +94,22 @@ function VistaProyectos() {
     
         setProyectos(proyectos.filter((proy) => proy.id !== id));
     }
+
+    const obtenerRol = async () => {
+        //debugger;
+        const idAuth = 32//sessionStorage.getItem("id");
+        const response = await fetch(`${URLObtenerRol}${idAuth}`,
+        { 
+            method: 'GET'
+        });
+        const data = await response.json();
+        //console.log(data[0].rol)
+        return data[0].rol;
+    }
     
     //const rol = 'admin'
-    const componenteProyectos = rol==='admin' ? 
+    console.log(rol)
+    const componenteProyectos = rol==='core team' ? 
     <ProyectosAdmins rol={rol}
                     proyectos={proyectos} 
                     onCrearProy={crearProyecto} 
@@ -115,9 +134,10 @@ const url = process.env.REACT_APP_API;
 const URLParticiparProy = `${url}participate_proyecto` //`http://localhost:5000/participate_proyecto` 
 const URLProyectos = `${url}get_proyectos` //'http://localhost:5000/get_proyectos'
 //const URLProyecto = `${url}get_proyecto`'http://localhost:5000/get_proyecto'//`${url}get_proyectos`
-const URLCrearProy = `${url}create_proyecto` //'http://localhost:5000/create_proyecto' 
-const URLEditarProy =  `${url}update_proyecto` //'http://localhost:5000/update_proyecto'
-const URLEliminarProy = `${url}delete_proyecto` //'http://localhost:5000/delete_proyecto'
-const URLParticpaVoluntario = `${url}participate` //'http://localhost:5000/participate'
+const URLCrearProy = 'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
+const URLEditarProy = 'http://localhost:5000/update_proyecto'//`${url}edit_proyecto`
+const URLEliminarProy = 'http://localhost:5000/delete_proyecto'//`${url}delete_proyecto`
+const URLParticpaVoluntario = 'http://localhost:5000/participate'//`${url}participate`
+const URLObtenerRol = 'http://localhost:5000/get_rol/'
 
 export default VistaProyectos;

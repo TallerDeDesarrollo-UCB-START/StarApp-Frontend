@@ -34,11 +34,11 @@ function ContenidoProyecto({proyecto, rol, onEliminarProy, onActivarForm, onPart
                             onGetParticipacion={onGetParticipacion}
                             onAsignarParticipacion={asignarParticipacion}/>
                             : ''
-    const botonEditarProyecto = rol === 'admin'?
+    const botonEditarProyecto = rol === 'core team'?
                             <EditarProyectoBtn  onActivarForm={onActivarForm}
                                                 proyecto={proyecto}/>
                             : ''
-    const botonEliminarProyecto = rol === 'admin'?
+    const botonEliminarProyecto = rol === 'core team'?
                             <EliminarProjectoBtn proyecto={proyecto}
                                                 onEliminarProy={onEliminarProy}/>
                             : ''
