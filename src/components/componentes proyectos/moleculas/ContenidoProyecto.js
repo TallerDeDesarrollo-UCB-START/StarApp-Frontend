@@ -2,13 +2,46 @@
 import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
+import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
 
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
+import { useState } from "react";
 
-// Merce y Vic
-function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion}) {
+function ContenidoProyecto({proyecto, rol, onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion}) {
+    // States:
+    const [participacion, setParticipacion] = useState(false)
+    /*useEffect(() => {
+        asignarParticipacion() 
+        // No use este useEffect,
+        // porque por algun motivo no se activa igual al useEffect de ParticiparEnProyectoBtn
+    })*/
+
+    // Functions:
+    async function asignarParticipacion() {
+        const participa = await onGetParticipacion(proyecto.id)
+        const p = participa === true? true : false
+        setParticipacion(p)
+    }
+    // Components:
+    const tagParticipacion = participacion === true?
+                            <EtiquetaParticipacion/> : ''
+    const botonParticiparProyecto = participacion === false?
+                            <ParticiparEnProyectoBtn proyecto={proyecto} 
+                            onPartiparProy={onPartiparProy} 
+                            onGetParticipacion={onGetParticipacion}
+                            onAsignarParticipacion={asignarParticipacion}/>
+                            : ''
+    const botonEditarProyecto = rol === 'admin'?
+                            <EditarProyectoBtn  onActivarForm={onActivarForm}
+                                                proyecto={proyecto}/>
+                            : ''
+    const botonEliminarProyecto = rol === 'admin'?
+                            <EliminarProjectoBtn proyecto={proyecto}
+                                                onEliminarProy={onEliminarProy}/>
+                            : ''
+
     return (
         <Box className="content-container">
             
@@ -19,9 +52,10 @@ function ContenidoProyecto({proyecto, onEliminarProy, onActivarForm, onPartiparP
 
             <div className="button-container">
                 <div className="space-button"></div>
-                <ParticiparEnProyectoBtn proyecto={proyecto} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion}/>
-                <EditarProyectoBtn  onActivarForm={onActivarForm} proyecto={proyecto}/>
-                <EliminarProjectoBtn proyecto={proyecto} onEliminarProy={onEliminarProy}/>
+                {tagParticipacion}
+                {botonParticiparProyecto}
+                {botonEditarProyecto}
+                {botonEliminarProyecto}
             </div>
         </Box>
     );
