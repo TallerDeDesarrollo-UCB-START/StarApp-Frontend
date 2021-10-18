@@ -15,6 +15,7 @@ function VistaProyectos() {
         setProyectos(proyectosDelServer)
         }
         getProyectos()
+        setRol('admin') // Set Dummy, para evitar warning de momento... (se arreglara al obtener roles del backend en otra historia)
     }, [proyectos.length] )
 
     // HTTP requests & functions
@@ -89,7 +90,7 @@ function VistaProyectos() {
     }
     
     //const rol = 'admin'
-    const componenteProyectos = rol=='admin' ? 
+    const componenteProyectos = rol==='admin' ? 
     <ProyectosAdmins rol={rol}
                     proyectos={proyectos} 
                     onCrearProy={crearProyecto} 
@@ -110,7 +111,7 @@ function VistaProyectos() {
     );
 }
     
-const url = process.env.REACT_APP_API;
+// const url = process.env.REACT_APP_API;
 const URLParticiparProy = `http://localhost:5000/participate_proyecto`
 const URLProyectos = 'http://localhost:5000/get_proyectos'
 //const URLProyecto = `${url}get_proyecto`'http://localhost:5000/get_proyecto'//`${url}get_proyectos`

@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 function handleClick(){}
 
-function ContenidoProyecto({}) {
+function ContenidoProyecto() {
     const classes = useStyles();
     return (
         <Chip  label="Participando"

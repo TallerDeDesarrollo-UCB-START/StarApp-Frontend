@@ -7,7 +7,7 @@ import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
-import { useState, useEffect} from "react";
+import { useState } from "react";
 
 function ContenidoProyecto({proyecto, rol, onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion}) {
     // States:
