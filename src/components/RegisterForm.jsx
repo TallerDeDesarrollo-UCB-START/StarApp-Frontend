@@ -6,8 +6,12 @@ import { Form, Field } from "react-final-form";
 import { useMediaQuery, Button, Grid, Typography } from "@material-ui/core";
 import { TextField } from "final-form-material-ui";
 import { validEmail, validPassword } from "./RegEx";
-import { useHistory } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 import AxiosClient from "./AxiosClient";
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide'
+
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
@@ -61,9 +65,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function TransitionDown(props) {
+  return <Slide {...props} direction="down" />;
+}
+
 const RegisterForm = () => {
-  const history = useHistory();
+  //const history = useHistory();
   const classes = useStyles();
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, open } = state;
+const [transition, setTransition] = React.useState(undefined);
   const smallScreen = useMediaQuery("(min-width:420px)");
   const validate = (values) => {
     const errors = {};
@@ -87,6 +102,16 @@ const RegisterForm = () => {
     }
     return errors;
   };
+
+  const handleClickOpen = (Transition,newState) => {
+    setTransition(() => Transition);
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+    window.location.href = `/login`;
+  };
   const URL_AUTH = process.env.REACT_APP_API_AUTH
   const URL = process.env.REACT_APP_API
   const onSubmit = async (values) => {
@@ -94,6 +119,7 @@ const RegisterForm = () => {
       email: values.email,
       password: values.password,
     };
+    
     console.log(bodyAuth);
     AxiosClient.post(`${URL_AUTH}api/auth/signup`, bodyAuth)
       .then((response) => {
@@ -122,8 +148,9 @@ const RegisterForm = () => {
       .catch((response) => {
         console.log(response);
       });
-      history.push(`/login`)
+      handleClickOpen(TransitionDown,{ vertical: 'top', horizontal: 'center' });
   };
+
   return (
     <div className={classes.registerContainer}>
       <div className={classes.logoContainer}>
@@ -214,6 +241,18 @@ const RegisterForm = () => {
                     Crear cuenta start
                   </Button>
                 </div>
+                <Snackbar
+                  anchorOrigin={{ vertical, horizontal }}
+                  open={open}
+                  autoHideDuration={2000}
+                  onClose={handleClose}
+                  TransitionComponent={transition}
+                  key={transition ? transition.name : ''}
+                >
+                  <Alert onClose={handleClose} severity="success" variant="filled">
+                    Su usuario fue creado correctamente!
+                  </Alert>
+                </Snackbar>
               </form>
             )}
           </Form>
