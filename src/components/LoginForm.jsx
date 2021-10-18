@@ -7,9 +7,9 @@ import {useMediaQuery, Button} from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { validEmail} from './RegEx'
 import AxiosClient from './AxiosClient'
-import Alert from '@material-ui/lab/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
-import Slide from '@material-ui/core/Slide';
+import LogoAndSlogan from '../components/LogoAndSlogan'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import SnackbarMessage from '../components/templates/SnackbarMessage'
 
 const useStyles = makeStyles(theme => ({
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
         margin:'250px 0',
     },
     smallContainer:{
-        isplay: 'flex',
+        display: 'flex',
         flexDirection:'column',
         justifyContent: 'center',
         alignItems: 'center',
@@ -60,27 +60,20 @@ const useStyles = makeStyles(theme => ({
         color: 'white',
         marginBottom: '10PX',
         fontWeight: 'bold',
-
     },
 })
 )
-function TransitionDown(props) {
-    return <Slide {...props} direction="down" />;
-  }
-  
 const LoginForm = ({sessionData, setSessionData}) => {
-    const [alertMessage, setAlertMessage] = useState({active: false, message:"", handleConfirm:()=>{}})
     const history = useHistory()
     const classes = useStyles()
-    const [state, setState] = React.useState({
-        open: false,
-        vertical: 'top',
-        horizontal: 'center',
-      });
-      const { vertical, horizontal, open } = state;
-    const [transition, setTransition] = React.useState(undefined);
-
-    const smallScreen = useMediaQuery('(min-width:420px)')
+    const smallScreen = !useMediaQuery('(min-width:900px)')
+    const [snackbar, setSnackbar] = useState({
+        message:"",
+        active:false,
+        severity:"success",
+        afterClose:()=>{},
+    })
+    const [activeProgressBar, setActiveProgressBar] = useState(false)
     const validate = values => {
         const errors = {}
         if(!validEmail.test(values.email)){
@@ -94,15 +87,9 @@ const LoginForm = ({sessionData, setSessionData}) => {
         }
         return errors
     }
-    const handleClickOpen = (Transition,newState) => {
-        setTransition(() => Transition);
-        setState({ open: true, ...newState });
-    };
-
-    const handleClose = () => {
-        setState({ ...state, open: false });
-        window.location.reload();
-    };
+    const activeSnackbar = (message, severity, afterClose)=>{
+        setSnackbar({message, severity, afterClose, active:true})
+      }
     const URL_AUTH = process.env.REACT_APP_API_AUTH
     const onSubmit = async values => {
         const body = {
@@ -110,7 +97,7 @@ const LoginForm = ({sessionData, setSessionData}) => {
             password: values.password
         }
         setActiveProgressBar(true)
-        return AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
+        await AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
             .then(response => {
                 if ((response.status = 201)) {
                     const jwt = response.data.accessToken
@@ -123,16 +110,12 @@ const LoginForm = ({sessionData, setSessionData}) => {
                 }
             })
             .catch((response) => {
-                console.log(response.status)
-                handleClickOpen(TransitionDown,{ vertical: 'top', horizontal: 'center' });
+                setActiveProgressBar(false)
+                activeSnackbar("Correo o contraseña inválidos.", "error", ()=>{window.location.reload()})
             })
     }
-    const activeAlertMessage = (message, handleConfirm)=>{
-        setAlertMessage({active:true,message, handleConfirm})
-      }
     return (
         <div className={smallScreen?classes.smallContainer:classes.Container}>
-            <AlertMessage message = {alertMessage.message} handleConfirm={alertMessage.handleConfirm} active={alertMessage.active}/>
             <LogoAndSlogan/>
             <div className = {classes.loginContainer}>
                 <Card className = {(smallScreen)?classes.respLoginCard:classes.loginCard}>
@@ -149,23 +132,12 @@ const LoginForm = ({sessionData, setSessionData}) => {
                                     <Button variant="contained" color="secondary" className = {classes.CreateButton} onClick = {()=> history.push("/register")}>
                                         Crear cuenta nueva
                                     </Button>
-                                    <Snackbar
-                                        anchorOrigin={{ vertical, horizontal }}
-                                        open={open}
-                                        autoHideDuration={3000}
-                                        onClose={handleClose}
-                                        TransitionComponent={transition}
-                                        key={transition ? transition.name : ''}
-                                    >
-                                        <Alert onClose={handleClose} severity="error" variant="filled">
-                                            Credenciales incorrectos, intente de nuevo!
-                                        </Alert>
-                                    </Snackbar>
                                 </div>                                
                             </form>
                         )}
                     </Form>
                 </Card>
+                <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
             </div>
         </div>
     )

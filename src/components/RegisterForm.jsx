@@ -1,16 +1,16 @@
-import {React, useState} from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import { Form, Field } from "react-final-form";
-import { useMediaQuery, Button, Grid, Typography } from "@material-ui/core";
-import { TextField } from "final-form-material-ui";
-import { validEmail, validPassword } from "./RegEx";
-//import { useHistory } from "react-router-dom";
-import AxiosClient from "./AxiosClient";
-import Alert from '@material-ui/lab/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
-import Slide from '@material-ui/core/Slide'
-
+import {React, useState} from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import Card from "@material-ui/core/Card"
+import { Form, Field } from "react-final-form"
+import { useMediaQuery, Button, Grid, Typography, Input, InputLabel } from "@material-ui/core"
+import { TextField } from "final-form-material-ui"
+import { validEmail, validPassword } from "./RegEx"
+import { useHistory } from "react-router-dom"
+import AxiosClient from "./AxiosClient"
+import LogoAndSlogan from '../components/LogoAndSlogan'
+import MaskedInput from 'react-text-mask'
+import SnackbarMessage from '../components/templates/SnackbarMessage'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
@@ -56,22 +56,18 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "16px",
   },
 }))
-
-function TransitionDown(props) {
-  return <Slide {...props} direction="down" />;
-}
-
 const RegisterForm = () => {
-  //const history = useHistory();
-  const classes = useStyles();
-  const [state, setState] = React.useState({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-  });
-  const { vertical, horizontal, open } = state;
-const [transition, setTransition] = React.useState(undefined);
-  const smallScreen = useMediaQuery("(min-width:420px)");
+  const history = useHistory()
+  const classes = useStyles()
+  const [activeProgressBar, setActiveProgressBar] = useState(false)
+  const smallScreen = !useMediaQuery("(min-width:811px)")
+  const [phoneValue, setPhoneValue] = useState("591")
+  const [snackbar, setSnackbar] = useState({
+    message:"",
+    active:false,
+    severity:"success",
+    afterClose:()=>{},
+  })
   const validate = (values) => {
     const errors = {}
     if (!validEmail.test(values.email)) {
@@ -89,27 +85,16 @@ const [transition, setTransition] = React.useState(undefined);
     if (values.confirmPassword !== values.password || !values.confirmPassword) {
       errors.confirmPassword = "Contraseñas no coinciden"
     }
-    return errors;
-  };
-
-  const handleClickOpen = (Transition,newState) => {
-    setTransition(() => Transition);
-    setState({ open: true, ...newState });
-  };
-
-  const handleClose = () => {
-    setState({ ...state, open: false });
-    window.location.href = `/login`;
-  };
+    return errors
+  }
   const URL_AUTH = process.env.REACT_APP_API_AUTH
   const URL = process.env.REACT_APP_API
   const onSubmit = async (values) => {
+    setActiveProgressBar(true)
     const bodyAuth = {
       email: values.email,
       password: values.password,
-    };
-    
-    console.log(bodyAuth);
+    }
     AxiosClient.post(`${URL_AUTH}api/auth/signup`, bodyAuth)
       .then((response) => {
         if (response.status === 200) {
@@ -122,24 +107,30 @@ const [transition, setTransition] = React.useState(undefined);
           }
           AxiosClient.post(`${URL}extended_form`, body)
             .then((response) => {
-              if (response.status === 200) {
-                activeAlertMessage("Se ha registrado el usuario correctamente.", ()=>history.push(`/login`))
+              if (response.status === 201) {
+                setActiveProgressBar(false)
+                activeSnackbar("Se ha registrado el usuario correctamente.", "success", ()=>{history.push(`/login`)})
               }
             })
             .catch((response) => {
-              activeAlertMessage(`${response}`, ()=>window.location.reload())
+              setActiveProgressBar(false)
+              activeSnackbar(`${response}`, "error", ()=>{window.location.reload()})
             })
         }
       }) 
       .catch((response) => {
-        activeAlertMessage(`El correo: ${values.email} ya ha sido registrado.`, ()=>window.location.reload())
-      });
-      handleClickOpen(TransitionDown,{ vertical: 'top', horizontal: 'center' });
-  };
-
+        setActiveProgressBar(false)
+        activeSnackbar(`El correo: ${values.email} ya ha sido registrado.`, "error", ()=>{window.location.reload()})
+      })
+  }
+  const activeSnackbar = (message, severity, afterClose)=>{
+    setSnackbar({message, severity, afterClose, active:true})
+  }
+  const handleChangePhone = (event)=>{
+    setPhoneValue(event.target.value)
+  }
   return (
     <div className={classes.registerContainer}>
-      <AlertMessage message = {alertMessage.message} handleConfirm={alertMessage.handleConfirm} active={alertMessage.active}/>
       <LogoAndSlogan/>
       <Grid>
         <div >
@@ -155,6 +146,7 @@ const [transition, setTransition] = React.useState(undefined);
           <Form onSubmit={onSubmit} validate={validate}>
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit} noValidate>
+                <LinearProgress style={{display:(activeProgressBar)?"":"none"}}/>
                 <Field
                   fullWidth
                   label="Ingresa tu correo electrónico"
@@ -226,23 +218,12 @@ const [transition, setTransition] = React.useState(undefined);
                     Crear cuenta start
                   </Button>
                 </div>
-                <Snackbar
-                  anchorOrigin={{ vertical, horizontal }}
-                  open={open}
-                  autoHideDuration={2000}
-                  onClose={handleClose}
-                  TransitionComponent={transition}
-                  key={transition ? transition.name : ''}
-                >
-                  <Alert onClose={handleClose} severity="success" variant="filled">
-                    Su usuario fue creado correctamente!
-                  </Alert>
-                </Snackbar>
               </form>
             )}
           </Form>
         </Card>
       </Grid>
+      <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
     </div>
   )
 }
