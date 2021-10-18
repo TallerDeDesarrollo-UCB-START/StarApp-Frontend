@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     marginBottom: "16px",
   },
-}));
+}))
 
 function TransitionDown(props) {
   return <Slide {...props} direction="down" />;
@@ -73,21 +73,21 @@ const RegisterForm = () => {
 const [transition, setTransition] = React.useState(undefined);
   const smallScreen = useMediaQuery("(min-width:420px)");
   const validate = (values) => {
-    const errors = {};
+    const errors = {}
     if (!validEmail.test(values.email)) {
-      errors.email = "No valido";
+      errors.email = "No valido"
     }
     if (!values.username) {
-      errors.username = "Campo requerido";
+      errors.username = "Campo requerido"
     }
     if (!values.lastname) {
-      errors.lastname = "Campo requerido";
+      errors.lastname = "Campo requerido"
     }
     if (!validPassword.test(values.password)) {
-      errors.password = "Debe contener 6 caracteres y un número";
+      errors.password = "Debe contener 6 caracteres y un número"
     }
     if (values.confirmPassword !== values.password || !values.confirmPassword) {
-      errors.confirmPassword = "Contraseñas no coinciden";
+      errors.confirmPassword = "Contraseñas no coinciden"
     }
     return errors;
   };
@@ -117,9 +117,9 @@ const [transition, setTransition] = React.useState(undefined);
           const body = {
             nombre: values.username,
             apellido: values.lastname,
-            telefono: `+591 ${values.phone}`,
+            telefono: phoneValue,
             id_autenticacion: parseInt(id_auth),
-          };
+          }
           AxiosClient.post(`${URL}extended_form`, body)
             .then((response) => {
               if (response.status === 200) {
@@ -128,7 +128,7 @@ const [transition, setTransition] = React.useState(undefined);
             })
             .catch((response) => {
               activeAlertMessage(`${response}`, ()=>window.location.reload())
-            });
+            })
         }
       }) 
       .catch((response) => {
@@ -187,14 +187,17 @@ const [transition, setTransition] = React.useState(undefined);
                     required
                   />
                 </div>
-                <Field
-                  fullWidth
-                  label="Ingresa tu número de teléfono"
-                  name="phone"
-                  type="phone"
-                  component={TextField}
-                  className={classes.textField}
-                />
+                <div style={{display:'flex',justifyContent: "space-between",marginBottom:'10px'}}>
+                  <InputLabel htmlFor="phone-input" style={{width:'30%', marginTop:'10px'}}>Número de celular:</InputLabel>
+                  <Input
+                    style={{width:'65%'}}
+                    value={phoneValue}
+                    onChange={handleChangePhone}
+                    name="phone"
+                    id="phone-input"
+                    inputComponent={TextMaskCustom}
+                  />
+                </div>
                 <Field
                   fullWidth
                   label="Ingresa tu contraseña"
@@ -241,7 +244,23 @@ const [transition, setTransition] = React.useState(undefined);
         </Card>
       </Grid>
     </div>
-  );
-};
+  )
+}
 
-export default RegisterForm;
+function TextMaskCustom(props) {
+  const { inputRef, ...other } = props
+  return (
+    <MaskedInput
+      {...other}
+      ref={(ref) => {
+        inputRef(ref ? ref.inputElement : null)
+      }}
+      mask={['(','+', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/,/\d/, /\d/, /\d/, /\d/]}
+      placeholderChar={'\u2000'}
+      showMask
+    />
+  )
+}
+
+export default RegisterForm
+
