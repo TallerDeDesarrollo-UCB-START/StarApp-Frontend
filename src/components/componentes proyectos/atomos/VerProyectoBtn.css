@@ -1,8 +1,10 @@
-.viewButton {
-    background-color: #8b8780;
+.verButton {
+    background-color: #3C4858;
     border: none;
     padding: 8px;
     color: white;
     font-weight: bold;
     border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

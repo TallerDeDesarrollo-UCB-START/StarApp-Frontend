@@ -9,10 +9,8 @@ function BodyProyectoIndividual({proyecto}) {
     return (
         <Box className="body-container">
             {
-                proyecto.map(proyecto => (
-                    <ProyectoDetalle key={proyecto.id} 
+                <ProyectoDetalle
                     proyecto={proyecto} />
-                ))
             }
         </Box>
     );

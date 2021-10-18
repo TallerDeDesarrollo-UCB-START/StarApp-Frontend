@@ -2,6 +2,7 @@
 import BodyProyectoIndividual from '../organismos/BodyProyectoIndividual'
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
+import { Box } from '@material-ui/core';
 
 function VistaProyectoIndividual() {
     // Hooks
@@ -34,10 +35,11 @@ function VistaProyectoIndividual() {
     }
 
     return (
-        <div>
-            
-            {proyecto.titulo} 
-        </div>
+        <Box className="body-container">
+            {
+               <BodyProyectoIndividual proyecto={proyecto}/>
+            }
+        </Box>
     );
 }
 

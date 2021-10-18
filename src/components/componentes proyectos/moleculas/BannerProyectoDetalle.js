@@ -1,6 +1,6 @@
 import Banner from '../../../assets/generic_picture.png';
 import { Box } from '@material-ui/core';
-import './BannerProyecto.css';
+import './BannerProyectoDetalle.css';
 
 
 function BannerProyectoDetalle() {
