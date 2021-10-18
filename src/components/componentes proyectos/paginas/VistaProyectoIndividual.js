@@ -12,7 +12,6 @@ function VistaProyectoIndividual() {
             let thisUrl = window.location.href;
             let id = getIdFromURL(thisUrl);
         const proyectoDelServer =  await obtenerProyecto(id)
-        console.log (proyectoDelServer[0])
         setProyecto(proyectoDelServer[0])
         }
         getProyecto()
