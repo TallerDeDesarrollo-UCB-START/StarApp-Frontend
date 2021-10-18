@@ -26,7 +26,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
     { estado: "EN CURSO", valor: 20 },
   ]);
   function obtenerEstadoActual(){
-    console.log(typeof(proyecto.estado) )
+    //console.log(typeof(proyecto.estado) )
     if(typeof(proyecto.estado) === 'string'){
       return estadosDefault.find((item_estado) => item_estado.estado === proyecto.estado).valor
     } else {
@@ -57,7 +57,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
   function validarCampos(event) {
     if (!titulo || !descripcion || !objetivo || !lider) {
       alert("Porfavor llene los campos");
-      //console.log(event)
+      //console.log(event) 
       if (!titulo) agregarRequerido(event.currentTarget[0]);
       if (!descripcion) agregarRequerido(event.currentTarget[1]);
       if (!objetivo) agregarRequerido(event.currentTarget[2]);
