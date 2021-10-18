@@ -9,14 +9,15 @@ import "./Profile.css";
 import Grid from "@material-ui/core/Grid";
 import ProfileCard from "./ProfileCard";
 import ProfileImage from "./ProfileImage";
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
 
-// const volunteer = {
-//   id: "1",
-//   name: "Juanito",
-// };
 
 const url = process.env.REACT_APP_API;
 const urlTablaExtensa = `${url}extended_form/`;
+
+
 //const urlTablaExtensa = "http://localhost:5000/extended_form/";
 
 function getModalStyle() {
@@ -77,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     left: "12%",
   },
-  checkintereses: {
+  checkboxes: {
     width: "76%",
     padding: "3px 5px",
     margin: "7px 0px 7px 0px",
@@ -106,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = (onClick) => {
+
   const [userExist, setUserExsit] = useState({
     userEx: false,
   });
@@ -126,6 +128,7 @@ const Profile = (onClick) => {
     rol: "",
     intereses: [],
     cualidades: [],
+    aptitudes_tecnicas:[],
     id_autenticacion: "",
     nombre_contacto_de_emergencia: "",
     numero_contacto_de_emergencia: "",
@@ -146,13 +149,14 @@ const Profile = (onClick) => {
     rol: "",
     intereses: [],
     cualidades: [],
+    aptitudes_tecnicas:[],
     id_autenticacion: "",
     nombre_contacto_de_emergencia: "",
     numero_contacto_de_emergencia: "",
     relacion_contacto_de_emergencia: "",
   });
   const handleChange = (event) => {
-    console.log(event.target.checked)
+    
     var nuevosInt = [];
     const tikeado = !event.target.checked;
 
@@ -160,9 +164,6 @@ const Profile = (onClick) => {
       if (tikeado) {
         nuevosInt = datosEdit.intereses.filter((i) => i !== event.target.value);
       } else {
-        // const aux = datosEdit.intereses;
-        // aux.push(event.target.value);
-        // nuevosInt = aux;
         nuevosInt = [...datosEdit.intereses, event.target.value];
       }
     
@@ -173,30 +174,29 @@ const Profile = (onClick) => {
   const handleChangeCualidades = (event) => {
     var nuevasCualidades = "";
     const tikeado = !event.target.checked;
-
-    if (typeof datosEdit.cualidades === typeof "string") {
-      if (tikeado) {
-        nuevasCualidades = datosEdit.cualidades
-          .split(/[,"}{]/)
-          .filter(Boolean)
-          .filter((i) => i !== event.target.value);
-      } else {
-        nuevasCualidades = datosEdit.cualidades
-          .split(/[,"}{]/)
-          .filter(Boolean)
-          .concat(event.target.value);
-      }
-    } else {
+   
       if (tikeado) {
         nuevasCualidades = datosEdit.cualidades.filter(
-          (i) => i !== event.target.value
+          (c) => c !== event.target.value
         );
       } else {
         nuevasCualidades = [...datosEdit.cualidades, event.target.value];
-      }
-    }
+      } 
 
     setDatosEdit({ ...datosEdit, [event.target.name]: nuevasCualidades });
+  };
+  const handleChangeAptitudes = (event) => {
+    var nuevasAptitudes = "";
+    const tikeado = !event.target.checked;
+      if (tikeado) {        
+        nuevasAptitudes = datosEdit.aptitudes_tecnicas.filter(
+          (c) => c !== event.target.value
+        );
+      } else {       
+        nuevasAptitudes = [...datosEdit.aptitudes_tecnicas, event.target.value];        
+      } 
+
+    setDatosEdit({ ...datosEdit, [event.target.name]: nuevasAptitudes });
   };
 
   const handleInputChange = (event) => {
@@ -218,13 +218,14 @@ const Profile = (onClick) => {
   var peticionPut = (asignaciones) => {
     axios
       .put(urlTablaExtensa + datos.id_usuario, asignaciones)
-      .then((response) => {
-        alert("actualizado correctamente");
-      })
+      // .then((response) => {
+      //   console.log("")
+      // })
       .catch((error) => {
         alert(error.message);
       });
   };
+  
 
   function sendForm() {
     setDatos(datosEdit);
@@ -244,20 +245,24 @@ const Profile = (onClick) => {
       rol: datosEdit.rol,
       intereses: datosEdit.intereses.toString(),
       cualidades: datosEdit.cualidades.toString(),
+      aptitudes_tecnicas:datosEdit.aptitudes_tecnicas.toString(),
       id_autenticacion: datosEdit.id_autenticacion,
       nombre_contacto_de_emergencia: datosEdit.nombre_contacto_de_emergencia,
       numero_contacto_de_emergencia: datosEdit.numero_contacto_de_emergencia,
       relacion_contacto_de_emergencia:
         datosEdit.relacion_contacto_de_emergencia,
     };
-
+    
     if (userExist.userEx) {
-      peticionPut(asignaciones);
+      peticionPut(asignaciones);      
       setOpen(false);
+      handleClickOpenSnakbar( TransitionDown,{ vertical: 'top', horizontal: 'center' })
+      
     } else {
       peticionPost(asignaciones);
       setOpen(false);
     }
+    
   }
 
   function removeNulls(model) {
@@ -281,6 +286,7 @@ const Profile = (onClick) => {
       .then((response) => {
         if (response.data.data) {
           setUserExsit({ userEx: true });
+          
           setDatos({ ...removeNulls(response.data.data) });
           setDatosEdit({ ...removeNulls(response.data.data) });
         } else {
@@ -293,12 +299,35 @@ const Profile = (onClick) => {
   const classNamees = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  
+  const [transition, setTransition] = React.useState(undefined);
+  const [state, setState] = React.useState({
+    openSnakbar: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, openSnakbar } = state;
+  function TransitionDown(props) {
+    return <Slide {...props} direction="down" />;
+  }
+  const handleClickOpenSnakbar = (Transition,newState) => {
+      setTransition(() => Transition);
+      setState({ openSnakbar: true, ...newState });
+  };
 
-  const handleOpen = () => {
+  const handleCloseSnakbar = () => {
+      setState({ ...state, openSnakbar: false });
+      
+      
+  };
+
+
+  const handleOpen = () => {//modal form
     setOpen(true);
   };
 
-  const handleClose = () => {
+
+  const handleClose = () => {//modal form
     setDatosEdit(datos);
     setOpen(false);
   };
@@ -373,7 +402,7 @@ const Profile = (onClick) => {
           <br></br>
           <label className={classNamees.titulos}>Mis intereses:</label>
           <br></br>
-          <div className={classNamees.checkintereses}>
+          <div className={classNamees.checkboxes}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <input
@@ -457,7 +486,7 @@ const Profile = (onClick) => {
           </div>
           <label className={classNamees.titulos}>Mis Cualidades:</label>
           <br></br>
-          <div className={classNamees.checkcualidades}>
+          <div className={classNamees.checkboxes}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <input
@@ -536,6 +565,87 @@ const Profile = (onClick) => {
             </Grid>
           </div>
 
+
+
+          <label className={classNamees.titulos}>Mis Aptitudes:</label>
+          <br></br>
+          <div className={classNamees.checkboxes}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.aptitudes_tecnicas.includes("Excel")}
+                  onChange={handleChangeAptitudes}
+                  value="Excel"
+                  name="aptitudes_tecnicas"
+                  id="Excel-check"
+                  type="checkbox"
+                />
+                {` `}
+                <label htmlFor="Excel-check">Excel</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.aptitudes_tecnicas.includes("Illustrator")}
+                  onChange={handleChangeAptitudes}
+                  value="Illustrator"
+                  name="aptitudes_tecnicas"
+                  id="Illustrator-check"
+                  type="checkbox"
+                />
+                {` `}
+                <label htmlFor="Illustrator-check">Illustrator</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.aptitudes_tecnicas.includes("WordPress")}
+                  onChange={handleChangeAptitudes}
+                  value="WordPress"
+                  name="aptitudes_tecnicas"
+                  id="WordPress-check"
+                  type="checkbox"
+                />
+                {` `}
+                <label htmlFor="WordPress-check">WordPress</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.aptitudes_tecnicas.includes("PowerPoint")}
+                  onChange={handleChangeAptitudes}
+                  value="PowerPoint"
+                  name="aptitudes_tecnicas"
+                  id="PowerPoint-check"
+                  type="checkbox"
+                />
+                {` `}
+                <label htmlFor="PowerPoint-check">PowerPoint</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.aptitudes_tecnicas.includes("Canva")}
+                  onChange={handleChangeAptitudes}
+                  value="Canva"
+                  name="aptitudes_tecnicas"
+                  id="Canva-check"
+                  type="checkbox"
+                />
+                {` `}
+                <label htmlFor="Canva-check">Canva</label>
+              </Grid>
+              <Grid item xs={12}>
+                <input
+                  checked={datosEdit.aptitudes_tecnicas.includes("Adobe Premiere")}
+                  onChange={handleChangeAptitudes}
+                  value="Adobe Premiere"
+                  name="aptitudes_tecnicas"
+                  id="Adobe Premiere-check"
+                  type="checkbox"
+                />
+                {` `}
+                <label htmlFor="Adobe Premiere-check">Adobe Premiere</label>
+              </Grid>
+              
+            </Grid>
+          </div>
           <label className={classNamees.titulos} htmlFor="pais_de_recidencia">
             Pais de residencia:
           </label>
@@ -677,7 +787,20 @@ const Profile = (onClick) => {
   );
 
   return (
+    
     <div>
+      <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={openSnakbar}
+            autoHideDuration={1500}
+            onClose={handleCloseSnakbar}
+            TransitionComponent={transition}
+            key={transition ? transition.name : ''}
+        >
+            <Alert onClose={handleCloseSnakbar} severity="success" variant="filled">
+                Se Actualizo correctamente!
+            </Alert>
+        </Snackbar>
       {location.pathname === "/" && <Link to="/profile">Perfil</Link>}
       <div>
         {location.pathname !== "/" && (

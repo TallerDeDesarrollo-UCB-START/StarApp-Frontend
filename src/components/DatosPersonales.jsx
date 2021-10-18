@@ -1,9 +1,10 @@
 import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles} from "@material-ui/core/styles";
 import { Typography, Divider, Button } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import CardActions from "@material-ui/core/CardActions";
+import DialogConfirm from "./DialogConfirm"
 
 import { withRouter } from "react-router";
 
@@ -39,69 +40,41 @@ import { withRouter } from "react-router";
         <div>
           <Grid container item xs={12} spacing={1}>
           <Grid item xs={6} className={classes.paper}>
-            <Grid>
+            {/* <Grid>
               <Paper style={{ padding: "15px" }}>
                 <Typography> Rol: {getDataProfile.rol} </Typography>
               </Paper>
-            </Grid>
-            <Grid className={classes.paper}>
-              <Paper style={{ padding: "15px" }}>
-                <Typography>Descripcion:</Typography>
-                {getDataProfile.descripcion_personal ? (
-                  getDataProfile.descripcion_personal
-                ) : (
-                  <span style={{ color: "red " }}>Sin llenar</span>
-                )}
-              </Paper>
-            </Grid>
-            <Grid className={classes.paper}>
-              <Paper style={{ padding: "15px" }}>
-                <Typography>Contacto de emergencia:</Typography>
-
-                <Typography variant="body2">
-                  Nombre:{" "}
-                  {getDataProfile.nombre_contacto_de_emergencia ? (
-                    getDataProfile.nombre_contacto_de_emergencia
-                  ) : (
-                    <span style={{ color: "red " }}>Sin llenar</span>
-                  )}
-                </Typography>
-                <Typography variant="body2">
-                  Relacion:{" "}
-                  {getDataProfile.relacion_contacto_de_emergencia ? (
-                    getDataProfile.relacion_contacto_de_emergencia
-                  ) : (
-                    <span style={{ color: "red " }}>Sin llenar</span>
-                  )}
-                </Typography>
-
-                <Typography variant="body2">
-                  Teléfono:{" "}
-                  {getDataProfile.numero_contacto_de_emergencia ? (
-                    getDataProfile.numero_contacto_de_emergencia
-                  ) : (
-                    <span style={{ color: "red " }}>Sin llenar</span>
-                  )}
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid className={classes.paper}>
+            </Grid> */}            
+            <Grid>
               <Paper style={{ padding: "15px" }}>
                 <Typography>Intereses Generales:</Typography>
+                <Divider style={{ borderColor: "black" }} />
                 {getDataProfile.intereses.map((interes) => (
-                  <Typography key={interes} variant="body2">
+                  <li key={interes} variant="body2">
                     {interes}
-                  </Typography>
+                  </li>
                 ))}
               </Paper>
             </Grid>
             <Grid className={classes.paper}>
               <Paper style={{ padding: "15px" }}>
                 <Typography>Cualidades:</Typography>
+                <Divider style={{ borderColor: "black" }} />
                 {getDataProfile.cualidades.map((cualidad) => (
-                  <Typography variant="body2" key={cualidad}>
+                  <li variant="body2" key={cualidad}>
                     {cualidad}
-                  </Typography>
+                  </li>
+                ))}
+              </Paper>
+            </Grid>
+            <Grid className={classes.paper}>
+              <Paper style={{ padding: "15px" }}>
+                <Typography>Aptitudes Tecnicas:</Typography>
+                <Divider style={{ borderColor: "black" }} />
+                {getDataProfile.aptitudes_tecnicas.map((aptitud) => (
+                  <li variant="body2" key={aptitud}>
+                    {aptitud}
+                  </li>
                 ))}
               </Paper>
             </Grid>
@@ -175,7 +148,50 @@ import { withRouter } from "react-router";
                     )}
                   </Typography>
                 </Grid>
+                
               </Paper>
+              <Grid className={classes.paper}>
+              <Paper style={{ padding: "15px" }}>
+                <Typography>Contacto de emergencia:</Typography>
+                <Divider style={{ borderColor: "black"}} />
+                <Typography variant="body2">
+                  Nombre:{" "}
+                  {getDataProfile.nombre_contacto_de_emergencia ? (
+                    getDataProfile.nombre_contacto_de_emergencia
+                  ) : (
+                    <span style={{ color: "red " }}>Sin llenar</span>
+                  )}
+                </Typography>
+                <Typography variant="body2">
+                  Relacion:{" "}
+                  {getDataProfile.relacion_contacto_de_emergencia ? (
+                    getDataProfile.relacion_contacto_de_emergencia
+                  ) : (
+                    <span style={{ color: "red " }}>Sin llenar</span>
+                  )}
+                </Typography>
+
+                <Typography variant="body2">
+                  Teléfono:{" "}
+                  {getDataProfile.numero_contacto_de_emergencia ? (
+                    getDataProfile.numero_contacto_de_emergencia
+                  ) : (
+                    <span style={{ color: "red " }}>Sin llenar</span>
+                  )}
+                </Typography>
+              </Paper>
+              <Grid className={classes.paper}>
+              <Paper style={{ padding: "15px" }}>
+                <Typography>Descripcion:</Typography>
+                <Divider style={{ borderColor: "black" }} />
+                {getDataProfile.descripcion_personal ? (
+                  getDataProfile.descripcion_personal
+                ) : (
+                  <span style={{ color: "red " }}>Sin llenar</span>
+                )}
+              </Paper>
+            </Grid>
+            </Grid>
               <Grid container justifyContent="space-evenly">
                 <Button
                   type="button"
@@ -186,9 +202,10 @@ import { withRouter } from "react-router";
                 >
                   Editar Perfil
                 </Button>
-                <DeleteButton className={classes.paper} variant="contained">
+                {/* <DeleteButton className={classes.paper} variant="contained">
                   Eliminar perfil
-                </DeleteButton>
+                </DeleteButton> */}
+                <DialogConfirm/>
               </Grid>
             </Grid>
           </Grid>
@@ -198,13 +215,5 @@ import { withRouter } from "react-router";
         </div>
       );
   }
-  const DeleteButton = withStyles((theme) => ({
-    root: {
-      backgroundColor: "#ED2020",
-      color: "#FFFFFF",
-      "&:hover": {
-        backgroundColor: "#a90e0e",
-      },
-    },
-  }))(Button);
+
   export default withRouter(DatosPersonales);
