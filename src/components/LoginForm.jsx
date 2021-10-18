@@ -104,7 +104,6 @@ const LoginForm = ({sessionData, setSessionData}) => {
         window.location.reload();
     };
     const URL_AUTH = process.env.REACT_APP_API_AUTH
-    const URL_API = process.env.REACT_APP_API
     const onSubmit = async values => {
         const body = {
             email: values.email,
@@ -118,17 +117,9 @@ const LoginForm = ({sessionData, setSessionData}) => {
                     const id_auth = response.data.id
                     sessionStorage.setItem("jwt", jwt)
                     sessionStorage.setItem("id", id_auth)
-                    AxiosClient.get(`${URL_API}extended_form/${id_auth}`)
-                        .then(response => {
-                            setActiveProgressBar(false)
-                            setSessionData({role: response.data.data.rol, id: id_auth, name:response.data.data.nombre})
-                        })
-                        .catch((response)=>{
-                            setActiveProgressBar(false)
-                            activeAlertMessage("Inicio de sesión fallido", ()=>window.location.reload())
-                            window.location.reload()
-                        })
+                    setActiveProgressBar(false)
                     history.push(`/`)
+                    window.location.reload()
                 }
             })
             .catch((response) => {
