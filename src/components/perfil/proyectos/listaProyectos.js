@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import { DataGrid } from '@material-ui/data-grid';
 import { makeStyles} from '@material-ui/core'
-import axios from 'axios';
 import { useMediaQuery } from '@material-ui/core'
 
 const useStyles = makeStyles((theme)=>({
@@ -59,7 +58,7 @@ const baseURL=`${url}sesion`;
 function ListaProyectos () {
     const classes = useStyles()
     const [data, setData] = useState([])
-    const [originalData, setOriginalData] = useState([])
+    //const [originalData, setOriginalData] = useState([])
     const smallScreen = useMediaQuery('(min-width:700px)')
     const obtenerParticipacionProyecto = async () => {
         const idSesion = sessionStorage.getItem("id");
@@ -71,7 +70,7 @@ function ListaProyectos () {
         );
         const data = await response.json();
         setData(data);
-        setOriginalData(data);
+        //setOriginalData(data);
     }
 
     useEffect( () => {
@@ -81,7 +80,6 @@ function ListaProyectos () {
     return (
         <section className={classes.section}>
             <div className={(smallScreen)?classes.containerSearchField: classes.smallContainerSearchField}>
-               
             </div>
             <div className={classes.containerTable}>
                 <DataGrid 
