@@ -11,6 +11,7 @@ import VistaProyectos from "../components/componentes proyectos/paginas/VistaPro
 import FormularioProyecto from "../components/Formulario";
 import Evento from "../components/Evento";
 import Users from "../screens/Users"
+import VistaProyectoIndividual from "../components/componentes proyectos/paginas/VistaProyectoIndividual"
 const Routes = [
   {
     path: "/",
@@ -22,6 +23,12 @@ const Routes = [
     path: '/projects',
     name: 'ShowProjects',
     component: VistaProyectos,
+    logginNeeded: true,
+  },
+  {
+    path: "/projects/:id",
+    name: "ProyectoIndividual",
+    component: VistaProyectoIndividual,
     logginNeeded: true,
   },
   {

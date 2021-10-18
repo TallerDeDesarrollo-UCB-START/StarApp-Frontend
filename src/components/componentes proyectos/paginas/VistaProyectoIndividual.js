@@ -1,5 +1,5 @@
 // Componentes:
-import BodyProyectoIndividual from './BodyProyectoIndividual'
+import BodyProyectoIndividual from '../organismos/BodyProyectoIndividual'
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
 
@@ -7,12 +7,12 @@ function VistaProyectoIndividual() {
     // Hooks
     const [proyecto, setProyecto] = useState([])
     useEffect(() => {
-        const obtenerProyecto = async () => {
-        const proyectosDelServer =  await obtenerProyecto()
-        setProyectos(proyectosDelServer)
+        const getProyecto = async () => {
+        const proyectoDelServer =  await obtenerProyecto()
+        setProyecto(proyectoDelServer)
         }
-        getProyectos()
-    }, [proyectos.length] )
+        getProyecto()
+    })
 
     // HTTP requests & functions
 
