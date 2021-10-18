@@ -6,10 +6,11 @@ import { Form, Field } from "react-final-form";
 import { useMediaQuery, Button, Grid, Typography } from "@material-ui/core";
 import { TextField } from "final-form-material-ui";
 import { validEmail, validPassword } from "./RegEx";
-import { useHistory } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 import AxiosClient from "./AxiosClient";
-import { withStyles } from "@material-ui/core/styles";
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,16 +65,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-  const OkButton = withStyles((theme) => ({
-    root: {
-      marginRight: "auto",
-      marginLeft: "auto",
-    },
-    }))(Button);
+function TransitionDown(props) {
+  return <Slide {...props} direction="down" />;
+}
+
 const RegisterForm = () => {
-  const history = useHistory();
+  //const history = useHistory();
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, open } = state;
+const [transition, setTransition] = React.useState(undefined);
   const smallScreen = useMediaQuery("(min-width:420px)");
   const validate = (values) => {
     const errors = {};
@@ -97,13 +102,15 @@ const RegisterForm = () => {
     }
     return errors;
   };
-  const handleClickOpen = () => {
-    setOpen(true);
-    console.log("si funciona")
+
+  const handleClickOpen = (Transition,newState) => {
+    setTransition(() => Transition);
+    setState({ open: true, ...newState });
   };
+
   const handleClose = () => {
-    setOpen(false);
-    history.push(`/login`)
+    setState({ ...state, open: false });
+    window.location.href = `/login`;
   };
   const URL_AUTH = process.env.REACT_APP_API_AUTH
   const URL = process.env.REACT_APP_API
@@ -141,7 +148,7 @@ const RegisterForm = () => {
       .catch((response) => {
         console.log(response);
       });
-      handleClickOpen();
+      handleClickOpen(TransitionDown,{ vertical: 'top', horizontal: 'center' });
   };
 
   return (
@@ -234,23 +241,18 @@ const RegisterForm = () => {
                     Crear cuenta start
                   </Button>
                 </div>
-                <Dialog
+                <Snackbar
+                  anchorOrigin={{ vertical, horizontal }}
                   open={open}
+                  autoHideDuration={2000}
                   onClose={handleClose}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
+                  TransitionComponent={transition}
+                  key={transition ? transition.name : ''}
                 >
-                <DialogTitle id="alert-dialog-title">
-                  Su perfil fue creado satisfactoriamente
-                </DialogTitle>
-                <DialogContent>
-                </DialogContent>
-                <DialogActions>
-                  <OkButton variant="contained" color="primary" onClick={handleClose} autoFocus>
-                    Ok  
-                  </OkButton>
-                </DialogActions>
-                </Dialog>
+                  <Alert onClose={handleClose} severity="success" variant="filled">
+                    Su usuario fue creado correctamente!
+                  </Alert>
+                </Snackbar>
               </form>
             )}
           </Form>
