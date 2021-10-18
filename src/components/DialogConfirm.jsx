@@ -113,7 +113,7 @@ export default function AlertDialog() {
             key={transition ? transition.name : ''}
         >
             <Alert onClose={handleCloseSnakbar} severity="success" variant="filled">
-                Se elimino su cuenta correctamente!
+                Se eliminó su cuenta correctamente!
             </Alert>
         </Snackbar>
         <CancelButton onClick={handleClose}  style={{ height: "30px",margin: "7px",}} color="primary" autoFocus>

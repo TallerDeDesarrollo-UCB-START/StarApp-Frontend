@@ -646,11 +646,6 @@ const Profile = (onClick) => {
               
             </Grid>
           </div>
-
-
-
-
-
           <label className={classNamees.titulos} htmlFor="pais_de_recidencia">
             Pais de residencia:
           </label>
