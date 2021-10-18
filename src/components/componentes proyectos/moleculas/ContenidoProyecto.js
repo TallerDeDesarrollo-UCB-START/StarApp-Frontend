@@ -3,6 +3,7 @@ import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
+import VerProyectoBtn from '../atomos/VerProyectoBtn';
 
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';
@@ -53,6 +54,7 @@ function ContenidoProyecto({proyecto, rol, onEliminarProy, onActivarForm, onPart
             <div className="button-container">
                 <div className="space-button"></div>
                 {tagParticipacion}
+                <VerProyectoBtn proyecto={proyecto}/>
                 {botonParticiparProyecto}
                 {botonEditarProyecto}
                 {botonEliminarProyecto}

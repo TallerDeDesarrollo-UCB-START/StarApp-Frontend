@@ -9,7 +9,7 @@ function BodyProyectoIndividual({proyecto}) {
     return (
         <Box className="body-container">
             {
-                proyectos.map(proyecto => (
+                proyecto.map(proyecto => (
                     <ProyectoDetalle key={proyecto.id} 
                     proyecto={proyecto} />
                 ))

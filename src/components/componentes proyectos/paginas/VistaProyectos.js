@@ -110,13 +110,13 @@ function VistaProyectos() {
         </>
     );
 }
-
+    
 const url = process.env.REACT_APP_API;
-const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
-const URLProyectos = `${url}get_proyectos`//'http://localhost:5000/get_proyectos'
+const URLParticiparProy = `${url}participate_proyecto` //`http://localhost:5000/participate_proyecto` 
+const URLProyectos = `${url}get_proyectos` //'http://localhost:5000/get_proyectos'
 //const URLProyecto = `${url}get_proyecto`'http://localhost:5000/get_proyecto'//`${url}get_proyectos`
-const URLCrearProy = `${url}create_proyecto` //'http://localhost:5000/create_proyecto'
-const URLEditarProy = `${url}update_proyecto` //'http://localhost:5000/update_proyecto'
+const URLCrearProy = `${url}create_proyecto` //'http://localhost:5000/create_proyecto' 
+const URLEditarProy =  `${url}update_proyecto` //'http://localhost:5000/update_proyecto'
 const URLEliminarProy = `${url}delete_proyecto` //'http://localhost:5000/delete_proyecto'
 const URLParticpaVoluntario = `${url}participate` //'http://localhost:5000/participate'
 
