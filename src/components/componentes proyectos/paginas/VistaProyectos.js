@@ -4,6 +4,7 @@ import ProyectosVoluntarios from './ProyectosVoluntarios'
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
 
+
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
@@ -16,7 +17,7 @@ function VistaProyectos() {
         }
         const asignarRol = async () => {
             const rolObtenido =  await obtenerRol()
-            console.log(rolObtenido)
+            //console.log(rolObtenido)
             setRol(rolObtenido)
         }
         getProyectos()
@@ -97,8 +98,8 @@ function VistaProyectos() {
 
     const obtenerRol = async () => {
         //debugger;
-        const idAuth = 32//sessionStorage.getItem("id");
-        const response = await fetch(`${URLObtenerRol}${idAuth}`,
+        const idAuth = sessionStorage.getItem("id");
+        const response = await fetch(`${URLObtenerRol}/${idAuth}`,
         { 
             method: 'GET'
         });
@@ -108,7 +109,7 @@ function VistaProyectos() {
     }
     
     //const rol = 'admin'
-    console.log(rol)
+    //console.log(rol)
     const componenteProyectos = rol==='core team' ? 
     <ProyectosAdmins rol={rol}
                     proyectos={proyectos} 
@@ -131,13 +132,13 @@ function VistaProyectos() {
 }
     
 const url = process.env.REACT_APP_API;
-const URLParticiparProy = `${url}participate_proyecto` //`http://localhost:5000/participate_proyecto` 
-const URLProyectos = `${url}get_proyectos` //'http://localhost:5000/get_proyectos'
+const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
+const URLProyectos = `${url}get_proyectos`//'http://localhost:5000/get_proyectos'
 //const URLProyecto = `${url}get_proyecto`'http://localhost:5000/get_proyecto'//`${url}get_proyectos`
-const URLCrearProy = 'http://localhost:5000/create_proyecto'//`${url}create_proyecto`
-const URLEditarProy = 'http://localhost:5000/update_proyecto'//`${url}edit_proyecto`
-const URLEliminarProy = 'http://localhost:5000/delete_proyecto'//`${url}delete_proyecto`
-const URLParticpaVoluntario = 'http://localhost:5000/participate'//`${url}participate`
-const URLObtenerRol = 'http://localhost:5000/get_rol/'
+const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//
+const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_proyecto'//
+const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//
+const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
+const URLObtenerRol = `${url}get_rol` //'http://localhost:5000/get_rol/'
 
 export default VistaProyectos;
