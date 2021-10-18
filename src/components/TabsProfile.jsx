@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from "@material-ui/core/Paper";
 import DatosPersonales from "./DatosPersonales";
+import ListaProyectos from "./perfil/proyectos/listaProyectos";
 
 function TabPanel(props) {
   const { getDataProfile, handleOpenprop,children, value, index, ...other } = props;
@@ -81,7 +82,7 @@ export default function TabsProfile(props) {
         Item Two
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <ListaProyectos></ListaProyectos>
       </TabPanel>
     </div>
   );
