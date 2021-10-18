@@ -106,7 +106,7 @@ const LoginForm = ({sessionData, setSessionData}) => {
 
     const handleClose = () => {
         setState({ ...state, open: false });
-        history.push(`/login`)
+        window.location.reload();
     };
     const URL_AUTH = process.env.REACT_APP_API_AUTH
     const URL_API = process.env.REACT_APP_API
