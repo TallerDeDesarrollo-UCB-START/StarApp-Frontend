@@ -6,7 +6,6 @@ import { Box } from '@material-ui/core';
 
 function VistaProyectoIndividual() {
     // Hooks
-       
     const [proyecto, setProyecto] = useState({})
     useEffect(() => {
         const getProyecto = async () => {
