@@ -1,9 +1,8 @@
-.content-container-detalle{
-    color: red;
-}
-
-.box-proyecto{
-    background-color: white;
-    border-radius: 5px;
-    border-color: black;
+.proyect-detail-container{
+    margin: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: #AAB6C5;
+    border-radius: 25px;
+    margin-bottom: 30px;
 }

@@ -10,7 +10,8 @@ function ContenidoProyecto({proyecto}) {
             <p> Objetivo: {proyecto.objetivo}</p>
             <p> Descripción: {proyecto.descripcion}</p>
             <p> Lider: {proyecto.lider}</p>
-            <p> Fecha de Inicio: 20/10/2021</p>
+            <p> Categoría: {proyecto.categoria}</p>
+            <p> Fecha de Inicio: {proyecto.fecha_inicio}</p>
             <p> Fecha de Fin: Proyecto en curso</p>
         </Box>
     );
