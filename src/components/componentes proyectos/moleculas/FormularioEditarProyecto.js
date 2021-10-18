@@ -26,7 +26,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
     { estado: "EN CURSO", valor: 20 },
   ]);
   function obtenerEstadoActual(){
-    console.log(typeof(proyecto.estado) )
+    //console.log(typeof(proyecto.estado) )
     if(typeof(proyecto.estado) === 'string'){
       return estadosDefault.find((item_estado) => item_estado.estado === proyecto.estado).valor
     } else {
