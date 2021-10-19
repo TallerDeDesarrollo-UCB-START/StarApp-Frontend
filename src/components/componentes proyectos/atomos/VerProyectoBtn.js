@@ -18,7 +18,7 @@ const VerButton = withStyles((theme) => ({
     root: {
       backgroundColor: "#3C4858",
       color: "#FFFFFF",
-      width: '15%',
+      width: '17%',
     },
   }))(Button);
 

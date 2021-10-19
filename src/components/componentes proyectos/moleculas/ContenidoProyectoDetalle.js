@@ -4,7 +4,8 @@ import { Box } from '@material-ui/core';
 
 function ContenidoProyecto({proyecto}) {
     const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
-
+    /*const fechaInicio=proyecto.fecha_inicio
+    fechaInicio.substr(0, 10)*/
     return (
         <Box className="content-container">
             <b>

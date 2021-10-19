@@ -15,12 +15,12 @@ p {
 .button-container {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
 .space-button {
-    width: 9    0%;
+    width: 70%;
 }   
 
 .info-container {
