@@ -61,8 +61,6 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                 {botonParticiparProyecto}
                 {botonEditarProyecto}
                 {botonEliminarProyecto}
-                
-                
             </div>
         </Box>
     );

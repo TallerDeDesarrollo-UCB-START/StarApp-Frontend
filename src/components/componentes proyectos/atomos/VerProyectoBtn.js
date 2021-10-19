@@ -20,7 +20,7 @@ const VerButton = withStyles((theme) => ({
       color: "#FFFFFF",
       marginRight: "35%",
       marginLeft: "1%",
-      minWidth: "15%"
+      widht: "100%"
     },
   }))(Button);
 
