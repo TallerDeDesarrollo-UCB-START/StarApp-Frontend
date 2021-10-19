@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Button } from "reactstrap";
@@ -15,10 +15,12 @@ const api = axios.create({
   baseURL: urlDeploy,
 });
 const urlParticipacion = `${urlDeploy}/participate_evento/`;
+
 class EventsList extends Component {
   state = {
     events: [],
     participaciones: [],
+    user: "",
     divcontainer: true,
     abierto: false,
     botonMostrar: false,
@@ -35,6 +37,7 @@ class EventsList extends Component {
     this.getEvents();
     this.getParticipaciones();
     this.getCategorias();
+    this.getUserRol();
   }
 
   abrirModal = () => {
@@ -44,7 +47,10 @@ class EventsList extends Component {
   getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
-      if (this.state.categoriaFiltrada !== "Todas" && this.state.categoriaFiltrada !== "Otro" ) {
+      if (
+        this.state.categoriaFiltrada !== "Todas" &&
+        this.state.categoriaFiltrada !== "Otro"
+      ) {
         data = data.filter(
           (event) =>
             event.estado === "1" &&
@@ -61,13 +67,13 @@ class EventsList extends Component {
 
   getCategorias = async () => {
     let data = await api.get("/categorias").then(({ data }) => data);
-    let aux = data.map(item => {return item.interes});
+    let aux = data.map((item) => {
+      return item.interes;
+    });
     aux.unshift("Todas");
     this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
   };
-
-
 
   getEventsArchivados = async () => {
     try {
@@ -120,20 +126,21 @@ class EventsList extends Component {
       .catch((error) => {
         console.log(error.message);
       });
-
   };
-  
-  getParticipaciones= async () => {
+
+  getParticipaciones = async () => {
     try {
-      var data = await api.get(`/participante/${window.sessionStorage.id}`).then(({ data }) => data);
-      this.setState({ participaciones: data});
+      var data = await api
+        .get(`/participante/${window.sessionStorage.id}`)
+        .then(({ data }) => data);
+      this.setState({ participaciones: data });
     } catch (err) {
       console.log(err);
     }
   };
   filterChangeHandler = (categoria) => {
     this.setState({ categoriaFiltrada: categoria.target.value });
-    this.getEvents();  
+    this.getEvents();
   };
 
   mensajeConfirmacionParticipacion(event) {
@@ -144,17 +151,22 @@ class EventsList extends Component {
   }
 
   //Funciones pertenecientes a Eliminacion Participacion
-  eliminarParticipacion = async (event)=>{
-    await axios.delete(urlDeploy + "/eliminar_participacion/" + event.id + "/" + window.sessionStorage.id)
-    .then((response) => {
-      this.mensajeConfirmacionEliminacionParticipacion(event);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-
-
-  }
+  eliminarParticipacion = async (event) => {
+    await axios
+      .delete(
+        urlDeploy +
+          "/eliminar_participacion/" +
+          event.id +
+          "/" +
+          window.sessionStorage.id
+      )
+      .then((response) => {
+        this.mensajeConfirmacionEliminacionParticipacion(event);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   mensajeConfirmacionEliminacionParticipacion(event) {
     window.alert(
@@ -164,9 +176,23 @@ class EventsList extends Component {
   }
 
   //Mostrar y Ocultar botones participacion
-  validarBotones(event){
-    return !this.state.participaciones.some(function(evento) { return evento.id_evento === event.id; });  
+  validarBotones(event) {
+    return !this.state.participaciones.some(function (evento) {
+      return evento.id_evento === event.id;
+    });
   }
+
+  getUserRol = async () => {
+    try {
+      let data = await axios.get(
+        url + "extended_form/" + window.sessionStorage.id
+      );
+      let rol = await data.data.data.rol;
+      this.setState({ user: rol });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   render() {
     const modalStyles = {
@@ -175,7 +201,7 @@ class EventsList extends Component {
       left: "50%",
       transform: "translate(-50%,-50%)",
     };
-
+    const rolUser = this.state.user;
     return (
       <div>
         <div>
@@ -183,27 +209,61 @@ class EventsList extends Component {
             <h1> Bienvenido a Lista de eventos!</h1>
           </div>
           <div>
-            <select  value={this.state.categoriaFiltrada} onChange={this.filterChangeHandler}>
-              {this.state.categorias.map(item => {
-                return (<option key={item} value={item}>{item}</option>);
+            <select
+              value={this.state.categoriaFiltrada}
+              onChange={this.filterChangeHandler}
+            >
+              {this.state.categorias.map((item) => {
+                return (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                );
               })}
             </select>
           </div>
           <div style={{ display: "flex" }}>
-            <Button style={{ marginLeft: "auto" }} href="/eventos/crearevento">
-              {" "}
-              Crear Evento{" "}
-            </Button>
-            <Button
-              style={{
-                display: this.state.botonMostrarEventosArchivados
-                  ? "block"
-                  : "none",
-              }}
-              onClick={() => this.getEventsArchivados()}
-            >
-              Eventos Pasados
-            </Button>
+            {rolUser === "lider" ? (
+              <Fragment>
+                <Button
+                  style={{ marginLeft: "auto" }}
+                  href="/eventos/crearevento"
+                >
+                  {" "}
+                  Crear Evento{" "}
+                </Button>
+                <Button
+                  style={{
+                    display: this.state.botonMostrarEventosArchivados
+                      ? "block"
+                      : "none",
+                  }}
+                  onClick={() => this.getEventsArchivados()}
+                >
+                  Eventos Pasados
+                </Button>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Button
+                  style={{ marginLeft: "auto"}} 
+                  color="#ffffff"
+                >
+                  
+                </Button>
+                <Button
+                  style={{
+                    display: this.state.botonMostrarEventosArchivados
+                      ? "block"
+                      : "none",
+                  }}
+                  onClick={() => this.getEventsArchivados()}
+                >
+                  Eventos Pasados
+                </Button>
+              </Fragment>
+            )}
+
             <Button
               style={{
                 display: this.state.botonMostrarEventosNoArchivados
@@ -243,52 +303,73 @@ class EventsList extends Component {
                       <p className="card-text">
                         <b>Lugar:</b> {event.lugar_evento}
                       </p>
-                                            
+
                       <p className="card-text">
                         <b>Categoría:</b> {event.categoria}
                       </p>
 
-
-                      {this.validarBotones(event) ?
-                      <Button onClick={() => {this.postParticipacion(event);}} > Participar</Button> :
-                      <Button onClick={()=>{this.eliminarParticipacion(event)}}> Eliminar Participacion</Button>
-                      }
-
+                      {this.validarBotones(event) ? (
+                        <Button
+                          onClick={() => {
+                            this.postParticipacion(event);
+                          }}
+                        >
+                          {" "}
+                          Participar
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            this.eliminarParticipacion(event);
+                          }}
+                        >
+                          {" "}
+                          Eliminar Participacion
+                        </Button>
+                      )}
 
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
                       </Button>
                     </div>
                   </div>
+                  {rolUser === "lider" ? (
+                    <Fragment>
+                      <div className="principal">
+                        <div className="secundario">
+                          <Button
+                            style={{
+                              display: this.state.botonMostrar
+                                ? "block"
+                                : "none",
+                            }}
+                            onClick={() => this.peticionMostrar(event)}
+                          >
+                            Mostrar
+                          </Button>
+                          <Button
+                            style={{
+                              display: this.state.botonArchivar
+                                ? "block"
+                                : "none",
+                            }}
+                            onClick={() => this.peticionArchivar(event)}
+                          >
+                            Archivar
+                          </Button>
 
-                  <div className="principal">
-                    <div className="secundario">
-                      <Button
-                        style={{
-                          display: this.state.botonMostrar ? "block" : "none",
-                        }}
-                        onClick={() => this.peticionMostrar(event)}
-                      >
-                        Mostrar
-                      </Button>
-                      <Button
-                        style={{
-                          display: this.state.botonArchivar ? "block" : "none",
-                        }}
-                        onClick={() => this.peticionArchivar(event)}
-                      >
-                        Archivar
-                      </Button>
-
-                      
-
-
-
-                      <Button color="success" onClick={()=>this.deleteEvento(event)}>
-                        Eliminar
-                      </Button>
-                    </div>
-                  </div>
+                          <Button
+                            color="success"
+                            onClick={() => this.deleteEvento(event)}
+                          >
+                            Eliminar
+                          </Button>
+                        </div>
+                      </div>
+                    </Fragment>
+                  ) : (
+                    <></>
+                  )}
 
                   <Modal isOpen={this.state.abierto} style={modalStyles}>
                     <ModalHeader>
