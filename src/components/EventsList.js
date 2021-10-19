@@ -28,7 +28,7 @@ class EventsList extends Component {
     botonMostrarEventosNoArchivados: false,
     botonMostrarEventosArchivados: true,
     success: false,
-    categoriaFiltrada: "",
+    categoriaFiltrada: "Todas",
     categorias: [],
   };
 
