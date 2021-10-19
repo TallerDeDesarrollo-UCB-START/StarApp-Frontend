@@ -23,7 +23,7 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion
                 onAsignarParticipacion() 
             }}
         );
-    })
+    }, [])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -36,8 +36,9 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onGetParticipacion
     const onClick = (event) => {
         onPartiparProy(proyecto.id); 
         document.getElementById(proyecto.id).classList.add('button-hide'); 
-        onAsignarParticipacion()
         handleClickOpen();
+        onAsignarParticipacion();
+        
     }
 
     return (

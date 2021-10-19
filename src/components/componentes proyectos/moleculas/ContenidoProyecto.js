@@ -11,19 +11,25 @@ import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion}) {
     // States:
     const [participacion, setParticipacion] = useState(false)
-    /*useEffect(() => {
-        asignarParticipacion() 
+    useEffect(() => {
+        //debugger
+        const asigParticip = async () => {
+            const p =  await onGetParticipacion(proyecto.id)
+            setParticipacion(p)
+        }
+        asigParticip()
         // No use este useEffect,
         // porque por algun motivo no se activa igual al useEffect de ParticiparEnProyectoBtn
-    })*/
+    }, [])
 
     // Functions:
     async function asignarParticipacion() {
+        debugger
         const participa = await onGetParticipacion(proyecto.id)
         const p = participa === true? true : false
         setParticipacion(p)

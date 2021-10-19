@@ -15,15 +15,18 @@ function CancelarParticipacionBtn( {proyecto,  onCancelarParticipacion, onGetPar
 
     useEffect(function () {
         onGetParticipacion(proyecto.id).then(state => 
-            {if(!state) {
-                // Coloque este if, porque a veces se renderiza un null y eso daba warning
-                /*if(document.getElementById(proyecto.id)){
-                    document.getElementById(proyecto.id).classList.add('button-hide');
-                }*/
+            {
+                //debugger
+                if(!state) {
+                if(document.getElementById(proyecto.id)){
+                    //document.getElementById(proyecto.id).classList.add('button-hide');
+                }
                 onAsignarParticipacion() 
             }}
+            
         );
-    })
+        
+    }, [])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -35,8 +38,8 @@ function CancelarParticipacionBtn( {proyecto,  onCancelarParticipacion, onGetPar
 
     const onClick = (event) => {
         onCancelarParticipacion(proyecto.id); 
-        document.getElementById(proyecto.id).classList.add('button-hide'); 
-        onAsignarParticipacion()
+        //document.getElementById(proyecto.id).classList.add('button-hide'); 
+        onAsignarParticipacion();
         handleClickOpen();
     }
 

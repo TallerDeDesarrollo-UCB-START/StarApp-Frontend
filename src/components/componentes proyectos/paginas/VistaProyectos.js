@@ -60,6 +60,7 @@ function VistaProyectos() {
     }
 
     const cancelarParticipacionProyecto = async (id) => { 
+        //debugger
         const idSesion = sessionStorage.getItem("id");
         await fetch(
             `${URLCancelarParticipProy}/${id}/sesion/${idSesion}`,
