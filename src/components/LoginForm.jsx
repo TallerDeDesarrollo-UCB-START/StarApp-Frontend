@@ -1,41 +1,35 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
-import LogoStart from '../images/logoStart.png'
 import InputTextbox from './InputTextbox'
 import { Form } from "react-final-form"
 import {useMediaQuery, Button} from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { validEmail} from './RegEx'
 import AxiosClient from './AxiosClient'
-import Alert from '@material-ui/lab/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
-import Slide from '@material-ui/core/Slide';
+import LogoAndSlogan from '../components/LogoAndSlogan'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import SnackbarMessage from '../components/templates/SnackbarMessage'
 
 const useStyles = makeStyles(theme => ({
 
     Container : {
         display: 'flex',
-        paddingBottom: '5%'
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin:'250px 0',
+    },
+    smallContainer:{
+        display: 'flex',
+        flexDirection:'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin:'200px 0',
+        marginBottom: '0',
     },
     loginContainer : {
         display: 'flex',
-        justifyContent: 'right',
-        alignItems: 'center',
-        paddingTop: '5%',
-        paddingBottom: '5%',
-        marginRight: '2%'
-    },
-    logoContainer : {
-        display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-    },
-    logo : {
-        width: '70%',
-        height: '40%',
     },
     loginCard : {
         width: '450px',
@@ -66,26 +60,20 @@ const useStyles = makeStyles(theme => ({
         color: 'white',
         marginBottom: '10PX',
         fontWeight: 'bold',
-
     },
 })
 )
-function TransitionDown(props) {
-    return <Slide {...props} direction="down" />;
-  }
-  
 const LoginForm = ({sessionData, setSessionData}) => {
     const history = useHistory()
     const classes = useStyles()
-    const [state, setState] = React.useState({
-        open: false,
-        vertical: 'top',
-        horizontal: 'center',
-      });
-      const { vertical, horizontal, open } = state;
-    const [transition, setTransition] = React.useState(undefined);
-
-    const smallScreen = useMediaQuery('(min-width:420px)')
+    const smallScreen = !useMediaQuery('(min-width:900px)')
+    const [snackbar, setSnackbar] = useState({
+        message:"",
+        active:false,
+        severity:"success",
+        afterClose:()=>{},
+    })
+    const [activeProgressBar, setActiveProgressBar] = useState(false)
     const validate = values => {
         const errors = {}
         if(!validEmail.test(values.email)){
@@ -99,61 +87,42 @@ const LoginForm = ({sessionData, setSessionData}) => {
         }
         return errors
     }
-    const handleClickOpen = (Transition,newState) => {
-        setTransition(() => Transition);
-        setState({ open: true, ...newState });
-    };
-
-    const handleClose = () => {
-        setState({ ...state, open: false });
-        window.location.reload();
-    };
+    const activeSnackbar = (message, severity, afterClose)=>{
+        setSnackbar({message, severity, afterClose, active:true})
+      }
     const URL_AUTH = process.env.REACT_APP_API_AUTH
-    const URL_API = process.env.REACT_APP_API
     const onSubmit = async values => {
         const body = {
             email: values.email,
             password: values.password
         }
-        return AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
+        setActiveProgressBar(true)
+        await AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
             .then(response => {
                 if ((response.status = 201)) {
-                    console.log("logged")
                     const jwt = response.data.accessToken
                     const id_auth = response.data.id
-                    console.log(response)
                     sessionStorage.setItem("jwt", jwt)
                     sessionStorage.setItem("id", id_auth)
-                    AxiosClient.get(`${URL_API}extended_form/${id_auth}`)
-                        .then(response => {
-                            console.log(response.data.data)
-                            setSessionData({role: response.data.data.rol, id: id_auth})
-                        })
-                        .catch((response)=>{
-                            console.log(response.status)
-                            alert('Inicio de sesión fallido')
-                            window.location.reload()
-                        })
+                    setActiveProgressBar(false)
                     history.push(`/`)
+                    window.location.reload()
                 }
             })
             .catch((response) => {
-                console.log(response.status)
-                handleClickOpen(TransitionDown,{ vertical: 'top', horizontal: 'center' });
+                setActiveProgressBar(false)
+                activeSnackbar("Correo o contraseña inválidos.", "error", ()=>{window.location.reload()})
             })
     }
     return (
-        <div className={classes.Container}>
-            <div className = {classes.logoContainer}>
-                <img src={LogoStart} alt="logo Start" className = {classes.logo} />
-                <Typography> Incubadora de proyectos sociales y ambientales </Typography>
-            </div>
-
+        <div className={smallScreen?classes.smallContainer:classes.Container}>
+            <LogoAndSlogan/>
             <div className = {classes.loginContainer}>
-                <Card className = {(smallScreen)?classes.loginCard:classes.respLoginCard}>
+                <Card className = {(smallScreen)?classes.respLoginCard:classes.loginCard}>
                     <Form onSubmit={onSubmit} validate={validate} >
                         {({ handleSubmit }) => (
                             <form onSubmit={handleSubmit} noValidate>
+                                <LinearProgress style={{display:(activeProgressBar)?"":"none"}}/>
                                 <InputTextbox name="email" type="text" placeholder = "Correo Electrónico"/>
                                 <InputTextbox name="password" type = "password" placeholder = "Contraseña"/>
                                 <div className = {classes.buttonContainer}>
@@ -163,23 +132,12 @@ const LoginForm = ({sessionData, setSessionData}) => {
                                     <Button variant="contained" color="secondary" className = {classes.CreateButton} onClick = {()=> history.push("/register")}>
                                         Crear cuenta nueva
                                     </Button>
-                                    <Snackbar
-                                        anchorOrigin={{ vertical, horizontal }}
-                                        open={open}
-                                        autoHideDuration={3000}
-                                        onClose={handleClose}
-                                        TransitionComponent={transition}
-                                        key={transition ? transition.name : ''}
-                                    >
-                                        <Alert onClose={handleClose} severity="error" variant="filled">
-                                            Credenciales incorrectos, intente de nuevo!
-                                        </Alert>
-                                    </Snackbar>
                                 </div>                                
                             </form>
                         )}
                     </Form>
                 </Card>
+                <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
             </div>
         </div>
     )
