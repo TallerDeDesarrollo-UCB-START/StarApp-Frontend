@@ -33,6 +33,7 @@ function VistaProyectoIndividual() {
     }
 
     return (
+        
         <Box className="body-container">
             {
                <BodyProyectoIndividual proyecto={proyecto}/>
