@@ -1,7 +1,8 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react';
 import { DataGrid } from '@material-ui/data-grid';
-import { makeStyles} from '@material-ui/core'
-import { useMediaQuery } from '@material-ui/core'
+import { makeStyles} from '@material-ui/core';
+import { useMediaQuery } from '@material-ui/core';
+import axios from "axios";
 
 const useStyles = makeStyles((theme)=>({
     section: {
@@ -25,8 +26,13 @@ const useStyles = makeStyles((theme)=>({
 
 const columns = [
     {
-        field: 'titulo',
-        headerName: 'Titulo',
+        field: 'nombre_evento',
+        headerName: 'Evento', 
+        width: 270,
+    },
+    {
+        field: 'descripcion_evento',
+        headerName: 'Descripcion', 
         width: 270,
     },
     {
@@ -35,9 +41,8 @@ const columns = [
         width: 200,
     },
     {
-        field: 'estado',
-        headerName: 'Estado',
-        type: 'phone',
+        field: 'modalidad_evento',
+        headerName: 'Modalidad',
         width: 200,
     },
     {
@@ -46,33 +51,35 @@ const columns = [
         width: 200,
     },
     {
-        field: 'fecha_inicio',
+        field: 'proyecto',
+        headerName: 'Proyecto',
+        width: 200,
+    },
+    {
+        field: 'fecha_evento',
         headerName: 'Fecha de Inicio',
         width: 260,
     },
 ];
 
 const url = process.env.REACT_APP_API;
-const baseURL=`${url}sesion`;
+//const localUrl=`http://localhost:5000/sesion`; //para pruebas
+const localUrl=`${url}sesion`;
+const api = axios.create({
+ baseURL: localUrl,
+  });
 
 function ListaEventos () {
     const classes = useStyles()
     const [data, setData] = useState([])
-    //const [originalData, setOriginalData] = useState([])
     const smallScreen = useMediaQuery('(min-width:700px)')
     const obtenerParticipacionEvento = async () => {
         const idSesion = sessionStorage.getItem("id");
-        const response = await fetch(
-          `${baseURL}/${idSesion}/get_my_eventos`,
-          {
-            method: "GET",
-          }
-        );
-        const data = await response.json();
-        setData(data);
-        //setOriginalData(data);
+        let data = await api.get(
+          `${localUrl}/${idSesion}/get_my_eventos`
+        ).then(data => data);
+        setData(data.data);
     }
-    console.log(data);
 
     useEffect( () => {
         obtenerParticipacionEvento();
