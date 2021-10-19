@@ -9,7 +9,7 @@ import {withStyles} from "@material-ui/core/styles";
 function VerProyectoBtn({proyecto}) {
     return (
         <VerButton variant="contained">
-            <Link to={"projects/" + proyecto.id}>VER MÁS</Link>
+            <Link to={"projects/" + proyecto.id}>Ver más</Link>
         </VerButton>
     )
 }
@@ -18,9 +18,7 @@ const VerButton = withStyles((theme) => ({
     root: {
       backgroundColor: "#3C4858",
       color: "#FFFFFF",
-      marginRight: "35%",
-      marginLeft: "1%",
-      widht: "100%"
+      width: '16%',
     },
   }))(Button);
 

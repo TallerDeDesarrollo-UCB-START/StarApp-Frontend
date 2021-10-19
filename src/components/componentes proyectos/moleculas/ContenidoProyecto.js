@@ -55,8 +55,8 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
             <p> Lider: {proyecto.lider}</p>
 
             <div className="button-container">
-                <div className="space-button"></div>
                 <VerProyectoBtn proyecto={proyecto}/>
+                <div className="space-button"></div>
                 {tagParticipacion}
                 {botonParticiparProyecto}
                 {botonEditarProyecto}
