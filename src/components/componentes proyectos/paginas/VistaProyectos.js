@@ -58,6 +58,15 @@ function VistaProyectos() {
             method: 'PUT'
         })
     }
+
+    const cancelarParticipacionProyecto = async (id) => { 
+        const idSesion = sessionStorage.getItem("id");
+        await fetch(
+            `${URLCancelarParticipProy}/${id}/sesion/${idSesion}`,
+            { 
+                method: 'DELETE'
+            })
+    }
     
     /*const obtenerProyecto = async (idProyecto) => {
         const response = await fetch(`${URLProyectos}/${idProyecto}`)
@@ -138,7 +147,8 @@ function VistaProyectos() {
                         onPartiparProy={participarEnProyecto} 
                         onEditarProy={editarProyecto} 
                         onGetParticipacion={obtenerParticipacionProyecto}
-                        onFiltroProy={filtrarPorCaterogia}/> 
+                        onFiltroProy={filtrarPorCaterogia}
+                        onCancelarParticipacion={cancelarParticipacionProyecto}/> 
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
@@ -146,7 +156,8 @@ function VistaProyectos() {
                         proyectos={proyectos}
                         onPartiparProy={participarEnProyecto}
                         onGetParticipacion={obtenerParticipacionProyecto}
-                        onFiltroProy={filtrarPorCaterogia}/>
+                        onFiltroProy={filtrarPorCaterogia}
+                        onCancelarParticipacion={cancelarParticipacionProyecto}/>
             </PuertaPermisos>
         </>
     );
@@ -161,5 +172,6 @@ const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_pro
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//
 const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
 const URLObtenerRol = `${url}get_rol` //'http://localhost:5000/get_rol/'
+const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
 
 export default VistaProyectos;

@@ -4,7 +4,7 @@ import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
 import VerProyectoBtn from '../atomos/VerProyectoBtn';
-
+import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 // Permisos/Roles:
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
@@ -13,7 +13,7 @@ import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 import { useState } from "react";
 
-function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion}) {
+function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion}) {
     // States:
     const [participacion, setParticipacion] = useState(false)
     /*useEffect(() => {
@@ -33,13 +33,19 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                             <EtiquetaParticipacion/> : ''
     const botonParticiparProyecto = participacion === false?
                             <ParticiparEnProyectoBtn proyecto={proyecto} 
-                            onPartiparProy={onPartiparProy} 
-                            onGetParticipacion={onGetParticipacion}
-                            onAsignarParticipacion={asignarParticipacion}/>
+                                                    onPartiparProy={onPartiparProy} 
+                                                    onGetParticipacion={onGetParticipacion}
+                                                    onAsignarParticipacion={asignarParticipacion}/>
+                            : ''
+    const botonCancelarParticipacion = participacion === true?
+                            <CancelarParticipacionBtn proyecto={proyecto} 
+                                                    onCancelarParticipacion={onCancelarParticipacion} 
+                                                    onGetParticipacion={onGetParticipacion}
+                                                    onAsignarParticipacion={asignarParticipacion}/>
                             : ''
     const botonEditarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
                                     <EditarProyectoBtn  onActivarForm={onActivarForm}
-                                                proyecto={proyecto}/>
+                                                        proyecto={proyecto}/>
                                 </PuertaPermisos>
     const botonEliminarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
                                         <EliminarProjectoBtn proyecto={proyecto}
@@ -59,6 +65,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                 <div className="space-button"></div>
                 {tagParticipacion}
                 {botonParticiparProyecto}
+                {botonCancelarParticipacion}
                 {botonEditarProyecto}
                 {botonEliminarProyecto}
             </div>
