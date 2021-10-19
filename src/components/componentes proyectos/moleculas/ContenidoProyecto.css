@@ -16,11 +16,11 @@ p {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
 }
 
 .space-button {
-    width: 90%;
+    width: 9    0%;
 }   
 
 .info-container {
