@@ -14,7 +14,7 @@ export const SCOPES = {
 
 export const PERMISSIONS = {
     [ROLES.voluntario]: [SCOPES.canView, SCOPES.canParticipate, SCOPES.canNotCrudProyectos],
-    [ROLES.lider]: [SCOPES.canView, SCOPES.canCrudEventos],
+    [ROLES.lider]: [SCOPES.canView, SCOPES.canCrudEventos, SCOPES.canNotCrudProyectos],
     [ROLES.coreTeam]: [
     SCOPES.canCrudProyectos,
     SCOPES.canCrudEventos,
