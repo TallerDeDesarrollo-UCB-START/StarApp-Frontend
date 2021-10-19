@@ -18,7 +18,6 @@ const DeleteButton = withStyles((theme) => ({
     root: {
       backgroundColor: "#ED2020",
       color: "#FFFFFF",
-      minWidth: "15%",
       "&:hover": {
         backgroundColor: "#a90e0e",
       },

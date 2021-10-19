@@ -19,7 +19,6 @@ const EditarButton = withStyles((theme) => ({
     root: {
       marginRight: 10,
       marginLeft: 10,
-      minWidth: "15%",
     },
   }))(Button);
 
