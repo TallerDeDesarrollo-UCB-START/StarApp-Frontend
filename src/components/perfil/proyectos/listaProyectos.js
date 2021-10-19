@@ -69,6 +69,9 @@ function ListaProyectos () {
           }
         );
         const data = await response.json();
+        data.map(element => element.fecha_inicio = element.fecha_inicio[0]+element.fecha_inicio[1]+element.fecha_inicio[2]+element.fecha_inicio[3]
+            +element.fecha_inicio[4]+element.fecha_inicio[5]+element.fecha_inicio[6]+element.fecha_inicio[7]+element.fecha_inicio[8]+
+            element.fecha_inicio[9]);
         setData(data);
         //setOriginalData(data);
     }
