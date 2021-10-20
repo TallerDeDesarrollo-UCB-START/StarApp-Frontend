@@ -32,7 +32,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     useEffect(() => {
         const activarAsignaciones = () => {
             activateSnackBar()
-            asignarSnackbarStatus()
+            //asignarSnackbarStatus()
             asignarParticipacion()
         }
         activarAsignaciones()
