@@ -30,9 +30,12 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     })
     const [participacion, setParticipacion] = useState(false)
     useEffect(() => {
-        activateSnackBar()
-        asignarSnackbarStatus()
-        asignarParticipacion()
+        const activarAsignaciones = () => {
+            activateSnackBar()
+            asignarSnackbarStatus()
+            asignarParticipacion()
+        }
+        activarAsignaciones()
     }, [participacion])
 
     // Functions:
