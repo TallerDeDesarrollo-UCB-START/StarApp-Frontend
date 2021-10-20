@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     chip: {
         margin: 'auto',
         marginRight: '5px',
+        width: '22%'
     },
 });
 
