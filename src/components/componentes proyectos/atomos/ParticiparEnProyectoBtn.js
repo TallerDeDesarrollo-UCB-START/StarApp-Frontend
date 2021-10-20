@@ -19,12 +19,13 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
     const onClick = async (event) => {
         //debugger
         const participarResponse = await onPartiparProy(proyecto.id)
-        console.log(participarResponse)
+        //console.log(participarResponse)
         if(participarResponse){
             
             onAsignarParticipacion();
             onAsignarSnackbarStatus("Participacion exitosa", true, true);
         }else{
+            onAsignarParticipacion();
             onAsignarSnackbarStatus("Participacion fallida", true, false);
         }
     }

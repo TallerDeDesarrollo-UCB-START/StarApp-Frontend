@@ -51,6 +51,7 @@ function VistaProyectos() {
     }
 
     const participarEnProyecto = async (id) => { 
+        //debugger
         const idSesion = sessionStorage.getItem("id");
         const response = await fetch(
         `${URLParticiparProy}/${id}/sesion/${idSesion}`,
