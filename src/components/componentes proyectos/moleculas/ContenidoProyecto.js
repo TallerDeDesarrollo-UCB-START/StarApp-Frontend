@@ -84,7 +84,6 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
             }
         }
         activateSnackBar()
-        //asignarSnackbarStatus()
         // eslint-disable-next-line react-hooks/exhaustive-deps
         asignarParticipacion()
     }, [participacion])
