@@ -1,4 +1,5 @@
 // Librerias-Paquetes:
+import ListaParticipantesProyecto from './ListaParticipantesProyecto';
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 
@@ -29,6 +30,7 @@ function ContenidoProyecto({proyecto}) {
             <p className="card-text">
                 <b>Fecha de Fin:</b> {fechaFin}
             </p>
+            <ListaParticipantesProyecto proyectoId={proyecto.id}/>
         </Box>
     );
     
