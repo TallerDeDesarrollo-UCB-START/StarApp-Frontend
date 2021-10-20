@@ -18,18 +18,20 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     const [participacion, setParticipacion] = useState(false)
     useEffect(() => {
         //debugger
-        const asigParticip = async () => {
+        /*const asigParticip = async () => {
             const p =  await onGetParticipacion(proyecto.id)
             setParticipacion(p)
         }
-        asigParticip()
+        asigParticip()*/
         // No use este useEffect,
         // porque por algun motivo no se activa igual al useEffect de ParticiparEnProyectoBtn
-    }, [])
+        console.log('pepe')
+        asignarParticipacion()
+    }, [participacion])
 
     // Functions:
     async function asignarParticipacion() {
-        debugger
+        //debugger
         const participa = await onGetParticipacion(proyecto.id)
         const p = participa === true? true : false
         setParticipacion(p)

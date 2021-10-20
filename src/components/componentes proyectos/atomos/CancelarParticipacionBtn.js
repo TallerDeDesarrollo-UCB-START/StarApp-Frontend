@@ -1,5 +1,6 @@
 // Componentes:
 import './ParticiparEnProyectoBtn.css';
+import SnackbarMessage from '../../templates/SnackbarMessage'
 // Librerias-Paquetes:
 import React, {useEffect} from "react";
 import { Button } from '@material-ui/core';
@@ -12,7 +13,15 @@ function CancelarParticipacionBtn( {proyecto,  onCancelarParticipacion, onGetPar
 
     // States
     const [open, setOpen] = React.useState(false);
-
+    const [snackbar, setSnackbar] = useState({
+        message:"",
+        active:false,
+        severity:"success",
+        afterClose:()=>{},
+    })
+    const activeSnackbar = (message, severity, afterClose)=>{
+        setSnackbar({message, severity, afterClose, active:true})
+    }
     useEffect(function () {
         onGetParticipacion(proyecto.id).then(state => 
             {
@@ -52,23 +61,7 @@ function CancelarParticipacionBtn( {proyecto,  onCancelarParticipacion, onGetPar
                     Cancelar Participacion
                 </ParticipateButton>
             </div>
-            <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-            >
-            <DialogTitle id="alert-dialog-title">
-                Se cancelo la participacion con exito
-            </DialogTitle>
-            <DialogContent>
-            </DialogContent>
-            <DialogActions>
-                <OkButton variant="contained" color="primary" onClick={handleClose} autoFocus>
-                    Ok  
-                </OkButton>
-            </DialogActions>
-        </Dialog>
+            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
         </div>
     );
 }
