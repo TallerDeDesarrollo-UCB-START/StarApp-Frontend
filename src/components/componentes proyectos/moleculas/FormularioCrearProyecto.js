@@ -3,9 +3,12 @@ import InputTexto from '../moleculas/InputTexto'
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
 
 
-function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
+function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}) {
     // States
     const [titulo, setTitulo] = useState('')
     const [descripcion, setDescripcion] = useState('')
@@ -63,8 +66,69 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value); removerRequerido(e.target)}
     const onChangeLider = (e) => {setLider(e.target.value); removerRequerido(e.target)}
 
+    // ---- NUEVO ----
+    function getModalStyle() {
+        const top = 50;
+        const left = 50;
+        
+        return {
+            top: `${top}%`,
+            left: `${left}%`,
+            transform: `translate(-${top}%, -${left}%)`,
+        };
+    }
+
+    const useStyles = makeStyles((theme) => ({
+    paper: {
+        position: 'absolute',
+        width: 430,
+        backgroundColor: '#F2F2F2',
+        borderRadius: '15',
+        boxShadow: '10px 10px 4px rgba(0, 0, 0, 0.25)',
+        padding: 25,
+    },
+    })); 	
+    
+    const classNamees = useStyles();
+    const [modalStyle] = React.useState(getModalStyle);
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const body = (
+        <div style={modalStyle} className="paperr">
+    ejemplo      
+    </div>);
+    
+// Simplemente hacer abrir el modal con el boton de crear y el body sera lo mismo que tenia antes
     return (
-        <div id="gen-form">
+        <div>
+            <button type="button" onClick={handleOpen}>
+            Open Modal
+            </button>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                >
+            {body}
+            </Modal>
+        </div>
+        
+    );
+}
+
+export default FormularioCrearProyecto
+
+
+/*
+<div id="gen-form">
             <form  onSubmit={onSubmit}>
                 <div className="crear-container-title">
                     <h3>CREAR PROYECTO</h3>
@@ -97,8 +161,4 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
             </form>
             <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
         </div>
-        
-    );
-}
-
-export default FormularioCrearProyecto
+*/
