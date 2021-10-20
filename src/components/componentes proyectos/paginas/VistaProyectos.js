@@ -14,6 +14,7 @@ function VistaProyectos() {
     const [rol, setRol] = useState('')
 
     useEffect(() => {
+        
         const getProyectos = async () => {
             const proyectosDelServer =  await fetchProyectos()
             setProyectos(proyectosDelServer)
@@ -110,6 +111,19 @@ function VistaProyectos() {
         //console.log(data[0].rol)
         return data[0].rol;
     }
+    const filtrarPorCaterogia = async(categoria) => {
+       const response= await fetch(
+            `${URLProyectos}/${categoria}`,
+            {
+                method: 'GET'
+            }
+        )
+        const data = await response.json();
+        //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
+        setProyectos(data)
+
+        console.log({data})
+    }
     
     //const rol = 'admin'
     //console.log(rol)
@@ -124,14 +138,16 @@ function VistaProyectos() {
                         onEliminarProy={eliminarProyecto} 
                         onPartiparProy={participarEnProyecto} 
                         onEditarProy={editarProyecto} 
-                        onGetParticipacion={obtenerParticipacionProyecto}/> 
+                        onGetParticipacion={obtenerParticipacionProyecto}
+                        onFiltroProy={filtrarPorCaterogia}/> 
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
                 <ProyectosVoluntarios rol={rol}
                         proyectos={proyectos}
                         onPartiparProy={participarEnProyecto}
-                        onGetParticipacion={obtenerParticipacionProyecto}/>
+                        onGetParticipacion={obtenerParticipacionProyecto}
+                        onFiltroProy={filtrarPorCaterogia}/>
             </PuertaPermisos>
         </>
     );
