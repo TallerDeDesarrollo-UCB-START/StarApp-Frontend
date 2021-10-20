@@ -28,22 +28,19 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
     }
 
     return (
-        <div>
-            <div id={proyecto.id}>
                 <CancelParticipationButton variant="contained" color="primary"
                 onClick={onClick}
                 >
                     No participar
                 </CancelParticipationButton>
-            </div>
-        </div>
     );
 }
 
 const CancelParticipationButton = withStyles((theme) => ({
     root: {
         backgroundColor: "#a8a8a8",
-        whiteSpace: 'nowrap',
+        width: "30%",
+        //whiteSpace: 'nowrap',
         color: "white",
         "&:hover": {
             backgroundColor: "#818181",

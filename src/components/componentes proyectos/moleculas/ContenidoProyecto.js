@@ -71,6 +71,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         }else{
             //activeSnackbar("snackBarStatus.message", "error", ()=>{})
         }
+        asignarSnackbarStatus(mensaje, false, estado); // reset para que no reaparezca indebidamente
     }
 
     // Components:
