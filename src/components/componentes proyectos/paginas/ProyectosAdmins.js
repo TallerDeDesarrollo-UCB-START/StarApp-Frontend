@@ -3,12 +3,13 @@ import HeaderProyectosAdmin from '../organismos/HeaderProyectosAdmin'
 import BodyProyectos from '../organismos/BodyProyectos'
 import FormularioCrearProyecto from '../moleculas/FormularioCrearProyecto'
 import FormularioEditarProyecto from '../moleculas/FormularioEditarProyecto'
+import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria'
 // Librerias-Paquetes:
 import {useState} from 'react'
 import { Box } from '@material-ui/core';
 
 
-function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartiparProy, onEditarProy, onGetParticipacion}) {
+function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartiparProy, onEditarProy, onGetParticipacion,onFiltroProy}) {
     // Hooks
     const [mostrarFormCrear, setMostrarFormCrear] = useState(false)
     const [mostrarFormEditar, setMostrarFormEditar] = useState(false)
@@ -33,6 +34,7 @@ function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartipa
             <HeaderProyectosAdmin onActivarForm={activarFormCrear}/>
             {FormularioCrear}
             {FormularioEditar}
+            <SelectFiltroCategoria onFiltroProy={onFiltroProy}/>
             <BodyProyectos rol={rol}
                             proyectos={proyectos} 
                             onEliminarProy={onEliminarProy} 
