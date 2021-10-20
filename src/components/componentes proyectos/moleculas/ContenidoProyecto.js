@@ -30,12 +30,26 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     })
     const [participacion, setParticipacion] = useState(false)
     useEffect(() => {
-        const activarAsignaciones = () => {
-            activateSnackBar()
-            //asignarSnackbarStatus()
-            asignarParticipacion()
+        const activateSnackBar = () => {
+            //debugger
+            let activar = snackbarStatus.active
+            let estado = snackbarStatus.status
+            let mensaje = snackbarStatus.message
+            if(activar){
+                if(estado){
+                    //debugger
+                    activeSnackbar(mensaje, "success", ()=>{})
+                } else{
+                    activeSnackbar(mensaje, "error", ()=>{})
+                }
+            }else{
+                //activeSnackbar("snackBarStatus.message", "error", ()=>{})
+            }
         }
-        activarAsignaciones()
+        //asignarSnackbarStatus()
+        activateSnackBar()
+        asignarParticipacion()
+        //activarAsignaciones()
     }, [participacion])
 
     // Functions:
@@ -56,22 +70,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     const activeSnackbar = (message, severity, afterClose)=>{
         setSnackbar({message, severity, afterClose, active:true})
     }
-    const activateSnackBar = () => {
-        //debugger
-        let activar = snackbarStatus.active
-        let estado = snackbarStatus.status
-        let mensaje = snackbarStatus.message
-        if(activar){
-            if(estado){
-                //debugger
-                activeSnackbar(mensaje, "success", ()=>{})
-            } else{
-                activeSnackbar(mensaje, "error", ()=>{})
-            }
-        }else{
-            //activeSnackbar("snackBarStatus.message", "error", ()=>{})
-        }
-    }
+    
     // Components:
     const tagParticipacion = participacion === true?
                             <EtiquetaParticipacion/> : ''
