@@ -3,12 +3,13 @@ import { FormControl } from "@material-ui/core"
 import { Box } from "@material-ui/core"
 import { MenuItem } from "@material-ui/core"
 import { InputLabel } from "@material-ui/core"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
 function SelectFiltroCategoria({onFiltroProy}) {
 
     const [categoria, setCategoria] = useState('')
+
 
     const handleChange = (event) => {
         switch(event.target.value) {
@@ -22,6 +23,7 @@ function SelectFiltroCategoria({onFiltroProy}) {
                 onFiltroProy('Social');
                 break;
             default:
+                onFiltroProy('');
                 break;
         }
     setCategoria(event.target.value)
@@ -30,7 +32,7 @@ function SelectFiltroCategoria({onFiltroProy}) {
     };
     return (
         <div>
-            <FormControl variant="standard" sx={{borderRadius: 5, m: 1, minWidth: 300 }}>
+            <FormControl variant="standard" className="form-control" >
                 <InputLabel id="demo-simple-select-standard-label">Categoria</InputLabel>
                 <Select labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"

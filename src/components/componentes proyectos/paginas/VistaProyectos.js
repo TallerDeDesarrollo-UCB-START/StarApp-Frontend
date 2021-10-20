@@ -25,9 +25,10 @@ function VistaProyectos() {
             setRol(rolObtenido)
         }
         getProyectos()
+        console.log("hola")
         asignarRol()
          // Set Dummy, para evitar warning de momento... (se arreglara al obtener roles del backend en otra historia)
-    }, [proyectos.length] )
+    }, [] )
 
     // HTTP requests & functions
     async function fetchProyectos() {
@@ -121,8 +122,6 @@ function VistaProyectos() {
         const data = await response.json();
         //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
         setProyectos(data)
-
-        console.log({data})
     }
     
     //const rol = 'admin'
