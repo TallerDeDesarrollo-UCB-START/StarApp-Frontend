@@ -46,12 +46,14 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                 //activeSnackbar("snackBarStatus.message", "error", ()=>{})
             }
         }
-        const activarAsignarParticipacion = () => {
-            asignarParticipacion()
+        const activarAsignarParticipacion = async () => {
+            const participa = await onGetParticipacion(proyecto.id)
+            const p = participa === true? true : false
+            setParticipacion(p)
         }
-        //asignarSnackbarStatus()
         activateSnackBar()
         activarAsignarParticipacion()
+        //asignarSnackbarStatus()
         //activarAsignaciones()
     }, [participacion])
 
