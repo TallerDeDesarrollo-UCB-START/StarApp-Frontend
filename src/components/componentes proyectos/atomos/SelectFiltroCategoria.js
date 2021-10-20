@@ -1,9 +1,8 @@
 import { Select } from "@material-ui/core"
 import { FormControl } from "@material-ui/core"
-import { Box } from "@material-ui/core"
 import { MenuItem } from "@material-ui/core"
 import { InputLabel } from "@material-ui/core"
-import { useEffect, useState } from "react"
+
 
 
 function SelectFiltroCategoria({onFiltroProy}) {
