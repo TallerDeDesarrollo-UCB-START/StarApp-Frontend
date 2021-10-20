@@ -57,27 +57,26 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     const activeSnackbar = (message, severity, afterClose)=>{
         setSnackbar({message, severity, afterClose, active:true})
     }
-    
-    useEffect(() => {
-        const activateSnackBar = () => {
-            //debugger
-            let activar = snackbarStatus.active
-            let estado = snackbarStatus.status
-            let mensaje = snackbarStatus.message
-            if(activar){
-                if(estado){
-                    //debugger
-                    activeSnackbar(mensaje, "success", ()=>{})
-                } else{
-                    activeSnackbar(mensaje, "error", ()=>{})
-                }
-            }else{
-                //activeSnackbar("snackBarStatus.message", "error", ()=>{})
+    const activateSnackBar = () => {
+        //debugger
+        let activar = snackbarStatus.active
+        let estado = snackbarStatus.status
+        let mensaje = snackbarStatus.message
+        if(activar){
+            if(estado){
+                //debugger
+                activeSnackbar(mensaje, "success", ()=>{})
+            } else{
+                activeSnackbar(mensaje, "error", ()=>{})
             }
+        }else{
+            //activeSnackbar("snackBarStatus.message", "error", ()=>{})
         }
+    }
+    useEffect(() => {
         activateSnackBar()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         asignarParticipacion2()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [participacion])
     // Components:
     const tagParticipacion = participacion === true?
