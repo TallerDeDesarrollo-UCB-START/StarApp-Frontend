@@ -1,83 +1,54 @@
 // Componentes:
 import './ParticiparEnProyectoBtn.css';
-import SnackbarMessage from '../../templates/SnackbarMessage'
 // Librerias-Paquetes:
-import React, {useEffect} from "react";
+import React from "react";
 import { Button } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 
 
 // Merce Vic
-function CancelarParticipacionBtn( {proyecto,  onCancelarParticipacion, onGetParticipacion, onAsignarParticipacion}) {
+function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignarSnackbarStatus, onAsignarParticipacion}) {
 
     // States
-    const [open, setOpen] = React.useState(false);
-    const [snackbar, setSnackbar] = useState({
-        message:"",
-        active:false,
-        severity:"success",
-        afterClose:()=>{},
-    })
-    const activeSnackbar = (message, severity, afterClose)=>{
-        setSnackbar({message, severity, afterClose, active:true})
-    }
-    useEffect(function () {
-        onGetParticipacion(proyecto.id).then(state => 
-            {
-                //debugger
-                if(!state) {
-                if(document.getElementById(proyecto.id)){
-                    //document.getElementById(proyecto.id).classList.add('button-hide');
-                }
-                onAsignarParticipacion() 
-            }}
-            
-        );
-        
-    }, [])
+    //const [snackbar, setSnackbar] = React.useState()
+    /*useEffect(function () {
+        onAsignarParticipacion()
+    }, [snackbar, participacion])*/
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const onClick = (event) => {
-        onCancelarParticipacion(proyecto.id); 
-        //document.getElementById(proyecto.id).classList.add('button-hide'); 
-        onAsignarParticipacion();
-        handleClickOpen();
+    const onClick = async (event) => {
+        const cancelResponse = await onCancelarParticipacion(proyecto.id);
+        console.log(cancelResponse)
+        if(cancelResponse){
+            onAsignarParticipacion();
+            onAsignarSnackbarStatus("Participacion cancelada", true, true);
+        }else{
+            onAsignarSnackbarStatus("Participacion no cancelada", true, false);
+        }
     }
 
     return (
         <div>
             <div id={proyecto.id}>
-                <ParticipateButton variant="contained" color="secondary"
+                <CancelParticipationButton variant="contained" color="primary"
                 onClick={onClick}
                 >
-                    Cancelar Participacion
-                </ParticipateButton>
+                    No participar
+                </CancelParticipationButton>
             </div>
-            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
         </div>
     );
 }
 
-const ParticipateButton = withStyles((theme) => ({
+const CancelParticipationButton = withStyles((theme) => ({
     root: {
-      color: "#FFFFFF",
-      backgroundColor: "black",
+        backgroundColor: "#a8a8a8",
+        whiteSpace: 'nowrap',
+        color: "white",
+        "&:hover": {
+            backgroundColor: "#818181",
+        },
     },
-  }))(Button);
-
-const OkButton = withStyles((theme) => ({
-root: {
-    marginRight: "auto",
-    marginLeft: "auto",
-},
+    
 }))(Button);
 
 export default CancelarParticipacionBtn

@@ -52,21 +52,25 @@ function VistaProyectos() {
 
     const participarEnProyecto = async (id) => { 
         const idSesion = sessionStorage.getItem("id");
-        await fetch(
+        const response = await fetch(
         `${URLParticiparProy}/${id}/sesion/${idSesion}`,
         { 
             method: 'PUT'
         })
+        const data = await response.json()
+        return data
     }
 
     const cancelarParticipacionProyecto = async (id) => { 
         //debugger
         const idSesion = sessionStorage.getItem("id");
-        await fetch(
+        const response = await fetch(
             `${URLCancelarParticipProy}/${id}/sesion/${idSesion}`,
             { 
                 method: 'DELETE'
             })
+        const data = await response.json()
+        return data
     }
     
     /*const obtenerProyecto = async (idProyecto) => {
