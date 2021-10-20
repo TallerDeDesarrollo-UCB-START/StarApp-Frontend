@@ -30,7 +30,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     })
     const [participacion, setParticipacion] = useState(false)
     
-    // OJO. no borrar el comentario dentro del useEffect()
+    // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
         activateSnackBar()
         asignarParticipacion()
