@@ -33,6 +33,7 @@ function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartipa
             <HeaderProyectosAdmin onActivarForm={activarFormCrear}/>
             {FormularioCrear}
             {FormularioEditar}
+            <SelectFiltroCategoria onFiltroProy={onFiltroProy}/>
             <BodyProyectos rol={rol}
                             proyectos={proyectos} 
                             onEliminarProy={onEliminarProy} 
