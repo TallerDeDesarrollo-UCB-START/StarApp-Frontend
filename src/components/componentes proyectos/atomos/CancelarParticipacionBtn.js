@@ -40,6 +40,7 @@ const CancelParticipationButton = withStyles((theme) => ({
     root: {
         backgroundColor: "#a8a8a8",
         width: "35%",
+        minWidth: "20%",
         whiteSpace: 'nowrap',
         color: "white",
         "&:hover": {
