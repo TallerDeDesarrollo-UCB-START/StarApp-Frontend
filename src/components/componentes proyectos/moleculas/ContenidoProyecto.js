@@ -46,9 +46,12 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                 //activeSnackbar("snackBarStatus.message", "error", ()=>{})
             }
         }
+        const activarAsignarParticipacion = () => {
+            asignarParticipacion()
+        }
         //asignarSnackbarStatus()
         activateSnackBar()
-        asignarParticipacion()
+        activarAsignarParticipacion()
         //activarAsignaciones()
     }, [participacion])
 
