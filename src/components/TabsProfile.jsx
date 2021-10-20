@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Paper from "@material-ui/core/Paper";
 import DatosPersonales from "./DatosPersonales";
 import ListaProyectos from "./perfil/proyectos/listaProyectos";
+import ListaEventos from './perfil/eventos/listaEventos';
 
 function TabPanel(props) {
   const { getDataProfile, handleOpenprop,children, value, index, ...other } = props;
@@ -79,7 +80,7 @@ export default function TabsProfile(props) {
         handleOpenprop={handleOpenprop}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <ListaEventos></ListaEventos>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <ListaProyectos></ListaProyectos>
