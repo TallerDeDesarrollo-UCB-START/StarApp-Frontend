@@ -30,17 +30,16 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     })
     const [participacion, setParticipacion] = useState(false)
     
+    // OJO. no borrar el comentario dentro del useEffect()
+    useEffect(() => {
+        activateSnackBar()
+        asignarParticipacion()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [participacion])
     
 
     // Functions:
     async function asignarParticipacion() {
-        //debugger
-        const participa = await onGetParticipacion(proyecto.id)
-        const p = participa === true? true : false
-        setParticipacion(p)
-    }
-
-    async function asignarParticipacion2() {
         //debugger
         const participa = await onGetParticipacion(proyecto.id)
         const p = participa === true? true : false
@@ -73,11 +72,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
             //activeSnackbar("snackBarStatus.message", "error", ()=>{})
         }
     }
-    useEffect(() => {
-        activateSnackBar()
-        asignarParticipacion2()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [participacion])
+
     // Components:
     const tagParticipacion = participacion === true?
                             <EtiquetaParticipacion/> : ''
