@@ -51,12 +51,27 @@ function VistaProyectos() {
     }
 
     const participarEnProyecto = async (id) => { 
+        //debugger
         const idSesion = sessionStorage.getItem("id");
-        await fetch(
+        const response = await fetch(
         `${URLParticiparProy}/${id}/sesion/${idSesion}`,
         { 
             method: 'PUT'
         })
+        const data = await response.json()
+        return data
+    }
+
+    const cancelarParticipacionProyecto = async (id) => { 
+        //debugger
+        const idSesion = sessionStorage.getItem("id");
+        const response = await fetch(
+            `${URLCancelarParticipProy}/${id}/sesion/${idSesion}`,
+            { 
+                method: 'DELETE'
+            })
+        const data = await response.json()
+        return data
     }
     
     /*const obtenerProyecto = async (idProyecto) => {
@@ -138,7 +153,8 @@ function VistaProyectos() {
                         onPartiparProy={participarEnProyecto} 
                         onEditarProy={editarProyecto} 
                         onGetParticipacion={obtenerParticipacionProyecto}
-                        onFiltroProy={filtrarPorCaterogia}/> 
+                        onFiltroProy={filtrarPorCaterogia}
+                        onCancelarParticipacion={cancelarParticipacionProyecto}/> 
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
@@ -146,7 +162,8 @@ function VistaProyectos() {
                         proyectos={proyectos}
                         onPartiparProy={participarEnProyecto}
                         onGetParticipacion={obtenerParticipacionProyecto}
-                        onFiltroProy={filtrarPorCaterogia}/>
+                        onFiltroProy={filtrarPorCaterogia}
+                        onCancelarParticipacion={cancelarParticipacionProyecto}/>
             </PuertaPermisos>
         </>
     );
@@ -161,5 +178,6 @@ const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_pro
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//
 const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
 const URLObtenerRol = `${url}get_rol` //'http://localhost:5000/get_rol/'
+const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
 
 export default VistaProyectos;

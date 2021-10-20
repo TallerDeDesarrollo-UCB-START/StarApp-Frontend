@@ -7,7 +7,7 @@ import './ProyectoVoluntario.css';
 import { Box } from '@material-ui/core';
 
 // Diego
-function ProyectoVoluntario({proyecto, rol, onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion}) {
+function ProyectoVoluntario({proyecto, rol, onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion}) {
     return (
         <Box className="proyect-container">
             <BannerProyecto />
@@ -16,7 +16,8 @@ function ProyectoVoluntario({proyecto, rol, onEliminarProy, onActivarForm, onPar
                             onEliminarProy={onEliminarProy} 
                             onActivarForm={onActivarForm}
                             onPartiparProy={onPartiparProy}
-                            onGetParticipacion={onGetParticipacion}/>
+                            onGetParticipacion={onGetParticipacion}
+                            onCancelarParticipacion={onCancelarParticipacion}/>
         </Box>
     );
 }

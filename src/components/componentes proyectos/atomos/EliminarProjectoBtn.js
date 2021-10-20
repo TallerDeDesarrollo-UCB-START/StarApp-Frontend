@@ -17,6 +17,8 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
 const DeleteButton = withStyles((theme) => ({
     root: {
       backgroundColor: "#ED2020",
+      width: '25%',
+      minWidth: "15%",
       color: "#FFFFFF",
       "&:hover": {
         backgroundColor: "#a90e0e",
