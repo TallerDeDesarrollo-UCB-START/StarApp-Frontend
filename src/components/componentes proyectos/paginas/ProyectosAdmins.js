@@ -3,6 +3,7 @@ import HeaderProyectosAdmin from '../organismos/HeaderProyectosAdmin'
 import BodyProyectos from '../organismos/BodyProyectos'
 import FormularioCrearProyecto from '../moleculas/FormularioCrearProyecto'
 import FormularioEditarProyecto from '../moleculas/FormularioEditarProyecto'
+import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria'
 // Librerias-Paquetes:
 import {useState} from 'react'
 import { Box } from '@material-ui/core';
