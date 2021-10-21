@@ -14,7 +14,8 @@ import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 import { useState, useEffect } from "react";
 
-function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion}) {
+function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
+
     // States:
     const [snackbar, setSnackbar] = useState({
         message:"",
@@ -29,11 +30,13 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
 
     })
     const [participacion, setParticipacion] = useState(false)
+    const [numberParticipants, setNumber] = useState(0)
     
     // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
         activateSnackBar()
         asignarParticipacion()
+        getNumberParticipants()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [participacion])
     
@@ -44,6 +47,11 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         const participa = await onGetParticipacion(proyecto.id)
         const p = participa === true? true : false
         setParticipacion(p)
+    }
+
+    async function getNumberParticipants() {
+        const numberParticipants = await onNumeroParticipantes(proyecto.id);
+        setNumber(numberParticipants);
     }
 
     function asignarSnackbarStatus(message, active, status){
@@ -101,14 +109,15 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                         <EliminarProjectoBtn proyecto={proyecto}
                                                             onEliminarProy={onEliminarProy}/>
                                     </PuertaPermisos>
-
+    
     return (
         <Box className="content-container">
             
-            <p>Proyecto: {proyecto.titulo}</p>
-            <p> Objetivo: {proyecto.objetivo}</p>
-            <p> Descripción: {proyecto.descripcion}</p>
-            <p> Lider: {proyecto.lider}</p>
+            <p> <b>Proyecto:</b> {proyecto.titulo}</p>
+            <p> <b>Objetivo:</b> {proyecto.objetivo}</p>
+            <p> <b>Descripción:</b> {proyecto.descripcion}</p>
+            <p> <b>Lider:</b> {proyecto.lider}</p>
+            <p> <b>Número de Participantes:</b> {numberParticipants.count}</p>
 
             <div className="button-container">
                 <VerProyectoBtn proyecto={proyecto}/>
