@@ -91,6 +91,15 @@ function VistaProyectos() {
         return data;
     }
 
+    const obtenerNumeroParticipantes = async (idProyecto) => {
+        const response = await fetch(`${URLNumeroParticipantes}/${idProyecto}`,
+        { 
+            method: 'GET'
+        });
+        const data = await response.json();
+        return data;
+    }
+
     const editarProyecto = async (proyectoEditar) => {
         const response = await fetch(
             `${URLEditarProy}/${proyectoEditar.id}`,
@@ -154,7 +163,8 @@ function VistaProyectos() {
                         onEditarProy={editarProyecto} 
                         onGetParticipacion={obtenerParticipacionProyecto}
                         onFiltroProy={filtrarPorCaterogia}
-                        onCancelarParticipacion={cancelarParticipacionProyecto}/> 
+                        onCancelarParticipacion={cancelarParticipacionProyecto}
+                        onNumeroParticipantes={obtenerNumeroParticipantes}/> 
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
@@ -163,7 +173,8 @@ function VistaProyectos() {
                         onPartiparProy={participarEnProyecto}
                         onGetParticipacion={obtenerParticipacionProyecto}
                         onFiltroProy={filtrarPorCaterogia}
-                        onCancelarParticipacion={cancelarParticipacionProyecto}/>
+                        onCancelarParticipacion={cancelarParticipacionProyecto}
+                        onNumeroParticipantes={obtenerNumeroParticipantes}/>
             </PuertaPermisos>
         </>
     );
@@ -179,5 +190,6 @@ const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_p
 const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
 const URLObtenerRol = `${url}get_rol` //'http://localhost:5000/get_rol/'
 const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
+const URLNumeroParticipantes = `${url}get_numero_participantes` //'http://localhost:5000/get_rol/'
 
 export default VistaProyectos;
