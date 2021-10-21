@@ -25,7 +25,7 @@ function VistaProyectos() {
             setRol(rolObtenido)
         }
         getProyectos()
-        console.log("hola")
+        // Setconsole.log("hola")
         asignarRol()
          // Set Dummy, para evitar warning de momento... (se arreglara al obtener roles del backend en otra historia)
     }, [] )

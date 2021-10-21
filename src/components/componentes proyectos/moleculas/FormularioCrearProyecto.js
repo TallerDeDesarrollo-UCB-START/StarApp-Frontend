@@ -89,17 +89,10 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     },
     })); 	
     
-    const classNamees = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
-    const [open, setOpen] = React.useState(false);
-    
-
-    const handleOpen = () => {
-        setOpen(mostrarFormCrear);
-    };
     
     const handleClose = () => {
-        setOpen(false);
+
     };
     const body = (
         <div style={modalStyle} className="paper-crear">

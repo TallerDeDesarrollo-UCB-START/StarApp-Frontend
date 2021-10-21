@@ -128,28 +128,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     };
 }
 
-const useStyles = makeStyles((theme) => ({
-paper: {
-    position: 'absolute',
-    width: 430,
-    backgroundColor: '#F2F2F2',
-    borderRadius: '15',
-    boxShadow: '10px 10px 4px rgba(0, 0, 0, 0.25)',
-    padding: 25,
-},
-})); 	
-
-const classNamees = useStyles();
-const [modalStyle] = React.useState(getModalStyle);
-const [open, setOpen] = React.useState(false);
-
-
-const handleOpen = () => {
-    setOpen(mostrarFormCrear);
-};
-
 const handleClose = () => {
-    setOpen(false);
+    
 };
 
 const body = (
