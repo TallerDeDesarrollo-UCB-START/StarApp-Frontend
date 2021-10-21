@@ -4,18 +4,20 @@ import InputDropDown from "../atomos/InputDropDown";
 // Librerias-Paquetes:
 import "../moleculas/FormularioCrearProyecto.css";
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
 
 // Styles
-const useStyles = makeStyles({
+const useStylesDrpdn = makeStyles({
   drpdown: {
     margin: "0 10%",
   },
 });
 
-function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
+function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar }) {
   // Styles
-  const classes = useStyles();
+  const classesDrpdn = useStylesDrpdn();
   // States
   const [titulo, setTitulo] = useState(proyecto.titulo);
   const [descripcion, setDescripcion] = useState(proyecto.descripcion);
@@ -114,8 +116,44 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
     setEstadoVal(e.target.value);
   };
 
-  return (
-    <div id="gen-form">
+  // ---- NUEVO ----
+  function getModalStyle() {
+    const top = 50;
+    const left = 50;
+    
+    return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    };
+}
+
+const useStyles = makeStyles((theme) => ({
+paper: {
+    position: 'absolute',
+    width: 430,
+    backgroundColor: '#F2F2F2',
+    borderRadius: '15',
+    boxShadow: '10px 10px 4px rgba(0, 0, 0, 0.25)',
+    padding: 25,
+},
+})); 	
+
+const classNamees = useStyles();
+const [modalStyle] = React.useState(getModalStyle);
+const [open, setOpen] = React.useState(false);
+
+
+const handleOpen = () => {
+    setOpen(mostrarFormCrear);
+};
+
+const handleClose = () => {
+    setOpen(false);
+};
+
+const body = (
+  <div id="gen-form">
       <form onSubmit={onSubmit}>
         {/*<div className="underlayer-proy">dads</div>*/}
         <div className="crear-container-title">
@@ -153,7 +191,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
             items={estadosDefault}
             valueSelect={estadoVal}
             onChangeEstado={onChangeEstado}
-            classes={classes}
+            classes={classesDrpdn}
           />
           {/* value={estado} */}
           <div className="btn-crear-container">
@@ -173,6 +211,20 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
         Cancelar{" "}
       </button>
     </div>
+);
+
+  return (
+    <div>
+            <Modal
+                open={mostrarFormEditar}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                >
+                {body}
+            </Modal>
+        </div>
+    
   );
 }
 
