@@ -9,7 +9,7 @@ import {useState} from 'react'
 import { Box } from '@material-ui/core';
 
 
-function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartiparProy, onEditarProy, onGetParticipacion, onCancelarParticipacion, onFiltroProy}) {
+function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartiparProy, onEditarProy, onGetParticipacion, onCancelarParticipacion, onFiltroProy, onNumeroParticipantes}) {
     // Hooks
     const [mostrarFormCrear, setMostrarFormCrear] = useState(false)
     const [mostrarFormEditar, setMostrarFormEditar] = useState(false)
@@ -41,7 +41,8 @@ function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartipa
                             onActivarForm={activarFormEditar}
                             onPartiparProy={onPartiparProy}
                             onGetParticipacion={onGetParticipacion}
-                            onCancelarParticipacion={onCancelarParticipacion}/>
+                            onCancelarParticipacion={onCancelarParticipacion}
+                            onNumeroParticipantes={onNumeroParticipantes}/>
         </Box>
     );
 }

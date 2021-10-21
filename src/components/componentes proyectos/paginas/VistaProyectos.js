@@ -164,7 +164,8 @@ function VistaProyectos() {
                         onEditarProy={editarProyecto} 
                         onGetParticipacion={obtenerParticipacionProyecto}
                         onFiltroProy={filtrarPorCaterogia}
-                        onCancelarParticipacion={cancelarParticipacionProyecto}/> 
+                        onCancelarParticipacion={cancelarParticipacionProyecto}
+                        onNumeroParticipantes={obtenerNumeroParticipantes}/> 
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
@@ -173,7 +174,8 @@ function VistaProyectos() {
                         onPartiparProy={participarEnProyecto}
                         onGetParticipacion={obtenerParticipacionProyecto}
                         onFiltroProy={filtrarPorCaterogia}
-                        onCancelarParticipacion={cancelarParticipacionProyecto}/>
+                        onCancelarParticipacion={cancelarParticipacionProyecto}
+                        onNumeroParticipantes={obtenerNumeroParticipantes}/>
             </PuertaPermisos>
         </>
     );

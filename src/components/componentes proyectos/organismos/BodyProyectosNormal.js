@@ -5,12 +5,12 @@ import './BodyProyectos.css';
 import { Box } from '@material-ui/core';
 
 // diego
-function BodyProyectosNormal({proyectos, onPartiparProy, onGetParticipacion}) {
+function BodyProyectosNormal({proyectos, onPartiparProy, onGetParticipacion, onNumeroParticipantes}) {
     return (
         <Box className="body-container">
             {
                 proyectos.map(proyecto => (
-                    <ProyectoVoluntarioNormal key={proyecto.id} proyecto={proyecto} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion}/>
+                    <ProyectoVoluntarioNormal key={proyecto.id} proyecto={proyecto} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion} onNumeroParticipantes={onNumeroParticipantes}/>
                 ))
             }
         </Box>

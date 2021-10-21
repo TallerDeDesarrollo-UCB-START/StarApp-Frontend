@@ -2,14 +2,14 @@
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 
-function ContenidoProyecto({proyecto}) {
+function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
     /*const fechaInicio=proyecto.fecha_inicio
     fechaInicio.substr(0, 10)*/
     return (
         <Box className="content-container">
             <b>
-                <h4 className="card-title">{proyecto.titulo}</h4>
+                <h1 className="card-title">{proyecto.titulo}</h1>
             </b>
             <p className="card-text">
                 <b>Objetivo:</b> {proyecto.objetivo}
@@ -34,4 +34,4 @@ function ContenidoProyecto({proyecto}) {
     
 }
  
-export default ContenidoProyecto
+export default ContenidoProyectoDetalle

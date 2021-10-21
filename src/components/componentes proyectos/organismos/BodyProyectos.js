@@ -5,7 +5,7 @@ import './BodyProyectos.css';
 import { Box } from '@material-ui/core';
 
 // diego
-function BodyProyectos({proyectos, rol, onEliminarProy,  onPartiparProy, onActivarForm, onGetParticipacion, onCancelarParticipacion}) {
+function BodyProyectos({proyectos, rol, onEliminarProy,  onPartiparProy, onActivarForm, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
     // OJO!
     // BodyProyectos se renderiza varias veces.
     // El endpoint de 'Crear Proyecto' es await. Entonces antes de que el nuevo
@@ -36,7 +36,8 @@ function BodyProyectos({proyectos, rol, onEliminarProy,  onPartiparProy, onActiv
                     onActivarForm={onActivarForm}
                     onPartiparProy={onPartiparProy}
                     onGetParticipacion={onGetParticipacion}
-                    onCancelarParticipacion={onCancelarParticipacion}/>
+                    onCancelarParticipacion={onCancelarParticipacion}
+                    onNumeroParticipantes={onNumeroParticipantes}/>
                 ))
             }
         </Box>
