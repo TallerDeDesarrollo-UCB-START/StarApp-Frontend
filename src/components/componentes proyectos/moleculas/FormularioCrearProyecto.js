@@ -129,7 +129,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
         </div>);
     
-// Simplemente hacer abrir el modal con el boton de crear y el body sera lo mismo que tenia antes
+// S implemente hacer abrir el modal con el boton de crear y el body sera lo mismo que tenia antes
     return (
         <div>
             <Modal
