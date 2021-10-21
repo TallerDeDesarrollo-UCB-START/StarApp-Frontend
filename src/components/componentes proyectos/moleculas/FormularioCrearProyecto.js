@@ -92,43 +92,17 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const classNamees = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
+    
 
     const handleOpen = () => {
-        setOpen(true);
+        setOpen(mostrarFormCrear);
     };
     
     const handleClose = () => {
         setOpen(false);
     };
     const body = (
-        <div style={modalStyle} className="paperr">
-    ejemplo      
-    </div>);
-    
-// Simplemente hacer abrir el modal con el boton de crear y el body sera lo mismo que tenia antes
-    return (
-        <div>
-            <button type="button" onClick={handleOpen}>
-            Open Modal
-            </button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                >
-            {body}
-            </Modal>
-        </div>
-        
-    );
-}
-
-export default FormularioCrearProyecto
-
-
-/*
-<div id="gen-form">
+        <div style={modalStyle} className="paper-crear">
             <form  onSubmit={onSubmit}>
                 <div className="crear-container-title">
                     <h3>CREAR PROYECTO</h3>
@@ -160,5 +134,27 @@ export default FormularioCrearProyecto
                 </div>
             </form>
             <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
+        </div>);
+    
+// Simplemente hacer abrir el modal con el boton de crear y el body sera lo mismo que tenia antes
+    return (
+        <div>
+            <Modal
+                open={mostrarFormCrear}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                >
+                {body}
+            </Modal>
         </div>
+        
+    );
+}
+
+export default FormularioCrearProyecto
+
+
+/*
+
 */
