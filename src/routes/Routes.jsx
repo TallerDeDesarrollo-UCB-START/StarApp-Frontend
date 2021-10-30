@@ -12,6 +12,7 @@ import FormularioProyecto from "../components/Formulario";
 import Evento from "../components/Evento";
 import Users from "../screens/Users"
 import VistaProyectoIndividual from "../components/componentes proyectos/paginas/VistaProyectoIndividual"
+import VistaCategoriasProyectos from "../components/componentes proyectos/paginas/VistaCategoriasProyectos"
 const Routes = [
   {
     path: "/",
@@ -23,6 +24,12 @@ const Routes = [
     path: '/projects',
     name: 'ShowProjects',
     component: VistaProyectos,
+    logginNeeded: true,
+  },
+  {
+    path: '/projects/categories',
+    name: 'ShowProjectsCategories',
+    component: VistaCategoriasProyectos,
     logginNeeded: true,
   },
   {
