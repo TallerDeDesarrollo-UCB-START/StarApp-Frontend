@@ -6,12 +6,13 @@ import "./crearEvento.css";
 import { Box } from "@material-ui/core";
 import { Button, Container } from "reactstrap";
 
-
 const URL = process.env.REACT_APP_API;
 
 const url = `${URL}eventos/crearevento`;
 const urlLideres = `${URL}lideres`;
 const urlCategorias = `${URL}eventos`;
+// const urlProyectos = `${URL}get_proyectos`;
+const urlProyectos = `http://localhost:5000/get_proyectos`;
 
 const apiLideres = axios.create({
   baseURL: urlLideres,
@@ -19,12 +20,16 @@ const apiLideres = axios.create({
 const apiCategorias = axios.create({
   baseURL: urlCategorias,
 });
+const apiProyectos = axios.create({
+  baseURL: urlProyectos,
+});
 
 class crearEvento extends React.Component {
   constructor() {
     super();
     this.getLideres();
     this.getCategorias();
+    this.getProyectos();
   }
 
   state = {
@@ -40,9 +45,11 @@ class crearEvento extends React.Component {
       estado: "1",
       hora_inicio: "",
       hora_fin: "",
+      proyecto: "",
     },
     lideres: [],
     categorias: [],
+    proyectos: [],
   };
 
   mostrarModalInsertar = () => {
@@ -82,6 +89,14 @@ class crearEvento extends React.Component {
     });
     aux.unshift("Todas");
     this.setState({ categorias: aux });
+  };
+  getProyectos = async () => {
+    let data = await apiProyectos.get("/").then(({ data }) => data);
+    let aux = data.map((item) => {
+      return item.titulo;
+    });
+    // aux.unshift("Todas");
+    this.setState({ proyectos: aux });
   };
 
   cerrarModalInsertar = () => {
@@ -220,6 +235,25 @@ class crearEvento extends React.Component {
                   type="time"
                   onChange={this.handleChange}
                 />
+              </Box>
+            </Box>
+
+            <Box className="Proyecto" xs={12} mt={0.8}>
+              <Box className="InLine Proyecto" xs={4}>
+                <label>Proyecto</label>
+                <select
+                  className=" form-control proyecto-input"
+                  name="proyecto"
+                  onChange={this.handleChange}
+                >
+                  {this.state.proyectos.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
               </Box>
             </Box>
 
