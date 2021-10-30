@@ -21,12 +21,6 @@ const Routes = [
     logginNeeded: false,
   },
   {
-    path: '/projects',
-    name: 'ShowProjects',
-    component: VistaProyectos,
-    logginNeeded: true,
-  },
-  {
     path: '/projects/categories',
     name: 'ShowProjectsCategories',
     component: VistaCategoriasProyectos,
@@ -96,6 +90,12 @@ const Routes = [
     path: "/eventos/:id",
     name: "Evento",
     component: Evento,
+    logginNeeded: true,
+  },
+  {
+    path: '/projects',
+    name: 'ShowProjects',
+    component: VistaProyectos,
     logginNeeded: true,
   },
   {
