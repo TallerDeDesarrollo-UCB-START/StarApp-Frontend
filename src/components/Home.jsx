@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography} from '@material-ui/core';
+import RecordatorioLlenarDatos from "./RecordatorioLlenarDatos"
+
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -13,6 +15,7 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () =>{
     const classes = useStyles()
+    
     return(
         <section>
             <Typography className = {classes.title} variant="h1">
@@ -21,6 +24,7 @@ const Home = () =>{
             <Typography className = {classes.subtitle} variant="h3">
                 Aplicación interna para voluntarios
             </Typography>
+            <RecordatorioLlenarDatos/>
         </section>
     )
 }
