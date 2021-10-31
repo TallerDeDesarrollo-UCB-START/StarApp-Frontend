@@ -1,5 +1,5 @@
 // Componentes:
-import { Box } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import TarjetaCategoriaProyecto from '../moleculas/TarjetaCategoriaProyecto'
 // Permisos/Roles:
 
@@ -12,7 +12,18 @@ function ContenidoCategoriasProyectos() {
 
     return (
         <Box>
-            <TarjetaCategoriaProyecto imagen={ambiental}/>
+            <Grid container>
+                <Grid item md={4}> 
+                    <TarjetaCategoriaProyecto imagen={ambiental} categoria={"ambiental"}/>
+                </Grid>
+                <Grid item md={4}> 
+                    <TarjetaCategoriaProyecto imagen={animalista} categoria={"animalista"}/>
+                </Grid>
+                <Grid item md={4}> 
+                    <TarjetaCategoriaProyecto imagen={social} categoria={"social"}/>
+                </Grid>
+            </Grid>
+            
         </Box>
     );
 }
