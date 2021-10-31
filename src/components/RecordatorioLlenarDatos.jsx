@@ -71,7 +71,7 @@ const RecordatorioLlenarDatos=()=>{
     function existEmptyiFields(model){    
         var res=false    
         for (var value of Object.keys(model)) {
-            if(model[value] ===""){ res=true; break;} 
+            if(model[value].length===0){ res=true; break;} 
         }
         return res;
     }   
@@ -91,7 +91,7 @@ const RecordatorioLlenarDatos=()=>{
                 <ErrorIcon className = {classes.marginRL5} color="error"/>
                 <span>Completa tus datos</span>
                 <Button className = {classes.closeIco} color="inherit" size="small" 
-                    onClick={() => history.push(islogged ? routes[3].path : routes[4].path)}> go  </Button>
+                    onClick={() => history.push(islogged ? routes[3].path : routes[4].path)}> completar  </Button>
                 <IconButton className = {classes.closeIco} size="small" aria-label="close" color="inherit" onClick={handleClose}>
                     <CloseIcon fontSize="small" />
                 </IconButton>
