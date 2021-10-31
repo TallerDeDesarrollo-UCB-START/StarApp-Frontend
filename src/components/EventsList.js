@@ -223,7 +223,7 @@ class EventsList extends Component {
             </select>
           </div>
           <div style={{ display: "flex" }}>
-            {rolUser === "lider" ? (
+            {rolUser !== "voluntario" ? (
               <Fragment>
                 <Button
                   style={{ marginLeft: "auto" }}
@@ -333,7 +333,7 @@ class EventsList extends Component {
                       </Button>
                     </div>
                   </div>
-                  {rolUser === "lider" ? (
+                  {rolUser !== "voluntario" ? (
                     <Fragment>
                       <div className="principal">
                         <div className="secundario">
