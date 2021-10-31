@@ -16,8 +16,8 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(() => ({
     container: {
-      width: '90%',
-      height: '75%',
+      width: '100%',//'90%',
+      height: '100%',//'75%',
       margin: 'auto',
     },
     card: {
