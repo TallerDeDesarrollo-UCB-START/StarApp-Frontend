@@ -1,5 +1,6 @@
 // Componentes:
 import BodyProyectoIndividual from '../organismos/BodyProyectoIndividual'
+import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
 import { Box } from '@material-ui/core';
@@ -35,6 +36,7 @@ function VistaProyectoIndividual() {
     return (
         
         <Box className="body-container">
+            <VolverProyectoBtn/>
             {
                <BodyProyectoIndividual proyecto={proyecto}/>
             }
