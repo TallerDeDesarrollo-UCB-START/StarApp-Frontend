@@ -15,24 +15,16 @@ import Button from '@material-ui/core/Button';
 // Librerias-Paquetes:
 
 const useStyles = makeStyles(() => ({
+    container: {
+      width: '90%',
+      height: '75%',
+      margin: 'auto',
+    },
     card: {
         borderRadius: '1rem',
-        //boxShadow: 'none',
         position: 'relative',
-        //minWidth: 200,
-        //minHeight: 300,
         width: '100%',
         height: '100%',
-      /*'&:after': {
-        content: '""',
-        display: 'block',
-        position: 'absolute',
-        width: '100%',
-        height: '64%',
-        bottom: 0,
-        zIndex: 1,
-        background: 'linear-gradient(to top, #000, rgba(0,0,0,0))',
-      },*/
     },
     action: {
         width: '100%',
@@ -63,7 +55,7 @@ const useStyles = makeStyles(() => ({
 function TarjetaCategoriaProyecto({imagen, categoria}) {
     const classes = useStyles();
     return (
-        <Box>
+        <Box className={classes.container}>
             <Card className={classes.card}>
               <CardActionArea className={classes.action}>
                 <CardMedia
@@ -75,7 +67,7 @@ function TarjetaCategoriaProyecto({imagen, categoria}) {
                   className={classes.media}
                 />
                 <Box  className={classes.content}>
-                  <Typography gutterBottom variant="h4" component="h3" className={classes.typography}>
+                  <Typography gutterBottom variant="h5" component="h3" className={classes.typography}>
                     {categoria}
                   </Typography>
                 </Box>
@@ -88,3 +80,19 @@ function TarjetaCategoriaProyecto({imagen, categoria}) {
 export default TarjetaCategoriaProyecto;
 
 /* style={{backgroundImage: image}}*/
+
+/* CARD STYLES descartados:
+//boxShadow: 'none',
+        //minWidth: 200,
+        //minHeight: 300,
+      /*'&:after': {
+        content: '""',
+        display: 'block',
+        position: 'absolute',
+        width: '100%',
+        height: '64%',
+        bottom: 0,
+        zIndex: 1,
+        background: 'linear-gradient(to top, #000, rgba(0,0,0,0))',
+      },
+*/
