@@ -40,7 +40,7 @@ function ContenidoCategoriasProyectos() {
 }
 export default ContenidoCategoriasProyectos;
 
-/*
+/* 
 <Grid container>
     {categorias.map(categoria => (
         <Grid item key={categoria.id} xs={12} sm={6} md={4}> 
