@@ -73,6 +73,7 @@ class EventsList extends Component {
     this.getEvents();
     this.getParticipaciones();
     this.getCategorias();
+    this.getFechas();
     this.getUserRol();
     this.getLideres();
     this.getProyectos();
