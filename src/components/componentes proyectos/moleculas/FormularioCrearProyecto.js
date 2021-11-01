@@ -31,7 +31,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     function validarCampos(event) {
         if (!titulo || !descripcion || !objetivo || !lider) {
             alert('Porfavor llene los campos')
-            console.log(event)
+            //console.log(event)
             if (!titulo) agregarRequerido(event.currentTarget[0])
             if (!descripcion) agregarRequerido(event.currentTarget[1])
             if (!objetivo) agregarRequerido(event.currentTarget[2])
