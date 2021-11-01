@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
-//const urlDeploy = `http://localhost:5000/eventos`
+const urlLocal = `http://localhost:5000/eventos`
 
 // const urlProyectos = `${URL}get_proyectos`;
 const urlCrearEvento = `${url}eventos/crearevento`;
@@ -44,6 +44,8 @@ class EventsList extends Component {
     botonMostrarEventosArchivados: true,
     success: false,
     categoriaFiltrada: "Todas",
+    filtradoSegunEstado: "En Curso",
+    estados:["En Curso","Proximo","Pasado"],
     categorias: [],
 
     modalInsertar: false,
@@ -69,6 +71,7 @@ class EventsList extends Component {
     this.getEvents();
     this.getParticipaciones();
     this.getCategorias();
+    this.getFechas();
     this.getUserRol();
 
     this.getLideres();
@@ -88,8 +91,8 @@ class EventsList extends Component {
       ) {
         data = data.filter(
           (event) =>
-            event.estado === "1" &&
-            event.categoria === this.state.categoriaFiltrada
+            event.estado === "1" && event.categoria === this.state.categoriaFiltrada 
+            //event.estado === "1" && event.fecha_evento === this.state.filtradoSegunEstado
         );
       } else {
         data = data.filter((event) => event.estado === "1");
@@ -108,6 +111,15 @@ class EventsList extends Component {
     aux.unshift("Todas");
     this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
+  };
+  getFechas = async () => {
+    let data = await api.get("/fechas").then(({ data }) => data);
+    let aux = data.map((item) => {
+      return item;
+    });
+    aux.unshift("En Curso");
+    this.setState({ filtradoSegunEstado: aux[0] });
+    this.setState({ estados: aux });
   };
 
   getEventsArchivados = async () => {
@@ -317,6 +329,18 @@ class EventsList extends Component {
               onChange={this.filterChangeHandler}
             >
               {this.state.categorias.map((item) => {
+                return (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              value={this.state.filtradoSegunEstado}
+              //onChange={this.filterChangeHandler}
+            >
+              {this.state.estados.map((item) => {
                 return (
                   <option key={item} value={item}>
                     {item}
