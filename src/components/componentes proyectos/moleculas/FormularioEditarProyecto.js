@@ -82,8 +82,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
       id: proyecto.id,
       titulo: titulo,
       descripcion: descripcion,
-      objetivo: objetivos,
-      lider: lideres,
+      objetivo: [objetivos],
+      lider: [lideres],
       estado: estado,
     };
 

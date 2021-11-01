@@ -11,7 +11,6 @@ import {useState, useEffect} from 'react'
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
-    const [rol, setRol] = useState('')
 
     useEffect(() => {
         
@@ -19,14 +18,8 @@ function VistaProyectos() {
             const proyectosDelServer =  await fetchProyectos()
             setProyectos(proyectosDelServer)
         }
-        const asignarRol = async () => {
-            const rolObtenido =  await obtenerRol()
-            //console.log(rolObtenido)
-            setRol(rolObtenido)
-        }
         getProyectos()
         // Setconsole.log("hola")
-        asignarRol()
          // Set Dummy, para evitar warning de momento... (se arreglara al obtener roles del backend en otra historia)
     }, [proyectos] )
 
@@ -101,7 +94,7 @@ function VistaProyectos() {
     }
 
     const editarProyecto = async (proyectoEditar) => {
-        debugger
+        //debugger
         const response = await fetch(
             `${URLEditarProy}/${proyectoEditar.id}`,
             {
@@ -109,8 +102,8 @@ function VistaProyectos() {
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify(proyectoEditar)
             })
-        
         const data = await response.json()
+        
         setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data])
     
     }
@@ -126,17 +119,6 @@ function VistaProyectos() {
         setProyectos(proyectos.filter((proy) => proy.id !== id));
     }
 
-    const obtenerRol = async () => {
-        //debugger;
-        const idAuth = sessionStorage.getItem("id");
-        const response = await fetch(`${URLObtenerRol}/${idAuth}`,
-        { 
-            method: 'GET'
-        });
-        const data = await response.json();
-        //console.log(data[0].rol)
-        return data[0].rol;
-    }
     const filtrarPorCaterogia = async(categoria) => {
        const response= await fetch(
             `${URLProyectos}/${categoria}`,
@@ -156,7 +138,7 @@ function VistaProyectos() {
     return (
         <>
             <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-                <ProyectosAdmins rol={rol}
+                <ProyectosAdmins rol={"core team"}
                         proyectos={proyectos} 
                         onCrearProy={crearProyecto} 
                         onEliminarProy={eliminarProyecto} 
@@ -169,7 +151,7 @@ function VistaProyectos() {
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
-                <ProyectosVoluntarios rol={rol}
+                <ProyectosVoluntarios rol={"core team"}
                         proyectos={proyectos}
                         onPartiparProy={participarEnProyecto}
                         onGetParticipacion={obtenerParticipacionProyecto}
