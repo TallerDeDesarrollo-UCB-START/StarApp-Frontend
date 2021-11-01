@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import { Link } from "react-router-dom";
 /*
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -57,21 +58,25 @@ function TarjetaCategoriaProyecto({imagen, categoria}) {
     return (
         <Box className={classes.container}>
             <Card className={classes.card}>
-              <CardActionArea className={classes.action}>
-                <CardMedia
-                  component="img"
-                  alt={categoria}
-                  height="300"
-                  image={imagen}
-                  title={categoria}
-                  className={classes.media}
-                />
-                <Box  className={classes.content}>
-                  <Typography gutterBottom variant="h5" component="h3" className={classes.typography}>
-                    {categoria}
-                  </Typography>
-                </Box>
-              </CardActionArea>
+              
+              <Link to={"../projects"}>
+                <CardActionArea className={classes.action}>
+                  <CardMedia
+                    component="img"
+                    alt={categoria}
+                    height="300"
+                    image={imagen}
+                    title={categoria}
+                    className={classes.media}
+                  />
+                  <Box  className={classes.content}>
+                    <Typography gutterBottom variant="h5" component="h3" className={classes.typography}>
+                      {categoria}
+                    </Typography>
+                  </Box>
+                  
+                </CardActionArea>
+              </Link>
               
             </Card>
         </Box>
