@@ -36,7 +36,7 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
                 <ParticipateButton variant="contained" color="secondary"
                 onClick={onClick}
                 >
-                    Participar
+                    Unirme
                 </ParticipateButton>
             </div>
         </div>

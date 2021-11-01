@@ -9,7 +9,7 @@ import {withStyles} from "@material-ui/core/styles";
 function VerProyectoBtn({proyecto}) {
     return (
         <VerButton variant="contained">
-            <Link to={"projects/" + proyecto.id}>Ver más</Link>
+            <Link to={"projects/" + proyecto.id}>Ver detalles</Link>
         </VerButton>
     )
 }

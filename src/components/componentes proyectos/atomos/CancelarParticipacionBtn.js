@@ -31,7 +31,7 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
                 <CancelParticipationButton variant="contained" color="primary"
                 onClick={onClick}
                 >
-                    No participar
+                    Dejar Proyecto
                 </CancelParticipationButton>
     );
 }
