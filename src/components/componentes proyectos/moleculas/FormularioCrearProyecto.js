@@ -3,9 +3,11 @@ import InputTexto from '../moleculas/InputTexto'
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
+import React from 'react';
+import Modal from '@material-ui/core/Modal';
 
 
-function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
+function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}) {
     // States
     const [titulo, setTitulo] = useState('')
     const [descripcion, setDescripcion] = useState('')
@@ -29,7 +31,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
     function validarCampos(event) {
         if (!titulo || !descripcion || !objetivo || !lider) {
             alert('Porfavor llene los campos')
-            console.log(event)
+            //console.log(event)
             if (!titulo) agregarRequerido(event.currentTarget[0])
             if (!descripcion) agregarRequerido(event.currentTarget[1])
             if (!objetivo) agregarRequerido(event.currentTarget[2])
@@ -63,8 +65,27 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value); removerRequerido(e.target)}
     const onChangeLider = (e) => {setLider(e.target.value); removerRequerido(e.target)}
 
-    return (
-        <div id="gen-form">
+    // ---- NUEVO ----
+    function getModalStyle() {
+        const top = 50;
+        const left = 50;
+        
+        return {
+            top: `${top}%`,
+            left: `${left}%`,
+            transform: `translate(-${top}%, -${left}%)`,
+        };
+    }
+
+    	
+    
+    const [modalStyle] = React.useState(getModalStyle);
+    
+    const handleClose = () => {
+        onActivarForm()
+    };
+    const body = (
+        <div style={modalStyle} className="paper-crear">
             <form  onSubmit={onSubmit}>
                 <div className="crear-container-title">
                     <h3>CREAR PROYECTO</h3>
@@ -96,9 +117,27 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm }) {
                 </div>
             </form>
             <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
+        </div>);
+    
+// S implemente hacer abrir el modal con el boton de crear y el body sera lo mismo que tenia antes
+    return (
+        <div>
+            <Modal
+                open={mostrarFormCrear}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                >
+                {body}
+            </Modal>
         </div>
         
     );
 }
 
 export default FormularioCrearProyecto
+
+
+/*
+
+*/

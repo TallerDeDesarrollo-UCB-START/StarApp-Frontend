@@ -11,7 +11,6 @@ import {useState, useEffect} from 'react'
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
-    const [rol, setRol] = useState('')
 
     useEffect(() => {
         
@@ -19,16 +18,10 @@ function VistaProyectos() {
             const proyectosDelServer =  await fetchProyectos()
             setProyectos(proyectosDelServer)
         }
-        const asignarRol = async () => {
-            const rolObtenido =  await obtenerRol()
-            //console.log(rolObtenido)
-            setRol(rolObtenido)
-        }
         getProyectos()
-        console.log("hola")
-        asignarRol()
+        // Setconsole.log("hola")
          // Set Dummy, para evitar warning de momento... (se arreglara al obtener roles del backend en otra historia)
-    }, [] )
+    }, [proyectos] )
 
     // HTTP requests & functions
     async function fetchProyectos() {
@@ -78,7 +71,7 @@ function VistaProyectos() {
         const response = await fetch(`${URLProyectos}/${idProyecto}`)
         const data = await response.json()
         setProyecto(data)
-        return data;
+        return data; 
     }*/
 
     const obtenerParticipacionProyecto = async (idProyecto) => {
@@ -101,6 +94,7 @@ function VistaProyectos() {
     }
 
     const editarProyecto = async (proyectoEditar) => {
+        //debugger
         const response = await fetch(
             `${URLEditarProy}/${proyectoEditar.id}`,
             {
@@ -108,8 +102,8 @@ function VistaProyectos() {
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify(proyectoEditar)
             })
-        
         const data = await response.json()
+        
         setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data])
     
     }
@@ -125,17 +119,6 @@ function VistaProyectos() {
         setProyectos(proyectos.filter((proy) => proy.id !== id));
     }
 
-    const obtenerRol = async () => {
-        //debugger;
-        const idAuth = sessionStorage.getItem("id");
-        const response = await fetch(`${URLObtenerRol}/${idAuth}`,
-        { 
-            method: 'GET'
-        });
-        const data = await response.json();
-        //console.log(data[0].rol)
-        return data[0].rol;
-    }
     const filtrarPorCaterogia = async(categoria) => {
        const response= await fetch(
             `${URLProyectos}/${categoria}`,
@@ -155,7 +138,7 @@ function VistaProyectos() {
     return (
         <>
             <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-                <ProyectosAdmins rol={rol}
+                <ProyectosAdmins rol={"core team"}
                         proyectos={proyectos} 
                         onCrearProy={crearProyecto} 
                         onEliminarProy={eliminarProyecto} 
@@ -168,7 +151,7 @@ function VistaProyectos() {
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
-                <ProyectosVoluntarios rol={rol}
+                <ProyectosVoluntarios rol={"core team"}
                         proyectos={proyectos}
                         onPartiparProy={participarEnProyecto}
                         onGetParticipacion={obtenerParticipacionProyecto}
@@ -188,7 +171,6 @@ const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proy
 const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_proyecto'//
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//
 const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
-const URLObtenerRol = `${url}get_rol` //'http://localhost:5000/get_rol/'
 const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
 const URLNumeroParticipantes = `${url}get_numero_participantes` //'http://localhost:5000/get_rol/'
 

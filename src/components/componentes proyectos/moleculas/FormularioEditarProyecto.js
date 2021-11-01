@@ -4,18 +4,20 @@ import InputDropDown from "../atomos/InputDropDown";
 // Librerias-Paquetes:
 import "../moleculas/FormularioCrearProyecto.css";
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
 
 // Styles
-const useStyles = makeStyles({
+const useStylesDrpdn = makeStyles({
   drpdown: {
     margin: "0 10%",
   },
 });
 
-function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
+function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar }) {
   // Styles
-  const classes = useStyles();
+  const classesDrpdn = useStylesDrpdn();
   // States
   const [titulo, setTitulo] = useState(proyecto.titulo);
   const [descripcion, setDescripcion] = useState(proyecto.descripcion);
@@ -80,8 +82,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
       id: proyecto.id,
       titulo: titulo,
       descripcion: descripcion,
-      objetivo: objetivos,
-      lider: lideres,
+      objetivo: [objetivos],
+      lider: [lideres],
       estado: estado,
     };
 
@@ -114,8 +116,15 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
     setEstadoVal(e.target.value);
   };
 
-  return (
-    <div id="gen-form">
+  // ---- NUEVO ----
+  
+
+const handleClose = () => {
+    onActivarForm()
+};
+
+const body = (
+  <div id="gen-form">
       <form onSubmit={onSubmit}>
         {/*<div className="underlayer-proy">dads</div>*/}
         <div className="crear-container-title">
@@ -153,7 +162,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
             items={estadosDefault}
             valueSelect={estadoVal}
             onChangeEstado={onChangeEstado}
-            classes={classes}
+            classes={classesDrpdn}
           />
           {/* value={estado} */}
           <div className="btn-crear-container">
@@ -173,6 +182,20 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto }) {
         Cancelar{" "}
       </button>
     </div>
+);
+
+  return (
+    <div>
+            <Modal
+                open={mostrarFormEditar}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                >
+                {body}
+            </Modal>
+        </div>
+    
   );
 }
 

@@ -12,6 +12,15 @@
   font-weight: bold;
   height: fit-content;
 }
+.paper-crear{
+  position: absolute;
+  width: 475px;
+  height: 630px;
+  padding: 25px;
+  background: #F2F2F2;
+  box-shadow: 10px 10px 4px rgb(0 0 0 / 25%);
+  border-radius: 15px;
+}
 
 .btn-proy-editar {
   display: inline-block;
