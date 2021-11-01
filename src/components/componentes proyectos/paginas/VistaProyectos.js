@@ -171,7 +171,6 @@ const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proy
 const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_proyecto'//
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//
 const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
-const URLObtenerRol = `${url}get_rol` //'http://localhost:5000/get_rol/'
 const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
 const URLNumeroParticipantes = `${url}get_numero_participantes` //'http://localhost:5000/get_rol/'
 
