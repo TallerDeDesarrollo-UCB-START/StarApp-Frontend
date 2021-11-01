@@ -60,7 +60,7 @@ function ContenidoCategoriasProyectos() {
     /*async function fetchProyectos() {
         const response = await fetch(URLProyectos)
         const data = await response.json()
-        return data;
+        return data; 
     }*/
 
 
