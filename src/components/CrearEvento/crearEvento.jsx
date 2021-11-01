@@ -45,7 +45,7 @@ class crearEvento extends React.Component {
       estado: "1",
       hora_inicio: "",
       hora_fin: "",
-      proyecto: "",
+      proyecto: "Ninguno",
     },
     lideres: [],
     categorias: [],
@@ -95,7 +95,7 @@ class crearEvento extends React.Component {
     let aux = data.map((item) => {
       return item.titulo;
     });
-    // aux.unshift("Todas");
+    aux.unshift("No Seleccionado");
     this.setState({ proyectos: aux });
   };
 
