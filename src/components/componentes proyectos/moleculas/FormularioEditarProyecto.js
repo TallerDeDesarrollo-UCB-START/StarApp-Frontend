@@ -120,7 +120,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
   
 
 const handleClose = () => {
-    
+    onActivarForm()
 };
 
 const body = (

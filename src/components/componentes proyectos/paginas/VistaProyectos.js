@@ -28,7 +28,7 @@ function VistaProyectos() {
         // Setconsole.log("hola")
         asignarRol()
          // Set Dummy, para evitar warning de momento... (se arreglara al obtener roles del backend en otra historia)
-    }, [] )
+    }, [proyectos] )
 
     // HTTP requests & functions
     async function fetchProyectos() {

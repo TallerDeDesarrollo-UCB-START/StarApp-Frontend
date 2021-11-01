@@ -82,7 +82,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const [modalStyle] = React.useState(getModalStyle);
     
     const handleClose = () => {
-
+        onActivarForm()
     };
     const body = (
         <div style={modalStyle} className="paper-crear">
