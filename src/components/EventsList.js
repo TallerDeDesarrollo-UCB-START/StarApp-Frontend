@@ -13,8 +13,6 @@ import TextField from "@mui/material/TextField";
 const url = process.env.REACT_APP_API;
 const urlLocal = `http://localhost:5000/eventos`;
 const urlDeploy = `${url}eventos`;
-
-// const urlProyectos = `${URL}get_proyectos`;
 const urlCrearEvento = `${url}/crearevento`;
 const urlLideres = `${url}lideres`;
 const urlProyectos = `${url}get_proyectos`;
@@ -76,6 +74,7 @@ class EventsList extends Component {
     this.getEvents();
     this.getParticipaciones();
     this.getCategorias();
+    this.getFechas();
     this.getUserRol();
     this.getLideres();
     this.getProyectos();
@@ -127,6 +126,15 @@ class EventsList extends Component {
     aux.unshift("Todas");
     this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
+  };
+  getFechas = async () => {
+    let data = await api.get("/fechas").then(({ data }) => data);
+    let aux = data.map((item) => {
+      return item;
+    });
+    aux.unshift("En Curso");
+    this.setState({ filtradoSegunEstado: aux[0] });
+    this.setState({ estados: aux });
   };
 
 
@@ -346,7 +354,6 @@ class EventsList extends Component {
                 );
               })}
             </select>
-            <span>Estado:</span>
             <select
               value={this.state.filtradoSegunEstado}
               onChange={this.filterStateChangeHandler}
@@ -359,7 +366,7 @@ class EventsList extends Component {
                 );
               })}
             </select>
-            </div>
+          </div>
           <div style={{ display: "flex" }}>
             {rolUser !== "voluntario" ? (
               <Fragment>
