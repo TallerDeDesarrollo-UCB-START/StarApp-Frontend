@@ -78,7 +78,7 @@ function VistaProyectos() {
         const response = await fetch(`${URLProyectos}/${idProyecto}`)
         const data = await response.json()
         setProyecto(data)
-        return data;
+        return data; 
     }*/
 
     const obtenerParticipacionProyecto = async (idProyecto) => {
