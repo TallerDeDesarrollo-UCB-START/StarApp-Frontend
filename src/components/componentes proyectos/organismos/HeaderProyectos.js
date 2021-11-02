@@ -4,10 +4,11 @@ import './HeaderProyectos.css';
 
 
 function HeaderProyectos({tituloHeader}) {
+    const categoria = tituloHeader? tituloHeader : ''
     return (
         <div className="header-container">
             <div className="textHeader-container_normal">
-            <h1>{`PROYECTOS ${tituloHeader}`}</h1>
+            <h1>{`PROYECTOS ${categoria}`}</h1>
             </div>
         </div>
     );
