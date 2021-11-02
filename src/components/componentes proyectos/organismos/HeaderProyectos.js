@@ -1,16 +1,32 @@
 // Componentes:
 import './HeaderProyectos.css';
+import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
 // Librerias-Paquetes:
+import { Container, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles({
+    far_right: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        gap: '3%'
+    },
+  });
 
 function HeaderProyectos({tituloHeader}) {
+    const classes = useStyles()
     const categoria = tituloHeader? tituloHeader : ''
     return (
-        <div className="header-container">
-            <div className="textHeader-container_normal">
-            <h1>{`PROYECTOS ${categoria}`}</h1>
-            </div>
-        </div>
+        <Container >
+                <Grid container justifyContent="center" alignItems={"center"}>
+                    <Grid item xs={5} md={7}>
+                        <h1>{`Proyectos ${categoria}`}</h1>
+                    </Grid>
+                    <Grid item xs={7} md={5} className={classes.far_right}>
+                        <ProyectosPasadosBtn/>
+                    </Grid>
+                </Grid>
+        </Container>
     );
 }
 

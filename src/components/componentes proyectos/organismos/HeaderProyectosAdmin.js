@@ -1,19 +1,36 @@
 // Componentes:
 import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
-// Librerias-Paquetes-Estilos: 
+import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
+// Librerias-Paquetes-Estilos:
 import './HeaderProyectos.css';
+import { Container, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles({
+    far_right: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        gap: '3%'
+    },
+  });
 
 function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
+    const classes = useStyles()
     const categoria = tituloHeader? tituloHeader : ''
     return (
-        <div className="header-container">
-            <div className="borderHeader-conatiner"></div>
-            <div className="textHeader-container">
-                <h1>{`Proyectos ${categoria}`}</h1>
-            </div>
-            <CrearProyectoBtn onActivarForm={onActivarForm}/>
-        </div>
+        <Container >
+                <Grid container justifyContent="space-between" alignItems={"center"}>
+                    <Grid item xs={5} md={7}>
+                        <h1>{`Proyectos ${categoria}`}</h1>
+                    </Grid>
+                    <Grid item xs={7} md={5} className={classes.far_right}>
+                        <CrearProyectoBtn onActivarForm={onActivarForm}/>
+                        <ProyectosPasadosBtn/>
+                    </Grid>
+                    
+                </Grid>
+        </Container>
+
     );
 }
 
