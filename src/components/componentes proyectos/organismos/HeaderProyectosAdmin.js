@@ -4,12 +4,12 @@ import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
 import './HeaderProyectos.css';
 
 
-function HeaderProyectosAdmin({onActivarForm}) {
+function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
     return (
         <div className="header-container">
             <div className="borderHeader-conatiner"></div>
             <div className="textHeader-container">
-                <h1>PROYECTOS</h1>
+                <h1>{`Proyectos ${tituloHeader}`}</h1>
             </div>
             <CrearProyectoBtn onActivarForm={onActivarForm}/>
         </div>

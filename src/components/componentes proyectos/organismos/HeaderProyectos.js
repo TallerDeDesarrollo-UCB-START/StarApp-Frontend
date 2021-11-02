@@ -3,11 +3,11 @@ import './HeaderProyectos.css';
 // Librerias-Paquetes:
 
 
-function HeaderProyectos() {
+function HeaderProyectos({tituloHeader}) {
     return (
         <div className="header-container">
             <div className="textHeader-container_normal">
-                <h1>PROYECTOS</h1>
+            <h1>{`PROYECTOS ${tituloHeader}`}</h1>
             </div>
         </div>
     );
