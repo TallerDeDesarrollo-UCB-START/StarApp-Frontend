@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = (onClick) => {
+const Profile = ({sessionData}) => {
 
   const [userExist, setUserExsit] = useState({
     userEx: false,
@@ -805,7 +805,7 @@ const Profile = (onClick) => {
       <div>
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
-            <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} />
+            <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
             <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen}/>
             
             <Modal

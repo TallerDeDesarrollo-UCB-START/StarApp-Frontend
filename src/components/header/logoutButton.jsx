@@ -50,7 +50,7 @@ const LogoutButton = ({logged, sessionData}) => {
                 </Popper>
                 <Chip label={sessionData.name} 
                 color="primary" 
-                avatar={<Avatar src="../../images/PerfilDefault.jpg" />} 
+                avatar={<Avatar src={sessionData.foto_url?sessionData.foto_url:"https://i.pinimg.com/originals/14/a8/cd/14a8cd8c46df11082f60ae15b97f47ff.jpg"} />} 
                 clickable
                 onClick={handleClick('bottom')}
                 />
