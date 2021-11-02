@@ -94,6 +94,7 @@ const RegisterForm = () => {
     const bodyAuth = {
       email: values.email,
       password: values.password,
+      tipo:"normal",
     }
     AxiosClient.post(`${URL_AUTH}api/auth/signup`, bodyAuth)
       .then((response) => {
@@ -103,6 +104,7 @@ const RegisterForm = () => {
             nombre: values.username,
             apellido: values.lastname,
             telefono: phoneValue,
+            foto_url: "https://i.pinimg.com/originals/14/a8/cd/14a8cd8c46df11082f60ae15b97f47ff.jpg",
             id_autenticacion: parseInt(id_auth),
           }
           AxiosClient.post(`${URL}extended_form`, body)

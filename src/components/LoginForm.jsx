@@ -32,15 +32,15 @@ const useStyles = makeStyles((theme) => ({
   },
   loginCard: {
     width: "450px",
-    height: "364px",
     background: "#F2F2F2",
     boxShadow:
       "0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.14), 0px 8px 10px -5px rgba(0, 0, 0, 0.2)",
     borderRadius: "20px 20px 20px 20px",
+    paddingBottom:"20px",
   },
   respLoginCard: {
     width: "100%",
-    height: "484px",
+    paddingBottom:"20px",
   },
   buttonContainer: {
     width: "100%",
@@ -94,6 +94,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     const body = {
       email: values.email,
       password: values.password,
+      tipo:"normal",
     };
     setActiveProgressBar(true);
     await AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)

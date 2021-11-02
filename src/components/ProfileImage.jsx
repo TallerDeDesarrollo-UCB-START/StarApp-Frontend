@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import PerfilDefault from "../images/PerfilDefault.jpg";
 import {
   Chip,
   Grid,
@@ -33,7 +32,7 @@ const baseURL = `${url}extended_form/`;
 
 //const baseURL = "http://localhost:5000/extended_form/";
 
-export default function ProfileImage({ getDataProfile, setDataProfile }) {
+export default function ProfileImage({ getDataProfile, setDataProfile, sessionData }) {
   const classes = useStyles();
 
   var peticionPut = (disponibilidad) => {
@@ -80,7 +79,7 @@ export default function ProfileImage({ getDataProfile, setDataProfile }) {
         >
           <Avatar
             alt="Imagen de Perfil"
-            src={PerfilDefault}
+            src={sessionData.foto_url?sessionData.foto_url:"https://i.pinimg.com/originals/14/a8/cd/14a8cd8c46df11082f60ae15b97f47ff.jpg"}
             className={classes.large}
           />
         </Badge>
