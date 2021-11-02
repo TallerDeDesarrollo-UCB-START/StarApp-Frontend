@@ -1,7 +1,7 @@
 // Componentes:
 import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
 import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
-// Librerias-Paquetes-Estilos:
+// Librerias-Paquetes-Estilos: 
 import './HeaderProyectos.css';
 import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
