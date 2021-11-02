@@ -7,11 +7,10 @@ import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria';
 
 // DIEGO
 //victor y Merce
-function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onFiltroProy, onNumeroParticipantes}) {
+function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
     return (
         <Box style={styles}>
             <HeaderProyectos />
-            <SelectFiltroCategoria onFiltroProy={onFiltroProy}/>
             <BodyProyectos rol = {rol}
                             proyectos={proyectos}
                             onPartiparProy={onPartiparProy}

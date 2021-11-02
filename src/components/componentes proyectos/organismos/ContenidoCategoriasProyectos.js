@@ -18,55 +18,25 @@ const ambiental = 'https://media.istockphoto.com/photos/mount-hood-oregon-pictur
 const animalista = 'https://media.istockphoto.com/photos/female-veterinarian-holding-a-little-dog-in-her-arms-picture-id1280869192?b=1&k=20&m=1280869192&s=170667a&w=0&h=Fhsw2VrPIhhmKz1gSAjqS7lH_s0KNUSVO9-Obi7CFJE='
 const social = 'https://media.istockphoto.com/photos/life-is-amazing-when-you-have-the-greatest-friends-around-picture-id648817898?b=1&k=20&m=648817898&s=170667a&w=0&h=9OGTLvfpfy4Ce4BM__-yDb9RlErBGJRMv7irZMhFLfY='
 
-function ContenidoCategoriasProyectos() {
+function ContenidoCategoriasProyectos({categorias}) {
     const classes = useStyles();
-
-    // Hooks
-    const [categorias, setCategorias] = useState([])
-
-    useEffect(() => {
-        /*const getCategoriasProyectos = async () => {
-            const categoriasDelServer =  await fetchCategoriasProyectos()
-            setCategorias(categoriasDelServer)
-        }*/
-        const getCategoriasProyectos =  () => {
-            const categoriasDelServer =   fetchCategoriasProyectos()
-            setCategorias(categoriasDelServer)
-        }
-        getCategoriasProyectos()
-    }, [] )
-
-    async function fetchCategoriasProyectos() {
-        const data = [
-            {
-                id: 1,
-                tipo: 'ambiental',
-                imagen: 'https://media.istockphoto.com/photos/mount-hood-oregon-picture-id1268487061?b=1&k=20&m=1268487061&s=170667a&w=0&h=3fHYwaImlqUETcjCnSV7YO2-PzCFvaX6VSQaiGfWqpc='
-            },
-            {
-                id: 2,
-                tipo: 'social',
-                imagen: 'https://media.istockphoto.com/photos/life-is-amazing-when-you-have-the-greatest-friends-around-picture-id648817898?b=1&k=20&m=648817898&s=170667a&w=0&h=9OGTLvfpfy4Ce4BM__-yDb9RlErBGJRMv7irZMhFLfY='
-            },
-            {
-                id: 3,
-                tipo: 'animalista',
-                imagen: 'https://media.istockphoto.com/photos/female-veterinarian-holding-a-little-dog-in-her-arms-picture-id1280869192?b=1&k=20&m=1280869192&s=170667a&w=0&h=Fhsw2VrPIhhmKz1gSAjqS7lH_s0KNUSVO9-Obi7CFJE='
-            },
-        ]
-        return data
-    }
-
-    /*async function fetchProyectos() {
-        const response = await fetch(URLProyectos)
-        const data = await response.json()
-        return data; 
-    }*/
-
 
     return (
         <Container className={classes.container}>
             <Grid container spacing={4}>
+                {categorias.map(categoria => (
+                    <Grid item key={categoria.id} xs={12} sm={6} md={4} lg={3} className={classes.item}> 
+                        <TarjetaCategoriaProyecto imagen={categoria.imagen} categoria={categoria.tipo}/>
+                    </Grid>
+                ))}
+            </Grid>
+        </Container>
+    );
+}
+export default ContenidoCategoriasProyectos;
+
+/* 
+ <Grid container spacing={4}>
                 <Grid item xs={12} sm={6} md={4} lg={3} className={classes.item}> 
                     <TarjetaCategoriaProyecto imagen={ambiental} categoria={"ambiental"}/>
                 </Grid>
@@ -77,19 +47,4 @@ function ContenidoCategoriasProyectos() {
                     <TarjetaCategoriaProyecto imagen={social} categoria={"social"}/>
                 </Grid>
             </Grid>
-            
-        </Container>
-    );
-}
-export default ContenidoCategoriasProyectos;
-
-/* 
-<Grid container>
-    {categorias.map(categoria => (
-        <Grid item key={categoria.id} xs={12} sm={6} md={4}> 
-            <TarjetaCategoriaProyecto imagen={categoria.imagen} categoria={categoria.titulo}/>
-        </Grid>
-    ))}
-    
-</Grid>
 */

@@ -59,7 +59,7 @@ function TarjetaCategoriaProyecto({imagen, categoria}) {
         <Box className={classes.container}>
             <Card className={classes.card}>
               
-              <Link to={"../projects"}>
+              <Link to={`../projects?categoria=${categoria}`}>
                 <CardActionArea className={classes.action}>
                   <CardMedia
                     component="img"

@@ -6,22 +6,31 @@ import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
+import {useLocation} from "react-router-dom";
 
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
+    let categoria = useQuery().get("categoria");
 
+    //console.log(categoria)
     useEffect(() => {
         
         const getProyectos = async () => {
             const proyectosDelServer =  await fetchProyectos()
             setProyectos(proyectosDelServer)
         }
-        getProyectos()
-        // Setconsole.log("hola")
-         // Set Dummy, para evitar warning de momento... (se arreglara al obtener roles del backend en otra historia)
-    }, [proyectos] )
+
+        const getProyectosFiltro = async () => {
+            await filtrarPorCategoria(categoria)
+        }
+
+        categoria? getProyectosFiltro() : getProyectos()
+    }, [] )
 
     // HTTP requests & functions
     async function fetchProyectos() {
@@ -66,13 +75,6 @@ function VistaProyectos() {
         const data = await response.json()
         return data
     }
-    
-    /*const obtenerProyecto = async (idProyecto) => {
-        const response = await fetch(`${URLProyectos}/${idProyecto}`)
-        const data = await response.json()
-        setProyecto(data)
-        return data; 
-    }*/
 
     const obtenerParticipacionProyecto = async (idProyecto) => {
         const idSesion = sessionStorage.getItem("id");
@@ -119,8 +121,8 @@ function VistaProyectos() {
         setProyectos(proyectos.filter((proy) => proy.id !== id));
     }
 
-    const filtrarPorCaterogia = async(categoria) => {
-       const response= await fetch(
+    const filtrarPorCategoria = async(categoria) => {
+        const response= await fetch(
             `${URLProyectos}/${categoria}`,
             {
                 method: 'GET'
@@ -131,10 +133,6 @@ function VistaProyectos() {
         setProyectos(data)
     }
     
-    //const rol = 'admin'
-    //console.log(rol)
-    
-//<PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
     return (
         <>
             <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
@@ -145,7 +143,6 @@ function VistaProyectos() {
                         onPartiparProy={participarEnProyecto} 
                         onEditarProy={editarProyecto} 
                         onGetParticipacion={obtenerParticipacionProyecto}
-                        onFiltroProy={filtrarPorCaterogia}
                         onCancelarParticipacion={cancelarParticipacionProyecto}
                         onNumeroParticipantes={obtenerNumeroParticipantes}/> 
             </PuertaPermisos>
@@ -155,7 +152,6 @@ function VistaProyectos() {
                         proyectos={proyectos}
                         onPartiparProy={participarEnProyecto}
                         onGetParticipacion={obtenerParticipacionProyecto}
-                        onFiltroProy={filtrarPorCaterogia}
                         onCancelarParticipacion={cancelarParticipacionProyecto}
                         onNumeroParticipantes={obtenerNumeroParticipantes}/>
             </PuertaPermisos>
@@ -166,7 +162,6 @@ function VistaProyectos() {
 const url = process.env.REACT_APP_API;
 const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 const URLProyectos = `${url}get_proyectos`//'http://localhost:5000/get_proyectos'
-//const URLProyecto = `${url}get_proyecto`'http://localhost:5000/get_proyecto'//`${url}get_proyectos`
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//
 const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_proyecto'//
 const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//
