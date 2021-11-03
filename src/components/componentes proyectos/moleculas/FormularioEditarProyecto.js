@@ -76,6 +76,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const estado = estadosDefault.find(
       (item_estado) => item_estado.valor === estadoVal
     ).estado;
+    debugger
+    const categoria = proyecto.categoria? proyecto.categoria : "Ambiental" //Default a mejorar
     //console.log(estado)
     //debugger;
     const proyectoEditar = {
@@ -85,7 +87,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
       objetivo: [objetivos],
       lider: [lideres],
       estado: estado,
-      categoria: "Ambiental"
+      categoria: categoria
     };
 
     if (validarCampos(event) === false) {

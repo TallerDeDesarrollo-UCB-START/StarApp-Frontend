@@ -3,7 +3,6 @@ import HeaderProyectos from '../organismos/HeaderProyectos'
 import BodyProyectos from '../organismos/BodyProyectos'
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
-import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria';
 
 // DIEGO
 //victor y Merce
