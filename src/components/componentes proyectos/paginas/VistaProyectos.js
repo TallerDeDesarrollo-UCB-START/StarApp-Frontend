@@ -63,7 +63,7 @@ function VistaProyectos() {
             method: 'PUT'
         })
         const data = await response.json()
-        setActualizar(!actualizar)
+        //setActualizar(!actualizar)
         return data
     }
 
