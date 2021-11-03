@@ -1,53 +1,11 @@
-// Componentes:
-// Librerias-Paquetes:
-import { Box ,Typography,List, ListItem,ListItemIcon,ListItemText} from '@material-ui/core';
-/*import { useState,useEffect } from 'react';
-
-function ListaParticipantesProyecto({proyectoId}){
-
-    const[participantes, setParticipantes]=useState([])
-
-    useEffect(() => {
-        const getParticipantes = async () => {
-        const participantesProyecto =  await fetchParticipantes()
-        setParticipantes(participantesProyecto)
-        }
-        getParticipantes()
-    })
-
-    // HTTP requests & functions
-    async function fetchParticipantes() {
-        const response = await fetch(`${process.env.REACT_APP_API}get_participantes_proyecto_simple/${proyectoId}`)
-        const data = await response.json()
-        return data;
-    }
-    return (
-        <Box>
-            <p>Participantes:</p>
-            <List>
-            {
-                participantes.map(participante=>(
-                    <ListItem>
-                        <ListItemIcon>
-
-                        </ListItemIcon>
-                        <ListItemText primary={participante.nombre} />
-                    </ListItem>
-
-                ))
-            }
-
-            </List>
-
-
-        </Box>
-
-    );
-}
-export default ListaParticipantesProyecto */
+import { Box ,List, ListItem,ListItemIcon,ListItemText,Button} from '@material-ui/core';
 import axios from 'axios'
 import React,{Component} from 'react'
+import ExportExcel from 'react-export-excel'
 
+const ExcelFile = ExportExcel.ExcelFile;
+const ExcelSheet = ExportExcel.ExcelSheet;
+const ExcelColumn = ExportExcel.ExcelColumn;
 export class ListaParticipantesProyecto extends Component{
     constructor(props) {
         super(props)
@@ -79,7 +37,15 @@ export class ListaParticipantesProyecto extends Component{
         const {posts} = this.state
         return(
             <Box>
-                <p>Lista de Participantes:</p>
+                <div>
+                    <p>Lista de Participantes:</p>
+                    <ExcelFile element={<Button>Exportar Excel</Button>} filename="ListaParticipantes">
+                        <ExcelSheet data={posts} name="Participantes">
+                            <ExcelColumn label="Lista Participantes" value="nombre"/>
+                        </ExcelSheet>
+                    </ExcelFile>
+                </div>
+                
                 <List>
                 {
                     posts.map(post=>(
