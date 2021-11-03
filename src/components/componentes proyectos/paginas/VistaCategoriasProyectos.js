@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import HeaderCategoriasProyectos from '../organismos/HeaderCategoriasProyectos'
 import ContenidoCategoriasProyectos from '../organismos/ContenidoCategoriasProyectos'
 import { Container } from '@material-ui/core';
-// Permisos/Roles:
+// Permisos/Roles: 
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
 
