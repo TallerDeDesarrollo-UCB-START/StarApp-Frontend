@@ -5,7 +5,6 @@ import { Container, Card, Modal } from "reactstrap";
 import { Button } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import Grid from "@mui/material/Grid";
 import "./Evento.css";
 
 const url = process.env.REACT_APP_API;
@@ -190,7 +189,7 @@ class Evento extends Component {
                     <div className="col">
                       <div className="card-block px-1">
                         <p className="card-text">
-                          <b>Description:</b> {event.descripcion_evento}
+                          <b>Descripción:</b> {event.descripcion_evento}
                         </p>
                         <p className="card-text">
                           <b>Categoría:</b> {event.categoria}
@@ -226,18 +225,19 @@ class Evento extends Component {
               <div className="card-footer w-100 text-muted"></div>
             </div>
           ))}
+
+          <Button
+            className="botonEditarEvento"
+            variant="contained"
+            color="primary"
+            size="medium"
+            onClick={() => this.abrilModalEditarEvento()}
+          >
+            Editar
+          </Button>
         </Card>
 
-        <Button
-          variant="contained"
-          color="primary"
-          size="medium"
-          onClick={() => this.abrilModalEditarEvento()}
-        >
-          Editar
-        </Button>
-
-        <h1>Lista de participantes</h1>
+        <h1 className="TituloListaParticipantes">Lista de participantes</h1>
         <Card>
           {this.state.participants.map((participant) => (
             <div className="card w-70" key={participant.id}>
@@ -262,8 +262,10 @@ class Evento extends Component {
           isOpen={this.state.modalAbierto}
           style={customStyles}
         >
-          <div className="Titulo">Editar Evento</div>
-          <form>
+          <div className="Titulo">
+            <strong>Editar Evento</strong>
+          </div>
+          <form className="formularioEdicionEvento">
             <TextField
               label="Nombre del evento"
               name="nombre_evento"
@@ -297,9 +299,9 @@ class Evento extends Component {
             >
               {this.state.lideres.map((item) => {
                 return (
-                  <option key={item} value={item}>
+                  <MenuItem key={item} value={item}>
                     {item}
-                  </option>
+                  </MenuItem>
                 );
               })}
             </TextField>
@@ -312,12 +314,12 @@ class Evento extends Component {
               onChange={this.handleChange}
               value={this.state.formEditado.modalidad_evento}
             >
-              <option value="Presencial" name="modalidad_evento">
+              <MenuItem value="Presencial" name="modalidad_evento">
                 Presencial
-              </option>
-              <option value="Virtual" name="modalidad_evento">
+              </MenuItem>
+              <MenuItem value="Virtual" name="modalidad_evento">
                 Virtual
-              </option>
+              </MenuItem>
             </TextField>
 
             <TextField
@@ -348,9 +350,9 @@ class Evento extends Component {
             >
               {this.state.categorias.map((item) => {
                 return (
-                  <option key={item} value={item}>
+                  <MenuItem key={item} value={item}>
                     {item}
-                  </option>
+                  </MenuItem>
                 );
               })}
             </TextField>

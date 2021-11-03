@@ -1,13 +1,17 @@
 #ModalFormEditEvento {
   width: 400px;
-  background-color: #eae9e9;
+  background-color: #f2f2f2 !important;
   text-align: center;
   padding: 3px;
   border-radius: 8px;
 }
+.formularioEdicionEvento {
+  background-color: #f2f2f2;
+}
 
 .Titulo {
-  margin-bottom: 5px;
+  margin-bottom: 20px !important;
+  background-color: #f2f2f2;
 }
 
 .textInput {
@@ -17,12 +21,44 @@
 }
 
 .botonActualizar {
-  background-color: blue;
+  background-color: #888888 !important;
+  color: white !important;
+  width: 50%;
+  margin: 4px !important;
 }
 
 .botonCancelar {
-  background-color: red;
+  background-color: white !important;
+  color: #f00000 !important;
+  width: 45%;
+  margin: 4px !important;
+  border: 1px solid red !important;
+}
+
+.botonActualizar:hover {
+  background-color: #1694d2 !important;
+  color: white !important;
+}
+
+.botonCancelar:hover {
+  background-color: #f00000 !important;
+  color: white !important;
 }
 
 .CamposBotones {
+  width: 100%;
+  padding: 5px;
+  margin-top: -15px;
+}
+
+.modal-content {
+  background-color: #f2f2f2;
+}
+
+.botonEditarEvento {
+  width: 30%;
+}
+
+.TituloListaParticipantes {
+  margin-top: 10px;
 }
