@@ -13,6 +13,10 @@ import {SCOPES} from '../organismos/map-permisos';
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
 import { useState, useEffect } from "react";
+import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
 
 function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
 
@@ -109,9 +113,46 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                         <EliminarProjectoBtn proyecto={proyecto}
                                                             onEliminarProy={onEliminarProy}/>
                                     </PuertaPermisos>
+
+    function content (){
+        var resp="";
+        if( proyecto.descripcion.length > 107 ) {
+            for(var i=0; i < 107; i++){
+                resp += proyecto.descripcion[i];
+            }
+            resp += '...';
+        } else {
+            resp = proyecto.descripcion;
+        }
+        return resp;
+    }
     
     return (
-        <Box className="content-container">
+        <Box>
+            <CardContent>
+                <Typography gutterBottom className="content-title">
+                    {proyecto.titulo}
+                </Typography>
+                <Typography className="content-description" color="textSecondary" component="p">
+                    {content()}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small" color="primary">
+                Share
+                </Button>
+                <Button size="small" color="primary">
+                Learn More
+                </Button>
+            </CardActions>
+
+            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
+        </Box>
+    );
+}
+
+/*
+<Box className="content-container">
             
             <p> <b>Proyecto:</b> {proyecto.titulo}</p>
             <p> <b>Objetivo:</b> {proyecto.objetivo}</p>
@@ -131,7 +172,5 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
 
             <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
         </Box>
-    );
-}
-
+*/
 export default ContenidoProyecto
