@@ -105,7 +105,6 @@ function Users () {
     const [data, setData] = useState([])
     const [originalData, setOriginalData] = useState([])
     const smallScreen = useMediaQuery('(min-width:700px)')
-    console.log(data)
     const usersGet = async() => (
         await axios.get(baseURL)
         .then( response => {
