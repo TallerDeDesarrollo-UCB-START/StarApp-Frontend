@@ -1,9 +1,8 @@
 import { React, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
 import InputTextbox from "./InputTextbox";
 import { Form } from "react-final-form";
-import { useMediaQuery, Button } from "@material-ui/core";
+import { useMediaQuery, Button, Typography, Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { validEmail } from "./RegEx";
 import AxiosClient from "./AxiosClient";
@@ -23,48 +22,27 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    margin: "200px 0",
+    margin: "100px 0",
     marginBottom: "0",
-  },
-  loginContainer: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  loginCard: {
-    width: "450px",
-    background: "#F2F2F2",
-    boxShadow:
-      "0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.14), 0px 8px 10px -5px rgba(0, 0, 0, 0.2)",
-    borderRadius: "20px 20px 20px 20px",
-    paddingBottom:"20px",
-  },
-  respLoginCard: {
-    width: "100%",
-    paddingBottom:"20px",
   },
   buttonContainer: {
     width: "100%",
-    marginTop: "42px",
+    marginTop: "20px",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
   },
-  loginButton: {
+  loginContainer: {
     width: "400px",
     color: "white",
     fontWeight: "bold",
     marginBottom: "10px",
   },
-  CreateButton: {
-    marginTop: "20px",
-    color: "white",
-    marginBottom: "10PX",
-    fontWeight: "bold",
-  },
 }));
 const LoginForm = ({ sessionData, setSessionData }) => {
   const history = useHistory();
   const classes = useStyles();
+  const [validateButton, setValidateButton] = useState(false);
   const smallScreen = !useMediaQuery("(min-width:900px)");
   const [snackbar, setSnackbar] = useState({
     message: "",
@@ -74,6 +52,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
   });
   const [activeProgressBar, setActiveProgressBar] = useState(false);
   const validate = (values) => {
+    setValidateButton(false);
     const errors = {};
     if (!validEmail.test(values.email)) {
       errors.email = "Correo no valido";
@@ -83,6 +62,9 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     }
     if (!values.password) {
       errors.password = "Campo requerido";
+    }
+    if (!errors.email && !errors.password) {
+      setValidateButton(true);
     }
     return errors;
   };
@@ -94,7 +76,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     const body = {
       email: values.email,
       password: values.password,
-      tipo:"normal",
+      tipo: "normal",
     };
     setActiveProgressBar(true);
     await AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
@@ -116,53 +98,54 @@ const LoginForm = ({ sessionData, setSessionData }) => {
         });
       });
   };
-
   return (
     <div className={smallScreen ? classes.smallContainer : classes.Container}>
       <LogoAndSlogan />
-      <div className={classes.loginContainer}>
-        <Card
-          className={smallScreen ? classes.respLoginCard : classes.loginCard}
-        >
+      <div>
+        <Grid className={classes.loginContainer}>
           <Form onSubmit={onSubmit} validate={validate}>
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit} noValidate>
-                <LinearProgress
-                  style={{ display: activeProgressBar ? "" : "none" }}
-                />
-                <InputTextbox
-                  name="email"
-                  type="text"
-                  placeholder="Correo Electrónico"
-                />
-                <InputTextbox
-                  name="password"
-                  type="password"
-                  placeholder="Contraseña"
-                />
-                <div className={classes.buttonContainer}>
+                <Grid>
+                  <Typography
+                    style={{ marginLeft: "30px", fontWeight: "bold" }}
+                  >
+                    Inicia Sesión
+                  </Typography>
+                  <LinearProgress
+                    style={{ display: activeProgressBar ? "" : "none" }}
+                  />
+                  <InputTextbox
+                    name="email"
+                    type="text"
+                    placeholder="Correo *"
+                  />
+                  <InputTextbox
+                    name="password"
+                    type="password"
+                    placeholder="Contraseña *"
+                  />
                   <Button
+                    style={{
+                      marginLeft: "34px",
+                      width: "83%",
+                      marginTop: "20px",
+                    }}
                     variant="contained"
                     color="primary"
-                    className={classes.loginButton}
                     type="submit"
+                    disabled={validateButton ? false : true}
                   >
                     Iniciar Sesión
                   </Button>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    className={classes.CreateButton}
-                    onClick={() => history.push("/register")}
-                  >
-                    Crear cuenta nueva
-                  </Button>
+                <div className={classes.buttonContainer}>
                   <LoginGoogle />
                 </div>
+                </Grid>
               </form>
             )}
           </Form>
-        </Card>
+        </Grid>
         <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
       </div>
     </div>
