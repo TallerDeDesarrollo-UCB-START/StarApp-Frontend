@@ -32,7 +32,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     if(typeof(proyecto.estado) === 'string'){
       return estadosDefault.find((item_estado) => item_estado.estado === proyecto.estado).valor
     } else {
-      return ''
+      return 20 // En Curso - valor default
     }
     
   }
@@ -76,10 +76,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const estado = estadosDefault.find(
       (item_estado) => item_estado.valor === estadoVal
     ).estado;
-    debugger
-    const categoria = proyecto.categoria? proyecto.categoria : "Ambiental" //Default a mejorar
-    //console.log(estado)
-    //debugger;
+    const categoria = proyecto.categoria? proyecto.categoria : "Ambiental" //Default a mejorar agregando campo de categoria en formulario
+
     const proyectoEditar = {
       id: proyecto.id,
       titulo: titulo,
