@@ -75,8 +75,9 @@ const useStyles = makeStyles((theme) => ({
   },
   preguntaIni:{
     marginTop:"10px",
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: "'DM Sans', sans-serif !important",
+    color: "black"
   }
 }))
 const RegisterForm = () => {
@@ -262,7 +263,9 @@ const RegisterForm = () => {
                     Crea tu cuenta de start
                   </Button>
                 </div>
-                <div className={classes.preguntaIni}>¿Ya tienes cuenta? Inicia Sesión.</div>
+                <div className={classes.preguntaIni}>
+                <a href="/login" className={classes.preguntaIni}><strong>¿Ya tienes cuenta? Inicia Sesión. </strong></a>
+                </div>
                 <div className={classes.fontSize12}>Al crear tu cuenta aceptas que miembros de START se
                    pongan en contacto contigo para futuras actividades</div>
               </form>
