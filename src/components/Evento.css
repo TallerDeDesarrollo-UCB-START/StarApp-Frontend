@@ -1,0 +1,12 @@
+#ModalFormEditEvento {
+  width: 400px;
+  background-color: #eae9e9;
+  text-align: center;
+  padding: 3px;
+}
+
+.nombreEventoEdicion,
+.descripcionEventoEdicion {
+  width: 90%;
+  color: #eae9e9;
+}

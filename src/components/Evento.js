@@ -3,7 +3,9 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Modal } from "reactstrap";
 import { Button } from "@material-ui/core";
-
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import "./Evento.css";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -20,8 +22,6 @@ const apiLideres = axios.create({
 const apiCategorias = axios.create({
   baseURL: urlCategorias,
 });
-
-
 
 class Evento extends Component {
   state = {
@@ -57,31 +57,29 @@ class Evento extends Component {
     return id;
   }
 
-  abrilModalEditarEvento(){
+  abrilModalEditarEvento() {
     this.prepararModal();
     this.setState({ modalAbierto: true });
-    
   }
 
-  prepararModal(){
+  prepararModal() {
     this.llenarFormulario();
     this.getLideres();
     this.getCategorias();
   }
 
-  llenarFormulario(){
-    this.setState( {formEditado : this.state.events[0]});
-  
+  llenarFormulario() {
+    this.setState({ formEditado: this.state.events[0] });
   }
 
-  cerrarModalEditarEvento(){
+  cerrarModalEditarEvento() {
     this.setState({ modalAbierto: false });
   }
 
   getEvento = async () => {
     let thisUrl = window.location.href;
     let id = this.getIdFromURL(thisUrl);
-    
+
     try {
       let data = await api.get(`/${id}`).then(({ data }) => data);
       this.setState({ events: data });
@@ -117,9 +115,9 @@ class Evento extends Component {
       return item.interes;
     });
     aux.unshift(this.state.formEditado["categoria"]);
-    let result = aux.filter((item,index)=>{
+    let result = aux.filter((item, index) => {
       return aux.indexOf(item) === index;
-    })
+    });
     this.setState({ categorias: result });
   };
 
@@ -130,22 +128,22 @@ class Evento extends Component {
         return item.nombre + " " + item.apellido;
       });
       aux.unshift(this.state.formEditado["lider"]);
-      let result = aux.filter((item,index)=>{
+      let result = aux.filter((item, index) => {
         return aux.indexOf(item) === index;
-      })
+      });
       this.setState({ lideres: result });
     } catch (err) {
       console.log(err);
     }
   };
 
-
   guardarNuevaData = async () => {
     //console.log(this.state.formEditado);
     let thisUrl = window.location.href;
     let id = this.getIdFromURL(thisUrl);
     var newUrl = "http://localhost:5000/actualizar_evento/" + id;
-    await axios.put(newUrl, this.state.formEditado)
+    await axios
+      .put(newUrl, this.state.formEditado)
       .then((response) => {
         this.insertar();
       })
@@ -160,9 +158,6 @@ class Evento extends Component {
     //window.location.href = "/eventos";
     window.location.reload();
   };
-
-
-
 
   render() {
     const customStyles = {
@@ -232,11 +227,14 @@ class Evento extends Component {
           ))}
         </Card>
 
-
-        <Button variant="contained" color="primary" size="medium" onClick={()=>this.abrilModalEditarEvento()} >
+        <Button
+          variant="contained"
+          color="primary"
+          size="medium"
+          onClick={() => this.abrilModalEditarEvento()}
+        >
           Editar
         </Button>
-
 
         <h1>Lista de participantes</h1>
         <Card>
@@ -258,127 +256,135 @@ class Evento extends Component {
           ))}
         </Card>
 
-        <Modal isOpen={this.state.modalAbierto} style={customStyles} >
-            <div>Editar Evento</div>
-            <form>
+        <Modal
+          id="ModalFormEditEvento"
+          isOpen={this.state.modalAbierto}
+          style={customStyles}
+        >
+          <div>Editar Evento</div>
+          <form>
+            <TextField
+              placeholder="Nombre del evento"
+              name="nombre_evento"
+              className="nombreEventoEdicion"
+              type="text"
+              value={this.state.formEditado["nombre_evento"]}
+              onChange={this.handleChange}
+            />
 
-                 
-              <label>Nombre del Evento:</label>
-                <input
-                  name="nombre_evento"
-                  type="text"
-                  value={this.state.formEditado['nombre_evento']}
-                  onChange={this.handleChange}
-                />
-              <br></br>
+            <br></br>
 
+            <label>Descripción:</label>
+            <TextField
+              id="filled-multiline-flexible"
+              className="descripcionEventoEdicion"
+              multiline
+              maxRows={4}
+              name="descripcion_evento"
+              type="text"
+              value={this.state.formEditado["descripcion_evento"]}
+              onChange={this.handleChange}
+            />
+            <br></br>
 
-              <label>Descripción:</label>
-                <textarea
-                  cols="30"
-                  rows="10"
-                  name="descripcion_evento"
-                  type="text"
-                  value={this.state.formEditado['descripcion_evento']}
-                  onChange={this.handleChange}
-                ></textarea>
-              <br></br>
-
-              <label>Lider:</label>
-                <select
-                  className=" form-control lider-input"
-                  name="lider"
-                  onChange={this.handleChange}
-                >
-                  {this.state.lideres.map((item) => {
-                    return (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    );
-                  })}
-                </select>
-              <br></br>
-
-              <label>Modalidad</label>
-                <select
-                  className=" form-control"
-                  name="modalidad_evento"
-                  onChange={this.handleChange}
-                >
-                  <option value="Presencial" name="modalidad_evento">
-                    Presencial
+            <label>Lider:</label>
+            <select
+              className="liderEventoEdicion"
+              name="lider"
+              onChange={this.handleChange}
+            >
+              {this.state.lideres.map((item) => {
+                return (
+                  <option key={item} value={item}>
+                    {item}
                   </option>
-                  <option value="Virtual" name="modalidad_evento">
-                    Virtual
+                );
+              })}
+            </select>
+            <br></br>
+
+            <label>Modalidad</label>
+            <select
+              className="nombreEventoEdicion"
+              name="modalidad_evento"
+              onChange={this.handleChange}
+            >
+              <option value="Presencial" name="modalidad_evento">
+                Presencial
+              </option>
+              <option value="Virtual" name="modalidad_evento">
+                Virtual
+              </option>
+            </select>
+            <br></br>
+
+            <label>Lugar</label>
+            <input
+              className="LugarEventoEdicion"
+              name="lugar_evento"
+              type="text"
+              value={this.state.formEditado["lugar_evento"]}
+              onChange={this.handleChange}
+            />
+            <br></br>
+
+            <label>Fecha</label>
+            <input
+              className="FechaEventoEdicion"
+              name="fecha_evento"
+              type="date"
+              value={this.state.formEditado["fecha_evento"]}
+              onChange={this.handleChange}
+            />
+            <br></br>
+
+            <label>Categoria</label>
+            <select
+              className="CategoriaEventoEdicion"
+              name="categoria"
+              onChange={this.handleChange}
+            >
+              {this.state.categorias.map((item) => {
+                return (
+                  <option key={item} value={item}>
+                    {item}
                   </option>
-                </select>
-              <br></br>
+                );
+              })}
+            </select>
+            <br></br>
 
-              <label>Lugar</label>
-                <input
-                  name="lugar_evento"
-                  type="text"
-                  value={this.state.formEditado['lugar_evento']}
-                  onChange={this.handleChange}
-                />
-              <br></br>
+            <label>Hora Inicio</label>
+            <input
+              className="HoraInicioEventoEdicion"
+              name="hora_inicio"
+              type="time"
+              value={this.state.formEditado["hora_inicio"]}
+              onChange={this.handleChange}
+            />
+            <br></br>
 
-              <label>Fecha</label>
-                <input
-                  name="fecha_evento"
-                  type="date"
-                  value={this.state.formEditado['fecha_evento']}
-                  onChange={this.handleChange}
-                />
-              <br></br>
+            <label>Hora Fin</label>
+            <input
+              className="HoraFinEventoEdicion"
+              name="hora_fin"
+              type="time"
+              value={this.state.formEditado["hora_fin"]}
+              onChange={this.handleChange}
+            />
+            <br></br>
 
-              <label>Categoria</label>
-                <select
-                  className=" form-control categoria-input"
-                  name="categoria"
-                  onChange={this.handleChange}
-                >
-                  {this.state.categorias.map((item) => {
-                    return (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    );
-                  })}
-                </select>
-              <br></br>
-
-              <label>Hora Inicio</label>
-                <input
-                  className="form-control"
-                  name="hora_inicio"
-                  type="time"
-                  value={this.state.formEditado['hora_inicio']}
-                  onChange={this.handleChange}
-                />
-              <br></br>
-
-              <label>Hora Fin</label>
-                <input
-                  className="form-control"
-                  name="hora_fin"
-                  type="time"
-                  value={this.state.formEditado['hora_fin']}
-                  onChange={this.handleChange}
-                />
-              <br></br>
-
-
-              <div className="CamposBotones">
-                <Button onClick={() => this.guardarNuevaData()} >Actualizar Evento </Button>
-                <Button onClick={()=>this.cerrarModalEditarEvento()}>  Cancelar </Button>
-              </div> 
-
-            </form>
-          </Modal>
-
-
+            <div className="CamposBotones">
+              <Button onClick={() => this.guardarNuevaData()}>
+                Actualizar Evento{" "}
+              </Button>
+              <Button onClick={() => this.cerrarModalEditarEvento()}>
+                {" "}
+                Cancelar{" "}
+              </Button>
+            </div>
+          </form>
+        </Modal>
       </Container>
     );
   }
