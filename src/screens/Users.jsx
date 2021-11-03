@@ -29,13 +29,28 @@ const useStyles = makeStyles((theme)=>({
 
 const columns = [
     {
-        field: 'nombre',
-        headerName: 'Nombre(s)',
+        field: 'nombre_completo',
+        headerName: 'Nombre',
         width: 200,
     },
     {
-        field: 'apellido',
-        headerName: 'Apellido(s)',
+        field: 'fecha_de_nacimiento',
+        headerName: 'Edad',
+        width: 128,
+    },
+    {
+        field: 'genero',
+        headerName: 'Género',
+        width: 150,
+    },
+    {
+        field: 'ocupacion',
+        headerName: 'Ocupación',
+        width: 180,
+    },
+    {
+        field: 'carrera',
+        headerName: 'Carrera',
         width: 200,
     },
     {
@@ -45,19 +60,45 @@ const columns = [
         width: 200,
     },
     {
+        field: 'ciudad_de_recidencia',
+        headerName: 'Ciudad de Residencia',
+        width: 200,
+    },
+    {
+        field: 'pais_de_recidencia',
+        headerName: 'Pais de Residencia',
+        width: 200,
+    },
+    {
+        field: 'nombre_contacto_de_emergencia',
+        headerName: 'Persona de Contacto',
+        width: 200,
+    },
+    {
+        field: 'numero_contacto_de_emergencia',
+        headerName: 'Número de contacto',
+        width: 200,
+    },
+    {
+        field: 'estado_de_disponibilidad',
+        headerName: 'Disponibilidad',
+        width: 200,
+    },
+    {
         field: 'rol',
         headerName: 'Rol',
         width: 200,
     },
-    {
-        field: 'ciudad_de_recidencia',
-        headerName: 'Ciudad',
-        width: 200,
-        },
 ];
 
 const url = process.env.REACT_APP_API
 const baseURL=`${url}extended_form`
+const calculateAge = (birthday) => { // birthday is a date
+    birthday = new Date(birthday)
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
 
 function Users () {
     const classes = useStyles()
@@ -71,7 +112,12 @@ function Users () {
             var ids = 0
             resp = resp.map((person) => {
                 ids = ids + 1
-                return {...person, id:ids}
+                return {...person, 
+                    id:ids, 
+                    nombre_completo:`${person.nombre} ${person.apellido}`,
+                    fecha_de_nacimiento: calculateAge(person.fecha_de_nacimiento).toString(),
+                    nombre_contacto_de_emergencia: `${person.nombre_contacto_de_emergencia} (${person.relacion_contacto_de_emergencia})`,
+                }
             })
             setData(resp);
             setOriginalData(resp);

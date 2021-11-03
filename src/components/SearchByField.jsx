@@ -40,6 +40,15 @@ const fields = {
     'Teléfono':'telefono',
     'Rol':'rol',
     'Ciudad':'ciudad_de_recidencia',
+    'Edad': 'fecha_de_nacimiento',
+    'Género': 'genero',
+    'Ocupación': 'ocupacion',
+    'Carrera': 'carrera',
+    'Ciudad de Residencia': 'ciudad_de_recidencia',
+    'Pais de Residencia': 'pais_de_recidencia',
+    'Persona de Contacto': 'nombre_contacto_de_emergencia',
+    'Número de contacto': 'numero_contacto_de_emergencia',
+    'Disponibilidad': 'estado_de_disponibilidad',
 }
 const SearchByField = ({data, setData, originalData}) => {
     const idSearchInput = "search-input"
