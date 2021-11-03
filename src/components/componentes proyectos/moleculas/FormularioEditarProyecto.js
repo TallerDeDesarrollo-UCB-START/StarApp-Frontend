@@ -85,6 +85,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
       objetivo: [objetivos],
       lider: [lideres],
       estado: estado,
+      categoria: "Ambiental"
     };
 
     if (validarCampos(event) === false) {

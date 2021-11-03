@@ -53,7 +53,8 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             descripcion: descripcion,
             objetivo: objetivos,
             lider: lideres,
-            estado: "EN CURSO"
+            estado: "EN CURSO",
+            categoria: "Ambiental"
         }
         onCrearProy(nuevoProyecto) // callback invocation
         resetStates()

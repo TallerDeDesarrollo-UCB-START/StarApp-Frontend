@@ -15,6 +15,7 @@ function useQuery() {
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
+    const [actualizar, setActualizar] = useState(false)
     let categoria = useQuery().get("categoria");
 
     //console.log(categoria)
@@ -30,7 +31,7 @@ function VistaProyectos() {
         }
 
         categoria? getProyectosFiltro() : getProyectos()
-    }, [] )
+    }, [actualizar] )
 
     // HTTP requests & functions
     async function fetchProyectos() {
@@ -49,6 +50,7 @@ function VistaProyectos() {
             })
         const data = await response.json()
         setProyectos([...proyectos, data])
+        setActualizar(!actualizar)
     
     }
 
@@ -61,6 +63,7 @@ function VistaProyectos() {
             method: 'PUT'
         })
         const data = await response.json()
+        setActualizar(!actualizar)
         return data
     }
 
@@ -73,6 +76,7 @@ function VistaProyectos() {
                 method: 'DELETE'
             })
         const data = await response.json()
+        setActualizar(!actualizar)
         return data
     }
 
@@ -107,7 +111,7 @@ function VistaProyectos() {
         const data = await response.json()
         
         setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data])
-    
+        setActualizar(!actualizar)
     }
         
     const eliminarProyecto = async (id) => { 
