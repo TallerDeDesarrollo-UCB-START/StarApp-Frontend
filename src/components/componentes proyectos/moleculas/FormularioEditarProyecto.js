@@ -37,7 +37,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     
   }
   const [estadoVal, setEstadoVal] = useState(obtenerEstadoActual());
-
+  
   function resetStates() {
     setTitulo("");
     setDescripcion("");
