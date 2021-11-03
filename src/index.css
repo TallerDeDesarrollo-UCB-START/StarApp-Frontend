@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Miriam+Libre&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 body {
   margin: 0;
-  font-family: 'Miriam Libre',
-    sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
