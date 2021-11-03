@@ -25,26 +25,6 @@ const useStyles = makeStyles((theme) => ({
     margin: "100px 0",
     marginBottom: "0",
   },
-  loginContainer: {
-    width: "400px",
-    color: "white",
-    fontWeight: "bold",
-    marginBottom: "10px",
-  },
-  loginCard: {
-    width: "450px",
-    height: "364px",
-    background: "#F2F2F2",
-    boxShadow:
-      "0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.14), 0px 8px 10px -5px rgba(0, 0, 0, 0.2)",
-    borderRadius: "20px 20px 20px 20px",
-    paddingBottom: "20px",
-  },
-  respLoginCard: {
-    width: "100%",
-    height: "484px",
-    paddingBottom: "20px",
-  },
   buttonContainer: {
     width: "100%",
     marginTop: "20px",
@@ -52,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
   },
-  loginButton: {
+  loginContainer: {
     width: "400px",
     color: "white",
     fontWeight: "bold",
@@ -121,23 +101,30 @@ const LoginForm = ({ sessionData, setSessionData }) => {
   return (
     <div className={smallScreen ? classes.smallContainer : classes.Container}>
       <LogoAndSlogan />
-      <div className={classes.loginContainer}>
+      <div>
         <Grid className={classes.loginContainer}>
           <Form onSubmit={onSubmit} validate={validate}>
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit} noValidate>
-                <Typography style={{ marginLeft: "30px", fontWeight: "bold" }}>
-                  Inicia Sesión
-                </Typography>
-                <LinearProgress
-                  style={{ display: activeProgressBar ? "" : "none" }}
-                />
-                <InputTextbox name="email" type="text" placeholder="Correo *" />
-                <InputTextbox
-                  name="password"
-                  type="password"
-                  placeholder="Contraseña *"
-                />
+                <Grid>
+                  <Typography
+                    style={{ marginLeft: "30px", fontWeight: "bold" }}
+                  >
+                    Inicia Sesión
+                  </Typography>
+                  <LinearProgress
+                    style={{ display: activeProgressBar ? "" : "none" }}
+                  />
+                  <InputTextbox
+                    name="email"
+                    type="text"
+                    placeholder="Correo *"
+                  />
+                  <InputTextbox
+                    name="password"
+                    type="password"
+                    placeholder="Contraseña *"
+                  />
                   <Button
                     style={{
                       marginLeft: "34px",
@@ -146,7 +133,6 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                     }}
                     variant="contained"
                     color="primary"
-                    className={classes.loginButton}
                     type="submit"
                     disabled={validateButton ? false : true}
                   >
@@ -155,6 +141,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                 <div className={classes.buttonContainer}>
                   <LoginGoogle />
                 </div>
+                </Grid>
               </form>
             )}
           </Form>

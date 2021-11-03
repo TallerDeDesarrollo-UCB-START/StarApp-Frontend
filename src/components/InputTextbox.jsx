@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         height: '12px', 
     },
     textbox : {
-        width: '76%',
+        width: '86%',
         height: '42px',
         background: '#FFFFFF',
         padding: '3px 5px',
