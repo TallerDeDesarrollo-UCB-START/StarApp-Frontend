@@ -28,3 +28,11 @@ p {
     border-radius: 25px;
     padding: 20px;
 }
+
+.content-title {
+    font-size: 18px !important;
+}
+
+.content-description {
+    font-size: 14px !important;
+}
