@@ -3,15 +3,13 @@ import HeaderProyectos from '../organismos/HeaderProyectos'
 import BodyProyectos from '../organismos/BodyProyectos'
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
-import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria';
 
 // DIEGO
 //victor y Merce
-function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onFiltroProy, onNumeroParticipantes}) {
+function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes, tituloHeader}) {
     return (
         <Box style={styles}>
-            <HeaderProyectos />
-            <SelectFiltroCategoria onFiltroProy={onFiltroProy}/>
+            <HeaderProyectos tituloHeader={tituloHeader}/>
             <BodyProyectos rol = {rol}
                             proyectos={proyectos}
                             onPartiparProy={onPartiparProy}

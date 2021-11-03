@@ -32,12 +32,12 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     if(typeof(proyecto.estado) === 'string'){
       return estadosDefault.find((item_estado) => item_estado.estado === proyecto.estado).valor
     } else {
-      return ''
+      return 20 // En Curso - valor default
     }
     
   }
   const [estadoVal, setEstadoVal] = useState(obtenerEstadoActual());
-
+  
   function resetStates() {
     setTitulo("");
     setDescripcion("");
@@ -76,8 +76,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const estado = estadosDefault.find(
       (item_estado) => item_estado.valor === estadoVal
     ).estado;
-    //console.log(estado)
-    //debugger;
+    const categoria = proyecto.categoria? proyecto.categoria : "Ambiental" //Default a mejorar agregando campo de categoria en formulario
+
     const proyectoEditar = {
       id: proyecto.id,
       titulo: titulo,
@@ -85,6 +85,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
       objetivo: [objetivos],
       lider: [lideres],
       estado: estado,
+      categoria: categoria
     };
 
     if (validarCampos(event) === false) {
