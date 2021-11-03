@@ -2,14 +2,48 @@
 import BannerProyecto from '../moleculas/BannerProyecto'
 import ContenidoProyecto from '../moleculas/ContenidoProyecto'
 import './ProyectoVoluntario.css';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
 
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
+const useStyles = makeStyles({
+    root: {
+      maxWidth: 344,
+      maxHeight: 301,
+    },
+    media: {
+      height: 140,
+    },
+  });
+
 // Diego
 function ProyectoVoluntario({proyecto, rol, onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
+    
+    const classes = useStyles();
+    
     return (
-        <Box className="proyect-container">
+        <Card className={classes.root}>
+            <CardActionArea>
+                <BannerProyecto />
+                <ContenidoProyecto rol={rol}
+                            proyecto={proyecto} 
+                            onEliminarProy={onEliminarProy} 
+                            onActivarForm={onActivarForm}
+                            onPartiparProy={onPartiparProy}
+                            onGetParticipacion={onGetParticipacion}
+                            onCancelarParticipacion={onCancelarParticipacion}
+                            onNumeroParticipantes={onNumeroParticipantes}/>
+            </CardActionArea>
+        </Card>
+    );
+}
+
+/*
+<Box className="proyect-container">
             <BannerProyecto />
             <ContenidoProyecto rol={rol}
                             proyecto={proyecto} 
@@ -19,8 +53,8 @@ function ProyectoVoluntario({proyecto, rol, onEliminarProy, onActivarForm, onPar
                             onGetParticipacion={onGetParticipacion}
                             onCancelarParticipacion={onCancelarParticipacion}
                             onNumeroParticipantes={onNumeroParticipantes}/>
+           
         </Box>
-    );
-}
 
+*/
 export default ProyectoVoluntario
