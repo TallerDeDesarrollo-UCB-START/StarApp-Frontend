@@ -3,10 +3,26 @@
   background-color: #eae9e9;
   text-align: center;
   padding: 3px;
+  border-radius: 8px;
 }
 
-.nombreEventoEdicion,
-.descripcionEventoEdicion {
+.Titulo {
+  margin-bottom: 5px;
+}
+
+.textInput {
   width: 90%;
   color: #eae9e9;
+  margin-bottom: 25px !important;
+}
+
+.botonActualizar {
+  background-color: blue;
+}
+
+.botonCancelar {
+  background-color: red;
+}
+
+.CamposBotones {
 }

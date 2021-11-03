@@ -5,6 +5,7 @@ import { Container, Card, Modal } from "reactstrap";
 import { Button } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import Grid from "@mui/material/Grid";
 import "./Evento.css";
 
 const url = process.env.REACT_APP_API;
@@ -261,12 +262,12 @@ class Evento extends Component {
           isOpen={this.state.modalAbierto}
           style={customStyles}
         >
-          <div>Editar Evento</div>
+          <div className="Titulo">Editar Evento</div>
           <form>
             <TextField
-              placeholder="Nombre del evento"
+              label="Nombre del evento"
               name="nombre_evento"
-              className="nombreEventoEdicion"
+              className="nombreEventoEdicion textInput"
               type="text"
               value={this.state.formEditado["nombre_evento"]}
               onChange={this.handleChange}
@@ -274,10 +275,10 @@ class Evento extends Component {
 
             <br></br>
 
-            <label>Descripción:</label>
             <TextField
               id="filled-multiline-flexible"
-              className="descripcionEventoEdicion"
+              label="Descripción"
+              className="descripcionEventoEdicion textInput"
               multiline
               maxRows={4}
               name="descripcion_evento"
@@ -285,13 +286,14 @@ class Evento extends Component {
               value={this.state.formEditado["descripcion_evento"]}
               onChange={this.handleChange}
             />
-            <br></br>
 
-            <label>Lider:</label>
-            <select
-              className="liderEventoEdicion"
+            <TextField
+              label="Lider"
+              select
+              className="liderEventoEdicion textInput"
               name="lider"
               onChange={this.handleChange}
+              value={this.state.formEditado.lider}
             >
               {this.state.lideres.map((item) => {
                 return (
@@ -300,14 +302,15 @@ class Evento extends Component {
                   </option>
                 );
               })}
-            </select>
-            <br></br>
+            </TextField>
 
-            <label>Modalidad</label>
-            <select
-              className="nombreEventoEdicion"
+            <TextField
+              label="Modalidad"
+              select
+              className="nombreEventoEdicion textInput"
               name="modalidad_evento"
               onChange={this.handleChange}
+              value={this.state.formEditado.modalidad_evento}
             >
               <option value="Presencial" name="modalidad_evento">
                 Presencial
@@ -315,34 +318,33 @@ class Evento extends Component {
               <option value="Virtual" name="modalidad_evento">
                 Virtual
               </option>
-            </select>
-            <br></br>
+            </TextField>
 
-            <label>Lugar</label>
-            <input
-              className="LugarEventoEdicion"
+            <TextField
+              label="Lugar"
+              className="LugarEventoEdicion textInput"
               name="lugar_evento"
               type="text"
               value={this.state.formEditado["lugar_evento"]}
               onChange={this.handleChange}
             />
-            <br></br>
 
-            <label>Fecha</label>
-            <input
-              className="FechaEventoEdicion"
+            <TextField
+              label="Fecha"
+              className="FechaEventoEdicion textInput"
               name="fecha_evento"
               type="date"
               value={this.state.formEditado["fecha_evento"]}
               onChange={this.handleChange}
             />
-            <br></br>
 
-            <label>Categoria</label>
-            <select
-              className="CategoriaEventoEdicion"
+            <TextField
+              label="Categoria"
+              select
+              className="CategoriaEventoEdicion textInput"
               name="categoria"
               onChange={this.handleChange}
+              value={this.state.formEditado.categoria}
             >
               {this.state.categorias.map((item) => {
                 return (
@@ -351,34 +353,37 @@ class Evento extends Component {
                   </option>
                 );
               })}
-            </select>
-            <br></br>
+            </TextField>
 
-            <label>Hora Inicio</label>
-            <input
-              className="HoraInicioEventoEdicion"
+            <TextField
+              label="Hora Inicio"
+              className="HoraInicioEventoEdicion textInput"
               name="hora_inicio"
               type="time"
               value={this.state.formEditado["hora_inicio"]}
               onChange={this.handleChange}
             />
-            <br></br>
 
-            <label>Hora Fin</label>
-            <input
-              className="HoraFinEventoEdicion"
+            <TextField
+              label="Hora Fin"
+              className="HoraFinEventoEdicion textInput"
               name="hora_fin"
               type="time"
               value={this.state.formEditado["hora_fin"]}
               onChange={this.handleChange}
             />
-            <br></br>
 
             <div className="CamposBotones">
-              <Button onClick={() => this.guardarNuevaData()}>
+              <Button
+                className="botonActualizar"
+                onClick={() => this.guardarNuevaData()}
+              >
                 Actualizar Evento{" "}
               </Button>
-              <Button onClick={() => this.cerrarModalEditarEvento()}>
+              <Button
+                className="botonCancelar"
+                onClick={() => this.cerrarModalEditarEvento()}
+              >
                 {" "}
                 Cancelar{" "}
               </Button>
