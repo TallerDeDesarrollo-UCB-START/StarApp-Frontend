@@ -5,12 +5,12 @@ import { Box } from '@material-ui/core';
 import BannerProyectoDetalle from '../moleculas/BannerProyectoDetalle';
 import ContenidoProyectoDetalle from './ContenidoProyectoDetalle';
 
-function ProyectoDetalle({proyecto, onPartiparProy, onGetParticipacion}) {
+function ProyectoDetalle({proyecto}) {
     
     return (
         <Box className="proyect-detail-container">
             <BannerProyectoDetalle />
-            <ContenidoProyectoDetalle proyecto={proyecto} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion}/>
+            <ContenidoProyectoDetalle proyecto={proyecto}/>
         </Box>
     );
 }
