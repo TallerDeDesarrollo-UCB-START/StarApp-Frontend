@@ -26,20 +26,25 @@ function BodyProyectos({proyectos, rol, onEliminarProy,  onPartiparProy, onActiv
         }
     }*/
     return (
-        <Box className="body-container">
-            {
-                proyectos.map(proyecto => (
-                    <ProyectoVoluntario key={proyecto.id} 
-                    rol={rol}
-                    proyecto={proyecto} 
-                    onEliminarProy={onEliminarProy}
-                    onActivarForm={onActivarForm}
-                    onPartiparProy={onPartiparProy}
-                    onGetParticipacion={onGetParticipacion}
-                    onCancelarParticipacion={onCancelarParticipacion}
-                    onNumeroParticipantes={onNumeroParticipantes}/>
-                ))
-            }
+        <Box>
+            <div className="body-container">
+                    {
+                        proyectos.map(proyecto => (
+                            <div className="item-space">
+                            <ProyectoVoluntario  className="card-container"
+                            key={proyecto.id} 
+                            rol={rol}
+                            proyecto={proyecto} 
+                            onEliminarProy={onEliminarProy}
+                            onActivarForm={onActivarForm}
+                            onPartiparProy={onPartiparProy}
+                            onGetParticipacion={onGetParticipacion}
+                            onCancelarParticipacion={onCancelarParticipacion}
+                            onNumeroParticipantes={onNumeroParticipantes}/>
+                            </div>
+                        ))
+                    }
+            </div>
         </Box>
     );
 }

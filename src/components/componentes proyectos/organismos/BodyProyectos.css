@@ -1,3 +1,14 @@
 .body-container {
     margin: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card-container {
+    height: 301;
+}
+
+.item-space {
+    margin: 20px;
 }

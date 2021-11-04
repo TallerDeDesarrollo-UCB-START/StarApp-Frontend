@@ -33,7 +33,7 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
     return (
         <div>
             <div id={proyecto.id}>
-                <ParticipateButton variant="contained" color="secondary"
+                <ParticipateButton variant="contained"
                 onClick={onClick}
                 >
                     Unirme
@@ -46,6 +46,10 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
 const ParticipateButton = withStyles((theme) => ({
     root: {
         color: "#FFFFFF",
+        backgroundColor: "#269BD5",
+        height: 51,
+        width: 119,
+        fontSize: 16,
     },
 }))(Button);
 

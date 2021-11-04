@@ -4,3 +4,9 @@
 }
 
 .eliminarButton:hover {background-color: #a90e0e}
+
+.delete-icon {
+    color: #545454;
+    margin: 0;
+    padding: 0;
+}

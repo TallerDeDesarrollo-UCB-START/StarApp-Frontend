@@ -1,7 +1,5 @@
-.verButton {
-    background-color: #3C4858;
-    border: none;
-    padding: 7px;
-    color: white;
-    font-weight: bold;
+.ver-button {
+    color: #A4A4A4;
+    text-decoration: underline;
+    font-size: 14px;
 }
