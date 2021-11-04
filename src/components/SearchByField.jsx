@@ -47,6 +47,7 @@ const fields = {
     'Ciudad de Residencia': 'ciudad_de_recidencia',
     'Pais de Residencia': 'pais_de_recidencia',
     'Persona de Contacto': 'nombre_contacto_de_emergencia',
+    'Relación con Contacto': 'relacion_contacto_de_emergencia',
     'Número de contacto': 'numero_contacto_de_emergencia',
     'Disponibilidad': 'estado_de_disponibilidad',
 }
