@@ -3,7 +3,6 @@
 import { Button} from '@material-ui/core';
 import {useHistory} from "react-router-dom"
 import {withStyles} from "@material-ui/core/styles";
-import { IconButton } from '@material-ui/core';
 
 
 function VolverProyectoBtn() {
