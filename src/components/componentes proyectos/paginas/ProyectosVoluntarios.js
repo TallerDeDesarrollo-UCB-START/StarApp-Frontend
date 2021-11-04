@@ -17,12 +17,12 @@ import Banner from '../../../assets/generic_picture.png';
 
 // DIEGO
 //victor y Merce
-function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onFiltroProy, onNumeroParticipantes}) {
+function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onFiltroProy, onNumeroParticipantes, tituloHeader}) {
     const classes = useStyles();
 
     return (
         <Box style={styles}>
-            <HeaderProyectos />
+            <HeaderProyectos tituloHeader={tituloHeader}/>
             
             <SelectFiltroCategoria onFiltroProy={onFiltroProy}/>
             <BodyProyectos rol = {rol}
