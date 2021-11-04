@@ -3,9 +3,9 @@ import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
-import VerProyectoBtn from '../atomos/VerProyectoBtn';
 import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
-import SnackbarMessage from '../../templates/SnackbarMessage'
+import SnackbarMessage from '../../templates/SnackbarMessage';
+import VerProyectoBtn from '../atomos/VerProyectoBtn';
 // Permisos/Roles:
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
@@ -116,8 +116,8 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
 
     function content (){
         var resp="";
-        if( proyecto.descripcion.length > 107 ) {
-            for(var i=0; i < 107; i++){
+        if( proyecto.descripcion.length > 85 ) {
+            for(var i=0; i < 85; i++){
                 resp += proyecto.descripcion[i];
             }
             resp += '...';
@@ -126,24 +126,35 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         }
         return resp;
     }
+
+    function title (){
+        var resp="";
+        if( proyecto.titulo.length > 29 ) {
+            for(var i=0; i < 29; i++){
+                resp += proyecto.titulo[i];
+            }
+            resp += '...';
+        } else {
+            resp = proyecto.titulo;
+        }
+        return resp;
+    }
     
     return (
-        <Box>
-            <CardContent>
+        <Box >
+            <CardContent className="card-container-box">
                 <Typography gutterBottom className="content-title">
-                    {proyecto.titulo}
+                    {title()}
                 </Typography>
                 <Typography className="content-description" color="textSecondary" component="p">
                     {content()}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" color="primary">
-                Share
-                </Button>
-                <Button size="small" color="primary">
-                Learn More
-                </Button>
+                {botonParticiparProyecto}
+                <VerProyectoBtn proyecto={proyecto}/>
+                {botonEditarProyecto}
+                {botonEliminarProyecto}
             </CardActions>
 
             <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>

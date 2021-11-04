@@ -13,7 +13,9 @@ import { Box } from '@material-ui/core';
 const useStyles = makeStyles({
     root: {
       maxWidth: 344,
-      maxHeight: 301,
+      minWidth: 344,
+      minHeight: 301,
+      maxHeight: 301
     },
     media: {
       height: 140,

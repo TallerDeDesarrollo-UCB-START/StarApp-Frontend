@@ -8,20 +8,8 @@ import {withStyles} from "@material-ui/core/styles";
 
 function VerProyectoBtn({proyecto}) {
     return (
-        <VerButton variant="contained">
-            <Link to={"projects/" + proyecto.id}>Ver detalles</Link>
-        </VerButton>
+        <Link className="ver-button" to={"projects/" + proyecto.id}>Ver detalles</Link>
     )
 }
-
-const VerButton = withStyles((theme) => ({
-    root: {
-      backgroundColor: "#3C4858",
-      color: "#FFFFFF",
-      whiteSpace: 'nowrap',
-      minWidth: "13%",
-      width: '17%',
-    },
-  }))(Button);
 
 export default VerProyectoBtn

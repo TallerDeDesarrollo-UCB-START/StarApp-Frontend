@@ -10,7 +10,7 @@ function BodyProyectosNormal({proyectos, onPartiparProy, onGetParticipacion, onN
         <Box className="body-container">
             {
                 proyectos.map(proyecto => (
-                    <ProyectoVoluntarioNormal key={proyecto.id} proyecto={proyecto} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion} onNumeroParticipantes={onNumeroParticipantes}/>
+                    <ProyectoVoluntarioNormal className="card-container" key={proyecto.id} proyecto={proyecto} onPartiparProy={onPartiparProy} onGetParticipacion={onGetParticipacion} onNumeroParticipantes={onNumeroParticipantes}/>
                 ))
             }
         </Box>
