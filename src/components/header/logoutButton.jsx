@@ -6,7 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme)=> ({
-    loginButton: {
+    registerButton: {
         width:"10%", 
         marginRight:"30px",
     },
@@ -26,10 +26,10 @@ const LogoutButton = ({logged, sessionData}) => {
     return (
         (!logged)?(
             <Button 
-                className={classes.loginButton} 
+                className={classes.registerButton} 
                 variant="contained"
-                onClick={()=>history.push("/login")}>
-                    Login
+                onClick={()=>history.push("/register")}>
+                    Únete a Start
             </Button>
         ):(
             <div>
