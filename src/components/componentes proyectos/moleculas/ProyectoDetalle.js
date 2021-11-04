@@ -9,6 +9,7 @@ function ProyectoDetalle({proyecto}) {
     
     return (
         <Box className="proyect-detail-container">
+            
             <BannerProyectoDetalle />
             <ContenidoProyectoDetalle proyecto={proyecto}/>
         </Box>
