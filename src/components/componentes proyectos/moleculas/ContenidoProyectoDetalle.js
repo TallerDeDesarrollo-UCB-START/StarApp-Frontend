@@ -31,7 +31,6 @@ function ContenidoProyectoDetalle ({proyecto}) {
             <ListaParticipantesProyecto proyectoId={proyecto.id}/>
         </Box>
     );
-    
 }
  
 export default ContenidoProyectoDetalle
