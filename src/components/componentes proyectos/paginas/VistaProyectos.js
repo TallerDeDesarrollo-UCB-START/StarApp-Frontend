@@ -76,7 +76,7 @@ function VistaProyectos() {
                 method: 'DELETE'
             })
         const data = await response.json()
-        setActualizar(!actualizar)
+        //setActualizar(!actualizar)
         return data
     }
 
