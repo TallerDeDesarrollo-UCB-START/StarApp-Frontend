@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme)=>({
         flexDirection: 'column',
     },
     containerTable:{
-        height: 400,
         width: '100%',
+        paddingBottom:"50px",
     }
 }))
 
@@ -67,7 +67,7 @@ const columns = [
     },
     {
         field: 'pais_de_recidencia',
-        headerName: 'Pais de Residencia',
+        headerName: 'País de Residencia',
         width: 280,
     },
     {
