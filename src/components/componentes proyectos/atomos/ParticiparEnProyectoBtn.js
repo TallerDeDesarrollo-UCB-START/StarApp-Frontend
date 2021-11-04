@@ -49,6 +49,7 @@ const ParticipateButton = withStyles((theme) => ({
         backgroundColor: "#269BD5",
         height: 51,
         width: 119,
+        fontSize: 16,
     },
 }))(Button);
 

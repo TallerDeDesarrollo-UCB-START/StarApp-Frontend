@@ -3,26 +3,21 @@ import './EliminarProjectoBtn.css'
 // Librerias-Paquetes-Estilos:
 import { Button } from '@material-ui/core';
 import {withStyles} from "@material-ui/core/styles";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 function EliminarProjectoBtn({proyecto, onEliminarProy}) {
     return (
-        <DeleteButton variant="contained"
-            onClick={() => onEliminarProy(proyecto.id)}
-        >
-            Eliminar
-        </DeleteButton>
+        <DeleteButton onClick={() => onEliminarProy(proyecto.id)}>
+          <FontAwesomeIcon className="delete-icon" icon={faTrashAlt} />
+      </DeleteButton>
     )
 }
 
 const DeleteButton = withStyles((theme) => ({
     root: {
-      backgroundColor: "#ED2020",
-      width: '25%',
-      minWidth: "15%",
-      color: "#FFFFFF",
-      "&:hover": {
-        backgroundColor: "#a90e0e",
-      },
+      backgroundColor: "#E3E3E3",
+      borderRadius: '40px',
     },
   }))(Button);
 export default EliminarProjectoBtn
