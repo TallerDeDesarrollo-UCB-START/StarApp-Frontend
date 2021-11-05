@@ -9,14 +9,12 @@ import React from 'react';
 
 // DIEGO
 //victor y Merce
-function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onFiltroProy, onNumeroParticipantes, tituloHeader}) {
+function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes, tituloHeader}) {
     //const classes = useStyles();
 
     return (
         <Box style={styles}>
             <HeaderProyectos tituloHeader={tituloHeader}/>
-            
-            <SelectFiltroCategoria onFiltroProy={onFiltroProy}/>
             <VolverProyectoBtn/>            
             <BodyProyectos rol = {rol}
                             proyectos={proyectos}

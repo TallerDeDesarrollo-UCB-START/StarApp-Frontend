@@ -24,8 +24,8 @@ function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
                         <h1>{`Proyectos ${categoria}`}</h1>
                     </Grid>
                     <Grid item xs={7} md={5} className={classes.far_right}>
-                        <CrearProyectoBtn onActivarForm={onActivarForm}/>
                         <ProyectosPasadosBtn/>
+                        <CrearProyectoBtn onActivarForm={onActivarForm}/>
                     </Grid>
                     
                 </Grid>
