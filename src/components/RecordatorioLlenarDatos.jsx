@@ -12,7 +12,7 @@ const urlTablaExtensa = `${url}extended_form/`;
 
 const useStyles = makeStyles(theme => ({
     recordatorioStyle: {
-        position:"absolute",
+        position:"fixed",
         bottom:"5%",
         left:"37%",        
         background:"#F2F2F2",
@@ -21,10 +21,16 @@ const useStyles = makeStyles(theme => ({
         height:"40px",
         display: 'flex',
         alignItems: 'center',  
-        "@media (max-Width: 375px)": {
+        "@media (max-Width: 1115px)": {
             width:"90%",
             left:"5%",
+            bottom:"20px",
         }     
+    },
+    noneRecordatorioStyle:{
+        display: "none",
+        boxShadow:"none",
+        backgroundColor:"none"
     },
     marginRL5:{
         marginLeft:"10px",
@@ -38,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 const RecordatorioLlenarDatos=()=>{
     const classes = useStyles()
     const history = useHistory();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
     const islogged=Boolean(sessionStorage.getItem("jwt"))
     const [datos, setDatos] = useState({
         id_usuario: "",
@@ -82,12 +88,13 @@ const RecordatorioLlenarDatos=()=>{
         axios
           .get(urlTablaExtensa + responseAutenticacion.id_autenticacion)
           .then((response) => {
-            if (response.data.data) {  setDatos({ ...removeNulls(response.data.data) });}});
-      }, [datos.id]);
-     
-    if(existEmptyiFields(datos)&&islogged&&open)
-    {   return(  
-            <div className = {classes.recordatorioStyle}>
+            if (response.data.data) {  
+                setDatos({ ...removeNulls(response.data.data) });
+                setOpen(existEmptyiFields({...removeNulls(response.data.data) })&&islogged)
+            }});
+      }, [datos.id, islogged]);
+      return(  
+            <div className ={(open)?classes.recordatorioStyle:classes.noneRecordatorioStyle}>
                 <ErrorIcon className = {classes.marginRL5} color="error"/>
                 <span>Completa tus datos</span>
                 <Button className = {classes.closeIco} color="inherit" size="small" 
@@ -97,8 +104,6 @@ const RecordatorioLlenarDatos=()=>{
                 </IconButton>
             </div>        
         )
-    }
-    else{ return(null) }
 }
 export default RecordatorioLlenarDatos;
 
