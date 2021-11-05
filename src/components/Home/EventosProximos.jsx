@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         margin: '20px 0',
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'flex-start'
+        justifyContent: 'space-between'
     },
     noEvents:{
         margin: '200px 0',
@@ -34,7 +34,7 @@ const EventosProximos = ({id}) => {
     const smallScreen = !useMediaQuery("(min-width:500px)")
     const [events, setEvents] = useState([])
     const classes = useStyles()
-    const baseURL = `${process.env.REACT_APP_API}/sesion/${id}/get_my_eventos`
+    const baseURL = `${process.env.REACT_APP_API}sesion/${id}/get_my_eventos`
     useEffect(()=>(
         axios.get(baseURL)
         .then( response => {
@@ -52,7 +52,7 @@ const EventosProximos = ({id}) => {
             {(events.length)?(
                 <div className = {classes.containerEvents}>
                     {events.map((event)=>(
-                        <CardEvento event={event} enlisted={true}/>
+                        <CardEvento event={event} enlisted={true} key={event.id}/>
                     ))}
                 </div>
             ):(

@@ -12,7 +12,7 @@ const urlTablaExtensa = `${url}extended_form/`;
 
 const useStyles = makeStyles(theme => ({
     recordatorioStyle: {
-        position:"absolute",
+        position:"fixed",
         bottom:"5%",
         left:"37%",        
         background:"#F2F2F2",
@@ -21,9 +21,10 @@ const useStyles = makeStyles(theme => ({
         height:"40px",
         display: 'flex',
         alignItems: 'center',  
-        "@media (max-Width: 375px)": {
+        "@media (max-Width: 1115px)": {
             width:"90%",
             left:"5%",
+            bottom:"20px",
         }     
     },
     noneRecordatorioStyle:{

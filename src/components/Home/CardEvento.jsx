@@ -7,6 +7,7 @@ import DateRangeIcon from '@material-ui/icons/DateRange'
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
+        marginBottom: "30px",
     },
     date_description:{fontSize:"18px"},
     date_icon:{fontSize:"22px"},
