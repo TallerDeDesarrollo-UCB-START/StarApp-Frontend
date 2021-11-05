@@ -141,7 +141,7 @@ const RegisterForm = () => {
             .then((response) => {
               if (response.status === 201) {
                 setActiveProgressBar(false)
-                activeSnackbar("Se ha registrado el usuario correctamente.", "success", ()=>{history.push(`/login`)})
+                activeSnackbar(`Se ha enviado un correo de confirmación al email: ${bodyAuth.email}` , "success", ()=>{history.push(`/login`)})
               }
             })
             .catch((response) => {

@@ -13,6 +13,7 @@ import Evento from "../components/Evento";
 import Users from "../screens/Users"
 import VistaProyectoIndividual from "../components/componentes proyectos/paginas/VistaProyectoIndividual"
 import VistaCategoriasProyectos from "../components/componentes proyectos/paginas/VistaCategoriasProyectos"
+import ValidateView from "../screens/ValidateView";
 const Routes = [
   {
     path: "/",
@@ -103,6 +104,12 @@ const Routes = [
     name: "ProyectoIndividual",
     component: VistaProyectoIndividual,
     logginNeeded: true,
+  },
+  {
+    path: "/validate/:id",
+    name: "ValidacionCorreo",
+    component: ValidateView,
+    logginNeeded: false,
   },
 ];
 export default Routes;

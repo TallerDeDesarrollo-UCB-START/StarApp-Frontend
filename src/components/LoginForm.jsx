@@ -81,7 +81,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     setActiveProgressBar(true);
     await AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
       .then((response) => {
-        if ((response.status = 201)) {
+        if ((response.status === 200)) {
           const jwt = response.data.accessToken;
           const id_auth = response.data.id;
           sessionStorage.setItem("jwt", jwt);
@@ -91,11 +91,17 @@ const LoginForm = ({ sessionData, setSessionData }) => {
           window.location.reload();
         }
       })
-      .catch((response) => {
-        setActiveProgressBar(false);
-        activeSnackbar("Correo o contraseña inválidos.", "error", () => {
-          window.location.reload();
-        });
+      .catch((error) => {
+        if(error.response.status === 405){
+          setActiveProgressBar(false);
+          activeSnackbar("La cuenta no se ha validado.", "warning", () => {
+          });
+        }
+        else{
+          setActiveProgressBar(false);
+          activeSnackbar("Correo o contraseña inválidos.", "error", () => {
+          });
+        }
       });
   };
   return (
