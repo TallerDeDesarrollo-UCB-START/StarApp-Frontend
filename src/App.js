@@ -8,7 +8,7 @@ import AxiosClient from './components/AxiosClient'
 
 function App() {
   const [sessionData, setSessionData] = useState({
-    id: '1',
+    id: '',
     role: 'voluntario',
     name: "",
     foto_url:""
