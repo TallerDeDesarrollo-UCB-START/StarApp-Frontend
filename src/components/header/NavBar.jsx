@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   navButton: {
     borderBottom: "none",
+    margin: "0 -5px",
     marginTop: "5px",
   },
   containerLogo: {
