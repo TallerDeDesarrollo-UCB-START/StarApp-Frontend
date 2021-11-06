@@ -1,10 +1,9 @@
 // Componentes:
 import HeaderProyectos from '../organismos/HeaderProyectos'
 import BodyProyectos from '../organismos/BodyProyectos'
-import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
-import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria';
+//import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria';
 import React from 'react';
 
 // DIEGO
@@ -15,7 +14,6 @@ function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacio
     return (
         <Box style={styles}>
             <HeaderProyectos tituloHeader={tituloHeader}/>
-            <VolverProyectoBtn/>            
             <BodyProyectos rol = {rol}
                             proyectos={proyectos}
                             onPartiparProy={onPartiparProy}
