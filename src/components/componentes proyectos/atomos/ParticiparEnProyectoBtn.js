@@ -43,9 +43,7 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
             }
         }
     }
-    /*QUE EL TITULO DIGA PROYECTOS PASADOS
-    QUIZAS HACER DESAPARECER EL BOTON DE PROYECTOS PASADOS CUANDO SE ESTA EN LA VISTA DE PROYECTOS PASADOS
-    OPCIONALMENTE MOVER EL BOTON DE VOLVER ATRAS DE KEVIN*/
+    /*OPCIONALMENTE MOVER EL BOTON DE VOLVER ATRAS DE KEVIN*/
     const candado = proyecto && proyecto.estado === "ACABADO"? <LockIcon/> : ""
     return (
         <div>

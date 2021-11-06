@@ -1,7 +1,11 @@
 import React from 'react'
 //import { Button } from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 const useStyles = makeStyles({
     linkpasados: {
@@ -13,12 +17,20 @@ const useStyles = makeStyles({
 });
 
 function ProyectosPasadosBtn() {
+    // Estilos
     const classes = useStyles()
+    // Componente
+    const botonLink = <Link to="../projects?tipoestado=Pasados" className={classes.linkpasados}>
+                            Proyectos Pasados
+                        </Link>
+    // Mostrar o no componente
+    let tipoEstado = useQuery().get("tipoestado"); 
+    const boton = tipoEstado && tipoEstado==="Pasados"? "" : botonLink
+    
     return (
-        <Link to="../projects?tipoestado=Pasados" className={classes.linkpasados}>
-            Proyectos Pasados
-        </Link>
-        
+        <>
+        {boton}
+        </>
     )
 }
 
