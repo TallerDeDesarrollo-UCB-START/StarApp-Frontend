@@ -30,14 +30,15 @@ function App() {
   return (
     //<myContext.Provider value = {sessionData}>
       <Router>
-        <Switch>
-            {Routes.map(route => (
-              <Route exact path={route.path} key={route.path}>
-                <Header sessionData = {sessionData} setSessionData = {setSessionData}/>
-                <route.component sessionData = {sessionData} setSessionData ={setSessionData}/>
-              </Route>
-            ))}
-        </Switch>
+          <Header sessionData = {sessionData} setSessionData = {setSessionData}>
+            <Switch>
+                {Routes.map(route => (
+                  <Route exact path={route.path} key={route.path}>
+                      <route.component sessionData = {sessionData} setSessionData ={setSessionData}/>
+                  </Route>
+                ))}
+            </Switch>
+          </Header>
       </Router>
     //</myContext.Provider>
   );

@@ -28,8 +28,9 @@ const LogoutButton = ({logged, sessionData}) => {
             <Button 
                 className={classes.registerButton} 
                 variant="contained"
+                color="primary"
                 onClick={()=>history.push("/register")}>
-                    Únete a Start
+                    Únete
             </Button>
         ):(
             <div>
@@ -53,6 +54,7 @@ const LogoutButton = ({logged, sessionData}) => {
                 avatar={<Avatar src={sessionData.foto_url?sessionData.foto_url:"https://i.pinimg.com/originals/14/a8/cd/14a8cd8c46df11082f60ae15b97f47ff.jpg"} />} 
                 clickable
                 onClick={handleClick('bottom')}
+                style={{marginRight:"5px"}}
                 />
             </div>
         )

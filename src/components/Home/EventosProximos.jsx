@@ -57,7 +57,7 @@ const EventosProximos = ({id}) => {
                 </div>
             ):(
                 <div className = {classes.noEvents}>
-                    <Typography color="textSecondary" component="p" className={(smallScreen)?classes.resp_noevents_message:classes.noevents_message}>
+                    <Typography color="textSecondary" className={(smallScreen)?classes.resp_noevents_message:classes.noevents_message}>
                         Aún no te has registrado a ningún evento. Una vez te hayas registrado a alguno de nuestros eventos, aparecerán en tu página de inicio.
                     </Typography>
                     <Button onClick={()=>window.location.href="/eventos"} variant="contained" color="primary" style={{margin:"20px 0"}}>
