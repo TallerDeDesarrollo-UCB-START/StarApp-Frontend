@@ -44,7 +44,7 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
       <BottomNavigationAction
         icon={<HomeIcon />}
         disabled={currentPath === routes[0].path}
-        label="Home"
+        label="Inicio"
         className={
           currentPath === routes[0].path
             ? classes.activeNavButton
@@ -109,7 +109,7 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
       <BottomNavigationAction
         icon={<PersonIcon />}
         disabled={currentPath === routes[3].path}
-        label="Perfil"
+        label="Cuenta"
         className={
           currentPath === routes[3].path
             ? classes.activeNavButton
