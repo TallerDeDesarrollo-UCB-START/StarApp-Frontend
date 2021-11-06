@@ -12,7 +12,9 @@ import ProfileImage from "./ProfileImage";
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
-
+import Chip from "@material-ui/core/Chip";
+import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
+import { useMediaQuery } from "@material-ui/core";
 
 const url = process.env.REACT_APP_API;
 const urlTablaExtensa = `${url}extended_form/`;
@@ -104,6 +106,11 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  chipRoot:{
+    position: "absolute",
+    top: "30%",
+    right: "2%"
+  }
 }));
 
 const Profile = ({sessionData}) => {
@@ -299,7 +306,7 @@ const Profile = ({sessionData}) => {
   const classNamees = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  
+  const smallScreen = !useMediaQuery("(min-width:811px)")
   const [transition, setTransition] = React.useState(undefined);
   const [state, setState] = React.useState({
     openSnakbar: false,
@@ -803,6 +810,14 @@ const Profile = ({sessionData}) => {
         </Snackbar>
       {location.pathname === "/" && <Link to="/profile">Perfil</Link>}
       <div>
+      {smallScreen? <Chip
+          className ={classNamees.chipRoot}
+          variant="outlined"
+          icon={<EditTwoToneIcon />}
+          label="Editar"
+          clickable
+          onClick={handleOpen}
+        />: ""}
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
             <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
