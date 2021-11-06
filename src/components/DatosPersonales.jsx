@@ -168,11 +168,6 @@ import { withRouter } from "react-router";
             </Grid>
           </Grid>
           <Grid item xs={12} md={6} className={classes.paper}>
-              {/* <Grid>
-                <Paper style={{ padding: "15px" }}>
-                  <Typography> Rol: {getDataProfile.rol} </Typography>
-                </Paper>
-              </Grid> */}            
               <Grid>
                 <Paper style={{ padding: "15px" }} className= {smallScreen? classes.smallGrid: ""}>
                   <Typography ><strong className={classes.blackColor}>Intereses Generales:</strong></Typography>
