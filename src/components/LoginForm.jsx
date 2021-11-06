@@ -108,6 +108,9 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     <div className={smallScreen ? classes.smallContainer : classes.Container}>
       <LogoAndSlogan />
       <div>
+      <LinearProgress
+        style={{ display: activeProgressBar ? "" : "none" }}
+      />
         <Grid className={classes.loginContainer}>
           <Form onSubmit={onSubmit} validate={validate}>
             {({ handleSubmit }) => (
@@ -118,9 +121,6 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                   >
                     Inicia Sesión
                   </Typography>
-                  <LinearProgress
-                    style={{ display: activeProgressBar ? "" : "none" }}
-                  />
                   <InputTextbox
                     name="email"
                     type="text"
