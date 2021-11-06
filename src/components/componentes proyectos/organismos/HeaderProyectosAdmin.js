@@ -10,9 +10,10 @@ const useStyles = makeStyles({
     far_right: {
         display: 'flex',
         justifyContent: 'flex-end',
+        alignItems: 'center',
         gap: '3%'
     },
-  });
+});
 
 function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
     const classes = useStyles()
