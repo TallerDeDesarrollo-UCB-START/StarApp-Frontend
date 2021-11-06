@@ -344,22 +344,28 @@ class Evento extends Component {
               value={this.state.formEditado["fecha_evento"]}
               onChange={this.handleChange}
             />
-
-            <select
-              label="Categoria"
-              className="CategoriaEventoEdicion textInput"
-              name="categoria"
-              onChange={this.handleChange}
-              value={this.state.formEditado.categoria}
-            >
-              {this.state.categorias.map((item) => {
-                return (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
+            <div>
+              <div>
+                <label className="LabelCategoria">Categoria</label>
+              </div>
+              <div>
+                <select
+                  label="Categoria"
+                  className="CategoriaEventoEdicion textInput"
+                  name="categoria"
+                  onChange={this.handleChange}
+                  value={this.state.formEditado.categoria}
+                >
+                  {this.state.categorias.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>
 
             <TextField
               label="Hora Inicio"

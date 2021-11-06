@@ -71,10 +71,14 @@
   border: 1px solid #888888;
   color: black;
   text-align: center;
+  z-index: 0;
 }
 
-.LabelLider {
+.LabelLider,
+.LabelCategoria {
   font-size: 0.8em;
-  float: left;
-  margin-right: -4px;
+  z-index: 1;
+  position: absolute;
+  left: 40px;
+  color: #585858;
 }
