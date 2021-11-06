@@ -55,7 +55,7 @@ import { withRouter } from "react-router";
           <Grid item xs={12} md={6} className={classes.paper}>
             <Grid>
               <Paper style={{ padding: "15px" }} className= {smallScreen? classes.smallGrid: ""} >
-                <Typography>Datos Personales</Typography>
+                <Typography><strong className={classes.blackColor}>Datos Personales:</strong></Typography>
                 <Grid>
                   <Divider style={{ borderColor: "black" }} />
                   <Typography variant="body2" className={classes.greyColor}>
@@ -105,7 +105,7 @@ import { withRouter } from "react-router";
                     )}
                   </Typography>
                   <Typography variant="body2" className={classes.greyColor}>
-                   <strong className={classes.blackColor}> Ciudad de residencia:</strong>{" "}
+                   <strong className={classes.blackColor}> Ciudad de residencia:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.ciudad_de_recidencia ? (
                       getDataProfile.ciudad_de_recidencia
                     ) : (

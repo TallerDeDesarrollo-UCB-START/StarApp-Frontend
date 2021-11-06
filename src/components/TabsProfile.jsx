@@ -70,7 +70,7 @@ export default function TabsProfile(props) {
       <AppBar position="static">
         <Paper className={classes.root} >
           <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant={smallScreen? "scrollable": "fullWidth"}
-          scrollButtons={smallScreen? "auto": "off"} centered>
+          scrollButtons={smallScreen? "auto": "off"} >
             <Tab className={classes.mytab} label="Mis Datos" {...a11yProps(0)} />
             <Tab className={classes.mytab} label="Mis Eventos" {...a11yProps(1)} />
             <Tab className={classes.mytab} label="Mis Proyectos" {...a11yProps(2)} />
