@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {  Card} from "@material-ui/core";
+import { useMediaQuery, Card} from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 
@@ -14,8 +14,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     direction: "row",
-    backgroundColor: "#AAB6C5",
+    backgroundColor: "#F2F2F2",
     margin: "3% 10% 5% 10%",
+  },
+  rootSmallScreen: {
+    justifyContent: "center",
+    alignItems: "center",
+    direction: "row",
   },
   paper: {
     marginTop: 20,
@@ -24,18 +29,30 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfileCard = (props) => {
   const classes = useStyles();
+  const smallScreen = !useMediaQuery("(min-width:811px)")
   const { getDataProfile, handleOpenprop } = props;
-  return (
-    <Card className={classes.root}>
-      <CardContent>
-        <TabsProfile 
-          getDataProfile={getDataProfile}
-          handleOpenprop={handleOpenprop}
-         />
-      </CardContent>
-      <CardActions></CardActions>
-    </Card>
-  );
+  if (smallScreen)
+  {
+    return (
+      <Card className={smallScreen ? classes.rootSmallScreen: classes.root}>
+          <TabsProfile 
+            getDataProfile={getDataProfile}
+            handleOpenprop={handleOpenprop}
+          />
+      </Card>
+    );
+  }else {
+    return (
+      <Card className={smallScreen ? classes.rootSmallScreen: classes.root}>
+        <CardContent>
+          <TabsProfile 
+            getDataProfile={getDataProfile}
+            handleOpenprop={handleOpenprop}
+          />
+        </CardContent>
+      </Card>
+    );
+  }
 };
 export default withRouter(ProfileCard);
 
