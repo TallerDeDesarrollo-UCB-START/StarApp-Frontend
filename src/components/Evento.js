@@ -288,23 +288,28 @@ class Evento extends Component {
               value={this.state.formEditado["descripcion_evento"]}
               onChange={this.handleChange}
             />
-
-            <TextField
-              label="Lider"
-              select
-              className="liderEventoEdicion textInput"
-              name="lider"
-              onChange={this.handleChange}
-              value={this.state.formEditado.lider}
-            >
-              {this.state.lideres.map((item) => {
-                return (
-                  <MenuItem key={item} value={item}>
-                    {item}
-                  </MenuItem>
-                );
-              })}
-            </TextField>
+            <div>
+              <div>
+                <label className="LabelLider">Lider</label>
+              </div>
+              <div>
+                <select
+                  label="Lider"
+                  className="liderEventoEdicion textInput"
+                  name="lider"
+                  onChange={this.handleChange}
+                  value={this.state.formEditado.lider}
+                >
+                  {this.state.lideres.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>
 
             <TextField
               label="Modalidad"
@@ -312,7 +317,7 @@ class Evento extends Component {
               className="nombreEventoEdicion textInput"
               name="modalidad_evento"
               onChange={this.handleChange}
-              value={this.state.formEditado.modalidad_evento}
+              value={"" || this.state.formEditado["modalidad_evento"]}
             >
               <MenuItem value="Presencial" name="modalidad_evento">
                 Presencial
@@ -340,9 +345,8 @@ class Evento extends Component {
               onChange={this.handleChange}
             />
 
-            <TextField
+            <select
               label="Categoria"
-              select
               className="CategoriaEventoEdicion textInput"
               name="categoria"
               onChange={this.handleChange}
@@ -350,12 +354,12 @@ class Evento extends Component {
             >
               {this.state.categorias.map((item) => {
                 return (
-                  <MenuItem key={item} value={item}>
+                  <option key={item} value={item}>
                     {item}
-                  </MenuItem>
+                  </option>
                 );
               })}
-            </TextField>
+            </select>
 
             <TextField
               label="Hora Inicio"

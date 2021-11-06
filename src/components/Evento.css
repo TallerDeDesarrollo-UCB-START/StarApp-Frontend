@@ -62,3 +62,19 @@
 .TituloListaParticipantes {
   margin-top: 10px;
 }
+
+.CategoriaEventoEdicion,
+.liderEventoEdicion {
+  height: 60px;
+  background-color: #f2f2f2;
+  border-radius: 6px;
+  border: 1px solid #888888;
+  color: black;
+  text-align: center;
+}
+
+.LabelLider {
+  font-size: 0.8em;
+  float: left;
+  margin-right: -4px;
+}
