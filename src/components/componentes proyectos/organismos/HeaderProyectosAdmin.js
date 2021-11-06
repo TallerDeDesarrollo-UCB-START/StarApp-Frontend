@@ -17,12 +17,12 @@ const useStyles = makeStyles({
 
 function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
     const classes = useStyles()
-    const categoria = tituloHeader? tituloHeader : ''
+    const complementoTitulo = tituloHeader? tituloHeader : ''
     return (
         <Container >
                 <Grid container justifyContent="space-between" alignItems={"center"}>
                     <Grid item xs={5} md={7}>
-                        <h1>{`Proyectos ${categoria}`}</h1>
+                        <h1>{`Proyectos ${complementoTitulo}`}</h1>
                     </Grid>
                     <Grid item xs={7} md={5} className={classes.far_right}>
                         <ProyectosPasadosBtn/>

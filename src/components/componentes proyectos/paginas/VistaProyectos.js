@@ -16,9 +16,12 @@ function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
     const [actualizar, setActualizar] = useState(false)
+    // Variables
     let categoria = useQuery().get("categoria");
     let tipoEstado = useQuery().get("tipoestado"); //pasados,?
-    //console.log(categoria)
+    let complementoHeader = categoria? categoria : tipoEstado
+    complementoHeader = complementoHeader? complementoHeader : ""
+    
     useEffect(() => {
         
         const getProyectos = async () => {
@@ -164,7 +167,7 @@ function VistaProyectos() {
                         onGetParticipacion={obtenerParticipacionProyecto}
                         onCancelarParticipacion={cancelarParticipacionProyecto}
                         onNumeroParticipantes={obtenerNumeroParticipantes}
-                        tituloHeader={categoria}/> 
+                        tituloHeader={complementoHeader}/> 
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
@@ -174,7 +177,7 @@ function VistaProyectos() {
                         onGetParticipacion={obtenerParticipacionProyecto}
                         onCancelarParticipacion={cancelarParticipacionProyecto}
                         onNumeroParticipantes={obtenerNumeroParticipantes}
-                        tituloHeader={categoria}/>
+                        tituloHeader={complementoHeader}/>
             </PuertaPermisos>
         </>
     );
