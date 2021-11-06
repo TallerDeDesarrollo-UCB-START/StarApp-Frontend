@@ -19,7 +19,7 @@ function App() {
       const id_auth = sessionStorage.getItem("id")
       AxiosClient.get(`${URL_API}extended_form/${id_auth}`)
       .then(response => {
-        setSessionData({id: id_auth, role: response.data.data.rol, name: response.data.data.nombre, foto_url:response.data.data.foto_url})
+        setSessionData({id: id_auth, role: response.data.data.rol, name: `${response.data.data.nombre} ${response.data.data.apellido}`, foto_url:response.data.data.foto_url})
       })
       .catch((response)=>{
         console.log(response)

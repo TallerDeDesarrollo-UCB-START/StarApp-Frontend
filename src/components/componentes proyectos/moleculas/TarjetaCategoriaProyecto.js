@@ -46,7 +46,6 @@ const useStyles = makeStyles(() => ({
       position: 'absolute',
       top: '0%',
       right: '0%',
-      zIndex: '10',
     },
     typography: {
       textTransform: 'uppercase',
