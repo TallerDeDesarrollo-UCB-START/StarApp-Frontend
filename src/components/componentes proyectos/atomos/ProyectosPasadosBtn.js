@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function ProyectosPasadosBtn() {
     return (
-        <Link to="../">
+        <Link to="../projects?tipoestado=Pasados">
             <ProyectosPasadosButton variant="contained"
                                 onClick={() => console.log('pasados')}>
                 Proyectos Pasados

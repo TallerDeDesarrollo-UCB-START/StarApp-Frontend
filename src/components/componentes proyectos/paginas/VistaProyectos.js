@@ -17,7 +17,7 @@ function VistaProyectos() {
     const [proyectos, setProyectos] = useState([])
     const [actualizar, setActualizar] = useState(false)
     let categoria = useQuery().get("categoria");
-
+    let tipoEstado = useQuery().get("tipoestado"); //pasados,?
     //console.log(categoria)
     useEffect(() => {
         
@@ -30,12 +30,27 @@ function VistaProyectos() {
             await filtrarPorCategoria(categoria)
         }
 
-        categoria? getProyectosFiltro() : getProyectos()
+        const getProyectosPasados = async () => {
+            const proyectosPasados =  await fetchProyectosPasados()
+            setProyectos(proyectosPasados)
+        }
+
+        if(tipoEstado){
+            tipoEstado==="Pasados"? getProyectosPasados() : getProyectos() 
+        } else{
+            categoria? getProyectosFiltro() : getProyectos()
+        }
     }, [actualizar, categoria] )
 
     // HTTP requests & functions
     async function fetchProyectos() {
         const response = await fetch(URLProyectos)
+        const data = await response.json()
+        return data;
+    }
+
+    async function fetchProyectosPasados() {
+        const response = await fetch(URLProyectosPasados)
         const data = await response.json()
         return data;
     }
@@ -174,5 +189,5 @@ const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_p
 const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
 const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
 const URLNumeroParticipantes = `${url}get_numero_participantes` //'http://localhost:5000/get_rol/'
-
+const URLProyectosPasados = `${url}get_proyectos_acabado`
 export default VistaProyectos;
