@@ -1,15 +1,36 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Card, Button } from "reactstrap";
+import { Container, Card,Modal,Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
+
+import "./EventsList.css";
+
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
 //const urlDeploy = `http://localhost:5000/eventos`
+
+
+
+// const urlProyectos = `${URL}get_proyectos`;
+const urlCrearEvento = `${url}eventos/crearevento`;
+const urlLideres = `${url}lideres`;
+const urlProyectos = `http://localhost:5000/get_proyectos`;
+const apiLideres = axios.create({
+  baseURL: urlLideres,
+});
+
+const apiProyectos = axios.create({
+  baseURL: urlProyectos,
+});
+
+
+
 
 const api = axios.create({
   baseURL: urlDeploy,
@@ -30,6 +51,24 @@ class EventsList extends Component {
     success: false,
     categoriaFiltrada: "Todas",
     categorias: [],
+
+    modalInsertar: false,
+    form: {
+      nombre_evento: "",
+      descripcion_evento: "",
+      lider: "",
+      modalidad_evento: "Presencial",
+      lugar_evento: "",
+      fecha_evento: "",
+      categoria: "Todas",
+      estado: "1",
+      hora_inicio: "",
+      hora_fin: "",
+      proyecto: "Ninguno",
+    },
+    lideres: [],
+    proyectos: [],
+
   };
 
   constructor() {
@@ -38,6 +77,9 @@ class EventsList extends Component {
     this.getParticipaciones();
     this.getCategorias();
     this.getUserRol();
+
+    this.getLideres();
+    this.getProyectos();
   }
 
   abrirModal = () => {
@@ -138,6 +180,7 @@ class EventsList extends Component {
       console.log(err);
     }
   };
+
   filterChangeHandler = (categoria) => {
     this.setState({ categoriaFiltrada: categoria.target.value });
     this.getEvents();
@@ -194,6 +237,70 @@ class EventsList extends Component {
     }
   };
 
+
+
+  //Funciones Crear Evento
+
+  mostrarModalInsertar() {
+    this.setState({
+      modalInsertar: true,
+    });
+  };
+
+  peticionPost = async () => {
+    console.log(this.state.form);
+    await axios
+      .post(urlCrearEvento, this.state.form)
+      .then((response) => {
+        this.insertar();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  getLideres = async () => {
+    try {
+      let data = await apiLideres.get("/").then(({ data }) => data);
+      let aux = data.map((item) => {
+        return item.nombre + " " + item.apellido;
+      });
+      aux.unshift("Sin Lider");
+      this.setState({ lideres: aux });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  getProyectos = async () => {
+    let data = await apiProyectos.get("/").then(({ data }) => data);
+    let aux = data.map((item) => {
+      return item.titulo;
+    });
+    aux.unshift("No Seleccionado");
+    this.setState({ proyectos: aux });
+  };
+
+  cerrarModalInsertar(){
+    this.setState({ modalInsertar: false });
+  };
+
+  insertar = () => {
+    window.alert("Evento Guardado");
+    this.cerrarModalInsertar();
+    window.location.reload();
+
+  };
+
+  handleChange = (e) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
+
   render() {
     const modalStyles = {
       position: "absolute",
@@ -227,7 +334,8 @@ class EventsList extends Component {
               <Fragment>
                 <Button
                   style={{ marginLeft: "auto" }}
-                  href="/eventos/crearevento"
+               
+                  onClick={() => this.mostrarModalInsertar()}
                 >
                   {" "}
                   Crear Evento{" "}
@@ -393,6 +501,136 @@ class EventsList extends Component {
             ))}
           </Card>
         </Container>
+
+        <Modal
+          id="ModalFormCrearEvento"
+          isOpen={this.state.modalInsertar}
+        >
+          <div className="Titulo">
+            <strong>Crear Evento</strong>
+          </div>
+
+          <form className="FormularioCrearEvento">
+            <TextField
+              label="Nombre del evento"
+              placeholder="Nombre del evento"
+              name="nombre_evento"
+              className="nombreEventoCrear textInput"
+              type="text"
+              onChange={this.handleChange}
+            />
+
+            <br></br>
+
+            <TextField
+              id="filled-multiline-flexible"
+              multiline
+              maxRows={4}
+              label="Descripción"
+              placeholder="Descripcion"
+              className="descripcionEventoCrear textInput"
+              name="descripcion_evento"
+              type="text"
+              onChange={this.handleChange}
+            />
+
+            <TextField
+              select
+              label="Lider"
+              className="liderEventoCrear textInput"
+              name="lider"
+              onChange={this.handleChange}
+              
+            >
+              {this.state.lideres.map((item) => {
+                return (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                );
+              })}
+            </TextField>
+
+            <TextField
+              select
+              className="nombreEventoCrear textInput"
+              name="modalidad_evento"
+              onChange={this.handleChange}
+              label="Modalidad"
+            >
+              <MenuItem value="Presencial" name="modalidad_evento">
+                Presencial
+              </MenuItem>
+              <MenuItem value="Virtual" name="modalidad_evento">
+                Virtual
+              </MenuItem>
+            </TextField>
+
+            <TextField
+              label="Lugar"
+              className="LugarEventoCrear textInput"
+              placeholder="Lugar"
+              name="lugar_evento"
+              type="text"
+              onChange={this.handleChange}
+            />
+
+            <TextField
+              className="FechaEventoCrear textInput"
+              name="fecha_evento"
+              type="date"
+              onChange={this.handleChange}
+            />
+
+            <TextField
+              select
+              className="CategoriaEventoCrear textInput"
+              name="categoria"
+              onChange={this.handleChange}
+              label="Categoria"
+            >
+              {this.state.categorias.map((item) => {
+                return (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                );
+              })}
+            </TextField>
+
+            <TextField
+
+              className="HoraInicioEventoCrear textInput"
+              name="hora_inicio"
+              type="time"
+              onChange={this.handleChange}
+            />
+
+            <TextField
+
+              className="HoraFinEventoCreae textInput"
+              name="hora_fin"
+              type="time"
+              onChange={this.handleChange}
+            />
+
+            <div className="CamposBotones">
+              <Button
+                className="botonActualizar"
+                onClick={() => this.peticionPost()}
+              >
+                Guardar Evento{" "}
+              </Button>
+              <Button
+                className="botonCancelar"
+                onClick={() => this.cerrarModalInsertar()}
+              >
+                {" "}
+                Cancelar{" "}
+              </Button>
+            </div>
+          </form>
+        </Modal>
       </div>
     );
   }
