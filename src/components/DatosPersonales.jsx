@@ -22,6 +22,13 @@ import { withRouter } from "react-router";
     smallGrid: {
       background: "transparent",
       boxShadow: "none"
+
+    },
+    greyColor: {
+      color: "#5F5F5F"
+    },
+    blackColor: {
+      color: "black"
     }
   }));
 
@@ -51,11 +58,11 @@ import { withRouter } from "react-router";
                 <Typography>Datos Personales</Typography>
                 <Grid>
                   <Divider style={{ borderColor: "black" }} />
-                  <Typography variant="body2">
-                    Nombre: {smallScreen? <br></br>: ""} {getDataProfile.nombre} {getDataProfile.apellido} 
+                  <Typography variant="body2" className={classes.greyColor}>
+                    <strong className={classes.blackColor}> Nombre:</strong> {smallScreen? <br></br>: ""} {getDataProfile.nombre} {getDataProfile.apellido} 
                   </Typography>
-                  <Typography variant="body2">
-                    Edad:{" "} {smallScreen? <br></br>: ""}
+                  <Typography variant="body2"  className={classes.greyColor}>
+                   <strong className={classes.blackColor}> Edad:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.fecha_de_nacimiento ? (
                       calcularEdad(
                         getDataProfile.fecha_de_nacimiento
@@ -64,8 +71,8 @@ import { withRouter } from "react-router";
                       <span style={{ color: "red " }}>Sin llenar</span>
                     )}
                   </Typography>
-                  <Typography variant="body2">
-                    Genero:{" "} {smallScreen? <br></br>: ""}
+                  <Typography variant="body2" className={classes.greyColor}>
+                   <strong className={classes.blackColor}> Genero:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.genero ? (
                       getDataProfile.genero
                     ) : (
@@ -73,40 +80,40 @@ import { withRouter } from "react-router";
                     )}
                   </Typography>
 
-                  <Typography variant="body2">
-                    Ocupación:{" "} {smallScreen? <br></br>: ""}
+                  <Typography variant="body2" className={classes.greyColor}>
+                  <strong className={classes.blackColor}>  Ocupación:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.ocupacion ? (
                       getDataProfile.ocupacion
                     ) : (
                       <span style={{ color: "red " }}>Sin llenar</span>
                     )}
                   </Typography>
-                  <Typography variant="body2">
-                    Carrera:{" "} {smallScreen? <br></br>: ""}
+                  <Typography variant="body2" className={classes.greyColor}>
+                   <strong className={classes.blackColor}> Carrera:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.carrera ? (
                       getDataProfile.carrera
                     ) : (
                       <span style={{ color: "red " }}>Sin llenar</span>
                     )}
                   </Typography>
-                  <Typography variant="body2">
-                    Telefono:{" "} {smallScreen? <br></br>: ""}
+                  <Typography variant="body2" className={classes.greyColor}>
+                   <strong className={classes.blackColor}> Telefono:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.telefono ? (
                       getDataProfile.telefono
                     ) : (
                       <span style={{ color: "red " }}>Sin llenar</span>
                     )}
                   </Typography>
-                  <Typography variant="body2">
-                    Ciudad de residencia:{" "}
+                  <Typography variant="body2" className={classes.greyColor}>
+                   <strong className={classes.blackColor}> Ciudad de residencia:</strong>{" "}
                     {getDataProfile.ciudad_de_recidencia ? (
                       getDataProfile.ciudad_de_recidencia
                     ) : (
                       <span style={{ color: "red " }}>Sin llenar</span>
                     )}
                   </Typography>
-                  <Typography variant="body2">
-                    Pais de residencia:{" "} {smallScreen? <br></br>: ""}
+                  <Typography variant="body2" className={classes.greyColor}>
+                   <strong className={classes.blackColor}> Pais de residencia:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.pais_de_recidencia ? (
                       getDataProfile.pais_de_recidencia
                     ) : (
@@ -118,18 +125,18 @@ import { withRouter } from "react-router";
               </Paper>
               <Grid className={classes.paper}>
               <Paper style={{ padding: "15px" }} className= {smallScreen? classes.smallGrid: ""}>
-                <Typography>Contacto de emergencia:</Typography>
+                <Typography><strong className={classes.blackColor}> Contacto de emergencia:</strong></Typography>
                 <Divider style={{ borderColor: "black"}} />
-                <Typography variant="body2">
-                  Nombre:{" "} {smallScreen? <br></br>: ""}
+                <Typography variant="body2"  className={classes.greyColor}>
+                 <strong className={classes.blackColor}> Nombre:</strong>{" "} {smallScreen? <br></br>: ""}
                   {getDataProfile.nombre_contacto_de_emergencia ? (
                     getDataProfile.nombre_contacto_de_emergencia
                   ) : (
                     <span style={{ color: "red " }}>Sin llenar</span>
                   )}
                 </Typography>
-                <Typography variant="body2">
-                  Relacion:{" "} {smallScreen? <br></br>: ""}
+                <Typography variant="body2"  className={classes.greyColor}>
+                <strong className={classes.blackColor}> Relacion:</strong>{" "} {smallScreen? <br></br>: ""}
                   {getDataProfile.relacion_contacto_de_emergencia ? (
                     getDataProfile.relacion_contacto_de_emergencia
                   ) : (
@@ -137,8 +144,8 @@ import { withRouter } from "react-router";
                   )}
                 </Typography>
 
-                <Typography variant="body2">
-                  Teléfono:{" "} {smallScreen? <br></br>: ""}
+                <Typography variant="body2"  className={classes.greyColor}>
+                 <strong className={classes.blackColor}> Teléfono:</strong>{" "} {smallScreen? <br></br>: ""}
                   {getDataProfile.numero_contacto_de_emergencia ? (
                     getDataProfile.numero_contacto_de_emergencia
                   ) : (
@@ -148,12 +155,12 @@ import { withRouter } from "react-router";
               </Paper>
               <Grid className={classes.paper}>
               <Paper style={{ padding: "15px" }} className= {smallScreen? classes.smallGrid: ""}>
-                <Typography>Descripcion:</Typography>
+                <Typography><strong className={classes.blackColor}>Descripcion:</strong></Typography>
                 <Divider style={{ borderColor: "black" }} />
                 {getDataProfile.descripcion_personal ? (
-                  getDataProfile.descripcion_personal
+                <span  className={classes.greyColor}>  {getDataProfile.descripcion_personal} </span>
                 ) : (
-                  <span style={{ color: "red " }}>Sin llenar</span>
+                  <span style={{ color: "red " }} >Sin llenar</span>
                 )}
               </Paper>
             </Grid>
@@ -168,10 +175,10 @@ import { withRouter } from "react-router";
               </Grid> */}            
               <Grid>
                 <Paper style={{ padding: "15px" }} className= {smallScreen? classes.smallGrid: ""}>
-                  <Typography>Intereses Generales:</Typography>
+                  <Typography ><strong className={classes.blackColor}>Intereses Generales:</strong></Typography>
                   <Divider style={{ borderColor: "black" }} />
                   {getDataProfile.intereses.map((interes) => (
-                    <li key={interes} variant="body2">
+                    <li key={interes} variant="body2"  className={classes.greyColor}>
                       {interes}
                     </li>
                   ))}
@@ -179,10 +186,10 @@ import { withRouter } from "react-router";
               </Grid>
               <Grid className={classes.paper}>
                 <Paper style={{ padding: "15px" }} className= {smallScreen? classes.smallGrid: ""}>
-                  <Typography>Cualidades:</Typography>
+                  <Typography><strong className={classes.blackColor}>Cualidades:</strong></Typography>
                   <Divider style={{ borderColor: "black" }} />
                   {getDataProfile.cualidades.map((cualidad) => (
-                    <li variant="body2" key={cualidad}>
+                    <li variant="body2" key={cualidad}  className={classes.greyColor}>
                       {cualidad}
                     </li>
                   ))}
@@ -190,25 +197,25 @@ import { withRouter } from "react-router";
               </Grid>
               <Grid className={classes.paper}>
                 <Paper style={{ padding: "15px" }} className= {smallScreen? classes.smallGrid: ""}>
-                  <Typography>Aptitudes Tecnicas:</Typography>
+                  <Typography><strong className={classes.blackColor}>Aptitudes Tecnicas:</strong></Typography>
                   <Divider style={{ borderColor: "black" }} />
                   {getDataProfile.aptitudes_tecnicas.map((aptitud) => (
-                    <li variant="body2" key={aptitud}>
+                    <li variant="body2" key={aptitud}  className={classes.greyColor}>
                       {aptitud}
                     </li>
                   ))}
                 </Paper>
               </Grid>
-              <Grid container justifyContent="space-evenly">
-                <Button
+              <Grid container justifyContent="space-evenly" >
+                {smallScreen? " ": <Button
                   type="button"
                   className={classes.paper}
                   onClick={handleOpenprop}
                   variant="contained"
                   color="primary"
                 >
-                  Editar Perfil
-                </Button>
+                  {smallScreen? "Editar": "Editar Perfil"} 
+                </Button>}
                 {/* <DeleteButton className={classes.paper} variant="contained">
                   Eliminar perfil
                 </DeleteButton> */}
