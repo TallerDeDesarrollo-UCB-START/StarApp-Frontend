@@ -108,7 +108,6 @@ const useStyles = makeStyles((theme) => ({
   },
   chipRoot:{
     position: "absolute",
-    top: "30%",
     right: "2%"
   }
 }));
