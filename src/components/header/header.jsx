@@ -82,7 +82,9 @@ const Header = ({ sessionData, children }) => {
           <div className={classes.containerLogo}>
             <img src={"https://i1.wp.com/www.startamericastogether.org/wp-content/uploads/2021/03/LOGO_2020_2.0_STARTER_Horizontal-01-01-1.png?fit=1307%2C435&ssl=1"} alt=" " className="header-image" />
           </div>
-          <LoggoutButton logged={logged} sessionData={sessionData} />
+          <div style={(smallScreen)?{}:{ width: "10%" }}>
+            <LoggoutButton logged={logged} sessionData={sessionData} />
+          </div>
         </div>
         <div
           className="header-menu"
@@ -97,7 +99,7 @@ const Header = ({ sessionData, children }) => {
           />
         </div>
       </header>
-      <div className={classes.childr} style={{marginBottom:"70px"}}>{children}</div>
+      <div className={classes.children} style={{marginBottom:"70px", minHeight:"250px"}}>{children}</div>
       <div
         className={classes.responsiveHeader}
         style={

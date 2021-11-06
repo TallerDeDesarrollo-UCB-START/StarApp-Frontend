@@ -171,6 +171,7 @@ const RegisterForm = () => {
             Crea Tu Cuenta
           </h2>
         </div>
+        <LinearProgress style={{display:(activeProgressBar)?"":"none"}}/>
         <Card
           className={
             smallScreen ? classes.smallRegisterCard: classes.registerCard
@@ -206,7 +207,6 @@ const RegisterForm = () => {
                     required
                   />
                 </div>
-                <LinearProgress style={{display:(activeProgressBar)?"":"none"}}/>
                 <Field
                   fullWidth
                   name="email"
