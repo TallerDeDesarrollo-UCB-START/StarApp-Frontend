@@ -1,134 +1,125 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Logo from "../../assets/logo.png";
 import "./header.css";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import {
+  useMediaQuery,
+} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import routes from "../../routes/Routes";
 import LoggoutButton from "./logoutButton";
 import verifier from "../../routes/AuthRoutesVerifier";
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import {faFacebook, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-icons'
+import NavBar from "./NavBar";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  header:{
+    flexDirection: "column",
     width: "100%",
-    background: "none",
+    position: "sticky",
+    backgroundColor: "#074d81",
   },
-  activeNavButton: {
-    borderBottom: "solid",
+  headerHome:{
+    flexDirection: "column",
+    width: "100%",
+    position: "sticky",
+    backgroundImage: `url("https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg")`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "top",
+    height:"700px",
   },
-  navButton: {
-    borderBottom: "none",
+  responsiveHeaderHome:{
+    flexDirection: "column",
+    width: "100%",
+    position: "sticky",
+    backgroundImage: `url("https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg")`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height:"400px",
   },
   containerLogo: {
     width: "80%",
     display: "flex",
     justifyContent: "center",
   },
+  responsiveHeader: {
+    width: "100%",
+    position: "fixed",
+    bottom: "0px",
+  },
 }));
 
-const Header = ({ sessionData }) => {
+const Header = ({ sessionData, children }) => {
+  const smallScreen = !useMediaQuery("(min-width:900px)");
   const [logged, setLogged] = React.useState(false);
   let location = useLocation();
   const history = useHistory();
   const classes = useStyles();
-  const [currentPath, setCurrentPath] = React.useState(location.pathname);
   useEffect(() => {
     if (
       !Boolean(sessionStorage.getItem("jwt")) &&
-      verifier(currentPath).needLoggin
+      verifier(location.pathname).needLoggin
     ) {
       history.push(routes[4].path);
     }
     setLogged(Boolean(sessionStorage.getItem("jwt")));
-  }, [history, currentPath]);
+  }, [history, location.pathname]);
   return (
-    <header className="header-division" style={{ display: (currentPath===routes[4].path || currentPath===routes[5].path || `${currentPath.substring(0,10)}:id`===routes[15].path)? "none":"" }}>
-      <div className="header-logo">
-        <div style={{ width: "10%" }}></div>
-        <div className={classes.containerLogo}>
-          <img src={Logo} alt=" " className="header-image" />
+    <div>
+      <header
+        className={(location.pathname === routes[0].path)?(smallScreen)?classes.responsiveHeaderHome:classes.headerHome:classes.header}
+        style={
+          location.pathname === routes[4].path ||
+          location.pathname === routes[5].path ||
+          location.pathname.includes("validate")
+            ? { display: "none" }
+            : {}
+        }
+      >
+        <div className="header-logo">
+          <div style={{ width: "10%" }}></div>
+          <div className={classes.containerLogo}>
+            <img src={"https://i1.wp.com/www.startamericastogether.org/wp-content/uploads/2021/03/LOGO_2020_2.0_STARTER_Horizontal-01-01-1.png?fit=1307%2C435&ssl=1"} alt=" " className="header-image" />
+          </div>
+          <LoggoutButton logged={logged} sessionData={sessionData} />
         </div>
-        <LoggoutButton logged={logged} sessionData={sessionData}/>
-      </div>
-      <div className="header-menu">
-        <BottomNavigation
-          currentpath={currentPath}
-          onChange={(event, newcurrentPath) => {
-            setCurrentPath(newcurrentPath);
-          }}
-          showLabels
-          className={classes.root}
+        <div
+          className="header-menu"
+          style={smallScreen ? { display: "none"} : { }}
         >
-          <BottomNavigationAction
-            disabled={currentPath === routes[0].path}
-            label="Home"
-            className={
-              currentPath === routes[0].path
-                ? classes.activeNavButton
-                : classes.navButton
-            }
-            onClick={() => history.push(routes[0].path)}
+          <NavBar
+            currentPath={location.pathname}
+            routes={routes}
+            logged={logged}
+            sessionData={sessionData}
+            pagesize={"wide"}
           />
-          <BottomNavigationAction
-            disabled={currentPath === routes[1].path}
-            label="Proyectos"
-            className={
-              currentPath === routes[1].path
-                ? classes.activeNavButton
-                : classes.navButton
-            }
-            onClick={() =>
-              history.push(logged ? routes[1].path : routes[4].path)
-            }
-          />
-          <BottomNavigationAction
-            disabled={currentPath === routes[2].path}
-            label="Eventos"
-            className={
-              currentPath === routes[2].path
-                ? classes.activeNavButton
-                : classes.navButton
-            }
-            onClick={() =>
-              history.push(logged ? routes[2].path : routes[4].path)
-            }
-          />
-          <BottomNavigationAction
-            disabled={currentPath === routes[3].path}
-            label="Perfil"
-            className={
-              currentPath === routes[3].path
-                ? classes.activeNavButton
-                : classes.navButton
-            }
-            onClick={() =>
-              history.push(logged ? routes[3].path : routes[4].path)
-            }
-          />
-          {sessionData.role !== "voluntario" ? (
-            <BottomNavigationAction
-              disabled={currentPath === routes[6].path}
-              label="Usuarios"
-              className={
-                currentPath === routes[6].path
-                  ? classes.activeNavButton
-                  : classes.navButton
-              }
-              onClick={() =>
-                history.push(logged ? routes[6].path : routes[4].path)
-              }
-            />
-          ) : (
-            <BottomNavigationAction style={{ display: "none" }} label="" />
-          )}
-        </BottomNavigation>
+        </div>
+      </header>
+      <div className={classes.childr} style={{marginBottom:"70px"}}>{children}</div>
+      <div
+        className={classes.responsiveHeader}
+        style={
+          smallScreen &&
+          !(
+            location.pathname === routes[4].path ||
+            location.pathname === routes[5].path ||
+            `${location.pathname.substring(0, 10)}:id` === routes[15].path
+          )
+            ? {}
+            : { display: "none" }
+        }
+      >
+        <NavBar
+          currentPath={location.pathname}
+          routes={routes}
+          logged={logged}
+          sessionData={sessionData}
+          pagesize={"small"}
+        />
       </div>
-    </header>
+    </div>
   );
 };
 

@@ -19,7 +19,7 @@ function App() {
       const id_auth = sessionStorage.getItem("id")
       AxiosClient.get(`${URL_API}extended_form/${id_auth}`)
       .then(response => {
-        setSessionData({id: id_auth, role: response.data.data.rol, name: response.data.data.nombre, foto_url:response.data.data.foto_url})
+        setSessionData({id: id_auth, role: response.data.data.rol, name: `${response.data.data.nombre} ${response.data.data.apellido}`, foto_url:response.data.data.foto_url})
       })
       .catch((response)=>{
         console.log(response)
@@ -30,14 +30,15 @@ function App() {
   return (
     //<myContext.Provider value = {sessionData}>
       <Router>
-        <Switch>
-            {Routes.map(route => (
-              <Route exact path={route.path} key={route.path}>
-                <Header sessionData = {sessionData} setSessionData = {setSessionData}/>
-                <route.component sessionData = {sessionData} setSessionData ={setSessionData}/>
-              </Route>
-            ))}
-        </Switch>
+          <Header sessionData = {sessionData} setSessionData = {setSessionData}>
+            <Switch>
+                {Routes.map(route => (
+                  <Route exact path={route.path} key={route.path}>
+                      <route.component sessionData = {sessionData} setSessionData ={setSessionData}/>
+                  </Route>
+                ))}
+            </Switch>
+          </Header>
       </Router>
     //</myContext.Provider>
   );

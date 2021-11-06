@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         "@media (max-Width: 1115px)": {
             width:"90%",
             left:"5%",
-            bottom:"20px",
+            bottom:"100px",
         }     
     },
     noneRecordatorioStyle:{

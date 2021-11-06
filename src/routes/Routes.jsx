@@ -34,8 +34,8 @@ const Routes = [
     logginNeeded: true,
   },
   {
-    path: "/perfil",
-    name: "Perfil",
+    path: "/cuenta",
+    name: "Cuenta",
     component: Profile,
     logginNeeded: true,
   },
