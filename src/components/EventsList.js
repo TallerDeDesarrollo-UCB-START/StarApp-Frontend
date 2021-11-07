@@ -73,7 +73,6 @@ class EventsList extends Component {
     this.getEvents();
     this.getParticipaciones();
     this.getCategorias();
-    this.getFechas();
     this.getUserRol();
     this.getLideres();
     this.getProyectos();
@@ -91,8 +90,8 @@ class EventsList extends Component {
     this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
   };
-
-  getEvents = async () => {
+  
+  getEvents= async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
       if (
@@ -379,6 +378,7 @@ class EventsList extends Component {
                 );
               })}
             </select>
+            <span>Estado:</span>
             <select
               value={this.state.filtradoSegunEstado}
               onChange={this.filterStateChangeHandler}
@@ -391,7 +391,7 @@ class EventsList extends Component {
                 );
               })}
             </select>
-          </div>
+            </div>
           <div style={{ display: "flex" }}>
             {rolUser !== "voluntario" ? (
               <Fragment>
@@ -402,11 +402,12 @@ class EventsList extends Component {
                   {" "}
                   Crear Evento{" "}
                 </Button>
-                <Button
+                <Button 
                   style={{
                     display: this.state.botonMostrarEventosArchivados
                       ? "block"
                       : "none",
+                    
                   }}
                   onClick={() => this.getEventsArchivados()}
                 >
