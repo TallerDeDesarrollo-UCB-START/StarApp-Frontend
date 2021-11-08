@@ -48,8 +48,7 @@ class EventsList extends Component {
     success: false,
     categoriaFiltrada: "Todas",
     filtradoSegunEstado: "En Curso",
-    estados:["En Curso","Proximo","Pasados"],
-    fechas:[],
+    estados: ["En Curso", "Proximo", "Pasados"],
     categorias: [],
 
     modalInsertar: false,
