@@ -1,10 +1,11 @@
 // Componentes:
 //import './ParticiparEnProyectoBtn.css';
-// Librerias-Paquetes:
 import React from "react";
 import { Button, Box } from '@material-ui/core';
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import LockIcon from '@material-ui/icons/Lock';
+import {VARIABLES} from '../organismos/variables-compartidas'
+// Librerias-Paquetes:
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 const ParticipateButton = withStyles((theme) => ({
     root: {
@@ -23,12 +24,14 @@ const useStyles = makeStyles({
     },
 });
 
+const varProyectos = VARIABLES.datosProyectos
+
 function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarStatus, onAsignarParticipacion}) {
     const classes = useStyles()
 
     const onClick = async (event) => {
         if(proyecto){
-            if(proyecto.estado === "ACABADO" || proyecto.estado === "CONCLUIDO"){
+            if(proyecto.estado === varProyectos.estadoAcabado){
                 onAsignarSnackbarStatus("Participacion bloqueada", true, false);
                 return
             } else{
@@ -44,7 +47,7 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
         }
     }
     /*OPCIONALMENTE MOVER EL BOTON DE VOLVER ATRAS DE KEVIN*/
-    const candado = proyecto && proyecto.estado === "ACABADO"? <LockIcon/> : ""
+    const candado = proyecto && proyecto.estado === varProyectos.estadoAcabado? <LockIcon/> : ""
     return (
         <div>
             <div id={proyecto.id}>

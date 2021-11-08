@@ -82,7 +82,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     event.preventDefault(); // To avoid submitting to an actual page
     const lideres = lider; //[lider]
     const objetivos = objetivo; //[objetivo]
-    debugger
+    //debugger
     const estado = estadosDefault.find(
       (item_estado) => item_estado.valor === estadoVal
     ).estado;
