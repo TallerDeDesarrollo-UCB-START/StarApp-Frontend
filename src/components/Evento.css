@@ -64,7 +64,8 @@
 }
 
 .CategoriaEventoEdicion,
-.liderEventoEdicion {
+.liderEventoEdicion,
+.ProyectoEventoEdicion {
   height: 60px;
   background-color: #f2f2f2;
   border-radius: 6px;
@@ -75,7 +76,8 @@
 }
 
 .LabelLider,
-.LabelCategoria {
+.LabelCategoria,
+.LabelProyecto {
   font-size: 0.8em;
   z-index: 1;
   position: absolute;

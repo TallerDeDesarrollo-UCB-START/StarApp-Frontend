@@ -11,6 +11,7 @@ const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
 const urlLideres = `${url}lideres`;
 const urlCategorias = `${url}eventos`;
+const urlProyectos = `http://localhost:5000/get_proyectos`;
 
 const api = axios.create({
   baseURL: urlDeploy,
@@ -21,6 +22,9 @@ const apiLideres = axios.create({
 });
 const apiCategorias = axios.create({
   baseURL: urlCategorias,
+});
+const apiProyectos = axios.create({
+  baseURL: urlProyectos,
 });
 
 class Evento extends Component {
@@ -40,9 +44,11 @@ class Evento extends Component {
       estado: "1",
       hora_inicio: "",
       hora_fin: "",
+      proyecto: "",
     },
     lideres: [],
     categorias: [],
+    proyectos: [],
   };
 
   constructor() {
@@ -66,6 +72,7 @@ class Evento extends Component {
     this.llenarFormulario();
     this.getLideres();
     this.getCategorias();
+    this.getProyectos();
   }
 
   llenarFormulario() {
@@ -135,6 +142,14 @@ class Evento extends Component {
     } catch (err) {
       console.log(err);
     }
+  };
+  getProyectos = async () => {
+    let data = await apiProyectos.get("/").then(({ data }) => data);
+    let aux = data.map((item) => {
+      return item.titulo;
+    });
+    aux.unshift("No Seleccionado");
+    this.setState({ proyectos: aux });
   };
 
   guardarNuevaData = async () => {
@@ -368,40 +383,62 @@ class Evento extends Component {
                   })}
                 </select>
               </div>
-            </div>
+              <div>
+                <div>
+                  <label className="LabelProyecto">Proyecto</label>
+                </div>
+                <div>
+                  <select
+                    label="Proyecto"
+                    className="ProyectoEventoEdicion textInput"
+                    name="proyecto"
+                    onChange={this.handleChange}
+                    value={this.state.formEditado.proyecto}
+                  >
+                    {this.state.proyectos.map((item) => {
+                      return (
+                        <option key={item} value={item}>
+                          {item}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
 
-            <TextField
-              label="Hora Inicio"
-              className="HoraInicioEventoEdicion textInput"
-              name="hora_inicio"
-              type="time"
-              value={this.state.formEditado["hora_inicio"]}
-              onChange={this.handleChange}
-            />
+              <TextField
+                label="Hora Inicio"
+                className="HoraInicioEventoEdicion textInput"
+                name="hora_inicio"
+                type="time"
+                value={this.state.formEditado["hora_inicio"]}
+                onChange={this.handleChange}
+              />
 
-            <TextField
-              label="Hora Fin"
-              className="HoraFinEventoEdicion textInput"
-              name="hora_fin"
-              type="time"
-              value={this.state.formEditado["hora_fin"]}
-              onChange={this.handleChange}
-            />
+              <TextField
+                label="Hora Fin"
+                className="HoraFinEventoEdicion textInput"
+                name="hora_fin"
+                type="time"
+                value={this.state.formEditado["hora_fin"]}
+                onChange={this.handleChange}
+              />
 
-            <div className="CamposBotones">
-              <Button
-                className="botonActualizar"
-                onClick={() => this.guardarNuevaData()}
-              >
-                Actualizar Evento{" "}
-              </Button>
-              <Button
-                className="botonCancelar"
-                onClick={() => this.cerrarModalEditarEvento()}
-              >
-                {" "}
-                Cancelar{" "}
-              </Button>
+              <div className="CamposBotones">
+                <Button
+                  className="botonActualizar"
+                  onClick={() => this.guardarNuevaData()}
+                >
+                  Actualizar Evento{" "}
+                </Button>
+                <Button
+                  className="botonCancelar"
+                  onClick={() => this.cerrarModalEditarEvento()}
+                >
+                  {" "}
+                  Cancelar{" "}
+                </Button>
+              </div>
             </div>
           </form>
         </Modal>

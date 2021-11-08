@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Card,Modal,Button } from "reactstrap";
+import { Container, Card, Modal, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
@@ -15,8 +15,6 @@ const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
 //const urlDeploy = `http://localhost:5000/eventos`
 
-
-
 // const urlProyectos = `${URL}get_proyectos`;
 const urlCrearEvento = `${url}eventos/crearevento`;
 const urlLideres = `${url}lideres`;
@@ -28,9 +26,6 @@ const apiLideres = axios.create({
 const apiProyectos = axios.create({
   baseURL: urlProyectos,
 });
-
-
-
 
 const api = axios.create({
   baseURL: urlDeploy,
@@ -68,7 +63,6 @@ class EventsList extends Component {
     },
     lideres: [],
     proyectos: [],
-
   };
 
   constructor() {
@@ -237,15 +231,13 @@ class EventsList extends Component {
     }
   };
 
-
-
   //Funciones Crear Evento
 
   mostrarModalInsertar() {
     this.setState({
       modalInsertar: true,
     });
-  };
+  }
 
   peticionPost = async () => {
     console.log(this.state.form);
@@ -281,15 +273,14 @@ class EventsList extends Component {
     this.setState({ proyectos: aux });
   };
 
-  cerrarModalInsertar(){
+  cerrarModalInsertar() {
     this.setState({ modalInsertar: false });
-  };
+  }
 
   insertar = () => {
     window.alert("Evento Guardado");
     this.cerrarModalInsertar();
     window.location.reload();
-
   };
 
   handleChange = (e) => {
@@ -334,7 +325,6 @@ class EventsList extends Component {
               <Fragment>
                 <Button
                   style={{ marginLeft: "auto" }}
-               
                   onClick={() => this.mostrarModalInsertar()}
                 >
                   {" "}
@@ -353,12 +343,7 @@ class EventsList extends Component {
               </Fragment>
             ) : (
               <Fragment>
-                <Button
-                  style={{ marginLeft: "auto"}} 
-                  color="#ffffff"
-                >
-                  
-                </Button>
+                <Button style={{ marginLeft: "auto" }} color="#ffffff"></Button>
                 <Button
                   style={{
                     display: this.state.botonMostrarEventosArchivados
@@ -400,7 +385,7 @@ class EventsList extends Component {
                     <div className="card-block px-1">
                       <h4 className="card-title">{event.nombre_evento}</h4>
                       <p className="card-text">
-                        <b>Description:</b> {event.descripcion_evento}
+                        <b>Descripción:</b> {event.descripcion_evento}
                       </p>
                       <p className="card-text">
                         <b>Modalidad:</b> {event.modalidad_evento}
@@ -502,10 +487,7 @@ class EventsList extends Component {
           </Card>
         </Container>
 
-        <Modal
-          id="ModalFormCrearEvento"
-          isOpen={this.state.modalInsertar}
-        >
+        <Modal id="ModalFormCrearEvento" isOpen={this.state.modalInsertar}>
           <div className="Titulo">
             <strong>Crear Evento</strong>
           </div>
@@ -540,7 +522,6 @@ class EventsList extends Component {
               className="liderEventoCrear textInput"
               name="lider"
               onChange={this.handleChange}
-              
             >
               {this.state.lideres.map((item) => {
                 return (
@@ -597,9 +578,23 @@ class EventsList extends Component {
                 );
               })}
             </TextField>
+            <TextField
+              select
+              className="ProyectoEventoCrear textInput"
+              name="proyecto"
+              onChange={this.handleChange}
+              label="Proyecto"
+            >
+              {this.state.proyectos.map((item) => {
+                return (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                );
+              })}
+            </TextField>
 
             <TextField
-
               className="HoraInicioEventoCrear textInput"
               name="hora_inicio"
               type="time"
@@ -607,7 +602,6 @@ class EventsList extends Component {
             />
 
             <TextField
-
               className="HoraFinEventoCreae textInput"
               name="hora_fin"
               type="time"
