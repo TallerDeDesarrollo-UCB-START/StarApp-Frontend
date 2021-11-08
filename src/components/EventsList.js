@@ -25,8 +25,9 @@ const apiProyectos = axios.create({
 });
 
 const current = new Date();
-const currentDate = `${current.getFullYear()}-${current.getMonth()+1}-${("0" + current.getDate()).slice(-2)}`;
-
+const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${(
+  "0" + current.getDate()
+).slice(-2)}`;
 
 const api = axios.create({
   baseURL: urlLocal,
@@ -92,26 +93,62 @@ class EventsList extends Component {
     this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
   };
-  
-  getEvents= async () => {
+
+  getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
       if (
         this.state.categoriaFiltrada !== "Todas" &&
         this.state.categoriaFiltrada !== "Otro"
       ) {
-      switch(this.state.filtradoSegunEstado){
-        case'En Curso': data = data.filter((event) =>event.estado === "1" && event.fecha_evento === currentDate && event.categoria === this.state.categoriaFiltrada);break
-        case'Proximo': data = data.filter((event) =>event.estado === "1" && event.fecha_evento > currentDate && event.categoria === this.state.categoriaFiltrada );break
-        case'Pasados': data = data.filter((event) =>event.estado === "1" && event.fecha_evento < currentDate && event.categoria === this.state.categoriaFiltrada);break
-       
-      }}else{
-        switch(this.state.filtradoSegunEstado){
-          case'En Curso': data = data.filter((event) =>event.estado === "1" && event.fecha_evento === currentDate );break
-          case'Proximo': data = data.filter((event) =>event.estado === "1" && event.fecha_evento > currentDate );break
-          case'Pasados': data = data.filter((event) =>event.estado === "1" && event.fecha_evento < currentDate );break
-          
-      }}
+        switch (this.state.filtradoSegunEstado) {
+          case "En Curso":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" &&
+                event.fecha_evento === currentDate &&
+                event.categoria === this.state.categoriaFiltrada
+            );
+            break;
+          case "Proximo":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" &&
+                event.fecha_evento > currentDate &&
+                event.categoria === this.state.categoriaFiltrada
+            );
+            break;
+          case "Pasados":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" &&
+                event.fecha_evento < currentDate &&
+                event.categoria === this.state.categoriaFiltrada
+            );
+            break;
+        }
+      } else {
+        switch (this.state.filtradoSegunEstado) {
+          case "En Curso":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" && event.fecha_evento === currentDate
+            );
+            break;
+          case "Proximo":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" && event.fecha_evento > currentDate
+            );
+            break;
+          case "Pasados":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" && event.fecha_evento < currentDate
+            );
+            break;
+        }
+      }
 
       this.setState({ events: data });
     } catch (err) {
@@ -136,7 +173,6 @@ class EventsList extends Component {
     this.setState({ filtradoSegunEstado: aux[0] });
     this.setState({ estados: aux });
   };
-
 
   getEventsArchivados = async () => {
     try {
@@ -339,7 +375,7 @@ class EventsList extends Component {
     return (
       <div>
         <div>
-        <h1> Bienvenido a Lista de eventos!</h1>
+          <h1> Bienvenido a Lista de eventos!</h1>
           <div className="header-lista-eventos">
             <span>Categoria:</span>
             <select
@@ -377,12 +413,11 @@ class EventsList extends Component {
                   {" "}
                   Crear Evento{" "}
                 </Button>
-                <Button 
+                <Button
                   style={{
                     display: this.state.botonMostrarEventosArchivados
                       ? "block"
                       : "none",
-                    
                   }}
                   onClick={() => this.getEventsArchivados()}
                 >
@@ -392,22 +427,20 @@ class EventsList extends Component {
             ) : (
               <Fragment>
                 <div className="eventos-pasados-button">
-                <Button
-                  style={{ marginLeft: "auto"}} 
-                  color="#ffffff"
-                >
-                  
-                </Button>
-                <Button
-                  style={{
-                    display: this.state.botonMostrarEventosArchivados
-                      ? "block"
-                      : "none",
-                  }}
-                  onClick={() => this.getEventsArchivados()}
-                >
-                  Eventos Pasados
-                </Button>
+                  <Button
+                    style={{ marginLeft: "auto" }}
+                    color="#ffffff"
+                  ></Button>
+                  <Button
+                    style={{
+                      display: this.state.botonMostrarEventosArchivados
+                        ? "block"
+                        : "none",
+                    }}
+                    onClick={() => this.getEventsArchivados()}
+                  >
+                    Eventos Pasados
+                  </Button>
                 </div>
               </Fragment>
             )}
