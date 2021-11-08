@@ -84,3 +84,52 @@
   left: 40px;
   color: #585858;
 }
+
+
+.listForm{
+  height: 100%;
+  width: 100%;
+  border: #585858 0.1px solid;
+  text-align: center;
+  border-radius: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.Participante{
+  text-align: justify;
+  padding-left: 2%;
+  padding-bottom: 1%;
+}
+.card-text{
+  font-size: 18px;
+  margin-left: 30%;
+}
+
+.card{
+  margin-top: 50px;
+  border: #ffffff 0.1px solid;
+  border-radius: 15px;
+}
+
+.card-title{
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.card-list-1{
+  padding-left: 25px;
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+.card-list{
+  padding-left: 25px;
+  font-size: 18px;
+}
+
+.col-auto{
+  padding-top: 5%;
+  padding-left: 5%;
+}
