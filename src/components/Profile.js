@@ -120,15 +120,12 @@ const Profile = ({sessionData}) => {
 
   const [datos, setDatos] = useState({
     id_usuario: "",
-    nombre: "",
-    apellido: "",
     fecha_de_nacimiento: "",
     pais_de_recidencia: "",
     ciudad_de_recidencia: "",
     carrera: "",
     nivel_de_estudios: "",
     ocupacion: "",
-    telefono: "",
     genero: "",
     estado_de_cuenta: "",
     rol: "",
@@ -142,14 +139,11 @@ const Profile = ({sessionData}) => {
   });
   const [datosEdit, setDatosEdit] = useState({
     id_usuario: "",
-    nombre: "",
-    apellido: "",
     fecha_de_nacimiento: "",
     pais_de_recidencia: "",
     ciudad_de_recidencia: "",
     nivel_de_estudios: "",
     ocupacion: "",
-    telefono: "",
     genero: "",
     estado_de_cuenta: "",
     rol: "",
@@ -237,15 +231,12 @@ const Profile = ({sessionData}) => {
     setDatos(datosEdit);
 
     const asignaciones = {
-      nombre: datosEdit.nombre,
-      apellido: datosEdit.apellido,
       fecha_de_nacimiento: datosEdit.fecha_de_nacimiento,
       pais_de_recidencia: datosEdit.pais_de_recidencia,
       ciudad_de_recidencia: datosEdit.ciudad_de_recidencia,
       carrera: datosEdit.carrera,
       ocupacion: datosEdit.ocupacion,
       descripcion_personal: datosEdit.descripcion_personal,
-      telefono: datosEdit.telefono,
       genero: datosEdit.genero,
       estado_de_cuenta: datosEdit.estado_de_cuenta,
       rol: datosEdit.rol,
@@ -342,32 +333,6 @@ const Profile = ({sessionData}) => {
     <div style={modalStyle} className="paperr">
       <div>
         <form className="fomrExt">
-          <label className={classNamees.titulos} htmlFor="nombre">
-            Nombre:
-          </label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.nombre}
-            onChange={handleInputChange}
-            placeholder="Nombre"
-            name="nombre"
-            id="nombre"
-            type="text"
-          />
-          <br></br>
-          <label className={classNamees.titulos} htmlFor="apellido">
-            Apellido:
-          </label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.apellido}
-            onChange={handleInputChange}
-            placeholder="Apellido"
-            name="apellido"
-            id="apellido"
-            type="text"
-          />
-          <br></br>
           <label className={classNamees.titulos} htmlFor="fecha_de_nacimiento">
             Fecha de nacimiento:
           </label>
@@ -676,20 +641,6 @@ const Profile = ({sessionData}) => {
             placeholder="Ciudad de recidencia"
             name="ciudad_de_recidencia"
             id="ciudad_de_recidencia"
-            type="text"
-          />
-          <br></br>
-          <label className={classNamees.titulos} htmlFor="telefono">
-            Teléfono:
-          </label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.telefono}
-            onChange={handleInputChange}
-            placeholder="Telefono
-                    "
-            name="telefono"
-            id="telefono"
             type="text"
           />
           <br></br>
