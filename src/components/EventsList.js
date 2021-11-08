@@ -75,7 +75,6 @@ class EventsList extends Component {
     this.getEvents();
     this.getParticipaciones();
     this.getCategorias();
-    this.getFechas();
     this.getUserRol();
     this.getLideres();
     this.getProyectos();
@@ -164,16 +163,7 @@ class EventsList extends Component {
     this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
   };
-  getFechas = async () => {
-    let data = await api.get("/fechas").then(({ data }) => data);
-    let aux = data.map((item) => {
-      return item;
-    });
-    aux.unshift("En Curso");
-    this.setState({ filtradoSegunEstado: aux[0] });
-    this.setState({ estados: aux });
-  };
-
+  
   getEventsArchivados = async () => {
     try {
       this.state.botonMostrar = true;
