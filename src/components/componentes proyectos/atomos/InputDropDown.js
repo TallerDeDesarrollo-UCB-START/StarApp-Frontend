@@ -8,8 +8,8 @@ import '../moleculas/FormularioCrearProyecto.css'
 function InputDropDown({labelId, input_id, label, items, onChangeEstado, valueSelect, classes}) {
     const valor1 = items[0].valor
     const valor2 = items[1].valor
-    const estado1 = items[0].estado
-    const estado2 = items[1].estado
+    const estado1 = "CONCLUIDO"//items[0].estado
+    const estado2 = "EN CURSO"//items[1].estado
     return (
         <Box className='form-control-proy'>
             <FormControl fullWidth>

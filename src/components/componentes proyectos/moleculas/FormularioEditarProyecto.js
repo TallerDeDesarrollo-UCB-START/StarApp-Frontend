@@ -2,6 +2,7 @@
 import InputTexto from "../moleculas/InputTexto";
 import InputDropDown from "../atomos/InputDropDown";
 // Librerias-Paquetes:
+import {VARIABLES} from '../organismos/variables-compartidas'
 import "../moleculas/FormularioCrearProyecto.css";
 import { useState } from "react";
 import React from 'react';
@@ -15,6 +16,8 @@ const useStylesDrpdn = makeStyles({
   },
 });
 
+const varProyectos = VARIABLES.datosProyectos
+
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar }) {
   // Styles
   const classesDrpdn = useStylesDrpdn();
@@ -24,13 +27,19 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
   const [objetivo, setObjetivo] = useState(proyecto.objetivo);
   const [lider, setLider] = useState(proyecto.lider);
   const [estadosDefault, setEstadosDefault] = useState([
-    { estado: "ACABADO", valor: 10 },
-    { estado: "EN CURSO", valor: 20 },
+    { estado: varProyectos.estadoAcabado, valor: 10 },
+    { estado: varProyectos.estadoEnCurso, valor: 20 },
   ]);
+
+  function buscarEstado(tipoResultado){
+    //debugger
+    const elementoEstado = estadosDefault.find((item_estado) => item_estado.estado === proyecto.estado)
+    return tipoResultado==='estado'? elementoEstado.estado : elementoEstado.valor
+  }
+
   function obtenerEstadoActual(){
-    //console.log(typeof(proyecto.estado) )
-    if(typeof(proyecto.estado) === 'string'){
-      return estadosDefault.find((item_estado) => item_estado.estado === proyecto.estado).valor
+    if(typeof(proyecto.estado) === 'boolean'){
+      return buscarEstado('valor')
     } else {
       return 20 // En Curso - valor default
     }
@@ -73,6 +82,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     event.preventDefault(); // To avoid submitting to an actual page
     const lideres = lider; //[lider]
     const objetivos = objetivo; //[objetivo]
+    debugger
     const estado = estadosDefault.find(
       (item_estado) => item_estado.valor === estadoVal
     ).estado;
