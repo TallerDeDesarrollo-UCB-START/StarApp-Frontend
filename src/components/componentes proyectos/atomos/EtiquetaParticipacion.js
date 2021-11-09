@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles({
     chip: {
         position: 'relative',
-        bottom: '264px',
+        bottom: '278px',
         right: '0',
         left: '220px',
         backgroundColor: 'rgba(196, 196, 196, 0.65)',

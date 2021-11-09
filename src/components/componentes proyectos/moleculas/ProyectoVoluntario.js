@@ -29,7 +29,6 @@ function ProyectoVoluntario({proyecto, rol, onEliminarProy, onActivarForm, onPar
     
     return (
         <Card className={classes.root}>
-            <CardActionArea>
                 <BannerProyecto />
                 <ContenidoProyecto rol={rol}
                             proyecto={proyecto} 
@@ -39,7 +38,6 @@ function ProyectoVoluntario({proyecto, rol, onEliminarProy, onActivarForm, onPar
                             onGetParticipacion={onGetParticipacion}
                             onCancelarParticipacion={onCancelarParticipacion}
                             onNumeroParticipantes={onNumeroParticipantes}/>
-            </CardActionArea>
         </Card>
     );
 }

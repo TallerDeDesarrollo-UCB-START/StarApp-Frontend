@@ -150,7 +150,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                     {content()}
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className="card-action-box">
                 {botonParticiparProyecto}
                 <VerProyectoBtn proyecto={proyecto}/>
                 {botonEditarProyecto}
