@@ -63,3 +63,25 @@ width: 30%;
 .TituloListaParticipantes {
 margin-top: 10px;
 }
+
+.descripcion{
+    border: #ffffff 0.1px solid;
+    border-radius: 25px;
+}
+.btns{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+*{
+    margin: 0;
+    padding: e;
+    box-sizing: border-box;
+}
+
+Fragment{
+    position: relative;
+}
+
+.Button{
+    font-size: 10px;
+}
