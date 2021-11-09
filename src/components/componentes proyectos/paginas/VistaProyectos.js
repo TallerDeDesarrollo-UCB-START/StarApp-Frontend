@@ -43,7 +43,7 @@ function VistaProyectos() {
         } else{
             categoria? getProyectosFiltro() : getProyectos()
         }
-    }, [actualizar, categoria] )
+    }, [actualizar, categoria, tipoEstado] )
 
     // HTTP requests & functions
     async function fetchProyectos() {
