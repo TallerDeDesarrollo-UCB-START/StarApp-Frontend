@@ -6,7 +6,6 @@ import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
 import { Box } from '@material-ui/core';
 import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 
 // DIEGO
 //victor y Merce

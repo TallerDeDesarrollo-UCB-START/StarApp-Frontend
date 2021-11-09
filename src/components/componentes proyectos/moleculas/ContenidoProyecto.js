@@ -3,7 +3,7 @@ import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
-import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
+//import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 import SnackbarMessage from '../../templates/SnackbarMessage';
 import VerProyectoBtn from '../atomos/VerProyectoBtn';
 // Permisos/Roles:
