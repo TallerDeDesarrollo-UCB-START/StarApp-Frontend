@@ -321,10 +321,12 @@ class EventsList extends Component {
               })}
             </select>
           </div>
-          <div style={{ display: "flex" }}>
+          <Box style={{ display: "flex" }}>
             {rolUser !== "voluntario" ? (
               <Fragment>
                 <Button
+                  variant="contained"
+                  color="secondary"
                   style={{ marginLeft: "auto" }}
                   onClick={() => this.mostrarModalInsertar()}
                 >
@@ -368,7 +370,7 @@ class EventsList extends Component {
             >
               Volver
             </Button>
-          </div>
+          </Box>
         </div>
         <Container>
           <Card>
@@ -407,7 +409,6 @@ class EventsList extends Component {
                       <b>Categoria:</b> {event.categoria}
                     </p>
                     <div className="buttons">
-                      
                       {rolUser !== "voluntario" ? (
                         <Box
                           sx={{
@@ -416,45 +417,44 @@ class EventsList extends Component {
                             gridTemplateColumns: "repeat(2, 1fr)",
                           }}
                         >
-                          
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                style={{
-                                  display: this.state.botonMostrar
-                                    ? "block"
-                                    : "none",
-                                }}
-                                onClick={() => this.peticionMostrar(event)}
-                              >
-                                Mostrar
-                              </Button>
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                style={{
-                                  display: this.state.botonArchivar
-                                    ? "block"
-                                    : "none",
-                                }}
-                                onClick={() => this.peticionArchivar(event)}
-                              >
-                                Archivar
-                              </Button>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            style={{
+                              display: this.state.botonMostrar
+                                ? "block"
+                                : "none",
+                            }}
+                            onClick={() => this.peticionMostrar(event)}
+                          >
+                            Mostrar
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            style={{
+                              display: this.state.botonArchivar
+                                ? "block"
+                                : "none",
+                            }}
+                            onClick={() => this.peticionArchivar(event)}
+                          >
+                            Archivar
+                          </Button>
 
-                              <Button
-                                variant="contained"
-                                color="success"
-                                onClick={() => this.deleteEvento(event)}
-                              >
-                                Eliminar
-                              </Button>
+                          <Button
+                            variant="contained"
+                            color="success"
+                            onClick={() => this.deleteEvento(event)}
+                          >
+                            Eliminar
+                          </Button>
                         </Box>
                       ) : (
                         <></>
                       )}
 
-<Box
+                      <Box
                         sx={{
                           display: "grid",
                           gap: 10,

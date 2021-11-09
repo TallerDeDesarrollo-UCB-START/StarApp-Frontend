@@ -250,6 +250,7 @@ class Evento extends Component {
           <br></br>
         </Card>
         <br></br>
+        
         <Button
           className="botonEditarEvento"
           variant="contained"
@@ -259,6 +260,7 @@ class Evento extends Component {
         >
           Editar
         </Button>
+        
         <br></br>
         <br></br>
         <div className="listForm">
