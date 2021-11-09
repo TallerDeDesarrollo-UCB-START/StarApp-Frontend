@@ -7,7 +7,7 @@ import { Box } from '@material-ui/core';
 import React from 'react';
 
 // DIEGO
-//victor y Merce
+//victor y Merce 
 function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes, tituloHeader}) {
     //const classes = useStyles();
 
