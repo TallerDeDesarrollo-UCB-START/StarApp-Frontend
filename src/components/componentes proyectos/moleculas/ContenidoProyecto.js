@@ -156,7 +156,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                 {botonEditarProyecto}
                 {botonEliminarProyecto}
             </CardActions>
-
+            {tagParticipacion}
             <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
         </Box>
     );

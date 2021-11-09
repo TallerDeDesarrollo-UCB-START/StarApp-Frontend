@@ -7,9 +7,17 @@ import { makeStyles } from "@material-ui/core";
 // Styles
 const useStyles = makeStyles({
     chip: {
-        margin: 'auto',
-        marginRight: '5px',
-        width: '22%'
+        position: 'relative',
+        bottom: '264px',
+        right: '0',
+        left: '220px',
+        backgroundColor: 'rgba(196, 196, 196, 0.65)',
+        color: 'white',
+        fontSize: '10px',
+        letterSpacing: '2px',
+        width: '117px',
+        height: '25px',
+        paddingTop: '3px',
     },
 });
 
@@ -19,8 +27,7 @@ function handleClick(){}
 function ContenidoProyecto() {
     const classes = useStyles();
     return (
-        <Chip  label="Participando"
-                color="primary"
+        <Chip  label="PARTICIPANDO"
                 onClick={handleClick} 
                 className={classes.chip}/>
     );
