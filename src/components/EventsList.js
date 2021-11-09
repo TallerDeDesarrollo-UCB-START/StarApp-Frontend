@@ -5,7 +5,6 @@ import { Container, Card, Modal, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
-
 import "./EventsList.css";
 
 import TextField from "@mui/material/TextField";
