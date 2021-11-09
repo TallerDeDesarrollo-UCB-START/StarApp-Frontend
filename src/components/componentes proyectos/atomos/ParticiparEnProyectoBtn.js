@@ -1,56 +1,69 @@
 // Componentes:
-import './ParticiparEnProyectoBtn.css';
-// Librerias-Paquetes:
+//import './ParticiparEnProyectoBtn.css';
 import React from "react";
-import { Button } from '@material-ui/core';
-import { withStyles } from "@material-ui/core/styles";
-
-
-function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarStatus, onAsignarParticipacion}) {
-
-    // States
-    //const [snackbar, setSnackbar] = React.useState(false)
-
-    /*useEffect(function () {
-        onAsignarParticipacion()
-    }, [snackbar, participacion])*/
-
-
-    const onClick = async (event) => {
-        //debugger
-        const participarResponse = await onPartiparProy(proyecto.id)
-        //console.log(participarResponse)
-        if(participarResponse){
-            
-            onAsignarParticipacion();
-            onAsignarSnackbarStatus("Participacion exitosa", true, true);
-        }else{
-            onAsignarParticipacion();
-            onAsignarSnackbarStatus("Participacion fallida", true, false);
-        }
-    }
-
-    return (
-        <div>
-            <div id={proyecto.id}>
-                <ParticipateButton variant="contained"
-                onClick={onClick}
-                >
-                    Unirme
-                </ParticipateButton>
-            </div>
-        </div>
-    );
-}
+import { Button, Box } from '@material-ui/core';
+import LockIcon from '@material-ui/icons/Lock';
+import {VARIABLES} from '../organismos/variables-compartidas'
+// Librerias-Paquetes:
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 const ParticipateButton = withStyles((theme) => ({
     root: {
-        color: "#FFFFFF",
         backgroundColor: "#269BD5",
         height: 51,
         width: 119,
         fontSize: 16,
     },
 }))(Button);
+
+const useStyles = makeStyles({
+    contenedorBtn: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8%'
+    },
+});
+
+const varProyectos = VARIABLES.datosProyectos
+
+function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarStatus, onAsignarParticipacion}) {
+    const classes = useStyles()
+
+    const onClick = async (event) => {
+        if(proyecto){
+            if(proyecto.estado === varProyectos.estadoAcabado){
+                onAsignarSnackbarStatus("Participacion bloqueada", true, false);
+                return
+            } else{
+                const participarResponse = await onPartiparProy(proyecto.id)
+                if(participarResponse){
+                    onAsignarParticipacion();
+                    onAsignarSnackbarStatus("Participacion exitosa", true, true);
+                }else{
+                    onAsignarParticipacion();
+                    onAsignarSnackbarStatus("Participacion fallida", true, false);
+                }
+            }
+        }
+    }
+    /*OPCIONALMENTE MOVER EL BOTON DE VOLVER ATRAS DE KEVIN*/
+    const candado = proyecto && proyecto.estado === varProyectos.estadoAcabado? <LockIcon/> : ""
+    return (
+        <div>
+            <div id={proyecto.id}>
+                <ParticipateButton variant="contained"
+                                    color="primary"
+                                    onClick={onClick}>
+                    <Box className={classes.contenedorBtn}>
+                        Unirme
+                        {candado}
+                    </Box>
+                </ParticipateButton>
+            </div>
+        </div>
+    );
+}
+
+
 
 export default ParticiparEnProyectoBtn

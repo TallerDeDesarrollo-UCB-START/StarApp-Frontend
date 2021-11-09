@@ -2,6 +2,7 @@
 import InputTexto from '../moleculas/InputTexto'
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
+//import {VARIABLES} from '../organismos/variables-compartidas'
 import { useState } from "react"
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
@@ -53,7 +54,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             descripcion: descripcion,
             objetivo: objetivos,
             lider: lideres,
-            estado: "EN CURSO",
+            estado: true,//Valor default hasta mejorar formularios "EN CURSO",
             categoria: "Ambiental"
         }
         onCrearProy(nuevoProyecto) // callback invocation
