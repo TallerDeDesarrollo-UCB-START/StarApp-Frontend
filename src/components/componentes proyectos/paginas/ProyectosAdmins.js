@@ -3,7 +3,6 @@ import HeaderProyectosAdmin from '../organismos/HeaderProyectosAdmin'
 import BodyProyectos from '../organismos/BodyProyectos'
 import FormularioCrearProyecto from '../moleculas/FormularioCrearProyecto'
 import FormularioEditarProyecto from '../moleculas/FormularioEditarProyecto'
-import VolverProyectoBtn from '../atomos/VolverProyectoBtn'
 // Librerias-Paquetes:
 import {useState} from 'react'
 import { Box } from '@material-ui/core';
@@ -34,7 +33,6 @@ function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartipa
             <HeaderProyectosAdmin onActivarForm={activarFormCrear} tituloHeader={tituloHeader}/>
             {FormularioCrear}
             {FormularioEditar}
-            <VolverProyectoBtn/> 
             <BodyProyectos rol={rol}
                             proyectos={proyectos} 
                             onEliminarProy={onEliminarProy} 

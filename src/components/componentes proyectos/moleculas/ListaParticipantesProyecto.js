@@ -54,7 +54,9 @@ export class ListaParticipantesProyecto extends Component{
                 </List>
                 <ExcelFile element={<ExportarButton variant="contained" color="green">Exportar Lista</ExportarButton>} filename="ListaParticipantes">
                         <ExcelSheet data={posts} name="Participantes">
-                            <ExcelColumn label="Lista Participantes" value="nombre"/>
+                            <ExcelColumn label="Nombre" value="nombre"/>
+                            <ExcelColumn label="Apellido" value="apellido"/>
+                            <ExcelColumn label="Rol" value="rol"/>
                         </ExcelSheet>
                 </ExcelFile>
             </Box>
