@@ -1,4 +1,4 @@
-// Componentes:
+// Componentes: 
 import ProyectosAdmins from './ProyectosAdmins'
 import ProyectosVoluntarios from './ProyectosVoluntarios'
 // Permisos/Roles:
