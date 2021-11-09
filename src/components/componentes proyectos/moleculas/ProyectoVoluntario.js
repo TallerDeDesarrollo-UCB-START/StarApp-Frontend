@@ -5,10 +5,8 @@ import './ProyectoVoluntario.css';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 
 // Librerias-Paquetes:
-import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
