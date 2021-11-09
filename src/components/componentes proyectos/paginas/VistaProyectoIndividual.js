@@ -16,7 +16,7 @@ function VistaProyectoIndividual() {
         setProyecto(proyectoDelServer[0])
         }
         getProyecto()
-    })
+    }, [])
     
     function getIdFromURL(thisUrl) {
         var id = thisUrl.substring(thisUrl.indexOf("/") + 1)

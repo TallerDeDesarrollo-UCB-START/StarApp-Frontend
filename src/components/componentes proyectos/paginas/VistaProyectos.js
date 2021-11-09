@@ -1,4 +1,4 @@
-// Componentes:
+// Componentes: 
 import ProyectosAdmins from './ProyectosAdmins'
 import ProyectosVoluntarios from './ProyectosVoluntarios'
 // Permisos/Roles:
@@ -16,9 +16,12 @@ function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
     const [actualizar, setActualizar] = useState(false)
+    // Variables
     let categoria = useQuery().get("categoria");
-
-    //console.log(categoria)
+    let tipoEstado = useQuery().get("tipoestado"); //pasados,?
+    let complementoHeader = categoria? categoria : tipoEstado
+    complementoHeader = complementoHeader? complementoHeader : ""
+    
     useEffect(() => {
         
         const getProyectos = async () => {
@@ -30,12 +33,27 @@ function VistaProyectos() {
             await filtrarPorCategoria(categoria)
         }
 
-        categoria? getProyectosFiltro() : getProyectos()
-    }, [actualizar, categoria] )
+        const getProyectosPasados = async () => {
+            const proyectosPasados =  await fetchProyectosPasados()
+            setProyectos(proyectosPasados)
+        }
+
+        if(tipoEstado){
+            tipoEstado==="Pasados"? getProyectosPasados() : getProyectos() 
+        } else{
+            categoria? getProyectosFiltro() : getProyectos()
+        }
+    }, [actualizar, categoria, tipoEstado] )
 
     // HTTP requests & functions
     async function fetchProyectos() {
         const response = await fetch(URLProyectos)
+        const data = await response.json()
+        return data;
+    }
+
+    async function fetchProyectosPasados() {
+        const response = await fetch(URLProyectosPasados)
         const data = await response.json()
         return data;
     }
@@ -149,7 +167,7 @@ function VistaProyectos() {
                         onGetParticipacion={obtenerParticipacionProyecto}
                         onCancelarParticipacion={cancelarParticipacionProyecto}
                         onNumeroParticipantes={obtenerNumeroParticipantes}
-                        tituloHeader={categoria}/> 
+                        tituloHeader={complementoHeader}/> 
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
@@ -159,7 +177,7 @@ function VistaProyectos() {
                         onGetParticipacion={obtenerParticipacionProyecto}
                         onCancelarParticipacion={cancelarParticipacionProyecto}
                         onNumeroParticipantes={obtenerNumeroParticipantes}
-                        tituloHeader={categoria}/>
+                        tituloHeader={complementoHeader}/>
             </PuertaPermisos>
         </>
     );
@@ -174,5 +192,5 @@ const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_p
 const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
 const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
 const URLNumeroParticipantes = `${url}get_numero_participantes` //'http://localhost:5000/get_rol/'
-
+const URLProyectosPasados = `${url}get_proyectos_acabado`
 export default VistaProyectos;
