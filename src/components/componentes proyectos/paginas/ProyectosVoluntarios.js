@@ -6,12 +6,11 @@ import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
 import { Box } from '@material-ui/core';
 import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 
 // DIEGO
 //victor y Merce
 function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onFiltroProy, onNumeroParticipantes, tituloHeader}) {
-    const classes = useStyles();
+    //const classes = useStyles();
 
     return (
         <Box style={styles}>
@@ -33,11 +32,11 @@ const styles= {
     minHeight: "650px"
     //border: "4px solid orange"
 }
-
+/*
 const useStyles = makeStyles({
     root: {
       maxWidth: 345,
     },
-  });
+  });*/
 
 export default ProyectosVoluntarios
