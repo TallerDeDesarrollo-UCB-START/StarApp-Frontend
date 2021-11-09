@@ -95,8 +95,7 @@ class EventsList extends Component {
     try {
       let data = await api.get("/").then(({ data }) => data);
       if (
-        this.state.categoriaFiltrada !== "Todas" &&
-        this.state.categoriaFiltrada !== "Otro"
+        this.state.categoriaFiltrada !== "Todas"   
       ) {
         switch (this.state.filtradoSegunEstado) {
           case "En Curso":
