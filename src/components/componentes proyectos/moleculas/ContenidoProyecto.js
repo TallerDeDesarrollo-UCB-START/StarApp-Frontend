@@ -86,8 +86,8 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     }
 
     // Components:
-    /*const tagParticipacion = participacion === true?
-                            <EtiquetaParticipacion/> : ''*/
+    const tagParticipacion = participacion === true?
+                            <EtiquetaParticipacion/> : ''
     const botonParticiparProyecto = participacion === false?
                             <ParticiparEnProyectoBtn proyecto={proyecto} 
                                                     onPartiparProy={onPartiparProy} 
