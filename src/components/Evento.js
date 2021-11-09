@@ -11,7 +11,7 @@ const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
 const urlLideres = `${url}lideres`;
 const urlCategorias = `${url}eventos`;
-const urlProyectos = `http://localhost:5000/get_proyectos`;
+const urlProyectos = `${url}get_proyectos`;
 
 const api = axios.create({
   baseURL: urlDeploy,
@@ -156,7 +156,8 @@ class Evento extends Component {
     //console.log(this.state.formEditado);
     let thisUrl = window.location.href;
     let id = this.getIdFromURL(thisUrl);
-    var newUrl = "http://localhost:5000/actualizar_evento/" + id;
+    var newUrl = `${url}actualizar_evento/` + id;
+    console.log(newUrl);
     await axios
       .put(newUrl, this.state.formEditado)
       .then((response) => {
@@ -189,7 +190,7 @@ class Evento extends Component {
               <div className="row no-gutters">
                 <div className="col-auto">
                   <img
-                    src="http://jorge-zientarski.com/imgs/Events2.jpg"
+                    src="../../assets/generic_picture.png"
                     className="img-fluid"
                     alt=""
                   />
