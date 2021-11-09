@@ -362,6 +362,7 @@ class Evento extends Component {
               value={this.state.formEditado["fecha_evento"]}
               onChange={this.handleChange}
             />
+
             <div>
               <div>
                 <label className="LabelCategoria">Categoria</label>
@@ -383,62 +384,63 @@ class Evento extends Component {
                   })}
                 </select>
               </div>
+            </div>
+
+            <div>
               <div>
-                <div>
-                  <label className="LabelProyecto">Proyecto</label>
-                </div>
-                <div>
-                  <select
-                    label="Proyecto"
-                    className="ProyectoEventoEdicion textInput"
-                    name="proyecto"
-                    onChange={this.handleChange}
-                    value={this.state.formEditado.proyecto}
-                  >
-                    {this.state.proyectos.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
+                <label className="LabelProyecto">Proyecto</label>
               </div>
-
-              <TextField
-                label="Hora Inicio"
-                className="HoraInicioEventoEdicion textInput"
-                name="hora_inicio"
-                type="time"
-                value={this.state.formEditado["hora_inicio"]}
-                onChange={this.handleChange}
-              />
-
-              <TextField
-                label="Hora Fin"
-                className="HoraFinEventoEdicion textInput"
-                name="hora_fin"
-                type="time"
-                value={this.state.formEditado["hora_fin"]}
-                onChange={this.handleChange}
-              />
-
-              <div className="CamposBotones">
-                <Button
-                  className="botonActualizar"
-                  onClick={() => this.guardarNuevaData()}
+              <div>
+                <select
+                  label="Proyecto"
+                  className="ProyectoEventoEdicion textInput"
+                  name="proyecto"
+                  onChange={this.handleChange}
+                  value={this.state.formEditado.proyecto}
                 >
-                  Actualizar Evento{" "}
-                </Button>
-                <Button
-                  className="botonCancelar"
-                  onClick={() => this.cerrarModalEditarEvento()}
-                >
-                  {" "}
-                  Cancelar{" "}
-                </Button>
+                  {this.state.proyectos.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
+            </div>
+
+            <TextField
+              label="Hora Inicio"
+              className="HoraInicioEventoEdicion textInput"
+              name="hora_inicio"
+              type="time"
+              value={this.state.formEditado["hora_inicio"]}
+              onChange={this.handleChange}
+            />
+
+            <TextField
+              label="Hora Fin"
+              className="HoraFinEventoEdicion textInput"
+              name="hora_fin"
+              type="time"
+              value={this.state.formEditado["hora_fin"]}
+              onChange={this.handleChange}
+            />
+
+            <div className="CamposBotones">
+              <Button
+                className="botonActualizar"
+                onClick={() => this.guardarNuevaData()}
+              >
+                Actualizar Evento{" "}
+              </Button>
+              <Button
+                className="botonCancelar"
+                onClick={() => this.cerrarModalEditarEvento()}
+              >
+                {" "}
+                Cancelar{" "}
+              </Button>
             </div>
           </form>
         </Modal>
