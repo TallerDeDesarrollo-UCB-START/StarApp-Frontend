@@ -41,3 +41,7 @@ p {
 .card-container-box {
     padding: 15px 10px 10px 10px !important;
 }
+
+.card-action-box {
+    height: 51px;
+}

@@ -9,7 +9,6 @@ import ModalFooter from "react-bootstrap/ModalFooter";
 import "./EventsList.css";
 
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -18,7 +17,7 @@ const urlDeploy = `${url}eventos`;
 // const urlProyectos = `${URL}get_proyectos`;
 const urlCrearEvento = `${url}eventos/crearevento`;
 const urlLideres = `${url}lideres`;
-const urlProyectos = `http://localhost:5000/get_proyectos`;
+const urlProyectos = `${url}get_proyectos`;
 const apiLideres = axios.create({
   baseURL: urlLideres,
 });
@@ -258,7 +257,10 @@ class EventsList extends Component {
         return item.nombre + " " + item.apellido;
       });
       aux.unshift("Sin Lider");
-      this.setState({ lideres: aux });
+      let result = aux.filter((item, index) => {
+        return aux.indexOf(item) === index;
+      });
+      this.setState({ lideres: result });
     } catch (err) {
       console.log(err);
     }
@@ -270,7 +272,10 @@ class EventsList extends Component {
       return item.titulo;
     });
     aux.unshift("No Seleccionado");
-    this.setState({ proyectos: aux });
+    let result = aux.filter((item, index) => {
+      return aux.indexOf(item) === index;
+    });
+    this.setState({ proyectos: result });
   };
 
   cerrarModalInsertar() {
@@ -516,36 +521,46 @@ class EventsList extends Component {
               onChange={this.handleChange}
             />
 
-            <TextField
-              select
-              label="Lider"
-              className="liderEventoCrear textInput"
-              name="lider"
-              onChange={this.handleChange}
-            >
-              {this.state.lideres.map((item) => {
-                return (
-                  <MenuItem key={item} value={item}>
-                    {item}
-                  </MenuItem>
-                );
-              })}
-            </TextField>
+            <div>
+              <div>
+                <label className="LabelLiderCrearEvento">Lider</label>
+              </div>
+              <div>
+                <select
+                  label="Lider"
+                  className="liderEventoCrear textInput"
+                  name="lider"
+                  onChange={this.handleChange}
+                >
+                  {this.state.lideres.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>
 
-            <TextField
-              select
-              className="nombreEventoCrear textInput"
-              name="modalidad_evento"
-              onChange={this.handleChange}
-              label="Modalidad"
-            >
-              <MenuItem value="Presencial" name="modalidad_evento">
-                Presencial
-              </MenuItem>
-              <MenuItem value="Virtual" name="modalidad_evento">
-                Virtual
-              </MenuItem>
-            </TextField>
+            <div>
+              <div>
+                <label className="LabelModalidadCrearEvento">Modalidad</label>
+              </div>
+              <select
+                className="nombreEventoCrear textInput"
+                name="modalidad_evento"
+                onChange={this.handleChange}
+                label="Modalidad"
+              >
+                <option value="Presencial" name="modalidad_evento">
+                  Presencial
+                </option>
+                <option value="Virtual" name="modalidad_evento">
+                  Virtual
+                </option>
+              </select>
+            </div>
 
             <TextField
               label="Lugar"
@@ -563,36 +578,49 @@ class EventsList extends Component {
               onChange={this.handleChange}
             />
 
-            <TextField
-              select
-              className="CategoriaEventoCrear textInput"
-              name="categoria"
-              onChange={this.handleChange}
-              label="Categoria"
-            >
-              {this.state.categorias.map((item) => {
-                return (
-                  <MenuItem key={item} value={item}>
-                    {item}
-                  </MenuItem>
-                );
-              })}
-            </TextField>
-            <TextField
-              select
-              className="ProyectoEventoCrear textInput"
-              name="proyecto"
-              onChange={this.handleChange}
-              label="Proyecto"
-            >
-              {this.state.proyectos.map((item) => {
-                return (
-                  <MenuItem key={item} value={item}>
-                    {item}
-                  </MenuItem>
-                );
-              })}
-            </TextField>
+            <div>
+              <div>
+                <label className="LabelCategoriaCrearEvento">Categoria</label>
+              </div>
+              <div>
+                <select
+                  label="Categoria"
+                  className="CategoriaEventoCrear textInput"
+                  name="categoria"
+                  onChange={this.handleChange}
+                >
+                  {this.state.categorias.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <label className="LabelProyectoCrearEvento">Proyecto</label>
+              </div>
+              <div>
+                <select
+                  className="ProyectoEventoCrear textInput"
+                  name="proyecto"
+                  onChange={this.handleChange}
+                  label="Proyecto"
+                >
+                  {this.state.proyectos.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>
 
             <TextField
               className="HoraInicioEventoCrear textInput"

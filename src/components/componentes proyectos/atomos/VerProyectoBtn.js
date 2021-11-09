@@ -2,9 +2,6 @@
 import './VerProyectoBtn.css';
 // Librerias-Paquetes-Estilos:
 import { Link } from "react-router-dom";
-import { Button} from '@material-ui/core';
-import {withStyles} from "@material-ui/core/styles";
-
 
 function VerProyectoBtn({proyecto}) {
     return (
