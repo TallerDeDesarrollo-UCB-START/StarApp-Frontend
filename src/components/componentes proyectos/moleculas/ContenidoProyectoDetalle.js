@@ -10,14 +10,13 @@ import { useEffect, useState } from 'react';
 
 function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
+    //const visualizarP = proyecto.visualizar
     const [visualizarP, setVisualizarP] = useState(proyecto.visualizar)
-    useEffect(()=>{
-        console.log(proyecto)
-    },[])
 
     const Onchange = async () => {
         //debugger
         setVisualizarP(!visualizarP)
+       // visualizarP = !visualizarP
         const proyectoEditar={
             visualizar: visualizarP
         }
@@ -37,16 +36,20 @@ function ContenidoProyectoDetalle ({proyecto}) {
         :<PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
         <ListaParticipantesProyecto proyectoId={proyecto.id}/>
         </PuertaPermisos>
+        
 
     const listaPartipantes = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
                                     <Switch
-                                    onChange={Onchange}
+                                    onClick={Onchange}
                                     checked={!visualizarP} 
+                                    
                                     />
                                 </PuertaPermisos>
     
     return (
+       
         <Box className="content-container">
+             {console.log(proyecto)}
             <b>
                 <h1 className="card-title">{proyecto.titulo}</h1>
             </b>
