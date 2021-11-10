@@ -146,7 +146,6 @@ function VistaProyectos() {
     }
         
     const eliminarProyecto = async (id) => { 
-        //debugger
         await fetch(
         `${URLEliminarProy}/${id}`,
         { 
