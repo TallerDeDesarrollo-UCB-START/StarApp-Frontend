@@ -153,7 +153,6 @@ class Evento extends Component {
   };
 
   guardarNuevaData = async () => {
-    //console.log(this.state.formEditado);
     let thisUrl = window.location.href;
     let id = this.getIdFromURL(thisUrl);
     var newUrl = `${url}actualizar_evento/` + id;
@@ -190,7 +189,7 @@ class Evento extends Component {
               <div className="row no-gutters">
                 <div className="col-auto">
                   <img
-                    src="../../assets/generic_picture.png"
+                    src="https://jorge-zientarski.com/imgs/Events2.jpg"
                     className="img-fluid"
                     alt=""
                   />

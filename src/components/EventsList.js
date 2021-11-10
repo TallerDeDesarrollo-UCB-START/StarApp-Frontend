@@ -381,7 +381,7 @@ class EventsList extends Component {
                 <div className="row no-gutters">
                   <div className="col-auto">
                     <img
-                      src="src/assets/generic_image.jpeg"
+                      src="https://jorge-zientarski.com/imgs/Events2.jpg"
                       className="img-fluid"
                       alt=""
                     />
