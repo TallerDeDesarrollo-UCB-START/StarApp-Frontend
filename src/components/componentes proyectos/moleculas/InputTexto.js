@@ -1,10 +1,10 @@
 
-function InputTexto({titulo, value, placeHolder, onChange}) {
+function InputTexto({titulo, type,  value, placeHolder, onChange}) {
     return (
         <div className='form-control-proy'>
             <label>{titulo}</label>
 
-            <input type='text'
+            <input type={type}
                 placeholder={placeHolder}
                 value={value}
                 onChange={onChange}
