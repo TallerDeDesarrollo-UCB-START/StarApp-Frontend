@@ -1,4 +1,4 @@
-import Banner from '../../../assets/generic_picture.png';
+import Banner from '../../../assets/ejemploBannerProyecto.jpeg';
 import { Box } from '@material-ui/core';
 import './BannerProyectoDetalle.css';
 
