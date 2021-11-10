@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import { Box, Button, Grid } from "@material-ui/core";
-
+import {withStyles} from "@material-ui/core/styles";
 import "./EventsList.css";
 
 import TextField from "@mui/material/TextField";
@@ -305,12 +305,22 @@ class EventsList extends Component {
       left: "50%",
       transform: "translate(-50%,-50%)",
     };
+    const DeleteButton = withStyles((theme) => ({
+      root: {
+        backgroundColor: "#ED2020",
+        color: "#FFFFFF",
+        "&:hover": {
+          backgroundColor: "#a90e0e",
+        },
+      },
+    }))(Button);
+
     const rolUser = this.state.user;
     return (
       <div>
         <div>
           <div>
-            <h1> Bienvenido a Lista de eventos!</h1>
+            <h1 className="tittleEvent">Lista de Eventos</h1>
           </div>
           <div>
             <select
@@ -415,12 +425,12 @@ class EventsList extends Component {
                     </p>
                     <div className="buttons">
                       {rolUser !== "voluntario" ? (
-                        <Grid container spacing={6}>
+                        <Grid container spacing={1}>
                           {this.validarBotones(event) ? (
                             <Grid item xs>
                               <Button
                                 variant="contained"
-                                color="primary"
+                                color="secondary"
                                 onClick={() => {
                                   this.postParticipacion(event);
                                 }}
@@ -431,7 +441,7 @@ class EventsList extends Component {
                             </Grid>
                           ) : (
                             <Grid item xs="auto">
-                              <Button
+                              <DeleteButton
                                 variant="contained"
                                 onClick={() => {
                                   this.eliminarParticipacion(event);
@@ -439,7 +449,7 @@ class EventsList extends Component {
                               >
                                 {" "}
                                 Eliminar Participacion
-                              </Button>
+                              </DeleteButton>
                             </Grid>
                           )}
                           <Grid item xs>
@@ -471,13 +481,13 @@ class EventsList extends Component {
                             </Button>
                           </Grid>
                           <Grid item xs>
-                            <Button
+                            <DeleteButton
                               variant="contained"
                               color="success"
                               onClick={() => this.deleteEvento(event)}
                             >
                               Eliminar
-                            </Button>
+                            </DeleteButton>
                           </Grid>
                           <Grid item xs="auto">
                             <Button
@@ -528,8 +538,7 @@ class EventsList extends Component {
                   </div>
                 </div>
               ))}
-            </div>
-
+            </div>                 
             {this.state.events.map((event) => (
               <div key={event.id}>
                 <div>
@@ -554,7 +563,6 @@ class EventsList extends Component {
             ))}
           </Card>
         </Container>
-
         <Modal id="ModalFormCrearEvento" isOpen={this.state.modalInsertar}>
           <div className="Titulo">
             <strong>Crear Evento</strong>

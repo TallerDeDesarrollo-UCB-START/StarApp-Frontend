@@ -91,7 +91,7 @@
 
 .card-text{
   font-size: 18px;
-  margin-left: 30%;
+  margin-left: 105px;
 }
 
 .card{
@@ -172,9 +172,17 @@ background: #af1c12;
 
 .descripcion{
   position: relative;
+  border: #ffffff 0.1px solid;/*si se quiere ver el cuadro que contiene a todos los detalles del evento*/
+  border-radius: 16px;
 }
 
 .descripcion p{
   margin: 20px 30px;
   width: 800px;
+}
+
+.tittleEvent{
+  text-align: left;
+  padding-top: 2%;
+  padding-left: 12%;
 }
