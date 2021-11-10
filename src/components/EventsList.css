@@ -88,3 +88,21 @@
   color: #888888 !important;
 }
 
+.TituloListaParticipantes {
+  margin-top: 10px;
+  }
+  
+  h1{
+      padding-left: 16%;
+      padding-bottom: 25px;
+  }
+  
+  .header-lista-eventos {
+      top: 35%;
+      padding-left: 15.5%;
+  }
+  
+  span{
+      padding-left: 10px;
+      padding-right: 5px;
+    }
