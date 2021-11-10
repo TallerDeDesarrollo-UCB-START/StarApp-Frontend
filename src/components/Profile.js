@@ -624,7 +624,7 @@ const Profile = ({sessionData}) => {
             className={classNamees.intputs}
             value={datosEdit.pais_de_recidencia}
             onChange={handleInputChange}
-            placeholder="País de recidencia"
+            placeholder="País de residencia"
             name="pais_de_recidencia"
             id="pais_de_recidencia"
             type="text"
@@ -638,7 +638,7 @@ const Profile = ({sessionData}) => {
             className={classNamees.intputs}
             value={datosEdit.ciudad_de_recidencia}
             onChange={handleInputChange}
-            placeholder="Ciudad de recidencia"
+            placeholder="Ciudad de residencia"
             name="ciudad_de_recidencia"
             id="ciudad_de_recidencia"
             type="text"
