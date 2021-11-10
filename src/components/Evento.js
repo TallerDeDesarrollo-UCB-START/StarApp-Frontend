@@ -55,6 +55,7 @@ class Evento extends Component {
     super();
     this.getEvento();
     this.getParticipantes();
+    this.getUserRol();
   }
 
   getIdFromURL(thisUrl) {
@@ -174,6 +175,18 @@ class Evento extends Component {
     window.location.reload();
   };
 
+  getUserRol = async () => {
+    try {
+      let data = await axios.get(
+        url + "extended_form/" + window.sessionStorage.id
+      );
+      let rol = await data.data.data.rol;
+      this.setState({ user: rol });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     const customStyles = {
       position: "absolute",
@@ -181,51 +194,50 @@ class Evento extends Component {
       left: "50%",
       transform: "translate(-50%,-50%)",
     };
+    const rolUser = this.state.user;
     return (
       <Container>
         <Card>
           {this.state.events.map((event) => (
-            <div className="card w-70" key={event.id}>
+            <div key={event.id}>
               <div className="row no-gutters">
                 <div className="col-auto">
                   <img
                     src="http://jorge-zientarski.com/imgs/Events2.jpg"
                     className="img-fluid"
                     alt=""
+                    align="center"
                   />
                 </div>
 
                 <div className="col">
                   <div className="row">
-                    <h4 className="card-title">{event.nombre_evento}</h4>
+                    <h4 className="card-title">
+                      <b>{event.nombre_evento}</b>
+                    </h4>
                   </div>
 
                   <div className="row">
                     <div className="col">
                       <div className="card-block px-1">
                         <p className="card-text">
-                          <b>Descripción:</b> {event.descripcion_evento}
-                        </p>
-                        <p className="card-text">
-                          <b>Categoría:</b> {event.categoria}
-                        </p>
-                        <p className="card-text">
-                          <b>Modalidad:</b> {event.modalidad_evento}
+                          <b>Hora Inicio:</b> {event.hora_inicio}
                         </p>
                         <p className="card-text">
                           <b>Fecha:</b> {event.fecha_evento}
+                        </p>
+                        <p className="card-text">
+                          <b>Proyecto:</b> {event.proyecto}
+                        </p>
+
+                        <p className="card-text">
+                          <b>Modalidad:</b> {event.modalidad_evento}
                         </p>
                       </div>
                     </div>
 
                     <div className="col">
                       <div className="card-block px-1">
-                        <p className="card-text">
-                          <b>Lider:</b> {event.lider}
-                        </p>
-                        <p className="card-text">
-                          <b>Hora Inicio:</b> {event.hora_inicio}
-                        </p>
                         <p className="card-text">
                           <b>Hora Fin:</b> {event.hora_fin}
                         </p>
@@ -233,47 +245,52 @@ class Evento extends Component {
                           <b>Lugar:</b> {event.lugar_evento}
                         </p>
                         <p className="card-text">
-                          <b>Proyecto:</b> {event.proyecto}
+                          <b>Categoría:</b> {event.categoria}
+                        </p>
+                        <p className="card-text">
+                          <b>Lider:</b> {event.lider}
                         </p>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="card-footer w-100 text-muted"></div>
-            </div>
-          ))}
-
-          <Button
-            className="botonEditarEvento"
-            variant="contained"
-            color="primary"
-            size="medium"
-            onClick={() => this.abrilModalEditarEvento()}
-          >
-            Editar
-          </Button>
-        </Card>
-
-        <h1 className="TituloListaParticipantes">Lista de participantes</h1>
-        <Card>
-          {this.state.participants.map((participant) => (
-            <div className="card w-70" key={participant.id}>
-              <div className="row no-gutters">
-                <div className="col">
-                  <div className="card-block px-1">
-                    <p className="card-text"></p>
-                    <p className="card-text">
-                      <b> Nombre:</b> {participant.nombre}{" "}
-                      {participant.apellido}
+                    <p className="card-text1">
+                      <b>Descripción:</b> {event.descripcion_evento}
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="card-footer w-100 text-muted"></div>
             </div>
           ))}
+          <br></br>
         </Card>
+        <br></br>
+        {rolUser !== "voluntario" ? (
+          <Button
+            className="botonEditarEvento"
+            variant="contained"
+            color="primary"
+            size="small"
+            onClick={() => this.abrilModalEditarEvento()}
+          >
+            Editar
+          </Button>
+        ) : (
+          <></>
+        )}
+
+        <br></br>
+        <br></br>
+        <div className="listForm">
+          <h4 className="card-list-1">
+            <b>Lista De Participantes</b>
+          </h4>
+          {this.state.participants.map((participant) => (
+            <div className="Participante" key={participant.id}>
+              <p className="card-list">
+                <b> Nombre:</b> {participant.nombre} {participant.apellido}
+              </p>
+            </div>
+          ))}
+        </div>
 
         <Modal
           id="ModalFormEditEvento"
