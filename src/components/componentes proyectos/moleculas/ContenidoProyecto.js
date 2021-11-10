@@ -3,7 +3,7 @@ import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
-import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
+//import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 import SnackbarMessage from '../../templates/SnackbarMessage';
 import VerProyectoBtn from '../atomos/VerProyectoBtn';
 // Permisos/Roles:
@@ -15,7 +15,6 @@ import { Box } from '@material-ui/core';
 import { useState, useEffect } from "react";
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 
 function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
@@ -34,13 +33,13 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
 
     })
     const [participacion, setParticipacion] = useState(false)
-    const [numberParticipants, setNumber] = useState(0)
+    //const [numberParticipants, setNumber] = useState(0)
     
     // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
         activateSnackBar()
         asignarParticipacion()
-        getNumberParticipants()
+        //getNumberParticipants()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [participacion])
     
@@ -52,11 +51,11 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         const p = participa === true? true : false
         setParticipacion(p)
     }
-
+/*
     async function getNumberParticipants() {
         const numberParticipants = await onNumeroParticipantes(proyecto.id);
         setNumber(numberParticipants);
-    }
+    }*/
 
     function asignarSnackbarStatus(message, active, status){
         setSnackbarStatus({
@@ -97,14 +96,14 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
                                                     />
                             : ''
-    const botonCancelarParticipacion = participacion === true?
+    /*const botonCancelarParticipacion = participacion === true?
                             <CancelarParticipacionBtn proyecto={proyecto} 
                                                     onCancelarParticipacion={onCancelarParticipacion} 
                                                     onGetParticipacion={onGetParticipacion}
                                                     onAsignarParticipacion={asignarParticipacion}
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
                                                     />
-                            : ''
+                            : ''*/
     const botonEditarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
                                     <EditarProyectoBtn  onActivarForm={onActivarForm}
                                                         proyecto={proyecto}/>
@@ -150,13 +149,13 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                     {content()}
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className="card-action-box">
                 {botonParticiparProyecto}
                 <VerProyectoBtn proyecto={proyecto}/>
                 {botonEditarProyecto}
                 {botonEliminarProyecto}
             </CardActions>
-
+            {tagParticipacion}
             <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
         </Box>
     );
