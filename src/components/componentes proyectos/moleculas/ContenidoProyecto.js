@@ -12,7 +12,7 @@ import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -34,12 +34,22 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     })
     const [participacion, setParticipacion] = useState(false)
     //const [numberParticipants, setNumber] = useState(0)
+    const mountedRef = useRef(false)
     
     // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
+        mountedRef.current = true
+        
         activateSnackBar()
-        asignarParticipacion()
+        const colocarParticipacion = async () => {
+            const participa = await asignarParticipacion()
+            mountedRef.current && setParticipacion(participa)
+        }
+        colocarParticipacion()
         //getNumberParticipants()
+        return () => {
+            mountedRef.current = false
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [participacion])
     
@@ -49,7 +59,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         //debugger
         const participa = await onGetParticipacion(proyecto.id)
         const p = participa === true? true : false
-        setParticipacion(p)
+        return p
     }
 /*
     async function getNumberParticipants() {
