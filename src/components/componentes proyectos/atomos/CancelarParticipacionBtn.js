@@ -39,9 +39,8 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
 const CancelParticipationButton = withStyles((theme) => ({
     root: {
         backgroundColor: "#a8a8a8",
-        width: "35%",
+        width: "40%",
         minWidth: "20%",
-        whiteSpace: 'nowrap',
         color: "white",
         "&:hover": {
             backgroundColor: "#818181",
