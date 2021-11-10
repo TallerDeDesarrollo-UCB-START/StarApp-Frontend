@@ -7,7 +7,6 @@ import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
 import {useState, useEffect, useRef} from 'react'
 import {useLocation} from "react-router-dom";
-import ProyectoVoluntario from '../moleculas/ProyectoVoluntario';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
