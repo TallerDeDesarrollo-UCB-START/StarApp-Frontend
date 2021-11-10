@@ -5,12 +5,12 @@ import { Container, Card, Modal, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
-
 import "./EventsList.css";
 
 import TextField from "@mui/material/TextField";
 
 const url = process.env.REACT_APP_API;
+const urlLocal = `http://localhost:5000/eventos`;
 const urlDeploy = `${url}eventos`;
 const urlCrearEvento = `${url}eventos/crearevento`;
 const urlLideres = `${url}lideres`;
@@ -23,8 +23,13 @@ const apiProyectos = axios.create({
   baseURL: urlProyectos,
 });
 
+const current = new Date();
+const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${(
+  "0" + current.getDate()
+).slice(-2)}`;
+
 const api = axios.create({
-  baseURL: urlDeploy,
+  baseURL: urlLocal,
 });
 const urlParticipacion = `${urlDeploy}/participate_evento/`;
 const current = new Date();
@@ -72,13 +77,21 @@ class EventsList extends Component {
     this.getParticipaciones();
     this.getCategorias();
     this.getUserRol();
-
     this.getLideres();
     this.getProyectos();
   }
 
   abrirModal = () => {
     this.setState({ abierto: !this.state.abierto });
+  };
+  getCategorias = async () => {
+    let data = await api.get("/categorias").then(({ data }) => data);
+    let aux = data.map((item) => {
+      return item.interes;
+    });
+    aux.unshift("Todas");
+    this.setState({ categoriaFiltrada: aux[0] });
+    this.setState({ categorias: aux });
   };
 
   getEvents = async () => {
@@ -150,7 +163,7 @@ class EventsList extends Component {
     this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
   };
-
+  
   getEventsArchivados = async () => {
     try {
       this.state.botonMostrar = true;
@@ -352,10 +365,9 @@ class EventsList extends Component {
     return (
       <div>
         <div>
-          <div>
-            <h1> Bienvenido a Lista de eventos!</h1>
-          </div>
-          <div>
+          <h1> Bienvenido a Lista de eventos!</h1>
+          <div className="header-lista-eventos">
+            <span>Categoria:</span>
             <select
               value={this.state.categoriaFiltrada}
               onChange={this.filterChangeHandler}
@@ -369,6 +381,7 @@ class EventsList extends Component {
               })}
             </select>
             
+            <span>Estado:</span>
             <select
               value={this.state.filtradoSegunEstado}
               onChange={this.filterStateChangeHandler}
@@ -405,17 +418,22 @@ class EventsList extends Component {
               </Fragment>
             ) : (
               <Fragment>
-                <Button style={{ marginLeft: "auto" }} color="#ffffff"></Button>
-                <Button
-                  style={{
-                    display: this.state.botonMostrarEventosArchivados
-                      ? "block"
-                      : "none",
-                  }}
-                  onClick={() => this.getEventsArchivados()}
-                >
-                  Eventos Pasados
-                </Button>
+                <div className="eventos-pasados-button">
+                  <Button
+                    style={{ marginLeft: "auto" }}
+                    color="#ffffff"
+                  ></Button>
+                  <Button
+                    style={{
+                      display: this.state.botonMostrarEventosArchivados
+                        ? "block"
+                        : "none",
+                    }}
+                    onClick={() => this.getEventsArchivados()}
+                  >
+                    Eventos Pasados
+                  </Button>
+                </div>
               </Fragment>
             )}
 
