@@ -18,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     backgroundColor: "#074d81",
   },
+  responsiveHeader: {
+    width: "100%",
+    position: "fixed",
+    bottom: "0px",
+  },
   headerHome:{
     flexDirection: "column",
     width: "100%",
@@ -42,11 +47,6 @@ const useStyles = makeStyles((theme) => ({
     width: "80%",
     display: "flex",
     justifyContent: "center",
-  },
-  responsiveHeader: {
-    width: "100%",
-    position: "fixed",
-    bottom: "0px",
   },
 }));
 
