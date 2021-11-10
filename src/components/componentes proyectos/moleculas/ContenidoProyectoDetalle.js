@@ -2,9 +2,49 @@
 import ListaParticipantesProyecto from './ListaParticipantesProyecto';
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
+import { Switch } from '@material-ui/core';
+// Permisos/Roles:
+import PuertaPermisos from '../organismos/PuertaPermisos';
+import {SCOPES} from '../organismos/map-permisos';
+import { useEffect, useState } from 'react';
 
 function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
+    const [visualizarP, setVisualizarP] = useState(proyecto.visualizar)
+    useEffect(()=>{
+        console.log(proyecto)
+    },[])
+
+    const Onchange = async () => {
+        //debugger
+        setVisualizarP(!visualizarP)
+        const proyectoEditar={
+            visualizar: visualizarP
+        }
+        const response = await fetch(
+            `${process.env.REACT_APP_API}update_proyecto/${proyecto.id}`,
+            {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(proyectoEditar)
+            })
+        const data = await response.json()    
+        console.log(data)
+    }
+
+     const switchListaParticipantes = proyecto.visualizar === true?
+        <ListaParticipantesProyecto proyectoId={proyecto.id}/>
+        :<PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
+        <ListaParticipantesProyecto proyectoId={proyecto.id}/>
+        </PuertaPermisos>
+
+    const listaPartipantes = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
+                                    <Switch
+                                    onChange={Onchange}
+                                    checked={!visualizarP} 
+                                    />
+                                </PuertaPermisos>
+    
     return (
         <Box className="content-container">
             <b>
@@ -28,17 +68,11 @@ function ContenidoProyectoDetalle ({proyecto}) {
             <p className="card-text">
                 <b>Categoría:</b> {proyecto.categoria}
             </p>
-            <ListaParticipantesProyecto proyectoId={proyecto.id}/>
+            {listaPartipantes}
+            {switchListaParticipantes}
+            
         </Box>
     );
 }
  
 export default ContenidoProyectoDetalle
-
-/*<p className="card-text">
-<b>Información Adicional:</b>
-</p>
-
-<p className="card-text">
-<b>Líder:</b> {proyecto.lider}
-</p>*/

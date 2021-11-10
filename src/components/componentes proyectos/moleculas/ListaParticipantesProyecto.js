@@ -21,12 +21,12 @@ export class ListaParticipantesProyecto extends Component{
         let id = this.getId(thisUrl);
         axios.get(`${process.env.REACT_APP_API}get_participantes_proyecto_simple/${id}`)
         .then(response => {
-            console.log(response)
             this.setState({posts:response.data})
         })
         .catch(error => {
             console.log(error)
         })
+
     }
     getId(thisUrl) {
         var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
