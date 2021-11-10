@@ -110,7 +110,7 @@ import { withRouter } from "react-router";
                     onClose={handlePopoverClose}
                     disableRestoreFocus
                   >
-                    <Typography >Para cambiar nombre, apellido o telefono contactanos.</Typography>
+                    <Typography >Para cambiar nombre, apellido o teléfono contactanos.</Typography>
                   </Popover>
                   <Divider style={{ borderColor: "black" }} />
                   <Typography variant="body2" className={classes.greyColor}>
@@ -127,7 +127,7 @@ import { withRouter } from "react-router";
                     )}
                   </Typography>
                   <Typography variant="body2" className={classes.greyColor}>
-                   <strong className={classes.blackColor}> Genero:</strong>{" "} {smallScreen? <br></br>: ""}
+                   <strong className={classes.blackColor}> Género:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.genero ? (
                       getDataProfile.genero
                     ) : (
@@ -152,7 +152,7 @@ import { withRouter } from "react-router";
                     )}
                   </Typography>
                   <Typography variant="body2" className={classes.greyColor}>
-                   <strong className={classes.blackColor}> Telefono:</strong>{" "} {smallScreen? <br></br>: ""}
+                   <strong className={classes.blackColor}> Teléfono:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.telefono ? (
                       getDataProfile.telefono
                     ) : (
@@ -168,7 +168,7 @@ import { withRouter } from "react-router";
                     )}
                   </Typography>
                   <Typography variant="body2" className={classes.greyColor}>
-                   <strong className={classes.blackColor}> Pais de residencia:</strong>{" "} {smallScreen? <br></br>: ""}
+                   <strong className={classes.blackColor}> País de residencia:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.pais_de_recidencia ? (
                       getDataProfile.pais_de_recidencia
                     ) : (
@@ -210,7 +210,7 @@ import { withRouter } from "react-router";
                 </Paper>
                 <Grid className={classes.paper}>
                   <Paper style={{ padding: "15px" }} className= {smallScreen? classes.smallGrid: ""}>
-                    <Typography><strong className={classes.blackColor}>Descripcion:</strong></Typography>
+                    <Typography><strong className={classes.blackColor}>Descripción:</strong></Typography>
                     <Divider style={{ borderColor: "black" }} />
                     {getDataProfile.descripcion_personal ? (
                     <span  className={classes.greyColor}>  {getDataProfile.descripcion_personal} </span>
@@ -247,7 +247,7 @@ import { withRouter } from "react-router";
               </Grid>
               <Grid className={classes.paper}>
                 <Paper style={{ padding: "15px" }} className= {smallScreen? classes.smallGrid: ""}>
-                  <Typography><strong className={classes.blackColor}>Aptitudes Tecnicas:</strong></Typography>
+                  <Typography><strong className={classes.blackColor}>Aptitudes Técnicas:</strong></Typography>
                   <Divider style={{ borderColor: "black" }} />
                   {getDataProfile.aptitudes_tecnicas.map((aptitud) => (
                     <li variant="body2" key={aptitud}  className={classes.greyColor}>

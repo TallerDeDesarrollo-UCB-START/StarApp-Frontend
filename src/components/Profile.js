@@ -365,7 +365,7 @@ const Profile = ({sessionData}) => {
             className={classNamees.intputs}
             value={datosEdit.carrera}
             onChange={handleInputChange}
-            placeholder="Profecion u Oficio"
+            placeholder="Profesión u Oficio"
             name="carrera"
             id="carrera"
             type="text"
@@ -451,7 +451,7 @@ const Profile = ({sessionData}) => {
                   type="checkbox"
                 />
                 {` `}
-                <label htmlFor="educacionCheck">Educacion</label>
+                <label htmlFor="educacionCheck">Educación</label>
               </Grid>
             </Grid>
           </div>
@@ -481,7 +481,7 @@ const Profile = ({sessionData}) => {
                   type="checkbox"
                 />
                 {` `}
-                <label htmlFor="organizacion-check">Organizacion</label>
+                <label htmlFor="organizacion-check">Organización</label>
               </Grid>
               <Grid item xs={12}>
                 <input
@@ -493,7 +493,7 @@ const Profile = ({sessionData}) => {
                   type="checkbox"
                 />
                 {` `}
-                <label htmlFor="aprendizaje-rapido">Aprendizaje rapido</label>
+                <label htmlFor="aprendizaje-rapido">Aprendizaje rápido</label>
               </Grid>
               <Grid item xs={12}>
                 <input
@@ -618,13 +618,13 @@ const Profile = ({sessionData}) => {
             </Grid>
           </div>
           <label className={classNamees.titulos} htmlFor="pais_de_recidencia">
-            Pais de residencia:
+            País de residencia:
           </label>
           <input
             className={classNamees.intputs}
             value={datosEdit.pais_de_recidencia}
             onChange={handleInputChange}
-            placeholder="Pais de recidencia"
+            placeholder="País de recidencia"
             name="pais_de_recidencia"
             id="pais_de_recidencia"
             type="text"
