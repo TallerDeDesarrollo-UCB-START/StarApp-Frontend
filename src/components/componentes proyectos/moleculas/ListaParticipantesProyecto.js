@@ -42,17 +42,17 @@ export class ListaParticipantesProyecto extends Component{
                 <List>
                 {
                     posts.map(post=>(
-                        <ListItem>
+                        <ListItem key={post.id}>
                             <ListItemIcon>
 
                             </ListItemIcon>
-                            <ListItemText primary={post.nombre} />
+                            <ListItemText  primary={post.nombre} />
                         </ListItem>
 
                     ))
                 }
                 </List>
-                <ExcelFile element={<ExportarButton variant="contained" color="green">Exportar Lista</ExportarButton>} filename="ListaParticipantes">
+                <ExcelFile element={<ExportarButton variant="contained" >Exportar Lista</ExportarButton>} filename="ListaParticipantes">
                         <ExcelSheet data={posts} name="Participantes">
                             <ExcelColumn label="Nombre" value="nombre"/>
                             <ExcelColumn label="Apellido" value="apellido"/>
