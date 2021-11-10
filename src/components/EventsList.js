@@ -483,7 +483,7 @@ class EventsList extends Component {
                           <Grid item xs>
                             <DeleteButton
                               variant="contained"
-                              color="success"
+                              color="secondary"
                               onClick={() => this.deleteEvento(event)}
                             >
                               Eliminar
