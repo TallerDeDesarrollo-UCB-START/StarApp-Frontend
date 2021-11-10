@@ -1,29 +1,40 @@
 // Componentes:
 import InputTexto from '../moleculas/InputTexto'
-import InputDropDown from "../atomos/InputDropDown";
+//import InputDropDown from "../atomos/InputDropDown";
 // Librerias-Paquetes:
-import {VARIABLES} from '../organismos/variables-compartidas'
+//import {VARIABLES} from '../organismos/variables-compartidas'
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+//import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 
 // Styles
-const useStylesDrpdn = makeStyles({
+/*const useStylesDrpdn = makeStyles({
   drpdown: {
     margin: "-5px 0%",
     backgroundColor: "#F2F2F2",
     border: "1px solid #C4C4C4",
     borderRadius: "6px",
   },
-});
+});*/
 
-const varProyectos = VARIABLES.datosProyectos
+//const varProyectos = VARIABLES.datosProyectos
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar}) {
   // Styles
-    const classesDrpdn = useStylesDrpdn();  
+    //const classesDrpdn = useStylesDrpdn();
+    const estadoActual= hallarEstado(proyecto.estado);
+    function hallarEstado (estado){
+        if(estado==='true'){
+            return ("Concluido")
+        }
+        else{
+            return ("En Curso") 
+        }
+    }
+    /*
+    */
   // States
     const [fechaInicio, setFechaInicio] = useState(proyecto.fechaInicio)
     const [fechaFin, setFechaFin] = useState(proyecto.fechaFin)
@@ -32,7 +43,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)
     const [lider, setLider] = useState(proyecto.lider)
     const [categoria, setCategoria] = useState(proyecto.categoria)
-    const [estado, setEstado] = useState(proyecto.estado)
+    const [setEstado] = useState(proyecto.estado)
     const [infoAd, setInfoAd] = useState(proyecto.infoAd)
 
 
@@ -85,7 +96,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             descripcion: descripcion,
             objetivo: objetivos,
             lider: lideres,
-            estado: estado,
+            estadoActual: estadoActual,
             categoria: categoria,
             infoAd: infoAd
         }
@@ -171,7 +182,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                 />
                     <label>Estado</label>
                     <InputTexto placeHolder='Estado'
-                                value={estado}
+                                value={estadoActual}
                                 onChange={onChangeEstado}
                                 />
                     <label>Información Adicional</label>
