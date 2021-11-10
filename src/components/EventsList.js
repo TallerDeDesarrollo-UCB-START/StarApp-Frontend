@@ -24,6 +24,7 @@ const apiProyectos = axios.create({
 });
 
 const current = new Date();
+
 const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${(
   "0" + current.getDate()
 ).slice(-2)}`;
@@ -32,10 +33,6 @@ const api = axios.create({
   baseURL: urlLocal,
 });
 const urlParticipacion = `${urlDeploy}/participate_evento/`;
-const current = new Date();
-const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${(
-  "0" + current.getDate()
-).slice(-2)}`;
 class EventsList extends Component {
   state = {
     events: [],
