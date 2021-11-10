@@ -6,7 +6,7 @@ import { Switch } from '@material-ui/core';
 // Permisos/Roles:
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 
 function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
