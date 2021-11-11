@@ -67,6 +67,7 @@ class EventsList extends Component {
     lideres: [],
     proyectos: [],
   };
+  
 
   constructor() {
     super();
