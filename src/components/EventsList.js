@@ -363,7 +363,7 @@ class EventsList extends Component {
         <div>
           <h1> Bienvenido a Lista de eventos!</h1>
           <div className="header-lista-eventos">
-            <span>Categoria:</span>
+            <span className="span-align">Categoria:</span>
             <select
               value={this.state.categoriaFiltrada}
               onChange={this.filterChangeHandler}
@@ -377,7 +377,7 @@ class EventsList extends Component {
               })}
             </select>
 
-            <span>Estado:</span>
+            <span className="span-align">Estado:</span>
             <select
               value={this.state.filtradoSegunEstado}
               onChange={this.filterStateChangeHandler}

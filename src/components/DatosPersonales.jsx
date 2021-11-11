@@ -86,7 +86,7 @@ import { withRouter } from "react-router";
                         variant="subtitle2"
                         style = {{color: "#4F61EA"}}
                       >
-                      mas informacion
+                      Más información
                       </Typography>
                     </Grid>
                   </Grid>
@@ -110,7 +110,7 @@ import { withRouter } from "react-router";
                     onClose={handlePopoverClose}
                     disableRestoreFocus
                   >
-                    <Typography >Para cambiar nombre, apellido o teléfono contactanos.</Typography>
+                    <Typography >Para cambiar nombre, apellido o teléfono contáctanos.</Typography>
                   </Popover>
                   <Divider style={{ borderColor: "black" }} />
                   <Typography variant="body2" className={classes.greyColor}>
@@ -191,7 +191,7 @@ import { withRouter } from "react-router";
                     )}
                   </Typography>
                   <Typography variant="body2"  className={classes.greyColor}>
-                  <strong className={classes.blackColor}> Relacion:</strong>{" "} {smallScreen? <br></br>: ""}
+                  <strong className={classes.blackColor}> Relación:</strong>{" "} {smallScreen? <br></br>: ""}
                     {getDataProfile.relacion_contacto_de_emergencia ? (
                       getDataProfile.relacion_contacto_de_emergencia
                     ) : (
