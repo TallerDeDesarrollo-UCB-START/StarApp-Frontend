@@ -60,8 +60,8 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
         onClick={() => history.push(routes[0].path)}
         style={
           pagesize === "small"
-            ? { color: currentPath === routes[0].path ? "black" : "gray" }
-            : { color: "white" }
+              ? { color: "gray" }
+              : { color: "white" }
         }
       />
       <BottomNavigationAction
@@ -94,8 +94,8 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
         onClick={() => history.push(logged ? routes[1].path : routes[4].path)}
         style={
           pagesize === "small"
-            ? { color: currentPath === routes[1].path ? "black" : "gray" }
-            : { color: "white" }
+              ? { color: "gray" }
+              : { color: "white" }
         }
       />
       <BottomNavigationAction
@@ -110,8 +110,8 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
         onClick={() => history.push(logged ? routes[2].path : routes[4].path)}
         style={
           pagesize === "small"
-            ? { color: currentPath === routes[2].path ? "black" : "gray" }
-            : { color: "white" }
+          ? { color: "gray" }
+          : { color: "white" }
         }
       />
       <BottomNavigationAction
@@ -126,8 +126,8 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
         onClick={() => history.push(logged ? routes[3].path : routes[4].path)}
         style={
           pagesize === "small"
-            ? { color: currentPath === routes[3].path ? "black" : "gray" }
-            : { color: "white" }
+              ? { color: "gray" }
+              : { color: "white" }
         }
       />
       {sessionData.role !== "voluntario" ? (
@@ -143,7 +143,7 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
           onClick={() => history.push(logged ? routes[6].path : routes[4].path)}
           style={
             pagesize === "small"
-              ? { color: currentPath === routes[4].path ? "black" : "gray" }
+              ? { color: "gray" }
               : { color: "white" }
           }
         />
