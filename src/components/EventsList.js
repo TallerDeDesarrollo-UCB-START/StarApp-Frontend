@@ -30,7 +30,7 @@ const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${(
 ).slice(-2)}`;
 
 const api = axios.create({
-  baseURL: urlLocal,
+  baseURL: urlDeploy,
 });
 const urlParticipacion = `${urlDeploy}/participate_evento/`;
 class EventsList extends Component {
@@ -67,6 +67,7 @@ class EventsList extends Component {
     lideres: [],
     proyectos: [],
   };
+  
 
   constructor() {
     super();
@@ -94,9 +95,7 @@ class EventsList extends Component {
   getEvents = async () => {
     try {
       let data = await api.get("/").then(({ data }) => data);
-      if (
-        this.state.categoriaFiltrada !== "Todas"   
-      ) {
+      if (this.state.categoriaFiltrada !== "Todas") {
         switch (this.state.filtradoSegunEstado) {
           case "En Curso":
             data = data.filter(
@@ -160,7 +159,7 @@ class EventsList extends Component {
     this.setState({ categoriaFiltrada: aux[0] });
     this.setState({ categorias: aux });
   };
-  
+
   getEventsArchivados = async () => {
     try {
       this.state.botonMostrar = true;
@@ -377,7 +376,7 @@ class EventsList extends Component {
                 );
               })}
             </select>
-            
+
             <span>Estado:</span>
             <select
               value={this.state.filtradoSegunEstado}

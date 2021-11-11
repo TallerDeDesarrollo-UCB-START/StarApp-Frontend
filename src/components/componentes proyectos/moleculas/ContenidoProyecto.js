@@ -124,6 +124,21 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
 
     function content (){
         var resp="";
+        var cont=true;
+        var i=0;
+        for(i=0; i < 85 && cont; i++){
+            if(proyecto.descripcion[i]!==undefined){
+                resp += proyecto.descripcion[i];
+            }else {
+                cont=false;
+            }
+        }
+        if(i >= 85) {
+            resp += '...';
+        }
+        
+        return resp;
+        /*
         if( proyecto.descripcion.length > 85 ) {
             for(var i=0; i < 85; i++){
                 resp += proyecto.descripcion[i];
@@ -132,11 +147,27 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         } else {
             resp = proyecto.descripcion;
         }
-        return resp;
+        return resp;*/
     }
 
     function title (){
+        
         var resp="";
+        var cont=true;
+        var i=0;
+        for( i=0; i < 29 && cont; i++){
+            if(proyecto.titulo[i]!==undefined){
+                resp += proyecto.titulo[i];
+            }else {
+                cont=false;
+            }
+        }
+
+        if(i >= 29) {
+            resp += '...';
+        }
+        return resp;
+        /*
         if( proyecto.titulo.length > 29 ) {
             for(var i=0; i < 29; i++){
                 resp += proyecto.titulo[i];
@@ -145,7 +176,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         } else {
             resp = proyecto.titulo;
         }
-        return resp;
+        return resp;*/
     }
     
     return (
