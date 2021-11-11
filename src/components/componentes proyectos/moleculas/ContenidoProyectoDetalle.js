@@ -1,6 +1,6 @@
 // Librerias-Paquetes:
 import ListaParticipantesProyecto from './ListaParticipantesProyecto';
-import './ContenidoProyecto.css';
+import './ContenidoProyectoDetalle.css';
 import { Box } from '@material-ui/core';
 import { Switch } from '@material-ui/core';
 // Permisos/Roles:
@@ -63,6 +63,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
             <p className="card-text">
                 <b>Descripción:</b> {proyecto.descripcion}
             </p>
+            
             <p className="card-text">
                 <b>Objetivo:</b> {proyecto.objetivo}
             </p>

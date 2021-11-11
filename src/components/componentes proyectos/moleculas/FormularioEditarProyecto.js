@@ -24,7 +24,7 @@ import Modal from '@material-ui/core/Modal';
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar}) {
   // Styles
     //const classesDrpdn = useStylesDrpdn();
-    const estadoActual= hallarEstado(proyecto.estado);
+    /*const estadoActual= hallarEstado(proyecto.estado);
     function hallarEstado (estado){
         if(estado==='true'){
             return ("Concluido")
@@ -32,9 +32,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         else{
             return ("En Curso") 
         }
-    }
-    /*
-    */
+    }*/
   // States
     const [fechaInicio, setFechaInicio] = useState(proyecto.fechaInicio)
     const [fechaFin, setFechaFin] = useState(proyecto.fechaFin)
@@ -43,8 +41,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)
     const [lider, setLider] = useState(proyecto.lider)
     const [categoria, setCategoria] = useState(proyecto.categoria)
-    const [setEstado] = useState(proyecto.estado)
-    const [infoAd, setInfoAd] = useState(proyecto.infoAd)
+    const [estado, setEstado] = useState(proyecto.estado)
+    const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
 
 
     function resetStates() {
@@ -55,7 +53,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setObjetivo('')
         setLider('')
         setCategoria('')
-        setEstado('')
+
         setInfoAd('')
     }
 
@@ -85,6 +83,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         event.preventDefault() // To avoid submitting to an actual page
         const lideres = [lider]
         const objetivos = [objetivo]
+        console.log (lideres)
         /*if (validarCampos(event) === false) {
             return
         }*/
@@ -96,9 +95,9 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             descripcion: descripcion,
             objetivo: objetivos,
             lider: lideres,
-            estadoActual: estadoActual,
+            estado: estado,
             categoria: categoria,
-            infoAd: infoAd
+            informacion_adicional: informacion_adicional
         }
         onEditarProy(proyectoEditar) // callback invocation
         resetStates()
@@ -161,33 +160,39 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                 onChange={onChangeTitulo}
                                 />
                     <label>Descripción</label>
-                    <InputTexto placeHolder='Descripción'
+                    <InputTexto type="text"
+                                placeHolder='Descripción'
                                 value={descripcion}
                                 onChange={onChangeDescrip}
                                 />
                     <label>Objetivo</label>
-                    <InputTexto placeHolder='Objetivo'
+                    <InputTexto type="text"
+                                placeHolder='Objetivo'
                                 value={objetivo}
                                 onChange={onChangeObjetivo}
                                 />
                     <label>Líder</label>
-                    <InputTexto placeHolder='Líder'
+                    <InputTexto type="text"
+                                placeHolder='Líder'
                                 value={lider}
                                 onChange={onChangeLider}
                                 />
                     <label>Categoría</label>
-                    <InputTexto placeHolder='Categoría'
+                    <InputTexto type="text"
+                                placeHolder='Categoría'
                                 value={categoria}
                                 onChange={onChangeCategoria}
                                 />
                     <label>Estado</label>
-                    <InputTexto placeHolder='Estado'
-                                value={estadoActual}
+                    <InputTexto type="text"
+                                placeHolder='Estado'
+                                value={estado}
                                 onChange={onChangeEstado}
                                 />
                     <label>Información Adicional</label>
-                    <InputTexto placeHolder='Información Adicional'
-                                value={infoAd}
+                    <InputTexto type="link"
+                                placeHolder='Información Adicional'
+                                value={informacion_adicional}
                                 onChange={onChangeInfoAd}
                                 />
                     <div className="btn-crear-container">
