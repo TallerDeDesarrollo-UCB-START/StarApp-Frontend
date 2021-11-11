@@ -48,36 +48,32 @@ function ContenidoProyectoDetalle ({proyecto}) {
                                 </PuertaPermisos>
     
     return (
-       
-        <Box className="content-container">
-             {console.log(proyecto)}
+        <Box className="content-container-detail">
+            {console.log(proyecto)}
             <b>
-                <h1 className="card-title">{proyecto.titulo}</h1>
+                <h1 className="card-title-detail">{proyecto.titulo}</h1>
             </b>
-            <p className="card-text">
+            <p className="card-text-detail">
                 <b>Fecha de Inicio:</b> {proyecto.fecha_inicio}
             </p>
-            <p>
+            <p className="card-text-detail">
                 <b>Fecha de Fin:</b> {fechaFin}
             </p>
-            <p className="card-text">
+            <p className="card-text-detail">
                 <b>Descripción:</b> {proyecto.descripcion}
             </p>
-            
-            <p className="card-text">
+            <p className="card-text-detail">
                 <b>Objetivo:</b> {proyecto.objetivo}
             </p>
-            <p className="card-text">
+            <p className="card-text-detail">
                 <b>Líder:</b> {proyecto.lider}
             </p>
-            <p className="card-text">
+            <p className="card-text-detail">
                 <b>Categoría:</b> {proyecto.categoria}
             </p>
             {listaPartipantes}
-            {switchListaParticipantes}
-            
+            {switchListaParticipantes}      
         </Box>
     );
 }
- 
 export default ContenidoProyectoDetalle
