@@ -21,12 +21,12 @@ export class ListaParticipantesProyecto extends Component{
         let id = this.getId(thisUrl);
         axios.get(`${process.env.REACT_APP_API}get_participantes_proyecto_simple/${id}`)
         .then(response => {
-            console.log(response)
             this.setState({posts:response.data})
         })
         .catch(error => {
             console.log(error)
         })
+
     }
     getId(thisUrl) {
         var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
@@ -42,17 +42,17 @@ export class ListaParticipantesProyecto extends Component{
                 <List>
                 {
                     posts.map(post=>(
-                        <ListItem>
+                        <ListItem key={post.id}>
                             <ListItemIcon>
 
                             </ListItemIcon>
-                            <ListItemText primary={post.nombre} />
+                            <ListItemText  primary={post.nombre} />
                         </ListItem>
 
                     ))
                 }
                 </List>
-                <ExcelFile element={<ExportarButton variant="contained" color="green">Exportar Lista</ExportarButton>} filename="ListaParticipantes">
+                <ExcelFile element={<ExportarButton variant="contained" >Exportar Lista</ExportarButton>} filename="ListaParticipantes">
                         <ExcelSheet data={posts} name="Participantes">
                             <ExcelColumn label="Nombre" value="nombre"/>
                             <ExcelColumn label="Apellido" value="apellido"/>

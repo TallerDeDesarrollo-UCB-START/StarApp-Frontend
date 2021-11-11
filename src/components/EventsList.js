@@ -5,16 +5,13 @@ import { Container, Card, Modal, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
-
 import "./EventsList.css";
 
 import TextField from "@mui/material/TextField";
 
 const url = process.env.REACT_APP_API;
+const urlLocal = `http://localhost:5000/eventos`;
 const urlDeploy = `${url}eventos`;
-//const urlDeploy = `http://localhost:5000/eventos`
-
-// const urlProyectos = `${URL}get_proyectos`;
 const urlCrearEvento = `${url}eventos/crearevento`;
 const urlLideres = `${url}lideres`;
 const urlProyectos = `${url}get_proyectos`;
@@ -26,11 +23,16 @@ const apiProyectos = axios.create({
   baseURL: urlProyectos,
 });
 
+const current = new Date();
+
+const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${(
+  "0" + current.getDate()
+).slice(-2)}`;
+
 const api = axios.create({
-  baseURL: urlDeploy,
+  baseURL: urlLocal,
 });
 const urlParticipacion = `${urlDeploy}/participate_evento/`;
-
 class EventsList extends Component {
   state = {
     events: [],
@@ -44,6 +46,8 @@ class EventsList extends Component {
     botonMostrarEventosArchivados: true,
     success: false,
     categoriaFiltrada: "Todas",
+    filtradoSegunEstado: "En Curso",
+    estados: ["En Curso", "Proximo", "Pasados"],
     categorias: [],
 
     modalInsertar: false,
@@ -70,7 +74,6 @@ class EventsList extends Component {
     this.getParticipaciones();
     this.getCategorias();
     this.getUserRol();
-
     this.getLideres();
     this.getProyectos();
   }
@@ -78,28 +81,6 @@ class EventsList extends Component {
   abrirModal = () => {
     this.setState({ abierto: !this.state.abierto });
   };
-
-  getEvents = async () => {
-    try {
-      let data = await api.get("/").then(({ data }) => data);
-      if (
-        this.state.categoriaFiltrada !== "Todas" &&
-        this.state.categoriaFiltrada !== "Otro"
-      ) {
-        data = data.filter(
-          (event) =>
-            event.estado === "1" &&
-            event.categoria === this.state.categoriaFiltrada
-        );
-      } else {
-        data = data.filter((event) => event.estado === "1");
-      }
-      this.setState({ events: data });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   getCategorias = async () => {
     let data = await api.get("/categorias").then(({ data }) => data);
     let aux = data.map((item) => {
@@ -110,6 +91,76 @@ class EventsList extends Component {
     this.setState({ categorias: aux });
   };
 
+  getEvents = async () => {
+    try {
+      let data = await api.get("/").then(({ data }) => data);
+      if (
+        this.state.categoriaFiltrada !== "Todas"   
+      ) {
+        switch (this.state.filtradoSegunEstado) {
+          case "En Curso":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" &&
+                event.fecha_evento === currentDate &&
+                event.categoria === this.state.categoriaFiltrada
+            );
+            break;
+          case "Proximo":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" &&
+                event.fecha_evento > currentDate &&
+                event.categoria === this.state.categoriaFiltrada
+            );
+            break;
+          case "Pasados":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" &&
+                event.fecha_evento < currentDate &&
+                event.categoria === this.state.categoriaFiltrada
+            );
+            break;
+        }
+      } else {
+        switch (this.state.filtradoSegunEstado) {
+          case "En Curso":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" && event.fecha_evento === currentDate
+            );
+            break;
+          case "Proximo":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" && event.fecha_evento > currentDate
+            );
+            break;
+          case "Pasados":
+            data = data.filter(
+              (event) =>
+                event.estado === "1" && event.fecha_evento < currentDate
+            );
+            break;
+        }
+      }
+
+      this.setState({ events: data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  getCategorias = async () => {
+    let data = await api.get("/categorias").then(({ data }) => data);
+    let aux = data.map((item) => {
+      return item.interes;
+    });
+    aux.unshift("Todas");
+    this.setState({ categoriaFiltrada: aux[0] });
+    this.setState({ categorias: aux });
+  };
+  
   getEventsArchivados = async () => {
     try {
       this.state.botonMostrar = true;
@@ -178,7 +229,10 @@ class EventsList extends Component {
     this.setState({ categoriaFiltrada: categoria.target.value });
     this.getEvents();
   };
-
+  filterStateChangeHandler = (estado) => {
+    this.setState({ filtradoSegunEstado: estado.target.value });
+    this.getEvents();
+  };
   mensajeConfirmacionParticipacion(event) {
     window.alert(
       `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
@@ -308,15 +362,28 @@ class EventsList extends Component {
     return (
       <div>
         <div>
-          <div>
-            <h1> Bienvenido a Lista de eventos!</h1>
-          </div>
-          <div>
+          <h1> Bienvenido a Lista de eventos!</h1>
+          <div className="header-lista-eventos">
+            <span>Categoria:</span>
             <select
               value={this.state.categoriaFiltrada}
               onChange={this.filterChangeHandler}
             >
               {this.state.categorias.map((item) => {
+                return (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
+            
+            <span>Estado:</span>
+            <select
+              value={this.state.filtradoSegunEstado}
+              onChange={this.filterStateChangeHandler}
+            >
+              {this.state.estados.map((item) => {
                 return (
                   <option key={item} value={item}>
                     {item}
@@ -348,17 +415,22 @@ class EventsList extends Component {
               </Fragment>
             ) : (
               <Fragment>
-                <Button style={{ marginLeft: "auto" }} color="#ffffff"></Button>
-                <Button
-                  style={{
-                    display: this.state.botonMostrarEventosArchivados
-                      ? "block"
-                      : "none",
-                  }}
-                  onClick={() => this.getEventsArchivados()}
-                >
-                  Eventos Pasados
-                </Button>
+                <div className="eventos-pasados-button">
+                  <Button
+                    style={{ marginLeft: "auto" }}
+                    color="#ffffff"
+                  ></Button>
+                  <Button
+                    style={{
+                      display: this.state.botonMostrarEventosArchivados
+                        ? "block"
+                        : "none",
+                    }}
+                    onClick={() => this.getEventsArchivados()}
+                  >
+                    Eventos Pasados
+                  </Button>
+                </div>
               </Fragment>
             )}
 
@@ -381,7 +453,7 @@ class EventsList extends Component {
                 <div className="row no-gutters">
                   <div className="col-auto">
                     <img
-                      src="http://jorge-zientarski.com/imgs/Events2.jpg"
+                      src="https://jorge-zientarski.com/imgs/Events2.jpg"
                       className="img-fluid"
                       alt=""
                     />

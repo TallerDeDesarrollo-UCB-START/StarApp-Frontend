@@ -5,7 +5,7 @@ import ProyectosVoluntarios from './ProyectosVoluntarios'
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import {useLocation} from "react-router-dom";
 
 function useQuery() {
@@ -16,32 +16,45 @@ function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
     const [actualizar, setActualizar] = useState(false)
+    const mountedRef = useRef(false)
     // Variables
     let categoria = useQuery().get("categoria");
     let tipoEstado = useQuery().get("tipoestado"); //pasados,?
     let complementoHeader = categoria? categoria : tipoEstado
     complementoHeader = complementoHeader? complementoHeader : ""
     
+    function setProyectosCheck(data, mounted){
+        if (mounted) {
+            setProyectos(data)
+        }
+    }
+
     useEffect(() => {
+        mountedRef.current = true
         
         const getProyectos = async () => {
             const proyectosDelServer =  await fetchProyectos()
-            setProyectos(proyectosDelServer)
+            setProyectosCheck(proyectosDelServer, mountedRef.current)
         }
 
         const getProyectosFiltro = async () => {
-            await filtrarPorCategoria(categoria)
+            const proyectosFiltrados = await filtrarPorCategoria(categoria)
+            setProyectosCheck(proyectosFiltrados, mountedRef.current)
         }
 
         const getProyectosPasados = async () => {
             const proyectosPasados =  await fetchProyectosPasados()
-            setProyectos(proyectosPasados)
+            setProyectosCheck(proyectosPasados, mountedRef.current)
         }
 
         if(tipoEstado){
             tipoEstado==="Pasados"? getProyectosPasados() : getProyectos() 
         } else{
             categoria? getProyectosFiltro() : getProyectos()
+        }
+
+        return () => {
+            mountedRef.current = false
         }
     }, [actualizar, categoria, tipoEstado] )
 
@@ -133,7 +146,6 @@ function VistaProyectos() {
     }
         
     const eliminarProyecto = async (id) => { 
-        //debugger
         await fetch(
         `${URLEliminarProy}/${id}`,
         { 
@@ -151,33 +163,38 @@ function VistaProyectos() {
             }
         )
         const data = await response.json();
+        return data
         //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
-        setProyectos(data)
+        
     }
-    
+    let proyectosAdmins = <ProyectosAdmins rol={"core team"}
+                                proyectos={proyectos} 
+                                onCrearProy={crearProyecto} 
+                                onEliminarProy={eliminarProyecto} 
+                                onPartiparProy={participarEnProyecto} 
+                                onEditarProy={editarProyecto} 
+                                onGetParticipacion={obtenerParticipacionProyecto}
+                                onCancelarParticipacion={cancelarParticipacionProyecto}
+                                onNumeroParticipantes={obtenerNumeroParticipantes}
+                                tituloHeader={complementoHeader}/> 
+    let proyectosVoluntarios = <ProyectosVoluntarios rol={"core team"}
+                                    proyectos={proyectos}
+                                    onPartiparProy={participarEnProyecto}
+                                    onGetParticipacion={obtenerParticipacionProyecto}
+                                    onCancelarParticipacion={cancelarParticipacionProyecto}
+                                    onNumeroParticipantes={obtenerNumeroParticipantes}
+                                    tituloHeader={complementoHeader}/>
+    //console.log(proyectosVoluntarios)
     return (
         <>
             <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-                <ProyectosAdmins rol={"core team"}
-                        proyectos={proyectos} 
-                        onCrearProy={crearProyecto} 
-                        onEliminarProy={eliminarProyecto} 
-                        onPartiparProy={participarEnProyecto} 
-                        onEditarProy={editarProyecto} 
-                        onGetParticipacion={obtenerParticipacionProyecto}
-                        onCancelarParticipacion={cancelarParticipacionProyecto}
-                        onNumeroParticipantes={obtenerNumeroParticipantes}
-                        tituloHeader={complementoHeader}/> 
+                {proyectosAdmins}
+                {proyectosVoluntarios = <></>}
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
-                <ProyectosVoluntarios rol={"core team"}
-                        proyectos={proyectos}
-                        onPartiparProy={participarEnProyecto}
-                        onGetParticipacion={obtenerParticipacionProyecto}
-                        onCancelarParticipacion={cancelarParticipacionProyecto}
-                        onNumeroParticipantes={obtenerNumeroParticipantes}
-                        tituloHeader={complementoHeader}/>
+                {proyectosVoluntarios}
+                {proyectosAdmins = <></>}
             </PuertaPermisos>
         </>
     );
