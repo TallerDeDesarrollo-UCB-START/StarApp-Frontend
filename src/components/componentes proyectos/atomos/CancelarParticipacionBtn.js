@@ -16,6 +16,7 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
     }, [snackbar, participacion])*/
 
     const onClick = async (event) => {
+        //debugger
         const cancelResponse = await onCancelarParticipacion(proyecto.id);
         //console.log(cancelResponse)
         if(cancelResponse){
@@ -31,7 +32,7 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
                 <CancelParticipationButton variant="contained" color="primary"
                 onClick={onClick}
                 >
-                    Dejar Proyecto
+                    Dejar
                 </CancelParticipationButton>
     );
 }

@@ -18,7 +18,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const [lider, setLider] = useState('')
     const [categoria, setCategoria] = useState('')
     const [estado, setEstado] = useState('')
-    const [infoAd, setInfoAd] = useState('')
+    const [informacion_adicional, setInfoAd] = useState('')
 
 
     function resetStates() {
@@ -41,10 +41,9 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     }
 
     function validarCampos(event) {
-        if (!fechaInicio || !titulo || !descripcion || !objetivo || !lider || !categoria) {
+        if (!titulo || !descripcion || !objetivo || !lider || !categoria) {
             alert('Porfavor llene los campos')
             //console.log(event)
-            if (!fechaInicio) agregarRequerido(event.currentTarget[0])
             if (!titulo) agregarRequerido(event.currentTarget[2])
             if (!descripcion) agregarRequerido(event.currentTarget[3])
             if (!objetivo) agregarRequerido(event.currentTarget[4])
@@ -71,14 +70,14 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             lider: lideres,
             estado: estado,
             categoria: categoria,
-            infoAd: infoAd
+            informacion_adicional: informacion_adicional
         }
         onCrearProy(nuevoProyecto) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario
     }
 
-    const onChangeFechaInicio = (e) => {setFechaInicio(e.target.value); removerRequerido(e.target)}
+    const onChangeFechaInicio = (e) => {setFechaInicio(e.target.value)}
     const onChangeFechaFin = (e) => {setFechaFin(e.target.value)}
     const onChangeTitulo = (e) => {setTitulo(e.target.value); removerRequerido(e.target)}
     const onChangeDescrip = (e) => {setDescripcion(e.target.value); removerRequerido(e.target)}
@@ -132,28 +131,34 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 value={titulo}
                                 onChange={onChangeTitulo}
                                 />
-                    <InputTexto placeHolder='Descripción'
+                    <InputTexto type="text"
+                                placeHolder='Descripción'
                                 value={descripcion}
                                 onChange={onChangeDescrip}
                                 />
-                    <InputTexto placeHolder='Objetivo'
+                    <InputTexto type="text"
+                                placeHolder='Objetivo'
                                 value={objetivo}
                                 onChange={onChangeObjetivo}
                                 />
-                    <InputTexto placeHolder='Líder'
+                    <InputTexto type="text"
+                                placeHolder='Líder'
                                 value={lider}
                                 onChange={onChangeLider}
                                 />
-                    <InputTexto placeHolder='Categoría'
+                    <InputTexto type="text"
+                                placeHolder='Categoría'
                                 value={categoria}
                                 onChange={onChangeCategoria}
                                 />
-                    <InputTexto placeHolder='Estado'
+                    <InputTexto type="text"
+                                placeHolder='Estado'
                                 value={estado}
                                 onChange={onChangeEstado}
                                 />
-                    <InputTexto placeHolder='Información Adicional'
-                                value={infoAd}
+                    <InputTexto type="link"
+                                placeHolder='Información Adicional'
+                                value={informacion_adicional}
                                 onChange={onChangeInfoAd}
                                 />
                     <div className="btn-crear-container">

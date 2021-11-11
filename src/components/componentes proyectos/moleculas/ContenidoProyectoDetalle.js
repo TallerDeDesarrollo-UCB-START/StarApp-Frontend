@@ -1,9 +1,6 @@
 // Librerias-Paquetes:
-import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
-import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 import ListaParticipantesProyecto from './ListaParticipantesProyecto';
 import './ContenidoProyectoDetalle.css';
-import SnackbarMessage from '../../templates/SnackbarMessage';
 import { Box } from '@material-ui/core';
 import { Switch } from '@material-ui/core';
 // Permisos/Roles:
