@@ -68,7 +68,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             descripcion: descripcion,
             objetivo: objetivos,
             lider: lideres,
-            estado: estado,
+            estado: true,
             categoria: categoria,
             informacion_adicional: informacion_adicional
         }
