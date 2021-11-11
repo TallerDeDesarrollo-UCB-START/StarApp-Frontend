@@ -189,12 +189,10 @@ function VistaProyectos() {
         <>
             <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
                 {proyectosAdmins}
-                {proyectosVoluntarios = <></>}
             </PuertaPermisos>
             
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
                 {proyectosVoluntarios}
-                {proyectosAdmins = <></>}
             </PuertaPermisos>
         </>
     );
