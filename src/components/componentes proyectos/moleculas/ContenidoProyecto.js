@@ -164,11 +164,14 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         var cont=true;
         var i=0;
         for( i=0; i < 29 && cont; i++){
-            if(proyecto.titulo[i]!==undefined){
-                resp += proyecto.titulo[i];
-            }else {
-                cont=false;
+            if(proyecto.titulo){
+                if(proyecto.titulo[i]){
+                    resp += proyecto.titulo[i];
+                }else {
+                    cont=false;
+                }
             }
+            
         }
 
         if(i >= 29) {
