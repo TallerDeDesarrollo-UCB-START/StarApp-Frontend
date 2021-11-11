@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
   const classes = useStyles();
   const history = useHistory();
-  console.log(currentPath)
   return (
     <BottomNavigation
       currentpath={currentPath}
