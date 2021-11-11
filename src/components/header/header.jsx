@@ -75,7 +75,13 @@ const Header = ({ sessionData, children }) => {
           location.pathname === routes[5].path ||
           location.pathname.includes("validate")
             ? { display: "none" }
-            : (smallScreen)?(location.pathname === routes[0].path)?{width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.6)}px`}:{width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.25)}px`}:(location.pathname === routes[0].path)?{width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.40)}px`}:{width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.115)}px`}
+            : (smallScreen)?
+              (location.pathname === routes[0].path)?
+                {width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.6)}px`}:
+                {width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.25)}px`}:
+              (location.pathname === routes[0].path)?
+                {width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.40)}px`}:
+                {width:`${windowWidth}px`, height: '215px'}
         }
       >
         <div className="header-logo">
