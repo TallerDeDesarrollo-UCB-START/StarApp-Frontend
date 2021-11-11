@@ -30,7 +30,6 @@ function BodyProyectos({proyectos, rol, onEliminarProy,  onPartiparProy, onActiv
             <div className="body-container">
                     {
                         proyectos.map(proyecto => (
-                            <div className="item-space">
                             <ProyectoVoluntario  className="card-container"
                             key={proyecto.id} 
                             rol={rol}
@@ -41,7 +40,6 @@ function BodyProyectos({proyectos, rol, onEliminarProy,  onPartiparProy, onActiv
                             onGetParticipacion={onGetParticipacion}
                             onCancelarParticipacion={onCancelarParticipacion}
                             onNumeroParticipantes={onNumeroParticipantes}/>
-                            </div>
                         ))
                     }
             </div>
