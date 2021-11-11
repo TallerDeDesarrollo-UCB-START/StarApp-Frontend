@@ -18,35 +18,23 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     backgroundColor: "#074d81",
   },
+  responsiveHeader: {
+    width: "100%",
+    position: "fixed",
+    bottom: "0px",
+  },
   headerHome:{
     flexDirection: "column",
-    width: "100%",
     position: "sticky",
     backgroundImage: `url("https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg")`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "top",
-    height:"700px",
-  },
-  responsiveHeaderHome:{
-    flexDirection: "column",
-    width: "100%",
-    position: "sticky",
-    backgroundImage: `url("https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg")`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    height:"400px",
   },
   containerLogo: {
     width: "80%",
     display: "flex",
     justifyContent: "center",
-  },
-  responsiveHeader: {
-    width: "100%",
-    position: "fixed",
-    bottom: "0px",
   },
 }));
 
@@ -65,16 +53,29 @@ const Header = ({ sessionData, children }) => {
     }
     setLogged(Boolean(sessionStorage.getItem("jwt")));
   }, [history, location.pathname]);
+  const useWindowSize = () => {
+    const [size, setSize] = React.useState([0])
+    React.useLayoutEffect(() => {
+      function updateSize() {
+        setSize([window.innerWidth])
+      }
+      window.addEventListener('resize', updateSize)
+      updateSize()
+      return () => window.removeEventListener('resize', updateSize)
+    }, [])
+    return size
+  }
+  const windowWidth = useWindowSize()
   return (
     <div>
       <header
-        className={(location.pathname === routes[0].path)?(smallScreen)?classes.responsiveHeaderHome:classes.headerHome:classes.header}
+        className={(location.pathname === routes[0].path)?classes.headerHome:classes.header}
         style={
           location.pathname === routes[4].path ||
           location.pathname === routes[5].path ||
           location.pathname.includes("validate")
             ? { display: "none" }
-            : {}
+            : (smallScreen)?{width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.6)}px`}:(location.pathname === routes[0].path)?{width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.40)}px`}:{width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.115)}px`}
         }
       >
         <div className="header-logo">

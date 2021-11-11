@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         margin: '20px 0',
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-between'
+        justifyContent: 'flex-start'
     },
     noEvents:{
         margin: '200px 0',
