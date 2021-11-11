@@ -53,7 +53,6 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [participacion, snackbar])
     
-
     // Functions:
     async function asignarParticipacion() {
         //debugger
