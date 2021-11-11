@@ -49,6 +49,7 @@ const useStyles = makeStyles(() => ({
     },
     typography: {
       textTransform: 'uppercase',
+      fontSize: '80%;',
     }
   }));
 
