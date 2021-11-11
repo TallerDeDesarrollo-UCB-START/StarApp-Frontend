@@ -7,7 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 
 // Merce Vic
-function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignarSnackbarStatus, onAsignarParticipacion}) {
+function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignarSnackbarStatus, onAsignarParticipacion, onAvisoAccion}) {
 
     // States
     //const [snackbar, setSnackbar] = React.useState()
@@ -22,9 +22,11 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
         if(cancelResponse){
             onAsignarParticipacion();
             onAsignarSnackbarStatus("Participacion cancelada", true, true);
+            onAvisoAccion()
         }else{
             onAsignarParticipacion();
             onAsignarSnackbarStatus("Participacion no cancelada", true, false);
+            onAvisoAccion()
         }
     }
 

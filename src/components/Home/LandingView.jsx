@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const LandingView = () => {
-    const smallScreen = !useMediaQuery("(min-width:700px)")
+    const smallScreen = !useMediaQuery("(min-width:900px)")
     const classes = useStyles()
     return (
         <div>

@@ -44,7 +44,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [estado, setEstado] = useState(proyecto.estado)
     const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
 
-
     function resetStates() {
         setFechaInicio('')
         setFechaFin('')
@@ -87,6 +86,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         /*if (validarCampos(event) === false) {
             return
         }*/
+        debugger
         const proyectoEditar = {
             id: proyecto.id,
             fechaInicio: fechaInicio,

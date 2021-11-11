@@ -33,25 +33,31 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
 
     })
     const [participacion, setParticipacion] = useState(false)
+    const [actualizar, setActualizar] = useState(false)
     //const [numberParticipants, setNumber] = useState(0)
     const mountedRef = useRef(false)
     
+    function avisoAccion() {
+        setActualizar(!actualizar)
+    }
+
     // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
         mountedRef.current = true
         
-        activateSnackBar()
         const colocarParticipacion = async () => {
             const participa = await asignarParticipacion()
             mountedRef.current && setParticipacion(participa)
+            
         }
+        activateSnackBar()
         colocarParticipacion()
         //getNumberParticipants()
         return () => {
             mountedRef.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [participacion, snackbar])
+    }, [participacion, actualizar])
     
     // Functions:
     async function asignarParticipacion() {
@@ -103,6 +109,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                     onGetParticipacion={onGetParticipacion}
                                                     onAsignarParticipacion={asignarParticipacion}
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
+                                                    onAvisoAccion={avisoAccion}
                                                     />
                             : ''
     const botonCancelarParticipacion = participacion === true?
@@ -111,6 +118,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                     onGetParticipacion={onGetParticipacion}
                                                     onAsignarParticipacion={asignarParticipacion}
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
+                                                    onAvisoAccion={avisoAccion}
                                                     />
                             : ''
     const botonEditarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
@@ -122,7 +130,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                             onEliminarProy={onEliminarProy}/>
                                     </PuertaPermisos>
 
-    function content (){
+    /*function content (){
         var resp="";
         var cont=true;
         var i=0;
@@ -147,20 +155,23 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         } else {
             resp = proyecto.descripcion;
         }
-        return resp;*/
-    }
+        return resp;
+    }*/
 
-    function title (){
+    /*function title (){
         
         var resp="";
         var cont=true;
         var i=0;
         for( i=0; i < 29 && cont; i++){
-            if(proyecto.titulo[i]!==undefined){
-                resp += proyecto.titulo[i];
-            }else {
-                cont=false;
+            if(proyecto.titulo){
+                if(proyecto.titulo[i]){
+                    resp += proyecto.titulo[i];
+                }else {
+                    cont=false;
+                }
             }
+            
         }
 
         if(i >= 29) {
@@ -176,17 +187,18 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         } else {
             resp = proyecto.titulo;
         }
-        return resp;*/
+        return resp;
+        
     }
-    
+    */
     return (
         <Box >
             <CardContent className="card-container-box">
                 <Typography gutterBottom className="content-title">
-                    {title()}
+                    {proyecto.titulo}
                 </Typography>
                 <Typography className="content-description" color="textSecondary" component="p">
-                    {content()}
+                    {proyecto.descripcion}
                 </Typography>
             </CardContent>
             <CardActions className="card-action-box">

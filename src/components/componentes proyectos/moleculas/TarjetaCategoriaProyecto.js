@@ -49,6 +49,12 @@ const useStyles = makeStyles(() => ({
     },
     typography: {
       textTransform: 'uppercase',
+      '@media only screen and (max-width: 400px) ': {
+        fontSize: '1.5rem',
+      },
+      '@media only screen and (max-width: 365px) ': {
+        fontSize: '1.3rem',
+      },
     }
   }));
 

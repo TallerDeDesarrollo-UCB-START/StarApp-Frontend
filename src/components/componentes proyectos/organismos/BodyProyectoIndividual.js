@@ -8,7 +8,7 @@ import { Box } from '@material-ui/core';
 function BodyProyectoIndividual({proyecto, onPartiparProy, onGetParticipacion, onCancelarParticipacion}) {
     
     return (
-        <Box className="body-container">
+        <Box>
             <VolverProyectoBtn/>
             {
                 <ProyectoDetalle
