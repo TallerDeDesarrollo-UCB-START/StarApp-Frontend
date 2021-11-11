@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
   const classes = useStyles();
   const history = useHistory();
+  console.log(currentPath)
   return (
     <BottomNavigation
       currentpath={currentPath}
@@ -83,11 +84,11 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
         //     ></path>
         //   </svg>
         // }
-        icon={(currentPath === routes[1].path)?<BusinessCenterIcon />: <BusinessCenterOutlinedIcon/>}
+        icon={(currentPath.includes('projects'))?<BusinessCenterIcon />: <BusinessCenterOutlinedIcon/>}
         disabled={currentPath === routes[1].path}
         label="Proyectos"
         className={
-          currentPath === routes[1].path
+          currentPath.includes('projects')
             ? classes.activeNavButton
             : classes.navButton
         }
@@ -99,11 +100,11 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
         }
       />
       <BottomNavigationAction
-        icon={(currentPath === routes[2].path)?<EventNoteIcon />:<EventNoteOutlinedIcon/>}
+        icon={(currentPath.includes('eventos'))?<EventNoteIcon />:<EventNoteOutlinedIcon/>}
         disabled={currentPath === routes[2].path}
         label="Eventos"
         className={
-          currentPath === routes[2].path
+          currentPath.includes('eventos')
             ? classes.activeNavButton
             : classes.navButton
         }
