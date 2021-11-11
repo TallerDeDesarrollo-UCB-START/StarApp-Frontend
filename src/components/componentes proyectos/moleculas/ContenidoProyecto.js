@@ -130,7 +130,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                             onEliminarProy={onEliminarProy}/>
                                     </PuertaPermisos>
 
-    function content (){
+    /*function content (){
         var resp="";
         var cont=true;
         var i=0;
@@ -155,10 +155,10 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         } else {
             resp = proyecto.descripcion;
         }
-        return resp;*/
-    }
+        return resp;
+    }*/
 
-    function title (){
+    /*function title (){
         
         var resp="";
         var cont=true;
@@ -187,17 +187,18 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         } else {
             resp = proyecto.titulo;
         }
-        return resp;*/
+        return resp;
+        
     }
-    
+    */
     return (
         <Box >
             <CardContent className="card-container-box">
                 <Typography gutterBottom className="content-title">
-                    {title()}
+                    {proyecto.titulo}
                 </Typography>
                 <Typography className="content-description" color="textSecondary" component="p">
-                    {content()}
+                    {proyecto.descripcion}
                 </Typography>
             </CardContent>
             <CardActions className="card-action-box">
