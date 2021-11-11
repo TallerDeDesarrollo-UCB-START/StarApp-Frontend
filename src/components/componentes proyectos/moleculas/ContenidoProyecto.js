@@ -33,25 +33,31 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
 
     })
     const [participacion, setParticipacion] = useState(false)
+    const [actualizar, setActualizar] = useState(false)
     //const [numberParticipants, setNumber] = useState(0)
     const mountedRef = useRef(false)
     
+    function avisoAccion() {
+        setActualizar(!actualizar)
+    }
+
     // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
         mountedRef.current = true
         
-        activateSnackBar()
         const colocarParticipacion = async () => {
             const participa = await asignarParticipacion()
             mountedRef.current && setParticipacion(participa)
+            
         }
+        activateSnackBar()
         colocarParticipacion()
         //getNumberParticipants()
         return () => {
             mountedRef.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [participacion, snackbar])
+    }, [participacion, actualizar])
     
     // Functions:
     async function asignarParticipacion() {
@@ -103,6 +109,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                     onGetParticipacion={onGetParticipacion}
                                                     onAsignarParticipacion={asignarParticipacion}
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
+                                                    onAvisoAccion={avisoAccion}
                                                     />
                             : ''
     const botonCancelarParticipacion = participacion === true?
@@ -111,6 +118,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                     onGetParticipacion={onGetParticipacion}
                                                     onAsignarParticipacion={asignarParticipacion}
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
+                                                    onAvisoAccion={avisoAccion}
                                                     />
                             : ''
     const botonEditarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>

@@ -26,22 +26,25 @@ const useStyles = makeStyles({
 
 const varProyectos = VARIABLES.datosProyectos
 
-function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarStatus, onAsignarParticipacion}) {
+function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarStatus, onAsignarParticipacion, onAvisoAccion}) {
     const classes = useStyles()
 
     const onClick = async (event) => {
         if(proyecto){
             if(proyecto.estado === varProyectos.estadoAcabado){
                 onAsignarSnackbarStatus("Participacion bloqueada", true, false);
+                onAvisoAccion()
                 return
             } else{
                 const participarResponse = await onPartiparProy(proyecto.id)
                 if(participarResponse){
                     onAsignarParticipacion();
                     onAsignarSnackbarStatus("Participacion exitosa", true, true);
+                    onAvisoAccion()
                 }else{
                     onAsignarParticipacion();
                     onAsignarSnackbarStatus("Participacion fallida", true, false);
+                    onAvisoAccion()
                 }
             }
         }
