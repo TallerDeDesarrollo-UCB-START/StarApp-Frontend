@@ -5,14 +5,17 @@ import './BodyProyectos.css';
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
 
-function BodyProyectoIndividual({proyecto}) {
+function BodyProyectoIndividual({proyecto, onPartiparProy, onGetParticipacion, onCancelarParticipacion}) {
     
     return (
         <Box className="body-container">
             <VolverProyectoBtn/>
             {
                 <ProyectoDetalle
-                    proyecto={proyecto} />
+                    proyecto={proyecto} 
+                    onPartiparProy={onPartiparProy}
+                    onGetParticipacion={onGetParticipacion}
+                    onCancelarParticipacion={onCancelarParticipacion}/>
             }
         </Box>
     );

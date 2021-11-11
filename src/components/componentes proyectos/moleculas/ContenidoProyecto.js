@@ -3,7 +3,7 @@ import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
-//import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
+import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 import SnackbarMessage from '../../templates/SnackbarMessage';
 import VerProyectoBtn from '../atomos/VerProyectoBtn';
 // Permisos/Roles:
@@ -12,7 +12,7 @@ import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
 import './ContenidoProyecto.css';
 import { Box } from '@material-ui/core';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -34,22 +34,31 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
     })
     const [participacion, setParticipacion] = useState(false)
     //const [numberParticipants, setNumber] = useState(0)
+    const mountedRef = useRef(false)
     
     // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
+        mountedRef.current = true
+        
         activateSnackBar()
-        asignarParticipacion()
+        const colocarParticipacion = async () => {
+            const participa = await asignarParticipacion()
+            mountedRef.current && setParticipacion(participa)
+        }
+        colocarParticipacion()
         //getNumberParticipants()
+        return () => {
+            mountedRef.current = false
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [participacion])
+    }, [participacion, snackbar])
     
-
     // Functions:
     async function asignarParticipacion() {
         //debugger
         const participa = await onGetParticipacion(proyecto.id)
         const p = participa === true? true : false
-        setParticipacion(p)
+        return p
     }
 /*
     async function getNumberParticipants() {
@@ -96,14 +105,14 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
                                                     />
                             : ''
-    /*const botonCancelarParticipacion = participacion === true?
+    const botonCancelarParticipacion = participacion === true?
                             <CancelarParticipacionBtn proyecto={proyecto} 
                                                     onCancelarParticipacion={onCancelarParticipacion} 
                                                     onGetParticipacion={onGetParticipacion}
                                                     onAsignarParticipacion={asignarParticipacion}
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
                                                     />
-                            : ''*/
+                            : ''
     const botonEditarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
                                     <EditarProyectoBtn  onActivarForm={onActivarForm}
                                                         proyecto={proyecto}/>
@@ -151,6 +160,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
             </CardContent>
             <CardActions className="card-action-box">
                 {botonParticiparProyecto}
+                {botonCancelarParticipacion}
                 <VerProyectoBtn proyecto={proyecto}/>
                 {botonEditarProyecto}
                 {botonEliminarProyecto}

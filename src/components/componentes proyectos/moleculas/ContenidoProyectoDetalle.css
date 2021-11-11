@@ -1,0 +1,10 @@
+.content-container-detail {
+    width: 100%;
+    margin: 2%;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
