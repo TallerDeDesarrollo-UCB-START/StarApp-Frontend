@@ -389,18 +389,18 @@ class EventsList extends Component {
         </div>
         <Container>
           <Card>
-            <div class="container">
+            <div className="container">
               {this.state.events.map((event) => (
-                <div class="card-container" key={event.id}>
-                  <div class="header">
+                <div className="card-container" key={event.id}>
+                  <div className="header">
                     <a href="#">
                       <img
                         src="http://jorge-zientarski.com/imgs/Events2.jpg"
                         alt=""
                       />
-                    </a>
+                    </a>  
                   </div>
-                  <div class="descripcion">
+                  <div className="descripcion">
                     <p>
                       <b>{event.nombre_evento}</b>
                     </p>
