@@ -8,3 +8,12 @@
     display: flex;
     flex-direction: column;
 }
+.card-text-detail{
+  font-size: 18px;
+  margin-left: 3%;
+  padding-bottom: 0.1px;
+}
+ .card-title-detail{
+   padding-left: 4%;
+   padding-bottom: 5px;
+}
