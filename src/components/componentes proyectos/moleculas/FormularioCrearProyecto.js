@@ -10,16 +10,27 @@ import Modal from '@material-ui/core/Modal';
 
 function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}) {
     // States
+    const [fechaInicio, setFechaInicio] = useState('')
+    const [fechaFin, setFechaFin] = useState('')
     const [titulo, setTitulo] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [objetivo, setObjetivo] = useState('')
     const [lider, setLider] = useState('')
+    const [categoria, setCategoria] = useState('')
+    const [estado, setEstado] = useState('')
+    const [infoAd, setInfoAd] = useState('')
+
 
     function resetStates() {
+        setFechaInicio('')
+        setFechaFin('')
         setTitulo('')
         setDescripcion('')
         setObjetivo('')
         setLider('')
+        setCategoria('')
+        setEstado('')
+        setInfoAd('')
     }
 
     function agregarRequerido(element){
@@ -30,13 +41,15 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     }
 
     function validarCampos(event) {
-        if (!titulo || !descripcion || !objetivo || !lider) {
+        if (!fechaInicio || !titulo || !descripcion || !objetivo || !lider || !categoria) {
             alert('Porfavor llene los campos')
             //console.log(event)
-            if (!titulo) agregarRequerido(event.currentTarget[0])
-            if (!descripcion) agregarRequerido(event.currentTarget[1])
-            if (!objetivo) agregarRequerido(event.currentTarget[2])
-            if (!lider) agregarRequerido(event.currentTarget[3])
+            if (!fechaInicio) agregarRequerido(event.currentTarget[0])
+            if (!titulo) agregarRequerido(event.currentTarget[2])
+            if (!descripcion) agregarRequerido(event.currentTarget[3])
+            if (!objetivo) agregarRequerido(event.currentTarget[4])
+            if (!lider) agregarRequerido(event.currentTarget[5])
+            if (!categoria) agregarRequerido(event.currentTarget[6])
             return false
         }
         return true
@@ -50,33 +63,44 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             return
         }
         const nuevoProyecto = {
+            fechaInicio: fechaInicio,
+            fechaFin: fechaFin,
             titulo: titulo,
             descripcion: descripcion,
             objetivo: objetivos,
             lider: lideres,
-            estado: true,//Valor default hasta mejorar formularios "EN CURSO",
-            categoria: "Ambiental"
+            estado: estado,
+            categoria: categoria,
+            infoAd: infoAd
         }
         onCrearProy(nuevoProyecto) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario
     }
 
+    const onChangeFechaInicio = (e) => {setFechaInicio(e.target.value); removerRequerido(e.target)}
+    const onChangeFechaFin = (e) => {setFechaFin(e.target.value)}
     const onChangeTitulo = (e) => {setTitulo(e.target.value); removerRequerido(e.target)}
     const onChangeDescrip = (e) => {setDescripcion(e.target.value); removerRequerido(e.target)}
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value); removerRequerido(e.target)}
     const onChangeLider = (e) => {setLider(e.target.value); removerRequerido(e.target)}
-
+    const onChangeCategoria = (e) => {setCategoria(e.target.value); removerRequerido(e.target)}
+    const onChangeEstado = (e) => {setEstado(e.target.value)}
+    const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
     // ---- NUEVO ----
     function getModalStyle() {
         const top = 50;
         const left = 50;
         
         return {
+            "@media (maxWidth: 375px)": {
+              top: 0,
+              left: 0,
+            },
             top: `${top}%`,
             left: `${left}%`,
             transform: `translate(-${top}%, -${left}%)`,
-        };
+          };
     }
 
     	
@@ -90,35 +114,55 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
         <div style={modalStyle} className="paper-crear">
             <form  onSubmit={onSubmit}>
                 <div className="crear-container-title">
-                    <h3>CREAR PROYECTO</h3>
+                    <h4>Crear Proyecto</h4>
                 </div>
-                <div style={{padding: "3% 3% 0 3%"}}>
-                    <InputTexto titulo='Titulo' 
-                                placeHolder='Ingrese el titulo'
+                <div style={{padding: "1% 3% 0 5%"}}>
+                    <label>Fecha de Inicio</label>
+                    <InputTexto type="date"
+                                value={fechaInicio}
+                                onChange={onChangeFechaInicio}
+                                />
+                    <label>Fecha de Fin</label>
+                    <InputTexto type="date"
+                                value={fechaFin}
+                                onChange={onChangeFechaFin}
+                                />
+                    <InputTexto type="text"
+                                placeHolder='Nombre del proyecto'
                                 value={titulo}
                                 onChange={onChangeTitulo}
                                 />
-                    <InputTexto titulo='Descripcion' 
-                                placeHolder='Ingrese una descripcion'
+                    <InputTexto placeHolder='Descripción'
                                 value={descripcion}
                                 onChange={onChangeDescrip}
                                 />
-                    <InputTexto titulo='Objetivo' 
-                                placeHolder='Ingrese el objetivo'
+                    <InputTexto placeHolder='Objetivo'
                                 value={objetivo}
                                 onChange={onChangeObjetivo}
                                 />
-                    <InputTexto titulo='Lider' 
-                                placeHolder='Escriba el nombre del lider'
+                    <InputTexto placeHolder='Líder'
                                 value={lider}
                                 onChange={onChangeLider}
                                 />
+                    <InputTexto placeHolder='Categoría'
+                                value={categoria}
+                                onChange={onChangeCategoria}
+                                />
+                    <InputTexto placeHolder='Estado'
+                                value={estado}
+                                onChange={onChangeEstado}
+                                />
+                    <InputTexto placeHolder='Información Adicional'
+                                value={infoAd}
+                                onChange={onChangeInfoAd}
+                                />
                     <div className="btn-crear-container">
                         <input type='submit' value='Crear' className='btn-proy-crear btn-proy-block'/>
+                        <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
                     </div>
                 </div>
             </form>
-            <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
+            
         </div>);
     
 // S implemente hacer abrir el modal con el boton de crear y el body sera lo mismo que tenia antes
@@ -138,8 +182,3 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
 }
 
 export default FormularioCrearProyecto
-
-
-/*
-
-*/

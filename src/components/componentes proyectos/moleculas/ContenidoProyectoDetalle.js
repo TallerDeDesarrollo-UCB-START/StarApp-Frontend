@@ -10,6 +10,7 @@ import {useState } from 'react';
 
 function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
+    
     //const visualizarP = proyecto.visualizar
     const [visualizarP, setVisualizarP] = useState(proyecto.visualizar)
 
