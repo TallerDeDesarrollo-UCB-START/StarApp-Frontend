@@ -81,7 +81,7 @@ const Header = ({ sessionData, children }) => {
                 {width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.25)}px`}:
               (location.pathname === routes[0].path)?
                 {width:`${windowWidth}px`, height:`${Math.round(windowWidth*0.40)}px`}:
-                {width:`${windowWidth}px`, height: '215px'}
+                {width:`${windowWidth}px`}
         }
       >
         <div className="header-logo">
