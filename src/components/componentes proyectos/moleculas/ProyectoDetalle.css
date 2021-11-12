@@ -1,0 +1,8 @@
+.proyect-detail-container{
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    border-radius: 25px;
+    margin-bottom: 30px;
+}

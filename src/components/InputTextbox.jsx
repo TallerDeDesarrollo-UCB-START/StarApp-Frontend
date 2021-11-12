@@ -16,13 +16,11 @@ const useStyles = makeStyles(theme => ({
         height: '12px', 
     },
     textbox : {
-        width: '76%',
+        width: '86%',
         height: '42px',
         background: '#FFFFFF',
-        border: '1px solid #C4C4C4',
-        boxSizing: 'border-box',
-        borderRadius: '6px',
         padding: '3px 5px',
+        marginBottom: '10px',
     },
     passwd : {
         WebkitTextSecurity: 'disc',
@@ -44,6 +42,8 @@ const InputTextbox = ({title, placeholder, type, name}) => {
             placeholder={(placeholder)? placeholder: ""}
             component={TextField}
             className = {classes.textbox}
+            size="small"
+            variant = "outlined"
             />
         </div>
     )

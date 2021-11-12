@@ -1,24 +1,25 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import LogoStart from "../images/logoStart.png";
-import { Form, Field } from "react-final-form";
-import { useMediaQuery, Button, Grid, Typography } from "@material-ui/core";
-import { TextField } from "final-form-material-ui";
-import { validEmail, validPassword } from "./RegEx";
-import { useHistory } from "react-router-dom";
-import AxiosClient from "./AxiosClient";
+import {React, useState} from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import Card from "@material-ui/core/Card"
+import { Form, Field } from "react-final-form"
+import { useMediaQuery, Button, Grid } from "@material-ui/core"
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import { TextField } from "final-form-material-ui"
+import { validEmail, validPassword } from "./RegEx"
+import { useHistory } from "react-router-dom"
+import AxiosClient from "./AxiosClient"
+import LogoAndSlogan from '../components/LogoAndSlogan'
+import MaskedInput from 'react-text-mask'
+import SnackbarMessage from '../components/templates/SnackbarMessage'
+import LinearProgress from '@material-ui/core/LinearProgress'
+
+
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
+    margin:'150px 0',
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  logoContainer: {
-    display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -26,28 +27,27 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
-  logo: {
-    width: "500px",
-    height: "200px",
-    marginTop: "5px",
+  smallNameContainer:{
+    display: "flex",
+    flexDirection: "column",
   },
   registerCard: {
     padding: "30px",
     width: "750px",
-    height: "500px",
-    marginRight: "80px",
+    margin:"auto auto",
     background: "#F2F2F2",
     boxShadow:
       "0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.14), 0px 8px 10px -5px rgba(0, 0, 0, 0.2)",
     borderRadius: "6px 6px 0px 0px",
   },
-  respregisterCard: {
+  smallRegisterCard: {
+    padding: "15px",
     width: "100%",
-    height: "484px",
+    boxShadow:"none"
   },
   buttonContainer: {
     width: "100%",
-    marginTop: "42px",
+    marginTop: "15px",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
@@ -55,172 +55,245 @@ const useStyles = makeStyles((theme) => ({
   registerButton: {
     color: "white",
     fontWeight: "bold",
+    width:"100%"
   },
   textField: {
     marginBottom: "16px",
   },
-}));
-
+  titleCreaCuenta:{
+    fontFamily: "'DM Sans', sans-serif !important",
+    fontWeight: "700 !important",
+    fontStyle: "normal",
+    lineHeight: "31px",
+    marginLeft: "5%"
+  },
+  fontSize12:{
+    marginTop:"10px",
+    fontSize: 12,
+    fontFamily: "'DM Sans', sans-serif !important",
+    color:"#545454"
+  },
+  preguntaIni:{
+    marginTop:"10px",
+    fontSize: 16,
+    fontFamily: "'DM Sans', sans-serif !important",
+    color: "black"
+  }
+}))
 const RegisterForm = () => {
-  const history = useHistory();
-  const classes = useStyles();
-  const smallScreen = useMediaQuery("(min-width:420px)");
+  const history = useHistory()
+  const classes = useStyles()
+  const [validateButton, setValidateButton] = useState(false)
+  
+  const [activeProgressBar, setActiveProgressBar] = useState(false)
+  const smallScreen = !useMediaQuery("(min-width:811px)")
+  const [phoneValue, setPhoneValue] = useState("591")
+  const [snackbar, setSnackbar] = useState({
+    message:"",
+    active:false,
+    severity:"success",
+    afterClose:()=>{},
+  })
   const validate = (values) => {
-    const errors = {};
+    setValidateButton(false)
+    const errors = {}
     if (!validEmail.test(values.email)) {
-      errors.email = "No valido";
+      errors.email = "Correo no valido"
     }
     if (!values.username) {
-      errors.username = "Campo requerido";
-    }
-    if (!values.phone) {
-      errors.phone = "Campo requerido";
+      errors.username = "Nombre req."
     }
     if (!values.lastname) {
-      errors.lastname = "Campo requerido";
+      errors.lastname = "Apellido req."
     }
     if (!validPassword.test(values.password)) {
-      errors.password = "Debe contener 6 caracteres y un número";
+      errors.password = "Debe tener 6 caracteres y 1 número"
     }
     if (values.confirmPassword !== values.password || !values.confirmPassword) {
-      errors.confirmPassword = "Contraseñas no coinciden";
+      errors.confirmPassword = "Contraseñas no coinciden"
     }
-    return errors;
-  };
+    if(!errors.username && !errors.lastname && !errors.email && !errors.password &&!errors.confirmPassword){
+      setValidateButton(true)
+  }
+    return errors
+  }
   const URL_AUTH = process.env.REACT_APP_API_AUTH
   const URL = process.env.REACT_APP_API
   const onSubmit = async (values) => {
+    setActiveProgressBar(true)
     const bodyAuth = {
       email: values.email,
       password: values.password,
-    };
-    console.log(bodyAuth);
+      tipo:"normal",
+    }
     AxiosClient.post(`${URL_AUTH}api/auth/signup`, bodyAuth)
       .then((response) => {
         if (response.status === 200) {
-          console.log("auth register done")
           const id_auth = response.data.id_autenticacion
           const body = {
             nombre: values.username,
             apellido: values.lastname,
-            telefono: `+591 ${values.phone}`,
+            telefono: phoneValue,
+            foto_url: "https://i.pinimg.com/originals/14/a8/cd/14a8cd8c46df11082f60ae15b97f47ff.jpg",
             id_autenticacion: parseInt(id_auth),
-          };
-          console.log(body);
+          }
           AxiosClient.post(`${URL}extended_form`, body)
             .then((response) => {
-              if (response.status === 200) {
-                console.log("user register done")
-                
+              if (response.status === 201) {
+                setActiveProgressBar(false)
+                activeSnackbar(`Se ha enviado un correo de confirmación al email: ${bodyAuth.email}` , "success", ()=>{history.push(`/login`)})
               }
             })
             .catch((response) => {
-              console.log(response)
-            });
+              setActiveProgressBar(false)
+              activeSnackbar(`${response}`, "error", ()=>{window.location.reload()})
+            })
         }
       }) 
       .catch((response) => {
-        console.log(response);
-      });
-      history.push(`/login`)
-  };
+        setActiveProgressBar(false)
+        activeSnackbar(`El correo: ${values.email} ya ha sido registrado.`, "error", ()=>{window.location.reload()})
+      })
+  }
+  const activeSnackbar = (message, severity, afterClose)=>{
+    setSnackbar({message, severity, afterClose, active:true})
+  }
+  const handleChangePhone = (event)=>{
+    setPhoneValue(event.target.value)
+  }
   return (
-    <div className={classes.registerContainer}>
-      <div className={classes.logoContainer}>
-        <img src={LogoStart} alt="logo Start" className={classes.logo} />
-        <Typography variant="h2" style={{ marginRight: "" }}>
-          Incubadora de proyectos sociales y ambientales
-        </Typography>
-      </div>
+    
+    <div className={classes.registerContainer} >
+      <LogoAndSlogan/>
       <Grid>
-        <div style={{ textAlign: "center" }}>
-          <Typography variant="h3" style={{ marginRight: "80px" }}>
-            Formulario de registro
-          </Typography>
+        <div >
+          <h2 className={classes.titleCreaCuenta}>
+            Crea Tu Cuenta
+          </h2>
         </div>
+        <LinearProgress style={{display:(activeProgressBar)?"":"none"}}/>
         <Card
           className={
-            smallScreen ? classes.registerCard : classes.respregisterCard
+            smallScreen ? classes.smallRegisterCard: classes.registerCard
           }
         >
           <Form onSubmit={onSubmit} validate={validate}>
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit} noValidate>
-                <Field
-                  fullWidth
-                  label="Ingresa tu correo electrónico"
-                  name="email"
-                  type="text"
-                  placeholder="ejemplo@gmail.com"
-                  className={classes.textField}
-                  component={TextField}
-                  required
-                />
+                <div style={{ marginBottom: "15px" }}>Regístrate para partipar de proyectos y eventos</div>
                 <div className={classes.nameContainer}>
                   <Field
-                    style={{ width: "49%" }}
-                    label="Ingresa tu nombre"
+                    style={{ width: "48%" }}
+                    
                     name="username"
                     type="text"
-                    placeholder="Juan"
+                    placeholder="Nombre *"
                     className={classes.textField}
                     component={TextField}
+                    variant="outlined"
+                    size="small"
                     required
                   />
+                  
                   <Field
-                    style={{ width: "49%" }}
-                    label="Ingresa tu apellido"
+                    style={{ width:"48%" }}
                     name="lastname"
                     type="text"
-                    placeholder="Pérez"
+                    placeholder="Apellido *"
                     className={classes.textField}
                     component={TextField}
+                    variant="outlined"
+                    size="small"
                     required
                   />
                 </div>
                 <Field
                   fullWidth
-                  label="Ingresa tu número de teléfono"
-                  name="phone"
-                  type="phone"
-                  component={TextField}
+                  name="email"
+                  type="text"
+                  placeholder="Correo *"
                   className={classes.textField}
+                  component={TextField}
+                  variant="outlined"
+                    size="small"
+                  required
                 />
+                <div style={{display:'flex',justifyContent: "space-between",marginBottom:'10px'}}>
+                  <OutlinedInput
+                    value={phoneValue}
+                    style={{width:'100%',height:'45px',marginBottom:"10px"}}
+                    onChange={handleChangePhone}
+                    name="phone"
+                    id="phone-input"
+                    size="small"
+                    inputComponent={TextMaskCustom}
+                  />
+                </div>
                 <Field
                   fullWidth
-                  label="Ingresa tu contraseña"
+                  placeholder="Contraseña *"
                   name="password"
                   type="password"
                   className={classes.textField}
                   component={TextField}
+                  variant="outlined"
+                    size="small"
                   required
                 />
                 <Field
                   fullWidth
-                  label="Confirma tu contraseña"
+                  
+                  placeholder="Confirma tu contraseña *"
                   name="confirmPassword"
                   type="password"
                   className={classes.textField}
                   component={TextField}
+                  variant="outlined"
+                    size="small"
                   required
                 />
                 <div className={classes.buttonContainer}>
                   <Button
                     variant="contained"
-                    color="secondary"
+                    color="primary"
                     className={classes.registerButton}
                     type="submit"
+                    disabled={(validateButton)? false:true}
                   >
-                    Crear cuenta start
+                    Crea tu cuenta de start
                   </Button>
                 </div>
+                <div className={classes.preguntaIni}>
+                <a href="/login" className={classes.preguntaIni}><strong>¿Ya tienes cuenta? Inicia Sesión. </strong></a>
+                </div>
+                <div className={classes.fontSize12}>Al crear tu cuenta aceptas que miembros de START se
+                   pongan en contacto contigo para futuras actividades</div>
               </form>
             )}
           </Form>
         </Card>
       </Grid>
+      <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
     </div>
-  );
-};
+  )
+}
 
-export default RegisterForm;
+function TextMaskCustom(props) {
+  const { inputRef, ...other } = props
+  return (
+    <MaskedInput
+      {...other}
+      ref={(ref) => {
+        inputRef(ref ? ref.inputElement : null)
+      }}
+      mask={['(','+', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/,/\d/, /\d/, /\d/, /\d/]}
+      placeholderChar={'\u2000'}
+      showMask
+      
+      
+    />
+  )
+}
+
+export default RegisterForm
+

@@ -1,0 +1,145 @@
+#ModalFormEditEvento {
+  width: 500px;
+  background-color: #f2f2f2 !important;
+  text-align: center;
+  padding: 3px;
+  border-radius: 8px;
+}
+.formularioEdicionEvento {
+  background-color: #f2f2f2;
+}
+
+.Titulo {
+  margin-bottom: 20px !important;
+  background-color: #f2f2f2;
+}
+
+.textInput {
+  width: 90%;
+  color: #eae9e9;
+  margin-bottom: 25px !important;
+}
+
+.botonActualizar {
+  background-color: #888888 !important;
+  color: white !important;
+  width: 50%;
+  margin: 4px !important;
+}
+
+.botonCancelar {
+  background-color: white !important;
+  color: #f00000 !important;
+  width: 45%;
+  margin: 4px !important;
+  border: 1px solid red !important;
+}
+
+.botonActualizar:hover {
+  background-color: #1694d2 !important;
+  color: white !important;
+}
+
+.botonCancelar:hover {
+  background-color: #f00000 !important;
+  color: white !important;
+}
+
+.CamposBotones {
+  width: 100%;
+  padding: 5px;
+  margin-top: -15px;
+}
+
+.modal-content {
+  background-color: #f2f2f2;
+}
+
+.botonEditarEvento {
+  width: 10%;
+}
+
+.TituloListaParticipantes {
+  margin-top: 10px;
+}
+
+.CategoriaEventoEdicion,
+.liderEventoEdicion,
+.ProyectoEventoEdicion {
+  height: 60px;
+  background-color: #f2f2f2;
+  border-radius: 6px;
+  border: 1px solid #888888;
+  color: black;
+  text-align: center;
+  z-index: 0;
+}
+
+.LabelLider,
+.LabelCategoria,
+.LabelProyecto {
+  font-size: 0.8em;
+  z-index: 1;
+  position: absolute;
+  left: 40px;
+  color: #585858;
+}
+
+.listForm{
+  height: 100%;
+  width: 100%;
+  border: #585858 0.1px solid;
+  text-align: center;
+  border-radius: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.Participante{
+  text-align: justify;
+  padding-left: 2%;
+  padding-bottom: 1%;
+}
+.card-text{
+  font-size: 18px;
+  margin-left: 105px;
+  padding-bottom: 0.1px;
+}
+
+.card{
+  margin-top: 50px;
+  border: #ffffff 0.1px solid;
+  border-radius: 15px;
+}
+
+.card-title{
+  /*text-align: left;*/
+  padding-left: 118px;
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+
+.card-list-1{
+  padding-left: 25px;
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+.card-list{
+  padding-left: 25px;
+  font-size: 18px;
+}
+
+.col-auto{
+  padding-top: 5%;
+  padding-left: 5%;
+}
+
+.card-text1{
+  position: absolute;
+  font-size: 18px;
+  margin-left: 107px;
+  padding-top: 15%;
+  max-width: 55%;
+  max-height: 30%;
+}

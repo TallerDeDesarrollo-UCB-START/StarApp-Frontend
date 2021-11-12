@@ -1,8 +1,8 @@
 .btn-proy-crear {
   display: inline-block;
-  background-color: #B3DA3F;
-  color: #fff;
-  border: none;
+  background-color: white;
+  color: #B3DA3F;
+  border: 1px solid greenyellow !important;
   margin: 3% auto;
   cursor: pointer;
   text-decoration: none;
@@ -12,12 +12,49 @@
   font-weight: bold;
   height: fit-content;
 }
+.btn-proy-crear:hover {
+  background-color: #B3DA3F !important;
+  color: white !important;
+}
+.paper-crear{
+  overflow-y:scroll;
+  position: absolute;
+  width: 430px;
+  height: 630px;
+  padding: 25px;
+  background: #F2F2F2;
+  box-shadow: 10px 10px 4px rgb(0 0 0 / 25%);
+  border-radius: 15px;
+}
+@media (max-width: 376px) {
+  .paperr{
+      width: 95%;
+  
+  }
+}
+.paper-crear::-webkit-scrollbar {
+  
+  width: 8px;
+  background-color: transparent;
+  border-radius: 5px;
+}
+.paper-crear::-webkit-scrollbar-track{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+  
 
+.paper-crear::-webkit-scrollbar-thumb{    
+  border-radius: 5px;
+  width: 8px;
+  background-color: #b8b8b8;
+  
+}
 .btn-proy-editar {
   display: inline-block;
-  background-color: #0D6296;
-  color: #fff;
-  border: none;
+  background-color: white;
+  color: #1694d2;
+  border: 1px solid #1694d2 !important;
   margin: 3% auto;
   cursor: pointer;
   text-decoration: none;
@@ -26,13 +63,18 @@
   padding: 8px;
   font-weight: bold;
   height: fit-content;
+}
+.btn-proy-editar:hover {
+  background-color: #1694d2 !important;
+  color: white !important;
 }
 
 .btn-proy-cancelar {
   display: inline-block;
-  background-color: #989898;
-  color: #fff;
-  border: none;
+  background-color: white !important;
+  color: #f00000 !important;
+  width: 45%;
+  border: 1px solid red !important;
   margin: 3% auto;
   cursor: pointer;
   text-decoration: none;
@@ -41,6 +83,10 @@
   padding: 8px;
   font-weight: bold;
   height: fit-content;
+}
+.btn-proy-cancelar:hover {
+  background-color: #f00000 !important;
+  color: white !important;
 }
 
 .btn-proy:focus {
@@ -71,6 +117,7 @@
   /*border: 1px solid grey;*/
   border-radius: 7%;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 15px rgba(0,0,0,0.22);
+  z-index: 10;
 }
 
 .form-control-proy {
@@ -84,12 +131,15 @@
 }
 
 .form-control-proy  input {
+  background-color: #F2F2F2;
+  border: 1px solid #C4C4C4;
   width: 100%;
   height: 40px;
-  margin: 5px;
-  padding: 3px 7px;
+  padding: 3px 5px;
   font-size: 17px;
-  border-radius: 5px;
+  border-radius: 6px;
+  margin: 7px 0px 7px 0px;
+  position: relative;
 }
 
 .form-control-proy .requerido {
@@ -127,4 +177,5 @@
 
 .btn-crear-container {
   padding-top: 6px;
+  display:flex;
 }

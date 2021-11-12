@@ -1,0 +1,108 @@
+#ModalFormCrearEvento {
+  width: 500px;
+  background-color: #f2f2f2 !important;
+  text-align: center;
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.formularioCrearEvento {
+  background-color: #f2f2f2;
+}
+
+.Titulo {
+  margin-bottom: 20px !important;
+  background-color: #f2f2f2;
+}
+
+.textInput {
+  width: 90%;
+  color: #eae9e9;
+  margin-bottom: 25px !important;
+}
+
+.botonActualizar {
+  background-color: #888888 !important;
+  color: white !important;
+  width: 50%;
+  margin: 4px !important;
+}
+
+.botonCancelar {
+  background-color: white !important;
+  color: #f00000 !important;
+  width: 45%;
+  margin: 4px !important;
+  border: 1px solid red !important;
+}
+
+.botonActualizar:hover {
+  background-color: #1694d2 !important;
+  color: white !important;
+}
+
+.botonCancelar:hover {
+  background-color: #f00000 !important;
+  color: white !important;
+}
+
+.CamposBotones {
+  width: 100%;
+  padding: 5px;
+  margin-top: -15px;
+}
+
+.modal-content {
+  background-color: #f2f2f2;
+}
+
+.botonEditarEvento {
+  width: 30%;
+}
+
+.TituloListaParticipantes {
+  margin-top: 10px;
+}
+
+.CategoriaEventoCrear,
+.liderEventoCrear,
+.nombreEventoCrear,
+.ProyectoEventoCrear {
+  height: 60px;
+  background-color: #f2f2f2;
+  border-radius: 6px;
+  border: 1px solid #888888;
+  color: black !important;
+  text-align: center;
+  z-index: 0;
+}
+
+.LabelProyectoCrearEvento,
+.LabelLiderCrearEvento,
+.LabelCategoriaCrearEvento,
+.LabelModalidadCrearEvento {
+  font-size: 0.8em;
+  z-index: 1;
+  position: absolute;
+  left: 40px;
+  color: #888888 !important;
+}
+
+.TituloListaParticipantes {
+  margin-top: 10px;
+  }
+  
+  h1{
+      padding-left: 16%;
+      padding-bottom: 25px;
+  }
+  
+  .header-lista-eventos {
+      top: 35%;
+      padding-left: 15.5%;
+  }
+  
+  .span-align{
+      padding-left: 10px;
+      padding-right: 5px;
+    }

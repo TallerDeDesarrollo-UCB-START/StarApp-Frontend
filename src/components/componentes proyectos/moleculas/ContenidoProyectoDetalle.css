@@ -1,0 +1,19 @@
+.content-container-detail {
+    width: 100%;
+    margin: 2%;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.card-text-detail{
+  font-size: 18px;
+  margin-left: 3%;
+  padding-bottom: 0.1px;
+}
+ .card-title-detail{
+   padding-left: 4%;
+   padding-bottom: 5px;
+}

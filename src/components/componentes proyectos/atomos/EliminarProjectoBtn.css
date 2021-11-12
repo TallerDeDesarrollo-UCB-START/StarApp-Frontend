@@ -1,8 +1,12 @@
 .eliminarButton {
-    background-color: red;
-    border: none;
-    padding: 8px;
-    color: white;
-    font-weight: bold;
-    border-radius: 10px;
+    background-color: #ED2020;
+    color: #FFFFFF;
+}
+
+.eliminarButton:hover {background-color: #a90e0e}
+
+.delete-icon {
+    color: #545454;
+    margin: 0;
+    padding: 0;
 }

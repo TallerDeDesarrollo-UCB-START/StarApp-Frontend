@@ -8,7 +8,7 @@ import {useState} from 'react'
 import { Box } from '@material-ui/core';
 
 
-function ProyectosAdmins({proyectos, onCrearProy, onEliminarProy, onPartiparProy, onEditarProy}) {
+function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartiparProy, onEditarProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes, tituloHeader}) {
     // Hooks
     const [mostrarFormCrear, setMostrarFormCrear] = useState(false)
     const [mostrarFormEditar, setMostrarFormEditar] = useState(false)
@@ -25,18 +25,22 @@ function ProyectosAdmins({proyectos, onCrearProy, onEliminarProy, onPartiparProy
     }
 
     //Componentes
-    const FormularioCrear = mostrarFormCrear==true ? <FormularioCrearProyecto onCrearProy={onCrearProy} onActivarForm={activarFormCrear}/> : <></>
-    const FormularioEditar = mostrarFormEditar==true ? <FormularioEditarProyecto onEditarProy={onEditarProy} onActivarForm={activarFormEditar} proyecto={proyectoEditar}/> : <></>
+    const FormularioCrear = mostrarFormCrear===true ? <FormularioCrearProyecto onCrearProy={onCrearProy} onActivarForm={activarFormCrear} mostrarFormCrear={mostrarFormCrear}/> : <></>
+    const FormularioEditar = mostrarFormEditar===true ? <FormularioEditarProyecto onEditarProy={onEditarProy} onActivarForm={activarFormEditar} proyecto={proyectoEditar} mostrarFormEditar={mostrarFormEditar}/> : <></>
 
     return (
         <Box style={styles}>
-            <HeaderProyectosAdmin onActivarForm={activarFormCrear}/>
+            <HeaderProyectosAdmin onActivarForm={activarFormCrear} tituloHeader={tituloHeader}/>
             {FormularioCrear}
             {FormularioEditar}
-            <BodyProyectos proyectos={proyectos} 
+            <BodyProyectos rol={rol}
+                            proyectos={proyectos} 
                             onEliminarProy={onEliminarProy} 
                             onActivarForm={activarFormEditar}
-                            onPartiparProy={onPartiparProy}/>
+                            onPartiparProy={onPartiparProy}
+                            onGetParticipacion={onGetParticipacion}
+                            onCancelarParticipacion={onCancelarParticipacion}
+                            onNumeroParticipantes={onNumeroParticipantes}/>
         </Box>
     );
 }
