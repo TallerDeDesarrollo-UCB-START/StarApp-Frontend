@@ -55,8 +55,6 @@ class EventsList extends Component {
     botonMostrarEventosArchivados: true,
     success: false,
     categoriaFiltrada: "Todas",
-    filtradoSegunEstado: "En Curso",
-    estados: ["En Curso", "Proximo", "Pasados"],
     categorias: [],
 
     modalInsertar: false,
@@ -104,53 +102,15 @@ class EventsList extends Component {
     try {
       let data = await api.get("/").then(({ data }) => data);
       if (this.state.categoriaFiltrada !== "Todas") {
-        switch (this.state.filtradoSegunEstado) {
-          case "En Curso":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" &&
-                event.fecha_evento === currentDate &&
-                event.categoria === this.state.categoriaFiltrada
-            );
-            break;
-          case "Proximo":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" &&
-                event.fecha_evento > currentDate &&
-                event.categoria === this.state.categoriaFiltrada
-            );
-            break;
-          case "Pasados":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" &&
-                event.fecha_evento < currentDate &&
-                event.categoria === this.state.categoriaFiltrada
-            );
-            break;
-        }
+
+        data = data.filter(
+          (event) =>
+            event.estado === "1" &&( event.fecha_evento === currentDate || event.fecha_evento > currentDate) && event.categoria === this.state.categoriaFiltrada);
       } else {
-        switch (this.state.filtradoSegunEstado) {
-          case "En Curso":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" && event.fecha_evento === currentDate
-            );
-            break;
-          case "Proximo":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" && event.fecha_evento > currentDate
-            );
-            break;
-          case "Pasados":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" && event.fecha_evento < currentDate
-            );
-            break;
-        }
+
+        data = data.filter(
+          (event) =>
+            event.estado === "1" &&( event.fecha_evento === currentDate || event.fecha_evento > currentDate) );
       }
 
       this.setState({ events: data });
@@ -234,10 +194,6 @@ class EventsList extends Component {
 
   filterChangeHandler = (categoria) => {
     this.setState({ categoriaFiltrada: categoria.target.value });
-    this.getEvents();
-  };
-  filterStateChangeHandler = (estado) => {
-    this.setState({ filtradoSegunEstado: estado.target.value });
     this.getEvents();
   };
   mensajeConfirmacionParticipacion(event) {
@@ -385,20 +341,6 @@ class EventsList extends Component {
               onChange={this.filterChangeHandler}
             >
               {this.state.categorias.map((item) => {
-                return (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
-
-            <span className="span-align">Estado:</span>
-            <select
-              value={this.state.filtradoSegunEstado}
-              onChange={this.filterStateChangeHandler}
-            >
-              {this.state.estados.map((item) => {
                 return (
                   <option key={item} value={item}>
                     {item}
