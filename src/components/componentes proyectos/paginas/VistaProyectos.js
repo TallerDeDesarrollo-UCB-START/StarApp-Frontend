@@ -15,17 +15,17 @@ function useQuery() {
 function VistaProyectos() {
     // Hooks
     const [proyectos, setProyectos] = useState([])
+    const [proyectosPasadosCategoria, setProyectosPasadosCategoria] = useState([])
     const [actualizar, setActualizar] = useState(false)
     const mountedRef = useRef(false)
     // Variables
     let categoria = useQuery().get("categoria");
-    let tipoEstado = useQuery().get("tipoestado"); //pasados,?
-    let complementoHeader = categoria? categoria : tipoEstado
+    let complementoHeader = categoria//categoria? categoria : tipoEstado
     complementoHeader = complementoHeader? complementoHeader : ""
     
-    function setProyectosCheck(data, mounted){
+    function setProyectosCheck(data, mounted, pasados=false){
         if (mounted) {
-            setProyectos(data)
+            pasados? setProyectosPasadosCategoria(data) : setProyectos(data)
         }
     }
 
@@ -44,19 +44,16 @@ function VistaProyectos() {
 
         const getProyectosPasados = async () => {
             const proyectosPasados =  await fetchProyectosPasados()
-            setProyectosCheck(proyectosPasados, mountedRef.current)
+            setProyectosCheck(proyectosPasados, mountedRef.current, true)
         }
 
-        if(tipoEstado){
-            tipoEstado==="Pasados"? getProyectosPasados() : getProyectos() 
-        } else{
-            categoria? getProyectosFiltro() : getProyectos()
-        }
+        categoria? getProyectosFiltro() : getProyectos()
+        getProyectosPasados()
 
         return () => {
             mountedRef.current = false
         }
-    }, [actualizar, categoria, tipoEstado] )
+    }, [actualizar, categoria, proyectosPasadosCategoria] )
 
     // HTTP requests & functions
     async function fetchProyectos() {
@@ -176,14 +173,16 @@ function VistaProyectos() {
                                 onGetParticipacion={obtenerParticipacionProyecto}
                                 onCancelarParticipacion={cancelarParticipacionProyecto}
                                 onNumeroParticipantes={obtenerNumeroParticipantes}
-                                tituloHeader={complementoHeader}/> 
+                                tituloHeader={complementoHeader}
+                                proyectosPasadosCategoria={proyectosPasadosCategoria}/> 
     let proyectosVoluntarios = <ProyectosVoluntarios rol={"core team"}
                                     proyectos={proyectos}
                                     onPartiparProy={participarEnProyecto}
                                     onGetParticipacion={obtenerParticipacionProyecto}
                                     onCancelarParticipacion={cancelarParticipacionProyecto}
                                     onNumeroParticipantes={obtenerNumeroParticipantes}
-                                    tituloHeader={complementoHeader}/>
+                                    tituloHeader={complementoHeader}
+                                    proyectosPasadosCategoria={proyectosPasadosCategoria}/>
     //console.log(proyectosVoluntarios)
     return (
         <>
