@@ -22,6 +22,15 @@ const useStyles = makeStyles({
         alignItems: 'center',
         gap: '8%'
     },
+    contenedorBtnPasado: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8%',
+        backgroundColor: "#a8a8a8",
+        "&:hover": {
+            backgroundColor: "#818181",
+        },
+    },
 });
 
 const varProyectos = VARIABLES.datosProyectos
@@ -51,11 +60,13 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
     }
     /*OPCIONALMENTE MOVER EL BOTON DE VOLVER ATRAS DE KEVIN*/
     const candado = proyecto && proyecto.estado === varProyectos.estadoAcabado? <LockIcon/> : ""
+    const estilosBtnPasado = proyecto && proyecto.estado === varProyectos.estadoAcabado? classes.contenedorBtnPasado : ""
     return (
         <div>
             <div id={proyecto.id}>
                 <ParticipateButton variant="contained"
                                     color="primary"
+                                    className={estilosBtnPasado}
                                     onClick={onClick}>
                     <Box className={classes.contenedorBtn}>
                         Unirme
