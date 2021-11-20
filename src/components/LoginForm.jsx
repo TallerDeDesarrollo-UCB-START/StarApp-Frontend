@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { validEmail } from "./RegEx";
 import AxiosClient from "./AxiosClient";
 import LogoAndSlogan from "../components/LogoAndSlogan";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 import LoginGoogle from "./LoginGoogle";
 const useStyles = makeStyles((theme) => ({
@@ -81,26 +81,22 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     setActiveProgressBar(true);
     await AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
       .then((response) => {
-        if ((response.status === 200)) {
+        if (response.status === 200) {
           const jwt = response.data.accessToken;
           const id_auth = response.data.id;
           sessionStorage.setItem("jwt", jwt);
           sessionStorage.setItem("id", id_auth);
-          setActiveProgressBar(false);
           history.push(`/`);
-          window.location.reload();
+          window.location.reload(true);
         }
       })
       .catch((error) => {
-        if(error.response.status === 405){
+        if (error.response.status === 405) {
           setActiveProgressBar(false);
-          activeSnackbar("La cuenta no se ha validado.", "warning", () => {
-          });
-        }
-        else{
+          activeSnackbar("La cuenta no se ha validado.", "warning", () => {});
+        } else {
           setActiveProgressBar(false);
-          activeSnackbar("Correo o contraseña inválidos.", "error", () => {
-          });
+          activeSnackbar("Correo o contraseña inválidos.", "error", () => {});
         }
       });
   };
@@ -108,9 +104,15 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     <div className={smallScreen ? classes.smallContainer : classes.Container}>
       <LogoAndSlogan />
       <div>
-      <LinearProgress
-        style={{ display: activeProgressBar ? "" : "none" }}
-      />
+        <CircularProgress
+          style={{
+            left: "45%",
+            display: activeProgressBar ? "" : "none",
+            zIndex: "99",
+            top: "50%",
+            position: "absolute",
+          }}
+        />
         <Grid className={classes.loginContainer}>
           <Form onSubmit={onSubmit} validate={validate}>
             {({ handleSubmit }) => (
@@ -144,9 +146,9 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                   >
                     Iniciar Sesión
                   </Button>
-                <div className={classes.buttonContainer}>
-                  <LoginGoogle />
-                </div>
+                  <div className={classes.buttonContainer}>
+                    <LoginGoogle />
+                  </div>
                 </Grid>
               </form>
             )}
