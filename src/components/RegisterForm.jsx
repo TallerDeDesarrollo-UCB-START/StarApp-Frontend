@@ -205,7 +205,7 @@ const RegisterForm = () => {
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit} noValidate>
                 <div style={{ marginBottom: "15px" }}>
-                  Regístrate para partipar de proyectos y eventos
+                  Regístrate para participar de proyectos y eventos
                 </div>
                 <div className={classes.nameContainer}>
                   <Field
