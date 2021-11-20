@@ -10,6 +10,8 @@ import Box from '@material-ui/core/Box';
 import Paper from "@material-ui/core/Paper";
 import ListaProyectos from "./perfil/proyectos/listaProyectos";
 import EventosProximos from './Home/EventosProximos';
+import ListaEventos from './perfil/eventos/listaEventos';
+import ListaInsignias from './perfil/insignias/listaInsignias';
 
 function TabPanel(props) {
   const { getDataProfile, handleOpenprop,children, value, index, ...other } = props;
@@ -68,10 +70,10 @@ export default function TabsProfile({ getDataProfile, handleOpenprop, sessionDat
         <Paper className={classes.root} >
           <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant={smallScreen? "scrollable": "fullWidth"}
           scrollButtons={smallScreen? "auto": "off"} >
-            {/* <Tab className={classes.mytab} label="Mis Datos" {...a11yProps(0)} /> */}
-            <Tab className={classes.mytab} label="Tus Eventos" {...a11yProps(0)} /> 
-            <Tab className={classes.mytab} label="Tus Proyectos" {...a11yProps(1)} />
-            <Tab className={classes.mytab} label="Tus Logros" {...a11yProps(2)} />
+            <Tab className={classes.mytab} label="Mis Datos" {...a11yProps(0)} />
+            <Tab className={classes.mytab} label="Mis Eventos" {...a11yProps(1)} />
+            <Tab className={classes.mytab} label="Mis Proyectos" {...a11yProps(2)} />
+            <Tab className={classes.mytab} label="Mis Logros" {...a11yProps(3)} />
           </Tabs>
         </Paper>
       </AppBar>
@@ -89,6 +91,9 @@ export default function TabsProfile({ getDataProfile, handleOpenprop, sessionDat
       </TabPanel>
       <TabPanel value={value} index={2}>
 
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <ListaInsignias></ListaInsignias>
       </TabPanel>
     </div>
   );
