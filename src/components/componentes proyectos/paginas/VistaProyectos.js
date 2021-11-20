@@ -42,13 +42,13 @@ function VistaProyectos() {
             setProyectosCheck(proyectosFiltrados, mountedRef.current)
         }
 
-        const getProyectosPasados = async () => {
-            const proyectosPasados =  await fetchProyectosPasados()
+        const getProyectosPasadosCategoria = async () => {
+            const proyectosPasados =  await fetchProyectosPasadosCategoria()
             setProyectosCheck(proyectosPasados, mountedRef.current, true)
         }
 
         categoria? getProyectosFiltro() : getProyectos()
-        getProyectosPasados()
+        getProyectosPasadosCategoria()
 
         return () => {
             mountedRef.current = false
@@ -62,8 +62,14 @@ function VistaProyectos() {
         return data;
     }
 
-    async function fetchProyectosPasados() {
+    /*async function fetchProyectosPasados() {
         const response = await fetch(URLProyectosPasados)
+        const data = await response.json()
+        return data;
+    }*/
+
+    async function fetchProyectosPasadosCategoria(categoria) {
+        const response = await fetch(`${URLProyectosPasados}/${categoria}`)
         const data = await response.json()
         return data;
     }
