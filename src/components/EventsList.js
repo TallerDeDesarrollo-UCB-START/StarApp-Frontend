@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import "./EventsList.css";
+import Chip from "@material-ui/core/Chip";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+
 
 import TextField from "@mui/material/TextField";
 
@@ -360,6 +363,14 @@ class EventsList extends Component {
     const rolUser = this.state.user;
     return (
       <div>
+            <Chip
+          style={{ marginTop: "20px" }}
+          variant="outlined"
+          icon={<NavigateBeforeIcon />}
+          label="Volver"
+          clickable
+          onClick={() => window.history.back()}
+        />
         <div>
           <h1> Bienvenido a Lista de eventos!</h1>
           <div className="header-lista-eventos">
