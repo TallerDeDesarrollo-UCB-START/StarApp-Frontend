@@ -42,7 +42,7 @@ function VistaProyectos() {
         }
 
         const getProyectosPasadosCategoria = async () => {
-            const proyectosPasados =  await fetchProyectosPasadosCategoria()
+            const proyectosPasados =  await fetchProyectosPasadosCategoria(categoria)
             setProyectosCheck(proyectosPasados, mountedRef.current, true)
         }
 
@@ -202,7 +202,7 @@ function VistaProyectos() {
     );
 }
 
-const url = 'https://dev-back-startamericas.herokuapp.com/'//process.env.REACT_APP_API;
+const url = process.env.REACT_APP_API;
 const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 const URLProyectos = `${url}get_proyectos`//'http://localhost:5000/get_proyectos'
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//
