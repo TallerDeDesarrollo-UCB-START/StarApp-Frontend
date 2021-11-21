@@ -57,7 +57,7 @@ function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartipa
 
 const styles= {
     minHeight: "650px"
-    //border: "4px solid orange"
+    //border: "4px solid orange" 
 }
 
 export default ProyectosAdmins
