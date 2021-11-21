@@ -1,7 +1,8 @@
 import { React, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputTextbox from "./InputTextbox";
-import { Form } from "react-final-form";
+import { Form, Field } from "react-final-form";
+import { TextField } from "final-form-material-ui";
 import { useMediaQuery, Button, Typography, Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { validEmail } from "./RegEx";
@@ -9,7 +10,9 @@ import AxiosClient from "./AxiosClient";
 import LogoAndSlogan from "../components/LogoAndSlogan";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
+import Card from "@material-ui/core/Card";
 import LoginGoogle from "./LoginGoogle";
+import { NavLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   Container: {
     display: "flex",
@@ -38,6 +41,30 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     marginBottom: "10px",
   },
+  pregunta: {
+    marginTop: "10px",
+    fontSize: 16,
+    fontFamily: "'DM Sans', sans-serif !important",
+    textAlign: "center",
+    color: "black",
+  },
+  registerCard: {
+    padding: "30px",
+    width: "480px",
+    margin: "auto auto",
+    background: "#F2F2F2",
+    boxShadow:
+      "0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.14), 0px 8px 10px -5px rgba(0, 0, 0, 0.2)",
+    borderRadius: "6px 6px 0px 0px",
+  },
+  smallRegisterCard: {
+    padding: "15px",
+    width: "100%",
+    boxShadow: "none",
+  },
+  textField: {
+    marginBottom: "30px",
+  },
 }));
 const LoginForm = ({ sessionData, setSessionData }) => {
   const history = useHistory();
@@ -51,6 +78,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     afterClose: () => {},
   });
   const [activeProgressBar, setActiveProgressBar] = useState(false);
+
   const validate = (values) => {
     setValidateButton(false);
     const errors = {};
@@ -112,47 +140,70 @@ const LoginForm = ({ sessionData, setSessionData }) => {
             top: "50%",
             position: "absolute",
           }}
+          color="secondary"
         />
         <Grid className={classes.loginContainer}>
-          <Form onSubmit={onSubmit} validate={validate}>
-            {({ handleSubmit }) => (
-              <form onSubmit={handleSubmit} noValidate>
-                <Grid>
-                  <Typography
-                    style={{ marginLeft: "30px", fontWeight: "bold" }}
-                  >
-                    Inicia Sesión
-                  </Typography>
-                  <InputTextbox
-                    name="email"
-                    type="text"
-                    placeholder="Correo *"
-                  />
-                  <InputTextbox
-                    name="password"
-                    type="password"
-                    placeholder="Contraseña *"
-                  />
-                  <Button
-                    style={{
-                      marginLeft: "34px",
-                      width: "83%",
-                      marginTop: "20px",
-                    }}
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    disabled={validateButton ? false : true}
-                  >
-                    Iniciar Sesión
-                  </Button>
-                  <div className={classes.buttonContainer}>
-                    <LoginGoogle />
-                  </div>
-                </Grid>
-              </form>
-            )}
-          </Form>
+          <Card
+            className={
+              smallScreen ? classes.smallRegisterCard : classes.registerCard
+            }
+          >
+            <Form onSubmit={onSubmit} validate={validate}>
+              {({ handleSubmit }) => (
+                <form onSubmit={handleSubmit} noValidate>
+                  <Grid>
+                    <Typography
+                      style={{
+                        textAlign: "center",
+                        fontSize: "40px",
+                        fontWeight: "bold",
+                        marginBottom: "15px",
+                      }}
+                    >
+                      Inicia Sesión
+                    </Typography>
+                    <Field
+                      fullWidth
+                      name="email"
+                      type="text"
+                      placeholder="Correo *"
+                      className={classes.textField}
+                      component={TextField}
+                      variant="outlined"
+                      size="small"
+                    />
+                    <Field
+                      fullWidth
+                      placeholder="Contraseña *"
+                      name="password"
+                      type="password"
+                      className={classes.textField}
+                      component={TextField}
+                      variant="outlined"
+                      size="small"
+                    />
+                    <Button
+                      className={classes.buttonContainer}
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      disabled={validateButton ? false : true}
+                    >
+                      Iniciar Sesión
+                    </Button>
+                    <div className={classes.buttonContainer}>
+                      <LoginGoogle />
+                    </div>
+                    <div className={classes.pregunta}>
+                      <NavLink to="/register" className={classes.pregunta}>
+                        ¿No tienes cuenta? Regístrate aquí.
+                      </NavLink>
+                    </div>
+                  </Grid>
+                </form>
+              )}
+            </Form>
+          </Card>
         </Grid>
         <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
       </div>

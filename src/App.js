@@ -45,6 +45,7 @@ function App() {
           top: "50%",
           position: "absolute",
         }}
+        color="secondary"
       />
       <Header sessionData={sessionData} setSessionData={setSessionData}>
         <Switch>

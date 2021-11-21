@@ -195,6 +195,7 @@ const RegisterForm = () => {
             top: "50%",
             position: "absolute",
           }}
+          color="secondary"
         />
         <Card
           className={
