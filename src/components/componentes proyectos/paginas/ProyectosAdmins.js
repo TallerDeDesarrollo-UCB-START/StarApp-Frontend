@@ -1,5 +1,6 @@
 // Componentes:
-import HeaderProyectosAdmin from '../organismos/HeaderProyectosAdmin'
+import HeaderProyectosAdmin from '../organismos/HeaderProyectosAdmin';
+import HeaderProyectosPasados from '../organismos/HeaderProyectosPasados';
 import BodyProyectos from '../organismos/BodyProyectos'
 import FormularioCrearProyecto from '../moleculas/FormularioCrearProyecto'
 import FormularioEditarProyecto from '../moleculas/FormularioEditarProyecto'
@@ -8,7 +9,7 @@ import {useState} from 'react'
 import { Box } from '@material-ui/core';
 
 
-function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartiparProy, onEditarProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes, tituloHeader}) {
+function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartiparProy, onEditarProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes, tituloHeader, proyectosPasadosCategoria}) {
     // Hooks
     const [mostrarFormCrear, setMostrarFormCrear] = useState(false)
     const [mostrarFormEditar, setMostrarFormEditar] = useState(false)
@@ -41,13 +42,22 @@ function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartipa
                             onGetParticipacion={onGetParticipacion}
                             onCancelarParticipacion={onCancelarParticipacion}
                             onNumeroParticipantes={onNumeroParticipantes}/>
+            <HeaderProyectosPasados/>
+            <BodyProyectos rol={rol}
+                            proyectos={proyectosPasadosCategoria} 
+                            onEliminarProy={onEliminarProy} 
+                            onActivarForm={activarFormEditar}
+                            onPartiparProy={onPartiparProy}
+                            onGetParticipacion={onGetParticipacion}
+                            onCancelarParticipacion={onCancelarParticipacion}
+                            onNumeroParticipantes={onNumeroParticipantes}/>
         </Box>
     );
 }
 
 const styles= {
     minHeight: "650px"
-    //border: "4px solid orange"
+    //border: "4px solid orange" 
 }
 
 export default ProyectosAdmins
