@@ -11,7 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import ListaProyectos from "./perfil/proyectos/listaProyectos";
 import EventosProximos from './Home/EventosProximos';
 import ListaEventos from './perfil/eventos/listaEventos';
-import ListaInsignias from './perfil/insignias/listaInsignias';
+import ListaInsignias from './perfil/insignias/listaInsignias.jsx';
 
 function TabPanel(props) {
   const { getDataProfile, handleOpenprop,children, value, index, ...other } = props;
