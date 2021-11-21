@@ -10,6 +10,7 @@ import LogoAndSlogan from "../components/LogoAndSlogan";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 import LoginGoogle from "./LoginGoogle";
+import { NavLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   Container: {
     display: "flex",
@@ -51,6 +52,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     afterClose: () => {},
   });
   const [activeProgressBar, setActiveProgressBar] = useState(false);
+
   const validate = (values) => {
     setValidateButton(false);
     const errors = {};
@@ -149,6 +151,22 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                   <div className={classes.buttonContainer}>
                     <LoginGoogle />
                   </div>
+                  <Typography
+                    style={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      fontSize: "18px",
+                    }}
+                  >
+                    <NavLink
+                      to="/register"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      ¿No tienes cuenta? Registrate aquí.
+                    </NavLink>
+                  </Typography>
                 </Grid>
               </form>
             )}
