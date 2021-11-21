@@ -4,7 +4,8 @@ import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
 import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
 // Librerias-Paquetes-Estilos: 
 import './HeaderProyectos.css';
-import { Container, Grid, Box } from '@material-ui/core';
+import { Container, Grid, Box, Typography } from '@material-ui/core';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -16,6 +17,9 @@ const useStyles = makeStyles({
     },
 });
 
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
+
 function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
     const classes = useStyles()
     const complementoTitulo = tituloHeader? tituloHeader : ''
@@ -26,7 +30,9 @@ function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
                 </Box>
                 <Grid container justifyContent="space-between" alignItems={"center"}>
                     <Grid item xs={5} md={7}>
-                        <h1>{`Proyectos ${complementoTitulo}`}</h1>
+                        <ThemeProvider theme={theme}>
+                            <Typography variant="h3">{`Proyectos ${complementoTitulo}`}</Typography>
+                        </ThemeProvider>
                     </Grid>
                     <Grid item xs={7} md={5} className={classes.far_right}>
                         <CrearProyectoBtn onActivarForm={onActivarForm}/>
