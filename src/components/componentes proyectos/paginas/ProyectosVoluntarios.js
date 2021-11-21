@@ -1,5 +1,6 @@
 // Componentes:
 import HeaderProyectos from '../organismos/HeaderProyectos'
+import HeaderProyectosPasados from '../organismos/HeaderProyectosPasados';
 import BodyProyectos from '../organismos/BodyProyectos'
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
@@ -20,7 +21,7 @@ function ProyectosVoluntarios({proyectos, rol, onPartiparProy, onGetParticipacio
                             onGetParticipacion={onGetParticipacion}
                             onCancelarParticipacion={onCancelarParticipacion}
                             onNumeroParticipantes={onNumeroParticipantes}/>
-            <HeaderProyectos tituloHeader={tituloHeader}/>
+            <HeaderProyectosPasados/>
             <BodyProyectos rol = {rol}
                             proyectos={proyectosPasadosCategoria}
                             onPartiparProy={onPartiparProy}

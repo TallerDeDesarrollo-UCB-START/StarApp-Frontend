@@ -1,6 +1,6 @@
 // Componentes:
 import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
-import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
+//import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
 import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
 // Librerias-Paquetes-Estilos: 
 import './HeaderProyectos.css';
@@ -29,14 +29,16 @@ function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
                         <h1>{`Proyectos ${complementoTitulo}`}</h1>
                     </Grid>
                     <Grid item xs={7} md={5} className={classes.far_right}>
-                        <ProyectosPasadosBtn/>
                         <CrearProyectoBtn onActivarForm={onActivarForm}/>
                     </Grid>
-                    
                 </Grid>
         </Container>
-
+        
     );
 }
 
 export default HeaderProyectosAdmin
+
+/*
+ <ProyectosPasadosBtn/>
+ */

@@ -1,6 +1,6 @@
 // Componentes:
 import './HeaderProyectos.css';
-import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
+//import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
 import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
 // Librerias-Paquetes:
 import { Container, Grid, Box } from '@material-ui/core';
@@ -27,12 +27,14 @@ function HeaderProyectos({tituloHeader}) {
                     <Grid item xs={5} md={7}>
                         <h1>{`Proyectos ${complementoTitulo}`}</h1>
                     </Grid>
-                    <Grid item xs={7} md={5} className={classes.far_right}>
-                        <ProyectosPasadosBtn/>
-                    </Grid>
                 </Grid>
         </Container>
     );
 }
 
 export default HeaderProyectos
+
+/*<Grid item xs={7} md={5} className={classes.far_right}>
+                        <ProyectosPasadosBtn/>
+</Grid>
+*/

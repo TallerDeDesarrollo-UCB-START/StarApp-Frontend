@@ -1,5 +1,6 @@
 // Componentes:
-import HeaderProyectosAdmin from '../organismos/HeaderProyectosAdmin'
+import HeaderProyectosAdmin from '../organismos/HeaderProyectosAdmin';
+import HeaderProyectosPasados from '../organismos/HeaderProyectosPasados';
 import BodyProyectos from '../organismos/BodyProyectos'
 import FormularioCrearProyecto from '../moleculas/FormularioCrearProyecto'
 import FormularioEditarProyecto from '../moleculas/FormularioEditarProyecto'
@@ -41,9 +42,7 @@ function ProyectosAdmins({proyectos, rol, onCrearProy, onEliminarProy, onPartipa
                             onGetParticipacion={onGetParticipacion}
                             onCancelarParticipacion={onCancelarParticipacion}
                             onNumeroParticipantes={onNumeroParticipantes}/>
-            <HeaderProyectosAdmin onActivarForm={activarFormCrear} tituloHeader={tituloHeader}/>
-            {FormularioCrear}
-            {FormularioEditar}
+            <HeaderProyectosPasados/>
             <BodyProyectos rol={rol}
                             proyectos={proyectosPasadosCategoria} 
                             onEliminarProy={onEliminarProy} 
