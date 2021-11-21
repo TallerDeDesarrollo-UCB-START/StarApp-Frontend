@@ -164,7 +164,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                         "nav-link" + (!isActive ? " unselected" : "")
                       }
                     >
-                      ¿No tienes cuenta? Registrate aquí.
+                      ¿No tienes cuenta? Regístrate aquí.
                     </NavLink>
                   </Typography>
                 </Grid>
