@@ -73,7 +73,9 @@ const Header = ({ sessionData, children }) => {
         style={
           location.pathname === routes[4].path ||
           location.pathname === routes[5].path ||
-          location.pathname.includes("validate")
+          location.pathname.includes("validate") ||
+          location.pathname.includes("reset_password") ||
+          location.pathname.includes("recover")
             ? { display: "none" }
             : (smallScreen)?
               (location.pathname === routes[0].path)?
