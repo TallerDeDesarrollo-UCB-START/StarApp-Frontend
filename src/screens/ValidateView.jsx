@@ -33,7 +33,7 @@ const ValidateView = () => {
     ),[URL])
     return (
         <div className = {classes.root}>
-            <Typography style={{color:"Black", marginBottom:"50px"}} variant="h1" >
+            <Typography style={{color:"Black", marginBottom:"50px"}} variant="h1" style={{paddingLeft:"0"}}>
                 ¡Tu cuenta ha sido validada!
             </Typography>
             <Button 

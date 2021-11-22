@@ -109,7 +109,7 @@ const Routes = [
     path: "/validate/:id",
     name: "ValidacionCorreo",
     component: ValidateView,
-    logginNeeded: false,
+    logginNeeded: true,
   },
 ];
 export default Routes;
