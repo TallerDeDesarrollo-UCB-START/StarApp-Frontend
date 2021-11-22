@@ -50,7 +50,7 @@ const ResetPassword = () => {
   return (
     <div className={classes.root}>
       <Typography
-        style={{ color: "Black", marginBottom: "25px", paddingLeft: "0" }}
+        style={{ color: "Black", marginBottom: "25px", paddingLeft: "0", textAlign: "center",}}
         variant="h1"
       >
         Ingrese el correo para restablecer su contraseña.
@@ -62,7 +62,7 @@ const ResetPassword = () => {
         color="primary"
         placeholder="ejemplo@gmail.com"
         onChange={(event) => setEmail(event.target.value)}
-        style={{width:"400px"}}
+        style={{width:"300px"}}
       />
       <Button
         variant="contained"

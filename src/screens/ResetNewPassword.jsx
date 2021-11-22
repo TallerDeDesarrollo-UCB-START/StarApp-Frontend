@@ -56,20 +56,20 @@ export const ResetNewPassword = () => {
   return (
     <div className={classes.root}>
       <Typography
-        style={{ color: "Black", marginBottom: "25px", paddingLeft: "0" }}
+        style={{ color: "Black", marginBottom: "25px", paddingLeft: "0", textAlign: "center",}}
         variant="h1"
       >
         Ingrese la nueva contraseña.
       </Typography>
       <TextField
-        placeholder="Contraseña *"
+        placeholder="Nueva Contraseña"
         name="password"
         type="password"
         value={password}
         variant="outlined"
         color="primary"
         onChange={(event) => setPassword(event.target.value)}
-        style={{ width: "400px", marginBottom:"25px"}}
+        style={{ width: "300px", marginBottom:"25px"}}
       />
       <TextField
         error={password!==confirmPassword}
@@ -80,7 +80,7 @@ export const ResetNewPassword = () => {
         variant="outlined"
         color="primary"
         onChange={(event) => setConfirmPassword(event.target.value)}
-        style={{ width: "400px" }}
+        style={{ width: "300px" }}
       />
       <Button
         disabled={password!==confirmPassword || password===""}
