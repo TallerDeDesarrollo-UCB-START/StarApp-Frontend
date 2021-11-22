@@ -198,6 +198,11 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                         ¿No tienes cuenta? Regístrate aquí.
                       </NavLink>
                     </div>
+                    <div className={classes.pregunta}>
+                      <NavLink to="/reset_password" className={classes.pregunta}>
+                        ¿Has olvidado tu contraseña? Recupera tu contraseña.
+                      </NavLink>
+                    </div>
                   </Grid>
                 </form>
               )}

@@ -14,6 +14,8 @@ import Users from "../components/UsersTable/Users"
 import VistaProyectoIndividual from "../components/componentes proyectos/paginas/VistaProyectoIndividual"
 import VistaCategoriasProyectos from "../components/componentes proyectos/paginas/VistaCategoriasProyectos"
 import ValidateView from "../screens/ValidateView";
+import ResetPassword from "../screens/ResetPassword";
+import {ResetNewPassword} from "../screens/ResetNewPassword";
 const Routes = [
   {
     path: "/",
@@ -109,6 +111,18 @@ const Routes = [
     path: "/validate/:id",
     name: "ValidacionCorreo",
     component: ValidateView,
+    logginNeeded: true,
+  },
+  {
+    path: "/reset_password",
+    name: "RecuperarContrasena",
+    component: ResetPassword,
+    logginNeeded: false,
+  },
+  {
+    path: "/recover/:id",
+    name: "RecuperarNuevaContrasena",
+    component: ResetNewPassword,
     logginNeeded: false,
   },
 ];
