@@ -34,12 +34,11 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 150,
   },
 }))
-const fields = {
+export const fields = {
     'Nombre':'nombre',
     'Apellido':'apellido',
     'Teléfono':'telefono',
     'Rol':'rol',
-    'Ciudad':'ciudad_de_recidencia',
     'Edad': 'fecha_de_nacimiento',
     'Género': 'genero',
     'Ocupación': 'ocupacion',
