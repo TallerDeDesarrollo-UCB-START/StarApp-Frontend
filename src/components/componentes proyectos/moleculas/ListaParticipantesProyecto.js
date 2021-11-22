@@ -9,12 +9,16 @@ import {SCOPES} from '../organismos/map-permisos';
 const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;
 const ExcelColumn = ExportExcel.ExcelColumn;
+
 export class ListaParticipantesProyecto extends Component{
     constructor(props) {
         super(props)
 
         this.state = {
-            posts: []
+            posts: [],
+            inicio:'',
+            fin: ''
+
         }
     }
     
@@ -24,6 +28,9 @@ export class ListaParticipantesProyecto extends Component{
         axios.get(`${process.env.REACT_APP_API}get_participantes_proyecto_simple/${id}`)
         .then(response => {
             this.setState({posts:response.data})
+            console.log(response.data)
+            this.setState({inicio:"inicio: " + response.data[0].fecha_inicio.substring(0,10)})
+            this.setState({fin:"fin: " + response.data[0].fecha_fin.substring(0,10)})
         })
         .catch(error => {
             console.log(error)
@@ -38,6 +45,8 @@ export class ListaParticipantesProyecto extends Component{
 
     render(){
         const {posts} = this.state
+        const {inicio} = this.state
+        const {fin} = this.state
         return(
             <Box>
                 <p style={{color: '#424da6',textDecoration:'underline', fontWeight: 'bold'}}>Lista de Participantes:</p>
@@ -57,9 +66,12 @@ export class ListaParticipantesProyecto extends Component{
                 <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
                     <ExcelFile element={<ExportarButton variant="contained" >Exportar Lista</ExportarButton>} filename="ListaParticipantes">
                         <ExcelSheet data={posts} name="Participantes">
-                            <ExcelColumn label="Nombre" value="nombre"/>
+                            <ExcelColumn label={inicio}/>
+                            <ExcelColumn label={fin}/>
+                            <ExcelColumn label="Nombre" value="nombre" />
                             <ExcelColumn label="Apellido" value="apellido"/>
                             <ExcelColumn label="Rol" value="rol"/>
+                            <ExcelColumn label="Telefono" value="telefono"/>
                         </ExcelSheet>
                     </ExcelFile>
                 </PuertaPermisos>
