@@ -3,6 +3,8 @@ import axios from 'axios'
 import React,{Component} from 'react'
 import ExportExcel from 'react-export-excel'
 import { withStyles } from '@material-ui/core';
+import PuertaPermisos from '../organismos/PuertaPermisos';
+import {SCOPES} from '../organismos/map-permisos';
 
 const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;
@@ -52,13 +54,16 @@ export class ListaParticipantesProyecto extends Component{
                     ))
                 }
                 </List>
-                <ExcelFile element={<ExportarButton variant="contained" >Exportar Lista</ExportarButton>} filename="ListaParticipantes">
+                <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
+                    <ExcelFile element={<ExportarButton variant="contained" >Exportar Lista</ExportarButton>} filename="ListaParticipantes">
                         <ExcelSheet data={posts} name="Participantes">
                             <ExcelColumn label="Nombre" value="nombre"/>
                             <ExcelColumn label="Apellido" value="apellido"/>
                             <ExcelColumn label="Rol" value="rol"/>
                         </ExcelSheet>
-                </ExcelFile>
+                    </ExcelFile>
+                </PuertaPermisos>
+                
             </Box>
 
         )
