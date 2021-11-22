@@ -8,6 +8,7 @@ import {
   FormControl,
   Select,
   MenuItem,
+  Switch,
 } from "@material-ui/core";
 import { fields } from "./SearchByField";
 import MaskedInput from "react-text-mask";
@@ -170,7 +171,21 @@ export function InputByCriteria({ criteria, newValue, setNewValue }) {
     "Persona de Contacto": rehusableTextField(),
     "Relación con Contacto": rehusableTextField(),
     "Número de contacto": rehusableTextField(),
-    Disponibilidad: rehusableTextField(),
+    Disponibilidad: (
+      <FormControlLabel
+        control={
+          <Switch
+            checked={newValue[fields[criteria]]==="disponible"}
+            onChange={(event) =>
+              setNewValue({ ...newValue, [fields[criteria]]: (event.target.checked)?"disponible":"no disponible" })
+            }
+            name="disponibilidad"
+            color="secondary"
+          />
+        }
+        label={newValue[fields[criteria]]}
+      />
+    ),
   };
   return <>{inputsByFields[criteria]}</>;
 }

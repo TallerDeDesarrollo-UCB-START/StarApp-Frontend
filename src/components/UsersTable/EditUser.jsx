@@ -78,7 +78,7 @@ function getModalStyle() {
   }
 }
 
-const EditUser = ({ rowToUpdate, setRowToUpdate }) => {
+const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
   const [modalStyle] = React.useState(getModalStyle)
@@ -99,6 +99,7 @@ const EditUser = ({ rowToUpdate, setRowToUpdate }) => {
 
   const handleClose = () => {
     setOpen(false)
+    handleCloseButton()
   }
 
   const handleChange = (event) => {

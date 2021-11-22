@@ -268,7 +268,7 @@ function Users() {
         }}
       >
         <div style={{ margin: "5px 30px" }}>
-          <EditUser rowToUpdate={rowToUpdate} setRowToUpdate={setRowToUpdate} />
+          <EditUser rowToUpdate={rowToUpdate} setRowToUpdate={setRowToUpdate} handleCloseButton={handleClose}/>
         </div>
       </Popover>
     </section>
