@@ -104,6 +104,9 @@ const RegisterForm = () => {
     if (!values.lastname) {
       errors.lastname = "Apellido req.";
     }
+    if (phoneValue.replace(/\s+/g, '').length<7) {
+      errors.phoneValue = "Telefono req.";
+    }
     if (!validPassword.test(values.password)) {
       errors.password = "Debe tener 6 caracteres y 1 número";
     }
@@ -115,7 +118,8 @@ const RegisterForm = () => {
       !errors.lastname &&
       !errors.email &&
       !errors.password &&
-      !errors.confirmPassword
+      !errors.confirmPassword&&
+      !errors.phoneValue
     ) {
       setValidateButton(true);
     }
