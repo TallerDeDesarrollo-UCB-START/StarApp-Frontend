@@ -10,7 +10,7 @@ import crearEvento from "../components/CrearEvento/crearEvento";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
 import FormularioProyecto from "../components/Formulario";
 import Evento from "../components/Evento";
-import Users from "../screens/Users"
+import Users from "../components/UsersTable/Users"
 import VistaProyectoIndividual from "../components/componentes proyectos/paginas/VistaProyectoIndividual"
 import VistaCategoriasProyectos from "../components/componentes proyectos/paginas/VistaCategoriasProyectos"
 import ValidateView from "../screens/ValidateView";
