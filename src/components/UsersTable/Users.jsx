@@ -134,9 +134,6 @@ function Users() {
             nombre_completo: `${rowToUpdate.nombre ? rowToUpdate.nombre : ""} ${
               rowToUpdate.apellido ? rowToUpdate.apellido : ""
             }`,
-            fecha_de_nacimiento: calculateAge(
-              rowToUpdate.fecha_de_nacimiento
-            ).toString(),
             persona_contacto_de_emergencia: `${
               rowToUpdate.nombre_contacto_de_emergencia
                 ? rowToUpdate.nombre_contacto_de_emergencia
@@ -157,9 +154,6 @@ function Users() {
             nombre_completo: `${rowToUpdate.nombre ? rowToUpdate.nombre : ""} ${
               rowToUpdate.apellido ? rowToUpdate.apellido : ""
             }`,
-            fecha_de_nacimiento: calculateAge(
-              rowToUpdate.fecha_de_nacimiento
-            ).toString(),
             persona_contacto_de_emergencia: `${
               rowToUpdate.nombre_contacto_de_emergencia
                 ? rowToUpdate.nombre_contacto_de_emergencia
