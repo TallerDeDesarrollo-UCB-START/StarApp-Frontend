@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 import Paper from "@material-ui/core/Paper";
 import DatosPersonales from "./DatosPersonales";
 import ListaProyectos from "./perfil/proyectos/listaProyectos";
-import ListaEventos from './perfil/eventos/listaEventos';
+import EventosProximos from './Home/EventosProximos';
 
 function TabPanel(props) {
   const { getDataProfile, handleOpenprop,children, value, index, ...other } = props;
@@ -51,16 +51,14 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   mytab: {
-    marginLeft: "5%",
-    marginRight: "3%",
+    margin:"0 20px"
   },
 }));
 
-export default function TabsProfile(props) {
+export default function TabsProfile({ getDataProfile, handleOpenprop, sessionData }) {
   const classes = useStyles();
   const smallScreen = !useMediaQuery("(min-width:811px)")
   const [value, setValue] = React.useState(0);
-  const { getDataProfile, handleOpenprop } = props;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -84,7 +82,7 @@ export default function TabsProfile(props) {
         handleOpenprop={handleOpenprop}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ListaEventos></ListaEventos>
+        <EventosProximos id={sessionData.id} title={false}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <ListaProyectos></ListaProyectos>

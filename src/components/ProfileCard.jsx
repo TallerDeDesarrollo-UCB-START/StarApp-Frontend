@@ -26,10 +26,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfileCard = (props) => {
+const ProfileCard = ({ getDataProfile, handleOpenprop, sessionData }) => {
   const classes = useStyles();
   const smallScreen = !useMediaQuery("(min-width:811px)")
-  const { getDataProfile, handleOpenprop } = props;
   if (smallScreen)
   {
     return (
@@ -37,6 +36,7 @@ const ProfileCard = (props) => {
           <TabsProfile 
             getDataProfile={getDataProfile}
             handleOpenprop={handleOpenprop}
+            sessionData={sessionData}
           />
       </Card>
     );
@@ -47,6 +47,7 @@ const ProfileCard = (props) => {
           <TabsProfile 
             getDataProfile={getDataProfile}
             handleOpenprop={handleOpenprop}
+            sessionData={sessionData}
           />
         </CardContent>
       </Card>
