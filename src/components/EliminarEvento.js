@@ -1,5 +1,5 @@
 //aca viene el eliminar evento
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";

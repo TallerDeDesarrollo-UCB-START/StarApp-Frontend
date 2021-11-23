@@ -3,15 +3,19 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Modal, Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalFooter from "react-bootstrap/ModalFooter";
-import EliminarEvento from './EliminarEvento'
 import "./EventsList.css";
 
 import TextField from "@mui/material/TextField";
 
+//import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+//import Slide from "@mui/material/Slide";
+
 const url = process.env.REACT_APP_API;
-const urlLocal = `http://localhost:5000/eventos`;
+//const urlLocal = `http://localhost:5000/eventos`;
 const urlDeploy = `${url}eventos`;
 const urlCrearEvento = `${url}eventos/crearevento`;
 const urlLideres = `${url}lideres`;
@@ -34,6 +38,7 @@ const api = axios.create({
   baseURL: urlDeploy,
 });
 const urlParticipacion = `${urlDeploy}/participate_evento/`;
+
 class EventsList extends Component {
   state = {
     events: [],
@@ -68,7 +73,6 @@ class EventsList extends Component {
     lideres: [],
     proyectos: [],
   };
-  
 
   constructor() {
     super();
@@ -530,11 +534,10 @@ class EventsList extends Component {
 
                           <Button
                             color="success"
-                            onClick={() => this.deleteEvento(event)}
+                            onClick={() => this.abrirModal()}
                           >
                             Eliminar
                           </Button>
-                          <EliminarEvento></EliminarEvento>
                         </div>
                       </div>
                     </Fragment>
@@ -543,20 +546,20 @@ class EventsList extends Component {
                   )}
 
                   <Modal isOpen={this.state.abierto} style={modalStyles}>
-                    <ModalHeader>
-                      Esta seguro de eliminar este evento ??
-                    </ModalHeader>
-                    <ModalFooter>
-                      <Button
-                        color="primary"
-                        onClick={() => this.deleteEvento(event)}
-                      >
-                        Aceptar
+                  <DialogTitle>
+                      {"Esta seguro de eliminar este evento?"}
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description">
+                        El siguiente evento sera eliminado {event.nombre_evento}.
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={() => this.deleteEvento(event)}>
+                        Confimar
                       </Button>
-                      <Button color="secondary" onClick={this.abrirModal}>
-                        Cancelar
-                      </Button>
-                    </ModalFooter>
+                      <Button onClick={this.abrirModal}>Cancelar</Button>
+                    </DialogActions>
                   </Modal>
                 </div>
                 <div className="card-footer w-100 text-muted"></div>
