@@ -771,7 +771,7 @@ const Profile = ({sessionData}) => {
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
             <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
-            <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen}/>
+            <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen} sessionData={sessionData}/>
             
             <Modal
               open={open}
