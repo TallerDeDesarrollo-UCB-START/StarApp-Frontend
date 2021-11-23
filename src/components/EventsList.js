@@ -551,7 +551,7 @@ class EventsList extends Component {
                     </DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-slide-description">
-                        ¿Está seguro que desea este evento {event.nombre_evento}?
+                        ¿Está seguro de eliminar el evento {event.nombre_evento}?
                       </DialogContentText>
                       <DialogContentText id="alert-dialog-slide-description">
                         Se eliminará definitivamente.
