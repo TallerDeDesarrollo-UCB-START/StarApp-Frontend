@@ -546,17 +546,23 @@ class EventsList extends Component {
                   )}
 
                   <Modal isOpen={this.state.abierto} style={modalStyles}>
-                  <DialogTitle>
-                      {"Esta seguro de eliminar este evento?"}
+                    <DialogTitle>
+                      <b>{"Eliminar Evento"}</b>
                     </DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-slide-description">
-                        El siguiente evento sera eliminado {event.nombre_evento}.
+                        ¿Está seguro que desea eliminar éste evento?
+                      </DialogContentText>
+                      <DialogContentText id="alert-dialog-slide-description">
+                        El siguiente evento sera eliminado definitivamente {event.nombre_evento}.
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={() => this.deleteEvento(event)}>
-                        Confimar
+                      <Button
+                        color="danger"
+                        onClick={() => this.deleteEvento(event)}
+                      >
+                        Eliminar Evento
                       </Button>
                       <Button onClick={this.abrirModal}>Cancelar</Button>
                     </DialogActions>
