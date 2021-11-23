@@ -105,12 +105,12 @@ class EventsList extends Component {
 
         data = data.filter(
           (event) =>
-            event.estado === "1" &&( event.fecha_evento === currentDate || event.fecha_evento > currentDate) && event.categoria === this.state.categoriaFiltrada);
+       ( event.fecha_evento === currentDate || event.fecha_evento > currentDate) && event.categoria === this.state.categoriaFiltrada);
       } else {
 
         data = data.filter(
           (event) =>
-            event.estado === "1" &&( event.fecha_evento === currentDate || event.fecha_evento > currentDate) );
+            ( event.fecha_evento === currentDate || event.fecha_evento > currentDate) );
       }
 
       this.setState({ events: data });
@@ -135,7 +135,7 @@ class EventsList extends Component {
       this.state.botonMostrarEventosNoArchivados = true;
       this.state.botonMostrarEventosArchivados = false;
       let data = await api.get("/").then(({ data }) => data);
-      data = data.filter((event) => event.estado === "0");
+      data = data.filter((event) => event.fecha_evento < currentDate);
       this.setState({ events: data });
     } catch (err) {
       console.log(err);
@@ -335,8 +335,19 @@ class EventsList extends Component {
         <div>
           <h1> Bienvenido a Lista de eventos!</h1>
           <div className="header-lista-eventos">
-            <span className="span-align">Categoria:</span>
+            
+            <span 
+            style={{
+              display: this.state.botonMostrarEventosArchivados
+                ? "block"
+                : "none",
+              }}className="span-align">Categoria:</span>
             <select
+              style={{
+              display: this.state.botonMostrarEventosArchivados
+                ? "block"
+                : "none",
+              }}
               value={this.state.categoriaFiltrada}
               onChange={this.filterChangeHandler}
             >
@@ -464,26 +475,7 @@ class EventsList extends Component {
                     <Fragment>
                       <div className="principal">
                         <div className="secundario">
-                          <Button
-                            style={{
-                              display: this.state.botonMostrar
-                                ? "block"
-                                : "none",
-                            }}
-                            onClick={() => this.peticionMostrar(event)}
-                          >
-                            Mostrar
-                          </Button>
-                          <Button
-                            style={{
-                              display: this.state.botonArchivar
-                                ? "block"
-                                : "none",
-                            }}
-                            onClick={() => this.peticionArchivar(event)}
-                          >
-                            Archivar
-                          </Button>
+                         
 
                           <Button
                             color="success"
