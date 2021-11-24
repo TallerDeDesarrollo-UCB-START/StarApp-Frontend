@@ -191,7 +191,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                       Iniciar Sesión
                     </Button>
                     <div className={classes.buttonContainer}>
-                      <LoginGoogle />
+                      <LoginGoogle name = "Iniciar con Google"/>
                     </div>
                     <div className={classes.pregunta}>
                       <NavLink to="/register" className={classes.pregunta}>
