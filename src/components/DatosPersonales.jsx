@@ -50,11 +50,25 @@ import { withRouter } from "react-router";
   
     return edad;
   }
+
   const DatosPersonales = (props) => {
     const smallScreen = !useMediaQuery("(min-width:811px)")
     const classes = useStyles();
     const { getDataProfile, handleOpenprop } = props;
     const [anchorEl, setAnchorEl] = React.useState(null);
+
+
+    function horas_participadas() {
+      let horas_participadas = getDataProfile.horas_participadas_eventos;
+      
+  
+      if (!horas_participadas) {
+        horas_participadas = 0;
+      }
+      
+      let msj =  horas_participadas === 1 ? '1 hora' : horas_participadas + " horas";
+      return msj;
+    }
 
     const handlePopoverOpen = (event) => {
       setAnchorEl(event.currentTarget);
@@ -174,6 +188,10 @@ import { withRouter } from "react-router";
                     ) : (
                       <span style={{ color: "red " }}>Sin llenar</span>
                     )}
+                  </Typography>
+                  <Typography variant="body2"  className={classes.greyColor}>
+                    <strong className={classes.blackColor}> Horas participadas:</strong>{" "} {smallScreen? <br></br>: ""}
+                    {(horas_participadas().toString())}
                   </Typography>
                 </Grid>
                 
