@@ -569,7 +569,7 @@ class EventsList extends Component {
           </div>
         </div>
 
-        <Container>
+        <Container class="container1">
           {this.state.events.map((event) => (
             <div className="" key={event.id} >
               <div class="card1">
