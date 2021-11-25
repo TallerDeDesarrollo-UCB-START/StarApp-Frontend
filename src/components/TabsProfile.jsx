@@ -8,7 +8,6 @@ import { useMediaQuery } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from "@material-ui/core/Paper";
-import DatosPersonales from "./DatosPersonales";
 import ListaProyectos from "./perfil/proyectos/listaProyectos";
 import EventosProximos from './Home/EventosProximos';
 
@@ -69,23 +68,27 @@ export default function TabsProfile({ getDataProfile, handleOpenprop, sessionDat
         <Paper className={classes.root} >
           <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant={smallScreen? "scrollable": "fullWidth"}
           scrollButtons={smallScreen? "auto": "off"} >
-            <Tab className={classes.mytab} label="Mis Datos" {...a11yProps(0)} />
-            <Tab className={classes.mytab} label="Mis Eventos" {...a11yProps(1)} />
-            <Tab className={classes.mytab} label="Mis Proyectos" {...a11yProps(2)} />
+            {/* <Tab className={classes.mytab} label="Mis Datos" {...a11yProps(0)} /> */}
+            <Tab className={classes.mytab} label="Tus Eventos" {...a11yProps(0)} /> 
+            <Tab className={classes.mytab} label="Tus Proyectos" {...a11yProps(1)} />
+            <Tab className={classes.mytab} label="Tus Logros" {...a11yProps(2)} />
           </Tabs>
         </Paper>
       </AppBar>
       
-      <TabPanel  value={value} index={0} style={{background: "#F2F2F2"}}>
+      {/* <TabPanel  value={value} index={0} style={{background: "#F2F2F2"}}>
         <DatosPersonales 
         getDataProfile={getDataProfile}
         handleOpenprop={handleOpenprop}/>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
+      </TabPanel> */}
+      <TabPanel value={value} index={0}>
         <EventosProximos id={sessionData.id} title={false}/>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={1}>
         <ListaProyectos></ListaProyectos>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+
       </TabPanel>
     </div>
   );
