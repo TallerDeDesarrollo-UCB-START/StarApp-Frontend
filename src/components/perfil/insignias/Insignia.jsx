@@ -2,15 +2,14 @@ import { Typography } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
-import SchoolIcon from '@material-ui/icons/School';
 import Grid from "@material-ui/core/Grid";
+import InsigniaImg from "../../../assets/insignia.jpeg";
+import InsigniaImg2 from "../../../assets/insigniaBloqueada.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: theme.spacing(4),
-    height: 140,
-    width: 250,
+    height: 190,
+    width: 130,
   },
 }));
 
@@ -20,25 +19,14 @@ function Insignia({ insignias, insigniasOfUser }) {
   return (
     <>
       {insignias.map((insignia, id) => {
-        if (insigniasOfUser.insignias.includes(insignia.insignia)) {
-          return (
-            <Grid key={id} item>
-              <Paper className={classes.paper}>
-                <SchoolIcon />
-                <Typography color="primary">{insignia.insignia}</Typography>
-              </Paper>
-            </Grid>
-          );
-        } else {
-          return (
-            <Grid key={id} item>
-              <Paper className={classes.paper}>
-                <EmojiEventsIcon />
-                <Typography>{insignia.insignia}</Typography>
-              </Paper>
-            </Grid>
-          );
-        }
+        return (
+          <Grid key={id} item>
+            <Paper className={classes.paper}>
+              <img src={InsigniaImg} alt="Insignia"/>
+              <Typography color="primary">{insignia.insignia}</Typography>
+            </Paper>
+          </Grid>
+        );
       })}
     </>
   );

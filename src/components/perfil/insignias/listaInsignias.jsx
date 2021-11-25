@@ -40,7 +40,7 @@ function ListaInsignias() {
   }, []);
 
   return (
-    <Grid className={classes.styleGrid} justifyContent="center" container spacing={3}>
+    <Grid className={classes.styleGrid} justifyContent="space-around" container spacing={3}>
       <Insignia insignias={insignias} insigniasOfUser={insigniasOfUser} />
     </Grid>
   );
