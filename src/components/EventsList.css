@@ -1,4 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+<!--test-->
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fefefe;
+  font-family: sans-serif;
+}
+
+.container1 {
+  width: 90%;
+  margin: 50px auto;
+}
+.heading1 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+.row1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-flow: wrap;
+}
+
+.card1 {
+  width: 20%;
+  background: #fff;
+  border: 1px solid #ccc;
+  margin-bottom: 50px;
+  transition: 0.3s;
+}
+
+.card-header1 {
+  text-align: center;
+  padding: 50px 10px;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: #fff;
+}
+
+.card-body1 {
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.card-body1 .btn {
+  display: block;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  margin-top: 30px;
+  text-decoration: none;
+  padding: 10px 5px;
+}
+
+.card1:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (max-width: 1000px) {
+  .card1 {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .container1 {
+    width: 100%;
+  }
+
+  .heading1 {
+    padding: 20px;
+    font-size: 20px;
+  }
+
+  .card1 {
+    width: 80%;
+  }
+}
+<!--test-->
+
+.media {
+  height: '256px';
+}
+.Button {
+  color: red;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+.card-evn{
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+.card-info{
+  padding-left: 5%;
+}
+
 #ModalFormCrearEvento {
   width: 500px;
   background-color: #f2f2f2 !important;
