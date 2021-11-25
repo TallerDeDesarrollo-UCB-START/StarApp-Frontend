@@ -34,7 +34,7 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
                 <CancelParticipationButton variant="contained" color="primary"
                 onClick={onClick}
                 >
-                    Dejar
+                    Unirme
                 </CancelParticipationButton>
     );
 }
@@ -42,12 +42,13 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
 const CancelParticipationButton = withStyles((theme) => ({
     root: {
         backgroundColor: "#a8a8a8",
-        width: "40%",
-        minWidth: "20%",
+        fontSize: "16px",
         color: "white",
         "&:hover": {
             backgroundColor: "#818181",
         },
+        height: "51px",
+        minWidth: "119px",
     },
     
 }))(Button);
