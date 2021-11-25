@@ -10,6 +10,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import "./Evento.css";
 import Chip from "@material-ui/core/Chip";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import ParticipantesEventosBtn from "./ParticipantesEventosBtn";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -308,6 +309,7 @@ class Evento extends Component {
               </p>
             </div>
           ))}
+          <ParticipantesEventosBtn/>
         </div>
 
         <Modal
