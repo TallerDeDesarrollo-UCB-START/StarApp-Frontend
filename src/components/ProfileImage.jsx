@@ -41,7 +41,8 @@ const baseURL = `${url}extended_form/`;
 
 export default function ProfileImage({ getDataProfile, setDataProfile, sessionData }) {
   const classes = useStyles();
-  const smallScreen = !useMediaQuery("(min-width:811px)")
+  const smallScreen = !useMediaQuery("(min-width:760px)")
+
   var peticionPut = (disponibilidad) => {
     axios
       .put(baseURL + getDataProfile.id_usuario, disponibilidad)
@@ -92,11 +93,12 @@ export default function ProfileImage({ getDataProfile, setDataProfile, sessionDa
           />
         </Badge>
       </div>
-      <Box textAlign={smallScreen? "left": "center"} sx={{marginLeft: "10px"}}>
+      <Box textAlign={smallScreen? "left": "center"} sx={smallScreen? {marginLeft: "10px"}: {margin:"10px"}}>
         <Grid>
         {smallScreen? <Typography variant="subtitle1" style={{fontWeight: "bold"}}>
-            {getDataProfile.nombre} {getDataProfile.apellido}
-          </Typography>:<Typography variant="h6">
+            {getDataProfile.nombre? getDataProfile.nombre.split(" ")[0]: " "} {getDataProfile.apellido? getDataProfile.apellido.split(" ")[0]: " "} 
+          </Typography>:
+          <Typography variant="subtitle1" style={{fontWeight: "bold"}}>
             {getDataProfile.nombre} {getDataProfile.apellido}
           </Typography>}
         </Grid>
