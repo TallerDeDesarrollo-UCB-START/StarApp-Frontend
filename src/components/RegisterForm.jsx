@@ -12,6 +12,8 @@ import LogoAndSlogan from "../components/LogoAndSlogan";
 import MaskedInput from "react-text-mask";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import LoginGoogle from "./LoginGoogle";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
@@ -301,6 +303,10 @@ const RegisterForm = () => {
                   >
                     Crea tu cuenta de start
                   </Button>
+                  <Typography variant="h6">
+                    o
+                  </Typography>           
+                  <LoginGoogle name = "Regístrate con Google"/>
                 </div>
                 <div className={classes.preguntaIni}>
                   <a href="/login" className={classes.preguntaIni}>
