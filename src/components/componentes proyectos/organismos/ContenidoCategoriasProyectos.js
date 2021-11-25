@@ -33,7 +33,7 @@ function ContenidoCategoriasProyectos({categorias}) {
 export default ContenidoCategoriasProyectos;
 
 /* 
- <Grid container spacing={4}>
+<Grid container spacing={4} >
                 <Grid item xs={12} sm={6} md={4} lg={3} className={classes.item}> 
                     <TarjetaCategoriaProyecto imagen={ambiental} categoria={"ambiental"}/>
                 </Grid>
