@@ -354,12 +354,12 @@ class EventsList extends Component {
         />
         <div>
           <h1 style={{
-              display: this.state.botonMostrarEventosArchivados == true
+              display: this.state.botonMostrarEventosArchivados === true
                 ? "block"
                 : "none",
               }}> Bienvenido a Lista de eventos!</h1>
           <h1 style={{
-              display: this.state.botonMostrarEventosArchivados == false
+              display: this.state.botonMostrarEventosArchivados === false
                 ? "block"
                 : "none",
               }}> Bienvenido a Lista de eventos Pasados!</h1>
@@ -367,7 +367,7 @@ class EventsList extends Component {
             
             <span 
             style={{
-              display: this.state.botonMostrarEventosArchivados == true
+              display: this.state.botonMostrarEventosArchivados === true
                 ? "block"
                 : "none",
               }}className="span-align">Categoria:</span>
@@ -390,13 +390,13 @@ class EventsList extends Component {
             </select>
             <span 
             style={{
-              display: this.state.botonMostrarEventosArchivados == false
+              display: this.state.botonMostrarEventosArchivados === false
                 ? "block"
                 : "none",
               }}className="span-align">Categoria:</span>
             <select
               style={{
-              display: this.state.botonMostrarEventosArchivados == false
+              display: this.state.botonMostrarEventosArchivados === false
                 ? "block"
                 : "none",
               }}
@@ -468,7 +468,7 @@ class EventsList extends Component {
         </div>
         <Container>
         <h1 style={{
-              display: this.state.container == false
+              display: this.state.container === false
                 ? "block"
                 : "none",
               }}> Bienvenido a Lista de eventos!</h1>
