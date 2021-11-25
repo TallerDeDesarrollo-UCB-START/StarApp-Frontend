@@ -22,7 +22,8 @@ function ContenidoCategoriasProyectos({categorias}) {
             <Grid container spacing={4}>
                 {categorias.map(categoria => (
                     <Grid item key={categoria.id} xs={6} sm={6} md={4} lg={4} className={classes.item}> 
-                        <TarjetaCategoriaProyecto imagen={categoria.imagen} categoria={categoria.tipo}/>
+                        <TarjetaCategoriaProyecto imagen={categoria.imagenArchivo? categoria.imagenArchivo : categoria.imagen} 
+                                                    categoria={categoria.tipo}/>
                     </Grid>
                 ))}
             </Grid>

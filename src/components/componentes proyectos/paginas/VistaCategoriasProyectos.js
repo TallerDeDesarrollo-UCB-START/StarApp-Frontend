@@ -33,7 +33,7 @@ function VistaCategoriasProyectos() {
 
     // Endpoint fetch
     const crearProyecto = async (nuevoProyecto) => {
-        const response = await fetch(
+        await fetch(
             URLCrearProy,
             {
                 method: 'POST',
