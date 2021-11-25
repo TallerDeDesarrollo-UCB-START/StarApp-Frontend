@@ -8,6 +8,7 @@ import Chip from "@material-ui/core/Chip";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
 
+
 import TextField from "@mui/material/TextField";
 
 //import Dialog from "@mui/material/Dialog";
@@ -26,6 +27,11 @@ const urlProyectos = `${url}get_proyectos`;
 const apiLideres = axios.create({
   baseURL: urlLideres,
 });
+
+
+
+
+
 
 const apiProyectos = axios.create({
   baseURL: urlProyectos,
@@ -85,6 +91,8 @@ class EventsList extends Component {
     this.getUserRol();
     this.getLideres();
     this.getProyectos();
+
+    
   }
 
   abrirModal = () => {
@@ -300,8 +308,9 @@ class EventsList extends Component {
   }
 
   peticionPost = async () => {
-    console.log(this.state.form);
-    await axios
+    
+    if (this.state.form.nombre_evento && this.state.form.fecha_evento) {
+      await axios
       .post(urlCrearEvento, this.state.form)
       .then((response) => {
         this.insertar();
@@ -309,6 +318,11 @@ class EventsList extends Component {
       .catch((error) => {
         console.log(error.message);
       });
+    }
+    else {
+      alert('Campos de Nombre del Evento o Fecha faltantes.')
+    }
+    
   };
 
   getLideres = async () => {
@@ -348,7 +362,7 @@ class EventsList extends Component {
     this.cerrarModalInsertar();
     window.location.reload();
   };
-
+  
   handleChange = (e) => {
     this.setState({
       form: {
@@ -357,6 +371,7 @@ class EventsList extends Component {
       },
     });
   };
+  
 
   render() {
     const modalStyles = {
@@ -366,6 +381,9 @@ class EventsList extends Component {
       transform: "translate(-50%,-50%)",
     };
     const rolUser = this.state.user;
+
+    
+
     return (
       <div>
             <Chip
@@ -732,6 +750,7 @@ class EventsList extends Component {
             <div className="CamposBotones">
               <Button
                 className="botonActualizar"
+                // disabled={this.state.form.nombre_evento && this.state.form.fecha_evento? false:true}
                 onClick={() => this.peticionPost()}
               >
                 Guardar Evento{" "}
