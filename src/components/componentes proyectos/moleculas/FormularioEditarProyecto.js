@@ -7,7 +7,9 @@ import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
 //import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import { Button, Modal } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // Styles
 /*const useStylesDrpdn = makeStyles({
@@ -129,7 +131,10 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
           };
     }
 
-    	
+    const botonCancelarFormulario =
+        <Button onClick={onActivarForm}>
+            <FontAwesomeIcon className="cancel-icon" icon={faTimes}/>
+        </Button>;	
     
     const [modalStyle] = React.useState(getModalStyle);
     
@@ -139,6 +144,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const body = (
         <div style={modalStyle} className="paper-crear">
             <form  onSubmit={onSubmit}>
+                {botonCancelarFormulario}
                 <div className="crear-container-title">
                     <h4>Editar Proyecto</h4>
                 </div>
@@ -196,8 +202,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                 onChange={onChangeInfoAd}
                                 />
                     <div className="btn-crear-container">
-                        <input type='submit' value='Guardar' className='btn-proy-editar btn-proy-block'/>
-                        <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
+                        <input type='submit' value='GUARDAR CAMBIOS' className='btn-proy-editar btn-proy-block'/>
                     </div>
                 </div>
             </form>
