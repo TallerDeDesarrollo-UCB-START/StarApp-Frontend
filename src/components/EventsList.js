@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Card, Modal, Button } from "reactstrap";
+//import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Card, Modal, Button, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./EventsList.css";
 import Chip from "@material-ui/core/Chip";
@@ -13,6 +13,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import GoogleCalendar from "./googleCalendar.jsx"
+import Typography from '@material-ui/core/Typography';
+import {Grid,Box,CardHeader} from '@material-ui/core/';
+import { CardContent, CardMedia } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBoxOpen, faInbox, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -396,6 +402,7 @@ class EventsList extends Component {
     const { snackbarAbierto } = this.state;
 
     return (
+      
       <div>
         <Chip
           style={{ marginTop: "20px" }}
@@ -487,25 +494,42 @@ class EventsList extends Component {
               })}
             </select>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex",}}>
             {rolUser !== "voluntario" ? (
               <Fragment>
                 <Button
-                  style={{ marginLeft: "auto" }}
+                  style={{
+                    position: "absolute", 
+                    right: 300,                    
+                    borderRadius: 4,
+                    height:51,
+                    backgroundColor: "#B3DA3F",
+                    fontSize: "16px",
+                    margin:"8px",
+                    
+                  }}
                   onClick={() => this.mostrarModalInsertar()}
                 >
                   {" "}
-                  Crear Evento{" "}
+                  CREAR EVENTO{" "}
                 </Button>
                 <Button
                   style={{
                     display: this.state.botonMostrarEventosArchivados
                       ? "block"
                       : "none",
+                      position: "absolute", 
+                      right: 100,
+                      marginLeft: "auto",
+                      borderRadius: 4,
+                      height:51,
+                      backgroundColor: "#269bd5",
+                      fontSize: "16px",
+                      margin:"8px"
                   }}
                   onClick={() => this.getEventsArchivados()}
                 >
-                  Eventos Pasados
+                  EVENTOS PASADOS
                 </Button>
               </Fragment>
             ) : (
@@ -528,39 +552,127 @@ class EventsList extends Component {
                 </div>
               </Fragment>
             )}
-
-            <Button
+            <Button href="/eventos"
               style={{
                 display: this.state.botonMostrarEventosNoArchivados
                   ? "block"
                   : "none",
+                  position: "absolute", 
+                      right: 100,
+                      borderRadius: 4,
+                      height:51,
+                      backgroundColor: "#269bd5",
+                      fontSize: "16px",
+                      margin:"8px"                     
               }}
-              href="/eventos"
-            >
-              Volver
-            </Button>
+            >VOLVER</Button>
           </div>
         </div>
+
+          
+        <body>
+        <div class="container1">
+          {this.state.events.map((event) => ( 
+          <div className="" key={event.id} >
+
+          <div class="row1">
+            <div class="card1">
+                <CardMedia  component="img" height="140" image="https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg" className="img-fluid" />
+                <CardHeader title={event.nombre_evento} subheader={event.descripcion_evento} titleTypographyProps={{ gutterBottom: true }} />            
+                <Grid container spacing={4}>
+                      <CardContent>
+                       <p className="card-info"><b>La Modalidad del Evento es:</b> {event.modalidad_evento}</p>
+                       <p className="card-info"><b>Fecha:</b> {event.fecha_evento} </p> 
+                       <p className="card-info"><b>Lugar:</b> {event.lugar_evento} </p>
+                       <p className="card-info"> <b>Categoría:</b> {event.categoria} </p>
+                       </CardContent>
+                      
+                      
+                      
+                      <CardBody>  
+                        {this.validarBotones(event) ? (
+                          <Button  variant="contained" onClick={() => { this.postParticipacion(event);}} 
+                          style={{
+                            borderRadius: 4,
+                            height:51,
+                            backgroundColor: "#269BD5",
+                            fontSize: "16px",
+                            margin:"3px",
+                          }}>
+                             {" "}
+                              Participar
+                          </Button>
+                        ) : (
+                          <Button onClick={() => { this.eliminarParticipacion(event);}}
+                          style={{
+                            borderRadius: 4,
+                            height:60,
+                            backgroundColor: "red",
+                            fontSize: "16px",
+                            margin:"3px"
+                          }} >
+                             {" "}
+                              No Participar
+                          </Button>
+                        )}
+  
+                        
+                        {rolUser !== "voluntario" ? (
+                        <Fragment>
+                          
+                            <Button style={{
+                            borderRadius: 4,
+                            height:51,
+                            backgroundColor: "#B3DA3F",
+                            fontSize: "16px",
+                            margin:"3px"
+                          }} > <Link to={"eventos/" + event.id}>Detalles</Link> </Button>
+                          
+  
+                          
+                                        
+                            <Button onClick={() => this.peticionArchivar(event)} style={{
+                            borderRadius: 4,
+                            height:51,
+                            backgroundColor: "#269BD5",
+                            fontSize: "16px",
+                            margin:"5px"
+                            }}> Archivar  </Button>
+                          
+  
+                          
+                            <Button color="danger" onClick={() => this.deleteEvento(event)}> <FontAwesomeIcon icon={faTrashAlt} size="2x" > </FontAwesomeIcon> </Button>
+                         
+                        </Fragment>
+                        ) : (
+                          <></>
+                        )}
+                      </CardBody>
+
+               </Grid>        
+            </div>              
+          </div>
+
+          </div>
+              ))}
+
+        </div>
+      </body>
+
+     
+
+
+        
         <Container>
-          <h1
-            style={{
-              display: this.state.container === false ? "block" : "none",
-            }}
-          >
-            {" "}
-            Bienvenido a Lista de eventos!
-          </h1>
+          
           <Card>
             {this.state.events.map((event) => (
               <div className="card w-70" key={event.id}>
                 <div className="row no-gutters">
                   <div className="col-auto">
-                    <img
-                      src="https://jorge-zientarski.com/imgs/Events2.jpg"
-                      className="img-fluid"
-                      alt=""
-                    />
+                    <img src="https://jorge-zientarski.com/imgs/Events2.jpg" className="img-fluid" alt="" />
                   </div>
+                            
                   <div className="col">
                     <div className="card-block px-1">
                       <h4 className="card-title">{event.nombre_evento}</h4>
@@ -619,6 +731,7 @@ class EventsList extends Component {
                       </Button>
                     </div>
                   </div>
+
                   {rolUser !== "voluntario" ? (
                     <Fragment>
                       <div className="principal">
