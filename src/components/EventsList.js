@@ -48,6 +48,7 @@ class EventsList extends Component {
     participaciones: [],
     user: "",
     divcontainer: true,
+    container:false,
     abierto: false,
     botonMostrar: false,
     botonArchivar: true,
@@ -106,11 +107,13 @@ class EventsList extends Component {
         data = data.filter(
           (event) =>
        ( event.fecha_evento === currentDate || event.fecha_evento > currentDate) && event.categoria === this.state.categoriaFiltrada);
+       this.setState({ container: true });
       } else {
 
         data = data.filter(
           (event) =>
             ( event.fecha_evento === currentDate || event.fecha_evento > currentDate) );
+         this.setState({ container: true });
       }
 
       this.setState({ events: data });
@@ -135,7 +138,20 @@ class EventsList extends Component {
       this.state.botonMostrarEventosNoArchivados = true;
       this.state.botonMostrarEventosArchivados = false;
       let data = await api.get("/").then(({ data }) => data);
-      data = data.filter((event) => event.fecha_evento < currentDate);
+      if (this.state.categoriaFiltrada !== "Todas") {
+        data = data.filter(
+          (event) =>
+          (event.fecha_evento < currentDate) && event.categoria === this.state.categoriaFiltrada);
+          this.setState({ container: true });
+      } else {
+
+        data = data.filter(
+          (event) => (event.fecha_evento < currentDate) );
+          this.setState({ container: true });
+      }
+      if (data == null){
+        this.setState({ container: true });
+      }
       this.setState({ events: data });
     } catch (err) {
       console.log(err);
@@ -195,6 +211,10 @@ class EventsList extends Component {
   filterChangeHandler = (categoria) => {
     this.setState({ categoriaFiltrada: categoria.target.value });
     this.getEvents();
+  };
+  filterPastEventsChangeHandler = (categoria) => {
+    this.setState({ categoriaFiltrada: categoria.target.value });
+    this.getEventsArchivados();
   };
   mensajeConfirmacionParticipacion(event) {
     window.alert(
@@ -333,12 +353,21 @@ class EventsList extends Component {
           onClick={() => window.history.back()}
         />
         <div>
-          <h1> Bienvenido a Lista de eventos!</h1>
+          <h1 style={{
+              display: this.state.botonMostrarEventosArchivados == true
+                ? "block"
+                : "none",
+              }}> Bienvenido a Lista de eventos!</h1>
+          <h1 style={{
+              display: this.state.botonMostrarEventosArchivados == false
+                ? "block"
+                : "none",
+              }}> Bienvenido a Lista de eventos Pasados!</h1>
           <div className="header-lista-eventos">
             
             <span 
             style={{
-              display: this.state.botonMostrarEventosArchivados
+              display: this.state.botonMostrarEventosArchivados == true
                 ? "block"
                 : "none",
               }}className="span-align">Categoria:</span>
@@ -350,6 +379,29 @@ class EventsList extends Component {
               }}
               value={this.state.categoriaFiltrada}
               onChange={this.filterChangeHandler}
+            >
+              {this.state.categorias.map((item) => {
+                return (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
+            <span 
+            style={{
+              display: this.state.botonMostrarEventosArchivados == false
+                ? "block"
+                : "none",
+              }}className="span-align">Categoria:</span>
+            <select
+              style={{
+              display: this.state.botonMostrarEventosArchivados == false
+                ? "block"
+                : "none",
+              }}
+              value={this.state.categoriaFiltrada}
+              onChange={this.filterPastEventsChangeHandler}
             >
               {this.state.categorias.map((item) => {
                 return (
@@ -415,6 +467,11 @@ class EventsList extends Component {
           </div>
         </div>
         <Container>
+        <h1 style={{
+              display: this.state.container == false
+                ? "block"
+                : "none",
+              }}> Bienvenido a Lista de eventos!</h1>
           <Card>
             {this.state.events.map((event) => (
               <div className="card w-70" key={event.id}>
