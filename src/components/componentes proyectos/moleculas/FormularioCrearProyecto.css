@@ -167,3 +167,13 @@
   padding-top: 6px;
   display:flex;
 }
+
+.dropdown-proyectos{
+  height: 60px;
+  background-color: #f2f2f2;
+  border-radius: 6px;
+  border: 1px solid #888888;
+  color: black !important;
+  text-align: center;
+  z-index: 0;
+}

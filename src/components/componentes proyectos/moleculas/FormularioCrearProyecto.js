@@ -145,18 +145,20 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 value={objetivo}
                                 onChange={onChangeObjetivo}
                                 />
-                    <InputTexto type="text"
-                                placeHolder='Líder'
-                                value={lider}
-                                onChange={onChangeLider}
-                                />
-                     <FormControl styles="height: 60px;
-  background-color: #f2f2f2;
-  border-radius: 6px;
-  border: 1px solid #888888;
-  color: black !important;
-  text-align: center;
-  z-index: 0;">
+                    <div className='form-control-proy'>
+                     <FormControl>
+                        <InputLabel>Líder</InputLabel>
+                        <Select onChange={onChangeCategoria}>
+                            <MenuItem value={lider}>Sin Líder</MenuItem>
+                            <MenuItem value={lider}>Alvaro Flores</MenuItem>
+                            <MenuItem value={lider}>Líder 1</MenuItem>
+                            <MenuItem value={lider}>Líder Auxiliar</MenuItem>
+                            <MenuItem value={lider}>ANDREW JERSON TORREZ PEÑA</MenuItem>
+                        </Select>
+                    </FormControl>
+                    </div>
+                    <div className='form-control-proy'>
+                     <FormControl>
                         <InputLabel>Categorías</InputLabel>
                         <Select onChange={onChangeCategoria}>
                             <MenuItem value={categoria}>Animales</MenuItem>
@@ -169,12 +171,16 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                             <MenuItem value={categoria}>Otros</MenuItem>
                         </Select>
                     </FormControl>
-
-                    <InputTexto type="text"
-                                placeHolder='Estado'
-                                value={estado}
-                                onChange={onChangeEstado}
-                                />
+                    </div>
+                    <div className='form-control-proy'>
+                    <FormControl>
+                        <InputLabel>Estado</InputLabel>
+                        <Select onChange={onChangeCategoria}>
+                            <MenuItem value={estado}>En Curso</MenuItem>
+                            <MenuItem value={estado}>Concluido</MenuItem>
+                        </Select>
+                    </FormControl>
+                    </div>
                     <InputTexto type="link"
                                 placeHolder='Información Adicional'
                                 value={informacion_adicional}
