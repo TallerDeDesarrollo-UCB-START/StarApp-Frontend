@@ -46,11 +46,11 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
         if (!titulo || !descripcion || !objetivo || !lider || !categoria) {
             alert('Porfavor llene los campos')
             //console.log(event)
-            if (!titulo) agregarRequerido(event.currentTarget[2])
-            if (!descripcion) agregarRequerido(event.currentTarget[3])
-            if (!objetivo) agregarRequerido(event.currentTarget[4])
-            if (!lider) agregarRequerido(event.currentTarget[5])
-            if (!categoria) agregarRequerido(event.currentTarget[6])
+            if (!titulo) agregarRequerido(event.currentTarget[3])
+            if (!descripcion) agregarRequerido(event.currentTarget[4])
+            if (!objetivo) agregarRequerido(event.currentTarget[5])
+            if (!lider) agregarRequerido(event.currentTarget[6])
+            if (!categoria) agregarRequerido(event.currentTarget[7])
             return false
         }
         return true
