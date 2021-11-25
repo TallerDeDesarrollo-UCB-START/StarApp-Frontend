@@ -5,7 +5,9 @@ import '../moleculas/FormularioCrearProyecto.css'
 //import {VARIABLES} from '../organismos/variables-compartidas'
 import { useState } from "react"
 import React from 'react';
-import Modal from '@material-ui/core/Modal';
+import { Button, Modal } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 
 function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}) {
@@ -101,9 +103,10 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             transform: `translate(-${top}%, -${left}%)`,
           };
     }
-
-    	
-    
+    const botonCancelarFormulario =
+        <Button onClick={onActivarForm}>
+            <FontAwesomeIcon className="cancel-icon" icon={faTimes}/>
+        </Button>;
     const [modalStyle] = React.useState(getModalStyle);
     
     const handleClose = () => {
@@ -112,6 +115,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const body = (
         <div style={modalStyle} className="paper-crear">
             <form  onSubmit={onSubmit}>
+                {botonCancelarFormulario}
                 <div className="crear-container-title">
                     <h4>Crear Proyecto</h4>
                 </div>
@@ -162,8 +166,8 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 onChange={onChangeInfoAd}
                                 />
                     <div className="btn-crear-container">
-                        <input type='submit' value='Crear' className='btn-proy-crear btn-proy-block'/>
-                        <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
+                        <input type='submit' value='CREAR PROYECTO' className='btn-proy-crear btn-proy-block'/>
+                        
                     </div>
                 </div>
             </form>
