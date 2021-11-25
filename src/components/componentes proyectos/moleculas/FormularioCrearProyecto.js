@@ -5,7 +5,7 @@ import '../moleculas/FormularioCrearProyecto.css'
 //import {VARIABLES} from '../organismos/variables-compartidas'
 import { useState } from "react"
 import React from 'react';
-import { Button, Modal } from '@material-ui/core';
+import { Button, Modal, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -85,7 +85,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const onChangeDescrip = (e) => {setDescripcion(e.target.value); removerRequerido(e.target)}
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value); removerRequerido(e.target)}
     const onChangeLider = (e) => {setLider(e.target.value); removerRequerido(e.target)}
-    const onChangeCategoria = (e) => {setCategoria(e.target.value); removerRequerido(e.target)}
+    const onChangeCategoria = (e) => {setCategoria(e.target.value)}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
     // ---- NUEVO ----
@@ -150,11 +150,26 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 value={lider}
                                 onChange={onChangeLider}
                                 />
-                    <InputTexto type="text"
-                                placeHolder='Categoría'
-                                value={categoria}
-                                onChange={onChangeCategoria}
-                                />
+                     <FormControl styles="height: 60px;
+  background-color: #f2f2f2;
+  border-radius: 6px;
+  border: 1px solid #888888;
+  color: black !important;
+  text-align: center;
+  z-index: 0;">
+                        <InputLabel>Categorías</InputLabel>
+                        <Select onChange={onChangeCategoria}>
+                            <MenuItem value={categoria}>Animales</MenuItem>
+                            <MenuItem value={categoria}>Medio Ambiente</MenuItem>
+                            <MenuItem value={categoria}>Desarrollo Sostenible</MenuItem>
+                            <MenuItem value={categoria}>Trabajo Social</MenuItem>
+                            <MenuItem value={categoria}>Empoderamiento</MenuItem>
+                            <MenuItem value={categoria}>Comunidad</MenuItem>
+                            <MenuItem value={categoria}>Educación</MenuItem>
+                            <MenuItem value={categoria}>Otros</MenuItem>
+                        </Select>
+                    </FormControl>
+
                     <InputTexto type="text"
                                 placeHolder='Estado'
                                 value={estado}
