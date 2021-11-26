@@ -1,5 +1,4 @@
 // Componentes:
-import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
 //import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
 import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
 // Librerias-Paquetes-Estilos: 
@@ -20,7 +19,7 @@ const useStyles = makeStyles({
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
-function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
+function HeaderProyectosAdmin({tituloHeader}) {
     const classes = useStyles()
     const complementoTitulo = tituloHeader? tituloHeader : ''
     return (
@@ -35,7 +34,7 @@ function HeaderProyectosAdmin({onActivarForm, tituloHeader}) {
                         </ThemeProvider>
                     </Grid>
                     <Grid item xs={7} md={5} className={classes.far_right}>
-                        <CrearProyectoBtn onActivarForm={onActivarForm}/>
+                        {/*Aqui cualquier componente para la esquina derecha*/}
                     </Grid>
                 </Grid>
         </Container>
