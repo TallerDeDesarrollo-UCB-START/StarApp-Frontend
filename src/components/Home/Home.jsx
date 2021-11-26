@@ -8,7 +8,9 @@ const Home = ({sessionData}) =>{
         <section>
             {(!sessionData.id)?
                 <LandingView/>:
-                (<EventosProximos id={sessionData.id}/>)
+                (<div style={{padding: "40px 5%"}}>
+                    <EventosProximos id={sessionData.id} title = {true} />
+                </div>)
             }
             <RecordatorioLlenarDatos/>
         </section>

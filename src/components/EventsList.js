@@ -3,14 +3,22 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Modal, Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalFooter from "react-bootstrap/ModalFooter";
 import "./EventsList.css";
+import Chip from "@material-ui/core/Chip";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+
 
 import TextField from "@mui/material/TextField";
 
+//import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+//import Slide from "@mui/material/Slide";
+
 const url = process.env.REACT_APP_API;
-const urlLocal = `http://localhost:5000/eventos`;
+//const urlLocal = `http://localhost:5000/eventos`;
 const urlDeploy = `${url}eventos`;
 const urlCrearEvento = `${url}eventos/crearevento`;
 const urlLideres = `${url}lideres`;
@@ -33,6 +41,7 @@ const api = axios.create({
   baseURL: urlDeploy,
 });
 const urlParticipacion = `${urlDeploy}/participate_evento/`;
+
 class EventsList extends Component {
   state = {
     events: [],
@@ -67,7 +76,6 @@ class EventsList extends Component {
     lideres: [],
     proyectos: [],
   };
-  
 
   constructor() {
     super();
@@ -360,6 +368,14 @@ class EventsList extends Component {
     const rolUser = this.state.user;
     return (
       <div>
+            <Chip
+          style={{ marginTop: "20px" }}
+          variant="outlined"
+          icon={<NavigateBeforeIcon />}
+          label="Volver"
+          clickable
+          onClick={() => window.history.back()}
+        />
         <div>
           <h1> Bienvenido a Lista de eventos!</h1>
           <div className="header-lista-eventos">
@@ -529,7 +545,7 @@ class EventsList extends Component {
 
                           <Button
                             color="success"
-                            onClick={() => this.deleteEvento(event)}
+                            onClick={() => this.abrirModal()}
                           >
                             Eliminar
                           </Button>
@@ -541,20 +557,26 @@ class EventsList extends Component {
                   )}
 
                   <Modal isOpen={this.state.abierto} style={modalStyles}>
-                    <ModalHeader>
-                      Esta seguro de eliminar este evento ??
-                    </ModalHeader>
-                    <ModalFooter>
+                    <DialogTitle>
+                      <b>{"Eliminar Evento"}</b>
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description">
+                        ¿Está seguro de eliminar el evento {event.nombre_evento}?
+                      </DialogContentText>
+                      <DialogContentText id="alert-dialog-slide-description">
+                        Se eliminará definitivamente.
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
                       <Button
-                        color="primary"
+                        color="danger"
                         onClick={() => this.deleteEvento(event)}
                       >
-                        Aceptar
+                        Eliminar Evento
                       </Button>
-                      <Button color="secondary" onClick={this.abrirModal}>
-                        Cancelar
-                      </Button>
-                    </ModalFooter>
+                      <Button onClick={this.abrirModal}>Cancelar</Button>
+                    </DialogActions>
                   </Modal>
                 </div>
                 <div className="card-footer w-100 text-muted"></div>

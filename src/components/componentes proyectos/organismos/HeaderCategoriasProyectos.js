@@ -2,7 +2,8 @@
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
+import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
+//import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
 // Permisos/Roles:
 
 // Librerias-Paquetes:
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 
-function HeaderCategoriasProyectos() {
+function HeaderCategoriasProyectos({onActivarForm}) {
     const classes = useStyles()
     return (
         <Box>
@@ -29,7 +30,7 @@ function HeaderCategoriasProyectos() {
                         </Typography>
                     </Grid>
                     <Grid item xs={7} md={5} className={classes.far_right}>
-                        <ProyectosPasadosBtn/>
+                        <CrearProyectoBtn onActivarForm={onActivarForm}/>
                     </Grid>
                 </Grid>
         </Box>

@@ -33,9 +33,9 @@ function ContenidoProyectoDetalle ({proyecto}) {
     }
 
      const switchListaParticipantes = proyecto.visualizar === true?
-        <ListaParticipantesProyecto proyectoId={proyecto.id}/>
+        <ListaParticipantesProyecto/>
         :<PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-        <ListaParticipantesProyecto proyectoId={proyecto.id}/>
+        <ListaParticipantesProyecto/>
         </PuertaPermisos>
         
 

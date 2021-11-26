@@ -14,7 +14,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
 import Chip from "@material-ui/core/Chip";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
-import { useMediaQuery } from "@material-ui/core";
+import { useMediaQuery, Typography } from "@material-ui/core";
 
 const url = process.env.REACT_APP_API;
 const urlTablaExtensa = `${url}extended_form/`;
@@ -106,10 +106,15 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
-  chipRoot:{
+  chipRootSmall:{
     position: "absolute",
-    right: "2%"
-  }
+    right: "2%",
+    top: "37.2%",
+  },
+  chipRoot:{
+    float: "right",
+    marginRight: "12%"
+    }
 }));
 
 const Profile = ({sessionData}) => {
@@ -760,19 +765,20 @@ const Profile = ({sessionData}) => {
         </Snackbar>
       {location.pathname === "/" && <Link to="/profile">Perfil</Link>}
       <div>
-      {smallScreen? <Chip
-          className ={classNamees.chipRoot}
-          variant="outlined"
-          icon={<EditTwoToneIcon />}
-          label="Editar"
-          clickable
-          onClick={handleOpen}
-        />: ""}
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
+            {smallScreen? <Typography variant="h2" style={{padding : "10px"}}>Cuenta</Typography>: "" }
             <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
-            <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen}/>
-            
+            <Chip
+              className ={smallScreen? classNamees.chipRootSmall: classNamees.chipRoot}
+              variant="outlined"
+              icon={<EditTwoToneIcon />}
+              label="Editar Perfil"
+              clickable
+              onClick={handleOpen}
+            />
+            <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen} sessionData={sessionData}/>
+
             <Modal
               open={open}
               onClose={handleClose}

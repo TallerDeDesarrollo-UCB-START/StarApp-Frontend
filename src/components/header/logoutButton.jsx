@@ -7,8 +7,7 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme)=> ({
     registerButton: {
-        width:"10%", 
-        marginRight:"30px",
+        marginRight:"5px",
     },
 }))
 
@@ -29,8 +28,8 @@ const LogoutButton = ({logged, sessionData}) => {
                 className={classes.registerButton} 
                 variant="contained"
                 color="primary"
-                onClick={()=>history.push("/register")}>
-                    Únete
+                onClick={()=>history.push("/login")}>
+                    Iniciar Sesión
             </Button>
         ):(
             <div>
