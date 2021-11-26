@@ -69,10 +69,9 @@ export default function TabsProfile({ getDataProfile, handleOpenprop, sessionDat
         <Paper className={classes.root} >
           <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant={smallScreen? "scrollable": "fullWidth"}
           scrollButtons={smallScreen? "auto": "off"} >
-            <Tab className={classes.mytab} label="Mis Datos" {...a11yProps(0)} />
-            <Tab className={classes.mytab} label="Mis Eventos" {...a11yProps(1)} />
-            <Tab className={classes.mytab} label="Mis Proyectos" {...a11yProps(2)} />
-            <Tab className={classes.mytab} label="Mis Logros" {...a11yProps(3)} />
+            <Tab className={classes.mytab} label="Tus Eventos" {...a11yProps(0)} /> 
+            <Tab className={classes.mytab} label="Tus Proyectos" {...a11yProps(1)} />
+            <Tab className={classes.mytab} label="Tus Logros" {...a11yProps(2)} />
           </Tabs>
         </Paper>
       </AppBar>
@@ -89,9 +88,6 @@ export default function TabsProfile({ getDataProfile, handleOpenprop, sessionDat
         <ListaProyectos></ListaProyectos>
       </TabPanel>
       <TabPanel value={value} index={2}>
-
-      </TabPanel>
-      <TabPanel value={value} index={3}>
         <ListaInsignias></ListaInsignias>
       </TabPanel>
     </div>
