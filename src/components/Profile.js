@@ -106,11 +106,15 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
-  chipRoot:{
+  chipRootSmall:{
     position: "absolute",
     right: "2%",
     top: "37.2%",
-  }
+  },
+  chipRoot:{
+    float: "right",
+    marginRight: "12%"
+    }
 }));
 
 const Profile = ({sessionData}) => {
@@ -761,20 +765,20 @@ const Profile = ({sessionData}) => {
         </Snackbar>
       {location.pathname === "/" && <Link to="/profile">Perfil</Link>}
       <div>
-      {smallScreen? <Chip
-          className ={classNamees.chipRoot}
-          variant="outlined"
-          icon={<EditTwoToneIcon />}
-          label="Editar Perfil"
-          clickable
-          onClick={handleOpen}
-        />: ""}
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
             {smallScreen? <Typography variant="h2" style={{padding : "10px"}}>Cuenta</Typography>: "" }
             <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
+            <Chip
+              className ={smallScreen? classNamees.chipRootSmall: classNamees.chipRoot}
+              variant="outlined"
+              icon={<EditTwoToneIcon />}
+              label="Editar Perfil"
+              clickable
+              onClick={handleOpen}
+            />
             <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen} sessionData={sessionData}/>
-            
+
             <Modal
               open={open}
               onClose={handleClose}
