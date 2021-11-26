@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles} from '@material-ui/core';
+import { makeStyles } from "@material-ui/core";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import Insignia from "./Insignia";
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles((theme) => ({
   styleGrid: {
-     textAlign: 'center',
+    textAlign: "center",
   },
   root: {
     flexGrow: 1,
   },
-}))
+}));
 
 const url = process.env.REACT_APP_API;
 const baseURL = `${url}insignias`;
@@ -19,7 +19,7 @@ const api = axios.create({
   baseURL: baseURL,
 });
 function ListaInsignias() {
-  const classes = useStyles()
+  const classes = useStyles();
   const [insignias, setInsignias] = useState([]);
   const [insigniasOfUser, setInsigniasUser] = useState([]);
   const obtenerInsigniasUsuario = async () => {
@@ -40,7 +40,12 @@ function ListaInsignias() {
   }, []);
 
   return (
-    <Grid className={classes.styleGrid} justifyContent="space-around" container spacing={3}>
+    <Grid
+      className={classes.styleGrid}
+      justifyContent="space-around"
+      container
+      spacing={3}
+    >
       <Insignia insignias={insignias} insigniasOfUser={insigniasOfUser} />
     </Grid>
   );

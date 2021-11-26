@@ -22,7 +22,11 @@ function Insignia({ insignias, insigniasOfUser }) {
         return (
           <Grid key={id} item>
             <Paper className={classes.paper}>
-              <img src={InsigniaImg} alt="Insignia"/>
+              {insigniasOfUser?.insignias?.includes(insignia?.insignia) ? (
+                <img src={InsigniaImg} alt="Insignia" />
+              ) : (
+                <img src={InsigniaImg2} alt="Insignia2" />
+              )}
               <Typography color="primary">{insignia.insignia}</Typography>
             </Paper>
           </Grid>
