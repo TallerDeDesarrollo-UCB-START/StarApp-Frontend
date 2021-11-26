@@ -8,13 +8,15 @@ const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;
 const ExcelColumn = ExportExcel.ExcelColumn;
 //const url = process.env.REACT_APP_API;
-const urlLocal = `http://localhost:5000/`;
+const url = `http://localhost:5000/`;
 class ListaParticipantesProyecto extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       posts: [],
+      inicio: "",
+      fin: "",
     };
   }
 
@@ -22,19 +24,20 @@ class ListaParticipantesProyecto extends Component {
     let thisUrl = window.location.href;
     let id = this.getId(thisUrl);
     axios
-      .get(`${urlLocal}eventos/participantes/${id}`)
+      .get(`${url}eventos/participantes/${id}`)
       .then((response) => {
         this.setState({ posts: response.data });
         console.log(response.data);
         this.setState({
-          inicio: "inicio: " + response.data[0].hora_inicio.substring(0, 10),
+          inicio:
+            "Hora inicio: " + response.data[0].hora_inicio.substring(0, 10),
         });
         let fin = response.data[0].hora_fin;
         console.log(fin);
         if (fin == null) {
-          this.setState({ fin: "fin: en progreso " });
+          this.setState({ fin: "Hora fin: en progreso " });
         } else {
-          this.setState({ fin: "fin: " + fin });
+          this.setState({ fin: "Hora fin: " + fin });
         }
       })
       .catch((error) => {
@@ -49,8 +52,8 @@ class ListaParticipantesProyecto extends Component {
 
   render() {
     const { posts } = this.state;
-    const { inicio } = this.state;
-    const { fin } = this.state;
+    //const { inicio } = this.state;
+    //const { fin } = this.state;
     return (
       <Box>
         <ExcelFile
@@ -60,8 +63,8 @@ class ListaParticipantesProyecto extends Component {
           filename="ListaParticipantes"
         >
           <ExcelSheet data={posts} name="Participantes">
-            <ExcelColumn name="inicio" label={inicio} />
-            <ExcelColumn label={fin} />
+            <ExcelColumn label="Hora Inicio" value="hora_inicio" />
+            <ExcelColumn label="Hora Fin" value="hora_fin" />
             <ExcelColumn label="Nombre" value="nombre" />
             <ExcelColumn label="Apellido" value="apellido" />
             <ExcelColumn label="Rol" value="rol" />

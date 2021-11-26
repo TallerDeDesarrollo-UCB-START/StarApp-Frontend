@@ -265,7 +265,6 @@ class Evento extends Component {
                         </p>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -301,7 +300,7 @@ class Evento extends Component {
               </p>
             </div>
           ))}
-          <ParticipantesEventosBtn/>
+          {rolUser !== "voluntario" ? <ParticipantesEventosBtn /> : <></>}
         </div>
 
         <Modal
