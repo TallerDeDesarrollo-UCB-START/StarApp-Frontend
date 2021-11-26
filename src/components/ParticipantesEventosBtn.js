@@ -1,26 +1,73 @@
-import React from "react";
-import ReactExport from "react-export-excel";
-import { Button } from "@material-ui/core";
-
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
-
-   
-
-class Download extends React.Component {
+import { Box, Button } from "@material-ui/core";
+import axios from "axios";
+import React, { Component } from "react";
+import ExportExcel from "react-export-excel";
+import { withStyles } from "@material-ui/core";
+ 
+const ExcelFile = ExportExcel.ExcelFile;
+const ExcelSheet = ExportExcel.ExcelSheet;
+const ExcelColumn = ExportExcel.ExcelColumn;
+ 
+class ListaParticipantesProyecto extends Component {
+  constructor(props) {
+    super(props);
+ 
+    this.state = {
+      posts: [],
+     
+    };
+  }
+ 
+  componentDidMount() {
+    let thisUrl = window.location.href;
+    let id = this.getId(thisUrl);
+    axios
+      .get(`${process.env.REACT_APP_API}eventos/participantes/${id}`)
+      .then((response) => {
+        this.setState({ posts: response.data });
+        console.log(response.data);
+       
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  getId(thisUrl) {
+    var id = thisUrl.substring(thisUrl.indexOf("/") + 1);
+    id = thisUrl.split("/").pop();
+    return id;
+  }
+ 
   render() {
+    const { posts } = this.state;
+   
     return (
-      <ExcelFile element={<Button>Descargar Lista</Button>}>
-        <ExcelSheet data={dataSet1} name="Lista Peticipantes en eventos">
-          <ExcelColumn label="Nombre" value="nombre" />
-          <ExcelColumn label="Apellidos" value="apellido" />
-          <ExcelColumn label="Rol" value="rol" />
-          <ExcelColumn label="Celular" value="telefono" />
-        </ExcelSheet>
-      </ExcelFile>
+      <Box>
+        <ExcelFile
+          element={
+            <ExportarButton variant="contained">Exportar Lista</ExportarButton>
+          }
+          filename="ListaParticipantes"
+        >
+          <ExcelSheet data={posts} name="Participantes">
+           
+            <ExcelColumn label="Nombre" value="nombre" />
+            <ExcelColumn label="Apellido" value="apellido" />
+            <ExcelColumn label="Rol" value="rol" />
+            <ExcelColumn label="Telefono" value="telefono" />
+          </ExcelSheet>
+        </ExcelFile>
+      </Box>
     );
   }
 }
-
-export default Download;
+const ExportarButton = withStyles((theme) => ({
+  root: {
+    marginRight: 10,
+    marginLeft: 10,
+    width: "25%",
+    background: "green",
+    color: "white",
+  },
+}))(Button);
+export default ListaParticipantesProyecto;
