@@ -3,30 +3,39 @@ import axios from "axios";
 import React, { Component } from "react";
 import ExportExcel from "react-export-excel";
 import { withStyles } from "@material-ui/core";
- 
+
 const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;
 const ExcelColumn = ExportExcel.ExcelColumn;
- 
+//const url = process.env.REACT_APP_API;
+const urlLocal = `http://localhost:5000/`;
 class ListaParticipantesProyecto extends Component {
   constructor(props) {
     super(props);
- 
+
     this.state = {
       posts: [],
-     
     };
   }
- 
+
   componentDidMount() {
     let thisUrl = window.location.href;
     let id = this.getId(thisUrl);
     axios
-      .get(`${process.env.REACT_APP_API}eventos/participantes/${id}`)
+      .get(`${urlLocal}eventos/participantes/${id}`)
       .then((response) => {
         this.setState({ posts: response.data });
         console.log(response.data);
-       
+        this.setState({
+          inicio: "inicio: " + response.data[0].hora_inicio.substring(0, 10),
+        });
+        let fin = response.data[0].hora_fin;
+        console.log(fin);
+        if (fin == null) {
+          this.setState({ fin: "fin: en progreso " });
+        } else {
+          this.setState({ fin: "fin: " + fin });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -37,10 +46,11 @@ class ListaParticipantesProyecto extends Component {
     id = thisUrl.split("/").pop();
     return id;
   }
- 
+
   render() {
     const { posts } = this.state;
-   
+    const { inicio } = this.state;
+    const { fin } = this.state;
     return (
       <Box>
         <ExcelFile
@@ -50,7 +60,8 @@ class ListaParticipantesProyecto extends Component {
           filename="ListaParticipantes"
         >
           <ExcelSheet data={posts} name="Participantes">
-           
+            <ExcelColumn name="inicio" label={inicio} />
+            <ExcelColumn label={fin} />
             <ExcelColumn label="Nombre" value="nombre" />
             <ExcelColumn label="Apellido" value="apellido" />
             <ExcelColumn label="Rol" value="rol" />
