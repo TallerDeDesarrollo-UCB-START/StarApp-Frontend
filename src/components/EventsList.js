@@ -7,8 +7,9 @@ import "./EventsList.css";
 import Chip from "@material-ui/core/Chip";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
-
 import TextField from "@mui/material/TextField";
+import { Snackbar } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
 
 //import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -75,6 +76,7 @@ class EventsList extends Component {
     },
     lideres: [],
     proyectos: [],
+    snackbarAbierto: false,
   };
 
   constructor() {
@@ -214,7 +216,8 @@ class EventsList extends Component {
         id_autenticacion: window.sessionStorage.id,
       })
       .then((response) => {
-        this.mensajeConfirmacionParticipacion(event);
+        this.handleClick(); //abre el snackbar
+        // this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
         console.log(error.message);
@@ -357,6 +360,9 @@ class EventsList extends Component {
       },
     });
   };
+  // handleOpen = () => this.setState({ snackbarAbierto: true });
+  handleClose = () => this.setState({ snackbarAbierto: false });
+  handleClick = () => this.setState({ snackbarAbierto: true });
 
   render() {
     const modalStyles = {
@@ -366,9 +372,10 @@ class EventsList extends Component {
       transform: "translate(-50%,-50%)",
     };
     const rolUser = this.state.user;
+    const { snackbarAbierto } = this.state;
     return (
       <div>
-            <Chip
+        <Chip
           style={{ marginTop: "20px" }}
           variant="outlined"
           icon={<NavigateBeforeIcon />}
@@ -512,6 +519,38 @@ class EventsList extends Component {
                           Eliminar Participacion
                         </Button>
                       )}
+                      <div>
+                        <Snackbar
+                          anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "left",
+                          }}
+                          open={snackbarAbierto}
+                          onClose={this.handleClose}
+                          autoHideDuration={2000}
+                          // other Snackbar props
+                        >
+                          {/* <span
+                style={{
+                  background: "#000",
+                  color: "#fff",
+                  padding: "20px 5px",
+                  width: "100%",
+                  borderRadius: "5px"
+                }}
+              >
+                Order Confirmed
+              </span> */}
+                          <MuiAlert
+                            onClose={this.handleClose}
+                            severity="success"
+                            elevation={6}
+                            variant="filled"
+                          >
+                            Success Message
+                          </MuiAlert>
+                        </Snackbar>
+                      </div>
 
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
@@ -562,7 +601,8 @@ class EventsList extends Component {
                     </DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-slide-description">
-                        ¿Está seguro de eliminar el evento {event.nombre_evento}?
+                        ¿Está seguro de eliminar el evento {event.nombre_evento}
+                        ?
                       </DialogContentText>
                       <DialogContentText id="alert-dialog-slide-description">
                         Se eliminará definitivamente.
