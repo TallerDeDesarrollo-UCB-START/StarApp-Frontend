@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import "./EventsList.css";
-
 import TextField from "@mui/material/TextField";
+import { Snackbar } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const url = process.env.REACT_APP_API;
 const urlLocal = `http://localhost:5000/eventos`;
@@ -66,8 +67,8 @@ class EventsList extends Component {
     },
     lideres: [],
     proyectos: [],
+    snackbarAbierto: false,
   };
-  
 
   constructor() {
     super();
@@ -206,7 +207,8 @@ class EventsList extends Component {
         id_autenticacion: window.sessionStorage.id,
       })
       .then((response) => {
-        this.mensajeConfirmacionParticipacion(event);
+        this.handleClick(); //abre el snackbar
+        // this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
         console.log(error.message);
@@ -349,6 +351,9 @@ class EventsList extends Component {
       },
     });
   };
+  // handleOpen = () => this.setState({ snackbarAbierto: true });
+  handleClose = () => this.setState({ snackbarAbierto: false });
+  handleClick = () => this.setState({ snackbarAbierto: true });
 
   render() {
     const modalStyles = {
@@ -358,6 +363,7 @@ class EventsList extends Component {
       transform: "translate(-50%,-50%)",
     };
     const rolUser = this.state.user;
+    const { snackbarAbierto } = this.state;
     return (
       <div>
         <div>
@@ -496,6 +502,38 @@ class EventsList extends Component {
                           Eliminar Participacion
                         </Button>
                       )}
+                      <div>
+                        <Snackbar
+                          anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "left",
+                          }}
+                          open={snackbarAbierto}
+                          onClose={this.handleClose}
+                          autoHideDuration={2000}
+                          // other Snackbar props
+                        >
+                          {/* <span
+                style={{
+                  background: "#000",
+                  color: "#fff",
+                  padding: "20px 5px",
+                  width: "100%",
+                  borderRadius: "5px"
+                }}
+              >
+                Order Confirmed
+              </span> */}
+                          <MuiAlert
+                            onClose={this.handleClose}
+                            severity="success"
+                            elevation={6}
+                            variant="filled"
+                          >
+                            Success Message
+                          </MuiAlert>
+                        </Snackbar>
+                      </div>
 
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
