@@ -63,6 +63,7 @@ class ListaParticipantesProyecto extends Component {
           filename="ListaParticipantes"
         >
           <ExcelSheet data={posts} name="Participantes">
+            <ExcelColumn label="Evento" value="nombre_evento" />
             <ExcelColumn label="Hora Inicio" value="hora_inicio" />
             <ExcelColumn label="Hora Fin" value="hora_fin" />
             <ExcelColumn label="Nombre" value="nombre" />
