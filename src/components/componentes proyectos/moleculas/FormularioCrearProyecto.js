@@ -145,11 +145,13 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 value={objetivo}
                                 onChange={onChangeObjetivo}
                                 />
-                    <div  className='dropdown-proyectos form-control-proy'>
-                     <FormControl sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel>Líder</InputLabel>
-                        <Select onChange={onChangeLider}>
-                            <MenuItem value={lider}>Sin Líder</MenuItem>
+                    <div  className="form-control-proy">
+                     <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
+                        <InputLabel className='label-dropdown-proyectos'>Líder</InputLabel>
+                        <Select className='dropdown-proyectos'
+                        value={lider}
+                        onChange={onChangeLider}>
+                            <MenuItem value=""><em>Ninguno</em></MenuItem>
                             <MenuItem value={lider}>Alvaro Flores</MenuItem>
                             <MenuItem value={lider}>Líder 1</MenuItem>
                             <MenuItem value={lider}>Líder Auxiliar</MenuItem>
@@ -158,9 +160,11 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                     </FormControl>
                     </div>
                     <div className='form-control-proy'>
-                     <FormControl>
-                        <InputLabel>Categorías</InputLabel>
-                        <Select onChange={onChangeCategoria}>
+                     <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
+                        <InputLabel className='label-dropdown-proyectos'>Categorías</InputLabel>
+                        <Select className='dropdown-proyectos'
+                        value={categoria}
+                        onChange={onChangeCategoria}>
                             <MenuItem value={categoria}>Animales</MenuItem>
                             <MenuItem value={categoria}>Medio Ambiente</MenuItem>
                             <MenuItem value={categoria}>Desarrollo Sostenible</MenuItem>
@@ -173,9 +177,11 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                     </FormControl>
                     </div>
                     <div className='form-control-proy'>
-                    <FormControl>
-                        <InputLabel>Estado</InputLabel>
-                        <Select onChange={onChangeEstado}>
+                    <FormControl sx={{ m: 1, minWidth: 120 }} className='dropdown-proyectos'>
+                        <InputLabel className='label-dropdown-proyectos'>Estado</InputLabel>
+                        <Select className='dropdown-proyectos'
+                        value={estado}
+                        onChange={onChangeEstado}>
                             <MenuItem value={estado}>En Curso</MenuItem>
                             <MenuItem value={estado}>Concluido</MenuItem>
                         </Select>

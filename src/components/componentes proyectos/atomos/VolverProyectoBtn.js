@@ -16,11 +16,11 @@ const AtrasButton = withStyles((theme) => ({
     root: {
       color: "black",
       whiteSpace: 'nowrap',
-      minWidth: "5%",
+      minWidth: "100px",
       width: '10%',
       textAlign: 'center',
       borderRadius: 20,
-      alignItems:"right"
+      marginTop: "10px",
     },
   }))(Button);
 export default VolverProyectoBtn
