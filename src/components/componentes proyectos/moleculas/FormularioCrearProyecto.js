@@ -145,10 +145,10 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 value={objetivo}
                                 onChange={onChangeObjetivo}
                                 />
-                    <div className='form-control-proy'>
-                     <FormControl>
+                    <div  className='dropdown-proyectos form-control-proy'>
+                     <FormControl sx={{ m: 1, minWidth: 120 }}>
                         <InputLabel>Líder</InputLabel>
-                        <Select onChange={onChangeCategoria}>
+                        <Select onChange={onChangeLider}>
                             <MenuItem value={lider}>Sin Líder</MenuItem>
                             <MenuItem value={lider}>Alvaro Flores</MenuItem>
                             <MenuItem value={lider}>Líder 1</MenuItem>
@@ -175,7 +175,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                     <div className='form-control-proy'>
                     <FormControl>
                         <InputLabel>Estado</InputLabel>
-                        <Select onChange={onChangeCategoria}>
+                        <Select onChange={onChangeEstado}>
                             <MenuItem value={estado}>En Curso</MenuItem>
                             <MenuItem value={estado}>Concluido</MenuItem>
                         </Select>
