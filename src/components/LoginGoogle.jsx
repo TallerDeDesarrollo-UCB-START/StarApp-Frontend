@@ -4,11 +4,11 @@ import fb from "../initializers";
 import AxiosClient from "./AxiosClient";
 import Avatar from '@material-ui/core/Avatar';
 
-
 const URL_AUTH = process.env.REACT_APP_API_AUTH
 const URL = process.env.REACT_APP_API
-
+var telefonoContacto = null;
 const onSubmit = async (values) => {
+  telefonoContacto = values.user.phoneNumber;
   const bodyAuth = {
     email: values.additionalUserInfo.profile.email,
     tipo: "google",
@@ -22,6 +22,7 @@ const onSubmit = async (values) => {
           nombre: values.additionalUserInfo.profile.given_name,
           apellido: values.additionalUserInfo.profile.family_name,
           foto_url: values.user.photoURL,
+          telefono: telefonoContacto,
           id_autenticacion: parseInt(id_auth),
         }
         AxiosClient.post(`${URL}extended_form`, body)
@@ -56,6 +57,7 @@ const onSubmit = async (values) => {
           const id_auth = response.data.id;
           sessionStorage.setItem("jwt", jwt);
           sessionStorage.setItem("id", id_auth);
+          //debugger;
           //setActiveProgressBar(false);
           window.location.href = `/`;
         }
