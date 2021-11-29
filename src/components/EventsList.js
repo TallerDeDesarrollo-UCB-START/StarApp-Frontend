@@ -7,7 +7,6 @@ import "./EventsList.css";
 import Chip from "@material-ui/core/Chip";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
-
 import TextField from "@mui/material/TextField";
 
 //import Dialog from "@mui/material/Dialog";
@@ -48,6 +47,7 @@ class EventsList extends Component {
     participaciones: [],
     user: "",
     divcontainer: true,
+    container: false,
     abierto: false,
     botonMostrar: false,
     botonArchivar: true,
@@ -55,8 +55,6 @@ class EventsList extends Component {
     botonMostrarEventosArchivados: true,
     success: false,
     categoriaFiltrada: "Todas",
-    filtradoSegunEstado: "En Curso",
-    estados: ["En Curso", "Proximo", "Pasados"],
     categorias: [],
 
     modalInsertar: false,
@@ -104,53 +102,20 @@ class EventsList extends Component {
     try {
       let data = await api.get("/").then(({ data }) => data);
       if (this.state.categoriaFiltrada !== "Todas") {
-        switch (this.state.filtradoSegunEstado) {
-          case "En Curso":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" &&
-                event.fecha_evento === currentDate &&
-                event.categoria === this.state.categoriaFiltrada
-            );
-            break;
-          case "Proximo":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" &&
-                event.fecha_evento > currentDate &&
-                event.categoria === this.state.categoriaFiltrada
-            );
-            break;
-          case "Pasados":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" &&
-                event.fecha_evento < currentDate &&
-                event.categoria === this.state.categoriaFiltrada
-            );
-            break;
-        }
+        data = data.filter(
+          (event) =>
+            (event.fecha_evento === currentDate ||
+              event.fecha_evento > currentDate) &&
+            event.categoria === this.state.categoriaFiltrada
+        );
+        this.setState({ container: true });
       } else {
-        switch (this.state.filtradoSegunEstado) {
-          case "En Curso":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" && event.fecha_evento === currentDate
-            );
-            break;
-          case "Proximo":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" && event.fecha_evento > currentDate
-            );
-            break;
-          case "Pasados":
-            data = data.filter(
-              (event) =>
-                event.estado === "1" && event.fecha_evento < currentDate
-            );
-            break;
-        }
+        data = data.filter(
+          (event) =>
+            event.fecha_evento === currentDate ||
+            event.fecha_evento > currentDate
+        );
+        this.setState({ container: true });
       }
 
       this.setState({ events: data });
@@ -175,7 +140,20 @@ class EventsList extends Component {
       this.state.botonMostrarEventosNoArchivados = true;
       this.state.botonMostrarEventosArchivados = false;
       let data = await api.get("/").then(({ data }) => data);
-      data = data.filter((event) => event.estado === "0");
+      if (this.state.categoriaFiltrada !== "Todas") {
+        data = data.filter(
+          (event) =>
+            event.fecha_evento < currentDate &&
+            event.categoria === this.state.categoriaFiltrada
+        );
+        this.setState({ container: true });
+      } else {
+        data = data.filter((event) => event.fecha_evento < currentDate);
+        this.setState({ container: true });
+      }
+      if (data == null) {
+        this.setState({ container: true });
+      }
       this.setState({ events: data });
     } catch (err) {
       console.log(err);
@@ -236,9 +214,9 @@ class EventsList extends Component {
     this.setState({ categoriaFiltrada: categoria.target.value });
     this.getEvents();
   };
-  filterStateChangeHandler = (estado) => {
-    this.setState({ filtradoSegunEstado: estado.target.value });
-    this.getEvents();
+  filterPastEventsChangeHandler = (categoria) => {
+    this.setState({ categoriaFiltrada: categoria.target.value });
+    this.getEventsArchivados();
   };
   mensajeConfirmacionParticipacion(event) {
     window.alert(
@@ -368,7 +346,7 @@ class EventsList extends Component {
     const rolUser = this.state.user;
     return (
       <div>
-            <Chip
+        <Chip
           style={{ marginTop: "20px" }}
           variant="outlined"
           icon={<NavigateBeforeIcon />}
@@ -377,10 +355,46 @@ class EventsList extends Component {
           onClick={() => window.history.back()}
         />
         <div>
-          <h1> Bienvenido a Lista de eventos!</h1>
+          <h1
+            style={{
+              display:
+                this.state.botonMostrarEventosArchivados === true
+                  ? "block"
+                  : "none",
+            }}
+          >
+            {" "}
+            EVENTOS VIGENTES
+          </h1>
+          <h1
+            style={{
+              display:
+                this.state.botonMostrarEventosArchivados === false
+                  ? "block"
+                  : "none",
+            }}
+          >
+            {" "}
+            EVENTOS PASADOS
+          </h1>
           <div className="header-lista-eventos">
-            <span className="span-align">Categoria:</span>
+            <span
+              style={{
+                display:
+                  this.state.botonMostrarEventosArchivados === true
+                    ? "block"
+                    : "none",
+              }}
+              className="span-align"
+            >
+              Categoria:
+            </span>
             <select
+              style={{
+                display: this.state.botonMostrarEventosArchivados
+                  ? "block"
+                  : "none",
+              }}
               value={this.state.categoriaFiltrada}
               onChange={this.filterChangeHandler}
             >
@@ -392,13 +406,28 @@ class EventsList extends Component {
                 );
               })}
             </select>
-
-            <span className="span-align">Estado:</span>
-            <select
-              value={this.state.filtradoSegunEstado}
-              onChange={this.filterStateChangeHandler}
+            <span
+              style={{
+                display:
+                  this.state.botonMostrarEventosArchivados === false
+                    ? "block"
+                    : "none",
+              }}
+              className="span-align"
             >
-              {this.state.estados.map((item) => {
+              Categoria:
+            </span>
+            <select
+              style={{
+                display:
+                  this.state.botonMostrarEventosArchivados === false
+                    ? "block"
+                    : "none",
+              }}
+              value={this.state.categoriaFiltrada}
+              onChange={this.filterPastEventsChangeHandler}
+            >
+              {this.state.categorias.map((item) => {
                 return (
                   <option key={item} value={item}>
                     {item}
@@ -462,6 +491,14 @@ class EventsList extends Component {
           </div>
         </div>
         <Container>
+          <h1
+            style={{
+              display: this.state.container === false ? "block" : "none",
+            }}
+          >
+            {" "}
+            Bienvenido a Lista de eventos!
+          </h1>
           <Card>
             {this.state.events.map((event) => (
               <div className="card w-70" key={event.id}>
@@ -523,27 +560,6 @@ class EventsList extends Component {
                       <div className="principal">
                         <div className="secundario">
                           <Button
-                            style={{
-                              display: this.state.botonMostrar
-                                ? "block"
-                                : "none",
-                            }}
-                            onClick={() => this.peticionMostrar(event)}
-                          >
-                            Mostrar
-                          </Button>
-                          <Button
-                            style={{
-                              display: this.state.botonArchivar
-                                ? "block"
-                                : "none",
-                            }}
-                            onClick={() => this.peticionArchivar(event)}
-                          >
-                            Archivar
-                          </Button>
-
-                          <Button
                             color="success"
                             onClick={() => this.abrirModal()}
                           >
@@ -562,7 +578,8 @@ class EventsList extends Component {
                     </DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-slide-description">
-                        ¿Está seguro de eliminar el evento {event.nombre_evento}?
+                        ¿Está seguro de eliminar el evento {event.nombre_evento}
+                        ?
                       </DialogContentText>
                       <DialogContentText id="alert-dialog-slide-description">
                         Se eliminará definitivamente.
