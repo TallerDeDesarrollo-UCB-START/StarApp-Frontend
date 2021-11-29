@@ -221,7 +221,7 @@ class EventsList extends Component {
         id_autenticacion: window.sessionStorage.id,
       })
       .then((response) => {
-        this.mostrarMensajeSnackbar(event);;
+        this.mostrarMensajeSnackbar(event);
         this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
@@ -284,13 +284,13 @@ class EventsList extends Component {
     return !this.state.participaciones.some(function (evento) {
       return evento.id_evento === event.id;
     });
-  };
+  }
 
   mostrarMensajeSnackbar = (event) => {
-    if(this.validarBotones(event)){
-      this.state.mensajeSnackbar="registrada"
-    } else{
-      this.state.mensajeSnackbar="eliminada"
+    if (this.validarBotones(event)) {
+      this.state.mensajeSnackbar = "registrada";
+    } else {
+      this.state.mensajeSnackbar = "eliminada";
     }
   };
 
@@ -312,7 +312,7 @@ class EventsList extends Component {
     this.setState({
       modalInsertar: true,
     });
-  };
+  }
 
   peticionPost = async () => {
     console.log(this.state.form);
@@ -531,7 +531,6 @@ class EventsList extends Component {
                           Eliminar Participacion
                         </Button>
                       )}
-             
 
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
@@ -605,26 +604,26 @@ class EventsList extends Component {
             ))}
           </Card>
         </Container>
-          <div>
-            <Snackbar
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              open={snackbarAbierto}
+        <div>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            open={snackbarAbierto}
+            onClose={this.handleClose}
+            autoHideDuration={3000}
+          >
+            <MuiAlert
               onClose={this.handleClose}
-              autoHideDuration={3000}
+              severity="success"
+              elevation={6}
+              variant="filled"
             >
-              <MuiAlert
-                onClose={this.handleClose}
-                severity="success"
-                elevation={6}
-                variant="filled"
-              >
-                Tu participación ha sido {this.state.mensajeSnackbar}
-              </MuiAlert>
-            </Snackbar>
-          </div>
+              Tu participación ha sido {this.state.mensajeSnackbar}
+            </MuiAlert>
+          </Snackbar>
+        </div>
 
         <Modal id="ModalFormCrearEvento" isOpen={this.state.modalInsertar}>
           <div className="Titulo">
