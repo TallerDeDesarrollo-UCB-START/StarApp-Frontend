@@ -7,12 +7,19 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AxiosClient from "./AxiosClient";
+import SnackbarMessage from "./templates/SnackbarMessage"
 
 const urlBase = process.env.REACT_APP_API
 
 export default function PhoneDialog({user}) {
   const [open, setOpen] = React.useState(false);
   const [NuevoTelefono, setTelefono]= React.useState("");
+  const [snackbar, setSnackbar] = React.useState({
+    message:"",
+    active:false,
+    severity:"success",
+    afterClose:()=>{},
+})
   React.useEffect(()=>{
     AxiosClient.get(`${urlBase}extended_form/${user}`)
       .then((response) => {
@@ -24,6 +31,9 @@ export default function PhoneDialog({user}) {
         })
       .catch((response) => { console.log(response)});
   },[])
+  const activeSnackbar = (message, severity, afterClose)=>{
+    setSnackbar({message, severity, afterClose, active:true})
+  }
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -35,7 +45,7 @@ export default function PhoneDialog({user}) {
     AxiosClient.put(`${urlBase}extended_form/${user}`, to_send)
       .then((response) => {
         if (response.status === 202)
-            alert("Se registro correctamente");
+            activeSnackbar("Se ha registrado el numero de telefono", "success", ()=>{})
         })
       .catch((response) => { console.log(response)});
   };
@@ -66,6 +76,7 @@ export default function PhoneDialog({user}) {
           </Button>
         </DialogActions>
       </Dialog>
+      <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
     </div>
   );
 }
