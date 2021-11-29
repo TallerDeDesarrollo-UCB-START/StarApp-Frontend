@@ -221,6 +221,7 @@ class EventsList extends Component {
         id_autenticacion: window.sessionStorage.id,
       })
       .then((response) => {
+        this.mostrarMensajeSnackbar(event);;
         this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
@@ -264,6 +265,7 @@ class EventsList extends Component {
           window.sessionStorage.id
       )
       .then((response) => {
+        this.mostrarMensajeSnackbar(event);
         this.mensajeConfirmacionEliminacionParticipacion(event);
       })
       .catch((error) => {
@@ -282,9 +284,15 @@ class EventsList extends Component {
     return !this.state.participaciones.some(function (evento) {
       return evento.id_evento === event.id;
     });
-  }
-  // mostrarMnesajeSnackbar = (event) => {
-  //   if(this.validarBotones(event)){
+  };
+
+  mostrarMensajeSnackbar = (event) => {
+    if(this.validarBotones(event)){
+      this.state.mensajeSnackbar="registrada"
+    } else{
+      this.state.mensajeSnackbar="eliminada"
+    }
+  };
 
   getUserRol = async () => {
     try {
@@ -304,7 +312,7 @@ class EventsList extends Component {
     this.setState({
       modalInsertar: true,
     });
-  }
+  };
 
   peticionPost = async () => {
     console.log(this.state.form);
@@ -523,27 +531,7 @@ class EventsList extends Component {
                           Eliminar Participacion
                         </Button>
                       )}
-                      <div>
-                        <Snackbar
-                          anchorOrigin={{
-                            vertical: "top",
-                            horizontal: "center",
-                          }}
-                          open={snackbarAbierto}
-                          onClose={this.handleClose}
-                          autoHideDuration={2000}
-                        >
-                          <MuiAlert
-                            onClose={this.handleClose}
-                            severity="success"
-                            elevation={6}
-                            variant="filled"
-                          >
-                            Tu participación en {event.nombre_evento} ha sido
-                            registrada/eliminada
-                          </MuiAlert>
-                        </Snackbar>
-                      </div>
+             
 
                       <Button>
                         <Link to={"eventos/" + event.id}>Ver Evento</Link>
@@ -617,6 +605,26 @@ class EventsList extends Component {
             ))}
           </Card>
         </Container>
+          <div>
+            <Snackbar
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}
+              open={snackbarAbierto}
+              onClose={this.handleClose}
+              autoHideDuration={3000}
+            >
+              <MuiAlert
+                onClose={this.handleClose}
+                severity="success"
+                elevation={6}
+                variant="filled"
+              >
+                Tu participación ha sido {this.state.mensajeSnackbar}
+              </MuiAlert>
+            </Snackbar>
+          </div>
 
         <Modal id="ModalFormCrearEvento" isOpen={this.state.modalInsertar}>
           <div className="Titulo">
