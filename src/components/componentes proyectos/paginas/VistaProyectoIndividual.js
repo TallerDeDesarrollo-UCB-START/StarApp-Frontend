@@ -4,6 +4,7 @@ import BodyProyectoIndividual from '../organismos/BodyProyectoIndividual'
 // Librerias-Paquetes:
 import {useState, useEffect} from 'react'
 import { Box } from '@material-ui/core';
+import {CancelarParticipacionProvider} from '../zfunciones/CancelarParticipacionContext'
 
 function VistaProyectoIndividual() {
     // Hooks
@@ -36,10 +37,9 @@ function VistaProyectoIndividual() {
     return (
         
         <Box className="body-container">
-            
-            {
-               <BodyProyectoIndividual proyecto={proyecto}/>
-            }
+            <CancelarParticipacionProvider proyecto={proyecto}>
+                <BodyProyectoIndividual proyecto={proyecto}/>
+            </CancelarParticipacionProvider>
         </Box>
     );
 }
