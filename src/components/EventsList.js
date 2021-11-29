@@ -6,15 +6,13 @@ import { Link } from "react-router-dom";
 import "./EventsList.css";
 import Chip from "@material-ui/core/Chip";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-
 import TextField from "@mui/material/TextField";
-
-//import Dialog from "@mui/material/Dialog";
+import { Snackbar } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-//import Slide from "@mui/material/Slide";
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -25,10 +23,6 @@ const urlProyectos = `${url}get_proyectos`;
 const apiLideres = axios.create({
   baseURL: urlLideres,
 });
-
-
-
-
 
 
 const apiProyectos = axios.create({
@@ -78,6 +72,8 @@ class EventsList extends Component {
     },
     lideres: [],
     proyectos: [],
+    snackbarAbierto: false,
+    mensajeSnackbar: "",
   };
 
   constructor() {
@@ -188,6 +184,9 @@ class EventsList extends Component {
     await axios.put(urlDeploy + "/mostrar_evento/" + event.id);
     this.getEvents();
   };
+  sleep = async (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
 
   //Funciones pertenecientes a obtener Participacion
   postParticipacion = async (event) => {
@@ -199,6 +198,7 @@ class EventsList extends Component {
         id_autenticacion: window.sessionStorage.id,
       })
       .then((response) => {
+        this.mostrarMensajeSnackbar(event);
         this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
@@ -225,12 +225,11 @@ class EventsList extends Component {
     this.setState({ categoriaFiltrada: categoria.target.value });
     this.getEventsArchivados();
   };
-  mensajeConfirmacionParticipacion(event) {
-    window.alert(
-      `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
-    );
+  mensajeConfirmacionParticipacion = async (event) => {
+    this.handleClick(); //abre el snackbar
+    await this.sleep(2000);
     window.location.reload();
-  }
+  };
 
   //Funciones pertenecientes a Eliminacion Participacion
   eliminarParticipacion = async (event) => {
@@ -243,6 +242,7 @@ class EventsList extends Component {
           window.sessionStorage.id
       )
       .then((response) => {
+        this.mostrarMensajeSnackbar(event);
         this.mensajeConfirmacionEliminacionParticipacion(event);
       })
       .catch((error) => {
@@ -250,12 +250,11 @@ class EventsList extends Component {
       });
   };
 
-  mensajeConfirmacionEliminacionParticipacion(event) {
-    window.alert(
-      `Tu participación en el evento ${event.nombre_evento} fue eliminada exitosamente!`
-    );
+  mensajeConfirmacionEliminacionParticipacion = async (event) => {
+    this.handleClick(); //abre el snackbar
+    await this.sleep(2000);
     window.location.reload();
-  }
+  };
 
   //Mostrar y Ocultar botones participacion
   validarBotones(event) {
@@ -263,6 +262,14 @@ class EventsList extends Component {
       return evento.id_evento === event.id;
     });
   }
+
+  mostrarMensajeSnackbar = (event) => {
+    if (this.validarBotones(event)) {
+      this.setState({ mensajeSnackbar: "registrada" });
+    } else {
+      this.setState({ mensajeSnackbar: "eliminada" });
+    }
+  };
 
   getUserRol = async () => {
     try {
@@ -348,7 +355,9 @@ class EventsList extends Component {
       },
     });
   };
-  
+  // handleOpen = () => this.setState({ snackbarAbierto: true });
+  handleClose = () => this.setState({ snackbarAbierto: false });
+  handleClick = () => this.setState({ snackbarAbierto: true });
 
   render() {
     const modalStyles = {
@@ -358,8 +367,7 @@ class EventsList extends Component {
       transform: "translate(-50%,-50%)",
     };
     const rolUser = this.state.user;
-
-    
+    const { snackbarAbierto } = this.state;
 
     return (
       <div>
@@ -618,6 +626,26 @@ class EventsList extends Component {
             ))}
           </Card>
         </Container>
+        <div>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            open={snackbarAbierto}
+            onClose={this.handleClose}
+            autoHideDuration={3000}
+          >
+            <MuiAlert
+              onClose={this.handleClose}
+              severity="success"
+              elevation={6}
+              variant="filled"
+            >
+              Tu participación ha sido {this.state.mensajeSnackbar}
+            </MuiAlert>
+          </Snackbar>
+        </div>
 
         <Modal id="ModalFormCrearEvento" isOpen={this.state.modalInsertar}>
           <div className="Titulo">
