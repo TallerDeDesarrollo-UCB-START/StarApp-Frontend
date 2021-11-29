@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect, useRef} from 'react';
+import React, {useContext} from 'react';
 
 const CancelarParticipacionContext = React.createContext()
 
@@ -6,76 +6,7 @@ export function useCancelarParticipacion(){
     return useContext(CancelarParticipacionContext)
 }
 
-export function CancelarParticipacionProvider({children, proyecto}){
-    // Funcionalidad:
-    // States:
-    const [snackbar, setSnackbar] = useState({
-        message:"",
-        active:false,
-        severity:"success",
-        afterClose:()=>{},
-    })
-    const [snackbarStatus, setSnackbarStatus] = useState({
-        message: "",
-        active: false,
-        status: true,
-
-    })
-    const [participacion, setParticipacion] = useState(false)
-    const [actualizar, setActualizar] = useState(false)
-    const mountedRef = useRef(false)
-    function avisoAccion() {
-        setActualizar(!actualizar)
-    }
-    useEffect(() => {
-        mountedRef.current = true
-        
-        const colocarParticipacion = async () => {
-            const participa = await asignarParticipacion()
-            mountedRef.current && setParticipacion(participa)
-            
-        }
-        activateSnackBar()
-        colocarParticipacion()
-        //getNumberParticipants()
-        return () => {
-            mountedRef.current = false
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [participacion, actualizar])
-    async function asignarParticipacion() {
-        //debugger
-        const participa = await obtenerParticipacionProyecto(proyecto.id)
-        const p = participa === true? true : false
-        return p
-    }
-    function asignarSnackbarStatus(message, active, status){
-        setSnackbarStatus({
-            message: message,
-            active: active,
-            status: status
-        })
-    }
-    const activeSnackbar = (message, severity, afterClose)=>{
-        setSnackbar({message, severity, afterClose, active:true})
-    }
-    const activateSnackBar = () => {
-        //debugger
-        let activar = snackbarStatus.active
-        let estado = snackbarStatus.status
-        let mensaje = snackbarStatus.message
-        if(activar){
-            if(estado){
-                //debugger
-                activeSnackbar(mensaje, "success", ()=>{})
-            } else{
-                activeSnackbar(mensaje, "error", ()=>{})
-            }
-        }else{
-            //activeSnackbar("snackBarStatus.message", "error", ()=>{})
-        }
-        asignarSnackbarStatus(mensaje, false, estado); // reset para que no reaparezca indebidamente
-    }
+export function CancelarParticipacionProvider({children}){
     return (
         <CancelarParticipacionContext.Provider value={METODOS}>
             {children}
@@ -95,6 +26,7 @@ const cancelarParticipacionProyecto = async (id) => {
     return data
 }
 const obtenerParticipacionProyecto = async (idProyecto) => {
+    debugger
     const idSesion = sessionStorage.getItem("id");
     const response = await fetch(`${URLParticpaVoluntario}/${idProyecto}/sesion/${idSesion}`,
     { 

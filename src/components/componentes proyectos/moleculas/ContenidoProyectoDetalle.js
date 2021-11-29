@@ -1,14 +1,14 @@
 // Librerias-Paquetes:
 import ListaParticipantesProyecto from './ListaParticipantesProyecto';
 import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
+import SnackBarProyectos from '../moleculas/SnackBarProyectos';
 import './ContenidoProyectoDetalle.css';
 import { Box } from '@material-ui/core';
 import { Switch } from '@material-ui/core';
 // Permisos/Roles:
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
-import {useState } from 'react';
-import {useCancelarParticipacion} from '../zfunciones/CancelarParticipacionContext'
+import {useState, useRef, useEffect } from 'react';
 
 function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
@@ -49,15 +49,75 @@ function ContenidoProyectoDetalle ({proyecto}) {
                                     />
                                 </PuertaPermisos>
 
+    //CANCELAR
+    const [infoSnackbar, setInfoSnackbar] = useState()
+    const [activarSnackbar, setActivarSnackbar] = useState(false)
+    const [participacion, setParticipacion] = useState(false)
+    const [actualizar, setActualizar] = useState(false)
+    const mountedRef = useRef(false)
 
-    const METODOS = useCancelarParticipacion()
-    const onCancelarParticipacion = METODOS.find(metodo => metodo.cancelarParticipacionProyecto)
-    const onGetParticipacion = METODOS.find(metodo => metodo.cancelarParticipacionProyecto)
-    const asignarParticipacion = METODOS.find(metodo => metodo.cancelarParticipacionProyecto)
-    const asignarSnackbarStatus = METODOS.find(metodo => metodo.cancelarParticipacionProyecto)
-    const avisoAccion = METODOS.find(metodo => metodo.cancelarParticipacionProyecto)
-    const participacion = true
-    console.log(onCancelarParticipacion)
+    function asignarSnackbarStatus(message, active, status){
+        setInfoSnackbar({
+            message: message,
+            active: active,
+            status: status
+        })
+        setActivarSnackbar(true)
+    }
+    
+    function avisoAccion() {
+        setActualizar(!actualizar)
+    }
+
+    async function asignarParticipacion() {
+        //debugger
+        const pid = proyecto.id
+        const participa = await onGetParticipacion(pid)
+        const p = participa === true? true : false
+        return p
+    }
+    
+    // OJO. no borrar el comentario dentro del useEffect() 
+    useEffect(() => {
+        mountedRef.current = true
+        console.log('A')
+        const colocarParticipacion = async () => {
+            const participa = await asignarParticipacion()
+            mountedRef.current && setParticipacion(participa)
+            
+        }
+        
+        colocarParticipacion()
+
+        
+        return () => {
+            mountedRef.current = false
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [proyecto.id, actualizar])
+
+    const onCancelarParticipacion = async (id) => {
+        const idSesion = sessionStorage.getItem("id");
+        const response = await fetch(
+            `${URLCancelarParticipProy}/${id}/sesion/${idSesion}`,
+            { 
+                method: 'DELETE'
+            })
+        const data = await response.json()
+        return data
+    }
+    const onGetParticipacion = async (idProyecto) => {
+        //debugger
+        const idSesion = sessionStorage.getItem("id");
+        const response = await fetch(`${URLParticpaVoluntario}/${idProyecto}/sesion/${idSesion}`,
+        { 
+            method: 'GET'
+        });
+        const data = await response.json();
+        return data;
+    }
+
+    //asignarParticipacion()
     const botonCancelarParticipacion = participacion === true?
     <CancelarParticipacionBtn proyecto={proyecto} 
                             onCancelarParticipacion={onCancelarParticipacion} 
@@ -68,10 +128,14 @@ function ContenidoProyectoDetalle ({proyecto}) {
                             />
     : ''
     
+    const snackBarComponent = activarSnackbar && activarSnackbar === true?
+                                <SnackBarProyectos infoSnackbar={infoSnackbar}/>
+                                :
+                                ''
+    
 
     return (
         <Box className="content-container-detail">
-            {console.log(proyecto)}
             <b>
                 <h1 className="card-title-detail">{proyecto.titulo}</h1>
             </b>
@@ -96,7 +160,13 @@ function ContenidoProyectoDetalle ({proyecto}) {
             {listaPartipantes}
             {switchListaParticipantes}
             {botonCancelarParticipacion}
+            {snackBarComponent}
         </Box>
     );
 }
+
+const url = process.env.REACT_APP_API;
+const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
+const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
+
 export default ContenidoProyectoDetalle
