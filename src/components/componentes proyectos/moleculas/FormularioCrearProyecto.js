@@ -119,13 +119,13 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                 <div className="crear-container-title">
                     <h4>Crear Proyecto</h4>
                 </div>
-                <div style={{padding: "1% 3% 0 5%"}}>
-                    <label>Fecha de Inicio</label>
+                <div style={{padding: "1% 3% 0 2%"}}>
+                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Inicio</InputLabel>
                     <InputTexto type="date"
                                 value={fechaInicio}
                                 onChange={onChangeFechaInicio}
                                 />
-                    <label>Fecha de Fin</label>
+                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Fin</InputLabel>
                     <InputTexto type="date"
                                 value={fechaFin}
                                 onChange={onChangeFechaFin}
@@ -147,7 +147,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 />
                     <div  className="form-control-proy">
                      <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
-                        <InputLabel className='label-dropdown-proyectos'>Líder</InputLabel>
+                        <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Líder</InputLabel>
                         <Select className='dropdown-proyectos'
                         value={lider}
                         onChange={onChangeLider}>
@@ -161,7 +161,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                     </div>
                     <div className='form-control-proy'>
                      <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
-                        <InputLabel className='label-dropdown-proyectos'>Categorías</InputLabel>
+                        <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Categorías</InputLabel>
                         <Select className='dropdown-proyectos'
                         value={categoria}
                         onChange={onChangeCategoria}>
@@ -178,7 +178,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                     </div>
                     <div className='form-control-proy'>
                     <FormControl sx={{ m: 1, minWidth: 120 }} className='dropdown-proyectos'>
-                        <InputLabel className='label-dropdown-proyectos'>Estado</InputLabel>
+                        <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Estado</InputLabel>
                         <Select className='dropdown-proyectos'
                         value={estado}
                         onChange={onChangeEstado}>
@@ -187,11 +187,14 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                         </Select>
                     </FormControl>
                     </div>
-                    <InputTexto type="link"
+                    <div  style={{marginTop: "20px"}}>
+                    <InputTexto
+                                type="link"
                                 placeHolder='Información Adicional'
                                 value={informacion_adicional}
                                 onChange={onChangeInfoAd}
                                 />
+                    </div>
                     <div className="btn-crear-container">
                         <input type='submit' value='CREAR PROYECTO' className='btn-proy-crear btn-proy-block'/>
                         

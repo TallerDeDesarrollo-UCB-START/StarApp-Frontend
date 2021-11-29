@@ -2,12 +2,12 @@
   display: inline-block;
   background-color: #269BD5;
   color: white;
-  border: 1px solid #269BD5 !important;
+  border: 5px solid #269BD5 !important;
   margin: 3% auto;
   cursor: pointer;
   text-decoration: none;
   font-family: inherit;
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 8px;
   font-weight: bold;
   height: fit-content;
@@ -15,10 +15,10 @@
 .paper-crear{
   overflow-y:scroll;
   position: absolute;
-  width: 430px;
-  height: 630px;
+  width: 375px;
+  height: 700px;
   padding: 25px;
-  background: #F2F2F2;
+  background: #FFFFFF;
   box-shadow: 10px 10px 4px rgb(0 0 0 / 25%);
   border-radius: 15px;
 }
@@ -50,12 +50,12 @@
   display: inline-block;
   background-color: #3B3B3B;
   color: white;
-  border: 1px solid #3B3B3B !important;
+  border: 5px solid #3B3B3B !important;
   margin: 3% auto;
   cursor: pointer;
   text-decoration: none;
   font-family: inherit;
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 8px;
   font-weight: bold;
   height: fit-content;
@@ -95,7 +95,7 @@
 }
 
 .form-control-proy {
-  margin: 10px;
+  margin: 7px;
   border: none;
   background-color: inherit;
 }
@@ -105,8 +105,8 @@
 }
 
 .form-control-proy  input {
-  background-color: #F2F2F2;
-  border: 1px solid #C4C4C4;
+  background-color: #FFFFFF;
+  border: 1px solid #c0c0c0;
   width: 100%;
   height: 40px;
   padding: 3px 5px;
@@ -114,6 +114,7 @@
   border-radius: 6px;
   margin: 7px 0px 7px 0px;
   position: relative;
+  color: #c0c0c0;
 }
 
 .form-control-proy .requerido {
@@ -162,10 +163,4 @@
   padding-top: 0px;
   padding-bottom: 0px;
   height: 40px;
-}
-
-.label-dropdown-proyectos{
-  font-size: 17px;
-  padding-bottom: 10px;
-  padding-left: 10px;
 }
