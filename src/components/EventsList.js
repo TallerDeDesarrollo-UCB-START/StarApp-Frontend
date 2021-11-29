@@ -10,6 +10,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import TextField from "@mui/material/TextField";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
+import SelectInput from "@material-ui/core/Select/SelectInput";
 
 //import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -77,6 +78,7 @@ class EventsList extends Component {
     lideres: [],
     proyectos: [],
     snackbarAbierto: false,
+    mensajeSnackbar: "",
   };
 
   constructor() {
@@ -205,6 +207,9 @@ class EventsList extends Component {
     await axios.put(urlDeploy + "/mostrar_evento/" + event.id);
     this.getEvents();
   };
+  sleep = async (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
 
   //Funciones pertenecientes a obtener Participacion
   postParticipacion = async (event) => {
@@ -216,8 +221,7 @@ class EventsList extends Component {
         id_autenticacion: window.sessionStorage.id,
       })
       .then((response) => {
-        this.handleClick(); //abre el snackbar
-        // this.mensajeConfirmacionParticipacion(event);
+        this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
         console.log(error.message);
@@ -243,12 +247,11 @@ class EventsList extends Component {
     this.setState({ filtradoSegunEstado: estado.target.value });
     this.getEvents();
   };
-  mensajeConfirmacionParticipacion(event) {
-    window.alert(
-      `Tu participación en el evento ${event.nombre_evento} fue registrada, te esperamos!`
-    );
+  mensajeConfirmacionParticipacion = async (event) => {
+    this.handleClick(); //abre el snackbar
+    await this.sleep(2000);
     window.location.reload();
-  }
+  };
 
   //Funciones pertenecientes a Eliminacion Participacion
   eliminarParticipacion = async (event) => {
@@ -268,12 +271,11 @@ class EventsList extends Component {
       });
   };
 
-  mensajeConfirmacionEliminacionParticipacion(event) {
-    window.alert(
-      `Tu participación en el evento ${event.nombre_evento} fue eliminada exitosamente!`
-    );
+  mensajeConfirmacionEliminacionParticipacion = async (event) => {
+    this.handleClick(); //abre el snackbar
+    await this.sleep(2000);
     window.location.reload();
-  }
+  };
 
   //Mostrar y Ocultar botones participacion
   validarBotones(event) {
@@ -281,6 +283,8 @@ class EventsList extends Component {
       return evento.id_evento === event.id;
     });
   }
+  // mostrarMnesajeSnackbar = (event) => {
+  //   if(this.validarBotones(event)){
 
   getUserRol = async () => {
     try {
@@ -522,32 +526,21 @@ class EventsList extends Component {
                       <div>
                         <Snackbar
                           anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "left",
+                            vertical: "top",
+                            horizontal: "center",
                           }}
                           open={snackbarAbierto}
                           onClose={this.handleClose}
                           autoHideDuration={2000}
-                          // other Snackbar props
                         >
-                          {/* <span
-                style={{
-                  background: "#000",
-                  color: "#fff",
-                  padding: "20px 5px",
-                  width: "100%",
-                  borderRadius: "5px"
-                }}
-              >
-                Order Confirmed
-              </span> */}
                           <MuiAlert
                             onClose={this.handleClose}
                             severity="success"
                             elevation={6}
                             variant="filled"
                           >
-                            Success Message
+                            Tu participación en {event.nombre_evento} ha sido
+                            registrada/eliminada
                           </MuiAlert>
                         </Snackbar>
                       </div>
