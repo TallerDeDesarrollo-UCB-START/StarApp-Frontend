@@ -85,7 +85,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const onChangeDescrip = (e) => {setDescripcion(e.target.value); removerRequerido(e.target)}
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value); removerRequerido(e.target)}
     const onChangeLider = (e) => {setLider(e.target.value); removerRequerido(e.target)}
-    const onChangeCategoria = (e) => {setCategoria(e.target.value)}
+    const onChangeCategoria = (e) => {setCategoria(e.target.value); removerRequerido(e.target)}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
     // ---- NUEVO ----
@@ -119,13 +119,13 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                 <div className="crear-container-title">
                     <h4>Crear Proyecto</h4>
                 </div>
-                <div style={{padding: "1% 3% 0 2%"}}>
-                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Inicio</InputLabel>
+                <div style={{padding: "1% 3% 0 5%"}}>
+                    <label>Fecha de Inicio</label>
                     <InputTexto type="date"
                                 value={fechaInicio}
                                 onChange={onChangeFechaInicio}
                                 />
-                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Fin</InputLabel>
+                    <label>Fecha de Fin</label>
                     <InputTexto type="date"
                                 value={fechaFin}
                                 onChange={onChangeFechaFin}
@@ -145,56 +145,26 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 value={objetivo}
                                 onChange={onChangeObjetivo}
                                 />
-                    <div  className="form-control-proy">
-                     <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
-                        <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Líder</InputLabel>
-                        <Select className='dropdown-proyectos'
-                        value={lider}
-                        onChange={onChangeLider}>
-                            <MenuItem value=""><em>Ninguno</em></MenuItem>
-                            <MenuItem value={lider}>Alvaro Flores</MenuItem>
-                            <MenuItem value={lider}>Líder 1</MenuItem>
-                            <MenuItem value={lider}>Líder Auxiliar</MenuItem>
-                            <MenuItem value={lider}>ANDREW JERSON TORREZ PEÑA</MenuItem>
-                        </Select>
-                    </FormControl>
-                    </div>
-                    <div className='form-control-proy'>
-                     <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
-                        <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Categorías</InputLabel>
-                        <Select className='dropdown-proyectos'
-                        value={categoria}
-                        onChange={onChangeCategoria}>
-                            <MenuItem value={categoria}>Animales</MenuItem>
-                            <MenuItem value={categoria}>Medio Ambiente</MenuItem>
-                            <MenuItem value={categoria}>Desarrollo Sostenible</MenuItem>
-                            <MenuItem value={categoria}>Trabajo Social</MenuItem>
-                            <MenuItem value={categoria}>Empoderamiento</MenuItem>
-                            <MenuItem value={categoria}>Comunidad</MenuItem>
-                            <MenuItem value={categoria}>Educación</MenuItem>
-                            <MenuItem value={categoria}>Otros</MenuItem>
-                        </Select>
-                    </FormControl>
-                    </div>
-                    <div className='form-control-proy'>
-                    <FormControl sx={{ m: 1, minWidth: 120 }} className='dropdown-proyectos'>
-                        <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Estado</InputLabel>
-                        <Select className='dropdown-proyectos'
-                        value={estado}
-                        onChange={onChangeEstado}>
-                            <MenuItem value={estado}>En Curso</MenuItem>
-                            <MenuItem value={estado}>Concluido</MenuItem>
-                        </Select>
-                    </FormControl>
-                    </div>
-                    <div  style={{marginTop: "20px"}}>
-                    <InputTexto
-                                type="link"
+                    <InputTexto type="text"
+                                placeHolder='Líder'
+                                value={lider}
+                                onChange={onChangeLider}
+                                />
+                    <InputTexto type="text"
+                                placeHolder='Categoría'
+                                value={categoria}
+                                onChange={onChangeCategoria}
+                                />
+                    <InputTexto type="text"
+                                placeHolder='Estado'
+                                value={estado}
+                                onChange={onChangeEstado}
+                                />
+                    <InputTexto type="link"
                                 placeHolder='Información Adicional'
                                 value={informacion_adicional}
                                 onChange={onChangeInfoAd}
                                 />
-                    </div>
                     <div className="btn-crear-container">
                         <input type='submit' value='CREAR PROYECTO' className='btn-proy-crear btn-proy-block'/>
                         
