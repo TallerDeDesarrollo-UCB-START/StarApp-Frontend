@@ -326,6 +326,7 @@ class EventsList extends Component {
   };
 
   getProyectos = async () => {
+    try{
     let data = await apiProyectos.get("/").then(({ data }) => data);
     let aux = data.map((item) => {
       return item.titulo;
@@ -335,6 +336,9 @@ class EventsList extends Component {
       return aux.indexOf(item) === index;
     });
     this.setState({ proyectos: result });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   cerrarModalInsertar() {
