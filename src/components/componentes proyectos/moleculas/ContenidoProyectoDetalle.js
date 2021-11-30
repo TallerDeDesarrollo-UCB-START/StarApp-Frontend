@@ -3,6 +3,8 @@ import ListaParticipantesProyecto from './ListaParticipantesProyecto';
 import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 import SnackBarProyectos from '../moleculas/SnackBarProyectos';
 import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
+import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn'
+import {useHistory} from "react-router-dom"
 import './ContenidoProyectoDetalle.css';
 import { Box } from '@material-ui/core';
 import { Switch } from '@material-ui/core';
@@ -16,6 +18,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
     
     //const visualizarP = proyecto.visualizar
     const [visualizarP, setVisualizarP] = useState(proyecto.visualizar)
+    let history = useHistory();
 
     const Onchange = async () => {
         //debugger
@@ -81,7 +84,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
     // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
         mountedRef.current = true
-        console.log('A')
+        console.log(proyecto)
         const colocarParticipacion = async () => {
             const participa = await asignarParticipacion()
             mountedRef.current && setParticipacion(participa)
@@ -129,8 +132,20 @@ function ContenidoProyectoDetalle ({proyecto}) {
         //setActualizar(!actualizar)
         return data
     }
+    const eliminarProyecto = async (id) => { 
+        await fetch(
+        `${process.env.REACT_APP_API}delete_proyecto/${id}`,
+        { 
+            method: 'DELETE'
+        })
+    }
 
     //asignarParticipacion()
+    const botonEliminarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
+                                        <EliminarProjectoBtn proyecto={proyecto}
+                                                            onEliminarProy={eliminarProyecto}
+                                                            onClick={() => history.goBack()}/>
+                                    </PuertaPermisos>
     const botonCancelarParticipacion = participacion === true?
     <CancelarParticipacionBtn proyecto={proyecto} 
                             onCancelarParticipacion={onCancelarParticipacion} 
@@ -182,6 +197,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
             <Box >
                 {botonCancelarParticipacion}
                 {botonParticiparProyecto}
+                {botonEliminarProyecto}
             </Box>
             {listaPartipantes}
             {switchListaParticipantes}
