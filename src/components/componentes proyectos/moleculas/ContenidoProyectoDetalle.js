@@ -8,6 +8,7 @@ import {useHistory} from "react-router-dom"
 import './ContenidoProyectoDetalle.css';
 import { Box } from '@material-ui/core';
 import { Switch } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
 // Permisos/Roles:
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
@@ -194,17 +195,22 @@ function ContenidoProyectoDetalle ({proyecto}) {
             <p className="card-text-detail">
                 <b>Categoría:</b> {proyecto.categoria}
             </p>
-            <Box >
+            <BoxButtons>
                 {botonCancelarParticipacion}
                 {botonParticiparProyecto}
                 {botonEliminarProyecto}
-            </Box>
+            </BoxButtons>
             {listaPartipantes}
             {switchListaParticipantes}
             {snackBarComponent}
         </Box>
     );
 }
+const BoxButtons = withStyles((theme) => ({
+    root: {
+      display:'flex'
+    },
+  }))(Box);
 
 const url = process.env.REACT_APP_API;
 const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
