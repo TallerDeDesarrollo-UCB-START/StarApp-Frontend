@@ -23,7 +23,7 @@ function HeaderCategoriasProyectos({onActivarForm}) {
     const classes = useStyles()
     return (
         <Box>
-            <Grid container justifyContent="center" alignItems={"center"}>
+            <Grid container justifyContent="center" alignItems={"center"} style= {{padding: "5px 0px 10px 0px"}}>
                     <Grid item xs={5} md={7}>
                         <Typography gutterBottom variant="h2" component="h3" >
                             PROYECTOS
