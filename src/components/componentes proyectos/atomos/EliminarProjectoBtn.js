@@ -55,9 +55,8 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
 
     return (
       <div>
-        <DeleteButtonTrash onClick={handleClickOpen}>
-          <FontAwesomeIcon className="delete-icon" icon={faTrashAlt} />
-        </DeleteButtonTrash>
+        
+        <DeleteProy variant="contained" onClick={handleClickOpen}>Eliminar</DeleteProy>
         <Dialog
             open={open}
             onClose={handleClose}
@@ -95,13 +94,15 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
       </div>
     )
 }
-
-const DeleteButtonTrash = withStyles((theme) => ({
-    root: {
-      backgroundColor: "#E3E3E3",
-      borderRadius: '40px',
-    },
-  }))(Button);
+const DeleteProy = withStyles((theme) => ({
+  root: {
+   // marginRight: 10,
+   // marginLeft: 10,
+    //width: '10%',
+    background: 'red',
+    color:'white'
+  },
+}))(Button);
 
 const DeleteButton = withStyles((theme) => ({
   root: {
