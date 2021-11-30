@@ -16,9 +16,7 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
     }, [snackbar, participacion])*/
 
     const onClick = async (event) => {
-        //debugger
         const cancelResponse = await onCancelarParticipacion(proyecto.id);
-        //console.log(cancelResponse)
         if(cancelResponse){
             onAsignarParticipacion();
             onAsignarSnackbarStatus("Participacion cancelada", true, true);
