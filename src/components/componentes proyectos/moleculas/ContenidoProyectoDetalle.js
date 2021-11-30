@@ -2,6 +2,7 @@
 import ListaParticipantesProyecto from './ListaParticipantesProyecto';
 import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 import SnackBarProyectos from '../moleculas/SnackBarProyectos';
+import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import './ContenidoProyectoDetalle.css';
 import { Box } from '@material-ui/core';
 import { Switch } from '@material-ui/core';
@@ -62,7 +63,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
             active: active,
             status: status
         })
-        setActivarSnackbar(true)
+        setActivarSnackbar(active)
     }
     
     function avisoAccion() {
@@ -116,6 +117,18 @@ function ContenidoProyectoDetalle ({proyecto}) {
         const data = await response.json();
         return data;
     }
+    const participarEnProyecto = async (id) => { 
+        //debugger
+        const idSesion = sessionStorage.getItem("id");
+        const response = await fetch(
+        `${URLParticiparProy}/${id}/sesion/${idSesion}`,
+        { 
+            method: 'PUT'
+        })
+        const data = await response.json()
+        //setActualizar(!actualizar)
+        return data
+    }
 
     //asignarParticipacion()
     const botonCancelarParticipacion = participacion === true?
@@ -127,7 +140,16 @@ function ContenidoProyectoDetalle ({proyecto}) {
                             onAvisoAccion={avisoAccion}
                             />
     : ''
-    
+    const botonParticiparProyecto = participacion === false?
+                            <ParticiparEnProyectoBtn proyecto={proyecto} 
+                                                    onPartiparProy={participarEnProyecto} 
+                                                    onGetParticipacion={onGetParticipacion}
+                                                    onAsignarParticipacion={asignarParticipacion}
+                                                    onAsignarSnackbarStatus={asignarSnackbarStatus}
+                                                    onAvisoAccion={avisoAccion}
+                                                    />
+                            : ''
+
     const snackBarComponent = activarSnackbar && activarSnackbar === true?
                                 <SnackBarProyectos infoSnackbar={infoSnackbar}/>
                                 :
@@ -157,9 +179,12 @@ function ContenidoProyectoDetalle ({proyecto}) {
             <p className="card-text-detail">
                 <b>Categoría:</b> {proyecto.categoria}
             </p>
+            <Box >
+                {botonCancelarParticipacion}
+                {botonParticiparProyecto}
+            </Box>
             {listaPartipantes}
             {switchListaParticipantes}
-            {botonCancelarParticipacion}
             {snackBarComponent}
         </Box>
     );
@@ -168,5 +193,6 @@ function ContenidoProyectoDetalle ({proyecto}) {
 const url = process.env.REACT_APP_API;
 const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
 const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
+const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 
 export default ContenidoProyectoDetalle

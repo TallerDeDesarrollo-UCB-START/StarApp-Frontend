@@ -27,10 +27,11 @@ function SnackBarProyectos({infoSnackbar}) {
         mountedRef.current = true
         //debugger
         activateSnackBar()
+        
         return () => {
             mountedRef.current = false
         }
-    }, [])
+    }, [infoSnackbar])
 
     function asignarSnackbarStatus(message, active, status){
         setSnackbarStatus({
@@ -43,9 +44,10 @@ function SnackBarProyectos({infoSnackbar}) {
         setSnackbar({message, severity, afterClose, active:true})
     }
     const activateSnackBar = () => {
-        let activar = snackbarStatus.active
-        let estado = snackbarStatus.status
-        let mensaje = snackbarStatus.message
+        //debugger
+        let activar = true//snackbarStatus.active
+        let estado = infoSnackbar && infoSnackbar.status//snackbarStatus.status
+        let mensaje = infoSnackbar && infoSnackbar.message//snackbarStatus.message
         
         if(!activar) return
         if(estado){
