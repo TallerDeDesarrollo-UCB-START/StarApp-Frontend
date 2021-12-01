@@ -15,15 +15,15 @@ const useStyles = makeStyles({
     },
 });
 
-function BannerProyecto() {
+function BannerProyecto({proyecto}) {
 
     const classes = useStyles();
 
     return (
         <CardMedia
           className={classes.media}
-          image={Banner}
-          title="Contemplative Reptile"
+          image={proyecto.url_imagen}
+          title={proyecto.title}
         />
     );
 }

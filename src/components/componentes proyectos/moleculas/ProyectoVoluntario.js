@@ -28,7 +28,7 @@ function ProyectoVoluntario({proyecto, rol, onEliminarProy, onActivarForm, onPar
     
     return (
         <Card className={classes.root}>
-                <BannerProyecto />
+                <BannerProyecto proyecto={proyecto}/>
                 <ContenidoProyecto rol={rol}
                             proyecto={proyecto} 
                             onEliminarProy={onEliminarProy} 
