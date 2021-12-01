@@ -9,6 +9,7 @@ import Attendance from "../components/Attendance";
 import crearEvento from "../components/CrearEvento/crearEvento";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
 import FormularioProyecto from "../components/Formulario";
+import EditarPerfil from "../components/EditarPerfil";
 import Evento from "../components/Evento";
 import Users from "../components/UsersTable/Users"
 import VistaProyectoIndividual from "../components/componentes proyectos/paginas/VistaProyectoIndividual"
@@ -124,6 +125,12 @@ const Routes = [
     name: "RecuperarNuevaContrasena",
     component: ResetNewPassword,
     logginNeeded: false,
+  },
+  {
+    path: "/EditarPerfil",
+    name: "EditarPerfil",
+    component: EditarPerfil,
+    logginNeeded: true,
   },
 ];
 export default Routes;

@@ -15,6 +15,7 @@ import Slide from '@material-ui/core/Slide';
 import Chip from "@material-ui/core/Chip";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import { useMediaQuery, Typography } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const url = process.env.REACT_APP_API;
 const urlTablaExtensa = `${url}extended_form/`;
@@ -119,6 +120,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Profile = ({sessionData}) => {
 
+  const history = useHistory();
   const [userExist, setUserExsit] = useState({
     userEx: false,
   });
@@ -775,7 +777,7 @@ const Profile = ({sessionData}) => {
               icon={<EditTwoToneIcon />}
               label="Editar Perfil"
               clickable
-              onClick={handleOpen}
+              onClick={() => history.push(`/EditarPerfil`)}
             />
             <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen} sessionData={sessionData}/>
 
