@@ -13,7 +13,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import GoogleCalendar from "./googleCalendar";
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -370,7 +369,6 @@ class EventsList extends Component {
 
     return (
       <div>
-        <GoogleCalendar></GoogleCalendar>
         <Chip
           style={{ marginTop: "20px" }}
           variant="outlined"
