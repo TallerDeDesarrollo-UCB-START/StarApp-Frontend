@@ -16,6 +16,7 @@ function VistaProyectos() {
     // Hooks
     //window.location.reload()
     const [proyectos, setProyectos] = useState([])
+    const [lideres, setLideres] = useState([])
     const [proyectosPasadosCategoria, setProyectosPasadosCategoria] = useState([])
     const [actualizar, setActualizar] = useState(false)
     const mountedRef = useRef(false)
@@ -41,6 +42,11 @@ function VistaProyectos() {
             const proyectosFiltrados = await filtrarPorCategoria(categoria)
             setProyectosCheck(proyectosFiltrados, mountedRef.current)
         }
+        const getLideres = async ()=>{
+            const lideresDelServer = await fetchLideres()
+            setLideres(lideresDelServer)
+            console.log(lideresDelServer)
+        }
 
         const getProyectosPasadosCategoria = async () => {
             const proyectosPasados =  await fetchProyectosPasadosCategoria(categoria)
@@ -49,6 +55,8 @@ function VistaProyectos() {
 
         categoria? getProyectosFiltro() : getProyectos()
         getProyectosPasadosCategoria()
+        getLideres()
+
         return () => {
             mountedRef.current = false
         }
@@ -58,6 +66,11 @@ function VistaProyectos() {
     // HTTP requests & functions
     async function fetchProyectos() {
         const response = await fetch(URLProyectos)
+        const data = await response.json()
+        return data;
+    }
+    async function fetchLideres() {
+        const response = await fetch(URLLideres)
         const data = await response.json()
         return data;
     }
@@ -171,7 +184,8 @@ function VistaProyectos() {
         
     }
     let proyectosAdmins = <ProyectosAdmins rol={"core team"}
-                                proyectos={proyectos} 
+                                proyectos={proyectos}
+                                lideres={lideres} 
                                 onCrearProy={crearProyecto} 
                                 onEliminarProy={eliminarProyecto} 
                                 onPartiparProy={participarEnProyecto} 
@@ -204,6 +218,7 @@ function VistaProyectos() {
 }
 
 const url = process.env.REACT_APP_API;
+const URLLideres = `${url}get_lideres`
 const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 const URLProyectos = `${url}get_proyectos`//'http://localhost:5000/get_proyectos'
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//

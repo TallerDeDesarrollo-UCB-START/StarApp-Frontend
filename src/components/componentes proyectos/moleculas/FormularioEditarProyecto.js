@@ -24,7 +24,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 //const varProyectos = VARIABLES.datosProyectos
 
-function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar}) {
+function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres}) {
   // Styles
     //const classesDrpdn = useStylesDrpdn();
     /*const estadoActual= hallarEstado(proyecto.estado);
