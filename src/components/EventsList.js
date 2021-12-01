@@ -570,95 +570,97 @@ class EventsList extends Component {
         </div>
 
 
-        <body>
-        <div class="container1">
-          {this.state.events.map((event) => ( 
-          <div className="" key={event.id} >
+        <Container>
 
-          <div class="row1">
-            <div class="card1">
-                <CardMedia  component="img" height="140" image="https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg" className="img-fluid" />
-                <CardHeader title={event.nombre_evento} subheader={event.descripcion_evento} titleTypographyProps={{ gutterBottom: true }} />            
-                <Grid container spacing={4}>
-                      <CardContent>
-                       <p className="card-info"><b>La Modalidad del Evento es:</b> {event.modalidad_evento}</p>
-                       <p className="card-info"><b>Fecha:</b> {event.fecha_evento} </p> 
-                       <p className="card-info"><b>Lugar:</b> {event.lugar_evento} </p>
-                       <p className="card-info"> <b>Categoría:</b> {event.categoria} </p>
-                       </CardContent>
-                      
-                      
-                      
-                      <CardBody>  
-                        {this.validarBotones(event) ? (
-                          <Button  variant="contained" onClick={() => { this.postParticipacion(event);}} 
+          {this.state.events.map((event) => (
+            <div className="" key={event.id} >
+
+              <div class="row1">
+              {/* <Grid container spacing={6}>
+                  <Grid item xs={12}> */}
+                <div class="card1">
+                  <CardMedia component="img" height="140" image="https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg" className="img-fluid" />
+                  <CardHeader title={event.nombre_evento} subheader={event.descripcion_evento} titleTypographyProps={{ gutterBottom: true }} />
+                  
+                    <CardContent>
+                      <p className="card-info"><b>La Modalidad del Evento es:</b> {event.modalidad_evento}</p>
+                      <p className="card-info"><b>Fecha:</b> {event.fecha_evento} </p>
+                      <p className="card-info"><b>Lugar:</b> {event.lugar_evento} </p>
+                      <p className="card-info"> <b>Categoría:</b> {event.categoria} </p>
+                    </CardContent>
+                
+
+
+                    <CardBody>
+                      {this.validarBotones(event) ? (
+                        <Button variant="contained" onClick={() => { this.postParticipacion(event); }}
                           style={{
                             borderRadius: 4,
-                            height:51,
+                            height: 51,
                             backgroundColor: "#269BD5",
                             fontSize: "16px",
-                            margin:"3px",
+                            margin: "3px",
                           }}>
-                             {" "}
-                              Participar
-                          </Button>
-                        ) : (
-                          <Button onClick={() => { this.eliminarParticipacion(event);}}
+                          {" "}
+                          Participar
+                        </Button>
+                      ) : (
+                        <Button onClick={() => { this.eliminarParticipacion(event); }}
                           style={{
                             borderRadius: 4,
-                            height:60,
+                            height: 60,
                             backgroundColor: "red",
                             fontSize: "16px",
-                            margin:"3px"
+                            margin: "3px"
                           }} >
-                             {" "}
-                              No Participar
-                          </Button>
-                        )}
-  
-                        
-                        {rolUser !== "voluntario" ? (
+                          {" "}
+                          No Participar
+                        </Button>
+                      )}
+
+
+                      {rolUser !== "voluntario" ? (
                         <Fragment>
-                          
-                            <Button style={{
+
+                          <Button style={{
                             borderRadius: 4,
-                            height:51,
+                            height: 51,
                             backgroundColor: "#B3DA3F",
                             fontSize: "16px",
-                            margin:"3px"
+                            margin: "3px"
                           }} > <Link to={"eventos/" + event.id}>Detalles</Link> </Button>
-                          
-  
-                          
-                                        
-                            <Button onClick={() => this.peticionArchivar(event)} style={{
+
+
+
+
+                          <Button onClick={() => this.peticionArchivar(event)} style={{
                             borderRadius: 4,
-                            height:51,
+                            height: 51,
                             backgroundColor: "#269BD5",
                             fontSize: "16px",
-                            margin:"5px"
-                            }}> Archivar  </Button>
-                          
-  
-                          
-                            <Button color="danger" onClick={() => this.deleteEvento(event)}> <FontAwesomeIcon icon={faTrashAlt} size="2x" > </FontAwesomeIcon> </Button>
-                         
+                            margin: "5px"
+                          }}> Archivar  </Button>
+
+
+
+                          <Button color="danger" onClick={() => this.deleteEvento(event)}> <FontAwesomeIcon icon={faTrashAlt} size="2x" > </FontAwesomeIcon> </Button>
+
                         </Fragment>
-                        ) : (
-                          <></>
-                        )}
-                      </CardBody>
+                      ) : (
+                        <></>
+                      )}
+                    </CardBody>
+                        
+                 
+                </div>
+                {/* </Grid>
+        </Grid> */}
+              </div>
 
-               </Grid>        
-            </div>              
-          </div>
-
-          </div>
-              ))}
-
-        </div>
-      </body>
-
+            </div>
+          ))}
+        
+        </Container>
      
 
 

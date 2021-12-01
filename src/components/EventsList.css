@@ -12,10 +12,12 @@ body {
   font-family: sans-serif;
 }
 
-.container1 {
-  width: 90%;
-  margin: 50px auto;
+.container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(100px, auto);
 }
+
 .heading1 {
   text-align: center;
   font-size: 30px;
@@ -23,18 +25,17 @@ body {
 }
 
 .row1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-flow: wrap;
+  
 }
 
 .card1 {
-  width: 20%;
+  width: 90%;
+  display: inline-block;
   background: #fff;
   border: 1px solid #ccc;
   margin-bottom: 50px;
   transition: 0.3s;
+  position: relative;
 }
 
 .card-header1 {
