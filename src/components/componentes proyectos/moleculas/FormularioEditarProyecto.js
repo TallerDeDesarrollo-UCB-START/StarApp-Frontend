@@ -7,7 +7,9 @@ import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
 //import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import { Button, Modal, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // Styles
 /*const useStylesDrpdn = makeStyles({
@@ -117,7 +119,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     function getModalStyle() {
         const top = 50;
         const left = 50;
-        
         return {
             "@media (maxWidth: 375px)": {
               top: 0,
@@ -129,7 +130,10 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
           };
     }
 
-    	
+    const botonCancelarFormulario =
+        <Button onClick={onActivarForm}>
+            <FontAwesomeIcon className="cancel-icon" icon={faTimes}/>
+        </Button>;	
     
     const [modalStyle] = React.useState(getModalStyle);
     
@@ -139,65 +143,56 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const body = (
         <div style={modalStyle} className="paper-crear">
             <form  onSubmit={onSubmit}>
+                {botonCancelarFormulario}
                 <div className="crear-container-title">
                     <h4>Editar Proyecto</h4>
                 </div>
-                <div style={{padding: "1% 3% 0 5%"}}>
-                    <label>Fecha de Inicio</label>
+                <div style={{padding: "1% 3% 0 2%"}}>
+                <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Inicio</InputLabel>
                     <InputTexto type="date"
                                 value={fechaInicio}
                                 onChange={onChangeFechaInicio}
                                 />
-                    <label>Fecha de Fin</label>
+                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Fin</InputLabel>
                     <InputTexto type="date"
                                 value={fechaFin}
                                 onChange={onChangeFechaFin}
                                 />
-                    <label>Nombre del proyecto</label>
+                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Nombre del Proyecto</InputLabel>
                     <InputTexto type="text"
                                 placeHolder='Nombre del proyecto'
                                 value={titulo}
                                 onChange={onChangeTitulo}
                                 />
-                    <label>Descripción</label>
+                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Descripción</InputLabel>
                     <InputTexto type="text"
                                 placeHolder='Descripción'
                                 value={descripcion}
                                 onChange={onChangeDescrip}
                                 />
-                    <label>Objetivo</label>
+                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Objetivo</InputLabel>
                     <InputTexto type="text"
                                 placeHolder='Objetivo'
                                 value={objetivo}
                                 onChange={onChangeObjetivo}
                                 />
-                    <label>Líder</label>
                     <InputTexto type="text"
                                 placeHolder='Líder'
                                 value={lider}
                                 onChange={onChangeLider}
                                 />
-                    <label>Categoría</label>
                     <InputTexto type="text"
                                 placeHolder='Categoría'
                                 value={categoria}
                                 onChange={onChangeCategoria}
                                 />
-                    <label>Estado</label>
                     <InputTexto type="text"
                                 placeHolder='Estado'
                                 value={estado}
                                 onChange={onChangeEstado}
                                 />
-                    <label>Información Adicional</label>
-                    <InputTexto type="link"
-                                placeHolder='Información Adicional'
-                                value={informacion_adicional}
-                                onChange={onChangeInfoAd}
-                                />
                     <div className="btn-crear-container">
-                        <input type='submit' value='Guardar' className='btn-proy-editar btn-proy-block'/>
-                        <button className='btn-proy-block-cancel btn-proy-cancelar' onClick={onActivarForm}> Cancelar </button>
+                        <input type='submit' value='GUARDAR CAMBIOS' className='btn-proy-editar btn-proy-block'/>
                     </div>
                 </div>
             </form>

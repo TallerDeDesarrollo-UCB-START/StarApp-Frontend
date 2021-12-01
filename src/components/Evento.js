@@ -5,6 +5,8 @@ import { Container, Card, Modal, Tooltip } from "reactstrap";
 import { Button } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import { Snackbar } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
 import "./Evento.css";
 import Chip from "@material-ui/core/Chip";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
@@ -35,6 +37,7 @@ class Evento extends Component {
     participants: [],
     nombreParticipante: "",
     modalAbierto: false,
+    snackbarAbierto: false,
     formEditado: {
       nombre_evento: "",
       descripcion_evento: "",
@@ -189,6 +192,10 @@ class Evento extends Component {
     }
   };
 
+  handleOpen = () => this.setState({ snackbarAbierto: true });
+  handleClose = () => this.setState({ snackbarAbierto: false });
+  handleClick = () => this.setState({ snackbarAbierto: true });
+
   render() {
     const customStyles = {
       position: "absolute",
@@ -197,6 +204,7 @@ class Evento extends Component {
       transform: "translate(-50%,-50%)",
     };
     const rolUser = this.state.user;
+    const { snackbarAbierto } = this.state;
     return (
       <Container>
         <Chip

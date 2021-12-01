@@ -16,9 +16,7 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
     }, [snackbar, participacion])*/
 
     const onClick = async (event) => {
-        //debugger
         const cancelResponse = await onCancelarParticipacion(proyecto.id);
-        //console.log(cancelResponse)
         if(cancelResponse){
             onAsignarParticipacion();
             onAsignarSnackbarStatus("Participacion cancelada", true, true);
@@ -34,17 +32,18 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
                 <CancelParticipationButton variant="contained" color="primary"
                 onClick={onClick}
                 >
-                    Unirme
+                    Dejar Proyecto
                 </CancelParticipationButton>
     );
 }
 
 const CancelParticipationButton = withStyles((theme) => ({
     root: {
-        backgroundColor: "#a8a8a8",
+        backgroundColor: "#E3E3E3",
         fontSize: "16px",
-        color: "white",
+        color: "#545454",
         "&:hover": {
+            color: 'whitesmoke',
             backgroundColor: "#818181",
         },
         height: "51px",
