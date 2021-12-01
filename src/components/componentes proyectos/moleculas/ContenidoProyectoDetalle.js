@@ -198,6 +198,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
             <BoxButtons>
                 {botonCancelarParticipacion}
                 {botonParticiparProyecto}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {botonEliminarProyecto}
             </BoxButtons>
             {listaPartipantes}

@@ -1,7 +1,6 @@
 // Componentes:
 import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
-import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
 import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 import SnackbarMessage from '../../templates/SnackbarMessage';
@@ -17,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 
-function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
+function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
 
     // States:
     const [snackbar, setSnackbar] = useState({
@@ -125,10 +124,6 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                     <EditarProyectoBtn  onActivarForm={onActivarForm}
                                                         proyecto={proyecto}/>
                                 </PuertaPermisos>
-    const botonEliminarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-                                        <EliminarProjectoBtn proyecto={proyecto}
-                                                            onEliminarProy={onEliminarProy}/>
-                                    </PuertaPermisos>
 
     /*function content (){
         var resp="";
@@ -206,7 +201,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                 {botonCancelarParticipacion}
                 <VerProyectoBtn proyecto={proyecto}/>
                 {botonEditarProyecto}
-                {botonEliminarProyecto}
+                
             </CardActions>
             {tagParticipacion}
             <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
