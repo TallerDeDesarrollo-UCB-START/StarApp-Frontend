@@ -36,7 +36,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             return ("En Curso") 
         }
     }*/
-  // States
+    // States:
     const [fechaInicio, setFechaInicio] = useState(proyecto.fechaInicio)
     const [fechaFin, setFechaFin] = useState(proyecto.fechaFin)
     const [titulo, setTitulo] = useState(proyecto.titulo)
@@ -48,6 +48,12 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
     //const [image, setImagen] = useState('')
     const [url_imagen, setImagenUrl] = useState('')
+
+    // Constantes:
+    const estadoAcabadoValor = 10
+    const estadoAcabadoLabel = "ACABADO"
+    const estadoEnCursoValor = 20
+    const estadoEnCursoLabel = "EN CURSO"
 
     function resetStates() {
         setFechaInicio('')
@@ -92,6 +98,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         /*if (validarCampos(event) === false) {
             return
         }*/
+        const newEstado = selectElement("estado", selectValue("estado"))
         debugger
         const proyectoEditar = {
             id: proyecto.id,
@@ -101,7 +108,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             descripcion: descripcion,
             objetivo: objetivos,
             lider: lideres,
-            estado: estado,
+            estado: newEstado,
             categoria: categoria,
             informacion_adicional: informacion_adicional,
             //image: image,
@@ -129,13 +136,13 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         const left = 50;
         return {
             "@media (maxWidth: 375px)": {
-              top: 0,
-              left: 0,
+                top: 0,
+                left: 0,
             },
             top: `${top}%`,
             left: `${left}%`,
             transform: `translate(-${top}%, -${left}%)`,
-          };
+        };
     }
 
     const botonCancelarFormulario =
@@ -148,6 +155,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const handleClose = () => {
         onActivarForm()
     };
+
     const body = (
         <div style={modalStyle} className="paper-crear">
             <form  onSubmit={onSubmit}>
@@ -156,7 +164,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                     <h4>Editar Proyecto</h4>
                 </div>
                 <div style={{padding: "1% 3% 0 2%"}}>
-                <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Inicio</InputLabel>
+                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Inicio</InputLabel>
                     <InputTexto type="date"
                                 value={fechaInicio}
                                 onChange={onChangeFechaInicio}
