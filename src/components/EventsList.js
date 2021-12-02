@@ -291,13 +291,9 @@ class EventsList extends Component {
 
   peticionPost = async () => {
     if (this.state.form.nombre_evento && this.state.form.fecha_evento) {
-<<<<<<< HEAD
-      await axios
-=======
 
       if ( this.state.form.nombre_evento.trim().length > 0 ) {
         await axios
->>>>>>> d1f867a (Correccion del campo Nombre del evento con espacios vacios)
         .post(urlCrearEvento, this.state.form)
         .then((response) => {
           this.insertar();
@@ -305,11 +301,6 @@ class EventsList extends Component {
         .catch((error) => {
           console.log(error.message);
         });
-<<<<<<< HEAD
-    } else {
-      alert("Campos de Nombre del Evento o Fecha faltantes.");
-    }
-=======
       }
       else{
         alert("Nombre del Evento vacio");
@@ -320,7 +311,6 @@ class EventsList extends Component {
       alert("Campos Nombre del Evento o Fecha del Evento vacio")
     }
     
->>>>>>> d1f867a (Correccion del campo Nombre del evento con espacios vacios)
   };
 
   getLideres = async () => {
@@ -373,12 +363,9 @@ class EventsList extends Component {
       },
     });
   };
-<<<<<<< HEAD
   // handleOpen = () => this.setState({ snackbarAbierto: true });
   handleClose = () => this.setState({ snackbarAbierto: false });
   handleClick = () => this.setState({ snackbarAbierto: true });
-=======
->>>>>>> d1f867a (Correccion del campo Nombre del evento con espacios vacios)
 
   render() {
     const modalStyles = {
