@@ -291,7 +291,9 @@ class EventsList extends Component {
 
   peticionPost = async () => {
     if (this.state.form.nombre_evento && this.state.form.fecha_evento) {
-      await axios
+
+      if ( this.state.form.nombre_evento.trim().length > 0 ) {
+        await axios
         .post(urlCrearEvento, this.state.form)
         .then((response) => {
           this.insertar();
@@ -299,9 +301,16 @@ class EventsList extends Component {
         .catch((error) => {
           console.log(error.message);
         });
-    } else {
-      alert("Campos de Nombre del Evento o Fecha faltantes.");
+      }
+      else{
+        alert("Nombre del Evento vacio");
+      }
+      
     }
+    else {
+      alert("Campos Nombre del Evento o Fecha del Evento vacio")
+    }
+    
   };
 
   getLideres = async () => {
