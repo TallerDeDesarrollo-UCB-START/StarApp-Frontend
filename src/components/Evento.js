@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
+import GoogleCalendar from "./googleCalendar.jsx";
 import "./Evento.css";
 import Chip from "@material-ui/core/Chip";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
@@ -113,7 +114,11 @@ class Evento extends Component {
       console.log(err);
     }
   };
-
+  validarBotones(event) {
+    return !this.state.participants.some(function (evento) {
+      return evento.id_evento === event.id;
+    });
+  }
   handleChange = (e) => {
     this.setState({
       formEditado: {
@@ -294,7 +299,6 @@ class Evento extends Component {
         ) : (
           <></>
         )}
-
         <br></br>
         <br></br>
         <div className="listForm">
