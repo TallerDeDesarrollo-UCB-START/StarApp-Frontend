@@ -5,8 +5,8 @@ import axios from "axios";
 import { useMediaQuery, Button, Grid } from "@material-ui/core";
 import { TextField } from "final-form-material-ui";
 import { useHistory } from "react-router-dom";
-import AxiosClient from "./AxiosClient";
-import SnackbarMessage from "../components/templates/SnackbarMessage";
+
+
 import Typography from "@material-ui/core/Typography";
 import ProfileImage from "./ProfileImage";
 import Chip from "@material-ui/core/Chip";
@@ -33,9 +33,6 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       alignItems: "center",
       flexDirection: "column",
-    },
-    textField: {
-      marginBottom: "16px",
     },
     nameContainer: {
         display: "flex",
@@ -104,7 +101,7 @@ const EditarPerfil = ({ sessionData }) => {
     const history = useHistory();
     const smallScreen = !useMediaQuery("(min-width:811px)")
     const classNames = useStyles();
-    const [open, setOpen] = useState(false);
+    
     const [userExist, setUserExsit] = useState({
         userEx: false,
       });
@@ -113,12 +110,13 @@ const EditarPerfil = ({ sessionData }) => {
         nombre: "",
         apellido: "",
         fecha_de_nacimiento: "",
-        pais_de_residencia: "",
-        ciudad_de_residencia: "",
+        pais_de_recidencia: "",
+        ciudad_de_recidencia: "",
         carrera: "",
         nivel_de_estudios: "",
         ocupacion: "",
         genero: "",
+        descripcion_personal:"",
         estado_de_cuenta: "",
         rol: "",
         intereses: [],
@@ -132,11 +130,12 @@ const EditarPerfil = ({ sessionData }) => {
       const [datosEdit, setDatosEdit] = useState({
         id_usuario: "",
         fecha_de_nacimiento: "",
-        pais_de_residencia: "",
-        ciudad_de_residencia: "",
+        pais_de_recidencia: "",
+        ciudad_de_recidencia: "",
         nivel_de_estudios: "",
         ocupacion: "",
         genero: "",
+        descripcion_personal:"",
         estado_de_cuenta: "",
         rol: "",
         intereses: [],
@@ -196,6 +195,7 @@ const EditarPerfil = ({ sessionData }) => {
         setDatosEdit({ ...datosEdit, [event.target.name]: nuevasAptitudes });
     };
     var peticionPost = async (asignaciones) => {
+        
         await axios
           .post(urlTablaExtensa, asignaciones)
           .then((response) => {
@@ -217,7 +217,8 @@ const EditarPerfil = ({ sessionData }) => {
     };
     function sendForm() {
         setDatos(datosEdit);
-    
+        console.log("datosEdit")
+        console.log(datosEdit)
         const asignaciones = {
           fecha_de_nacimiento: datosEdit.fecha_de_nacimiento,
           pais_de_recidencia: datosEdit.pais_de_recidencia,
@@ -231,7 +232,7 @@ const EditarPerfil = ({ sessionData }) => {
           intereses: datosEdit.intereses.toString(),
           cualidades: datosEdit.cualidades.toString(),
           aptitudes_tecnicas:datosEdit.aptitudes_tecnicas.toString(),
-          id_autenticacion: datosEdit.id_autenticacion,
+          id_autenticacion: sessionStorage.getItem("id"),
           nombre_contacto_de_emergencia: datosEdit.nombre_contacto_de_emergencia,
           numero_contacto_de_emergencia: datosEdit.numero_contacto_de_emergencia,
           relacion_contacto_de_emergencia:
@@ -239,11 +240,14 @@ const EditarPerfil = ({ sessionData }) => {
         };
         
         if (userExist.userEx) {
+
           peticionPut(asignaciones);      
-          setOpen(false);
+          
         } else {
+            console.log("asignaciones antes post")
+        console.log(asignaciones)
           peticionPost(asignaciones);
-          setOpen(false);
+          
         }    
     }
     useEffect(() => {
@@ -306,7 +310,7 @@ const EditarPerfil = ({ sessionData }) => {
                             />
 
                             <Field
-                            style={{ width: "45%", marginRight: "26px" }}
+                            style={smallScreen ?  {width: "45%"}: { width: "45%", marginRight: "26px"}}
                             name="apellido"
                             type="text"
                             placeholder={datos.apellido? datos.apellido.split(" ")[0]: ""}
@@ -359,11 +363,11 @@ const EditarPerfil = ({ sessionData }) => {
                             size="small"
                         />
                         <FormControl className={classNames.formControl}>
-                            <InputLabel id="customized-select-label">País de residencia:</InputLabel>
+                            <InputLabel id="customized-select-label">País de recidencia:</InputLabel>
                             <Select
                                 id='customized-select'
-                                name="pais_de_residencia"
-                                value={datosEdit.pais_de_residencia}
+                                name="pais_de_recidencia"
+                                value={datosEdit.pais_de_recidencia}
                                 onChange={handleInputChange}
                                 MenuProps={{ classes: { paper: classNames.menuPaper } }}
                             >
@@ -377,13 +381,13 @@ const EditarPerfil = ({ sessionData }) => {
                         </FormControl>
                         <Field
                             style={{ width: "95.5%" }}
-                            name="ciudad_de_residencia"
+                            name="ciudad_de_recidencia"
                             type="text"
-                            placeholder="ciudad de residencia"
+                            placeholder="ciudad de recidencia"
                             className={classNames.textField}
                             onChange={handleInputChange}
                             component={TextField}
-                            value={datosEdit.ciudad_de_residencia}
+                            value={datosEdit.ciudad_de_recidencia}
                             variant="outlined"
                             size="small"
                         />
@@ -513,7 +517,7 @@ const EditarPerfil = ({ sessionData }) => {
                                 Perritos callejeros
                                 </label>
                             </Grid>
-                            <Grid item xs={6.5}>
+                            <Grid item xs={6.5} md={6}>
                                 <input
                                 checked={datosEdit.intereses.includes(
                                     "Desarrollo sostenible"
@@ -529,7 +533,7 @@ const EditarPerfil = ({ sessionData }) => {
                                 Desarrollo Sostenible
                                 </label>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={4} md={6}>
                                 <input
                                 checked={datosEdit.intereses.includes("Educacion")}
                                 onChange={handleChange}
