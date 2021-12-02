@@ -10,10 +10,10 @@ import {
   Slide,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import SnackbarMessage from "./templates/SnackbarMessage"
 
 const useStyles = makeStyles((theme) => ({
   root_container: {
-    border: "solid 1px #ABC",
     borderRadius: "15px",
     padding: "20px",
     width: "50%",
@@ -26,6 +26,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function GoogleCalendar({ eventData, active }) {
+  const [snackbar, setSnackbar] = React.useState({
+    message: "",
+    active: false,
+    severity: "success",
+    afterClose: () => {},
+  })
+  const activeSnackbar = (message, severity, afterClose) => {
+    setSnackbar({ message, severity, afterClose, active: true })
+  }
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -54,8 +63,8 @@ function GoogleCalendar({ eventData, active }) {
   var SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
   const handleClick = () => {
+
     gapi.load("client:auth2", () => {
-      console.log("loaded client");
 
       gapi.client.init({
         apiKey: API_KEY,
@@ -71,9 +80,9 @@ function GoogleCalendar({ eventData, active }) {
         .signIn()
         .then(() => {
           var event = {
-            summary: eventData.nombre_evento,
-            location: eventData.lugar_evento,
-            description: eventData.descripcion_evento,
+            summary: eventData.nombre_evento? eventData.nombre_evento:"Evento de Start",
+            location: eventData.lugar_evento?eventData.lugar_evento:"Lugar de Evento",
+            description: eventData.descripcion_evento?eventData.descripcion_evento:"no hay descripción",
             start: {
               dateTime: `${eventData.fecha_evento}T${eventData.hora_inicio}:00-04:00`,
               timeZone: "America/Puerto_Rico",
@@ -140,7 +149,13 @@ function GoogleCalendar({ eventData, active }) {
             }}
             variant="outlined"
             color="primary"
-            onClick={handleClick}
+            onClick={()=>{
+              if(eventData.fecha_evento && eventData.hora_inicio && eventData.hora_fin)
+              {
+                handleClick()
+              }else{
+                activeSnackbar("El evento no tiene hora de inicio y fin o fecha.", "error", () => {})
+              }}}
           >
             {"Añadir "}
             <Avatar
@@ -152,6 +167,7 @@ function GoogleCalendar({ eventData, active }) {
             />
           </Button>
         </DialogActions>
+        <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
       </Dialog>
     </div>
   );
