@@ -7,7 +7,8 @@ import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
 //import { makeStyles } from '@material-ui/core/styles';
-import { Button, Modal, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core';
+import { Button, Modal, InputLabel} from '@material-ui/core';
+//import { Button, Modal, FormData, FormControl, MenuItem, Select} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -45,6 +46,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [categoria, setCategoria] = useState(proyecto.categoria)
     const [estado, setEstado] = useState(proyecto.estado)
     const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
+    //const [image, setImagen] = useState('')
+    const [url_imagen, setImagenUrl] = useState('')
 
     function resetStates() {
         setFechaInicio('')
@@ -54,8 +57,9 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setObjetivo('')
         setLider('')
         setCategoria('')
-
         setInfoAd('')
+        //setImagen('')
+        setImagenUrl('')
     }
 
     /*function agregarRequerido(element){
@@ -99,7 +103,9 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             lider: lideres,
             estado: estado,
             categoria: categoria,
-            informacion_adicional: informacion_adicional
+            informacion_adicional: informacion_adicional,
+            //image: image,
+            url_imagen: url_imagen
         }
         onEditarProy(proyectoEditar) // callback invocation
         resetStates()
@@ -115,6 +121,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeCategoria = (e) => {setCategoria(e.target.value)}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
+    //const onChangeImagen = (e) => {setImagen(e.target.value)}
+    const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
     // ---- NUEVO ----
     function getModalStyle() {
         const top = 50;
@@ -191,6 +199,20 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                 value={estado}
                                 onChange={onChangeEstado}
                                 />
+                                <InputTexto type="link"
+                                placeHolder='Información Adicional'
+                                value={informacion_adicional}
+                                onChange={onChangeInfoAd}
+                                />
+                    <label>
+                        Imagen por Link
+                    </label>
+                    <InputTexto
+                        type="text" 
+                        name="image" 
+                        value={url_imagen}
+                        onChange={onChangeImagenUrl}
+                    />
                     <div className="btn-crear-container">
                         <input type='submit' value='GUARDAR CAMBIOS' className='btn-proy-editar btn-proy-block'/>
                     </div>
@@ -216,3 +238,15 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
 }
 
 export default FormularioEditarProyecto
+
+/*
+<label>
+                        Imagen por archivo
+                    </label>
+                    <InputTexto
+                        type="file" 
+                        name="image" 
+                        value={image}
+                        onChange={onChangeImagen}
+                    />
+*/
