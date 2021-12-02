@@ -1,7 +1,46 @@
 import React from "react";
-import { Avatar, useMediaQuery, Typography, Button } from "@material-ui/core";
+import {
+  Avatar,
+  Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Slide,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-function GoogleCalendar({ eventData }) {
+const useStyles = makeStyles((theme) => ({
+  root_container: {
+    border: "solid 1px #ABC",
+    borderRadius: "15px",
+    padding: "20px",
+    width: "50%",
+    margin: "30px 0",
+  },
+}));
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function GoogleCalendar({ eventData, active }) {
+  const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (active) {
+      handleClickOpen();
+    }
+  }, [active]);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const classes = useStyles();
   var gapi = window.gapi;
   /* 
     Update with your own Client Id and Api key 
@@ -14,9 +53,6 @@ function GoogleCalendar({ eventData }) {
   ];
   var SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
-  React.useEffect(()=>{
-    console.log(eventData)
-  },[eventData])
   const handleClick = () => {
     gapi.load("client:auth2", () => {
       console.log("loaded client");
@@ -64,49 +100,59 @@ function GoogleCalendar({ eventData }) {
           request.execute((event) => {
             console.log(event);
             window.open(event.htmlLink);
+            window.location.reload();
           });
         });
     });
+    handleClose();
   };
 
   return (
-    <div
-      className="App"
-      style={{
-        border: "solid 1px #ABC",
-        borderRadius: "15px",
-        padding: "20px",
-        width: "50%",
-        margin: "30px 0",
-      }}
-    >
-      <header className="App-header">
-        <Typography variant="h3">
-          Agregar el evento a tu calendario Google
-        </Typography>
-        <Typography style={{ fontSize: 18 }}>
-          Puedes agregar el evento en tu calendario Google. Recuerda que el
-          calendario de Google envía recordatorios a tus dispositivos.
-        </Typography>
-        <Button
-          style={{
-            border: "solid 1px",
-            textTransform: "none",
-            margin: "20px 0 0",
-          }}
-          color="primary"
-          onClick={handleClick}
-        >
-          {"Añadir "}
-          <Avatar
-            alt="Google Calendar icon"
-            src={
-              "//ssl.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_1_2x.png#"
-            }
-            style={{ width: "70" }}
-          />
-        </Button>
-      </header>
+    <div className={classes.root_container}>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title" variant="h3">
+          <Typography>Agregar el evento a tu calendario Google</Typography>
+        </DialogTitle>
+        <DialogContent>
+          <Typography style={{ fontSize: 18 }}>
+            Puedes agregar el evento en tu calendario Google. Recuerda que el
+            calendario de Google envía recordatorios a tus dispositivos.
+          </Typography>
+        </DialogContent>
+        <DialogActions style={{ padding: "20px 24px" }}>
+          <Button
+            onClick={handleClose}
+            variant="outlined"
+            style={{ color: "#989898" }}
+          >
+            Cancelar
+          </Button>
+          <Button
+            style={{
+              textTransform: "none",
+            }}
+            variant="outlined"
+            color="primary"
+            onClick={handleClick}
+          >
+            {"Añadir "}
+            <Avatar
+              alt="Google Calendar icon"
+              src={
+                "//ssl.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_1_2x.png#"
+              }
+              style={{ width: "70" }}
+            />
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

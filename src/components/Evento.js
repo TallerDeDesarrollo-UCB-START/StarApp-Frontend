@@ -114,7 +114,11 @@ class Evento extends Component {
       console.log(err);
     }
   };
-
+  validarBotones(event) {
+    return !this.state.participants.some(function (evento) {
+      return evento.id_evento === event.id;
+    });
+  }
   handleChange = (e) => {
     this.setState({
       formEditado: {
@@ -480,7 +484,6 @@ class Evento extends Component {
             </div>
           </form>
         </Modal>
-        <GoogleCalendar eventData={this.state.events[0]}></GoogleCalendar>
       </Container>
     );
   }

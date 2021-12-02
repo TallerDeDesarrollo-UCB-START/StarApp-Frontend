@@ -13,6 +13,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import GoogleCalendar from "./googleCalendar.jsx"
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -83,6 +84,7 @@ class EventsList extends Component {
     this.getUserRol();
     this.getLideres();
     this.getProyectos();
+    this.active = false;
   }
 
   abrirModal = () => {
@@ -189,14 +191,14 @@ class EventsList extends Component {
   postParticipacion = async (event) => {
     let newUrl =
       urlParticipacion + event.id + "/sesion/" + window.sessionStorage.id;
-    await axios
+    return await axios
       .post(newUrl, {
         id: event.id,
         id_autenticacion: window.sessionStorage.id,
       })
-      .then((response) => {
+      .then(async (response) => {
         this.mostrarMensajeSnackbar(event);
-        this.mensajeConfirmacionParticipacion(event);
+        await this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
         console.log(error.message);
@@ -225,7 +227,6 @@ class EventsList extends Component {
   mensajeConfirmacionParticipacion = async (event) => {
     this.handleClick(); //abre el snackbar
     await this.sleep(2000);
-    window.location.reload();
   };
 
   //Funciones pertenecientes a Eliminacion Participacion
@@ -557,6 +558,7 @@ class EventsList extends Component {
                         <Button
                           onClick={() => {
                             this.postParticipacion(event);
+                            this.active = true;
                           }}
                         >
                           {" "}
@@ -807,6 +809,7 @@ class EventsList extends Component {
             </div>
           </form>
         </Modal>
+        <GoogleCalendar eventData = {this.state.events[0]} active = {this.active}></GoogleCalendar>
       </div>
     );
   }
