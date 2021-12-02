@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Button, Modal } from "@material-ui/core";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import "./Profile.css";
 import Grid from "@material-ui/core/Grid";
 import ProfileCard from "./ProfileCard";
@@ -15,6 +15,9 @@ import Slide from '@material-ui/core/Slide';
 import Chip from "@material-ui/core/Chip";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import { useMediaQuery, Typography } from "@material-ui/core";
+import DialogConfirm from "./DialogConfirm"
+
+const { getCountries } = require("country-list-spanish");
 
 const url = process.env.REACT_APP_API;
 const urlTablaExtensa = `${url}extended_form/`;
@@ -36,27 +39,20 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
-const CancelButton = withStyles((theme) => ({
-  root: {
-    color: "white",
-    backgroundColor: "#a8a8a8",
-    "&:hover": {
-      backgroundColor: "#818181",
-    },
-  },
-}))(Button);
+
 const useStyles = makeStyles((theme) => ({
   containerbuttons: {
     display: "flex",
     justifyContent: "center",
+    marginBottom:"30px"
   },
   buttons: {
-    width: "36%",
-    height: "30px",
+    width: "90%",
+    backgroundColor:"#545454",
     margin: "7px",
   },
   intputextaera: {
-    width: "76%",
+    width: "97%",
     height: "100px",
     background: "#FFFFFF",
     border: "1px solid #C4C4C4",
@@ -65,12 +61,12 @@ const useStyles = makeStyles((theme) => ({
     padding: "3px 5px",
     margin: "7px 0px 7px 0px",
     position: "relative",
-    left: "12%",
+    left: "3%",
     resize: "none",
   },
   intputs: {
-    width: "76%",
-    height: "38px",
+    width: "97%",
+    height: "51px",
     background: "#FFFFFF",
     border: "1px solid #C4C4C4",
     boxSizing: "border-box",
@@ -78,27 +74,27 @@ const useStyles = makeStyles((theme) => ({
     padding: "3px 5px",
     margin: "7px 0px 7px 0px",
     position: "relative",
-    left: "12%",
+    left: "3%",
   },
   checkboxes: {
     width: "76%",
     padding: "3px 5px",
     margin: "7px 0px 7px 0px",
     position: "relative",
-    left: "12%",
+    left: "3%",
   },
   checkcualidades: {
     width: "76%",
     padding: "3px 5px",
     margin: "7px 0px 7px 0px",
     position: "relative",
-    left: "12%",
+    left: "3%",
   },
   titulos: {
-    width: "76%",
+    width: "97%",
     position: "relative",
 
-    left: "12%",
+    left: "3%",
   },
   root: {
     width: "100%",
@@ -119,6 +115,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Profile = ({sessionData}) => {
 
+  
   const [userExist, setUserExsit] = useState({
     userEx: false,
   });
@@ -337,10 +334,32 @@ const Profile = ({sessionData}) => {
   const body = (
     <div style={modalStyle} className="paperr">
       <div>
+        <span className={classNamees.titulos} style={{fontWeight:"bold", fontSize:"1.2em", color:"#545454"}}>
+            Datos Personales:
+        </span>
         <form className="fomrExt">
-          <label className={classNamees.titulos} htmlFor="fecha_de_nacimiento">
-            Fecha de nacimiento:
-          </label>
+        <input
+            className={classNamees.intputs}
+            style={{width:"47%", marginRight:"10px", background:"transparent"}}
+            value={datosEdit.nombre}
+            disabled
+            placeholder="Nombre"
+            name="nombre"
+            id="nombre"
+            type="text"
+          />
+          <input
+            className={classNamees.intputs}
+            style={{width:"48%",background:"transparent"}}
+            value={datosEdit.apellido}
+            disabled
+            placeholder="Apellido"
+            name="apellido"
+            id="apellido"
+            type="text"
+          />
+          
+          
           <input
             className={classNamees.intputs}
             type="date"
@@ -349,9 +368,7 @@ const Profile = ({sessionData}) => {
             onChange={handleInputChange}
           />
 
-          <label className={classNamees.titulos} htmlFor="ocupacion">
-            Ocupación:
-          </label>
+          
           <select
             name="ocupacion"
             value={datosEdit.ocupacion}
@@ -363,9 +380,7 @@ const Profile = ({sessionData}) => {
             <option value="Trabajando">Trabajando</option>
           </select>
 
-          <label className={classNamees.titulos} htmlFor="carrera">
-            Profesión u oficio:
-          </label>
+          
           <input
             className={classNamees.intputs}
             value={datosEdit.carrera}
@@ -376,7 +391,111 @@ const Profile = ({sessionData}) => {
             type="text"
           />
           <br></br>
-          <label className={classNamees.titulos}>Mis intereses:</label>
+
+          
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.ciudad_de_recidencia}
+            onChange={handleInputChange}
+            placeholder="Ciudad de residencia"
+            name="ciudad_de_recidencia"
+            id="ciudad_de_recidencia"
+            type="text"
+          />
+          <br></br>
+
+          
+          <select
+            name="pais_de_recidencia"
+            value={datosEdit.pais_de_recidencia}
+            onChange={handleInputChange}
+            className={classNamees.intputs}
+          >
+            {getCountries().map(pais => (
+              <option key={pais} value={pais}>{pais}</option>
+            ))}
+          </select>
+          <select
+            name="genero"
+            value={datosEdit.genero}
+            onChange={handleInputChange}
+            className={classNamees.intputs}
+          >
+            <option value="">Género</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
+            <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+          </select>
+          
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.telefono}
+            disabled
+            style={{background:"transparent"}}
+            placeholder="Telefono"
+            name="telefono"
+            id="telefono"
+            type="text"
+          />
+          <br></br>
+          <span className={classNamees.titulos} style={{fontSize:"0.8em",color:"grey"}}>
+          Para actualizar tu número de teléfono escribenos a perfil@startamericastogether.org
+          </span>
+          <br></br><br></br>
+          <span className={classNamees.titulos} style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}>
+            Contacto de emergencia:
+          </span>
+          
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.nombre_contacto_de_emergencia}
+            onChange={handleInputChange}
+            placeholder="Nombre de contacto de emergencia"
+            name="nombre_contacto_de_emergencia"
+            id="nombre_contacto_de_emergencia"
+            type="text"
+          />
+          
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.relacion_contacto_de_emergencia}
+            onChange={handleInputChange}
+            placeholder="Relación de contacto de emergencia"
+            name="relacion_contacto_de_emergencia"
+            id="relacion_contacto_de_emergencia"
+            type="text"
+          />
+          
+          <input
+            className={classNamees.intputs}
+            value={datosEdit.numero_contacto_de_emergencia}
+            onChange={handleInputChange}
+            placeholder="Número de contacto de emergencia"
+            name="numero_contacto_de_emergencia"
+            id="numero_contacto_de_emergencia"
+            type="text"
+          />
+          <br></br>
+          <label className={classNamees.titulos} 
+            style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}
+            htmlFor="descripcion_personal">
+            Mi descripción:
+          </label>
+          <textarea
+            className={classNamees.intputextaera}
+            value={datosEdit.descripcion_personal}
+            onChange={handleInputChange}
+            name="descripcion_personal"
+            id="descripcion_personal"
+          ></textarea>
+          <br></br>
+          
+
+
+
+          <label className={classNamees.titulos}
+          style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}>Mis intereses:</label>
           <br></br>
           <div className={classNamees.checkboxes}>
             <Grid container spacing={2}>
@@ -460,7 +579,8 @@ const Profile = ({sessionData}) => {
               </Grid>
             </Grid>
           </div>
-          <label className={classNamees.titulos}>Mis Cualidades:</label>
+          <label className={classNamees.titulos}
+          style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}>Mis Cualidades:</label>
           <br></br>
           <div className={classNamees.checkboxes}>
             <Grid container spacing={2}>
@@ -543,7 +663,8 @@ const Profile = ({sessionData}) => {
 
 
 
-          <label className={classNamees.titulos}>Mis Aptitudes:</label>
+          <label className={classNamees.titulos}
+          style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}>Mis Aptitudes:</label>
           <br></br>
           <div className={classNamees.checkboxes}>
             <Grid container spacing={2}>
@@ -622,108 +743,15 @@ const Profile = ({sessionData}) => {
               
             </Grid>
           </div>
-          <label className={classNamees.titulos} htmlFor="pais_de_recidencia">
-            País de residencia:
-          </label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.pais_de_recidencia}
-            onChange={handleInputChange}
-            placeholder="País de residencia"
-            name="pais_de_recidencia"
-            id="pais_de_recidencia"
-            type="text"
-          />
-          <br></br>
+         
 
-          <label className={classNamees.titulos} htmlFor="ciudad_de_recidencia">
-            Ciudad de residencia:
-          </label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.ciudad_de_recidencia}
-            onChange={handleInputChange}
-            placeholder="Ciudad de residencia"
-            name="ciudad_de_recidencia"
-            id="ciudad_de_recidencia"
-            type="text"
-          />
-          <br></br>
+          
 
-          <label className={classNamees.titulos} htmlFor="genero">
-            Género:
-          </label>
-          <select
-            name="genero"
-            value={datosEdit.genero}
-            onChange={handleInputChange}
-            className={classNamees.intputs}
-          >
-            <option value="">Género</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
-            <option value="Otro">Otro</option>
-            <option value="Prefiero no decirlo">Prefiero no decirlo</option>
-          </select>
+          
 
-          <label
-            className={classNamees.titulos}
-            htmlFor="nombre_contacto_de_emergencia"
-          >
-            Nombre de contacto de emergencia:
-          </label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.nombre_contacto_de_emergencia}
-            onChange={handleInputChange}
-            placeholder="Nombre de contacto de emergencia"
-            name="nombre_contacto_de_emergencia"
-            id="nombre_contacto_de_emergencia"
-            type="text"
-          />
-          <label
-            className={classNamees.titulos}
-            htmlFor="relacion_contacto_de_emergencia"
-          >
-            Relación con contacto de emergencia:
-          </label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.relacion_contacto_de_emergencia}
-            onChange={handleInputChange}
-            placeholder="Relación de contacto de emergencia"
-            name="relacion_contacto_de_emergencia"
-            id="relacion_contacto_de_emergencia"
-            type="text"
-          />
-          <label
-            className={classNamees.titulos}
-            htmlFor="numero_contacto_de_emergencia"
-          >
-            Número de contacto de emergencia:
-          </label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.numero_contacto_de_emergencia}
-            onChange={handleInputChange}
-            placeholder="Número de contacto de emergencia"
-            name="numero_contacto_de_emergencia"
-            id="numero_contacto_de_emergencia"
-            type="text"
-          />
-          <br></br>
+          
 
-          <label className={classNamees.titulos} htmlFor="descripcion_personal">
-            Mi pequeña descripción:
-          </label>
-          <textarea
-            className={classNamees.intputextaera}
-            value={datosEdit.descripcion_personal}
-            onChange={handleInputChange}
-            name="descripcion_personal"
-            id="descripcion_personal"
-          ></textarea>
-          <br></br>
+          
         </form>
       </div>
       <div className={classNamees.containerbuttons}>
@@ -734,17 +762,12 @@ const Profile = ({sessionData}) => {
           variant="contained"
           borderradius="20%"
         >
-          Guardar
+          Guardar Cambios
         </Button>
-        <CancelButton
-          variant="contained"
-          onClick={handleClose}
-          className={classNamees.buttons}
-          color="primary"
-        >
-          Cancelar
-        </CancelButton>
+        
+        
       </div>
+      <DialogConfirm/>
     </div>
   );
 

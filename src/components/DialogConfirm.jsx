@@ -10,7 +10,6 @@ import axios from "axios";
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
-import { useMediaQuery } from "@material-ui/core";
 
 const url = process.env.REACT_APP_API;
 const urlEliminarCuenta=`${url}disable_user/`
@@ -39,7 +38,7 @@ function TransitionDown(props) {
     return <Slide {...props} direction="down" />;
   }
 export default function AlertDialog() {
-  const smallScreen = !useMediaQuery("(min-width:811px)")
+  
   const [transition, setTransition] = React.useState(undefined);
   const [open, setOpen] = React.useState(false);//Dialog
 
@@ -83,9 +82,10 @@ export default function AlertDialog() {
   return (
     <div>
         
-      <DeleteButton onClick={handleClickOpen} style={{ marginTop: "20px" }}  variant="contained">
-      {smallScreen? "Eliminar": "Eliminar Perfil"} 
-      </DeleteButton>
+      <span onClick={handleClickOpen} style={{ marginTop: "20px",textDecoration:"underline black" }}  variant="contained">
+        Deseo eliminar mi cuenta
+      </span>
+      
       <Dialog
         open={open}
         onClose={handleClose}
@@ -100,9 +100,13 @@ export default function AlertDialog() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+
+          
         <DeleteButton onClick={peticionDelete} style={{ height: "30px",margin: "7px",}}     variant="contained">
             Eliminar 
         </DeleteButton>
+
+
         <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={openSnakbar}
