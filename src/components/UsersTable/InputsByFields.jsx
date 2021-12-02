@@ -9,6 +9,8 @@ import {
   Select,
   MenuItem,
   Switch,
+  FormGroup,
+  Checkbox,
 } from "@material-ui/core";
 import { fields } from "./SearchByField";
 import MaskedInput from "react-text-mask";
@@ -44,7 +46,14 @@ function TextMaskCustom(props) {
   );
 }
 
-export function InputByCriteria({ criteria, newValue, setNewValue }) {
+export function InputByCriteria({
+  criteria,
+  newValue,
+  setNewValue,
+  insignias,
+  setInsignias,
+  todasInsignias,
+}) {
   const rehusableTextField = () => (
     <TextField
       color="primary"
@@ -175,9 +184,14 @@ export function InputByCriteria({ criteria, newValue, setNewValue }) {
       <FormControlLabel
         control={
           <Switch
-            checked={newValue[fields[criteria]]==="disponible"}
+            checked={newValue[fields[criteria]] === "disponible"}
             onChange={(event) =>
-              setNewValue({ ...newValue, [fields[criteria]]: (event.target.checked)?"disponible":"no disponible" })
+              setNewValue({
+                ...newValue,
+                [fields[criteria]]: event.target.checked
+                  ? "disponible"
+                  : "no disponible",
+              })
             }
             name="disponibilidad"
             color="secondary"
@@ -185,6 +199,33 @@ export function InputByCriteria({ criteria, newValue, setNewValue }) {
         }
         label={newValue[fields[criteria]]}
       />
+    ),
+    Insignias: (
+      <FormControl>
+        <FormGroup>
+          {todasInsignias.map((insignia) => {
+            return (
+              <FormControlLabel
+                key={insignia.insignia}
+                control={
+                  <Checkbox
+                    checked={(insignias.includes(insignia.insignia))}
+                    onChange={()=>{
+                      if(! insignias.includes(insignia.insignia)){
+                        setInsignias([...insignias, insignia.insignia])
+                      }else{
+                        setInsignias(insignias.filter((i) => i!==insignia.insignia))
+                      }
+                    }}
+                    name="insignia.insignia"
+                  />
+                }
+                label={insignia.insignia}
+              />
+            );
+          })}
+        </FormGroup>
+      </FormControl>
     ),
   };
   return <>{inputsByFields[criteria]}</>;

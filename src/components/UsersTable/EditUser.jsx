@@ -79,19 +79,37 @@ function getModalStyle() {
 }
 
 const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
+  const fieldsToEdit = {...fields, "Insignias":""}
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
   const [modalStyle] = React.useState(getModalStyle)
   const [criteria, setCriteria] = React.useState("Rol")
   const [newValue, setNewValue] = React.useState({})
   const wideScreen = useMediaQuery("(min-width:700px)")
+  const [insignias, setInsignias] = React.useState([])
+  const [todasInsignias, setTodasInsignias] = React.useState([])
   const [snackbar, setSnackbar] = React.useState({
     message: "",
     active: false,
     severity: "success",
     afterClose: () => {},
   })
-
+  React.useEffect(() => {
+    const URL = process.env.REACT_APP_API
+    axios.get(`${URL}insignias/${rowToUpdate.id}`)
+      .then((response)=>{
+        if (response.status === 200){
+          setInsignias(response.data.data.insignias)
+          axios.get(`${URL}insignias`)
+            .then((response)=>{
+              setTodasInsignias(response.data.data)}
+            )
+        }
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+  }, [])
   const handleOpen = () => {
     setOpen(true)
     setNewValue(rowToUpdate)
@@ -109,12 +127,12 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
   const activeSnackbar = (message, severity, afterClose) => {
     setSnackbar({ message, severity, afterClose, active: true })
   }
-
+  
+  const API_URL = process.env.REACT_APP_API
   const updateUserField = () => {
-    if (newValue[fields[criteria]]) {
+    if (newValue[fieldsToEdit[criteria]]) {
       setRowToUpdate(newValue)
-      const API_URL = process.env.REACT_APP_API
-      const user = { [fields[criteria]]: newValue[fields[criteria]] }
+      const user = { [fieldsToEdit[criteria]]: newValue[fieldsToEdit[criteria]] }
       axios
         .put(`${API_URL}extended_form/${rowToUpdate.id_usuario}`, user)
         .then((response) => {
@@ -134,6 +152,22 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
         activeSnackbar("Ingrese valores en el campo.", "warning", () => {})
     }
   }
+  const updateInsigniasField= () => {
+    const body = {"insignias": insignias.join(',')}
+    axios.put(`${API_URL}insignias/${rowToUpdate.id_usuario}`, body)
+      .then((response) => {
+        if (response.status === 202) {
+          activeSnackbar(
+            `Se han registrado los cambios.`,
+            "success",
+            () => {}
+          )
+        }
+      })
+      .catch((error) => {
+        activeSnackbar("Ha ocurrido un error.", "error", () => {})
+      })
+  }
 
   const body = (
     <div
@@ -149,7 +183,7 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
             value={criteria}
             onChange={handleChange}
           >
-            {Object.keys(fields).map((field) => {
+            {Object.keys(fieldsToEdit).map((field) => {
               if (field !== "Edad") {
                 return (
                   <MenuItem key={`${field}-edit`} value={field}>
@@ -165,6 +199,9 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
         <InputByCriteria
           criteria={criteria}
           newValue={newValue}
+          insignias = {insignias}
+          setInsignias = {setInsignias}
+          todasInsignias={todasInsignias}
           setNewValue={setNewValue}
         />
       </div>
@@ -173,7 +210,8 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
           variant="contained"
           color="primary"
           onClick={() => {
-            updateUserField()
+            if(criteria === "Insignias") {updateInsigniasField()}
+            else {updateUserField()}
           }}
           style={{ marginRight: "20px" }}
         >
