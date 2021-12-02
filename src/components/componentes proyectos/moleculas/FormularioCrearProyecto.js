@@ -22,7 +22,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const [categoria, setCategoria] = useState('')
     const [estado, setEstado] = useState('')
     const [informacion_adicional, setInfoAd] = useState('')
-    const [image, setImagen] = useState('')
+    //const [image, setImagen] = useState('')
     const [url_imagen, setImagenUrl] = useState('')
 
 
@@ -36,7 +36,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
         setCategoria('')
         setEstado('')
         setInfoAd('')
-        setImagen('')
+        //setImagen('')
         setImagenUrl('')
     }
 
@@ -78,7 +78,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             estado: true,
             categoria: categoria,
             informacion_adicional: informacion_adicional,
-            image: image,
+            //image: image,
             url_imagen: url_imagen
         }
         onCrearProy(nuevoProyecto) // callback invocation
@@ -95,7 +95,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const onChangeCategoria = (e) => {setCategoria(e.target.value); removerRequerido(e.target)}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
-    const onChangeImagen = (e) => {setImagen(e.target.value)}
+    //const onChangeImagen = (e) => {setImagen(e.target.value)}
     const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
     // ---- NUEVO ----
     function getModalStyle() {
@@ -174,15 +174,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 value={informacion_adicional}
                                 onChange={onChangeInfoAd}
                                 />
-                    <label>
-                        Imagen por archivo
-                    </label>
-                    <InputTexto
-                        type="file" 
-                        name="image" 
-                        value={image}
-                        onChange={onChangeImagen}
-                    />
+                    
                     <label>
                         Imagen por Link
                     </label>
@@ -218,3 +210,15 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
 }
 
 export default FormularioCrearProyecto
+
+/*
+<label>
+                        Imagen por archivo
+                    </label>
+                    <InputTexto
+                        type="file" 
+                        name="image" 
+                        value={image}
+                        onChange={onChangeImagen}
+                    />
+*/
