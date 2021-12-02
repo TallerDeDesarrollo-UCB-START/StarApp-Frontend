@@ -4,7 +4,7 @@ import InputTexto from '../moleculas/InputTexto'
 // Librerias-Paquetes:
 //import {VARIABLES} from '../organismos/variables-compartidas'
 import '../moleculas/FormularioCrearProyecto.css'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import React from 'react';
 //import { makeStyles } from '@material-ui/core/styles';
 import { Button, Modal, InputLabel} from '@material-ui/core';
@@ -44,7 +44,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)
     const [lider, setLider] = useState(proyecto.lider)
     const [categoria, setCategoria] = useState(proyecto.categoria)
-    const [estado, setEstado] = useState(proyecto.estado)
+    //const [estado, setEstado] = useState(proyecto.estado)
+    const [estadoId, setEstadoId] = useState(10)
     const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
     //const [image, setImagen] = useState('')
     const [url_imagen, setImagenUrl] = useState('')
@@ -68,6 +69,9 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setImagenUrl('')
     }
 
+    useEffect(() => {
+        findValue("estado")
+    }, [])
     /*function agregarRequerido(element){
         element.classList.add('requerido')
     }
@@ -94,11 +98,11 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         event.preventDefault() // To avoid submitting to an actual page
         const lideres = [lider]
         const objetivos = [objetivo]
-        console.log (lideres)
+        //console.log (lideres)
         /*if (validarCampos(event) === false) {
             return
         }*/
-        const newEstado = selectElement("estado", selectValue("estado"))
+        const newEstado = findLabel("estado")
         debugger
         const proyectoEditar = {
             id: proyecto.id,
@@ -126,7 +130,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value)}
     const onChangeLider = (e) => {setLider(e.target.value)}
     const onChangeCategoria = (e) => {setCategoria(e.target.value)}
-    const onChangeEstado = (e) => {setEstado(e.target.value)}
+    const onChangeEstado = (e) => {setEstadoId(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
     //const onChangeImagen = (e) => {setImagen(e.target.value)}
     const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
