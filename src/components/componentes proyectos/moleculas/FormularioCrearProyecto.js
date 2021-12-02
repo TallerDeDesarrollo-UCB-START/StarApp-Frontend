@@ -101,7 +101,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     function getModalStyle() {
         const top = 50;
         const left = 50;
-        
         return {
             "@media (maxWidth: 375px)": {
               top: 0,
