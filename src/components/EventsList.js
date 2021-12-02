@@ -228,6 +228,7 @@ class EventsList extends Component {
   mensajeConfirmacionParticipacion = async (event) => {
     this.handleClick(); //abre el snackbar
     await this.sleep(2000);
+    window.location.reload();
   };
 
   //Funciones pertenecientes a Eliminacion Participacion
@@ -820,7 +821,6 @@ class EventsList extends Component {
             </div>
           </form>
         </Modal>
-        <GoogleCalendar eventData = {this.selectedEvent} active = {this.active}></GoogleCalendar>
       </div>
     );
   }
