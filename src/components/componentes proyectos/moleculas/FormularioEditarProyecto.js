@@ -56,6 +56,14 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const estadoEnCursoValor = 20
     const estadoEnCursoLabel = "EN CURSO"
 
+    const categorias = [Animales, Comunidad, Otros, Educación, ]
+    let categoriasList = []
+    
+    const categoriasIdLabel = categorias.map(categ => {
+        cateogriasList.push({ estado: categ, valor: 10 })
+    })
+    
+
     function resetStates() {
         setFechaInicio('')
         setFechaFin('')
