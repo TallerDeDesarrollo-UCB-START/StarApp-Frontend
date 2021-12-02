@@ -1,7 +1,6 @@
 // Componentes:
 
 // Librerias-Paquetes:
-import Banner from '../../../assets/example.png';
 import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import './BannerProyecto.css';
