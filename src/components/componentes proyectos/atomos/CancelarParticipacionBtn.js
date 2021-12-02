@@ -48,6 +48,7 @@ const CancelParticipationButton = withStyles((theme) => ({
         },
         height: "51px",
         minWidth: "119px",
+        display: "none"
     },
     
 }))(Button);

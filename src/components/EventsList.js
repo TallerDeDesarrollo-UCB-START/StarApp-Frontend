@@ -13,6 +13,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import GoogleCalendar from "./googleCalendar.jsx"
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -23,7 +24,6 @@ const urlProyectos = `${url}get_proyectos`;
 const apiLideres = axios.create({
   baseURL: urlLideres,
 });
-
 
 const apiProyectos = axios.create({
   baseURL: urlProyectos,
@@ -84,8 +84,7 @@ class EventsList extends Component {
     this.getUserRol();
     this.getLideres();
     this.getProyectos();
-
-    
+    this.active = false;
   }
 
   abrirModal = () => {
@@ -192,14 +191,14 @@ class EventsList extends Component {
   postParticipacion = async (event) => {
     let newUrl =
       urlParticipacion + event.id + "/sesion/" + window.sessionStorage.id;
-    await axios
+    return await axios
       .post(newUrl, {
         id: event.id,
         id_autenticacion: window.sessionStorage.id,
       })
-      .then((response) => {
+      .then(async (response) => {
         this.mostrarMensajeSnackbar(event);
-        this.mensajeConfirmacionParticipacion(event);
+        await this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
         console.log(error.message);
@@ -228,7 +227,6 @@ class EventsList extends Component {
   mensajeConfirmacionParticipacion = async (event) => {
     this.handleClick(); //abre el snackbar
     await this.sleep(2000);
-    window.location.reload();
   };
 
   //Funciones pertenecientes a Eliminacion Participacion
@@ -292,19 +290,25 @@ class EventsList extends Component {
   }
 
   peticionPost = async () => {
-    
     if (this.state.form.nombre_evento && this.state.form.fecha_evento) {
-      await axios
-      .post(urlCrearEvento, this.state.form)
-      .then((response) => {
-        this.insertar();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+
+      if ( this.state.form.nombre_evento.trim().length > 0 ) {
+        await axios
+        .post(urlCrearEvento, this.state.form)
+        .then((response) => {
+          this.insertar();
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+      }
+      else{
+        alert("Nombre del Evento vacio");
+      }
+      
     }
     else {
-      alert('Campos de Nombre del Evento o Fecha faltantes.')
+      alert("Campos Nombre del Evento o Fecha del Evento vacio")
     }
     
   };
@@ -326,16 +330,16 @@ class EventsList extends Component {
   };
 
   getProyectos = async () => {
-    try{
-    let data = await apiProyectos.get("/").then(({ data }) => data);
-    let aux = data.map((item) => {
-      return item.titulo;
-    });
-    aux.unshift("No Seleccionado");
-    let result = aux.filter((item, index) => {
-      return aux.indexOf(item) === index;
-    });
-    this.setState({ proyectos: result });
+    try {
+      let data = await apiProyectos.get("/").then(({ data }) => data);
+      let aux = data.map((item) => {
+        return item.titulo;
+      });
+      aux.unshift("No Seleccionado");
+      let result = aux.filter((item, index) => {
+        return aux.indexOf(item) === index;
+      });
+      this.setState({ proyectos: result });
     } catch (err) {
       console.log(err);
     }
@@ -350,7 +354,7 @@ class EventsList extends Component {
     this.cerrarModalInsertar();
     window.location.reload();
   };
-  
+
   handleChange = (e) => {
     this.setState({
       form: {
@@ -563,6 +567,7 @@ class EventsList extends Component {
                         <Button
                           onClick={() => {
                             this.postParticipacion(event);
+                            this.active = true;
                           }}
                         >
                           {" "}
@@ -813,6 +818,7 @@ class EventsList extends Component {
             </div>
           </form>
         </Modal>
+        <GoogleCalendar eventData = {this.state.events[0]} active = {this.active}></GoogleCalendar>
       </div>
     );
   }

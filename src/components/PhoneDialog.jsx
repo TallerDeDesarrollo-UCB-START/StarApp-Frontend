@@ -30,7 +30,7 @@ export default function PhoneDialog({user}) {
             }
         })
       .catch((response) => { console.log(response)});
-  },[])
+  },[user])
   const activeSnackbar = (message, severity, afterClose)=>{
     setSnackbar({message, severity, afterClose, active:true})
   }
