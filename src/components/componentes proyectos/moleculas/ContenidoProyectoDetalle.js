@@ -13,6 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
 import {useState, useRef, useEffect } from 'react';
+import EventosProximos from '../../Home/EventosProximos';
 
 function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
@@ -201,6 +202,8 @@ function ContenidoProyectoDetalle ({proyecto}) {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {botonEliminarProyecto}
             </BoxButtons>
+            <h2 class="titleEventos">Eventos</h2>
+            <EventosProximos id={sessionStorage.getItem("id")} title={false}/>
             {listaPartipantes}
             {switchListaParticipantes}
             {snackBarComponent}
