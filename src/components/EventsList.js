@@ -85,6 +85,7 @@ class EventsList extends Component {
     this.getLideres();
     this.getProyectos();
     this.active = false;
+    this.selectedEvent = {};
   }
 
   abrirModal = () => {
@@ -568,6 +569,7 @@ class EventsList extends Component {
                           onClick={() => {
                             this.postParticipacion(event);
                             this.active = true;
+                            this.selectedEvent = event;
                           }}
                         >
                           {" "}
@@ -818,7 +820,7 @@ class EventsList extends Component {
             </div>
           </form>
         </Modal>
-        <GoogleCalendar eventData = {this.state.events[0]} active = {this.active}></GoogleCalendar>
+        <GoogleCalendar eventData = {this.selectedEvent} active = {this.active}></GoogleCalendar>
       </div>
     );
   }
