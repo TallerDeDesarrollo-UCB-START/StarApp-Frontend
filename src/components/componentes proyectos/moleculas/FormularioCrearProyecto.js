@@ -5,7 +5,8 @@ import '../moleculas/FormularioCrearProyecto.css'
 //import {VARIABLES} from '../organismos/variables-compartidas'
 import { useState } from "react"
 import React from 'react';
-import { Button, Modal, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core';
+import { Button, Modal} from '@material-ui/core';
+//import { Button, Modal, FormData, FormControl, MenuItem, Select, InputLabel} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,6 +22,8 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const [categoria, setCategoria] = useState('')
     const [estado, setEstado] = useState('')
     const [informacion_adicional, setInfoAd] = useState('')
+    const [image, setImagen] = useState('')
+    const [url_imagen, setImagenUrl] = useState('')
 
 
     function resetStates() {
@@ -33,6 +36,8 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
         setCategoria('')
         setEstado('')
         setInfoAd('')
+        setImagen('')
+        setImagenUrl('')
     }
 
     function agregarRequerido(element){
@@ -72,7 +77,9 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             lider: lideres,
             estado: true,
             categoria: categoria,
-            informacion_adicional: informacion_adicional
+            informacion_adicional: informacion_adicional,
+            image: image,
+            url_imagen: url_imagen
         }
         onCrearProy(nuevoProyecto) // callback invocation
         resetStates()
@@ -88,6 +95,8 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const onChangeCategoria = (e) => {setCategoria(e.target.value); removerRequerido(e.target)}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
+    const onChangeImagen = (e) => {setImagen(e.target.value)}
+    const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
     // ---- NUEVO ----
     function getModalStyle() {
         const top = 50;
@@ -114,7 +123,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     };
     const body = (
         <div style={modalStyle} className="paper-crear">
-            <form  onSubmit={onSubmit}>
+            <form  onSubmit={onSubmit}  enctype="multipart/form-data">
                 {botonCancelarFormulario}
                 <div className="crear-container-title">
                     <h4>Crear Proyecto</h4>
@@ -165,6 +174,24 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
                                 value={informacion_adicional}
                                 onChange={onChangeInfoAd}
                                 />
+                    <label>
+                        Imagen por archivo
+                    </label>
+                    <InputTexto
+                        type="file" 
+                        name="image" 
+                        value={image}
+                        onChange={onChangeImagen}
+                    />
+                    <label>
+                        Imagen por Link
+                    </label>
+                    <InputTexto
+                        type="text" 
+                        name="image" 
+                        value={url_imagen}
+                        onChange={onChangeImagenUrl}
+                    />
                     <div className="btn-crear-container">
                         <input type='submit' value='CREAR PROYECTO' className='btn-proy-crear btn-proy-block'/>
                         
