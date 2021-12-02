@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
 //import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
 // Permisos/Roles:
+import PuertaPermisos from '../organismos/PuertaPermisos';
+import {SCOPES} from '../organismos/map-permisos';
 
 // Librerias-Paquetes:
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,7 +32,10 @@ function HeaderCategoriasProyectos({onActivarForm}) {
                         </Typography>
                     </Grid>
                     <Grid item xs={7} md={5} className={classes.far_right}>
-                        <CrearProyectoBtn onActivarForm={onActivarForm}/>
+                        <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
+                                <CrearProyectoBtn onActivarForm={onActivarForm}/>
+                        </PuertaPermisos>
+                        
                     </Grid>
                 </Grid>
         </Box>
