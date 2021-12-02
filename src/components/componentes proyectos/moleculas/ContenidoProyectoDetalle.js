@@ -9,6 +9,7 @@ import './ContenidoProyectoDetalle.css';
 import { Box } from '@material-ui/core';
 import { Switch } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
+import EventosProximos from '../../Home/EventosProximos';
 // Permisos/Roles:
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
@@ -16,6 +17,7 @@ import {useState, useRef, useEffect } from 'react';
 
 function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
+    const idUser = sessionStorage.getItem("id");
     
     //const visualizarP = proyecto.visualizar
     const [visualizarP, setVisualizarP] = useState(proyecto.visualizar)
@@ -201,6 +203,8 @@ function ContenidoProyectoDetalle ({proyecto}) {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {botonEliminarProyecto}
             </BoxButtons>
+            <h2 className="titleEventos">Eventos</h2>
+            <EventosProximos id={idUser} title={false}/>
             {listaPartipantes}
             {switchListaParticipantes}
             {snackBarComponent}
