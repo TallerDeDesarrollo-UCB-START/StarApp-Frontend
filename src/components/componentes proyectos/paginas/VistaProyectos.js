@@ -45,7 +45,7 @@ function VistaProyectos() {
         const getLideres = async ()=>{
             const lideresDelServer = await fetchLideres()
             setLideres(lideresDelServer)
-            console.log(lideresDelServer)
+            //console.log(lideresDelServer)
         }
 
         const getProyectosPasadosCategoria = async () => {

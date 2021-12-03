@@ -11,32 +11,19 @@ import { Button, Modal, InputLabel} from '@material-ui/core';
 //import { Button, Modal, FormData, FormControl, MenuItem, Select} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useForm, SubmitHandler } from "react-hook-form";
 
-// Styles
-/*const useStylesDrpdn = makeStyles({
-  drpdown: {
-    margin: "-5px 0%",
-    backgroundColor: "#F2F2F2",
-    border: "1px solid #C4C4C4",
-    borderRadius: "6px",
-  },
-});*/
-
-//const varProyectos = VARIABLES.datosProyectos
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres}) {
-  // Styles
-    //const classesDrpdn = useStylesDrpdn();
-    /*const estadoActual= hallarEstado(proyecto.estado);
-    function hallarEstado (estado){
-        if(estado==='true'){
-            return ("Concluido")
-        }
-        else{
-            return ("En Curso") 
-        }
-    }*/
     // States:
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+        setValue
+    } = useForm();
+
     const [fechaInicio, setFechaInicio] = useState(proyecto.fechaInicio)
     const [fechaFin, setFechaFin] = useState(proyecto.fechaFin)
     const [titulo, setTitulo] = useState(proyecto.titulo)
@@ -50,20 +37,19 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     //const [image, setImagen] = useState('')
     const [url_imagen, setImagenUrl] = useState('')
 
-    // Constantes:
+    // CONSTANTES:
     const estadoAcabadoValor = 10
     const estadoAcabadoLabel = "ACABADO"
     const estadoEnCursoValor = 20
     const estadoEnCursoLabel = "EN CURSO"
 
-    const categorias = [Animales, Comunidad, Otros, Educación, ]
-    let categoriasList = []
+    const categorias = ["Animales", "Comunidad", "Otros", "Educación" ]
+    //let categoriasList = []
     
     const categoriasIdLabel = categorias.map(categ => {
-        cateogriasList.push({ estado: categ, valor: 10 })
+       // cateogriasList.push({ estado: categ, valor: 10 })
     })
     
-
     function resetStates() {
         setFechaInicio('')
         setFechaFin('')
@@ -78,38 +64,34 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     }
 
     useEffect(() => {
+        //register({ name: "titulo" });
+        //{...register("titulo")}
         findValue("estado")
     }, [])
-    /*function agregarRequerido(element){
-        element.classList.add('requerido')
-    }
-    function removerRequerido(element){
-        element.classList.remove('requerido')
-    }
 
-    function validarCampos(event) {
-        if (!fechaInicio || !titulo || !descripcion || !objetivo || !lider || !categoria) {
-            alert('Porfavor llene los campos')
-            //console.log(event)
-            if (!fechaInicio) agregarRequerido(event.currentTarget[0])
-            if (!titulo) agregarRequerido(event.currentTarget[2])
-            if (!descripcion) agregarRequerido(event.currentTarget[3])
-            if (!objetivo) agregarRequerido(event.currentTarget[4])
-            if (!lider) agregarRequerido(event.currentTarget[5])
-            if (!categoria) agregarRequerido(event.currentTarget[6])
-            return false
-        }
-        return true
-    }*/
+    // FUNCIONES:
+    function getModalStyle() {
+        const top = 50;
+        const left = 50;
+        return {
+            "@media (maxWidth: 375px)": {
+                top: 0,
+                left: 0,
+            },
+            top: `${top}%`,
+            left: `${left}%`,
+            transform: `translate(-${top}%, -${left}%)`,
+        };
+    }
+    const handleClose = () => {
+        onActivarForm()
+    };
+
 
     const onSubmit = (event) => {
         event.preventDefault() // To avoid submitting to an actual page
         const lideres = [lider]
         const objetivos = [objetivo]
-        //console.log (lideres)
-        /*if (validarCampos(event) === false) {
-            return
-        }*/
         const newEstado = findLabel("estado")
         debugger
         const proyectoEditar = {
@@ -157,20 +139,15 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         };
     }
 
-    const botonCancelarFormulario =
+    const botonCancelarFormulario = 
         <Button onClick={onActivarForm}>
             <FontAwesomeIcon className="cancel-icon" icon={faTimes}/>
         </Button>;	
-    
-    const [modalStyle] = React.useState(getModalStyle);
-    
-    const handleClose = () => {
-        onActivarForm()
-    };
+
 
     const body = (
         <div style={modalStyle} className="paper-crear">
-            <form  onSubmit={onSubmit}>
+            <form  onSubmit={handleSubmit(onSubmit2)}>
                 {botonCancelarFormulario}
                 <div className="crear-container-title">
                     <h4>Editar Proyecto</h4>
@@ -186,18 +163,29 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                 value={fechaFin}
                                 onChange={onChangeFechaFin}
                                 />
+                    {/*NOTE: TITULO*/}
                     <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Nombre del Proyecto</InputLabel>
-                    <InputTexto type="text"
-                                placeHolder='Nombre del proyecto'
-                                value={titulo}
-                                onChange={onChangeTitulo}
-                                />
+                    <div className='form-control-proy'>
+                        <input type="text"
+                            placeholder='Nombre del proyecto'
+                            {...register('titulo', {required: true})}
+                            value={titulo}
+                            onChange={onChangeTitulo}
+                        />
+                        {errors.titulo && estilosValidar()}
+                    </div>
+                    {/*NOTE: DESCRIPCION*/}
                     <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Descripción</InputLabel>
-                    <InputTexto type="text"
-                                placeHolder='Descripción'
-                                value={descripcion}
-                                onChange={onChangeDescrip}
-                                />
+                    <div className='form-control-proy'>
+                        <input type="text"
+                            placeholder='Descripción'
+                            {...register('descripcion', {required: true})}
+                            value={descripcion}
+                            onChange={onChangeDescrip}
+                        />
+                        {errors.descripcion && estilosValidar()}
+                    </div>
+                    {/*NOTE: OBJETIVO*/}
                     <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Objetivo</InputLabel>
                     <InputTexto type="text"
                                 placeHolder='Objetivo'
