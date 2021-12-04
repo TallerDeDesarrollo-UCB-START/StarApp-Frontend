@@ -2,56 +2,43 @@
 import InputTexto from '../moleculas/InputTexto'
 //import InputDropDown from "../atomos/InputDropDown";
 // Librerias-Paquetes:
-//import {VARIABLES} from '../organismos/variables-compartidas'
 import '../moleculas/FormularioCrearProyecto.css'
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import React from 'react';
 //import { makeStyles } from '@material-ui/core/styles';
 import { Button, Modal, InputLabel} from '@material-ui/core';
 //import { Button, Modal, FormData, FormControl, MenuItem, Select} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { useForm, /*SubmitHandler,*/ FormProvider } from "react-hook-form";
 
 
-function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres}) {
-    // States:
-    /*const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-        setValue
-    } = useForm();*/
+function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
+
     const methods = useForm()
+    // CONSTANTES:
+    const estados = [
+        {value: 10, label: "CONCLUIDO"},
+        {value: 20, label: "EN CURSO"},
+    ]
+    const estadoAcabadoValor = estados[0].value
+    const estadoAcabadoLabel = estados[0].label
+    const estadoEnCursoValor = estados[1].value
+    const estadoEnCursoLabel = estados[1].label
 
+    // HOOKS:
+    // States fields
     const [fechaInicio, setFechaInicio] = useState(proyecto.fechaInicio)
     const [fechaFin, setFechaFin] = useState(proyecto.fechaFin)
     const [titulo, setTitulo] = useState(proyecto.titulo)
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
-    //objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
-    const [objetivo, setObjetivo] = useState(proyecto.objetivo[0][0][0])
+    const [objetivo, setObjetivo] = useState(proyecto.objetivo[0][0][0])//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
     const [lider, setLider] = useState(proyecto.lider)
-    const [categoria, setCategoria] = useState(proyecto.categoria)
-    //const [estado, setEstado] = useState(proyecto.estado)
-    const [estadoId, setEstadoId] = useState(10)
     const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
     //const [image, setImagen] = useState('')
     const [url_imagen, setImagenUrl] = useState('')
 
-    // CONSTANTES:
-    const estadoAcabadoValor = 10
-    const estadoAcabadoLabel = "ACABADO"
-    const estadoEnCursoValor = 20
-    const estadoEnCursoLabel = "EN CURSO"
-
-    const categorias = ["Animales", "Comunidad", "Otros", "Educación" ]
-    //let categoriasList = []
-    
-    const categoriasIdLabel = categorias.map(categ => {
-       // cateogriasList.push({ estado: categ, valor: 10 })
-    })
-    
+    // FUNCIONES:
     function resetStates() {
         setFechaInicio('')
         setFechaFin('')
@@ -59,19 +46,11 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setDescripcion('')
         setObjetivo('')
         setLider('')
-        setCategoria('')
         setInfoAd('')
         //setImagen('')
         setImagenUrl('')
     }
-
-    useEffect(() => {
-        //register({ name: "titulo" });
-        //{...register("titulo")}
-        findValue("estado")
-    }, [])
-
-    // FUNCIONES:
+    
     function getModalStyle() {
         const top = 50;
         const left = 50;
@@ -85,7 +64,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             transform: `translate(-${top}%, -${left}%)`,
         };
     }
-    const handleClose = () => {
+    const handleModalClose = () => {
         onActivarForm()
     };
 
@@ -121,7 +100,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeDescrip = (e) => {setDescripcion(e.target.value)}
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value)}
     const onChangeLider = (e) => {setLider(e.target.value)}
-    const onChangeCategoria = (e) => {setCategoria(e.target.value)}
+    const onChangeCategoria = (e) => {setCategoriaId(e.target.value)}
     const onChangeEstado = (e) => {setEstadoId(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
     //const onChangeImagen = (e) => {setImagen(e.target.value)}
@@ -141,6 +120,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         };
     }
 
+    // COMPONENTS:
     const botonCancelarFormulario = 
         <Button onClick={onActivarForm}>
             <FontAwesomeIcon className="cancel-icon" icon={faTimes}/>
@@ -229,13 +209,13 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             </form>
             
         </div>);
-    
-// S implemente hacer abrir el modal con el boton de crear y el body sera lo mismo que tenia antes
+        
+    // RENDER:
     return (
         <div>
             <Modal
                 open={mostrarFormEditar}
-                onClose={handleClose}
+                onClose={handleModalClose}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
                 >

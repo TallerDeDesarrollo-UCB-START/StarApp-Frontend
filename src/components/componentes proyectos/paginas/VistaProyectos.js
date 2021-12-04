@@ -17,6 +17,7 @@ function VistaProyectos() {
     //window.location.reload()
     const [proyectos, setProyectos] = useState([])
     const [lideres, setLideres] = useState([])
+    const [categorias, setCategorias] = useState([])
     const [proyectosPasadosCategoria, setProyectosPasadosCategoria] = useState([])
     const [actualizar, setActualizar] = useState(false)
     const mountedRef = useRef(false)
@@ -44,8 +45,13 @@ function VistaProyectos() {
         }
         const getLideres = async ()=>{
             const lideresDelServer = await fetchLideres()
-            setLideres(lideresDelServer)
+            mountedRef.current && setLideres(lideresDelServer)
             //console.log(lideresDelServer)
+        }
+
+        const getCategorias = async () => {
+            const categosServer = await fetchCategorias()
+            mountedRef.current && setCategorias(categosServer)
         }
 
         const getProyectosPasadosCategoria = async () => {
@@ -56,6 +62,7 @@ function VistaProyectos() {
         categoria? getProyectosFiltro() : getProyectos()
         getProyectosPasadosCategoria()
         getLideres()
+        getCategorias()
 
         return () => {
             mountedRef.current = false
@@ -85,6 +92,12 @@ function VistaProyectos() {
         const response = await fetch(`${URLProyectosPasados}/${categoria}`)
         const data = await response.json()
         return data;
+    }
+
+    const fetchCategorias = async () => {
+        const response = await fetch(URLCategorias)
+        const data = await response.json()
+        return data
     }
 
     const crearProyecto = async (nuevoProyecto) => {
@@ -186,6 +199,7 @@ function VistaProyectos() {
     let proyectosAdmins = <ProyectosAdmins rol={"core team"}
                                 proyectos={proyectos}
                                 lideres={lideres} 
+                                categorias={categorias}
                                 onCrearProy={crearProyecto} 
                                 onEliminarProy={eliminarProyecto} 
                                 onPartiparProy={participarEnProyecto} 
@@ -228,4 +242,5 @@ const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/partic
 const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
 const URLNumeroParticipantes = `${url}get_numero_participantes` //'http://localhost:5000/get_rol/'
 const URLProyectosPasados = `${url}get_proyectos_acabado`
+const URLCategorias = `${url}get_categoria_proyectos`//``http://localhost:5000/get_categorias`//`
 export default VistaProyectos;
