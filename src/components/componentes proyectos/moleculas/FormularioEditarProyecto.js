@@ -11,24 +11,26 @@ import { Button, Modal, InputLabel} from '@material-ui/core';
 //import { Button, Modal, FormData, FormControl, MenuItem, Select} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres}) {
     // States:
-    const {
+    /*const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
         setValue
-    } = useForm();
+    } = useForm();*/
+    const methods = useForm()
 
     const [fechaInicio, setFechaInicio] = useState(proyecto.fechaInicio)
     const [fechaFin, setFechaFin] = useState(proyecto.fechaFin)
     const [titulo, setTitulo] = useState(proyecto.titulo)
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
-    const [objetivo, setObjetivo] = useState(proyecto.objetivo)
+    //objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
+    const [objetivo, setObjetivo] = useState(proyecto.objetivo[0][0][0])
     const [lider, setLider] = useState(proyecto.lider)
     const [categoria, setCategoria] = useState(proyecto.categoria)
     //const [estado, setEstado] = useState(proyecto.estado)
@@ -143,8 +145,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         <Button onClick={onActivarForm}>
             <FontAwesomeIcon className="cancel-icon" icon={faTimes}/>
         </Button>;	
-
-
+        
     const body = (
         <div style={modalStyle} className="paper-crear">
             <form  onSubmit={handleSubmit(onSubmit2)}>

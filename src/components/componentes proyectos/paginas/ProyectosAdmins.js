@@ -16,13 +16,23 @@ function ProyectosAdmins({proyectos,lideres, rol, onEliminarProy, onPartiparProy
 
     // Funciones
 
+    // NOTE: Es importante ambas funciones (activarFormEditar y onlyActivarFormEditar) 
+    //       Una obtiene la data y activa el form para un proyecto. (obtiene data de ContenidoProyecto)
+    //       La otra solo activa el formulario, pero no recibe data (solo se activa/desactiva para FormularioEditarProyecto)
+    // Si no se tiene ambas funciones, la data se tratara obtener desde FormularioEditarProyecto y
+    // eso es redundante, ocacionando un error (huevo y la gallina)
     const activarFormEditar = (proyecto) => {
+        //`debugger
         setProyectoEditar(proyecto)
+        setMostrarFormEditar(!mostrarFormEditar);
+    }
+    const onlyActivarFormEditar = (proyecto) => {
+        //`debugger
         setMostrarFormEditar(!mostrarFormEditar);
     }
 
     //Componentes
-    const FormularioEditar = mostrarFormEditar===true ? <FormularioEditarProyecto onEditarProy={onEditarProy} onActivarForm={activarFormEditar} proyecto={proyectoEditar} mostrarFormEditar={mostrarFormEditar} lideres={lideres} /> : <></>
+    const FormularioEditar = mostrarFormEditar===true ? <FormularioEditarProyecto onEditarProy={onEditarProy} onActivarForm={onlyActivarFormEditar} proyecto={proyectoEditar} mostrarFormEditar={mostrarFormEditar} lideres={lideres} /> : <></>
 
     return (
         <Box style={styles}>
