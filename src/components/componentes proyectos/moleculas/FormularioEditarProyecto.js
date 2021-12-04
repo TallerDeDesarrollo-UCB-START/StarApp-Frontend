@@ -6,8 +6,7 @@ import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
 //import { makeStyles } from '@material-ui/core/styles';
-import { Button, Modal, InputLabel} from '@material-ui/core';
-//import { Button, Modal, FormData, FormControl, MenuItem, Select} from '@material-ui/core';
+import { Button, Modal, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useForm, /*SubmitHandler,*/ FormProvider } from "react-hook-form";
@@ -35,8 +34,14 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [objetivo, setObjetivo] = useState(proyecto.objetivo[0][0][0])//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
     const [lider, setLider] = useState(proyecto.lider)
     const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
-    //const [image, setImagen] = useState('')
     const [url_imagen, setImagenUrl] = useState('')
+    // States dropwdown values
+    const [estadoId, setEstadoId] = useState(findValue("estado"))
+    const [categoriaId, setCategoriaId] = useState(parseInt(categorias[0].id))
+    // Modal popup styles
+    const [modalStyle] = React.useState(getModalStyle);
+    
+    
 
     // FUNCIONES:
     function resetStates() {
@@ -47,7 +52,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setObjetivo('')
         setLider('')
         setInfoAd('')
-        //setImagen('')
         setImagenUrl('')
     }
     
@@ -68,32 +72,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         onActivarForm()
     };
 
-
-    const onSubmit = (event) => {
-        event.preventDefault() // To avoid submitting to an actual page
-        const lideres = [lider]
-        const objetivos = [objetivo]
-        const newEstado = findLabel("estado")
-        debugger
-        const proyectoEditar = {
-            id: proyecto.id,
-            fechaInicio: fechaInicio,
-            fechaFin: fechaFin,
-            titulo: titulo,
-            descripcion: descripcion,
-            objetivo: objetivos,
-            lider: lideres,
-            estado: newEstado,
-            categoria: categoria,
-            informacion_adicional: informacion_adicional,
-            //image: image,
-            url_imagen: url_imagen
-        }
-        onEditarProy(proyectoEditar) // callback invocation
-        resetStates()
-        onActivarForm() // Oculta el formulario
-    }
-
     const onChangeFechaInicio = (e) => {setFechaInicio(e.target.value)}
     const onChangeFechaFin = (e) => {setFechaFin(e.target.value)}
     const onChangeTitulo = (e) => {setTitulo(e.target.value)}
@@ -103,22 +81,37 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeCategoria = (e) => {setCategoriaId(e.target.value)}
     const onChangeEstado = (e) => {setEstadoId(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
-    //const onChangeImagen = (e) => {setImagen(e.target.value)}
     const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
-    // ---- NUEVO ----
-    function getModalStyle() {
-        const top = 50;
-        const left = 50;
-        return {
-            "@media (maxWidth: 375px)": {
-                top: 0,
-                left: 0,
-            },
-            top: `${top}%`,
-            left: `${left}%`,
-            transform: `translate(-${top}%, -${left}%)`,
-        };
+
+    function findValue(tipo){
+        if(tipo==="estado"){
+            const selectEstado = proyecto.estado===true?  estadoEnCursoValor : estadoAcabadoValor
+            return selectEstado
+        }
+        //NOTE: Completar con los ifs que hagan falta para diferentes values de  dropdowns
     }
+    
+    function estilosValidar(){
+        //FIXME: Falta agregar validacion con useForm para campos de texto y ver como validar dropdowns.
+        console.log('hubo algun error')
+    }
+
+    const onSubmit2 = data => {
+        debugger
+        console.log(data)
+        const estadoActual = estados.find(estado => estado.value === estadoId)
+        const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoriaId)
+        data.id = proyecto.id
+        data.estado = estadoActual.label
+        data.categoria = categoriaActual.tipo
+        onEditarProy(data) // callback invocation
+        resetStates()
+        onActivarForm() // Oculta/Activa el formulario
+        // NOTE: Los valores de dropdown se mapean y agregan al objeto "data" sin usar react-hook-form.
+        //       Los demas campos si utilizan react-hook-form.
+
+    }
+    console.log(url_imagen)
 
     // COMPONENTS:
     const botonCancelarFormulario = 
@@ -128,86 +121,127 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         
     const body = (
         <div style={modalStyle} className="paper-crear">
-            <form  onSubmit={handleSubmit(onSubmit2)}>
-                {botonCancelarFormulario}
-                <div className="crear-container-title">
-                    <h4>Editar Proyecto</h4>
-                </div>
-                <div style={{padding: "1% 3% 0 2%"}}>
-                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Inicio</InputLabel>
-                    <InputTexto type="date"
-                                value={fechaInicio}
-                                onChange={onChangeFechaInicio}
-                                />
-                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Fecha de Fin</InputLabel>
-                    <InputTexto type="date"
-                                value={fechaFin}
-                                onChange={onChangeFechaFin}
-                                />
-                    {/*NOTE: TITULO*/}
-                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Nombre del Proyecto</InputLabel>
-                    <div className='form-control-proy'>
-                        <input type="text"
-                            placeholder='Nombre del proyecto'
-                            {...register('titulo', {required: true})}
-                            value={titulo}
-                            onChange={onChangeTitulo}
-                        />
-                        {errors.titulo && estilosValidar()}
+            <FormProvider {...methods}>
+                <form  onSubmit={methods.handleSubmit(onSubmit2)}>
+                    {botonCancelarFormulario}
+                    {/*NOTE: FORM TITLE*/}
+                    <div className="crear-container-title">
+                        <h4>Editar Proyecto</h4>
                     </div>
-                    {/*NOTE: DESCRIPCION*/}
-                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Descripción</InputLabel>
-                    <div className='form-control-proy'>
-                        <input type="text"
-                            placeholder='Descripción'
-                            {...register('descripcion', {required: true})}
-                            value={descripcion}
-                            onChange={onChangeDescrip}
-                        />
-                        {errors.descripcion && estilosValidar()}
-                    </div>
-                    {/*NOTE: OBJETIVO*/}
-                    <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Objetivo</InputLabel>
-                    <InputTexto type="text"
-                                placeHolder='Objetivo'
-                                value={objetivo}
-                                onChange={onChangeObjetivo}
-                                />
-                    <InputTexto type="text"
-                                placeHolder='Líder'
-                                value={lider}
-                                onChange={onChangeLider}
-                                />
-                    <InputTexto type="text"
-                                placeHolder='Categoría'
-                                value={categoria}
+                    {/*NOTE: FORM FIELDS:*/}
+                    <div style={{padding: "1% 3% 0 2%"}}>
+                        {/*NOTE: FECHA INICIO*/}
+                        <InputTexto type="date"
+                                    tituloLabel={"Fecha de Inicio"}
+                                    nameId="fechaInicio"
+                                    value={fechaInicio}
+                                    onChange={onChangeFechaInicio}
+                                    estilosValidar={estilosValidar}
+                                    />
+                        {/*NOTE: FECHA FIN*/}
+                        <InputTexto type="date"
+                                    tituloLabel={"Fecha de Fin"}
+                                    nameId="fechaFin"
+                                    value={fechaFin}
+                                    onChange={onChangeFechaFin}
+                                    estilosValidar={estilosValidar}
+                                    />
+                        {/*NOTE: TITULO*/}
+                        <InputTexto type="text"
+                                    tituloLabel={"Nombre del Proyecto"}
+                                    placeHolder="Nombre del Proyecto"
+                                    nameId="titulo"
+                                    value={titulo}
+                                    onChange={onChangeTitulo}
+                                    options={{required: true}}
+                                    estilosValidar={estilosValidar}/>
+                        {/*NOTE: DESCRIPCION*/}
+                        <InputTexto type="text"
+                                    tituloLabel={"Descripción"}
+                                    placeHolder="Descripción"
+                                    nameId="descripcion"
+                                    value={descripcion}
+                                    onChange={onChangeDescrip}
+                                    options={{required: true}}
+                                    estilosValidar={estilosValidar}/>
+                        {/*NOTE: OBJETIVO*/}
+                        <InputTexto type="text"
+                                    tituloLabel={"Objetivo"}
+                                    placeHolder="Objetivo"
+                                    nameId="objetivo"
+                                    value={objetivo}
+                                    onChange={onChangeObjetivo}
+                                    options={{required: true}}
+                                    estilosValidar={estilosValidar}/>
+                        {/*NOTE: Dropwdown LIDER*/}
+                        <div className='form-control-proy' style={{marginBottom: "20px"}}>
+                            <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
+                                <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Líder</InputLabel>
+                                <Select className='dropdown-proyectos'
+                                        value={lider}
+                                        onChange={onChangeLider}>
+                                    <MenuItem value=""><em>Ninguno</em></MenuItem>
+                                    {
+                                        lideres.map(lista=>(
+                                            <MenuItem value={lider}>{lista.nombre}</MenuItem>
+                                            
+                                        ))
+                                    }
+                                </Select>
+                            </FormControl>
+                        </div>
+                        {/*NOTE: Dropwdown CATEGORIAS*/}
+                        <div className='form-control-proy' style={{marginTop: "20px", marginBottom: "20px"}}>
+                            <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
+                                <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Categorías</InputLabel>
+                                <Select className='dropdown-proyectos'
+                                value={categoriaId}
                                 onChange={onChangeCategoria}
-                                />
-                    <InputTexto type="text"
-                                placeHolder='Estado'
-                                value={estado}
-                                onChange={onChangeEstado}
-                                />
-                                <InputTexto type="link"
-                                placeHolder='Información Adicional'
-                                value={informacion_adicional}
-                                onChange={onChangeInfoAd}
-                                />
-                    <label>
-                        Imagen por Link
-                    </label>
-                    <InputTexto
-                        type="text" 
-                        name="image" 
-                        value={url_imagen}
-                        onChange={onChangeImagenUrl}
-                    />
-                    <div className="btn-crear-container">
-                        <input type='submit' value='GUARDAR CAMBIOS' className='btn-proy-editar btn-proy-block'/>
+                                >
+                                    {
+                                    categorias.map(categ=>(
+                                        <MenuItem value={parseInt(`${categ.id}`) }>{categ.tipo}</MenuItem>
+                                    ))
+                                    }
+                                </Select>
+                            </FormControl>
+                        </div>
+                        {/*NOTE: Dropwdown ESTADO*/}
+                        <div className='form-control-proy' style={{marginTop: "20px", marginBottom: "20px"}}>
+                            <FormControl sx={{ m: 1, minWidth: 120 }} className='dropdown-proyectos'>
+                                <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Estado</InputLabel>
+                                <Select className='dropdown-proyectos'
+                                value={estadoId}
+                                onChange={onChangeEstado}>
+                                    <MenuItem value={estadoEnCursoValor}>{estadoEnCursoLabel}</MenuItem>
+                                    <MenuItem value={estadoAcabadoValor}>{estadoAcabadoLabel}</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                        {/*NOTE: INFO ADICIONAL*/}
+                        <div  style={{marginTop: "20px"}}>
+                            <InputTexto type="link"
+                                        tituloLabel="Información Adicional"
+                                        nameId="informacion_adicional" 
+                                        placeHolder='Información Adicional'
+                                        value={informacion_adicional}
+                                        onChange={onChangeInfoAd}
+                                        options={{required: true}}
+                                        estilosValidar={estilosValidar}/>
+                        </div>
+                        <InputTexto type="text" 
+                                    tituloLabel="Imagen por Link"
+                                    nameId="url_imagen" 
+                                    value={url_imagen}
+                                    onChange={onChangeImagenUrl}
+                                    options={{required: true}}
+                                    estilosValidar={estilosValidar}/>
+                        <div className="btn-crear-container">
+                            <input type='submit' value='GUARDAR CAMBIOS' className='btn-proy-editar btn-proy-block'/>
+                        </div>
                     </div>
-                </div>
-            </form>
-            
+                </form>
+            </FormProvider>
         </div>);
         
     // RENDER:
@@ -227,15 +261,3 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
 }
 
 export default FormularioEditarProyecto
-
-/*
-<label>
-                        Imagen por archivo
-                    </label>
-                    <InputTexto
-                        type="file" 
-                        name="image" 
-                        value={image}
-                        onChange={onChangeImagen}
-                    />
-*/
