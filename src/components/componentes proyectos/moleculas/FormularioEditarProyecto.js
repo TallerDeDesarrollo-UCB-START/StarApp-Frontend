@@ -34,13 +34,13 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
     const [lider, setLider] = useState(proyecto.lider)
     const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
-    const [url_imagen, setImagenUrl] = useState('')
+    const [url_imagen, setImagenUrl] = useState(proyecto.url_imagen)
     // States dropwdown values
     const [estadoId, setEstadoId] = useState(findValue("estado"))
-    const [categoriaId, setCategoriaId] = useState(parseInt(categorias[0].id))
+    const [categoriaId, setCategoriaId] = useState(findValue("categoria"))/*parseInt(categorias[0].id)*/
     // Modal popup styles
     const [modalStyle] = React.useState(getModalStyle);
-    
+    //alert(categoriaId)
     
 
     // FUNCIONES:
@@ -88,6 +88,12 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             const selectEstado = proyecto.estado===true?  estadoEnCursoValor : estadoAcabadoValor
             return selectEstado
         }
+        if(tipo === "categoria")
+        {
+            const foundCategoria = categorias.find(catego => catego.tipo === proyecto.categoria)
+            const selectCategoria = parseInt(foundCategoria.id)
+            return selectCategoria
+        }
         //NOTE: Completar con los ifs que hagan falta para diferentes values de  dropdowns
     }
     
@@ -97,7 +103,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     }
 
     const onSubmit2 = data => {
-        debugger
+        //debugger
         console.log(data)
         const estadoActual = estados.find(estado => estado.value === estadoId)
         const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoriaId)
