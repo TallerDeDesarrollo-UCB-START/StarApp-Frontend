@@ -10,11 +10,11 @@
 }
 .card-text-detail{
   font-size: 18px;
-  margin-left: 3%;
+  /*margin-left: 3%;*/
   padding-bottom: 0.1px;
 }
  .card-title-detail{
-   padding-left: 4%;
+   padding-left: 0%;
    padding-bottom: 5px;
 }
 

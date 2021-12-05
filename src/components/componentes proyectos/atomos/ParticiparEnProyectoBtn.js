@@ -10,9 +10,9 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 const ParticipateButton = withStyles((theme) => ({
     root: {
         backgroundColor: "#269BD5",
-        height: 51,
+        height: "100%",//51, heigth: 51 NOTE: perjudica a la vista individual del ptoyecto.
         width: 119,
-        fontSize: 16,
+        //fontSize: 16, NOTE: perjudica a la vista individual del ptoyecto.
     },
 }))(Button);
 
