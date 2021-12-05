@@ -15,17 +15,30 @@ function SnackBarProyectos({infoSnackbar}) {
         severity:"success",
         afterClose:()=>{},
     })
-    const [snackbarStatus, setSnackbarStatus] = useState({
+    /*const [snackbarStatus, setSnackbarStatus] = useState({
         message: infoSnackbar && infoSnackbar.message,
         active: infoSnackbar && infoSnackbar.active,//false,
         status: infoSnackbar && infoSnackbar.status,
-    })
+    })*/
 
     const mountedRef = useRef(false)
 
     useEffect(() => {
         mountedRef.current = true
-        //debugger
+
+        const activateSnackBar = () => {
+            let activar = true//snackbarStatus.active
+            let estado = infoSnackbar && infoSnackbar.status//snackbarStatus.status
+            let mensaje = infoSnackbar && infoSnackbar.message//snackbarStatus.message
+            
+            if(!activar) return
+            if(estado){
+                activeSnackbar(mensaje, "success", ()=>{})
+            } else{
+                activeSnackbar(mensaje, "error", ()=>{})
+            }
+            //asignarSnackbarStatus(mensaje, false, estado); // reset para que no reaparezca indebidamente
+        }
         activateSnackBar()
         
         return () => {
@@ -33,30 +46,17 @@ function SnackBarProyectos({infoSnackbar}) {
         }
     }, [infoSnackbar])
 
-    function asignarSnackbarStatus(message, active, status){
+    /*function asignarSnackbarStatus(message, active, status){
         setSnackbarStatus({
             message: message,
             active: active,
             status: status
         })
-    }
+    }*/
     const activeSnackbar = (message, severity, afterClose)=>{
         setSnackbar({message, severity, afterClose, active:true})
     }
-    const activateSnackBar = () => {
-        //debugger
-        let activar = true//snackbarStatus.active
-        let estado = infoSnackbar && infoSnackbar.status//snackbarStatus.status
-        let mensaje = infoSnackbar && infoSnackbar.message//snackbarStatus.message
-        
-        if(!activar) return
-        if(estado){
-            activeSnackbar(mensaje, "success", ()=>{})
-        } else{
-            activeSnackbar(mensaje, "error", ()=>{})
-        }
-        asignarSnackbarStatus(mensaje, false, estado); // reset para que no reaparezca indebidamente
-    }
+    
 
     return (
         <Box >
