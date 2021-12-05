@@ -17,8 +17,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const methods = useForm()
     // CONSTANTES:
     const estados = [
-        {value: 10, label: "CONCLUIDO"},
-        {value: 20, label: "EN CURSO"},
+        {value: 10, label: "CONCLUIDO", bool: false},
+        {value: 20, label: "EN CURSO", bool: true}
     ]
     const estadoAcabadoValor = estados[0].value
     const estadoAcabadoLabel = estados[0].label
@@ -31,7 +31,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [fechaFin, setFechaFin] = useState(proyecto.fechaFin)
     const [titulo, setTitulo] = useState(proyecto.titulo)
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
-    const [objetivo, setObjetivo] = useState(proyecto.objetivo[0][0][0])//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
+    const [objetivo, setObjetivo] = useState(proyecto.objetivo)//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
     const [lider, setLider] = useState(proyecto.lider)
     const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
     const [url_imagen, setImagenUrl] = useState('')
@@ -102,7 +102,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         const estadoActual = estados.find(estado => estado.value === estadoId)
         const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoriaId)
         data.id = proyecto.id
-        data.estado = estadoActual.label
+        data.estado = estadoActual.bool
         data.categoria = categoriaActual.tipo
         onEditarProy(data) // callback invocation
         resetStates()
@@ -111,7 +111,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         //       Los demas campos si utilizan react-hook-form.
 
     }
-    console.log(url_imagen)
 
     // COMPONENTS:
     const botonCancelarFormulario = 
@@ -226,7 +225,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                         placeHolder='Información Adicional'
                                         value={informacion_adicional}
                                         onChange={onChangeInfoAd}
-                                        options={{required: true}}
                                         estilosValidar={estilosValidar}/>
                         </div>
                         <InputTexto type="text" 
@@ -234,7 +232,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     nameId="url_imagen" 
                                     value={url_imagen}
                                     onChange={onChangeImagenUrl}
-                                    options={{required: true}}
+                                    //options={{required: true}}
                                     estilosValidar={estilosValidar}/>
                         <div className="btn-crear-container">
                             <input type='submit' value='GUARDAR CAMBIOS' className='btn-proy-editar btn-proy-block'/>
