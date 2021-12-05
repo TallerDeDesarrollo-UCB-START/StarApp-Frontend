@@ -10,7 +10,7 @@ import { Button, Modal, FormControl, MenuItem, Select, InputLabel } from '@mater
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useForm, /*SubmitHandler,*/ FormProvider } from "react-hook-form";
-
+import DynamicDropdown from '../moleculas/DynamicDropdown'
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
 
@@ -21,9 +21,9 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         {value: 20, label: "EN CURSO", bool: true}
     ]
     const estadoAcabadoValor = estados[0].value
-    const estadoAcabadoLabel = estados[0].label
+    //const estadoAcabadoLabel = estados[0].label
     const estadoEnCursoValor = estados[1].value
-    const estadoEnCursoLabel = estados[1].label
+    //const estadoEnCursoLabel = estados[1].label
 
     // HOOKS:
     // States fields
@@ -54,7 +54,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setInfoAd('')
         setImagenUrl('')
     }
-    
     function getModalStyle() {
         const top = 50;
         const left = 50;
@@ -102,14 +101,14 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         console.log('hubo algun error')
     }
 
-    const onSubmit2 = data => {
-        //debugger
+    const onSubmit = data => {
         console.log(data)
         const estadoActual = estados.find(estado => estado.value === estadoId)
         const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoriaId)
         data.id = proyecto.id
         data.estado = estadoActual.bool
         data.categoria = categoriaActual.tipo
+
         onEditarProy(data) // callback invocation
         resetStates()
         onActivarForm() // Oculta/Activa el formulario
@@ -127,7 +126,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const body = (
         <div style={modalStyle} className="paper-crear">
             <FormProvider {...methods}>
-                <form  onSubmit={methods.handleSubmit(onSubmit2)}>
+                <form  onSubmit={methods.handleSubmit(onSubmit)}>
                     {botonCancelarFormulario}
                     {/*NOTE: FORM TITLE*/}
                     <div className="crear-container-title">
@@ -196,33 +195,21 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                             </FormControl>
                         </div>
                         {/*NOTE: Dropwdown CATEGORIAS*/}
-                        <div className='form-control-proy' style={{marginTop: "20px", marginBottom: "20px"}}>
-                            <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
-                                <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Categorías</InputLabel>
-                                <Select className='dropdown-proyectos'
-                                value={categoriaId}
-                                onChange={onChangeCategoria}
-                                >
-                                    {
-                                    categorias.map(categ=>(
-                                        <MenuItem value={parseInt(`${categ.id}`) }>{categ.tipo}</MenuItem>
-                                    ))
-                                    }
-                                </Select>
-                            </FormControl>
-                        </div>
+                        <DynamicDropdown titulo="Categorías"
+                                        elements={categorias}
+                                        value={categoriaId}
+                                        onChange={onChangeCategoria}
+                                        idField={'id'}
+                                        labelField={'tipo'}/>
+                        
                         {/*NOTE: Dropwdown ESTADO*/}
-                        <div className='form-control-proy' style={{marginTop: "20px", marginBottom: "20px"}}>
-                            <FormControl sx={{ m: 1, minWidth: 120 }} className='dropdown-proyectos'>
-                                <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Estado</InputLabel>
-                                <Select className='dropdown-proyectos'
-                                value={estadoId}
-                                onChange={onChangeEstado}>
-                                    <MenuItem value={estadoEnCursoValor}>{estadoEnCursoLabel}</MenuItem>
-                                    <MenuItem value={estadoAcabadoValor}>{estadoAcabadoLabel}</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </div>
+                        <DynamicDropdown titulo="Estados"
+                                        elements={estados}
+                                        value={estadoId}
+                                        onChange={onChangeEstado}
+                                        idField={'value'}
+                                        labelField={'label'}/>
+                        
                         {/*NOTE: INFO ADICIONAL*/}
                         <InputTexto type="link"
                                     tituloLabel="Información Adicional"
