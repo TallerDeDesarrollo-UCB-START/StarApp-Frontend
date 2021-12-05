@@ -7,6 +7,11 @@ function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, o
         control,
         formState: { errors }, } = useFormContext();
     //  console.log(value)
+    function applyErrorStyles(){
+        //NOTE: Agregar variables que conforman un className para estilos de error para
+        //       O activar alguna variable que active un mensaje de error
+        //       O hacer todo lo anterior, quizas usando useState o quizas solo const
+    }
     const validations = options? options : {}
     return (
         <Controller
@@ -25,6 +30,7 @@ function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, o
                                 value={value}
                                 onChange={onChange}
                                 options="dummy"
+                                style={{color: "black", border: "1px solid grey"}}
                                 //ref={{...register('titulo', {required: true})}}
                             />
                             {/*errors.titulo && estilosValidar()*/}

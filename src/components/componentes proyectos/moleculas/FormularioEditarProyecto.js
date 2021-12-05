@@ -224,15 +224,13 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                             </FormControl>
                         </div>
                         {/*NOTE: INFO ADICIONAL*/}
-                        <div  style={{marginTop: "20px"}}>
-                            <InputTexto type="link"
-                                        tituloLabel="Información Adicional"
-                                        nameId="informacion_adicional" 
-                                        placeHolder='Información Adicional'
-                                        value={informacion_adicional}
-                                        onChange={onChangeInfoAd}
-                                        estilosValidar={estilosValidar}/>
-                        </div>
+                        <InputTexto type="link"
+                                    tituloLabel="Información Adicional"
+                                    nameId="informacion_adicional" 
+                                    placeHolder='Información Adicional'
+                                    value={informacion_adicional}
+                                    onChange={onChangeInfoAd}
+                                    estilosValidar={estilosValidar}/>
                         <InputTexto type="text" 
                                     tituloLabel="Imagen por Link"
                                     nameId="url_imagen" 
