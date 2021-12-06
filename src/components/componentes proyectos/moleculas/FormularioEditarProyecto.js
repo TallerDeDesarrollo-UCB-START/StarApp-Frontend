@@ -40,7 +40,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [categoriaId, setCategoriaId] = useState(findValue("categoria"))/*parseInt(categorias[0].id)*/
     // Modal popup styles
     const [modalStyle] = React.useState(getModalStyle);
-    //alert(categoriaId)
     
 
     // FUNCIONES:
@@ -97,8 +96,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     }
     
     function estilosValidar(){
-        //FIXME: Falta agregar validacion con useForm para campos de texto y ver como validar dropdowns.
         console.log('hubo algun error')
+        //FIXME: Falta agregar validacion con useForm para campos de texto y ver como validar dropdowns.
     }
 
     const onSubmit = data => {
