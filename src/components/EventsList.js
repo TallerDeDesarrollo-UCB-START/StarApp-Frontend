@@ -73,7 +73,8 @@ class EventsList extends Component {
     lideres: [],
     proyectos: [],
     snackbarAbierto: false,
-    mensajeErrorEvento: "",
+    mensajeSnackbar: "",
+    severidadSnackbar: "",
   };
 
   constructor() {
@@ -265,9 +266,15 @@ class EventsList extends Component {
 
   mostrarMensajeSnackbar = (event) => {
     if (this.validarBotones(event)) {
-      this.setState({ mensajeErrorEvento: "registrada" });
+      this.setState({
+        mensajeSnackbar: "Tu participación en el evento ha sido registrada",
+        severidadSnackbar: "success",
+      });
     } else {
-      this.setState({ mensajeErrorEvento: "eliminada" });
+      this.setState({
+        mensajeSnackbar: "Tu participación en el evento ha sido eliminada",
+        severidadSnackbar: "success",
+      });
     }
   };
 
@@ -304,18 +311,19 @@ class EventsList extends Component {
           });
       } else {
         // alert("Nombre del Evento vacio");
-
-        // console.log("1");
-        this.setState({ mensajeErrorEvento: "Nombre del evento vacío" });
-        this.setState({ snackbarAbierto: true });
+        this.handleClick();
+        this.setState({
+          mensajeSnackbar: "Nombre del evento vacío",
+          severidadSnackbar: "error",
+        });
       }
     } else {
       // alert("Campos Nombre del Evento o Fecha del Evento vacio");
-      console.log("2");
+      this.handleClick();
       this.setState({
-        mensajeErrorEvento: "Nombre del Evento o Fecha del Evento vacía",
+        mensajeSnackbar: "Nombre del Evento o Fecha del Evento vacía",
+        severidadSnackbar: "error",
       });
-      this.setState({ snackbarAbierto: true });
     }
   };
 
@@ -654,12 +662,11 @@ class EventsList extends Component {
           >
             <MuiAlert
               onClose={this.handleClose}
-              severity="success"
+              severity={this.state.severidadSnackbar}
               elevation={6}
               variant="filled"
             >
-              Tu participación en el evento ha sido{" "}
-              {this.state.mensajeErrorEvento}
+              {this.state.mensajeSnackbar}
             </MuiAlert>
           </Snackbar>
         </div>
@@ -828,7 +835,7 @@ class EventsList extends Component {
           </form>
           <Snackbar
             anchorOrigin={{
-              vertical: "top",
+              vertical: "bottom",
               horizontal: "center",
             }}
             open={this.snackbarAbierto}
@@ -837,11 +844,11 @@ class EventsList extends Component {
           >
             <MuiAlert
               onClose={this.handleClose}
-              severity="error"
+              severity={this.state.severidadSnackbar}
               elevation={6}
               variant="filled"
             >
-              {this.state.mensajeErrorEvento}
+              {this.state.mensajeSnackbar}
             </MuiAlert>
           </Snackbar>
         </Modal>
