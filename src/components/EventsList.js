@@ -13,7 +13,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import GoogleCalendar from "./googleCalendar.jsx"
+import GoogleCalendar from "./googleCalendar.jsx";
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -73,7 +73,7 @@ class EventsList extends Component {
     lideres: [],
     proyectos: [],
     snackbarAbierto: false,
-    mensajeSnackbar: "",
+    mensajeErrorEvento: "",
   };
 
   constructor() {
@@ -265,9 +265,9 @@ class EventsList extends Component {
 
   mostrarMensajeSnackbar = (event) => {
     if (this.validarBotones(event)) {
-      this.setState({ mensajeSnackbar: "registrada" });
+      this.setState({ mensajeErrorEvento: "registrada" });
     } else {
-      this.setState({ mensajeSnackbar: "eliminada" });
+      this.setState({ mensajeErrorEvento: "eliminada" });
     }
   };
 
@@ -293,26 +293,30 @@ class EventsList extends Component {
 
   peticionPost = async () => {
     if (this.state.form.nombre_evento && this.state.form.fecha_evento) {
-
-      if ( this.state.form.nombre_evento.trim().length > 0 ) {
+      if (this.state.form.nombre_evento.trim().length > 0) {
         await axios
-        .post(urlCrearEvento, this.state.form)
-        .then((response) => {
-          this.insertar();
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+          .post(urlCrearEvento, this.state.form)
+          .then((response) => {
+            this.insertar();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        // alert("Nombre del Evento vacio");
+
+        // console.log("1");
+        this.setState({ mensajeErrorEvento: "Nombre del evento vacío" });
+        this.setState({ snackbarAbierto: true });
       }
-      else{
-        alert("Nombre del Evento vacio");
-      }
-      
+    } else {
+      // alert("Campos Nombre del Evento o Fecha del Evento vacio");
+      console.log("2");
+      this.setState({
+        mensajeErrorEvento: "Nombre del Evento o Fecha del Evento vacía",
+      });
+      this.setState({ snackbarAbierto: true });
     }
-    else {
-      alert("Campos Nombre del Evento o Fecha del Evento vacio")
-    }
-    
   };
 
   getLideres = async () => {
@@ -654,7 +658,8 @@ class EventsList extends Component {
               elevation={6}
               variant="filled"
             >
-              Tu participación ha sido {this.state.mensajeSnackbar}
+              Tu participación en el evento ha sido{" "}
+              {this.state.mensajeErrorEvento}
             </MuiAlert>
           </Snackbar>
         </div>
@@ -811,6 +816,7 @@ class EventsList extends Component {
               >
                 Guardar Evento{" "}
               </Button>
+
               <Button
                 className="botonCancelar"
                 onClick={() => this.cerrarModalInsertar()}
@@ -820,6 +826,24 @@ class EventsList extends Component {
               </Button>
             </div>
           </form>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            open={this.snackbarAbierto}
+            onClose={this.handleClose}
+            autoHideDuration={3000}
+          >
+            <MuiAlert
+              onClose={this.handleClose}
+              severity="error"
+              elevation={6}
+              variant="filled"
+            >
+              {this.state.mensajeErrorEvento}
+            </MuiAlert>
+          </Snackbar>
         </Modal>
       </div>
     );
