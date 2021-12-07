@@ -118,6 +118,7 @@ function VistaProyectos() {
                 body: JSON.stringify(nuevoProyecto)
             })
         const data = await response.json()
+        console.log(data)
         setProyectos([...proyectos, data])
         setActualizar(!actualizar)
     

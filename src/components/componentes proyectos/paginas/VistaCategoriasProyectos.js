@@ -19,6 +19,7 @@ function VistaCategoriasProyectos() {
 
     // Hooks:
     const [categorias, setCategorias] = useState([])
+    const [lideres, setLideres] = useState([])
     const [mostrarFormCrear, setMostrarFormCrear] = useState(false)
     
     useEffect(() => {
@@ -28,7 +29,13 @@ function VistaCategoriasProyectos() {
             const data = await response.json()
             setCategorias(data)
         }
+        const getLideres = async ()=>{
+            const lideresDelServer = await fetchLideres()
+            setLideres(lideresDelServer)
+            //console.log(lideresDelServer)
+        }
         getCategorias()
+        getLideres()
     }, [] )
 
     // Endpoint fetch
@@ -41,6 +48,20 @@ function VistaCategoriasProyectos() {
                 body: JSON.stringify(nuevoProyecto)
             })
     }
+    async function fetchLideres() {
+        const response = await fetch(URLLideres)
+        const data = await response.json()
+        let dataLider=[]
+        let index=1
+        for (let x of data ) {
+            dataLider.push({"id":`${index}`,"nombre":`${x.nombre}`})
+            index++
+            
+        }
+        //dataLider.pop()
+        console.log(dataLider)
+        return dataLider;
+    }
 
     // Methods:
     const activarFormCrear = () => {
@@ -48,7 +69,7 @@ function VistaCategoriasProyectos() {
     }
 
     // Components:
-    const FormularioCrear = mostrarFormCrear===true ? <FormularioCrearProyecto onCrearProy={crearProyecto} onActivarForm={activarFormCrear} mostrarFormCrear={mostrarFormCrear}/> : <></>
+    const FormularioCrear = mostrarFormCrear===true ? <FormularioCrearProyecto onCrearProy={crearProyecto} onActivarForm={activarFormCrear} mostrarFormCrear={mostrarFormCrear} lideres={lideres} categorias={categorias}/> : <></>
 
     return (
         <Container className={classes.container}>
@@ -60,6 +81,7 @@ function VistaCategoriasProyectos() {
 }
 
 const url = process.env.REACT_APP_API;
+const URLLideres = `${url}get_lideres`
 const URLCategorias = `${url}get_categoria_proyectos`//``http://localhost:5000/get_categorias`//`
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//
 

@@ -10,9 +10,14 @@ import { Button, Modal} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useForm, /*SubmitHandler,*/ FormProvider } from "react-hook-form";
+import DynamicDropdown from '../moleculas/DynamicDropdown'
+const estados = [
+    {value: 10, label: "CONCLUIDO", bool: false},
+    {value: 20, label: "EN CURSO", bool: true}
+]
 
 
-function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}) {
+function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear, lideres, categorias}) {
     const methods = useForm()
     // States
     const [fechaInicio, setFechaInicio] = useState('')
@@ -20,7 +25,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
     const [titulo, setTitulo] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [objetivo, setObjetivo] = useState('')
-    const [lider, setLider] = useState('')
+    const [lider, setLider] = useState(1)
     const [categoria, setCategoria] = useState('')
     const [estado, setEstado] = useState('')
     const [informacion_adicional, setInfoAd] = useState('')
@@ -83,7 +88,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear}
             //image: image,
             url_imagen: url_imagen
         }*/
-debugger
+//debugger
         onCrearProy(data) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario
@@ -94,7 +99,7 @@ debugger
     const onChangeTitulo = (e) => {setTitulo(e.target.value); removerRequerido(e.target)}
     const onChangeDescrip = (e) => {setDescripcion(e.target.value); removerRequerido(e.target)}
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value); removerRequerido(e.target)}
-    const onChangeLider = (e) => {setLider(e.target.value); removerRequerido(e.target)}
+    const onChangeLider = (e) => {setLider(e.target.value);}
     const onChangeCategoria = (e) => {setCategoria(e.target.value); removerRequerido(e.target)}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
@@ -165,12 +170,36 @@ debugger
                                     value={objetivo}
                                     onChange={onChangeObjetivo}
                                     />
-                        <InputTexto type="text"
+                        <DynamicDropdown titulo="Lideres"
+                                        elements={lideres}
+                                        value={1}
+                                        onChange={onChangeLider}
+                                        idField={'id'}
+                                        labelField={'nombre'}
+                        />
+                        <DynamicDropdown titulo="Categorias"
+                                        elements={categorias}
+                                        value={1}
+                                        onChange={onChangeCategoria}
+                                        idField={'id'}
+                                        labelField={'tipo'}
+                        />
+                        <DynamicDropdown titulo="Estados"
+                                        elements={estados}
+                                        value={10}
+                                        onChange={onChangeEstado}
+                                        idField={'value'}
+                                        labelField={'label'}/>
+
+
+                        {/*<InputTexto type="text"
                                     nameId="lider"
                                     placeHolder='Líder'
                                     value={lider}
                                     onChange={onChangeLider}
                                     />
+                        
+                         
                         <InputTexto type="text"
                                     nameId="categoria"
                                     placeHolder='Categoría'
@@ -182,7 +211,7 @@ debugger
                                     placeHolder='Estado'
                                     value={estado}
                                     onChange={onChangeEstado}
-                                    />
+                                    />*/}
                         <InputTexto type="link"
                                         tituloLabel="Información Adicional"
                                         nameId="informacion_adicional"

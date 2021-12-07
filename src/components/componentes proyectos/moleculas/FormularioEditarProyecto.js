@@ -194,22 +194,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     options={{required: true}}
                                     estilosValidar={estilosValidar}/>
                         {/*NOTE: Dropwdown LIDER*/}
-                        {/*<div className='form-control-proy' style={{marginBottom: "20px"}}>
-                            <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
-                                <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Líder</InputLabel>
-                                <Select className='dropdown-proyectos'
-                                        value={lider}
-                                        onChange={onChangeLider}>
-                                    <MenuItem value=""><em>Ninguno</em></MenuItem>
-                                    {
-                                        lideres.map(lista=>(
-                                            <MenuItem value={lider}>{lista.nombre}</MenuItem>
-                                            
-                                        ))
-                                    }
-                                </Select>
-                            </FormControl>
-                        </div>*/}
                         <DynamicDropdown titulo="Lideres"
                                         elements={lideres}
                                         value={liderId}
