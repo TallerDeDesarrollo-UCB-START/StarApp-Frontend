@@ -12,6 +12,7 @@ import "./Evento.css";
 import Chip from "@material-ui/core/Chip";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import ParticipantesEventosBtn from "./ParticipantesEventosBtn";
+import EventoImagen from "../assets/event_picture.png";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -225,9 +226,14 @@ class Evento extends Component {
           {this.state.events.map((event) => (
             <div key={event.id}>
               <div className="row no-gutters">
+                <div className="row">
+                  <h4 className="card-title">
+                    <b>{event.nombre_evento}</b>
+                  </h4>
+                </div>
                 <div className="col-auto">
                   <img
-                    src="https://jorge-zientarski.com/imgs/Events2.jpg"
+                    src={EventoImagen}
                     className="img-fluid"
                     alt=""
                     align="center"
@@ -236,14 +242,8 @@ class Evento extends Component {
 
                 <div className="col">
                   <div className="row">
-                    <h4 className="card-title">
-                      <b>{event.nombre_evento}</b>
-                    </h4>
-                  </div>
-
-                  <div className="row">
-                    <div className="col">
-                      <div className="card-block px-1">
+                    <div className="col text-1">
+                      <div className="card-block">
                         <p className="card-text">
                           <b>Hora Inicio:</b> {event.hora_inicio}
                         </p>
