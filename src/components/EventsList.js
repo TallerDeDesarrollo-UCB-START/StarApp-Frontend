@@ -364,7 +364,11 @@ class EventsList extends Component {
   }
 
   insertar = () => {
-    window.alert("Evento Guardado");
+    this.handleClick();
+    this.setState({
+      mensajeSnackbar: "Evento Guardado",
+      severidadSnackbar: "success",
+    });
     this.cerrarModalInsertar();
     window.location.reload();
   };
@@ -823,6 +827,24 @@ class EventsList extends Component {
               >
                 Guardar Evento{" "}
               </Button>
+              <Snackbar
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                open={this.snackbarAbierto}
+                onClose={this.handleClose}
+                autoHideDuration={4000}
+              >
+                <MuiAlert
+                  onClose={this.handleClose}
+                  severity={this.state.severidadSnackbar}
+                  elevation={6}
+                  variant="filled"
+                >
+                  {this.state.mensajeSnackbar}
+                </MuiAlert>
+              </Snackbar>
 
               <Button
                 className="botonCancelar"
