@@ -56,6 +56,9 @@ class Evento extends Component {
     lideres: [],
     categorias: [],
     proyectos: [],
+    snackbarAbierto: false,
+    mensajeSnackbar: "",
+    severidadSnackbar: "",
   };
 
   constructor() {
@@ -179,10 +182,15 @@ class Evento extends Component {
       });
   };
 
-  insertar = () => {
-    window.alert("Evento Actualizado");
+  insertar = async () => {
+    this.handleClick();
+
+    this.setState({
+      mensajeSnackbar: "Evento Actualizado",
+      severidadSnackbar: "success",
+    });
+    await this.sleep(2000);
     this.cerrarModalEditarEvento();
-    //window.location.href = "/eventos";
     window.location.reload();
   };
 
@@ -197,8 +205,11 @@ class Evento extends Component {
       console.log(err);
     }
   };
+  sleep = async (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
 
-  handleOpen = () => this.setState({ snackbarAbierto: true });
+  // handleOpen = () => this.setState({ snackbarAbierto: true });
   handleClose = () => this.setState({ snackbarAbierto: false });
   handleClick = () => this.setState({ snackbarAbierto: true });
 
@@ -474,6 +485,24 @@ class Evento extends Component {
               >
                 Actualizar Evento{" "}
               </Button>
+              <Snackbar
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                open={snackbarAbierto}
+                onClose={this.handleClose}
+                autoHideDuration={3000}
+              >
+                <MuiAlert
+                  onClose={this.handleClose}
+                  severity={this.state.severidadSnackbar}
+                  elevation={6}
+                  variant="filled"
+                >
+                  {this.state.mensajeSnackbar}
+                </MuiAlert>
+              </Snackbar>
               <Button
                 className="botonCancelar"
                 onClick={() => this.cerrarModalEditarEvento()}

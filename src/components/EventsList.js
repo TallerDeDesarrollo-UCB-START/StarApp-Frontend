@@ -363,12 +363,13 @@ class EventsList extends Component {
     this.setState({ modalInsertar: false });
   }
 
-  insertar = () => {
+  insertar = async () => {
     this.handleClick();
     this.setState({
       mensajeSnackbar: "Evento Guardado",
       severidadSnackbar: "success",
     });
+    await this.sleep(2000);
     this.cerrarModalInsertar();
     window.location.reload();
   };
