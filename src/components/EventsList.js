@@ -586,6 +586,12 @@ class EventsList extends Component {
                           onClick={() => {
                             this.eliminarParticipacion(event);
                           }}
+                          style={{
+                            display:
+                              this.state.botonMostrarEventosArchivados === true
+                                ? "block"
+                                : "none",
+                          }}
                         >
                           {" "}
                           Eliminar Participacion
