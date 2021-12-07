@@ -79,7 +79,16 @@ function VistaProyectos() {
     async function fetchLideres() {
         const response = await fetch(URLLideres)
         const data = await response.json()
-        return data;
+        let dataLider=[]
+        let index=1
+        for (let x of data ) {
+            dataLider.push({"id":`${index}`,"nombre":`${x.nombre}`})
+            index++
+            
+        }
+        //dataLider.pop()
+        console.log(dataLider)
+        return dataLider;
     }
 
     /*async function fetchProyectosPasados() {

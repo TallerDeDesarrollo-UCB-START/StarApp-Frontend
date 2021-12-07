@@ -38,6 +38,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     // States dropwdown values
     const [estadoId, setEstadoId] = useState(findValue("estado"))
     const [categoriaId, setCategoriaId] = useState(findValue("categoria"))/*parseInt(categorias[0].id)*/
+    const [liderId, setLiderId] = useState(findValue("lider"))/*parseInt(categorias[0].id)*/
     // Modal popup styles
     const [modalStyle] = React.useState(getModalStyle);
     
@@ -75,7 +76,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeTitulo = (e) => {setTitulo(e.target.value)}
     const onChangeDescrip = (e) => {setDescripcion(e.target.value)}
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value)}
-    const onChangeLider = (e) => {setLider(e.target.value)}
+    const onChangeLider = (e) => {setLiderId(e.target.value)}
     const onChangeCategoria = (e) => {setCategoriaId(e.target.value)}
     const onChangeEstado = (e) => {setEstadoId(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
@@ -92,6 +93,19 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             const selectCategoria = parseInt(foundCategoria.id)
             return selectCategoria
         }
+        if(tipo === "lider")
+        {
+            //debugger
+            const foundLider = lideres.find(lid=> lid.nombre === proyecto.lider)
+            if (foundLider)
+            {
+                const selectLider = parseInt(foundLider.id)
+                return selectLider
+
+            }
+            
+            return 1    
+        }
         //NOTE: Completar con los ifs que hagan falta para diferentes values de  dropdowns
     }
     
@@ -101,12 +115,15 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     }
 
     const onSubmit = data => {
+        debugger
         console.log(data)
         const estadoActual = estados.find(estado => estado.value === estadoId)
         const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoriaId)
+        const liderActual = lideres.find(lid=> lid.id===liderId)
         data.id = proyecto.id
         data.estado = estadoActual.bool
         data.categoria = categoriaActual.tipo
+        data.lider = liderActual.nombre
 
         onEditarProy(data) // callback invocation
         resetStates()
@@ -177,7 +194,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     options={{required: true}}
                                     estilosValidar={estilosValidar}/>
                         {/*NOTE: Dropwdown LIDER*/}
-                        <div className='form-control-proy' style={{marginBottom: "20px"}}>
+                        {/*<div className='form-control-proy' style={{marginBottom: "20px"}}>
                             <FormControl sx={{ m: 1, minWidth: 120 }}className='dropdown-proyectos'>
                                 <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>Líder</InputLabel>
                                 <Select className='dropdown-proyectos'
@@ -192,7 +209,14 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     }
                                 </Select>
                             </FormControl>
-                        </div>
+                        </div>*/}
+                        <DynamicDropdown titulo="Lideres"
+                                        elements={lideres}
+                                        value={liderId}
+                                        onChange={onChangeLider}
+                                        idField={'id'}
+                                        labelField={'nombre'}
+                        />
                         {/*NOTE: Dropwdown CATEGORIAS*/}
                         <DynamicDropdown titulo="Categorías"
                                         elements={categorias}
