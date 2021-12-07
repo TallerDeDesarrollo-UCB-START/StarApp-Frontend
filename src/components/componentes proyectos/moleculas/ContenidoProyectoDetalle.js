@@ -95,7 +95,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
         }
         
         colocarParticipacion()
-
+        
         
         return () => {
             mountedRef.current = false
@@ -145,28 +145,28 @@ function ContenidoProyectoDetalle ({proyecto}) {
 
     //asignarParticipacion()
     const botonEliminarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-                                        <EliminarProjectoBtn proyecto={proyecto}
-                                                            onEliminarProy={eliminarProyecto}
-                                                            onClick={() => history.goBack()}/>
-                                    </PuertaPermisos>
+                                    <EliminarProjectoBtn proyecto={proyecto}
+                                                        onEliminarProy={eliminarProyecto}
+                                                        onClick={() => history.goBack()}/>
+                                </PuertaPermisos>
     const botonCancelarParticipacion = participacion === true?
-    <CancelarParticipacionBtn proyecto={proyecto} 
-                            onCancelarParticipacion={onCancelarParticipacion} 
-                            onGetParticipacion={onGetParticipacion}
-                            onAsignarParticipacion={asignarParticipacion}
-                            onAsignarSnackbarStatus={asignarSnackbarStatus}
-                            onAvisoAccion={avisoAccion}
-                            />
+                                <CancelarParticipacionBtn proyecto={proyecto} 
+                                                        onCancelarParticipacion={onCancelarParticipacion} 
+                                                        onGetParticipacion={onGetParticipacion}
+                                                        onAsignarParticipacion={asignarParticipacion}
+                                                        onAsignarSnackbarStatus={asignarSnackbarStatus}
+                                                        onAvisoAccion={avisoAccion}
+                                                        />
     : ''
     const botonParticiparProyecto = participacion === false?
-                            <ParticiparEnProyectoBtn proyecto={proyecto} 
-                                                    onPartiparProy={participarEnProyecto} 
-                                                    onGetParticipacion={onGetParticipacion}
-                                                    onAsignarParticipacion={asignarParticipacion}
-                                                    onAsignarSnackbarStatus={asignarSnackbarStatus}
-                                                    onAvisoAccion={avisoAccion}
-                                                    />
-                            : ''
+                                <ParticiparEnProyectoBtn proyecto={proyecto} 
+                                                        onPartiparProy={participarEnProyecto} 
+                                                        onGetParticipacion={onGetParticipacion}
+                                                        onAsignarParticipacion={asignarParticipacion}
+                                                        onAsignarSnackbarStatus={asignarSnackbarStatus}
+                                                        onAvisoAccion={avisoAccion}
+                                                        />
+                                : ''
 
     const snackBarComponent = activarSnackbar && activarSnackbar === true?
                                 <SnackBarProyectos infoSnackbar={infoSnackbar}/>

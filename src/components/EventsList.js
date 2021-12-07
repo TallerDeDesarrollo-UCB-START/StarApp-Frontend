@@ -85,6 +85,7 @@ class EventsList extends Component {
     this.getLideres();
     this.getProyectos();
     this.active = false;
+    this.selectedEvent = {};
   }
 
   abrirModal = () => {
@@ -227,6 +228,7 @@ class EventsList extends Component {
   mensajeConfirmacionParticipacion = async (event) => {
     this.handleClick(); //abre el snackbar
     await this.sleep(2000);
+    window.location.reload();
   };
 
   //Funciones pertenecientes a Eliminacion Participacion
@@ -568,6 +570,7 @@ class EventsList extends Component {
                           onClick={() => {
                             this.postParticipacion(event);
                             this.active = true;
+                            this.selectedEvent = event;
                           }}
                         >
                           {" "}
@@ -818,7 +821,6 @@ class EventsList extends Component {
             </div>
           </form>
         </Modal>
-        <GoogleCalendar eventData = {this.state.events[0]} active = {this.active}></GoogleCalendar>
       </div>
     );
   }
