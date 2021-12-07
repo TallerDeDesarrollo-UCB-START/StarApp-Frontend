@@ -27,8 +27,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
 
     // HOOKS:
     // States fields
-    const [fechaInicio, setFechaInicio] = useState(proyecto.fechaInicio)
-    const [fechaFin, setFechaFin] = useState(proyecto.fechaFin)
+    const [fechaInicio, setFechaInicio] = useState(findValue("fechaInicio").substring(0,10))
+    const [fechaFin, setFechaFin] = useState(proyecto.fecha_fin)
     const [titulo, setTitulo] = useState(proyecto.titulo)
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
@@ -99,12 +99,17 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             const foundLider = lideres.find(lid=> lid.nombre === proyecto.lider)
             if (foundLider)
             {
-                const selectLider = parseInt(foundLider.id)
+                const selectLider = foundLider.id
                 return selectLider
 
             }
             
-            return 1    
+            return 1  
+        }
+        if(tipo === "fechaInicio")
+        {
+            const mapFechaInicio = proyecto.fecha_inicio
+            return mapFechaInicio
         }
         //NOTE: Completar con los ifs que hagan falta para diferentes values de  dropdowns
     }
