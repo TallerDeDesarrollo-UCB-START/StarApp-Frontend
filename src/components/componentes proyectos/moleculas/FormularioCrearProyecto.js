@@ -25,9 +25,9 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const [titulo, setTitulo] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [objetivo, setObjetivo] = useState('')
-    const [lider, setLider] = useState(1)
-    const [categoria, setCategoria] = useState(1)
-    const [estado, setEstado] = useState(10)
+    const [lider, setLider] = useState('1')
+    const [categoria, setCategoria] = useState('1')
+    const [estado, setEstado] = useState(20)
     const [informacion_adicional, setInfoAd] = useState('')
     //const [image, setImagen] = useState('')
     const [url_imagen, setImagenUrl] = useState('')
@@ -70,8 +70,8 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
 
     const onSubmit = (data) => {
         debugger
-        const estadoActual = estados.find(estado => estado.value === estado)
-        const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoria)
+        const estadoActual = estados.find(est => est.value === estado)
+        const categoriaActual = categorias.find(catego => catego.id === categoria)
         const liderActual = lideres.find(lid=> lid.id===lider)
         data.estado = estadoActual.bool
         data.categoria = categoriaActual.tipo
