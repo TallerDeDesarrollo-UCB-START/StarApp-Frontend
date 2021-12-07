@@ -26,8 +26,8 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const [descripcion, setDescripcion] = useState('')
     const [objetivo, setObjetivo] = useState('')
     const [lider, setLider] = useState(1)
-    const [categoria, setCategoria] = useState('')
-    const [estado, setEstado] = useState('')
+    const [categoria, setCategoria] = useState(1)
+    const [estado, setEstado] = useState(10)
     const [informacion_adicional, setInfoAd] = useState('')
     //const [image, setImagen] = useState('')
     const [url_imagen, setImagenUrl] = useState('')
@@ -69,6 +69,13 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     }
 
     const onSubmit = (data) => {
+        debugger
+        const estadoActual = estados.find(estado => estado.value === estado)
+        const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoria)
+        const liderActual = lideres.find(lid=> lid.id===lider)
+        data.estado = estadoActual.bool
+        data.categoria = categoriaActual.tipo
+        data.lider = liderActual.nombre
         /*event.preventDefault() // To avoid submitting to an actual page
         const lideres = [lider]
         const objetivos = [objetivo]
@@ -88,7 +95,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
             //image: image,
             url_imagen: url_imagen
         }*/
-//debugger
+//
         onCrearProy(data) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario
@@ -100,7 +107,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const onChangeDescrip = (e) => {setDescripcion(e.target.value); removerRequerido(e.target)}
     const onChangeObjetivo = (e) => {setObjetivo(e.target.value); removerRequerido(e.target)}
     const onChangeLider = (e) => {setLider(e.target.value);}
-    const onChangeCategoria = (e) => {setCategoria(e.target.value); removerRequerido(e.target)}
+    const onChangeCategoria = (e) => {setCategoria(e.target.value);}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
     //const onChangeImagen = (e) => {setImagen(e.target.value)}
@@ -172,21 +179,21 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     />
                         <DynamicDropdown titulo="Lideres"
                                         elements={lideres}
-                                        value={1}
+                                        value={lider}
                                         onChange={onChangeLider}
                                         idField={'id'}
                                         labelField={'nombre'}
                         />
                         <DynamicDropdown titulo="Categorias"
                                         elements={categorias}
-                                        value={1}
+                                        value={categoria}
                                         onChange={onChangeCategoria}
                                         idField={'id'}
                                         labelField={'tipo'}
                         />
                         <DynamicDropdown titulo="Estados"
                                         elements={estados}
-                                        value={10}
+                                        value={estado}
                                         onChange={onChangeEstado}
                                         idField={'value'}
                                         labelField={'label'}/>
