@@ -82,7 +82,7 @@ function VistaProyectos() {
         let dataLider=[]
         let index=1
         for (let x of data ) {
-            dataLider.push({"id":index,"nombre":`${x.nombre}`})
+            dataLider.push({"id": index,"nombre":`${x.nombre}`})
             index++
             
         }
