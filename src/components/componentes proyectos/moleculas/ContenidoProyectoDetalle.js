@@ -9,7 +9,7 @@ import './ContenidoProyectoDetalle.css';
 import { Box } from '@material-ui/core';
 import { Switch } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
-import EventosProximos from '../../Home/EventosProximos';
+import EventosProyecto from '../paginas/EventosProyecto';
 // Permisos/Roles:
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
@@ -38,7 +38,6 @@ function ContenidoProyectoDetalle ({proyecto}) {
                 body: JSON.stringify(proyectoEditar)
             })
         const data = await response.json()    
-        console.log(data)
     }
 
      const switchListaParticipantes = proyecto.visualizar === true?
@@ -204,7 +203,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
                 {botonEliminarProyecto}
             </BoxButtons>
             <h2 className="titleEventos">Eventos</h2>
-            <EventosProximos id={idUser} title={false}/>
+            <EventosProyecto id={proyecto.id} title={false}/>
             {listaPartipantes}
             {switchListaParticipantes}
             {snackBarComponent}
@@ -223,3 +222,4 @@ const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/partic
 const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 
 export default ContenidoProyectoDetalle
+
