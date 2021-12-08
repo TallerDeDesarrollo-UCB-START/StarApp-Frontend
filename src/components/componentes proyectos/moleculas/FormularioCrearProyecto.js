@@ -69,14 +69,33 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     }
 
     const onSubmit = (data) => {
-        debugger
+        //debugger
         const estadoActual = estados.find(est => est.value === estado)
         const categoriaActual = categorias.find(catego => catego.id === categoria)
         const liderActual = lideres.find(lid=> lid.id===lider)
         data.estado = estadoActual.bool
         data.categoria = categoriaActual.tipo
         data.lider = liderActual.nombre
-        
+        /*event.preventDefault() // To avoid submitting to an actual page
+        const lideres = [lider]
+        const objetivos = [objetivo]
+        if (validarCampos(event) === false) {
+            return
+        }
+        const nuevoProyecto = {
+            fechaInicio: fechaInicio,
+            fechaFin: fechaFin,
+            titulo: titulo,
+            descripcion: descripcion,
+            objetivo: objetivos,
+            lider: lideres,
+            estado: true,
+            categoria: categoria,
+            informacion_adicional: informacion_adicional,
+            //image: image,
+            url_imagen: url_imagen
+        }*/
+//
         onCrearProy(data) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario
@@ -178,6 +197,28 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                         onChange={onChangeEstado}
                                         idField={'value'}
                                         labelField={'label'}/>
+
+
+                        {/*<InputTexto type="text"
+                                    nameId="lider"
+                                    placeHolder='Líder'
+                                    value={lider}
+                                    onChange={onChangeLider}
+                                    />
+                        
+                         
+                        <InputTexto type="text"
+                                    nameId="categoria"
+                                    placeHolder='Categoría'
+                                    value={categoria}
+                                    onChange={onChangeCategoria}
+                                    />
+                        <InputTexto type="text"
+                                    nameId="estado"
+                                    placeHolder='Estado'
+                                    value={estado}
+                                    onChange={onChangeEstado}
+                                    />*/}
                         <InputTexto type="link"
                                         tituloLabel="Información Adicional"
                                         nameId="informacion_adicional"
