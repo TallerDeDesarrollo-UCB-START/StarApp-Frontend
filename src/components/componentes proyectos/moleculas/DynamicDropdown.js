@@ -20,7 +20,7 @@ function DynamicDropdown({ elements, value, onChange, idField, labelField, titul
                     >
                         {
                         elements.map(element => (
-                            <MenuItem value={ getElementId(element) }>{element[labelField]}</MenuItem>
+                            <MenuItem key={getElementId(element)} value={ getElementId(element) }>{element[labelField]}</MenuItem>
                         ))
                         }
                     </Select>

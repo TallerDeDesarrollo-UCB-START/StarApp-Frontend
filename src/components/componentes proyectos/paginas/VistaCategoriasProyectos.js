@@ -59,7 +59,7 @@ function VistaCategoriasProyectos() {
             
         }
         //dataLider.pop()
-        console.log(dataLider)
+        //console.log(dataLider)
         return dataLider;
     }
 

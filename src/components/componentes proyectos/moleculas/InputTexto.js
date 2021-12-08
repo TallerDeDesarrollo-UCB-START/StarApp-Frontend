@@ -22,7 +22,7 @@ function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, o
                     <>
                         <InputLabel style={{fontSize: "17px", padding:"10px 0px 0px 10px"}}>{tituloLabel}</InputLabel>
                         <div className='form-control-proy'>
-                            <input  validations
+                            <input  
                                 {...field}
                                 {...register(`${nameId}`, validations)}
                                 type={type}
