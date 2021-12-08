@@ -83,15 +83,25 @@ Comandos adicionales crear evento
  
  # Breve explicacion para el agregado de nueva funcionalidad
     **Proyectos**
-    En el caso de que se quiera implementar un nuevo procedimiento, se debe tomar en cuenta la funcionalidad que será implementada y que rol de usuario podrá tener acceso a ella.
+    En el caso de que se quiera implementar un nuevo procedimiento, se debe tomar en cuenta la funcionalidad que será implementada
+    y que rol de usuario podrá tener acceso a ella.
     Por ejemplo, se conoce que el Core team tiene el acceso total a la aplicación al ser un superusuario dentro de la misma, 
     el Líder tiene acceso al CRUD de Eventos pero no al de Proyectos y
     el Voluntario únicamente tiene acceso a poder ingresar a la aplicación para participar dentro de los eventos y proyectos existentes. 
-    Por este motivo, se creó la Puerta de Permisos.
+    Por este motivo, se creó el componente "PuertaPermisos.js".
+    Para usar "PuertaPermisos" se debe importar: "PuertaPermisos" y los "SCOPES" de "map-permisos" en el componente en el que será usado.
+    (Ver "ContenidoProyecto.js" como ejemplo)
+    
     Como primer componente se debe crear el "atomo" a utilizar.
     Este átomo se pasa por medio de import a las "moleculas".
     Las moleculas reciben el atomo, y son llamadas a los "organismos".
     Los organismos son llamadas a las páginas.
+    (Se puede revisar la metodología para estructurar componentes se llama "Atomic Design", revisar el siguiente enlace:
+    https://andela.com/insights/structuring-your-react-application-atomic-design-principles/ )
+    
+    En el caso de que se quiera otorgar permisos o roles, se debe incluir en "map-permisos.js"
+    
+    El consumo de Endpoints se hace desde los componentes "padre" de la carpeta de "componentes proyectos/paginas" y los datos consumidos y callbacks de funciones son enviados a través de props de react hacia los componentes "hijos" que necesiten los datos y callbacks.
     
     **Eventos**
     Crear un nuevo componente con la extensión ".jsx" y se llama en el archivo "EventsList.js"
