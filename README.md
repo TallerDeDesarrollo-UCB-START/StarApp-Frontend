@@ -9,7 +9,7 @@
 
 ```sh
 Abrir una ventana de comandos CMD
-Ejecutar los siguientes comandos para verificar la instalacion
+Ejecutar los siguientes comandos para verificar la instalación
     node --version
     npm --version
 Crear un proyecto con React Js
@@ -26,16 +26,18 @@ Comandos adicionales crear evento
     Material-ui v4.
     React
     Firebase
-    axios
+    Axios
     CSS
     Javascript
     final-form
     xlsx
     date-fns
     country-list-spanish
-    ... (grupo 1 y 3)
-
-
+    
+    react-export-excel
+    react-hook-form v7
+    reactstrap
+    
 # Estructura de Carpetas y Folders
 - build
 
@@ -45,13 +47,17 @@ Comandos adicionales crear evento
 
 - src
 
-    - **assets e images**: Imagenes necesarias, como las insignias, el logo del proyecto. Aqui se colocan las imagenes necesarias.
+    - **assets e images**: Imágenes necesarias, como las insignias, el logo del proyecto. Aquí se colocan las imágenes necesarias.
 
-    - **components**: El proyecto esta organizado por componentes, en los components se pueden colocar los archivos de las cuales esta conformado el proyecto.
-        - **componentes proyectos**: (grupo 1)
-        - **CrearEvento**: (grupo 3)
+    - **components**: El proyecto está organizado por componentes, en los components se pueden colocar los archivos de las cuales está conformado el proyecto.
+        - **componentes proyectos**: (ordenadas de mayor a menor tamaño)
+               - paginas: Este folder contiene las vistas de las páginas de proyectos dependiendo del rol.
+               - organismos: Este folder contiene varios archivos que se pueden dividir en el Body y el Header de cada página dependiendo del rol. También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios dependiendo del rol.
+               - moleculas: Este folder contiene todos los archivos que contienen los organismos como ser los Banners de cada vista, el contenido de los mismos, los formularios de crear y editar, entre otros.
+               - atomos: Este folder contiene los componentes más pequeños como ser los botones.
+        - **CrearEvento**: Este folder contiene el componente "crearEvento.jsx" y el estilo del componente.
         - **footer**: el footer inicial actualmente no usado
-        - **Formulario-evento.component**: (grupo 3)
+        - **Formulario-evento.component**: Este folder contiene los archivos para el componente del Formulario de Crear Evento, que también es reutilizado en el Formulario de Editar Evento.
         - **Header**: 
             - header.jsx: contiene el componente principal de header
         - **Home**: 
@@ -74,3 +80,18 @@ Comandos adicionales crear evento
     La Store sería lo más parecido al modelo de la aplicación. Guarda los datos y estado de la aplicación.
     No hay métodos en la Store que permitan modificar los datos en ella, eso se hace a través de dispatchers y acciones. 
     React utiliza JSX que permite incrustar etiquetas XML/HTML en el archivo de JavaScript, esto implica que JSX es una extensión de sintaxis para JavaScript es decir que en el mismo archivo JSX esistira codigo html javaScript y tambien css. Se tiene que usar un compilador como Babel, que recoge nuestro código JSX y lo compila para generar JavaScript que los navegadores puedan entender.
+ 
+ # Breve explicacion para el agregado de nueva funcionalidad
+    **Proyectos**
+    En el caso de que se quiera implementar un nuevo procedimiento, se debe tomar en cuenta la funcionalidad que será implementada y que rol de usuario podrá tener acceso a ella.
+    Por ejemplo, se conoce que el Core team tiene el acceso total a la aplicación al ser un superusuario dentro de la misma, 
+    el Líder tiene acceso al CRUD de Eventos pero no al de Proyectos y
+    el Voluntario únicamente tiene acceso a poder ingresar a la aplicación para participar dentro de los eventos y proyectos existentes. 
+    Por este motivo, se creó la Puerta de Permisos.
+    Como primer componente se debe crear el "atomo" a utilizar.
+    Este átomo se pasa por medio de import a las "moleculas".
+    Las moleculas reciben el atomo, y son llamadas a los "organismos".
+    Los organismos son llamadas a las páginas.
+    
+    **Eventos**
+    Crear un nuevo componente con la extensión ".jsx" y se llama en el archivo "EventsList.js"
