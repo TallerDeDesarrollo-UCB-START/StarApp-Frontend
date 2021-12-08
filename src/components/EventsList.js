@@ -497,6 +497,7 @@ class EventsList extends Component {
               })}
             </select>
           </div>
+          <br/>
           <div style={{ display: "flex",}}>
             {rolUser !== "voluntario" ? (
               <Fragment>
@@ -549,6 +550,16 @@ class EventsList extends Component {
                       display: this.state.botonMostrarEventosArchivados
                         ? "block"
                         : "none",
+
+                      position: "absolute",
+                      top:"30%", 
+                      right: "18%",
+                      marginLeft: "auto",
+                      borderRadius: 4,
+                      height:51,
+                      backgroundColor: "#269bd5",
+                      fontSize: "16px",
+                      margin:"8px"
                     }}
                     onClick={() => this.getEventsArchivados()}
                   >
