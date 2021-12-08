@@ -562,9 +562,9 @@ class EventsList extends Component {
                 display: this.state.botonMostrarEventosNoArchivados
                   ? "block"
                   : "none",
-                  position: "absolute",
-                      top:300,
+                  position: "absolute",                      
                       right: 100,
+                      top:300,
                       borderRadius: 4,
                       height:51,
                       backgroundColor: "#269bd5",
