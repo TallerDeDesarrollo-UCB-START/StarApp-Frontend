@@ -6,7 +6,7 @@ import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
 //import { makeStyles } from '@material-ui/core/styles';
-import { Button, Modal, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core';
+import { Button, Modal } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useForm, /*SubmitHandler,*/ FormProvider } from "react-hook-form";
@@ -32,7 +32,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [titulo, setTitulo] = useState(proyecto.titulo)
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
-    const [lider, setLider] = useState(proyecto.lider)
+    //const [lider, setLider] = useState(proyecto.lider)
     const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
     const [url_imagen, setImagenUrl] = useState(proyecto.url_imagen)
     // States dropwdown values
@@ -50,7 +50,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setTitulo('')
         setDescripcion('')
         setObjetivo('')
-        setLider('')
+        //setLider('')
         setInfoAd('')
         setImagenUrl('')
     }
@@ -95,7 +95,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         }
         if(tipo === "lider")
         {
-            //debugger
             const foundLider = lideres.find(lid=> lid.nombre === proyecto.lider)
             if (foundLider)
             {
@@ -114,14 +113,13 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         //NOTE: Completar con los ifs que hagan falta para diferentes values de  dropdowns
     }
     
-    function estilosValidar(){
-        console.log('hubo algun error')
-        //FIXME: Falta agregar validacion con useForm para campos de texto y ver como validar dropdowns.
+    function estilosValidar(campo, error){
+        console.log(`Error campo "${campo}": ${error}`)
+        //FIXME: Falta agregar estilos o algo en caso de error 
+        //       con las validaciones de hook-form para campos de texto y ver como validar dropdowns.
     }
 
     const onSubmit = data => {
-        debugger
-        console.log(data)
         const estadoActual = estados.find(estado => estado.value === estadoId)
         const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoriaId)
         const liderActual = lideres.find(lid=> lid.id===liderId)

@@ -87,7 +87,7 @@ function VistaProyectos() {
             
         }
         //dataLider.pop()
-        console.log(dataLider)
+        //console.log(dataLider)
         return dataLider;
     }
 
@@ -118,7 +118,7 @@ function VistaProyectos() {
                 body: JSON.stringify(nuevoProyecto)
             })
         const data = await response.json()
-        console.log(data)
+        //console.log(data)
         setProyectos([...proyectos, data])
         setActualizar(!actualizar)
     
