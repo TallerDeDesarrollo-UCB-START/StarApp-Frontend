@@ -8,7 +8,7 @@ import { useMediaQuery } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from "@material-ui/core/Paper";
-import ListaProyectos from "./perfil/proyectos/listaProyectos";
+import ProyectosProximos from '../components/componentes proyectos/paginas/ProyectosProximos';
 import EventosProximos from './Home/EventosProximos';
 import ListaInsignias from './perfil/insignias/listaInsignias.jsx';
 
@@ -85,7 +85,7 @@ export default function TabsProfile({ getDataProfile, handleOpenprop, sessionDat
         <EventosProximos id={sessionData.id} title={false}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ListaProyectos></ListaProyectos>
+        <ProyectosProximos title={false}></ProyectosProximos>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <ListaInsignias></ListaInsignias>
