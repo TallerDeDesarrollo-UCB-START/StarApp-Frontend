@@ -476,7 +476,7 @@ class EventsList extends Component {
               }}
               className="span-align"
             >
-              Categoria:
+                Categoria:
             </span>
             <select
               style={{
