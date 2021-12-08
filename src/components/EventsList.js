@@ -572,7 +572,12 @@ class EventsList extends Component {
                             this.active = true;
                             this.selectedEvent = event;
                           }}
-                        >
+                          style={{
+                            display:
+                              this.state.botonMostrarEventosArchivados === true
+                                ? "block"
+                                : "none",
+                          }}>
                           {" "}
                           Participar
                         </Button>
@@ -580,6 +585,12 @@ class EventsList extends Component {
                         <Button
                           onClick={() => {
                             this.eliminarParticipacion(event);
+                          }}
+                          style={{
+                            display:
+                              this.state.botonMostrarEventosArchivados === true
+                                ? "block"
+                                : "none",
                           }}
                         >
                           {" "}
