@@ -634,6 +634,27 @@ class EventsList extends Component {
             </div>
           ))}
         </Container>
+        
+        <div>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            open={snackbarAbierto}
+            onClose={this.handleClose}
+            autoHideDuration={3000}
+          >
+            <MuiAlert
+              onClose={this.handleClose}
+              severity={this.state.severidadSnackbar}
+              elevation={6}
+              variant="filled"
+            >
+              {this.state.mensajeSnackbar}
+            </MuiAlert>
+          </Snackbar>
+        </div>
 
         <Modal id="ModalFormCrearEvento" isOpen={this.state.modalInsertar}>
           <div className="Titulo">
