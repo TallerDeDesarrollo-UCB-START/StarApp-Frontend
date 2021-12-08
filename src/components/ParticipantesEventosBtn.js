@@ -7,8 +7,8 @@ import { withStyles } from "@material-ui/core";
 const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;
 const ExcelColumn = ExportExcel.ExcelColumn;
-//const url = process.env.REACT_APP_API;
-const url = `http://localhost:5000/`;
+const url = process.env.REACT_APP_API;
+// const url = `http://localhost:5000/`;
 class ListaParticipantesProyecto extends Component {
   constructor(props) {
     super(props);
