@@ -405,7 +405,10 @@ class EventsList extends Component {
       
       <div>
         <Chip
-          style={{ marginTop: "20px" }}
+          style={{ 
+            marginTop: "20px",
+            left: 300,
+          }}
           variant="outlined"
           icon={<NavigateBeforeIcon />}
           label="Volver"
@@ -500,6 +503,7 @@ class EventsList extends Component {
                 <Button
                   style={{
                     position: "absolute", 
+                    top:300,
                     right: 300,                    
                     borderRadius: 4,
                     height:51,
@@ -518,7 +522,8 @@ class EventsList extends Component {
                     display: this.state.botonMostrarEventosArchivados
                       ? "block"
                       : "none",
-                      position: "absolute", 
+                      position: "absolute",
+                      top:300, 
                       right: 100,
                       marginLeft: "auto",
                       borderRadius: 4,
@@ -557,7 +562,8 @@ class EventsList extends Component {
                 display: this.state.botonMostrarEventosNoArchivados
                   ? "block"
                   : "none",
-                  position: "absolute", 
+                  position: "absolute",
+                      top:300,
                       right: 100,
                       borderRadius: 4,
                       height:51,
@@ -627,7 +633,15 @@ class EventsList extends Component {
 
                     </Fragment>
                   ) : (
-                    <></>
+                    <Fragment>
+                      <Button style={{
+                        borderRadius: 4,
+                        height: 51,
+                        backgroundColor: "#B3DA3F",
+                        fontSize: "16px",
+                        margin: "3px"
+                      }} > <Link to={"eventos/" + event.id}>Detalles</Link> </Button>                      
+                    </Fragment>
                   )}
                 </CardBody>
               </div>
