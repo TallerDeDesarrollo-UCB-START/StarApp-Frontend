@@ -31,6 +31,7 @@ function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, o
                                 value={inputValue}
                                 onChange={onChange}
                                 style={{color: "black", border: "1px solid grey"}}
+                                autocomplete="off"
                             />
                             {/*errors.titulo && estilosValidar()*/}
                             {errors[nameId] && console.log(`Error campo "${nameId}": ${errors[nameId].type}`)}

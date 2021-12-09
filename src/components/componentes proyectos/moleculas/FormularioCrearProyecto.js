@@ -146,13 +146,13 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                     <div style={{padding: "1% 3% 0 5%"}}>
                         <InputTexto type="date"
                                     tituloLabel={"Fecha de Fin"}
-                                    nameId="fechaInicio"
+                                    nameId="fecha_fin"
                                     value={fechaInicio}
                                     onChange={onChangeFechaInicio}
                                     />
                         <InputTexto type="date"
                                     tituloLabel={"Fecha de Inicio"}
-                                    nameId="fechaFin"
+                                    nameId="fecha_inicio"
                                     value={fechaFin}
                                     onChange={onChangeFechaFin}
                                     />
