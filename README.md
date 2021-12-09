@@ -101,11 +101,13 @@ Si está usando Bootstrap 4, necesitará usar Reactstrap v8
     - **assets e images**: Imágenes necesarias, como las insignias, el logo del proyecto. Aquí se colocan las imágenes necesarias.
 
     - **components**: El proyecto está organizado por componentes, en los components se pueden colocar los archivos de las cuales está conformado el proyecto.
-        - **componentes proyectos**: (ordenadas de mayor a menor tamaño)
+        - **componentes proyectos**: (ordenadas de mayor a menor tamaño o por jerarquia de componentes)
+    
                - paginas: Este folder contiene las vistas de las páginas de proyectos dependiendo del rol.
                - organismos: Este folder contiene varios archivos que se pueden dividir en el Body y el Header de cada página dependiendo del rol. También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios dependiendo del rol.
                - moleculas: Este folder contiene todos los archivos que contienen los organismos como ser los Banners de cada vista, el contenido de los mismos, los formularios de crear y editar, entre otros.
                - atomos: Este folder contiene los componentes más pequeños como ser los botones.
+    
         - **CrearEvento**: Este folder contiene el componente "crearEvento.jsx" y el estilo del componente.
         - **footer**: el footer inicial actualmente no usado
         - **Formulario-evento.component**: Este folder contiene los archivos para el componente del Formulario de Crear Evento, que también es reutilizado en el Formulario de Editar Evento.
@@ -143,7 +145,7 @@ Si está usando Bootstrap 4, necesitará usar Reactstrap v8
 
 **Proyectos**
 
-En el caso de que se quiera implementar un nuevo procedimiento, se debe tomar en cuenta la funcionalidad que será implementada
+En el caso de que se quiera implementar un nuevo componente, se debe tomar en cuenta la funcionalidad que será implementada
 y que rol de usuario podrá tener acceso a ella.
 Por ejemplo, se conoce que el Core team tiene el acceso total a la aplicación al ser un superusuario dentro de la misma, 
 el Líder tiene acceso al CRUD de Eventos pero no al de Proyectos y
@@ -152,17 +154,19 @@ Por este motivo, se creó el componente "PuertaPermisos.js".
 Para usar "PuertaPermisos" se debe importar: "PuertaPermisos" y los "SCOPES" de "map-permisos" en el componente en el que será usado.
 (Ver "ContenidoProyecto.js" como ejemplo)
 
-Como primer componente se debe crear el "atomo" a utilizar.
-Este átomo se pasa por medio de import a las "moleculas".
-Las moleculas reciben el atomo, y son llamadas a los "organismos".
-Los organismos son llamadas a las páginas.
-(Se puede revisar la metodología para estructurar componentes se llama "Atomic Design", revisar el siguiente enlace:
+Si el componente es muy pequeño y ningun otro componente depende de este, se lo considera un "atomo".
+Las moleculas reciben atomos u otras moleculas.
+Los organismos reciben atomos moleculas u otros organismos.
+Las paginas son las vistas principales que contienen a los demas componentes y su layout base.
+Estas carpetas son para dividir los componentes semanticamente segun su jerarquia o tamaño en el virtual DOM de react.
+(Se puede revisar esta metodología de estructuracion de componentes llamada "Atomic Design". Revisar el siguiente enlace:
 https://andela.com/insights/structuring-your-react-application-atomic-design-principles/ )
 
-En el caso de que se quiera otorgar permisos o roles, se debe incluir en "map-permisos.js"
+En el caso de que se quiera agregar nuevos permisos o roles, se debe incluir en "map-permisos.js"
 
 El consumo de Endpoints se hace desde los componentes "padre" de la carpeta de "componentes proyectos/paginas" y los datos consumidos y callbacks de funciones son enviados a través de props de react hacia los componentes "hijos" que necesiten los datos y callbacks.
-
+    
+    
 **Eventos**
 
 Crear un nuevo componente con la extensión ".jsx" y se llama en el archivo "EventsList.js"
