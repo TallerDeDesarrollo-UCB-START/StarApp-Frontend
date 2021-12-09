@@ -16,7 +16,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function EliminarEvento(event) {
+//const event = props.event;
+
+const EliminarEvento = (event) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -28,13 +30,26 @@ function EliminarEvento(event) {
   };
 
   const deleteEvento = async (event) => {
-    await axios.delete(urlDeploy + "/" + event.id);
+    await axios.delete(urlDeploy + "/" + event.event.id);
+    console.log("Evento eliminado");
     handleClose();
+    window.location.reload();
   };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        style={{
+          borderRadius: 4,
+          height: 51,
+          backgroundColor: "#f00",
+          fontSize: "16px",
+          margin: "3px",
+          textTransform: 'none'
+        }}
+        onClick={handleClickOpen}
+      >
         Eliminar
       </Button>
       <Dialog
@@ -44,19 +59,26 @@ function EliminarEvento(event) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Esta seguro de eliminar este evento?"}</DialogTitle>
+        <DialogTitle></DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            El siguiente evento sera eliminado.
+            ¿Está seguro de eliminar el evento {event.event.nombre_evento}?
+          </DialogContentText>
+          <DialogContentText id="alert-dialog-slide-description">
+            Se eliminará definitivamente.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => deleteEvento(event)}>Confimar</Button>
-          <Button onClick={handleClose}>Cancelar</Button>
+          <Button variant="contained" onClick={() => deleteEvento(event)}>
+            Confimar
+          </Button>
+          <Button variant="contained" color="error" onClick={handleClose}>
+            Cancelar
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-}
+};
 
 export default EliminarEvento;
