@@ -38,7 +38,20 @@ const EliminarEvento = (event) => {
 
   return (
     <div>
-      <Button variant="contained" color="error" onClick={handleClickOpen}>Eliminar</Button>
+      <Button
+        variant="contained"
+        style={{
+          borderRadius: 4,
+          height: 51,
+          backgroundColor: "#f00",
+          fontSize: "16px",
+          margin: "3px",
+          textTransform: 'none'
+        }}
+        onClick={handleClickOpen}
+      >
+        Eliminar
+      </Button>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -56,16 +69,10 @@ const EliminarEvento = (event) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            variant="contained"
-            onClick={() => deleteEvento(event)}
-          >
+          <Button variant="contained" onClick={() => deleteEvento(event)}>
             Confimar
           </Button>
-          <Button
-            variant="contained" color="error"
-            onClick={handleClose}
-          >
+          <Button variant="contained" color="error" onClick={handleClose}>
             Cancelar
           </Button>
         </DialogActions>
