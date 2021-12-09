@@ -23,7 +23,7 @@ import {
   faInbox,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import EliminarEvento from './EliminarEvento';
+import EliminarEvento from "./EliminarEvento";
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
 const urlDeploy = `${url}eventos`;
@@ -697,18 +697,7 @@ class EventsList extends Component {
                   )}
                   {rolUser !== "voluntario" ? (
                     <Fragment>
-                      <Button
-                        style={{
-                          borderRadius: 4,
-                          height: 51,
-                          backgroundColor: "#d32f2f",
-                          fontSize: "16px",
-                          margin: "3px",
-                        }}
-                      >
-                        {" "}
-                        <EliminarEvento event = {event}/>{" "}
-                      </Button>
+                      <EliminarEvento event={event} />
                     </Fragment>
                   ) : (
                     <></>
