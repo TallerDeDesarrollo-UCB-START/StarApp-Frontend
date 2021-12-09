@@ -25,7 +25,7 @@ Comandos adicionales crear evento
 
 [![Material Version](https://img.shields.io/badge/Material--ui-v4.-blue)](https://v4.mui.com/)
 
-Los componentes para un desarrollo web más rápido y fácil. Construya su propio sistema de diseño o comience con el diseño de materiales.
+Nos ofrece componentes para un desarrollo web más rápido y fácil. Construya su propio sistema de diseño o comience con el diseño de materiales.
 
 [![React Version](https://img.shields.io/badge/React-17.0.2-9cf)](https://es.reactjs.org/)
 
@@ -33,7 +33,7 @@ React te ayuda a crear interfaces de usuario interactivas de forma sencilla. Dis
 
 [![Firebase Version](https://img.shields.io/badge/Firebase-4.5.0-yellowgreen)](https://console.firebase.google.com/u/0/?hl=es&pli=1)
 
-Herramientas de Google para compilar infraestructuras de apps, mejorar la calidad de las apps y desarrollar tu empresa
+Nos ofrece herramientas de Google para compilar infraestructuras de apps, mejorar la calidad de las apps y desarrollar tu empresa
 
 [![Axios Version](https://img.shields.io/badge/Axios-0.21.4-red)](https://www.npmjs.com/package/axios)
 
@@ -45,11 +45,11 @@ ECMAScript 2015 fue la segunda revisión importante de JavaScript.
 
 [![final-form Version](https://img.shields.io/badge/final--form-4.20.2-yellowgreen)](https://www.npmjs.com/package/final-form)
 
-Usted construye grandes formas, pero ¿sabe cómo los usuarios utilizan sus formas? Averiguar con Form Nerd! Análisis profesional del creador de Final Form.
+Para construir grandes formularios, con funcionalidades de validación usadas en este proyecto.
 
 [![xlsx Version](https://img.shields.io/badge/xlsx-0.17.2-success)](https://www.npmjs.com/package/xlsx)
 
-Analizador y escritor para varios formatos de hoja de cálculo. Puré-JS cleanroom implementación de especificaciones oficiales, documentos relacionados y archivos de prueba. Énfasis en el análisis y la escritura robustez, compatibilidad de funciones de formato cruzado con una representación JS unificada, y compatibilidad del navegador ES3/ ES5 volver a IE6.
+Analizador y escritor para varios formatos de hoja de cálculo. Puré-JS implementación de especificaciones oficiales, documentos relacionados y archivos de prueba. Énfasis en el análisis y la escritura robustez, compatibilidad de funciones de formato cruzado con una representación JS unificada, y compatibilidad del navegador ES3/ ES5 volver a IE6.
 
 [![date-fns Version](https://img.shields.io/badge/date--fns-2.24.0-important)](https://www.npmjs.com/package/date-fns)
 
@@ -81,7 +81,7 @@ Características
 
 [![reactstrap Version](https://img.shields.io/badge/reactstrap-8.10.0-reed)](https://www.npmjs.com/package/reactstrap)
 
-Componentes de reacción apátridas para Bootstrap 5.
+Componentes de React creadas para Bootstrap 5.
 
 Si está usando Bootstrap 4, necesitará usar Reactstrap v8
 
