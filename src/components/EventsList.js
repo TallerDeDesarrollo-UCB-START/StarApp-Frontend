@@ -607,6 +607,10 @@ class EventsList extends Component {
                         backgroundColor: "#269BD5",
                         fontSize: "16px",
                         margin: "3px",
+                        display:
+                              this.state.botonMostrarEventosArchivados === true
+                                ? "block"
+                                : "none",
                       }}>
                       {" "}
                       Participar
@@ -618,7 +622,11 @@ class EventsList extends Component {
                         height: 60,
                         backgroundColor: "red",
                         fontSize: "16px",
-                        margin: "3px"
+                        margin: "3px",
+                        display:
+                              this.state.botonMostrarEventosArchivados === true
+                                ? "block"
+                                : "none",
                       }} >
                       {" "}
                       No Participar
@@ -633,15 +641,6 @@ class EventsList extends Component {
                         fontSize: "16px",
                         margin: "3px"
                       }} > <Link to={"eventos/" + event.id}>Detalles</Link> </Button>
-                      <Button onClick={() => this.peticionArchivar(event)} style={{
-                        borderRadius: 4,
-                        height: 51,
-                        backgroundColor: "#269BD5",
-                        fontSize: "16px",
-                        margin: "5px"
-                      }}> Archivar  </Button>
-                      <Button color="danger" onClick={() => this.deleteEvento(event)}> <FontAwesomeIcon icon={faTrashAlt} size="2x" > </FontAwesomeIcon> </Button>
-
                     </Fragment>
                   ) : (
                     <Fragment>
@@ -654,6 +653,22 @@ class EventsList extends Component {
                       }} > <Link to={"eventos/" + event.id}>Detalles</Link> </Button>                      
                     </Fragment>
                   )}
+                  {/* {rolUser !== "voluntario" ? (
+                    <Fragment>
+                      <div className="principal">
+                        <div className="secundario">
+                          <Button
+                            color="success"
+                            onClick={() => this.abrirModal()}
+                          >
+                            Eliminar
+                          </Button>
+                        </div>
+                      </div>
+                    </Fragment>
+                  ) : (
+                    <></>
+                  )} */}
                 </CardBody>
               </div>
             </div>
