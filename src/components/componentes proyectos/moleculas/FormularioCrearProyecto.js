@@ -1,4 +1,4 @@
-// Componentes:
+// Componentes: 
 import InputTexto from '../moleculas/InputTexto'
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
