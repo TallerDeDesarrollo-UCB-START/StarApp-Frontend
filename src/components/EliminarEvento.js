@@ -20,7 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const EliminarEvento = (event) => {
   const [open, setOpen] = React.useState(false);
-  console.log(event.event.id);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -32,16 +32,13 @@ const EliminarEvento = (event) => {
   const deleteEvento = async (event) => {
     await axios.delete(urlDeploy + "/" + event.event.id);
     console.log("Evento eliminado");
-    console.log(event.event.id);
     handleClose();
     window.location.reload();
   };
 
   return (
     <div>
-      <Button onClick={handleClickOpen}>
-        Eliminar
-      </Button>
+      <Button variant="contained" color="error" onClick={handleClickOpen}>Eliminar</Button>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -49,19 +46,32 @@ const EliminarEvento = (event) => {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Esta seguro de eliminar este evento?"}</DialogTitle>
+        <DialogTitle></DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            El siguiente evento sera eliminado.
+            ¿Está seguro de eliminar el evento {event.event.nombre_evento}?
+          </DialogContentText>
+          <DialogContentText id="alert-dialog-slide-description">
+            Se eliminará definitivamente.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => deleteEvento(event)}>Confimar</Button>
-          <Button onClick={handleClose}>Cancelar</Button>
+          <Button
+            variant="contained"
+            onClick={() => deleteEvento(event)}
+          >
+            Confimar
+          </Button>
+          <Button
+            variant="contained" color="error"
+            onClick={handleClose}
+          >
+            Cancelar
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-}
+};
 
 export default EliminarEvento;

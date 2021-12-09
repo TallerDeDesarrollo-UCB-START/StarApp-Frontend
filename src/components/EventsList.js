@@ -701,7 +701,7 @@ class EventsList extends Component {
                         style={{
                           borderRadius: 4,
                           height: 51,
-                          backgroundColor: "#f00",
+                          backgroundColor: "#d32f2f",
                           fontSize: "16px",
                           margin: "3px",
                         }}
