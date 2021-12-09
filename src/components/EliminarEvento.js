@@ -16,9 +16,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function EliminarEvento(event) {
-  const [open, setOpen] = React.useState(false);
+//const event = props.event;
 
+const EliminarEvento = (event) => {
+  const [open, setOpen] = React.useState(false);
+  console.log(event.event.id);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -28,13 +30,16 @@ function EliminarEvento(event) {
   };
 
   const deleteEvento = async (event) => {
-    await axios.delete(urlDeploy + "/" + event.id);
+    await axios.delete(urlDeploy + "/" + event.event.id);
+    console.log("Evento eliminado");
+    console.log(event.event.id);
     handleClose();
+    window.location.reload();
   };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button onClick={handleClickOpen}>
         Eliminar
       </Button>
       <Dialog
