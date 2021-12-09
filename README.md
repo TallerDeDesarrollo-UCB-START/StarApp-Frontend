@@ -3,21 +3,20 @@
 <img alt="Logo" align="right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu1tfJ2N0SENG9G86Avbt6qN59vXLDAFYggA5IrspoOX4Q_irRB18laR-At4dTKZyG6VI&usqp=CAU" width="20%" />
 
 <details>
-    <summary><strong>Comandos para instalar</strong></summary>
+  <summary><strong>Comandos para Inicializar</strong></summary>
 
-Abrir una ventana de comandos CMD
-Ejecutar los siguientes comandos para verificar la instalación
-    node --version
-    npm --version
-Crear un proyecto con React Js
-    npx create-react-app "Nombre de la aplicacion"
-Abrir Visual studio Code y ejecutar el siguiente comando
+#### Comando para instalar Dependencias 
+
+    npm install  
+
+#### Comando para Ejecutar el Proyecto
+
     npm start
-Comandos adicionales crear evento 
-    npm i react-router-dom
-    npm i reactstrap
+
+- *Comienza a escuchar en el puerto [localhost 5000](http://localhost:5000/)*
 
 </details>
+
 
 <details>
     <summary><strong>Tecnologías usadas</strong></summary>
