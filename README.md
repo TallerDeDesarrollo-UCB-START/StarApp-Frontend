@@ -103,10 +103,11 @@ Si está usando Bootstrap 4, necesitará usar Reactstrap v8
     - **components**: El proyecto está organizado por componentes, en los components se pueden colocar los archivos de las cuales está conformado el proyecto.
         - **componentes proyectos**: (ordenadas de mayor a menor tamaño o por jerarquia de componentes)
     
-               - paginas: Este folder contiene las vistas de las páginas de proyectos dependiendo del rol.
-               - organismos: Este folder contiene varios archivos que se pueden dividir en el Body y el Header de cada página dependiendo del rol. También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios dependiendo del rol.
-               - moleculas: Este folder contiene todos los archivos que contienen los organismos como ser los Banners de cada vista, el contenido de los mismos, los formularios de crear y editar, entre otros.
+               - paginas: Este folder contiene las vistas de las páginas de proyectos.
+               - organismos: Este folder contiene como componentes principales un Body, su Header y otros componentes que sean bastante amplios, que sirven como parte del layout de cada página, dependiendo del rol en el caso de "ProyectosAdmins" y "ProyectosVoluntarios". También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios dependiendo del rol.
+               - moleculas: Este folder "hijos" de un organismo o a otras "moleculas" como ser los Banners de cada vista, el contenido de los mismos, los formularios de crear y editar, entre otros.
                - atomos: Este folder contiene los componentes más pequeños como ser los botones.
+                   (Esta division es algo subjetiva, sujeta al tamaño, dependencias y jerarquia de cada componente)
     
         - **CrearEvento**: Este folder contiene el componente "crearEvento.jsx" y el estilo del componente.
         - **footer**: el footer inicial actualmente no usado
