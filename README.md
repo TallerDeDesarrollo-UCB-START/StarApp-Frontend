@@ -3,21 +3,6 @@
 <img alt="Logo" align="right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu1tfJ2N0SENG9G86Avbt6qN59vXLDAFYggA5IrspoOX4Q_irRB18laR-At4dTKZyG6VI&usqp=CAU" width="20%" />
 
 <details>
-  <summary><strong>Comandos para Inicializar</strong></summary>
-
-#### Comando para instalar Dependencias 
-
-    npm install  
-
-#### Comando para Ejecutar el Proyecto
-
-    npm start
-    
-- *Comienza a escuchar en el puerto [localhost 5000](http://localhost:5000/)*
-
-</details>
-
-<details>
     <summary><strong>Comandos para instalar</strong></summary>
 
 Abrir una ventana de comandos CMD
@@ -119,8 +104,8 @@ Si está usando Bootstrap 4, necesitará usar Reactstrap v8
         - **componentes proyectos**: (ordenadas de mayor a menor tamaño o por jerarquia de componentes)
     
                - paginas: Este folder contiene las vistas de las páginas de proyectos.
-               - organismos: Este folder contiene como componentes principales un Body, su Header y otros componentes que sean bastante amplios, que sirven como parte del layout de cada página, dependiendo del rol en el caso de "ProyectosAdmins" y "ProyectosVoluntarios". También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios dependiendo del rol.
-               - moleculas: Este folder "hijos" de un organismo o a otras "moleculas" como ser los Banners de cada vista, el contenido de los mismos, los formularios de crear y editar, entre otros.
+               - organismos: Este folder contiene como componentes principales un Body, un Header y otros componentes que sean bastante amplios, que sirven como parte del layout de cada página, dependiendo del rol en el caso de "ProyectosAdmins" y "ProyectosVoluntarios". También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios.
+               - moleculas: Este folder "hijo" de un organismo o de otras "moleculas", como ser los Banners de cada vista, el contenido de los mismos, los formularios de crear y editar; entre otros.
                - atomos: Este folder contiene los componentes más pequeños como ser los botones.
                    (Esta division es algo subjetiva, sujeta al tamaño, dependencias y jerarquia de cada componente)
     
@@ -170,12 +155,12 @@ Por este motivo, se creó el componente "PuertaPermisos.js".
 Para usar "PuertaPermisos" se debe importar: "PuertaPermisos" y los "SCOPES" de "map-permisos" en el componente en el que será usado.
 (Ver "ContenidoProyecto.js" como ejemplo)
 
-Si el componente es muy pequeño y ningun otro componente depende de este, se lo considera un "atomo".
-Las moleculas reciben atomos u otras moleculas.
-Los organismos reciben atomos moleculas u otros organismos.
-Las paginas son las vistas principales que contienen a los demas componentes y su layout base.
-Estas carpetas son para dividir los componentes semanticamente segun su jerarquia o tamaño en el virtual DOM de react.
-(Se puede revisar esta metodología de estructuracion de componentes llamada "Atomic Design". Revisar el siguiente enlace:
+Si el componente es muy pequeño y ningún otro componente depende de éste, se lo considera un "átomo".
+Las moléculas reciben átomos u otras moléculas.
+Los organismos reciben átomos, moléculas u otros organismos.
+Las páginas son las vistas principales que contienen a los demás componentes y su layout base.
+Estas carpetas son para dividir los componentes semánticamente según su jerarquía o tamaño en el virtual DOM de react.
+(Se puede revisar esta metodología de estructuracion de componentes, llamada "Atomic Design". Revisar el siguiente enlace:
 https://andela.com/insights/structuring-your-react-application-atomic-design-principles/ )
 
 En el caso de que se quiera agregar nuevos permisos o roles, se debe incluir en "map-permisos.js"
