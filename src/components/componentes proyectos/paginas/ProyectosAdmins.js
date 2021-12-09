@@ -24,7 +24,7 @@ function ProyectosAdmins({proyectos,lideres,categorias, rol, onEliminarProy, onP
     const activarFormEditar = (proyecto) => {
         //`debugger
         setProyectoEditar(proyecto)
-        console.log(proyecto)
+        //console.log(proyecto)
         setMostrarFormEditar(!mostrarFormEditar);
     }
     const onlyActivarFormEditar = (proyecto) => {

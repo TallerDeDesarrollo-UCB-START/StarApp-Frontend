@@ -2,7 +2,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { InputLabel } from '@material-ui/core';
 
 
-function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, options, estilosValidar}) {
+function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, options/*, estilosValidar*/}) {
     const { register,
         control,
         formState: { errors }, } = useFormContext();
@@ -12,6 +12,7 @@ function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, o
         //       O activar alguna variable que active un mensaje de error
         //       O hacer todo lo anterior, quizas usando useState o quizas solo const
     //}
+    const inputValue = value? value : "" // Para evitar un warning
     const validations = options? options : {}
     return (
         <Controller
@@ -27,12 +28,12 @@ function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, o
                                 {...register(`${nameId}`, validations)}
                                 type={type}
                                 placeholder={placeHolder}
-                                value={value}
+                                value={inputValue}
                                 onChange={onChange}
                                 style={{color: "black", border: "1px solid grey"}}
                             />
                             {/*errors.titulo && estilosValidar()*/}
-                            {errors[nameId] && estilosValidar(nameId, errors[nameId].type)}
+                            {errors[nameId] && console.log(`Error campo "${nameId}": ${errors[nameId].type}`)}
                         </div>
                     </>
                 )
