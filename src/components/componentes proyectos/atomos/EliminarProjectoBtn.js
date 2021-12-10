@@ -48,7 +48,11 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
 
   var peticionDelete=()=>{
     onEliminarProy(proyecto.id);
-    handleClickOpenSnakbar( TransitionDown,{ vertical: 'top', horizontal: 'center' })   
+    handleClickOpenSnakbar( TransitionDown,{ vertical: 'top', horizontal: 'center' })
+    window.history.back()
+    window.history.back()
+    //se hace el doble back para que vaya a la lista de categorias, no se hace solo 1 ya que no se refresca la pagina y sigue el proyecto eliminado.
+    //se puede revisar y mejorar de alguna manera para que retorne a la lsita de proyectos de la categoria y muestre la pagina con los proyectos refrescados
   }
 
     return (
@@ -72,6 +76,7 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
             <DeleteButton onClick={peticionDelete} style={{ height: "30px",margin: "7px",}}     variant="contained">
                 Eliminar 
             </DeleteButton>
+            
             <Snackbar
                 anchorOrigin={{ vertical, horizontal }}
                 open={openSnakbar}

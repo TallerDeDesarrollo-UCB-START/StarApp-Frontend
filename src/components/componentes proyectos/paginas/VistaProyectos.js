@@ -14,6 +14,7 @@ function useQuery() {
 
 function VistaProyectos() {
     // Hooks
+    //window.location.reload()
     const [proyectos, setProyectos] = useState([])
     const [proyectosPasadosCategoria, setProyectosPasadosCategoria] = useState([])
     const [actualizar, setActualizar] = useState(false)
@@ -48,10 +49,10 @@ function VistaProyectos() {
 
         categoria? getProyectosFiltro() : getProyectos()
         getProyectosPasadosCategoria()
-
         return () => {
             mountedRef.current = false
         }
+
     }, [actualizar, categoria, /*proyectosPasadosCategoria*/] )
 
     // HTTP requests & functions
