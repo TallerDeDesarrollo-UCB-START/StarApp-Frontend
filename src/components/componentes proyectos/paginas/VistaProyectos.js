@@ -180,7 +180,7 @@ function VistaProyectos() {
             })
         const data = await response.json()
         
-        setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data])
+        //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
         setActualizar(!actualizar)
     }
         

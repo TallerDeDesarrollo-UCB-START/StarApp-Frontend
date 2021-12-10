@@ -27,8 +27,8 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
 
     // HOOKS:
     // States fields
-    const [fechaInicio, setFechaInicio] = useState(findValue("fechaInicio").substring(0,10))
-    const [fechaFin, setFechaFin] = useState(findValue("fechaFin").substring(0,10))
+    const [fechaInicio, setFechaInicio] = useState(findValue("fechaInicio"))
+    const [fechaFin, setFechaFin] = useState(findValue("fechaFin"))
     const [titulo, setTitulo] = useState(proyecto.titulo)
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
@@ -90,12 +90,12 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             return 1  
         }
         if(tipo === "fechaInicio"){
-            const mapFechaInicio = proyecto.fecha_inicio
+            const mapFechaInicio = proyecto.fecha_inicio.substring(0, 10)
             return mapFechaInicio
         }
         if(tipo === "fechaFin"){
             const mapFechaFin = proyecto.fecha_fin
-            return mapFechaFin? mapFechaFin : ""
+            return mapFechaFin? mapFechaFin.substring(0, 10) : ""
         }
         //NOTE: Completar con los ifs que hagan falta para mapear lo que haga falta
     }
@@ -112,7 +112,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
     
     const onSubmit = data => {
-        debugger
         const estadoActual = estados.find(estado => estado.value === estadoId)
         const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoriaId)
         const liderActual = lideres.find(lid=> lid.id===liderId)
