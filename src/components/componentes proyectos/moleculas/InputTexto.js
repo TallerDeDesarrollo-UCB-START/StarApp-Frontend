@@ -3,17 +3,24 @@ import { InputLabel } from '@material-ui/core';
 
 
 function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, options/*, estilosValidar*/}) {
+    // hook-form methods:
     const { register,
         control,
         formState: { errors }, } = useFormContext();
     
-    //function applyErrorStyles(){
-        //NOTE: Agregar variables que conforman un className para estilos de error para
-        //       O activar alguna variable que active un mensaje de error
-        //       O hacer todo lo anterior, quizas usando useState o quizas solo const
-    //}
+    // Constantes:
     const inputValue = value? value : "" // Para evitar un warning
     const validations = options? options : {}
+    
+    // Funciones:
+    const showErrorMessage = (show, msg="") => {
+        if(!show) return ""
+        const errorLabel = (<p style={{color: 'red', fontSize: "0.8em"}}> 
+                                {msg}
+                            </p>)
+        return errorLabel
+    }
+
     return (
         <Controller
                 name={nameId}
@@ -31,16 +38,14 @@ function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, o
                                 value={inputValue}
                                 onChange={onChange}
                                 style={{color: "black", border: "1px solid grey"}}
-                                autocomplete="off"
+                                autoComplete="off"
                             />
+                            {errors[nameId] && showErrorMessage(true, `Error: Campo ${errors[nameId].type}`)}
                             {/*errors.titulo && estilosValidar()*/}
-                            {errors[nameId] && console.log(`Error campo "${nameId}": ${errors[nameId].type}`)}
+                            {/*errors[nameId] && console.log(`Error campo "${nameId}": ${errors[nameId].type}`)*/}
                         </div>
                     </>
-                )
-
-                }
-                
+                )}
         />
         
     )
