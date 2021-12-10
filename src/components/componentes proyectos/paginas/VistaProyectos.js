@@ -65,7 +65,7 @@ function VistaProyectos() {
         getCategorias()
 
         return () => {
-            mountedRef.current = false
+            mountedRef.current = false // Desmontar componentes evitando warnings
         }
 
     }, [actualizar, categoria, /*proyectosPasadosCategoria*/] )

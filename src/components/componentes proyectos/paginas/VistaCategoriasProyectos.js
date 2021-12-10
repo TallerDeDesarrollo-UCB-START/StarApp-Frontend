@@ -4,9 +4,8 @@ import HeaderCategoriasProyectos from '../organismos/HeaderCategoriasProyectos'
 import FormularioCrearProyecto from '../moleculas/FormularioCrearProyecto'
 import ContenidoCategoriasProyectos from '../organismos/ContenidoCategoriasProyectos'
 import { Container } from '@material-ui/core';
-// Permisos/Roles: 
 // Librerias-Paquetes:
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 
 const useStyles = makeStyles(() => ({
     container: {
@@ -21,21 +20,25 @@ function VistaCategoriasProyectos() {
     const [categorias, setCategorias] = useState([])
     const [lideres, setLideres] = useState([])
     const [mostrarFormCrear, setMostrarFormCrear] = useState(false)
-    
+    const mountedRef = useRef(false)
+
     useEffect(() => {
+        mountedRef.current = true
         
         const getCategorias = async () => {
             const response = await fetch(URLCategorias)
             const data = await response.json()
-            setCategorias(data)
+            mountedRef.current && setCategorias(data)
         }
         const getLideres = async ()=>{
             const lideresDelServer = await fetchLideres()
-            setLideres(lideresDelServer)
+            mountedRef.current && setLideres(lideresDelServer)
             //console.log(lideresDelServer)
         }
         getCategorias()
         getLideres()
+
+        return () => mountedRef.current = false;// Desmontar componentes evitando warnings
     }, [] )
 
     // Endpoint fetch
