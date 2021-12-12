@@ -109,7 +109,7 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
       .catch((error)=>{
         console.log(error)
       })
-  }, [])
+  }, [rowToUpdate.id])
   const handleOpen = () => {
     setOpen(true)
     setNewValue(rowToUpdate)

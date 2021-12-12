@@ -115,7 +115,7 @@ const calculateAge = (birthday) => {
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 };
 
-function Users() {
+function Users({sessionData}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [rowToUpdate, setRowToUpdate] = React.useState(null);
 
@@ -243,7 +243,7 @@ function Users() {
             pageSize={20}
             rowHeight={40}
             autoHeight
-            onRowClick={(params) => handleClick(params.row)}
+            onRowClick={(sessionData.role === "core team")?(params) => handleClick(params.row):{}}
           />
         </ThemeProvider>
       </div>
