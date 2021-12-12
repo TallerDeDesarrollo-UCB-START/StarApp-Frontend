@@ -5,7 +5,7 @@ import InputTexto from '../moleculas/InputTexto'
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
-//import { makeStyles } from '@material-ui/core/styles';
+//import { makeStyles } from '@material-ui/core/styles'
 import { Button, Modal } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -105,9 +105,9 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         const [yearF, monthF,dayF ] = fechaFin.split("-")
         const fecha_i_val = new Date(monthI+' '+dayI+' '+yearI);
         const fecha_f_val = new Date(monthF+' '+dayF+' '+yearF);
-        const validacion = estado === true  &&  fecha_i_val > fecha_f_val
+        const validacion = estado === true  &&  fecha_i_val >= fecha_f_val
         if(validacion){
-            alert("-El proyecto ya CONCLUYÓ.\n\n-Amplie la fecha de finalización y coloque el estado EN CURSO si quiere\n que el proyecto esté EN CURSO nuevamente.")
+            alert("-La fecha de finalizacion no puede ser menor ni igual a la fecha de inicio.\n\n-Amplie la fecha de finalización y coloque el estado deseado del proyecto (conclido o en curso)")
         }
         return validacion
         // NOTE: Validacion provisional para que no se pueda actualizar una fecha_fin > fecha_inicio
@@ -190,6 +190,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     nameId="descripcion"
                                     value={descripcion}
                                     onChange={onChangeDescrip}
+                                    options={{required: true}}
                                     />
                         {/*NOTE: OBJETIVO*/}
                         <InputTexto type="text"
@@ -198,7 +199,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     nameId="objetivo"
                                     value={objetivo}
                                     onChange={onChangeObjetivo}
-                                    options={{required: true}}
                                     />
                         {/*NOTE: Dropwdown LIDER*/}
                         <DynamicDropdown titulo="Lideres"

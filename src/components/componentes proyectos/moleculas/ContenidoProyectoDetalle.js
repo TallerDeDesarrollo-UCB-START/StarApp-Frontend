@@ -16,7 +16,8 @@ import {SCOPES} from '../organismos/map-permisos';
 import {useState, useRef, useEffect } from 'react';
 
 function ContenidoProyectoDetalle ({proyecto}) {
-    const fechaFin = proyecto.fecha_fin?proyecto.fecha_fin: "En Progreso"
+    const fechaFin = proyecto.fecha_fin? proyecto.fecha_fin.substring(0, 10) : "En Progreso"
+    const fechaInicio = proyecto.fecha_inicio? proyecto.fecha_inicio.substring(0, 10) : "Por definir..."
     const idUser = sessionStorage.getItem("id");
     
     //const visualizarP = proyecto.visualizar
@@ -38,7 +39,6 @@ function ContenidoProyectoDetalle ({proyecto}) {
                 body: JSON.stringify(proyectoEditar)
             })
         const data = await response.json()    
-        console.log(data)
     }
 
      const switchListaParticipantes = proyecto.visualizar === true?
@@ -87,7 +87,6 @@ function ContenidoProyectoDetalle ({proyecto}) {
     // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
         mountedRef.current = true
-        console.log(proyecto)
         const colocarParticipacion = async () => {
             const participa = await asignarParticipacion()
             mountedRef.current && setParticipacion(participa)
@@ -180,7 +179,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
                 <h1 className="card-title-detail">{proyecto.titulo}</h1>
             </b>
             <p className="card-text-detail">
-                <b>Fecha de Inicio:</b> {proyecto.fecha_inicio}
+                <b>Fecha de Inicio:</b> {fechaInicio}
             </p>
             <p className="card-text-detail">
                 <b>Fecha de Fin:</b> {fechaFin}
