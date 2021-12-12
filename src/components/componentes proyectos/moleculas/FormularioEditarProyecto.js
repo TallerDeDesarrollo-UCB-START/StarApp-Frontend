@@ -1,6 +1,5 @@
 // Componentes:
 import InputTexto from '../moleculas/InputTexto'
-//import InputDropDown from "../atomos/InputDropDown";
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
@@ -32,7 +31,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [titulo, setTitulo] = useState(proyecto.titulo)
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
-    const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
     const [url_imagen, setImagenUrl] = useState(proyecto.url_imagen)
     // States dropwdown values
     const [estadoId, setEstadoId] = useState(findValue("estado"))
@@ -49,7 +47,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setTitulo('')
         setDescripcion('')
         setObjetivo('')
-        setInfoAd('')
         setImagenUrl('')
     }
     function getModalStyle() {
@@ -122,7 +119,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeLider = (e) => {setLiderId(e.target.value)}
     const onChangeCategoria = (e) => {setCategoriaId(e.target.value)}
     const onChangeEstado = (e) => {setEstadoId(e.target.value)}
-    const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
     const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
     
     const onSubmit = data => {
@@ -223,15 +219,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                         onChange={onChangeEstado}
                                         idField={'value'}
                                         labelField={'label'}/>
-                        
-                        {/*NOTE: INFO ADICIONAL*/}
-                        <InputTexto type="link"
-                                    tituloLabel="Información Adicional"
-                                    nameId="informacion_adicional" 
-                                    placeHolder='Información Adicional'
-                                    value={informacion_adicional}
-                                    onChange={onChangeInfoAd}
-                                    />
+    
                         <InputTexto type="text" 
                                     tituloLabel="Imagen por Link"
                                     nameId="url_imagen" 

@@ -4,7 +4,6 @@ import HeaderProyectosPasados from '../organismos/HeaderProyectosPasados';
 import BodyProyectos from '../organismos/BodyProyectos'
 // Librerias-Paquetes:
 import { Box } from '@material-ui/core';
-//import SelectFiltroCategoria from '../atomos/SelectFiltroCategoria';
 import React from 'react';
 
 // DIEGO

@@ -150,15 +150,15 @@ function VistaProyectos() {
     
     // UPDATEs
     const editarProyecto = async (proyectoEditar) => {
-        const response = await fetch(
+        //const response = 
+        await fetch(
             `${URLEditarProy}/${proyectoEditar.id}`,
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify(proyectoEditar)
             })
-        const data = await response.json()
-        
+        //const data = await response.json()
         //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
         setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
     }
