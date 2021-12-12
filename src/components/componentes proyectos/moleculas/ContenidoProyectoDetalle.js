@@ -39,7 +39,6 @@ function ContenidoProyectoDetalle ({proyecto}) {
                 body: JSON.stringify(proyectoEditar)
             })
         const data = await response.json()    
-        console.log(data)
     }
 
      const switchListaParticipantes = proyecto.visualizar === true?
@@ -88,7 +87,6 @@ function ContenidoProyectoDetalle ({proyecto}) {
     // OJO. no borrar el comentario dentro del useEffect() 
     useEffect(() => {
         mountedRef.current = true
-        console.log(proyecto)
         const colocarParticipacion = async () => {
             const participa = await asignarParticipacion()
             mountedRef.current && setParticipacion(participa)
