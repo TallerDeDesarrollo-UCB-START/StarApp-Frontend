@@ -99,6 +99,20 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         }
         //NOTE: Completar con los ifs que hagan falta para mapear lo que haga falta
     }
+
+    function validarFechas(estado){
+        const [yearI, monthI,dayI ] = fechaInicio.split("-")
+        const [yearF, monthF,dayF ] = fechaFin.split("-")
+        const fecha_i_val = new Date(monthI+' '+dayI+' '+yearI);
+        const fecha_f_val = new Date(monthF+' '+dayF+' '+yearF);
+        const validacion = estado === true  &&  fecha_i_val > fecha_f_val
+        if(validacion){
+            alert("-El proyecto ya CONCLUYÓ.\n\n-Amplie la fecha de finalización y coloque el estado EN CURSO si quiere\n que el proyecto esté EN CURSO nuevamente.")
+        }
+        return validacion
+        // NOTE: Validacion provisional para que no se pueda actualizar una fecha_fin > fecha_inicio
+        // i = inicio, f = fin
+    }
     
     const onChangeFechaInicio = (e) => {setFechaInicio(e.target.value)}
     const onChangeFechaFin = (e) => {setFechaFin(e.target.value)}
@@ -119,13 +133,14 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         data.estado = estadoActual.bool
         data.categoria = categoriaActual.tipo
         data.lider = liderActual.nombre
+        
+        if(validarFechas(data.estado)) return
 
         onEditarProy(data) // callback editar proyecto
         resetStates()
         onActivarForm() // Oculta/Activa el formulario
         // NOTE: Los valores de dropdown se mapean y agregan al objeto "data" sin usar react-hook-form.
         //       Los demas campos si utilizan react-hook-form.
-
     }
 
     // COMPONENTS:
