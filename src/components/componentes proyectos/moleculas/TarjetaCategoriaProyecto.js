@@ -49,12 +49,26 @@ const useStyles = makeStyles(() => ({
     },
     typography: {
       textTransform: 'uppercase',
-      '@media only screen and (max-width: 400px) ': {
+      '@media only screen and (max-width: 675px) ': {
+        fontSize: '1.7rem',
+      },
+      '@media only screen and (max-width: 610px) ': {
+        fontSize: '1.5rem',
+      },
+      '@media only screen and (max-width: 530px) ': {
+        fontSize: '1.2rem',
+      },
+      '@media only screen and (max-width: 445px) ': {
         fontSize: '1rem',
       },
-      '@media only screen and (max-width: 365px) ': {
-        fontSize: '1.3rem',
+      '@media only screen and (max-width: 380px) ': {
+        fontSize: '0.95rem',
       },
+      '@media only screen and (max-width: 370px) ': {
+        fontSize: '0.88rem',
+        wordBreak: 'break-all',
+      },
+      
     }
   }));
 

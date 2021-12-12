@@ -16,6 +16,8 @@ function VistaProyectos() {
     // Hooks
     //window.location.reload()
     const [proyectos, setProyectos] = useState([])
+    const [lideres, setLideres] = useState([])
+    const [categorias, setCategorias] = useState([])
     const [proyectosPasadosCategoria, setProyectosPasadosCategoria] = useState([])
     const [actualizar, setActualizar] = useState(false)
     const mountedRef = useRef(false)
@@ -41,6 +43,16 @@ function VistaProyectos() {
             const proyectosFiltrados = await filtrarPorCategoria(categoria)
             setProyectosCheck(proyectosFiltrados, mountedRef.current)
         }
+        const getLideres = async ()=>{
+            const lideresDelServer = await fetchLideres()
+            mountedRef.current && setLideres(lideresDelServer)
+            //console.log(lideresDelServer)
+        }
+
+        const getCategorias = async () => {
+            const categosServer = await fetchCategorias()
+            mountedRef.current && setCategorias(categosServer)
+        }
 
         const getProyectosPasadosCategoria = async () => {
             const proyectosPasados =  await fetchProyectosPasadosCategoria(categoria)
@@ -49,8 +61,11 @@ function VistaProyectos() {
 
         categoria? getProyectosFiltro() : getProyectos()
         getProyectosPasadosCategoria()
+        getLideres()
+        getCategorias()
+
         return () => {
-            mountedRef.current = false
+            mountedRef.current = false // Desmontar componentes evitando warnings
         }
 
     }, [actualizar, categoria, /*proyectosPasadosCategoria*/] )
@@ -60,6 +75,20 @@ function VistaProyectos() {
         const response = await fetch(URLProyectos)
         const data = await response.json()
         return data;
+    }
+    async function fetchLideres() {
+        const response = await fetch(URLLideres)
+        const data = await response.json()
+        let dataLider=[]
+        let index=1
+        for (let x of data ) {
+            dataLider.push({"id": index,"nombre":`${x.nombre}`})
+            index++
+            
+        }
+        //dataLider.pop()
+        //console.log(dataLider)
+        return dataLider;
     }
 
     /*async function fetchProyectosPasados() {
@@ -74,6 +103,12 @@ function VistaProyectos() {
         return data;
     }
 
+    const fetchCategorias = async () => {
+        const response = await fetch(URLCategorias)
+        const data = await response.json()
+        return data
+    }
+
     const crearProyecto = async (nuevoProyecto) => {
         const response = await fetch(
             URLCrearProy,
@@ -83,6 +118,7 @@ function VistaProyectos() {
                 body: JSON.stringify(nuevoProyecto)
             })
         const data = await response.json()
+        //console.log(data)
         setProyectos([...proyectos, data])
         setActualizar(!actualizar)
     
@@ -144,7 +180,7 @@ function VistaProyectos() {
             })
         const data = await response.json()
         
-        setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data])
+        //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
         setActualizar(!actualizar)
     }
         
@@ -171,7 +207,9 @@ function VistaProyectos() {
         
     }
     let proyectosAdmins = <ProyectosAdmins rol={"core team"}
-                                proyectos={proyectos} 
+                                proyectos={proyectos}
+                                lideres={lideres} 
+                                categorias={categorias}
                                 onCrearProy={crearProyecto} 
                                 onEliminarProy={eliminarProyecto} 
                                 onPartiparProy={participarEnProyecto} 
@@ -204,6 +242,7 @@ function VistaProyectos() {
 }
 
 const url = process.env.REACT_APP_API;
+const URLLideres = `${url}get_lideres`
 const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
 const URLProyectos = `${url}get_proyectos`//'http://localhost:5000/get_proyectos'
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//
@@ -213,4 +252,5 @@ const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/partic
 const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
 const URLNumeroParticipantes = `${url}get_numero_participantes` //'http://localhost:5000/get_rol/'
 const URLProyectosPasados = `${url}get_proyectos_acabado`
+const URLCategorias = `${url}get_categoria_proyectos`//``http://localhost:5000/get_categorias`//`
 export default VistaProyectos;

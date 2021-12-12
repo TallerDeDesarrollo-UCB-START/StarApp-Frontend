@@ -4,9 +4,8 @@ import HeaderCategoriasProyectos from '../organismos/HeaderCategoriasProyectos'
 import FormularioCrearProyecto from '../moleculas/FormularioCrearProyecto'
 import ContenidoCategoriasProyectos from '../organismos/ContenidoCategoriasProyectos'
 import { Container } from '@material-ui/core';
-// Permisos/Roles: 
 // Librerias-Paquetes:
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 
 const useStyles = makeStyles(() => ({
     container: {
@@ -19,16 +18,27 @@ function VistaCategoriasProyectos() {
 
     // Hooks:
     const [categorias, setCategorias] = useState([])
+    const [lideres, setLideres] = useState([])
     const [mostrarFormCrear, setMostrarFormCrear] = useState(false)
-    
+    const mountedRef = useRef(false)
+
     useEffect(() => {
+        mountedRef.current = true
         
         const getCategorias = async () => {
             const response = await fetch(URLCategorias)
             const data = await response.json()
-            setCategorias(data)
+            mountedRef.current && setCategorias(data)
+        }
+        const getLideres = async ()=>{
+            const lideresDelServer = await fetchLideres()
+            mountedRef.current && setLideres(lideresDelServer)
+            //console.log(lideresDelServer)
         }
         getCategorias()
+        getLideres()
+
+        return () => mountedRef.current = false;// Desmontar componentes evitando warnings
     }, [] )
 
     // Endpoint fetch
@@ -41,6 +51,20 @@ function VistaCategoriasProyectos() {
                 body: JSON.stringify(nuevoProyecto)
             })
     }
+    async function fetchLideres() {
+        const response = await fetch(URLLideres)
+        const data = await response.json()
+        let dataLider=[]
+        let index=1
+        for (let x of data ) {
+            dataLider.push({"id":`${index}`,"nombre":`${x.nombre}`})
+            index++
+            
+        }
+        //dataLider.pop()
+        //console.log(dataLider)
+        return dataLider;
+    }
 
     // Methods:
     const activarFormCrear = () => {
@@ -48,7 +72,7 @@ function VistaCategoriasProyectos() {
     }
 
     // Components:
-    const FormularioCrear = mostrarFormCrear===true ? <FormularioCrearProyecto onCrearProy={crearProyecto} onActivarForm={activarFormCrear} mostrarFormCrear={mostrarFormCrear}/> : <></>
+    const FormularioCrear = mostrarFormCrear===true ? <FormularioCrearProyecto onCrearProy={crearProyecto} onActivarForm={activarFormCrear} mostrarFormCrear={mostrarFormCrear} lideres={lideres} categorias={categorias}/> : <></>
 
     return (
         <Container className={classes.container}>
@@ -60,6 +84,7 @@ function VistaCategoriasProyectos() {
 }
 
 const url = process.env.REACT_APP_API;
+const URLLideres = `${url}get_lideres`
 const URLCategorias = `${url}get_categoria_proyectos`//``http://localhost:5000/get_categorias`//`
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//
 

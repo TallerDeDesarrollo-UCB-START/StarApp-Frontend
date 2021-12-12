@@ -17,11 +17,11 @@ const useStyles = makeStyles({
 function BannerProyecto({proyecto}) {
 
     const classes = useStyles();
-
+    const urlImage = proyecto.url_imagen? proyecto.url_imagen : " "
     return (
         <CardMedia
           className={classes.media}
-          image={proyecto.url_imagen}
+          image={urlImage}
           title={proyecto.title}
         />
     );

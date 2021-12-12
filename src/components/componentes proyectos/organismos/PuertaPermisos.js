@@ -11,12 +11,11 @@ const hasPermission = ({ permissions, scopes }) => {
 };
 
 function PuertaPermisos({children, scopes = []}) {
-    //debugger;
     const role = useGetRole();
     //console.log(role)
     const permissions = PERMISSIONS[role];
 
-    const permissionGranted = hasPermission({ permissions, scopes });
+    const permissionGranted = permissions? hasPermission({ permissions, scopes }) : false //Validacion para evitar errores
 
     if (!permissionGranted) return <></>
 
