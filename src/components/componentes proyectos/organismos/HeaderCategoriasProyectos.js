@@ -3,7 +3,6 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CrearProyectoBtn from '../atomos/CrearProyectoBtn'
-//import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
 // Permisos/Roles:
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';

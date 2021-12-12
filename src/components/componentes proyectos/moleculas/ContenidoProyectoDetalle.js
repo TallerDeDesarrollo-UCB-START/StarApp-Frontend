@@ -31,14 +31,13 @@ function ContenidoProyectoDetalle ({proyecto}) {
         const proyectoEditar={
             visualizar: visualizarP
         }
-        const response = await fetch(
+        await fetch(
             `${process.env.REACT_APP_API}update_proyecto/${proyecto.id}`,
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify(proyectoEditar)
             })
-        const data = await response.json()    
     }
 
      const switchListaParticipantes = proyecto.visualizar === true?
