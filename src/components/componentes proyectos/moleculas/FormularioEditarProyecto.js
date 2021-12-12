@@ -190,6 +190,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     nameId="descripcion"
                                     value={descripcion}
                                     onChange={onChangeDescrip}
+                                    options={{required: true}}
                                     />
                         {/*NOTE: OBJETIVO*/}
                         <InputTexto type="text"
@@ -198,7 +199,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     nameId="objetivo"
                                     value={objetivo}
                                     onChange={onChangeObjetivo}
-                                    options={{required: true}}
                                     />
                         {/*NOTE: Dropwdown LIDER*/}
                         <DynamicDropdown titulo="Lideres"
