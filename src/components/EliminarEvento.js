@@ -46,7 +46,9 @@ const EliminarEvento = (event) => {
           backgroundColor: "#f00",
           fontSize: "16px",
           margin: "3px",
-          textTransform: 'none'
+          textTransform: 'none',
+          width: "110px",
+
         }}
         onClick={handleClickOpen}
       >

@@ -24,6 +24,7 @@ import {
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import EliminarEvento from "./EliminarEvento";
+
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
 const urlDeploy = `${url}eventos`;
@@ -407,305 +408,332 @@ class EventsList extends Component {
 
     return (
       <div>
-        <Chip
-          style={{
-            marginTop: "20px",
-            left: 300,
-          }}
-          variant="outlined"
-          icon={<NavigateBeforeIcon />}
-          label="Volver"
-          clickable
-          onClick={() => window.history.back()}
-        />
-        <div>
-          <h1
-            style={{
-              display:
-                this.state.botonMostrarEventosArchivados === true
-                  ? "block"
-                  : "none",
-            }}
-          >
-            {" "}
-            EVENTOS VIGENTES
-          </h1>
-          <h1
-            style={{
-              display:
-                this.state.botonMostrarEventosArchivados === false
-                  ? "block"
-                  : "none",
-            }}
-          >
-            {" "}
-            EVENTOS PASADOS
-          </h1>
-          <div className="header-lista-eventos">
-            <span
+        
+
+        <Container className="container1">
+          <div>
+
+            <div className="Chip-Eventos">
+              <Chip
               style={{
-                display:
-                  this.state.botonMostrarEventosArchivados === true
-                    ? "block"
-                    : "none",
+                marginTop: "20px",
+                left: "10px",
               }}
-              className="span-align"
-            >
-              Categoria:
-            </span>
-            <select
-              style={{
-                display: this.state.botonMostrarEventosArchivados
-                  ? "block"
-                  : "none",
-              }}
-              value={this.state.categoriaFiltrada}
-              onChange={this.filterChangeHandler}
-            >
-              {this.state.categorias.map((item) => {
-                return (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
-            <span
-              style={{
-                display:
-                  this.state.botonMostrarEventosArchivados === false
-                    ? "block"
-                    : "none",
-              }}
-              className="span-align"
-            >
-              Categoria:
-            </span>
-            <select
-              style={{
-                display:
-                  this.state.botonMostrarEventosArchivados === false
-                    ? "block"
-                    : "none",
-              }}
-              value={this.state.categoriaFiltrada}
-              onChange={this.filterPastEventsChangeHandler}
-            >
-              {this.state.categorias.map((item) => {
-                return (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <br />
-          <div style={{ display: "flex" }}>
-            {rolUser !== "voluntario" ? (
-              <Fragment>
-                <Button
+              variant="outlined"
+              icon={<NavigateBeforeIcon />}
+              label="Volver"
+              clickable
+              onClick={() => window.history.back()}
+            />
+
+            </div>
+
+            <div className="Titulo-Eventos">
+
+              <h1
+                style={{
+                  paddingLeft: "50px",
+                  paddingTop: "15px",
+                  display:
+                    this.state.botonMostrarEventosArchivados === true
+                      ? "block"
+                      : "none",
+                }}
+              >
+
+                <Typography gutterBottom variant="h2" component="h3" >
+                  EVENTOS VIGENTES
+                </Typography>
+
+              </h1>
+
+              <h1
+                style={{
+                  paddingLeft: "50px",
+                  paddingTop: "15px",
+                  display:
+                    this.state.botonMostrarEventosArchivados === false
+                      ? "block"
+                      : "none",
+                }}
+              >
+                <Typography gutterBottom variant="h2" component="h3" >
+                  EVENTOS PASADOS
+                </Typography>
+
+              </h1>
+
+            </div>
+
+            <div className="Menu-Bar-Evento">
+
+              <div className="header-filtro-eventos">
+                <span
                   style={{
-                    position: "absolute",
-                    top: 300,
-                    right: 300,
-                    borderRadius: 4,
-                    height: 51,
-                    backgroundColor: "#B3DA3F",
-                    fontSize: "16px",
-                    margin: "8px",
+                    display:
+                      this.state.botonMostrarEventosArchivados === true
+                        ? "block"
+                        : "none",
                   }}
-                  onClick={() => this.mostrarModalInsertar()}
+                  className="span-align"
                 >
-                  {" "}
-                  CREAR EVENTO{" "}
-                </Button>
-                <Button
+                  Categoria:
+                </span>
+
+                <select
                   style={{
                     display: this.state.botonMostrarEventosArchivados
                       ? "block"
                       : "none",
-                    position: "absolute",
-                    top: 300,
-                    right: 100,
-                    marginLeft: "auto",
-                    borderRadius: 4,
-                    height: 51,
-                    backgroundColor: "#269bd5",
-                    fontSize: "16px",
-                    margin: "8px",
                   }}
-                  onClick={() => this.getEventsArchivados()}
+                  value={this.state.categoriaFiltrada}
+                  onChange={this.filterChangeHandler}
                 >
-                  EVENTOS PASADOS
-                </Button>
-              </Fragment>
-            ) : (
-              <Fragment>
-                <div className="eventos-pasados-button">
-                  <Button
-                    style={{ marginLeft: "auto" }}
-                    color="#ffffff"
-                  ></Button>
-                  <Button
-                    style={{
-                      display: this.state.botonMostrarEventosArchivados
+                  {this.state.categorias.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+
+                <span
+                  style={{
+                    display:
+                      this.state.botonMostrarEventosArchivados === false
                         ? "block"
                         : "none",
+                  }}
+                  className="span-align"
+                >
+                  Categoria:
+                </span>
 
-                      position: "absolute",
-                      top: "30%",
-                      right: "18%",
-                      marginLeft: "auto",
-                      borderRadius: 4,
-                      height: 51,
-                      backgroundColor: "#269bd5",
-                      fontSize: "16px",
-                      margin: "8px",
-                    }}
-                    onClick={() => this.getEventsArchivados()}
-                  >
-                    Eventos Pasados
-                  </Button>
-                </div>
-              </Fragment>
-            )}
-            <Button
-              href="/eventos"
-              style={{
-                display: this.state.botonMostrarEventosNoArchivados
-                  ? "block"
-                  : "none",
-                position: "absolute",
-                right: 100,
-                top: 300,
-                borderRadius: 4,
-                height: 51,
-                backgroundColor: "#269bd5",
-                fontSize: "16px",
-                margin: "8px",
-              }}
-            >
-              EVENTOS VIGENTES
-            </Button>
-          </div>
-        </div>
+                <select
+                  style={{
+                    display:
+                      this.state.botonMostrarEventosArchivados === false
+                        ? "block"
+                        : "none",
+                  }}
+                  value={this.state.categoriaFiltrada}
+                  onChange={this.filterPastEventsChangeHandler}
+                >
+                  {this.state.categorias.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
 
-        <Container className="container1">
-          {this.state.events.map((event) => (
-            <div className="" key={event.id}>
-              <div className="card1">
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image="https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg"
-                  className="img-fluid"
-                />
-                <CardHeader
-                  title={event.nombre_evento}
-                  subheader={event.descripcion_evento}
-                  titleTypographyProps={{ gutterBottom: true }}
-                />
-                <CardContent>
-                  <p className="card-info">
-                    <b>La Modalidad del Evento es:</b> {event.modalidad_evento}
-                  </p>
-                  <p className="card-info">
-                    <b>Fecha:</b> {event.fecha_evento}{" "}
-                  </p>
-                  <p className="card-info">
-                    <b>Lugar:</b> {event.lugar_evento}{" "}
-                  </p>
-                  <p className="card-info">
-                    {" "}
-                    <b>Categoría:</b> {event.categoria}{" "}
-                  </p>
-                </CardContent>
-                <CardBody>
-                  {this.validarBotones(event) ? (
+              </div>
+
+              <div className="header-botones-eventos" style={{ display: "flex" }}>
+                {rolUser !== "voluntario" ? (
+                  <Fragment>
                     <Button
-                      variant="contained"
-                      onClick={() => {
-                        this.postParticipacion(event);
-                      }}
                       style={{
+                        borderRadius: 4,
+                        height: 51,
+                        backgroundColor: "#B3DA3F",
+                        fontSize: "16px",
+                        margin: "5px",
+                        padding: "2px",
+                        borderColor: "#B3DA3F",
+                      }}
+                      onClick={() => this.mostrarModalInsertar()}
+                    >
+                      CREAR EVENTO
+                    </Button>
+                    <Button
+                      style={{
+                        display: this.state.botonMostrarEventosArchivados
+                          ? "block"
+                          : "none",
                         borderRadius: 4,
                         height: 51,
                         backgroundColor: "#269BD5",
                         fontSize: "16px",
-                        margin: "3px",
-                        display:
-                          this.state.botonMostrarEventosArchivados === true
-                            ? "block"
-                            : "none",
+                        margin: "5px",
+                        padding: "4px",
+                        borderColor: "#269BD5",
                       }}
+                      onClick={() => this.getEventsArchivados()}
                     >
-                      {" "}
-                      Participar
+                      EVENTOS PASADOS
                     </Button>
-                  ) : (
+                  </Fragment>
+                ) : (
+                  <Fragment>
+
                     <Button
-                      onClick={() => {
-                        this.eliminarParticipacion(event);
-                      }}
                       style={{
+                        display: this.state.botonMostrarEventosArchivados
+                          ? "block"
+                          : "none",
+
                         borderRadius: 4,
-                        height: 60,
-                        backgroundColor: "red",
+                        height: 51,
+                        backgroundColor: "#269BD5",
                         fontSize: "16px",
-                        margin: "3px",
-                        display:
-                          this.state.botonMostrarEventosArchivados === true
-                            ? "block"
-                            : "none",
+                        margin: "5px",
+                        padding: "4px",
+                        borderColor: "#269BD5",
                       }}
+                      onClick={() => this.getEventsArchivados()}
                     >
-                      {" "}
-                      No Participar
+                      Eventos Pasados
                     </Button>
-                  )}
-                  {rolUser !== "voluntario" ? (
-                    <Fragment>
-                      <Button
-                        style={{
-                          borderRadius: 4,
-                          height: 51,
-                          backgroundColor: "#B3DA3F",
-                          fontSize: "16px",
-                          margin: "3px",
-                        }}
-                      >
-                        {" "}
-                        <Link to={"eventos/" + event.id}>Detalles</Link>{" "}
-                      </Button>
-                    </Fragment>
-                  ) : (
-                    <Fragment>
-                      <Button
-                        style={{
-                          borderRadius: 4,
-                          height: 51,
-                          backgroundColor: "#B3DA3F",
-                          fontSize: "16px",
-                          margin: "3px",
-                        }}
-                      >
-                        {" "}
-                        <Link to={"eventos/" + event.id}>Detalles</Link>{" "}
-                      </Button>
-                    </Fragment>
-                  )}
-                  {rolUser !== "voluntario" ? (
-                    <Fragment>
-                      <EliminarEvento event={event} />
-                    </Fragment>
-                  ) : (
-                    <></>
-                  )}
-                </CardBody>
+
+                  </Fragment>
+                )}
+                <Button
+                  href="/eventos"
+                  style={{
+                    display: this.state.botonMostrarEventosNoArchivados
+                      ? "block"
+                      : "none",
+                      borderRadius: 4,
+                      height: 51,
+                      backgroundColor: "#269BD5",
+                      fontSize: "16px",
+                      margin: "5px",
+                      padding: "4px",
+                      paddingTop: "1vmax",
+                      borderColor: "#269BD5",
+                  }}
+                >
+                  EVENTOS VIGENTES
+                </Button>
               </div>
             </div>
-          ))}
+            
+          </div>
+
+          <div className="Container-Body">
+            {this.state.events.map((event) => (
+              <div className="Tarjeta-Principal-Evento" key={event.id}>
+                <div className="card1">
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image="https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg"
+                    className="img-fluid"
+                  />
+                  <CardHeader
+                    title={event.nombre_evento}
+                    subheader={event.descripcion_evento}
+                    titleTypographyProps={{ gutterBottom: true }}
+                  />
+                  <CardContent>
+                    <p className="card-info">
+                      <b>La Modalidad del Evento es:</b> {event.modalidad_evento}
+                    </p>
+                    <p className="card-info">
+                      <b>Fecha:</b> {event.fecha_evento}{" "}
+                    </p>
+                    <p className="card-info">
+                      <b>Lugar:</b> {event.lugar_evento}{" "}
+                    </p>
+                    <p className="card-info">
+                      {" "}
+                      <b>Categoría:</b> {event.categoria}{" "}
+                    </p>
+                  </CardContent>
+                  <CardBody className="CardBody-Eventos">
+                    {this.validarBotones(event) ? (
+                      <Button
+                        variant="contained"
+                        onClick={() => {
+                          this.postParticipacion(event);
+                        }}
+                        style={{
+                          borderRadius: 4,
+                          height: 51,
+                          backgroundColor: "#269BD5",
+                          fontSize: "16px",
+                          margin: "3px",
+                          width: "110px",
+                          display:
+                            this.state.botonMostrarEventosArchivados === true
+                              ? "block"
+                              : "none",
+                        }}
+                      >
+                        {" "}
+                        Participar
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => {
+                          this.eliminarParticipacion(event);
+                        }}
+                        style={{
+                          borderRadius: 4,
+                          height: 51,
+                          backgroundColor: "#E3E3E3",
+                          fontSize: "16px",
+                          margin: "3px",
+                          width: "110px",
+                          display:
+                            this.state.botonMostrarEventosArchivados === true
+                              ? "block"
+                              : "none",
+                        }}
+                      >
+                        {" "}
+                        No Participar
+                      </Button>
+                    )}
+                    {rolUser !== "voluntario" ? (
+                      <Fragment>
+                        <Button
+                          style={{
+                            borderRadius: 4,
+                            height: 51,
+                            backgroundColor: "#B3DA3F",
+                            fontSize: "16px",
+                            width: "110px",
+                            margin: "3px",
+                          }}
+                        >
+                          {" "}
+                          <Link to={"eventos/" + event.id}>Detalles</Link>{" "}
+                        </Button>
+                      </Fragment>
+                    ) : (
+                      <Fragment>
+                        <Button
+                          style={{
+                            borderRadius: 4,
+                            height: 51,
+                            backgroundColor: "#B3DA3F",
+                            fontSize: "16px",
+                            margin: "3px",
+                            width: "110px",
+                          }}
+                        >
+                          {" "}
+                          <Link to={"eventos/" + event.id}>Detalles</Link>{" "}
+                        </Button>
+                      </Fragment>
+                    )}
+                    {rolUser !== "voluntario" ? (
+                      <Fragment>
+                        <EliminarEvento event={event} />
+                      </Fragment>
+                    ) : (
+                      <></>
+                    )}
+                  </CardBody>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </Container>
 
         <div>

@@ -1,9 +1,11 @@
 #ModalFormEditEvento {
-  width: 500px;
+  width: 430px;
   background-color: #f2f2f2 !important;
   text-align: center;
   padding: 3px;
   border-radius: 8px;
+  margin-top: 200px;
+  margin-bottom: 300px;
 }
 .formularioEdicionEvento {
   background-color: #f2f2f2;
