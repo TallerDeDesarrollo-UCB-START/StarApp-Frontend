@@ -539,11 +539,11 @@ class EventsList extends Component {
                       style={{
                         borderRadius: 4,
                         height: 51,
-                        backgroundColor: "#B3DA3F",
+                        backgroundColor: "#269BD5",
                         fontSize: "16px",
                         margin: "5px",
                         padding: "2px",
-                        borderColor: "#B3DA3F",
+                        borderColor: "#269BD5",
                       }}
                       onClick={() => this.mostrarModalInsertar()}
                     >
@@ -556,11 +556,11 @@ class EventsList extends Component {
                           : "none",
                         borderRadius: 4,
                         height: 51,
-                        backgroundColor: "#269BD5",
+                        backgroundColor: "#3B3B3B",
                         fontSize: "16px",
                         margin: "5px",
                         padding: "4px",
-                        borderColor: "#269BD5",
+                        borderColor: "#3B3B3B",
                       }}
                       onClick={() => this.getEventsArchivados()}
                     >
@@ -578,11 +578,11 @@ class EventsList extends Component {
 
                         borderRadius: 4,
                         height: 51,
-                        backgroundColor: "#269BD5",
+                        backgroundColor: "#3B3B3B",
                         fontSize: "16px",
                         margin: "5px",
                         padding: "4px",
-                        borderColor: "#269BD5",
+                        borderColor: "#3B3B3B",
                       }}
                       onClick={() => this.getEventsArchivados()}
                     >
@@ -599,12 +599,12 @@ class EventsList extends Component {
                       : "none",
                       borderRadius: 4,
                       height: 51,
-                      backgroundColor: "#269BD5",
+                      backgroundColor: "#3B3B3B",
                       fontSize: "16px",
                       margin: "5px",
                       padding: "4px",
                       paddingTop: "1vmax",
-                      borderColor: "#269BD5",
+                      borderColor: "#3B3B3B",
                   }}
                 >
                   EVENTOS VIGENTES
@@ -673,9 +673,9 @@ class EventsList extends Component {
                           this.eliminarParticipacion(event);
                         }}
                         style={{
+                          color: "3B3B3B",
                           borderRadius: 4,
                           height: 51,
-                          backgroundColor: "#E3E3E3",
                           fontSize: "16px",
                           margin: "3px",
                           width: "110px",
@@ -686,7 +686,7 @@ class EventsList extends Component {
                         }}
                       >
                         {" "}
-                        No Participar
+                        Dejar de Participar
                       </Button>
                     )}
                     {rolUser !== "voluntario" ? (
@@ -904,7 +904,7 @@ class EventsList extends Component {
 
             <div className="CamposBotones">
               <Button
-                className="botonActualizar"
+                className="botonCrear"
                 // disabled={this.state.form.nombre_evento && this.state.form.fecha_evento? false:true}
                 onClick={() => this.peticionPost()}
               >

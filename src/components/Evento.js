@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-import GoogleCalendar from "./googleCalendar.jsx";
+//import GoogleCalendar from "./googleCalendar.jsx";
 import "./Evento.css";
 import Chip from "@material-ui/core/Chip";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
@@ -483,7 +483,7 @@ class Evento extends Component {
                 className="botonActualizar"
                 onClick={() => this.guardarNuevaData()}
               >
-                Actualizar Evento{" "}
+                Guardar Cambios{" "}
               </Button>
               <Snackbar
                 anchorOrigin={{
