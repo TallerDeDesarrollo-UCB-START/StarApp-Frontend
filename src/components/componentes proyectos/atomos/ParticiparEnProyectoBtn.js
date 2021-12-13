@@ -43,7 +43,6 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
             if(proyecto.estado === varProyectos.estadoAcabado){
                 onAsignarSnackbarStatus("Participacion bloqueada", true, false);
                 onAvisoAccion()
-                return
             } else{
                 const participarResponse = await onPartiparProy(proyecto.id)
                 if(participarResponse){

@@ -104,7 +104,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         const fecha_f_val = new Date(monthF+' '+dayF+' '+yearF);
         const validacion = estado === true  &&  fecha_i_val >= fecha_f_val
         if(validacion){
-            alert("-La fecha de finalizacion no puede ser menor ni igual a la fecha de inicio.\n\n-Amplie la fecha de finalización y coloque el estado deseado del proyecto (conclido o en curso)")
+            alert("-La fecha de finalizacion no puede ser menor ni igual a la fecha de inicio.\n\n-Amplie la fecha de finalización y coloque el estado deseado del proyecto (concluido o en curso)")
         }
         return validacion
         // NOTE: Validacion provisional para que no se pueda actualizar una fecha_fin > fecha_inicio

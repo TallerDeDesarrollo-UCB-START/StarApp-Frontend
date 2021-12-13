@@ -125,11 +125,11 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
                                                         proyecto={proyecto}/>
                                 </PuertaPermisos>
 
-    /*function content (){
+    function content (){
         var resp="";
         var cont=true;
         var i=0;
-        for(i=0; i < 85 && cont; i++){
+        for(i=0; i < 100 && cont; i++){
             if(proyecto.descripcion[i]!==undefined){
                 resp += proyecto.descripcion[i];
             }else {
@@ -150,15 +150,15 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
         } else {
             resp = proyecto.descripcion;
         }
-        return resp;
-    }*/
+        return resp;*/
+    }
 
-    /*function title (){
+    function title (){
         
         var resp="";
         var cont=true;
         var i=0;
-        for( i=0; i < 29 && cont; i++){
+        for( i=0; i < 35 && cont; i++){
             if(proyecto.titulo){
                 if(proyecto.titulo[i]){
                     resp += proyecto.titulo[i];
@@ -183,22 +183,21 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
             resp = proyecto.titulo;
         }
         return resp;
-        
+        */
     }
-    */
+    
     return (
         <Box >
             <CardContent className="card-container-box">
                 <Typography gutterBottom className="content-title">
-                    {proyecto.titulo}
+                    {title()}
                 </Typography>
                 <Typography className="content-description" color="textSecondary" component="p">
-                    {proyecto.descripcion}
+                    {content()}
                 </Typography>
             </CardContent>
             <CardActions className="card-action-box">
                 {botonParticiparProyecto}
-                {botonCancelarParticipacion}
                 <VerProyectoBtn proyecto={proyecto}/>
                 {botonEditarProyecto}
                 
