@@ -67,7 +67,7 @@ const ResumedCardProyect = ({ event, enlisted }) => {
           >
             {/* <DateRangeIcon className={classes.date_icon} /> */}
             <b style={{ color: "black" }}>
-              {`  ${months[parseInt(event.fecha_inicio.split("/")[1])]} ${event.fecha_inicio.split("/")[2] } 
+              {`  ${months[parseInt(event.fecha_inicio.split("-")[1])]} ${event.fecha_inicio.split("-")[1] }
               `}{" "}
             </b>
           </Typography>

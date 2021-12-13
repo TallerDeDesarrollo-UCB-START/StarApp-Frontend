@@ -35,7 +35,7 @@ const EventosProyecto = ({ id, title }) => {
   const smallScreen = !useMediaQuery("(min-width:500px)");
   const [events, setEvents] = useState([]);
   const classes = useStyles();
-  const baseURL = `${process.env.REACT_APP_API}eventos_de_proyecto/${id}`;
+  const baseURL = `${process.env.REACT_APP_API}eventos_de_proyecto/${id.titulo}`;
   useEffect(
     () =>
       axios

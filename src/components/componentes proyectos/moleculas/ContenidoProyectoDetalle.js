@@ -203,7 +203,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
                 {botonEliminarProyecto}
             </BoxButtons>
             <h2 className="titleEventos">Eventos</h2>
-            <EventosProyecto id={proyecto.id} title={false}/>
+            <EventosProyecto id={proyecto} title={false}/>
             {listaPartipantes}
             {switchListaParticipantes}
             {snackBarComponent}
