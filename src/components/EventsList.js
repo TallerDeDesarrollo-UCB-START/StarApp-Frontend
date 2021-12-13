@@ -624,26 +624,30 @@ class EventsList extends Component {
                     image="https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg"
                     className="img-fluid"
                   />
-                  <CardHeader
-                    title={event.nombre_evento}
-                    subheader={event.descripcion_evento}
-                    titleTypographyProps={{ gutterBottom: true }}
-                  />
-                  <CardContent>
-                    <p className="card-info">
-                      <b>La Modalidad del Evento es:</b> {event.modalidad_evento}
-                    </p>
-                    <p className="card-info">
-                      <b>Fecha:</b> {event.fecha_evento}{" "}
-                    </p>
-                    <p className="card-info">
-                      <b>Lugar:</b> {event.lugar_evento}{" "}
-                    </p>
-                    <p className="card-info">
-                      {" "}
-                      <b>Categoría:</b> {event.categoria}{" "}
-                    </p>
-                  </CardContent>
+                  
+                  <div className="CardScroll">
+                    <CardHeader 
+                      title={event.nombre_evento}
+                      subheader={event.descripcion_evento}
+                      titleTypographyProps={{ gutterBottom: true }}
+                    />
+                    <CardContent>
+                      <p className="card-info">
+                        <b>La Modalidad del Evento es:</b> {event.modalidad_evento}
+                      </p>
+                      <p className="card-info">
+                        <b>Fecha:</b> {event.fecha_evento}{" "}
+                      </p>
+                      <p className="card-info">
+                        <b>Lugar:</b> {event.lugar_evento}{" "}
+                      </p>
+                      <p className="card-info">
+                        {" "}
+                        <b>Categoría:</b> {event.categoria}{" "}
+                      </p>
+                    </CardContent>
+                  </div>
+                  
                   <CardBody className="CardBody-Eventos">
                     {this.validarBotones(event) ? (
                       <Button

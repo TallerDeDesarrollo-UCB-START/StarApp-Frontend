@@ -11,6 +11,7 @@
 .Container-Body {
   margin-top: 20px;
   display: grid;
+
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 
 }
@@ -43,6 +44,7 @@
 
 .card1 {
   width: 97%;
+  height: 830px;
   display: inline-block;
   background: #fff;
   border: 1px solid #ccc;
@@ -50,6 +52,7 @@
   transition: 0.3s;
   position: relative;
   text-align: left;
+
 }
 
 .card-header1 {
@@ -63,7 +66,14 @@
   padding: 30px 20px;
   text-align: center;
   font-size: 18px;
+  
 }
+
+.CardScroll{
+  height: 350px;
+  overflow-y: scroll;
+}
+
 
 .card-body1 .btn {
   display: block;
