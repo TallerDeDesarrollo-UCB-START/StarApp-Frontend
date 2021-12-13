@@ -1,11 +1,10 @@
 // Componentes:
 import InputTexto from '../moleculas/InputTexto'
-//import InputDropDown from "../atomos/InputDropDown";
 // Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
-//import { makeStyles } from '@material-ui/core/styles';
+//import { makeStyles } from '@material-ui/core/styles'
 import { Button, Modal } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -32,7 +31,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [titulo, setTitulo] = useState(proyecto.titulo)
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
-    const [informacion_adicional, setInfoAd] = useState(proyecto.infoAd)
     const [url_imagen, setImagenUrl] = useState(proyecto.url_imagen)
     // States dropwdown values
     const [estadoId, setEstadoId] = useState(findValue("estado"))
@@ -49,7 +47,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setTitulo('')
         setDescripcion('')
         setObjetivo('')
-        setInfoAd('')
         setImagenUrl('')
     }
     function getModalStyle() {
@@ -105,9 +102,9 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         const [yearF, monthF,dayF ] = fechaFin.split("-")
         const fecha_i_val = new Date(monthI+' '+dayI+' '+yearI);
         const fecha_f_val = new Date(monthF+' '+dayF+' '+yearF);
-        const validacion = estado === true  &&  fecha_i_val > fecha_f_val
+        const validacion = estado === true  &&  fecha_i_val >= fecha_f_val
         if(validacion){
-            alert("-El proyecto ya CONCLUYÓ.\n\n-Amplie la fecha de finalización y coloque el estado EN CURSO si quiere\n que el proyecto esté EN CURSO nuevamente.")
+            alert("-La fecha de finalizacion no puede ser menor ni igual a la fecha de inicio.\n\n-Amplie la fecha de finalización y coloque el estado deseado del proyecto (conclido o en curso)")
         }
         return validacion
         // NOTE: Validacion provisional para que no se pueda actualizar una fecha_fin > fecha_inicio
@@ -122,7 +119,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeLider = (e) => {setLiderId(e.target.value)}
     const onChangeCategoria = (e) => {setCategoriaId(e.target.value)}
     const onChangeEstado = (e) => {setEstadoId(e.target.value)}
-    const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
     const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
     
     const onSubmit = data => {
@@ -190,6 +186,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     nameId="descripcion"
                                     value={descripcion}
                                     onChange={onChangeDescrip}
+                                    options={{required: true}}
                                     />
                         {/*NOTE: OBJETIVO*/}
                         <InputTexto type="text"
@@ -198,7 +195,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     nameId="objetivo"
                                     value={objetivo}
                                     onChange={onChangeObjetivo}
-                                    options={{required: true}}
                                     />
                         {/*NOTE: Dropwdown LIDER*/}
                         <DynamicDropdown titulo="Lideres"
@@ -223,15 +219,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                         onChange={onChangeEstado}
                                         idField={'value'}
                                         labelField={'label'}/>
-                        
-                        {/*NOTE: INFO ADICIONAL*/}
-                        <InputTexto type="link"
-                                    tituloLabel="Información Adicional"
-                                    nameId="informacion_adicional" 
-                                    placeHolder='Información Adicional'
-                                    value={informacion_adicional}
-                                    onChange={onChangeInfoAd}
-                                    />
+    
                         <InputTexto type="text" 
                                     tituloLabel="Imagen por Link"
                                     nameId="url_imagen" 

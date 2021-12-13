@@ -13,15 +13,15 @@ function useQuery() {
 }
 
 function VistaProyectos() {
-    // Hooks
-    //window.location.reload()
+    // ==== HOOKS ==== 
     const [proyectos, setProyectos] = useState([])
     const [lideres, setLideres] = useState([])
     const [categorias, setCategorias] = useState([])
     const [proyectosPasadosCategoria, setProyectosPasadosCategoria] = useState([])
     const [actualizar, setActualizar] = useState(false)
-    const mountedRef = useRef(false)
-    // Variables
+    const mountedRef = useRef(false) // Bandera para saber si un componente esta desmontado o no, para evitar warning de cancelacion abrubta de llamadas asincronas
+
+    // ==== VARIABLES ====
     let categoria = useQuery().get("categoria");
     let complementoHeader = categoria//categoria? categoria : tipoEstado
     complementoHeader = complementoHeader? complementoHeader : ""
@@ -31,51 +31,70 @@ function VistaProyectos() {
             pasados? setProyectosPasadosCategoria(data) : setProyectos(data)
         }
     }
-
+    
+    // USE EFFECT
     useEffect(() => {
         mountedRef.current = true
         const getProyectos = async () => {
             const proyectosDelServer =  await fetchProyectos()
             setProyectosCheck(proyectosDelServer, mountedRef.current)
         }
-
-        const getProyectosFiltro = async () => {
-            const proyectosFiltrados = await filtrarPorCategoria(categoria)
+        const getProyectosPorCategoria = async () => {
+            const proyectosFiltrados = await fetchProyectosPorCategoria(categoria)
             setProyectosCheck(proyectosFiltrados, mountedRef.current)
+        }
+        const getProyectosPasadosPorCategoria = async () => {
+            const proyectosPasados =  await fetchProyectosPasadosPorCategoria(categoria)
+            setProyectosCheck(proyectosPasados, mountedRef.current, true)
         }
         const getLideres = async ()=>{
             const lideresDelServer = await fetchLideres()
             mountedRef.current && setLideres(lideresDelServer)
-            //console.log(lideresDelServer)
         }
-
         const getCategorias = async () => {
             const categosServer = await fetchCategorias()
             mountedRef.current && setCategorias(categosServer)
         }
+        
 
-        const getProyectosPasadosCategoria = async () => {
-            const proyectosPasados =  await fetchProyectosPasadosCategoria(categoria)
-            setProyectosCheck(proyectosPasados, mountedRef.current, true)
-        }
-
-        categoria? getProyectosFiltro() : getProyectos()
-        getProyectosPasadosCategoria()
+        categoria? getProyectosPorCategoria() : getProyectos()
+        getProyectosPasadosPorCategoria()
         getLideres()
         getCategorias()
 
         return () => {
             mountedRef.current = false // Desmontar componentes evitando warnings
         }
-
     }, [actualizar, categoria, /*proyectosPasadosCategoria*/] )
 
-    // HTTP requests & functions
+    
+    // ==== HTTP REQUESTS & FUNCIONES ====
+    // GETs
     async function fetchProyectos() {
         const response = await fetch(URLProyectos)
         const data = await response.json()
         return data;
     }
+
+    const fetchProyectosPorCategoria = async(categoria) => {
+        const response= await fetch(`${URLProyectos}/${categoria}`)
+        const data = response && response.status === 204? [] : await response.json(); //FIXME: Evita un warning, pero backend deberia hacer esta validacion del status 204 y no frontend
+        return data
+        //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
+    }
+
+    async function fetchProyectosPasadosPorCategoria(categoria) {
+        const response = await fetch(`${URLProyectosPasados}/${categoria}`)
+        const data = await response.json()
+        return data;
+    }
+    
+    const fetchCategorias = async () => {
+        const response = await fetch(URLCategorias)
+        const data = await response.json()
+        return data
+    }
+
     async function fetchLideres() {
         const response = await fetch(URLLideres)
         const data = await response.json()
@@ -84,70 +103,9 @@ function VistaProyectos() {
         for (let x of data ) {
             dataLider.push({"id": index,"nombre":`${x.nombre}`})
             index++
-            
         }
         //dataLider.pop()
-        //console.log(dataLider)
         return dataLider;
-    }
-
-    /*async function fetchProyectosPasados() {
-        const response = await fetch(URLProyectosPasados)
-        const data = await response.json()
-        return data;
-    }*/
-
-    async function fetchProyectosPasadosCategoria(categoria) {
-        const response = await fetch(`${URLProyectosPasados}/${categoria}`)
-        const data = await response.json()
-        return data;
-    }
-
-    const fetchCategorias = async () => {
-        const response = await fetch(URLCategorias)
-        const data = await response.json()
-        return data
-    }
-
-    const crearProyecto = async (nuevoProyecto) => {
-        const response = await fetch(
-            URLCrearProy,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify(nuevoProyecto)
-            })
-        const data = await response.json()
-        //console.log(data)
-        setProyectos([...proyectos, data])
-        setActualizar(!actualizar)
-    
-    }
-
-    const participarEnProyecto = async (id) => { 
-        //debugger
-        const idSesion = sessionStorage.getItem("id");
-        const response = await fetch(
-        `${URLParticiparProy}/${id}/sesion/${idSesion}`,
-        { 
-            method: 'PUT'
-        })
-        const data = await response.json()
-        //setActualizar(!actualizar)
-        return data
-    }
-
-    const cancelarParticipacionProyecto = async (id) => { 
-        //debugger
-        const idSesion = sessionStorage.getItem("id");
-        const response = await fetch(
-            `${URLCancelarParticipProy}/${id}/sesion/${idSesion}`,
-            { 
-                method: 'DELETE'
-            })
-        const data = await response.json()
-        //setActualizar(!actualizar)
-        return data
     }
 
     const obtenerParticipacionProyecto = async (idProyecto) => {
@@ -169,21 +127,67 @@ function VistaProyectos() {
         return data;
     }
 
-    const editarProyecto = async (proyectoEditar) => {
-        //debugger
+    /*async function fetchProyectosPasados() {
+        const response = await fetch(URLProyectosPasados)
+        const data = await response.json()
+        return data;
+    }*/
+    
+    // CREATEs
+    const crearProyecto = async (nuevoProyecto) => {
         const response = await fetch(
+            URLCrearProy,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(nuevoProyecto)
+            })
+        const data = await response.json()
+        setProyectos([...proyectos, data])
+        setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
+    
+    }
+    
+    // UPDATEs
+    const editarProyecto = async (proyectoEditar) => {
+        //const response = 
+        await fetch(
             `${URLEditarProy}/${proyectoEditar.id}`,
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify(proyectoEditar)
             })
-        const data = await response.json()
-        
+        //const data = await response.json()
         //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
-        setActualizar(!actualizar)
+        setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
     }
-        
+
+    const participarEnProyecto = async (id) => { 
+        const idSesion = sessionStorage.getItem("id");
+        const response = await fetch(
+        `${URLParticiparProy}/${id}/sesion/${idSesion}`,
+        { 
+            method: 'PUT'
+        })
+        const data = await response.json()
+        //setActualizar(!actualizar)
+        return data
+    }
+    
+    // DELETEs
+    const cancelarParticipacionProyecto = async (id) => { 
+        const idSesion = sessionStorage.getItem("id");
+        const response = await fetch(
+            `${URLCancelarParticipProy}/${id}/sesion/${idSesion}`,
+            { 
+                method: 'DELETE'
+            })
+        const data = await response.json()
+        //setActualizar(!actualizar)
+        return data
+    }
+
     const eliminarProyecto = async (id) => { 
         await fetch(
         `${URLEliminarProy}/${id}`,
@@ -194,18 +198,7 @@ function VistaProyectos() {
         setProyectos(proyectos.filter((proy) => proy.id !== id));
     }
 
-    const filtrarPorCategoria = async(categoria) => {
-        const response= await fetch(
-            `${URLProyectos}/${categoria}`,
-            {
-                method: 'GET'
-            }
-        )
-        const data = await response.json();
-        return data
-        //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
-        
-    }
+    // ==== COMPONENTES: ====
     let proyectosAdmins = <ProyectosAdmins rol={"core team"}
                                 proyectos={proyectos}
                                 lideres={lideres} 
@@ -227,7 +220,8 @@ function VistaProyectos() {
                                     onNumeroParticipantes={obtenerNumeroParticipantes}
                                     tituloHeader={complementoHeader}
                                     proyectosPasadosCategoria={proyectosPasadosCategoria}/>
-    //console.log(proyectosVoluntarios)
+    
+    // ==== RENDER ====
     return (
         <>
             <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>

@@ -1,5 +1,5 @@
 // Componentes:
-//import ProyectosPasadosBtn from '../atomos/ProyectosPasadosBtn'
+
 import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
 // Librerias-Paquetes-Estilos: 
 import './HeaderProyectos.css';
@@ -43,7 +43,3 @@ function HeaderProyectosAdmin({tituloHeader}) {
 }
 
 export default HeaderProyectosAdmin
-
-/*
- <ProyectosPasadosBtn/>
- */
