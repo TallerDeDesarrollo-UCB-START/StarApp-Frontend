@@ -6,7 +6,7 @@ import {withStyles} from "@material-ui/core/styles";
 
 function CrearProyectoBtn({onActivarForm}) {
     return (
-        <CrearButton variant="contained" color="secondary" onClick={onActivarForm}>
+        <CrearButton variant="contained" onClick={onActivarForm}>
             Crear proyecto
         </CrearButton>
     )
@@ -15,6 +15,7 @@ function CrearProyectoBtn({onActivarForm}) {
 const CrearButton = withStyles((theme) => ({
     root: {
       color: "#FFFFFF",
+      backgroundColor: "#269BD5",
     },
 }))(Button);
 

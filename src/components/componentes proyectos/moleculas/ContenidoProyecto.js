@@ -2,7 +2,7 @@
 import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
-import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
+//import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 import SnackbarMessage from '../../templates/SnackbarMessage';
 import VerProyectoBtn from '../atomos/VerProyectoBtn';
 // Permisos/Roles:
@@ -111,7 +111,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
                                                     onAvisoAccion={avisoAccion}
                                                     />
                             : ''
-    const botonCancelarParticipacion = participacion === true?
+    /*const botonCancelarParticipacion = participacion === true?
                             <CancelarParticipacionBtn proyecto={proyecto} 
                                                     onCancelarParticipacion={onCancelarParticipacion} 
                                                     onGetParticipacion={onGetParticipacion}
@@ -119,7 +119,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
                                                     onAvisoAccion={avisoAccion}
                                                     />
-                            : ''
+                            : ''*/
     const botonEditarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
                                     <EditarProyectoBtn  onActivarForm={onActivarForm}
                                                         proyecto={proyecto}/>
