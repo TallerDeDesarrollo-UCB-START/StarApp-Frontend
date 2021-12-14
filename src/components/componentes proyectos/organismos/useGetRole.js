@@ -1,27 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function useGetRole() {
-    const [rol, setRol] = useState('voluntario')
-    
+    const [rol, setRol] = useState('none')
+    const mountedRef = useRef(false)
     useEffect(() => {
-        //debugger;
-        let controller = new AbortController();
+        mountedRef.current = true
         const obtenerRol = async () => {
             const idAuth = sessionStorage.getItem("id");
             const response = await fetch(`${URLObtenerRol}/${idAuth}`,
             { 
                 method: 'GET'
-            },
-            {
-                signal: controller.signal
             });
             const data = await response.json();
-            //console.log(data[0].rol)
-            setRol(data[0].rol)
-            controller = null
+            mountedRef.current && setRol(data[0].rol)
         }
         obtenerRol()
-        return () => controller?.abort();
+        return () => mountedRef.current = false;// Desmontar componentes evitando warnings
     }, [])
 
     return rol

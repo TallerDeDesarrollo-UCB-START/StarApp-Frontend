@@ -10,9 +10,9 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 const ParticipateButton = withStyles((theme) => ({
     root: {
         backgroundColor: "#269BD5",
-        height: 51,
+        height: "100%",//51, heigth: 51 NOTE: perjudica a la vista individual del ptoyecto.
         width: 119,
-        fontSize: 16,
+        //fontSize: 16, NOTE: perjudica a la vista individual del ptoyecto.
     },
 }))(Button);
 
@@ -21,6 +21,15 @@ const useStyles = makeStyles({
         display: 'flex',
         alignItems: 'center',
         gap: '8%'
+    },
+    contenedorBtnPasado: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8%',
+        backgroundColor: "#a8a8a8",
+        "&:hover": {
+            backgroundColor: "#818181",
+        },
     },
 });
 
@@ -34,7 +43,6 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
             if(proyecto.estado === varProyectos.estadoAcabado){
                 onAsignarSnackbarStatus("Participacion bloqueada", true, false);
                 onAvisoAccion()
-                return
             } else{
                 const participarResponse = await onPartiparProy(proyecto.id)
                 if(participarResponse){
@@ -51,11 +59,13 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
     }
     /*OPCIONALMENTE MOVER EL BOTON DE VOLVER ATRAS DE KEVIN*/
     const candado = proyecto && proyecto.estado === varProyectos.estadoAcabado? <LockIcon/> : ""
+    const estilosBtnPasado = proyecto && proyecto.estado === varProyectos.estadoAcabado? classes.contenedorBtnPasado : ""
     return (
         <div>
             <div id={proyecto.id}>
                 <ParticipateButton variant="contained"
                                     color="primary"
+                                    className={estilosBtnPasado}
                                     onClick={onClick}>
                     <Box className={classes.contenedorBtn}>
                         Unirme

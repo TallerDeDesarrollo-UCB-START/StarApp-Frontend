@@ -1,7 +1,6 @@
 // Componentes:
 
 // Librerias-Paquetes:
-import Banner from '../../../assets/example.png';
 import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import './BannerProyecto.css';
@@ -15,15 +14,15 @@ const useStyles = makeStyles({
     },
 });
 
-function BannerProyecto() {
+function BannerProyecto({proyecto}) {
 
     const classes = useStyles();
-
+    const urlImage = proyecto.url_imagen? proyecto.url_imagen : " "
     return (
         <CardMedia
           className={classes.media}
-          image={Banner}
-          title="Contemplative Reptile"
+          image={urlImage}
+          title={proyecto.title}
         />
     );
 }

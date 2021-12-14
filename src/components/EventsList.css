@@ -1,5 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+<!--test-- > body {
+  background: #fefefe;
+  font-family: sans-serif;
+}
+
+.Titulo-Eventos {
+  height: 70px;
+}
+
+.Container-Body {
+  margin-top: 20px;
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.Tarjeta-Principal-Evento {
+  text-align: center;
+}
+
+.Menu-Bar-Evento {
+  display: flex;
+  padding-top: 15px;
+}
+
+.header-filtro-eventos {
+  padding-left: 15px;
+  width: 50%;
+}
+
+.header-botones-eventos {
+  width: 50%;
+  justify-content: right;
+}
+
+.heading1 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+.btn-container-dus {
+  display: flex !important;
+  flex-direction: row;
+  justify-items: start;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100% !important;
+  margin-left: 0px;
+  margin-bottom: 0px;
+}
+.card1 {
+  width: 97%;
+  height: 830px;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  margin-bottom: 50px;
+  transition: 0.3s;
+  position: relative;
+  text-align: left;
+}
+
+.card-header1 {
+  text-align: center;
+  padding: 50px 10px;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: #fff;
+}
+
+.card-body1 {
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.CardScroll {
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.card-body1 .btn {
+  display: block;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  margin-top: 30px;
+  text-decoration: none;
+  padding: 10px 5px;
+}
+
+.card1:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (max-width: 1000px) {
+  .card1 {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .container1 {
+    width: 100%;
+  }
+
+  .heading1 {
+    padding: 20px;
+    font-size: 20px;
+  }
+
+  .card1 {
+    width: 80%;
+  }
+  .Menu-Bar-Evento {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+  .header-botones-eventos {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .header-filtro-eventos {
+    padding-left: 11%;
+    width: 50%;
+    justify-content: left;
+  }
+}
+<!--test-- > .media {
+  height: "256px";
+}
+.Button {
+  color: red;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+.card-evn {
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+.card-info {
+  padding-left: 5%;
+}
 #ModalFormCrearEvento {
-  width: 500px;
+  width: 360px;
   background-color: #f2f2f2 !important;
   text-align: center;
   padding: 3px;
@@ -21,8 +170,8 @@
   margin-bottom: 25px !important;
 }
 
-.botonActualizar {
-  background-color: #888888 !important;
+.botonCrear {
+  background-color: #269bd5 !important;
   color: white !important;
   width: 50%;
   margin: 4px !important;
@@ -30,20 +179,10 @@
 
 .botonCancelar {
   background-color: white !important;
-  color: #f00000 !important;
+  color: #e5282c !important;
   width: 45%;
   margin: 4px !important;
   border: 1px solid red !important;
-}
-
-.botonActualizar:hover {
-  background-color: #1694d2 !important;
-  color: white !important;
-}
-
-.botonCancelar:hover {
-  background-color: #f00000 !important;
-  color: white !important;
 }
 
 .CamposBotones {
@@ -90,19 +229,23 @@
 
 .TituloListaParticipantes {
   margin-top: 10px;
-  }
-  
-  h1{
-      padding-left: 16%;
-      padding-bottom: 25px;
-  }
-  
-  .header-lista-eventos {
-      top: 35%;
-      padding-left: 15.5%;
-  }
-  
-  .span-align{
-      padding-left: 10px;
-      padding-right: 5px;
-    }
+}
+
+h1 {
+  padding-left: 16%;
+  padding-bottom: 25px;
+}
+
+.header-lista-eventos {
+  top: 35%;
+  padding-left: 15.5%;
+}
+
+.span-align {
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+.Modal {
+  font-family: "DM Sons", sons-serif;
+}

@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
     
 }))
 const RecordatorioLlenarDatos=()=>{
+    
     const classes = useStyles()
     const history = useHistory();
     const [open, setOpen] = React.useState(false);
@@ -74,10 +75,12 @@ const RecordatorioLlenarDatos=()=>{
         }
         return model;
     }
-    function existEmptyiFields(model){    
-        var res=false    
-        for (var value of Object.keys(model)) {
-            if(model[value].length===0){ res=true; break;} 
+    function existEmptyiFields(model){ 
+        var aux=Object.assign({} , model)  
+        var res=false   
+        delete aux['horas_participadas_eventos'];        
+        for (var value of Object.keys(aux)) {
+            if(aux[value].length===0){ res=true; break;} 
         }
         return res;
     }   
@@ -92,7 +95,9 @@ const RecordatorioLlenarDatos=()=>{
                 setDatos({ ...removeNulls(response.data.data) });
                 setOpen(existEmptyiFields({...removeNulls(response.data.data) })&&islogged)
             }});
+        
       }, [datos.id, islogged]);
+      
       return(  
             <div className ={(open)?classes.recordatorioStyle:classes.noneRecordatorioStyle}>
                 <ErrorIcon className = {classes.marginRL5} color="error"/>

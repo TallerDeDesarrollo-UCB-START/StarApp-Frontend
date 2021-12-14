@@ -8,9 +8,9 @@ import { useMediaQuery } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from "@material-ui/core/Paper";
-import DatosPersonales from "./DatosPersonales";
-import ListaProyectos from "./perfil/proyectos/listaProyectos";
-import ListaEventos from './perfil/eventos/listaEventos';
+import ProyectosProximos from '../components/componentes proyectos/paginas/ProyectosProximos';
+import EventosProximos from './Home/EventosProximos';
+import ListaInsignias from './perfil/insignias/listaInsignias.jsx';
 
 function TabPanel(props) {
   const { getDataProfile, handleOpenprop,children, value, index, ...other } = props;
@@ -51,16 +51,14 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   mytab: {
-    marginLeft: "5%",
-    marginRight: "3%",
+    margin:"0 20px"
   },
 }));
 
-export default function TabsProfile(props) {
+export default function TabsProfile({ getDataProfile, handleOpenprop, sessionData }) {
   const classes = useStyles();
   const smallScreen = !useMediaQuery("(min-width:811px)")
   const [value, setValue] = React.useState(0);
-  const { getDataProfile, handleOpenprop } = props;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -71,23 +69,26 @@ export default function TabsProfile(props) {
         <Paper className={classes.root} >
           <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant={smallScreen? "scrollable": "fullWidth"}
           scrollButtons={smallScreen? "auto": "off"} >
-            <Tab className={classes.mytab} label="Mis Datos" {...a11yProps(0)} />
-            <Tab className={classes.mytab} label="Mis Eventos" {...a11yProps(1)} />
-            <Tab className={classes.mytab} label="Mis Proyectos" {...a11yProps(2)} />
+            <Tab className={classes.mytab} label="Tus Eventos" {...a11yProps(0)} /> 
+            <Tab className={classes.mytab} label="Tus Proyectos" {...a11yProps(1)} />
+            <Tab className={classes.mytab} label="Tus Logros" {...a11yProps(2)} />
           </Tabs>
         </Paper>
       </AppBar>
       
-      <TabPanel  value={value} index={0} style={{background: "#F2F2F2"}}>
+      {/* <TabPanel  value={value} index={0} style={{background: "#F2F2F2"}}>
         <DatosPersonales 
         getDataProfile={getDataProfile}
         handleOpenprop={handleOpenprop}/>
+      </TabPanel> */}
+      <TabPanel value={value} index={0}>
+        <EventosProximos id={sessionData.id} title={false}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ListaEventos></ListaEventos>
+        <ProyectosProximos title={false}></ProyectosProximos>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ListaProyectos></ListaProyectos>
+        <ListaInsignias></ListaInsignias>
       </TabPanel>
     </div>
   );

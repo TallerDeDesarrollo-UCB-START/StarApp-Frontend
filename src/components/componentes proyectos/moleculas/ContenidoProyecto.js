@@ -1,9 +1,8 @@
 // Componentes:
 import ParticiparEnProyectoBtn from '../atomos/ParticiparEnProyectoBtn';
 import EditarProyectoBtn from '../atomos/EditarProyectoBtn';
-import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn';
 import EtiquetaParticipacion from '../atomos/EtiquetaParticipacion';
-import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
+//import CancelarParticipacionBtn from '../atomos/CancelarParticipacionBtn';
 import SnackbarMessage from '../../templates/SnackbarMessage';
 import VerProyectoBtn from '../atomos/VerProyectoBtn';
 // Permisos/Roles:
@@ -17,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 
-function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
+function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, onGetParticipacion, onCancelarParticipacion, onNumeroParticipantes}) {
 
     // States:
     const [snackbar, setSnackbar] = useState({
@@ -112,7 +111,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                     onAvisoAccion={avisoAccion}
                                                     />
                             : ''
-    const botonCancelarParticipacion = participacion === true?
+    /*const botonCancelarParticipacion = participacion === true?
                             <CancelarParticipacionBtn proyecto={proyecto} 
                                                     onCancelarParticipacion={onCancelarParticipacion} 
                                                     onGetParticipacion={onGetParticipacion}
@@ -120,21 +119,17 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
                                                     onAsignarSnackbarStatus={asignarSnackbarStatus}
                                                     onAvisoAccion={avisoAccion}
                                                     />
-                            : ''
+                            : ''*/
     const botonEditarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
                                     <EditarProyectoBtn  onActivarForm={onActivarForm}
                                                         proyecto={proyecto}/>
                                 </PuertaPermisos>
-    const botonEliminarProyecto = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-                                        <EliminarProjectoBtn proyecto={proyecto}
-                                                            onEliminarProy={onEliminarProy}/>
-                                    </PuertaPermisos>
 
-    /*function content (){
+    function content (){
         var resp="";
         var cont=true;
         var i=0;
-        for(i=0; i < 85 && cont; i++){
+        for(i=0; i < 100 && cont; i++){
             if(proyecto.descripcion[i]!==undefined){
                 resp += proyecto.descripcion[i];
             }else {
@@ -155,15 +150,15 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
         } else {
             resp = proyecto.descripcion;
         }
-        return resp;
-    }*/
+        return resp;*/
+    }
 
-    /*function title (){
+    function title (){
         
         var resp="";
         var cont=true;
         var i=0;
-        for( i=0; i < 29 && cont; i++){
+        for( i=0; i < 35 && cont; i++){
             if(proyecto.titulo){
                 if(proyecto.titulo[i]){
                     resp += proyecto.titulo[i];
@@ -188,25 +183,24 @@ function ContenidoProyecto({proyecto, /*rol,*/ onEliminarProy, onActivarForm, on
             resp = proyecto.titulo;
         }
         return resp;
-        
+        */
     }
-    */
+    
     return (
         <Box >
             <CardContent className="card-container-box">
                 <Typography gutterBottom className="content-title">
-                    {proyecto.titulo}
+                    {title()}
                 </Typography>
                 <Typography className="content-description" color="textSecondary" component="p">
-                    {proyecto.descripcion}
+                    {content()}
                 </Typography>
             </CardContent>
             <CardActions className="card-action-box">
                 {botonParticiparProyecto}
-                {botonCancelarParticipacion}
                 <VerProyectoBtn proyecto={proyecto}/>
                 {botonEditarProyecto}
-                {botonEliminarProyecto}
+                
             </CardActions>
             {tagParticipacion}
             <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
