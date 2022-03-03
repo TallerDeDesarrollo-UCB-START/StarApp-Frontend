@@ -41,9 +41,8 @@ const apiProyectos = axios.create({
 
 const current = new Date();
 
-const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${(
-  "0" + current.getDate()
-).slice(-2)}`;
+//const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${("0" + current.getDate()).slice(-2)}`;
+const currentDate = `${current.getFullYear()}-${("0" + parseInt(current.getMonth()+1)).slice(-2)}-${("0" + current.getDate()).slice(-2)}`;
 
 const api = axios.create({
   baseURL: urlDeploy,
