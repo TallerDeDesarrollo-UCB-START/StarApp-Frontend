@@ -1,0 +1,21 @@
+{
+  "name": "pruebacucumber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/pretty-formatter": "^1.0.0-alpha.1",
+    "chai": "^4.3.6",
+    "cucumber": "^7.0.0-rc.0"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^7.3.2",
+    "selenium-webdriver": "^4.1.1"
+  }
+}
