@@ -25,6 +25,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.4",
     "bootstrap": "^5.1.2",
+    "chromedriver": "^99.0.0",
     "country-list-spanish": "^0.2.1",
     "date-fns": "^2.24.0",
     "final-form": "^4.20.2",
@@ -47,6 +48,7 @@
     "react-select-search": "^3.0.8",
     "react-text-mask": "^5.4.3",
     "reactstrap": "^8.10.0",
+    "selenium-webdriver": "^4.1.1",
     "web-vitals": "^1.0.1",
     "xlsx": "^0.17.2"
   },
@@ -74,5 +76,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.3.2"
   }
 }
