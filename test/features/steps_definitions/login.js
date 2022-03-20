@@ -1,8 +1,7 @@
 //cucumber
 const { Given, When, Then, AfterAll } = require('@cucumber/cucumber');
 const { Builder, By, Capabilities, Key } = require('selenium-webdriver');
-const { expect } = require('chai');
-const { assert  = 
+const { expect } = require('chai'); 
 
 require("chromedriver");
 
