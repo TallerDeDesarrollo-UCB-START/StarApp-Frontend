@@ -2,7 +2,7 @@ import fb from "firebase";
 
 const config = {
   apiKey: "AIzaSyBVkBZ6TKoobHmk4vcIWmPVehlOcLzP2QY",
-  authDomain: "startamericastogether.firebaseapp.com",
+  authDomain: "https://dev-front-startamericas.web.app/",
   projectId: "startamericastogether",
   storageBucket: "startamericastogether.appspot.com",
   messagingSenderId: "706351017993",
