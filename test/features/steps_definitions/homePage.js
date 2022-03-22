@@ -9,11 +9,11 @@ const capabilities = Capabilities.chrome();
 capabilities.set('chromeOptions', { "w3c": false });
 const driver = new Builder().withCapabilities(capabilities).build();
 let BaseUrl="";
-Given('I´ve visited the page {string}',async function (url) {
+Given('I have visited the page {string}',async function (url) {
     // Write code here that turns the phrase above into concrete actions
     BaseUrl=url;
 });
-When('I´ve tried to into the web page',{timeout: 60 * 1000},async function () {
+When('I have tried to into the web page',{timeout: 60 * 1000},async function () {
     // Write code here that turns the phrase above into concrete actions
     await driver.get(BaseUrl);
     await driver.manage().window().maximize();
