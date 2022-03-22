@@ -7,10 +7,10 @@ Background:
     Given I am logged in the Start Americas Together page
 
 Scenario: Add new event
-    Given I see the Start Americas Together page and events title
-    And I scroll the page
-    When I click on the Explorar Eventos button
-    And I should see the events page
+    Given I see the Start Americas Together page
+    # And I scroll the page
+    When I click on the Eventos button
+    # And I should see the events page
     And I click on Crear Evento Button
     And I fill '<name>', '<description>','<place>' and '<date>' in the event card
     And I click on Guardar Evento
