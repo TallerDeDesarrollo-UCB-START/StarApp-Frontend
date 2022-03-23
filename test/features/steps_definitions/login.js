@@ -21,13 +21,14 @@ Given('I have entered {string} into the email field',async (email)=> {
 Given('I have entered {string} into the password field', async  (password)=> {
     await driver.findElement(By.name('password')).sendKeys(password);
 });
-When('I press the {string} button',async (code)=> {
+When('I press the {string} button',{timeout: 60*1000},async (code)=> {
     let xpath=`//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button`;
     await driver.findElement(By.xpath(xpath)).click();
   });
 Then('the welcome message should be dispayed on the screen',async ()=> {
-  let xpath = '/html/body/div/div[2]/header';
-  await driver.findElement(By.xpath(xpath)).getText();
+  let xpath = '/html/body/div[1]/div[2]/div[1]/section/div[1]/div[1]/div/button/span[1]';
+  let answer= await driver.findElement(By.xpath(xpath));
+  expect(answer.getText()).to.be.equal("");
 });
 AfterAll(async () => {
   await driver.close();
