@@ -9,7 +9,7 @@ require("chromedriver");
 // driver setup
 const capabilities = Capabilities.chrome();
 //capabilities.set('chromeOptions', { "w3c": false });
-capabilities.set("goog:chromeOptions", {"args": ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]});  
+capabilities.set("goog:chromeOptions", {"args": ["--no-sandbox", "--disable-dev-shm-usage"]});  
 const driver = new Builder().withCapabilities(capabilities).build();
 let BaseUrl="https://dev-front-startamericas.web.app/login"
 
@@ -24,12 +24,13 @@ Given('I have entered {string} into the password field', async  (password)=> {
     await driver.findElement(By.name('password')).sendKeys(password);
 });
 When('I press the {string} button',async (code)=> {
-    let xpath=`//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button`;
+    let xpath=`/html/body/div/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button/span[1]`;7
+    await sleep(1000);
     await driver.findElement(By.xpath(xpath)).click();
   });
 Then('the welcome message should be dispayed on the screen',async ()=> {
   let xpath = '//*[@id="root"]/div[2]/div[1]/section/div[1]/div[1]/h2';
-  await sleep(10000);
+  await sleep(1000);
   let AuxText= await driver.findElement(By.xpath(xpath)).getText();
   expect(AuxText).to.be.equal("Tus Próximos Eventos");
 });
