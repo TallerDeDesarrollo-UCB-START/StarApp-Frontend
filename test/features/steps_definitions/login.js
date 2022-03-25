@@ -8,7 +8,8 @@ require("chromedriver");
 
 // driver setup
 const capabilities = Capabilities.chrome();
-capabilities.set('chromeOptions', { "w3c": false });
+//capabilities.set('chromeOptions', { "w3c": false });
+capabilities.set("goog:chromeOptions", {"args": ["--headless", "--no-sandbox", "--disable-dev-shm-usage"]});  
 const driver = new Builder().withCapabilities(capabilities).build();
 let BaseUrl="https://dev-front-startamericas.web.app/login"
 
