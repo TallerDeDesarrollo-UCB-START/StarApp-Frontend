@@ -26,8 +26,8 @@ jobs:
       run: npm install
 
 
-#    - name: Run unit tests
-#      run: npm run test 
+    - name: Run unit e2e test
+      run: npm test 
 
 
     - name: SonarCloud Scan
