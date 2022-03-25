@@ -28,7 +28,7 @@ When('I press the {string} button',async (code)=> {
   });
 Then('the welcome message should be dispayed on the screen',async ()=> {
   let xpath = '//*[@id="root"]/div[2]/div[1]/section/div[1]/div[1]/h2';
-  await sleep(1000);
+  await sleep(10000);
   let AuxText= await driver.findElement(By.xpath(xpath)).getText();
   expect(AuxText).to.be.equal("Tus Próximos Eventos");
 });
