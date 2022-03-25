@@ -21,7 +21,8 @@ When('I´ve tried to into the web page',{timeout: 60 * 1000},async function () {
 Then('Show me home page',async function () {
     let xpath = '//*[@id="root"]/div[2]/div[1]/section/div[1]/div/div[2]/button[1]/span[1]';
     let AuxText= await driver.findElement(By.xpath(xpath)).getText().then(r=>r);
-    expect(AuxText).to.be.equal("ÚNETE A START")
+    expect(AuxText).to.be.equal("ÚNETE A START");
+    //expect(AuxText)).toBe(3);
 });
 AfterAll(async () => {
     await driver.close();

@@ -2,6 +2,7 @@
 const { Given, When, Then, AfterAll } = require('@cucumber/cucumber');
 const { Builder, By, Capabilities, Key } = require('selenium-webdriver');
 const { expect } = require('chai'); 
+const sleep = require('../support/sleep.js');
 
 require("chromedriver");
 
@@ -21,14 +22,16 @@ Given('I have entered {string} into the email field',async (email)=> {
 Given('I have entered {string} into the password field', async  (password)=> {
     await driver.findElement(By.name('password')).sendKeys(password);
 });
-When('I press the {string} button',{timeout: 60*1000},async (code)=> {
+When('I press the {string} button',async (code)=> {
     let xpath=`//*[@id="root"]/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button`;
     await driver.findElement(By.xpath(xpath)).click();
   });
 Then('the welcome message should be dispayed on the screen',async ()=> {
-  let xpath = '/html/body/div[1]/div[2]/div[1]/section/div[1]/div[1]/div/button/span[1]';
-  let answer= await driver.findElement(By.xpath(xpath));
-  expect(answer.getText()).to.be.equal("");
+  let xpath = '//*[@id="root"]/div[2]/div[1]/section/div[1]/div[1]/h2';
+  await sleep(1000);
+  let AuxText= await driver.findElement(By.xpath(xpath)).getText();
+  expect(AuxText).to.be.equal("Tus Próximos Eventos");
+  console.log(AuxText);
 });
 AfterAll(async () => {
   await driver.close();
