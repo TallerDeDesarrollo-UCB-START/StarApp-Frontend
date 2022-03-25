@@ -31,7 +31,6 @@ Then('the welcome message should be dispayed on the screen',async ()=> {
   await sleep(1000);
   let AuxText= await driver.findElement(By.xpath(xpath)).getText();
   expect(AuxText).to.be.equal("Tus Próximos Eventos");
-  console.log(AuxText);
 });
 AfterAll(async () => {
   await driver.close();
