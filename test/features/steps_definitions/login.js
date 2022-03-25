@@ -25,18 +25,17 @@ Given('I have entered {string} into the password field', async  (password)=> {
 });
 When('I press the {string} button',{timeout:50*1000},async (code)=> {
     let xpath=`/html/body/div/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button/span[1]`;
-    let button=await driver.findElement(By.xpath(xpath));
-    button.click();
+    let button= driver.findElement(By.xpath(xpath));
+    await driver.wait(until.elementIsVisible(button)).click();
   });
 Then('the welcome message should be dispayed on the screen',async ()=> {
   var xpath = '//*[@id="root"]/div[2]/header/div[2]/div/button[1]';
   await sleep(1000);
   //await driver.wait(until.elementLocated(By.xpath(xpath)));
-  let AuxText= await driver.findElement(By.xpath(xpath)).getText().then(r=>r);
-  await driver.wait(until.elementIsVisible(AuxWebElement),50*1000);
-  expect(AuxText).to.be.equal("Tus Próximos Eventos");
-  console.log("MI RESPUESTA: "+ AuxText);
-  console.log(By.xpath(xpath))
+  let AuxWebElement= driver.findElement(By.xpath(xpath));
+  let AuxText=await driver.wait(until.elementIsVisible(AuxWebElement),50*1000).getText();
+  expect(AuxText).to.be.equal("Inicio");
+  //console.log("MI RESPUESTA: "+ AuxText);
 });
 AfterAll(async () => {
   await driver.close();
