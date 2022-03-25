@@ -14,7 +14,7 @@ Scenario Outline: Login as voluntary, lider, coreteam
 Examples:
     | e-mail                                 | password   |
     | pruebadev@gmail.com                    | prueba123  |
-    #| lider.auxiliar@start.auxiliar.com      | lideraux1  |
-    #| lider.team.start@start.com             | lider1     |
-    #| core.team.auxiliar@star.auxiliar.com   | coreteam1  |
-    #| core.team.start@start.com              | coreteam1  |
+    | lider.auxiliar@start.auxiliar.com      | lideraux1  |
+    | lider.team.start@start.com             | lider1     |
+    | core.team.auxiliar@star.auxiliar.com   | coreteam1  |
+    | core.team.start@start.com              | coreteam1  |
