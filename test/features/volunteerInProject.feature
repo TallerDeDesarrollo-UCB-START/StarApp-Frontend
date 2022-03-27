@@ -4,13 +4,15 @@ Feature: Participate in projects
     I want to participate in projects
 
 Background:
-    Given I am logged in the Start Americas Together page
+    Given I have browsed to the Start Americas Together login page
+    And I have entered "pruebadev@gmail.com" into the email field
+    And I have entered "prueba123" into the password field
 
 Scenario Outline: Participate in a Medio Ambiente project
-    Given I see the Start Americas Together page and events title
+    Given I see the Start Americas Together home page
     And I press the Proyectos button
-    And I press the Medio Ambiente projects
-    And I see the diferent projects of Medio Ambiente
-    When I choose Proyecto de demo project
+    And I press the Animales projects
+    And I see the diferent projects of Animales
+    When I choose a demo project
     And I press the Unirme button
     Then I should see Participando at the right corner of the project
