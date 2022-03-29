@@ -8,14 +8,14 @@ require("chromedriver");
 
 // driver setup
 const capabilities = Capabilities.chrome();
-//capabilities.set('chromeOptions', { "w3c": false });
-capabilities.set("goog:chromeOptions", {"args": ["--headless", "--no-sandbox", "--disable-dev-shm-usage","--disable-gpu","--window-size=1280,720"]});  
+// capabilities.set('chromeOptions', { "w3c": false });
+capabilities.set("goog:chromeOptions", {"args": ["--headless", "--no-sandbox", "--disable-dev-shm-usage","--disable-gpu","--window-size=2560,2468"]});  
 const driver = new Builder().withCapabilities(capabilities).build();
 let BaseUrl="https://dev-front-startamericas.web.app/login"
 
 Given('I have browsed to the Start Americas Together login page', async ()=> {
     await driver.get(BaseUrl);
-    //await driver.manage().window().maximize();
+    await driver.manage().window().maximize();
   });
 Given('I have entered {string} into the email field',async (email)=> {
     await driver.findElement(By.name('email')).sendKeys(email);
@@ -29,14 +29,16 @@ When('I press the {string} button',{timeout:50*1000},async (code)=> {
     await driver.wait(until.elementIsVisible(button)).click();
   });
 Then('the welcome message should be dispayed on the screen',async ()=> {
-  var xpath = '//*[@id="root"]/div[2]/header/div[2]/div/button[1]';
+  var xpath = '//*[@id="root"]/div[2]/header/div[2]/div/button[1]/span/span';
   await sleep(1000);
   //await driver.wait(until.elementLocated(By.xpath(xpath)));
   let AuxWebElement= driver.findElement(By.xpath(xpath));
   let AuxText=await driver.wait(until.elementIsVisible(AuxWebElement),50*1000).getText();
   expect(AuxText).to.be.equal("Inicio");
-  //console.log("MI RESPUESTA: "+ AuxText);
 });
 AfterAll(async () => {
   await driver.close();
 });
+
+
+module.exports = driver;
