@@ -6,8 +6,6 @@ const sleep = require('../support/sleep.js');
 const driver = require('../steps_definitions/login.js')
 require("chromedriver");
 
-
-
 // Given('I go to the Start Americas Together login page', async ()=> {
 //   await sleep(5000);
 //   await driver.get(BaseUrl);
@@ -63,3 +61,12 @@ Then('I should see the Dejar de Participar button',async ()=>{
   let AuxText=await driver.wait(until.elementIsVisible(AuxWebElement),50*1000).getText();
   expect(AuxText).to.be.equal("Dejar de Participar");
 });
+
+Then('I should press the Dejar de Participar button', async ()=> {
+  let xpath=`//*[@id="root"]/div[2]/div[1]/div/div[1]/div[2]/div[1]/div/div[2]/div/button[1]`;
+  let button= driver.findElement(By.xpath(xpath));
+  await driver.wait(until.elementIsVisible(button)).click();
+  await sleep(3000);
+});
+
+module.exports = driver;

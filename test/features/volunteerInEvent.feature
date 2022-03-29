@@ -8,7 +8,6 @@ Feature: Participate in events
     And I have entered "pruebadev@gmail.com" into the email field
     And I have entered "prueba123" into the password field
     And I press the "Iniciar Sesión" button
-    When I press the "Iniciar Sesión" button
 
 Scenario: Be part of prueba event
     When I see the Start Americas Together home page
