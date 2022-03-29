@@ -5,38 +5,39 @@
 <details>
   <summary><strong>Comandos para Inicializar</strong></summary>
 
-#### Comando para instalar Dependencias 
+#### Comando para instalar Dependencias
 
-    npm install  
+    npm install
 
 #### Comando para Ejecutar el Proyecto
 
     npm start
-    
-- *Comienza a escuchar en el puerto [localhost 5000](http://localhost:5000/)*
+
+- _Comienza a escuchar en el puerto [localhost 5000](http://localhost:5000/)_
 
 </details>
 
 <details>
     <summary><strong>Comandos para instalar</strong></summary>
 
- Abrir una ventana de comandos CMD
+    npm test
+
+Abrir una ventana de comandos CMD
 Ejecutar los siguientes comandos para verificar la instalación
-    node --version
-    npm --version
+node --version
+npm --version
 Crear un proyecto con React Js
-    npx create-react-app "Nombre de la aplicacion"
+npx create-react-app "Nombre de la aplicacion"
 Abrir Visual studio Code y ejecutar el siguiente comando
-    npm start
-Comandos adicionales crear evento 
-    npm i react-router-dom
-    npm i reactstrap
+npm start
+Comandos adicionales crear evento
+npm i react-router-dom
+npm i reactstrap
 
 </details>
 
 <details>
     <summary><strong>Tecnologías usadas</strong></summary>
-
 
 [![Material Version](https://img.shields.io/badge/Material--ui-v4.-blue)](https://v4.mui.com/)
 
@@ -87,6 +88,7 @@ Una biblioteca de exportación a Excel creada con y para React.
 [![react-hook-form v7 Version](https://img.shields.io/badge/react--hook--form-0.5.3-green)](https://www.npmjs.com/package/react-hook-form)
 
 Características
+
 - Construido con el rendimiento, UX y DX en mente
 - Abarca la validación de formas nativas
 - Integración fuera de caja con bibliotecas de interfaz de usuario
@@ -113,32 +115,35 @@ Si está usando Bootstrap 4, necesitará usar Reactstrap v8
 
 - src
 
-    - **assets e images**: Imágenes necesarias, como las insignias, el logo del proyecto. Aquí se colocan las imágenes necesarias.
+  - **assets e images**: Imágenes necesarias, como las insignias, el logo del proyecto. Aquí se colocan las imágenes necesarias.
 
-    - **components**: El proyecto está organizado por componentes, en los components se pueden colocar los archivos de las cuales está conformado el proyecto.
-        - **componentes proyectos**: (ordenadas de mayor a menor tamaño o por jerarquia de componentes)
-    
-               - paginas: Este folder contiene las vistas de las páginas de proyectos.
-               - organismos: Este folder contiene como componentes principales un Body, su Header y otros componentes que sean bastante amplios, que sirven como parte del layout de cada página, dependiendo del rol en el caso de "ProyectosAdmins" y "ProyectosVoluntarios". También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios dependiendo del rol.
-               - moleculas: Este folder "hijos" de un organismo o a otras "moleculas" como ser los Banners de cada vista, el contenido de los mismos, los formularios de crear y editar, entre otros.
-               - atomos: Este folder contiene los componentes más pequeños como ser los botones.
-                   (Esta division es algo subjetiva, sujeta al tamaño, dependencias y jerarquia de cada componente)
-    
-        - **CrearEvento**: Este folder contiene el componente "crearEvento.jsx" y el estilo del componente.
-        - **footer**: el footer inicial actualmente no usado
-        - **Formulario-evento.component**: Este folder contiene los archivos para el componente del Formulario de Crear Evento, que también es reutilizado en el Formulario de Editar Evento.
-        - **Header**: 
-            - header.jsx: contiene el componente principal de header
-        - **Home**: 
-            - Home.jsx: componente principal que contiene los demas componentes, home presenta LandingView si no se esta loggeado o EventosProximos en caso contrario
-        - **Perfil**: Folder que contiene las 3 secciones presentes en la vista de Cuenta
-        - **templates**: Este folder contiene algunos componentes altamente rehusables
-        - **UserTable**: Users.ksx es el componente principal que contiene los otros componentes
-    - **routes**
-        - **routes** : definición de objeto que relaciona todos los componentes con una ruta
-        - **AuthRoutesVerifier**: archivo que alberga funciones de verificación en las rutas
-    - **screens:** Algunas de los componentes que se asocian con una ruta en routes
-    - **initializer.js:** archivo de configuración para conexión con api de inicio de sesión con google
+  - **components**: El proyecto está organizado por componentes, en los components se pueden colocar los archivos de las cuales está conformado el proyecto.
+
+    - **componentes proyectos**: (ordenadas de mayor a menor tamaño o por jerarquia de componentes)
+
+           - paginas: Este folder contiene las vistas de las páginas de proyectos.
+           - organismos: Este folder contiene como componentes principales un Body, su Header y otros componentes que sean bastante amplios, que sirven como parte del layout de cada página, dependiendo del rol en el caso de "ProyectosAdmins" y "ProyectosVoluntarios". También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios dependiendo del rol.
+           - moleculas: Este folder "hijos" de un organismo o a otras "moleculas" como ser los Banners de cada vista, el contenido de los mismos, los formularios de crear y editar, entre otros.
+           - atomos: Este folder contiene los componentes más pequeños como ser los botones.
+               (Esta division es algo subjetiva, sujeta al tamaño, dependencias y jerarquia de cada componente)
+
+    - **CrearEvento**: Este folder contiene el componente "crearEvento.jsx" y el estilo del componente.
+    - **footer**: el footer inicial actualmente no usado
+    - **Formulario-evento.component**: Este folder contiene los archivos para el componente del Formulario de Crear Evento, que también es reutilizado en el Formulario de Editar Evento.
+    - **Header**:
+      - header.jsx: contiene el componente principal de header
+    - **Home**:
+      - Home.jsx: componente principal que contiene los demas componentes, home presenta LandingView si no se esta loggeado o EventosProximos en caso contrario
+    - **Perfil**: Folder que contiene las 3 secciones presentes en la vista de Cuenta
+    - **templates**: Este folder contiene algunos componentes altamente rehusables
+    - **UserTable**: Users.ksx es el componente principal que contiene los otros componentes
+
+  - **routes**
+    - **routes** : definición de objeto que relaciona todos los componentes con una ruta
+    - **AuthRoutesVerifier**: archivo que alberga funciones de verificación en las rutas
+  - **screens:** Algunas de los componentes que se asocian con una ruta en routes
+  - **initializer.js:** archivo de configuración para conexión con api de inicio de sesión con google
+
 - .env
 - package.json
 - README.md
@@ -151,7 +156,7 @@ Si está usando Bootstrap 4, necesitará usar Reactstrap v8
     El front esta basado en React el framework que elegimos este semestre.
     React maneja una arquitectura Llamada Flux, que es similar a MVC ya que también contiene , su modelo, vista y controladores pero esta pensada en un flujo de datos unidireccional. Los datos viajan desde la vista por medio de acciones y llegan a un Store desde el cual se actualizará la vista de nuevo.
     La Store sería lo más parecido al modelo de la aplicación. Guarda los datos y estado de la aplicación.
-    No hay métodos en la Store que permitan modificar los datos en ella, eso se hace a través de dispatchers y acciones. 
+    No hay métodos en la Store que permitan modificar los datos en ella, eso se hace a través de dispatchers y acciones.
     React utiliza JSX que permite incrustar etiquetas XML/HTML en el archivo de JavaScript, esto implica que JSX es una extensión de sintaxis para JavaScript es decir que en el mismo archivo JSX esistira codigo html javaScript y tambien css. Se tiene que usar un compilador como Babel, que recoge nuestro código JSX y lo compila para generar JavaScript que los navegadores puedan entender.
 
 </details>
@@ -163,9 +168,9 @@ Si está usando Bootstrap 4, necesitará usar Reactstrap v8
 
 En el caso de que se quiera implementar un nuevo componente, se debe tomar en cuenta la funcionalidad que será implementada
 y que rol de usuario podrá tener acceso a ella.
-Por ejemplo, se conoce que el Core team tiene el acceso total a la aplicación al ser un superusuario dentro de la misma, 
+Por ejemplo, se conoce que el Core team tiene el acceso total a la aplicación al ser un superusuario dentro de la misma,
 el Líder tiene acceso al CRUD de Eventos pero no al de Proyectos y
-el Voluntario únicamente tiene acceso a poder ingresar a la aplicación para participar dentro de los eventos y proyectos existentes. 
+el Voluntario únicamente tiene acceso a poder ingresar a la aplicación para participar dentro de los eventos y proyectos existentes.
 Por este motivo, se creó el componente "PuertaPermisos.js".
 Para usar "PuertaPermisos" se debe importar: "PuertaPermisos" y los "SCOPES" de "map-permisos" en el componente en el que será usado.
 (Ver "ContenidoProyecto.js" como ejemplo)
@@ -181,8 +186,7 @@ https://andela.com/insights/structuring-your-react-application-atomic-design-pri
 En el caso de que se quiera agregar nuevos permisos o roles, se debe incluir en "map-permisos.js"
 
 El consumo de Endpoints se hace desde los componentes "padre" de la carpeta de "componentes proyectos/paginas" y los datos consumidos y callbacks de funciones son enviados a través de props de react hacia los componentes "hijos" que necesiten los datos y callbacks.
-    
-    
+
 **Eventos**
 
 Crear un nuevo componente con la extensión ".jsx" y se llama en el archivo "EventsList.js"
