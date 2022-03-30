@@ -56,7 +56,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "CI=false && react-scripts build",
-    "test": "cucumber-js test/features/volunteerInProject.feature",
+    "test": "cucumber-js test/features/createEvent.feature",
     "eject": "react-scripts eject",
     "server": "json-server --watch db.json --port 5000"
   },
