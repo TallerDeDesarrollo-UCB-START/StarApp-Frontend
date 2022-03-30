@@ -27,7 +27,7 @@ When('I choose a demo project',async function () {
 });
 
 When('I press the Unirme button',{timeout:50*1000},async ()=> {
-    let xpath=`/html/body/div[1]/div[2]/div[1]/div/div[2]/div/div[1]/div[2]/div[2]/div/div/button`;
+    let xpath=`/html/body/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div[2]/div/div/button`;
     let button= driver.findElement(By.xpath(xpath));
     await driver.wait(until.elementIsVisible(button)).click();
     await sleep(3000);

@@ -36,9 +36,7 @@ Then('the welcome message should be dispayed on the screen',async ()=> {
   let AuxText=await driver.wait(until.elementIsVisible(AuxWebElement),50*1000).getText();
   expect(AuxText).to.be.equal("Inicio");
 });
-AfterAll(async () => {
-  await driver.close();
-});
+
 
 
 module.exports = driver;
