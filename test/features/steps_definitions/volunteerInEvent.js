@@ -48,7 +48,7 @@ Given('I should see the events page',async ()=> {
 });
 
 When('I press the button of Participar in the test event',{timeout:50*1000},async ()=> {
-  let xpath=`//*[@id="root"]/div[2]/div[1]/div/div[1]/div[2]/div[1]/div/div[2]/div/button[1]`;
+  let xpath=`//*[@id="root"]/div[2]/div[1]/div/div[1]/div[2]/div/div/div[2]/div/button[1]`;
   let button= driver.findElement(By.xpath(xpath));
   await driver.wait(until.elementIsVisible(button)).click();
   await sleep(3000);
@@ -56,7 +56,7 @@ When('I press the button of Participar in the test event',{timeout:50*1000},asyn
 
 
 Then('I should see the Dejar de Participar button',async ()=>{
-  var xpath =  `//*[@id="root"]/div[2]/div[1]/div/div[1]/div[2]/div[1]/div/div[2]/div/button[1]`;
+  var xpath =  `//*[@id="root"]/div[2]/div[1]/div/div[1]/div[2]/div/div/div[2]/div/button[1]`;
   let AuxWebElement= driver.findElement(By.xpath(xpath));
   let AuxText=await driver.wait(until.elementIsVisible(AuxWebElement),50*1000).getText();
   expect(AuxText).to.be.equal("Dejar de Participar");
