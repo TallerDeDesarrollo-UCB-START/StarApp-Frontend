@@ -28,7 +28,7 @@ When('I press the {string} button',{timeout:50*1000},async (code)=> {
     let button= driver.findElement(By.xpath(xpath));
     await driver.wait(until.elementIsVisible(button)).click();
   });
-Then('the welcome message should be dispayed on the screen',async ()=> {
+When('the welcome message should be dispayed on the screen',async ()=> {
   var xpath = '//*[@id="root"]/div[2]/header/div[2]/div/button[1]/span/span';
   await sleep(1000);
   //await driver.wait(until.elementLocated(By.xpath(xpath)));
@@ -37,6 +37,8 @@ Then('the welcome message should be dispayed on the screen',async ()=> {
   expect(AuxText).to.be.equal("Inicio");
 });
 
-
+AfterAll(async () => {
+  await driver.close();
+});
 
 module.exports = driver;

@@ -37,9 +37,7 @@ Then('insert Data', async ()=> {
     await sleep(2000);
 });
 
-AfterAll(async () => {
-    await driver.close();
-});
+
 // //cucumber
 // const { Given, When, Then, AfterAll } = require('@cucumber/cucumber');
 // const { Builder, By, Capabilities, Key } = require('selenium-webdriver');
