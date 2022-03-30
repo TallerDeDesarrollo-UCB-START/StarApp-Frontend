@@ -32,7 +32,7 @@ Then('insert Data', async ()=> {
     await driver.findElement(By.name('fecha_evento')).sendKeys('05-08-2022');
     await driver.findElement(By.name('hora_inicio')).sendKeys('10:30AM');
     await driver.findElement(By.name('hora_fin')).sendKeys('12:00PM');
-    let xpath = '/html/body/div[13]/div/div[1]/div/div/form/div[11]/button[1]';
+    let xpath = '//*[@id="ModalFormCrearEvento"]/div/form/div[11]/button[1]';
     await driver.findElement(By.xpath(xpath)).click();
     await sleep(2000);
 });
