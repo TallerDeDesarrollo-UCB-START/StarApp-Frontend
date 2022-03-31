@@ -17,8 +17,6 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV_FRONT_STARTAMERICAS }}'
           projectId: dev-front-startamericas
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-    name: Build (Sonar Cloud)
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -31,10 +29,8 @@ jobs:
       - name: Node install dependencies
         run: npm install
 
-
       - name: Run unit e2e test
         run: npm test 
-
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
