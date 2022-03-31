@@ -20,7 +20,6 @@ jobs:
           channelId: live
           projectId: dev-front-startamericas
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-    steps:
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
