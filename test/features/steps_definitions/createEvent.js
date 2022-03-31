@@ -25,13 +25,13 @@ When('click on the CREAR EVENTO', async ()=> {
     await sleep(2000);
 });
 
-Then('insert Data', async ()=> {
-    await driver.findElement(By.name('nombre_evento')).sendKeys('Esto es una prueba :)');
-    await driver.findElement(By.name('descripcion_evento')).sendKeys('es una pruebita');
-    await driver.findElement(By.name('lugar_evento')).sendKeys('Plaza de la Revolución');
-    await driver.findElement(By.name('fecha_evento')).sendKeys('05-08-2022');
-    await driver.findElement(By.name('hora_inicio')).sendKeys('10:30AM');
-    await driver.findElement(By.name('hora_fin')).sendKeys('12:00PM');
+Then('insert Data',{timeout: 10*1000}, async ()=> {
+    driver.findElement(By.name('nombre_evento')).sendKeys('Esto es una prueba :)');
+    driver.findElement(By.name('descripcion_evento')).sendKeys('es una pruebita');
+    driver.findElement(By.name('lugar_evento')).sendKeys('Plaza de la Revolución');
+    driver.findElement(By.name('fecha_evento')).sendKeys('05-08-2022');
+    driver.findElement(By.name('hora_inicio')).sendKeys('10:30AM');
+    driver.findElement(By.name('hora_fin')).sendKeys('12:00PM');
     let xpath = '//*[@id="ModalFormCrearEvento"]/div/form/div[11]/button[1]';
     await driver.findElement(By.xpath(xpath)).click();
     await sleep(2000);

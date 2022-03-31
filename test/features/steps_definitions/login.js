@@ -13,7 +13,7 @@ capabilities.set("goog:chromeOptions", {"args": ["--headless", "--no-sandbox", "
 const driver = new Builder().withCapabilities(capabilities).build();
 let BaseUrl="https://dev-front-startamericas.web.app/login"
 
-Given('I have browsed to the Start Americas Together login page', async ()=> {
+Given('I have browsed to the Start Americas Together login page',{timeout: 10*1000}, async ()=> {
     await driver.get(BaseUrl);
     await driver.manage().window().maximize();
   });
