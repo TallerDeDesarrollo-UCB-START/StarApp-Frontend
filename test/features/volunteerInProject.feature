@@ -13,7 +13,6 @@ Scenario: Participate in a Medio Ambiente project
     Given I see the Start Americas Together home page
     And I press the Proyectos button
     And I press the Animales projects
-    # And I see the diferent projects of Animales
     When I choose a demo project
     And I press the Unirme button
     Then I click on Ver Detalles of the project

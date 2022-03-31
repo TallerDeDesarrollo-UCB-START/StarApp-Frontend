@@ -15,7 +15,3 @@ Scenario: Create a new Medio Ambiente project
     And the PROYECTOS message should appear on the screen
     And click on the CREAR PROYECTO
     Then insert Data of Project
-
-# Examples:
-#     | start_date      | end_date   | name          | description            |
-#     | 10/12/2022      | 17/12/2022 | Plantar Vida  | Plantaremos arbolitos  |

@@ -6,24 +6,6 @@ const sleep = require('../support/sleep.js');
 const driver = require('../steps_definitions/login.js')
 require("chromedriver");
 
-// Given('I go to the Start Americas Together login page', async ()=> {
-//   await sleep(5000);
-//   await driver.get(BaseUrl);
-// });
-// Given('I entered {string} into the email field',async (email)=> {
-//   await driver.findElement(By.name('email')).sendKeys(email);
-// });
-// Given('I entered {string} into the password field', async  (password)=> {
-//   await driver.findElement(By.name('password')).sendKeys(password);
-// });
-
-
-// When('I have press the {string} button',{timeout:50*1000},async (code)=> {
-//   let xpath=`/html/body/div/div[2]/div[1]/div/div[2]/div[2]/div/form/div/button/span[1]`;
-//   let button= driver.findElement(By.xpath(xpath));
-//   await driver.wait(until.elementIsVisible(button)).click();
-// });
-
 Given('I see the Start Americas Together home page',async ()=>{
   await sleep(2000);
   var xpath =  `//*[@id="root"]/div[2]/header/div[2]/div/button[1]`;
