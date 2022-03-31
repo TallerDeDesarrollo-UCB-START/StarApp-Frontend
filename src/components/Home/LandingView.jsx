@@ -41,7 +41,7 @@ const LandingView = () => {
                     <Typography style={(smallScreen)?{fontSize: "16px"}:{}}>
                         Una experiencia personalizada de volutariado para impulsar líderes de impacto positivo.
                         Explora causas y descubre la tuya, obtén un récord de tu participación activa, y acumula 
-                        horas y experiencias de voluntariado.
+                        horas y experiencias de voluntariado. Lorem, ipsum dolor.
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.card_actions}>
