@@ -58,7 +58,7 @@ const EventosProximos = ({ id, title }) => {
     >
       {title ? (
         <Typography variant="h2" component="h2" gutterBottom>
-          Tus Próximos Eventosssssss
+          Tus Próximos Eventos
         </Typography>
       ) : (
         <div style={{ display: "none" }}></div>
