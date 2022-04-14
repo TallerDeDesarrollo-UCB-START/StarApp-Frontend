@@ -100,6 +100,7 @@ const NavBar = ({ currentPath, routes, logged, sessionData, pagesize }) => {
       />
       <BottomNavigationAction
         icon={(currentPath.includes('eventos'))?<EventNoteIcon />:<EventNoteOutlinedIcon/>}
+        name='eventos'
         disabled={currentPath === routes[2].path}
         label="Eventos"
         className={

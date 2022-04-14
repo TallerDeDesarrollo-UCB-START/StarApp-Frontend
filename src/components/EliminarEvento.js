@@ -35,20 +35,19 @@ const EliminarEvento = (event) => {
     handleClose();
     window.location.reload();
   };
-
   return (
     <div>
       <Button
         variant="contained"
+        name={"Eliminar_" + event.event.nombre_evento}
         style={{
           borderRadius: 4,
           height: 51,
           backgroundColor: "#f00",
           fontSize: "16px",
           margin: "3px",
-          textTransform: 'none',
+          textTransform: "none",
           width: "110px",
-
         }}
         onClick={handleClickOpen}
       >
@@ -71,7 +70,7 @@ const EliminarEvento = (event) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={() => deleteEvento(event)}>
+          <Button variant="contained" onClick={() => deleteEvento(event)} name='EliminarEvento'>
             Confimar
           </Button>
           <Button variant="contained" color="error" onClick={handleClose}>

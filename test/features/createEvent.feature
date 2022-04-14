@@ -14,4 +14,6 @@ Scenario: Create Event
     And click on the eventos button
     And the EVENTOS VIGENTES message should appear on the screen
     And click on the CREAR EVENTO
-    Then insert Data
+    And insert Data
+    And check the new event is created
+    Then delete the event
