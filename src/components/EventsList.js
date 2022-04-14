@@ -435,7 +435,7 @@ class EventsList extends Component {
                 }}
               >
                 <Typography gutterBottom variant="h2" component="h3">
-                  EVENTOS VIGENTES
+                  EVENTOS VIGENTESSSSS
                 </Typography>
               </h1>
 
@@ -595,7 +595,7 @@ class EventsList extends Component {
                     borderColor: "#3B3B3B",
                   }}
                 >
-                  EVENTOS VIGENTES
+                  EVENTOS VIGENTESSSSSS
                 </Button>
               </div>
             </div>
