@@ -20,6 +20,8 @@ jobs:
           channelId: live
           projectId: dev-front-startamericas
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  deploy_sonarqube:
+      needs: [build_and_deploy]
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
@@ -27,7 +29,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '15'
-
+          
       - name: Node install dependencies
         run: npm install
 
