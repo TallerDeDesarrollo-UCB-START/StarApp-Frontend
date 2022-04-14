@@ -14,12 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
-      - run: npm test
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV_FRONT_STARTAMERICAS }}'
           projectId: dev-front-startamericas
+      - run: npm test
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel\
   
   run_sonarqube:
