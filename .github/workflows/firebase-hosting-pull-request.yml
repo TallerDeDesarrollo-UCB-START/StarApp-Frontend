@@ -24,8 +24,6 @@ jobs:
   
   deploy_sonarqube:
     name: sonarqube
-    environment:
-      name: desarrollo
       needs: [build_and_deploy]
       - uses: actions/checkout@v2
         with:
