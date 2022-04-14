@@ -7,6 +7,7 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - develop
 jobs:
+
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
@@ -20,6 +21,7 @@ jobs:
           channelId: live
           projectId: dev-front-startamericas
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  
   deploy_sonarqube:
       needs: [build_and_deploy]
       - uses: actions/checkout@v2
