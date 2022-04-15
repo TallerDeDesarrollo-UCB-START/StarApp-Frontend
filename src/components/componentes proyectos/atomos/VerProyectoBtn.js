@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function VerProyectoBtn({proyecto}) {
     return (
-        <Link className="ver-button" to={"projects/" + proyecto.id}>Ver detalles</Link>
+        <Link name={"detalle" + proyecto.titulo} className="ver-button" to={"projects/" + proyecto.id}>Ver detalles</Link>
     )
 }
 

@@ -14,4 +14,9 @@ Scenario: Create a new Medio Ambiente project
     And click on the Proyectos button
     And the PROYECTOS message should appear on the screen
     And click on the CREAR PROYECTO
-    Then insert Data of Project
+    And insert Data of Project
+    And press button Medio Ambiente
+    And click buttom detalle
+    And check the new project is created
+    And delete the project
+    Then click delete button

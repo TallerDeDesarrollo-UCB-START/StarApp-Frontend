@@ -6,7 +6,7 @@ import {withStyles} from "@material-ui/core/styles";
 
 function CrearProyectoBtn({onActivarForm}) {
     return (
-        <CrearButton variant="contained" onClick={onActivarForm}>
+        <CrearButton name='crearProyecto' variant="contained" onClick={onActivarForm}>
             Crear proyecto
         </CrearButton>
     )

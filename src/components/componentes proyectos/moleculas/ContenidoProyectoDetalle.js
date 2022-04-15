@@ -183,7 +183,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
             <p className="card-text-detail">
                 <b>Fecha de Fin:</b> {fechaFin}
             </p>
-            <p className="card-text-detail">
+            <p className="card-text-detail" name={'descripcion'+ proyecto.titulo}>
                 <b>Descripción:</b> {proyecto.descripcion}
             </p>
             <p className="card-text-detail">

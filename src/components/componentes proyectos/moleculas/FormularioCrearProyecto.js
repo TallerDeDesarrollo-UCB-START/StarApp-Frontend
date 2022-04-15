@@ -107,7 +107,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
             <FormProvider {...methods}>
                 <form  onSubmit={methods.handleSubmit(onSubmit)}  /*enctype="multipart/form-data"*/>
                     {botonCancelarFormulario}
-                    <div className="crear-container-title">
+                    <div className="crear-container-title" >
                         <h4>Crear Proyecto</h4>
                     </div>
                     <div style={{padding: "1% 3% 0 5%"}}>
@@ -181,7 +181,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     onChange={onChangeImagenUrl}
                                     />
                         <div className="btn-crear-container">
-                            <input type='submit' value='CREAR PROYECTO' className='btn-proy-crear btn-proy-block'/>
+                            <input  name='crearProyecto1' type='submit' value='CREAR PROYECTO' className='btn-proy-crear btn-proy-block'/>
                         </div>
                     </div>
                 </form>
