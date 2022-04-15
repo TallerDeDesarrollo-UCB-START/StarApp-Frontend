@@ -16,4 +16,5 @@ Scenario: Create Event
     And click on the CREAR EVENTO
     And insert Data
     And check the new event is created
-    Then delete the event
+    And delete the event
+    Then click button

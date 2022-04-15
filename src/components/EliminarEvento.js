@@ -65,12 +65,12 @@ const EliminarEvento = (event) => {
           <DialogContentText id="alert-dialog-slide-description">
             ¿Está seguro de eliminar el evento {event.event.nombre_evento}?
           </DialogContentText>
-          <DialogContentText id="alert-dialog-slide-description">
-            Se eliminará definitivamente.
+          <DialogContentText id="alert-dialog-slide-description" name='MensajeText'>
+            hola
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={() => deleteEvento(event)} name='EliminarEvento'>
+          <Button name={"eliminarevento" + event.event.nombre_evento} variant="contained" onClick={() => deleteEvento(event)}>
             Confimar
           </Button>
           <Button variant="contained" color="error" onClick={handleClose}>
