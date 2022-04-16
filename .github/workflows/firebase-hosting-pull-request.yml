@@ -5,6 +5,25 @@ name: Deploy to Firebase Hosting on PR
 'on': pull_request
 jobs:
 
+  deploy_to_production:
+    name: deploy_production
+    environment:
+      name: produccion
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo now we take master branch
+      - run: echo this is ready
+      
+      - name: Use another branch
+        uses: TallerDeDesarrollo-UCB-START/StartApp-Frontend@master
+        env:
+          REPO: self
+          BRANCH: master
+          FOLDER: public # The directory where your assets are generated
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: "Build: ready"
+
   build_and_deploy:
     name: Deploy to develop
     environment:
