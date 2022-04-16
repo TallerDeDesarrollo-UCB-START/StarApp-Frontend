@@ -11,7 +11,7 @@ const capabilities = Capabilities.chrome();
 //capabilities.set('chromeOptions', { "w3c": false });
 capabilities.set("goog:chromeOptions", {"args": ["--headless", "--no-sandbox", "--disable-dev-shm-usage","--disable-gpu","--window-size=2560,2468"]});  
 const driver = new Builder().withCapabilities(capabilities).build();
-let BaseUrl="http://localhost:3000/login"
+let BaseUrl="https://dev-front-startamericas.web.app/login"
 
 Given('I have browsed to the Start Americas Together login page',{timeout: 10*1000}, async ()=> {
     await driver.get(BaseUrl);
