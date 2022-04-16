@@ -1,5 +1,8 @@
 name: Deploy to Firebase
-'on': pull_request
+'on':
+  push:
+    branches:
+      - develop
 jobs:
 
   deploy_to_production:
