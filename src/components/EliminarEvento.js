@@ -35,20 +35,19 @@ const EliminarEvento = (event) => {
     handleClose();
     window.location.reload();
   };
-
   return (
     <div>
       <Button
         variant="contained"
+        name={"Eliminar_" + event.event.nombre_evento}
         style={{
           borderRadius: 4,
           height: 51,
           backgroundColor: "#f00",
           fontSize: "16px",
           margin: "3px",
-          textTransform: 'none',
+          textTransform: "none",
           width: "110px",
-
         }}
         onClick={handleClickOpen}
       >
@@ -66,12 +65,12 @@ const EliminarEvento = (event) => {
           <DialogContentText id="alert-dialog-slide-description">
             ¿Está seguro de eliminar el evento {event.event.nombre_evento}?
           </DialogContentText>
-          <DialogContentText id="alert-dialog-slide-description">
-            Se eliminará definitivamente.
+          <DialogContentText id="alert-dialog-slide-description" name='MensajeText'>
+            hola
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={() => deleteEvento(event)}>
+          <Button name={"eliminarevento" + event.event.nombre_evento} variant="contained" onClick={() => deleteEvento(event)}>
             Confimar
           </Button>
           <Button variant="contained" color="error" onClick={handleClose}>

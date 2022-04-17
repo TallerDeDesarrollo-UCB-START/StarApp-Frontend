@@ -58,7 +58,7 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
     return (
       <div>
         
-        <DeleteProy variant="contained" onClick={handleClickOpen}>Eliminar</DeleteProy>
+        <DeleteProy name='eliminarproyecto' variant="contained" onClick={handleClickOpen}>Eliminar</DeleteProy>
         <Dialog
             open={open}
             onClose={handleClose}
@@ -73,7 +73,7 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-            <DeleteButton onClick={peticionDelete} style={{ height: "30px",margin: "7px",}}     variant="contained">
+            <DeleteButton name='eliminarproyecto1' onClick={peticionDelete} style={{ height: "30px",margin: "7px",}}     variant="contained">
                 Eliminar 
             </DeleteButton>
             

@@ -284,8 +284,9 @@ class Evento extends Component {
                         <p className="card-text">
                           <b>Lider:</b> {event.lider}
                         </p>
-                        <p className="card-text">
-                          <b>Descripción:</b> {event.descripcion_evento}
+                        <p className="card-text" name={'descripcion'+event.descripcion_evento}>
+                          <b>Descripción:</b> 
+                          {event.descripcion_evento}
                         </p>
                       </div>
                     </div>

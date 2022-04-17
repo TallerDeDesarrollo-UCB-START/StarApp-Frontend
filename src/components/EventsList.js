@@ -42,7 +42,9 @@ const apiProyectos = axios.create({
 const current = new Date();
 
 //const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${("0" + current.getDate()).slice(-2)}`;
-const currentDate = `${current.getFullYear()}-${("0" + parseInt(current.getMonth()+1)).slice(-2)}-${("0" + current.getDate()).slice(-2)}`;
+const currentDate = `${current.getFullYear()}-${(
+  "0" + parseInt(current.getMonth() + 1)
+).slice(-2)}-${("0" + current.getDate()).slice(-2)}`;
 
 const api = axios.create({
   baseURL: urlDeploy,
@@ -434,7 +436,7 @@ class EventsList extends Component {
                       : "none",
                 }}
               >
-                <Typography gutterBottom variant="h2" component="h3">
+                <Typography gutterBottom variant="h2" component="h3" name='eventosVigentes'>
                   EVENTOS VIGENTES
                 </Typography>
               </h1>
@@ -526,6 +528,7 @@ class EventsList extends Component {
                 {rolUser !== "voluntario" ? (
                   <Fragment>
                     <Button
+                      name= "crear_evento"
                       style={{
                         borderRadius: 4,
                         height: 51,
@@ -603,7 +606,11 @@ class EventsList extends Component {
 
           <div className="Container-Body">
             {this.state.events.map((event) => (
-              <div className="Tarjeta-Principal-Evento" key={event.id}>
+              <div
+                className="Tarjeta-Principal-Evento"
+                key={event.id}
+                name={event.nombre_evento}
+              >
                 <div className="card1">
                   <CardMedia
                     component="img"
@@ -612,7 +619,8 @@ class EventsList extends Component {
                     className="img-fluid"
                   />
 
-                  <div className="CardScroll">
+                  <div
+                    className="CardScroll">
                     <CardHeader
                       title={event.nombre_evento}
                       subheader={event.descripcion_evento}
@@ -626,7 +634,7 @@ class EventsList extends Component {
                       <p className="card-info">
                         <b>Fecha:</b> {event.fecha_evento}{" "}
                       </p>
-                      <p className="card-info">
+                      <p className="card-info" name={"Lugar_" + event.nombre_evento}>
                         <b>Lugar:</b> {event.lugar_evento}{" "}
                       </p>
                       <p className="card-info">
@@ -641,6 +649,7 @@ class EventsList extends Component {
                       {this.validarBotones(event) ? (
                         <Button
                           variant="contained"
+                          name={"participar_" + event.nombre_evento}
                           onClick={() => {
                             this.postParticipacion(event);
                           }}
@@ -662,6 +671,7 @@ class EventsList extends Component {
                         </Button>
                       ) : (
                         <Button
+                          name={"DejarParticipar_" + event.nombre_evento}
                           onClick={() => {
                             this.eliminarParticipacion(event);
                           }}
@@ -685,6 +695,7 @@ class EventsList extends Component {
                       {rolUser !== "voluntario" ? (
                         <Fragment>
                           <Button
+                            name={"Detalles_" + event.nombre_evento}
                             style={{
                               borderRadius: 4,
                               height: 51,
@@ -901,6 +912,7 @@ class EventsList extends Component {
 
             <div className="CamposBotones">
               <Button
+                name="GuardarEvento"
                 className="botonCrear"
                 // disabled={this.state.form.nombre_evento && this.state.form.fecha_evento? false:true}
                 onClick={() => this.peticionPost()}

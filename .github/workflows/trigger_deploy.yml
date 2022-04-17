@@ -2,14 +2,14 @@ name: Deploy to Firebase
 'on':
   push:
     branches:
-      - master
+      - develop
 jobs:
   deploy_to_production:
     name: deploy_production
     environment:
       name: produccion
     runs-on: ubuntu-latest
-    #needs: [build_and_deploy, run_sonarqube]
+    needs: [build_and_deploy, run_sonarqube]
     steps:
-      - run: echo now we are in master
-      - run: echo this will be deploy soon
+      - run: deploy in develop ready, sonarqube ready
+      - run: production ready
