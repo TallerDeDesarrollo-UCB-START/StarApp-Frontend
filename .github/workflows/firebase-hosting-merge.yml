@@ -12,7 +12,6 @@ jobs:
     name: Deploy to develop
     environment:
       name: desarrollo
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,10 +19,11 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_DEVELOP_FRONT }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV_FRONT_STARTAMERICAS }}'
+          channelId: live
           projectId: dev-front-startamericas
       - run: npm test
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel\
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
   
   run_sonarqube:
     name: sonarqube
@@ -37,7 +37,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '15'
-
+          
       - name: Node install dependencies
         run: npm install
 
