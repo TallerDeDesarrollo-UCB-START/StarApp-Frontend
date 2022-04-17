@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - run: echo now we take master branch
       - run: echo this is ready
       
@@ -24,6 +24,6 @@ jobs:
         env:
           REPO: self
           BRANCH: master
-          FOLDER: public # The directory where your assets are generated
+          FOLDER: build # The directory where your assets are generated
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
           MESSAGE: "Build: ready"
