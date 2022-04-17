@@ -6,7 +6,6 @@ name: Deploy to Firebase Hosting on PR
 jobs:
 
   deploy_to_production:
-    uses: ./.github/workflows/main.yml
     name: deploy_production
     environment:
       name: produccion
@@ -17,7 +16,7 @@ jobs:
       - run: echo this is ready
       
       - name: Use another branch
-        uses: TallerDeDesarrollo-UCB-START/StartApp-Frontend@master
+        uses: TallerDeDesarrollo-UCB-START/StartApp-Frontend@master/.github/workflows/main.yml
         env:
           REPO: self
           BRANCH: master

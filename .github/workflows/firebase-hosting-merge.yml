@@ -9,18 +9,17 @@ name: Deploy to Firebase Hosting on merge
 jobs:
 
   deploy_to_production:
-    uses: ./.github/workflows/main.yml
     name: deploy_production
     environment:
       name: produccion
     runs-on: ubuntu-latest
 
-    steps:
+    steps: ./.github/workflows/main.yml
       - run: echo now we take master branch
       - run: echo this is ready
       
       - name: Use another branch
-        uses: TallerDeDesarrollo-UCB-START/StartApp-Frontend@master
+        uses: TallerDeDesarrollo-UCB-START/StartApp-Frontend@master/.github/workflows/main.yml
         env:
           REPO: self
           BRANCH: master
