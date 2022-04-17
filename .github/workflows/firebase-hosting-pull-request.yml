@@ -12,12 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
       - run: echo now we take master branch
       - run: echo this is ready
       
       - name: Use another branch
-        uses: ./.github/workflows/main.yml
+        uses: actions/checkout@v2
         env:
           REPO: self
           BRANCH: master
