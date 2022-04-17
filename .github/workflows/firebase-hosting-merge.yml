@@ -13,7 +13,6 @@ jobs:
     environment:
       name: produccion
     runs-on: ubuntu-latest
-    needs: [build_and_deploy, run_sonarqube]
     steps:
       - run: echo now we take master branch
       - run: echo this is ready
