@@ -15,7 +15,7 @@ jobs:
       - run: echo now we take master branch
       - run: echo this is ready  
       - name: Use another branch
-        uses: TallerDeDesarrollo-UCB-START/StartApp-Frontend@master/.github/workflows/main.yml
+        uses: ./.github/workflows/main.yml
         env:
           REPO: self
           BRANCH: master
