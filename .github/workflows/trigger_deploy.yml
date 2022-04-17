@@ -2,6 +2,7 @@ name: Deploy to Firebase
 on:
   pull_request:
       - develop
+      - feature/*
 jobs:
   deploy_to_production:
     name: deploy_production
