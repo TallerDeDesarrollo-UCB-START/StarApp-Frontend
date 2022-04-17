@@ -17,7 +17,7 @@ jobs:
       - run: echo this is ready
       
       - name: Use another branch
-        uses: ./
+        uses: ./.github/workflows/
         env:
           REPO: self
           BRANCH: master
