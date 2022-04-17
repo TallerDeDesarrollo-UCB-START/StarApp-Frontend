@@ -17,7 +17,7 @@ jobs:
       - run: echo this is ready
       
       - name: Use another branch
-        uses: TallerDeDesarrollo-UCB-START/StartApp-Frontend/@master
+        uses: ./
         env:
           REPO: self
           BRANCH: master
