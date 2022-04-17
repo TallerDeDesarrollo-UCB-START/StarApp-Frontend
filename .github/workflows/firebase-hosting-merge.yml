@@ -18,8 +18,9 @@ jobs:
       - run: echo this is ready
       
       - uses: actions/checkout@v2
-      - uses: TallerDeDesarrollo-UCB-START/StartApp-Frontend@master
+      - name: Invoke workflow in another repo with inputs
+        uses: benc-uk/workflow-dispatch@v1
         with:
-          github_token: ${{ github.token }}
-          source_ref: ${{ github.ref }}
-          target_branch: 'master'
+          workflow: Deploy to Firebase
+          repo: TallerDeDesarrollo-UCB-START/StartApp-Frontend
+          token: ${{ secrets.ACCESS_TOKEN_TO_MASTER }}
