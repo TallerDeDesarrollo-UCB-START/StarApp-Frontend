@@ -16,11 +16,7 @@ jobs:
     steps:
       - run: echo now we take master branch
       - run: echo this is ready
-      
-      - uses: actions/checkout@v2
-      - name: Invoke workflow in another repo with inputs
-        uses: benc-uk/workflow-dispatch@v1
+      - name: Checkout master
+        uses: actions/checkout@v1
         with:
-          workflow: Deploy to Firebase
-          repo: TallerDeDesarrollo-UCB-START/StartApp-Frontend
-          token: ${{ secrets.ACCESS_TOKEN_TO_MASTER }}
+          ref: 'master'
