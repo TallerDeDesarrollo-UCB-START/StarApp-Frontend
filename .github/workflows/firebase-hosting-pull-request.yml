@@ -5,6 +5,9 @@ name: Deploy to Firebase Hosting on PR
 'on': pull_request
 jobs:
   build_and_preview:
+    name: deploy_production
+    environment:
+      name: produccion
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
@@ -13,5 +16,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STARTAMERICASTOGETHER }}'
+          firebaseServiceAccount: '${{ secrets.PROD_FRONT_SERVIVE }}'
           projectId: startamericastogether
