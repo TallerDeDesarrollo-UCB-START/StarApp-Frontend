@@ -64,6 +64,6 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STARTAMERICASTOGETHER }}'
+          firebaseServiceAccount: '${{ secrets.PROD_FRONT_SERVIVE }}'
           channelId: live
           projectId: startamericastogether
