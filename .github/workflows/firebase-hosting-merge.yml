@@ -50,7 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-
   deploy_to_production:
     name: deploy_production
     needs: [build_and_deploy, run_sonarqube]
