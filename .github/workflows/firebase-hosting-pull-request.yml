@@ -50,6 +50,7 @@ jobs:
 
   deploy_to_production:
     name: deploy_production
+    needs: [build_and_deploy, run_sonarqube]
     environment:
       name: produccion
     runs-on: ubuntu-latest
@@ -61,3 +62,9 @@ jobs:
         with:
           ref: 'master'
       - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STARTAMERICASTOGETHER }}'
+          channelId: live
+          projectId: startamericastogether
