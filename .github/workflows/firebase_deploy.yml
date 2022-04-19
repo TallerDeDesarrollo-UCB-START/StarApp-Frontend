@@ -32,7 +32,7 @@ jobs:
 
   run_sonarqube:
     name: sonarqube
-    needs: [build_and_deploy]
+    needs: [build_and_deploy_develop]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -57,7 +57,7 @@ jobs:
 
   build_and_deploy_master:
     name: deploy to production
-    needs: [build_and_deploy, run_sonarqube]
+    needs: [build_and_deploy_develop, run_sonarqube]
     environment:
       name: produccion
     runs-on: ubuntu-latest
