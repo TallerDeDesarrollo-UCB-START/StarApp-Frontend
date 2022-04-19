@@ -8,6 +8,7 @@ name: Deploy to Firebase
       - master
     pull_request:
       - master
+      
 jobs:
 
   build_and_deploy:
@@ -29,9 +30,6 @@ jobs:
           projectId: dev-front-startamericas
       - run: npm test
 
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-  
   run_sonarqube:
     name: sonarqube
     needs: [build_and_deploy]
@@ -56,9 +54,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-
-
 
   build_and_deploy:
     name: deploy to production
