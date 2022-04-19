@@ -39,8 +39,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
+          ref: 'develop'
       - uses: actions/setup-node@v2
         with:
           node-version: '15'
