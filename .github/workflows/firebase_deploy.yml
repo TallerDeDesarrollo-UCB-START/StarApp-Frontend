@@ -1,22 +1,11 @@
-  deploy_to_production:
-    name: deploy_production
-    environment:
-      name: produccion
-    runs-on: ubuntu-latest
-    needs: [build_and_deploy, run_sonarqube]
-    steps:
-      - run: echo now we take master branch
-      - run: echo this is ready
-      
-      - name: Use another branch
-        uses: TallerDeDesarrollo-UCB-START/StartApp-Frontend@master
-        env:
-          REPO: self
-          BRANCH: master
-          FOLDER: public # The directory where your assets are generated
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-          MESSAGE: "Build: ready"
-
+name: Deploy to Firebase Hosting
+'on':
+  push:
+    branches:
+      - develop
+  pull_request:
+      - develop
+jobs:
 
   build_and_deploy:
     name: Deploy to develop
@@ -33,8 +22,7 @@
           channelId: live
           projectId: dev-front-startamericas
       - run: npm test
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-  
+
   run_sonarqube:
     name: sonarqube
     needs: [build_and_deploy]
@@ -42,7 +30,6 @@
     steps:
       - uses: actions/checkout@v2
         with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
@@ -59,3 +46,5 @@
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
