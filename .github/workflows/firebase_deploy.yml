@@ -18,7 +18,7 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV_FRONT_STARTAMERICAS }}'
+          firebaseServiceAccount: '${{ secrets.DEV_FRONT_SERVICE }}'
           channelId: live
           projectId: dev-front-startamericas
       - run: npm test
