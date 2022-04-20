@@ -24,14 +24,22 @@ function ListaInsignias() {
   const [insigniasOfUser, setInsigniasUser] = useState([]);
   const obtenerInsigniasUsuario = async () => {
     const idSesion = sessionStorage.getItem("id");
-    let dataUsuario = await api
-      .get(`${baseURL}/${idSesion}`)
-      .then((dataUsuario) => dataUsuario);
-    setInsigniasUser(dataUsuario.data.data);
+    try{
+      let dataUsuario = await api
+        .get(`${baseURL}/${idSesion}`)
+        .then((dataUsuario) => dataUsuario);
+      setInsigniasUser(dataUsuario.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const obtenerInsignias = async () => {
-    let dataLocal = await api.get(`${baseURL}`).then((data) => data);
-    setInsignias(dataLocal.data.data);
+    try{
+      let dataLocal = await api.get(`${baseURL}`).then((data) => data);
+      setInsignias(dataLocal.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

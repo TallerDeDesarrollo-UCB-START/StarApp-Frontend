@@ -83,20 +83,28 @@ class crearEvento extends React.Component {
     }
   };
   getCategorias = async () => {
-    let data = await apiCategorias.get("/categorias").then(({ data }) => data);
-    let aux = data.map((item) => {
-      return item.interes;
-    });
-    aux.unshift("Todas");
-    this.setState({ categorias: aux });
+    try {
+      let data = await apiCategorias.get("/categorias").then(({ data }) => data);
+      let aux = data.map((item) => {
+        return item.interes;
+      });
+      aux.unshift("Todas");
+      this.setState({ categorias: aux });
+    } catch (err) {
+      console.log(err);
+    }
   };
   getProyectos = async () => {
-    let data = await apiProyectos.get("/").then(({ data }) => data);
-    let aux = data.map((item) => {
-      return item.titulo;
-    });
-    aux.unshift("No Seleccionado");
-    this.setState({ proyectos: aux });
+    try {
+      let data = await apiProyectos.get("/").then(({ data }) => data);
+      let aux = data.map((item) => {
+        return item.titulo;
+      });
+      aux.unshift("No Seleccionado");
+      this.setState({ proyectos: aux });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   cerrarModalInsertar = () => {

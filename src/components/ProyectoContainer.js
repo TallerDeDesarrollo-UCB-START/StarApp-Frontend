@@ -14,10 +14,13 @@ function ProyectosContainer() {
     }, [] )
 
     async function fetchProyectos() {
+      try{
       const response = await fetch(URLProyectos)
       const data = await response.json()
-  
       return data;
+      } catch (err) {
+        console.log(err);
+      }
     }
     //Elements
     let componenteProyectos = <PaginaProyectos proyectos={proyectos} />;

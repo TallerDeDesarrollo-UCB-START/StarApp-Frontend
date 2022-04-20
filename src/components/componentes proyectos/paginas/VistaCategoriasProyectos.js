@@ -26,14 +26,22 @@ function VistaCategoriasProyectos() {
         mountedRef.current = true
         
         const getCategorias = async () => {
-            const response = await fetch(URLCategorias)
-            const data = await response.json()
-            mountedRef.current && setCategorias(data)
+            try{
+                const response = await fetch(URLCategorias)
+                const data = await response.json()
+                mountedRef.current && setCategorias(data)
+            } catch (err) {
+                console.log(err);
+            }
         }
         const getLideres = async ()=>{
-            const lideresDelServer = await fetchLideres()
-            mountedRef.current && setLideres(lideresDelServer)
-            //console.log(lideresDelServer)
+            try{
+                const lideresDelServer = await fetchLideres()
+                mountedRef.current && setLideres(lideresDelServer)
+                //console.log(lideresDelServer)
+            } catch (err) {
+                console.log(err);
+            }
         }
         getCategorias()
         getLideres()

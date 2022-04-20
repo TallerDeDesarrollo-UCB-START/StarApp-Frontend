@@ -62,16 +62,20 @@ function ListaProyectos () {
     const smallScreen = useMediaQuery('(min-width:700px)')
     const obtenerParticipacionProyecto = async () => {
         const idSesion = sessionStorage.getItem("id");
-        const response = await fetch(
-          `${baseURL}/${idSesion}/get_my_proyectos`,
-          {
-            method: "GET",
-          }
-        );
-        const data = await response.json();
-        data.map(element => element.fecha_inicio = element.fecha_inicio[0]+element.fecha_inicio[1]+element.fecha_inicio[2]+element.fecha_inicio[3]
-            +element.fecha_inicio[4]+element.fecha_inicio[5]+element.fecha_inicio[6]+element.fecha_inicio[7]+element.fecha_inicio[8]+
-            element.fecha_inicio[9]);
+        try{
+            const response = await fetch(
+            `${baseURL}/${idSesion}/get_my_proyectos`,
+            {
+                method: "GET",
+            }
+            );
+            const data = await response.json();
+            data.map(element => element.fecha_inicio = element.fecha_inicio[0]+element.fecha_inicio[1]+element.fecha_inicio[2]+element.fecha_inicio[3]
+                +element.fecha_inicio[4]+element.fecha_inicio[5]+element.fecha_inicio[6]+element.fecha_inicio[7]+element.fecha_inicio[8]+
+                element.fecha_inicio[9]);
+        } catch (error) {
+            console.log(error);
+        }
         setData(data);
         //setOriginalData(data);
     }

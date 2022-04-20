@@ -67,6 +67,9 @@ const url = process.env.REACT_APP_API;
 const localUrl=`${url}sesion`;
 const api = axios.create({
  baseURL: localUrl,
+  })      
+  .catch((error) => {
+    console.log(error.message);
   });
 
 function ListaEventos () {
@@ -75,10 +78,14 @@ function ListaEventos () {
     const smallScreen = useMediaQuery('(min-width:700px)')
     const obtenerParticipacionEvento = async () => {
         const idSesion = sessionStorage.getItem("id");
-        let data = await api.get(
-          `${localUrl}/${idSesion}/get_my_eventos`
-        ).then(data => data);
-        setData(data.data);
+        try{
+            let data = await api.get(
+            `${localUrl}/${idSesion}/get_my_eventos`
+            ).then(data => data);
+            setData(data.data);
+        }catch(error){
+            console.log(error);
+        }
     }
 
     useEffect( () => {

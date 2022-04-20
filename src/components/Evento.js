@@ -133,15 +133,19 @@ class Evento extends Component {
   };
 
   getCategorias = async () => {
-    let data = await apiCategorias.get("/categorias").then(({ data }) => data);
-    let aux = data.map((item) => {
-      return item.interes;
-    });
-    aux.unshift(this.state.formEditado["categoria"]);
-    let result = aux.filter((item, index) => {
-      return aux.indexOf(item) === index;
-    });
-    this.setState({ categorias: result });
+    try{
+      let data = await apiCategorias.get("/categorias").then(({ data }) => data);
+      let aux = data.map((item) => {
+        return item.interes;
+      });
+      aux.unshift(this.state.formEditado["categoria"]);
+      let result = aux.filter((item, index) => {
+        return aux.indexOf(item) === index;
+      });
+      this.setState({ categorias: result });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   getLideres = async () => {
@@ -160,12 +164,16 @@ class Evento extends Component {
     }
   };
   getProyectos = async () => {
-    let data = await apiProyectos.get("/").then(({ data }) => data);
-    let aux = data.map((item) => {
-      return item.titulo;
-    });
-    aux.unshift("No Seleccionado");
-    this.setState({ proyectos: aux });
+    try{
+      let data = await apiProyectos.get("/").then(({ data }) => data);
+      let aux = data.map((item) => {
+        return item.titulo;
+      });
+      aux.unshift("No Seleccionado");
+      this.setState({ proyectos: aux });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   guardarNuevaData = async () => {

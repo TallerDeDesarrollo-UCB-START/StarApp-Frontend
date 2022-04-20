@@ -30,7 +30,14 @@ const EliminarEvento = (event) => {
   };
 
   const deleteEvento = async (event) => {
-    await axios.delete(urlDeploy + "/" + event.event.id);
+    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+    await axios.delete(urlDeploy + "/" + event.event.id)
+    .catch((error) => {
+      console.log(error.message);
+    });
     console.log("Evento eliminado");
     handleClose();
     window.location.reload();

@@ -291,6 +291,9 @@ const Profile = ({sessionData}) => {
         } else {
           setUserExsit({ userEx: false });
         }
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   }, [datos.id]);
 

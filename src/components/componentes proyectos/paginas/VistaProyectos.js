@@ -36,24 +36,44 @@ function VistaProyectos() {
     useEffect(() => {
         mountedRef.current = true
         const getProyectos = async () => {
-            const proyectosDelServer =  await fetchProyectos()
-            setProyectosCheck(proyectosDelServer, mountedRef.current)
+            try{
+                const proyectosDelServer =  await fetchProyectos()
+                setProyectosCheck(proyectosDelServer, mountedRef.current)
+            } catch (error) {
+                console.log(error);
+            }
         }
         const getProyectosPorCategoria = async () => {
-            const proyectosFiltrados = await fetchProyectosPorCategoria(categoria)
-            setProyectosCheck(proyectosFiltrados, mountedRef.current)
+            try{
+                const proyectosFiltrados = await fetchProyectosPorCategoria(categoria)
+                setProyectosCheck(proyectosFiltrados, mountedRef.current)
+            } catch (error) {
+                console.log(error);
+            }
         }
         const getProyectosPasadosPorCategoria = async () => {
-            const proyectosPasados =  await fetchProyectosPasadosPorCategoria(categoria)
-            setProyectosCheck(proyectosPasados, mountedRef.current, true)
+            try{
+                const proyectosPasados =  await fetchProyectosPasadosPorCategoria(categoria)
+                setProyectosCheck(proyectosPasados, mountedRef.current, true)
+            } catch (error) {
+                console.log(error);
+            }
         }
         const getLideres = async ()=>{
-            const lideresDelServer = await fetchLideres()
-            mountedRef.current && setLideres(lideresDelServer)
+            try{
+                const lideresDelServer = await fetchLideres()
+                mountedRef.current && setLideres(lideresDelServer)
+            } catch (err) {
+                console.log(error);
+            }
         }
         const getCategorias = async () => {
-            const categosServer = await fetchCategorias()
-            mountedRef.current && setCategorias(categosServer)
+            try{
+                const categosServer = await fetchCategorias()
+                mountedRef.current && setCategorias(categosServer)
+            } catch (error) {
+                console.log(error);
+            }
         }
         
 
@@ -71,60 +91,88 @@ function VistaProyectos() {
     // ==== HTTP REQUESTS & FUNCIONES ====
     // GETs
     async function fetchProyectos() {
-        const response = await fetch(URLProyectos)
-        const data = await response.json()
-        return data;
+        try{
+            const response = await fetch(URLProyectos)
+            const data = await response.json()
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const fetchProyectosPorCategoria = async(categoria) => {
-        const response= await fetch(`${URLProyectos}/${categoria}`)
-        const data = response && response.status === 204? [] : await response.json(); //FIXME: Evita un warning, pero backend deberia hacer esta validacion del status 204 y no frontend
-        return data
-        //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
+        try{
+            const response= await fetch(`${URLProyectos}/${categoria}`)
+            const data = response && response.status === 204? [] : await response.json(); //FIXME: Evita un warning, pero backend deberia hacer esta validacion del status 204 y no frontend
+            return data
+            //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async function fetchProyectosPasadosPorCategoria(categoria) {
-        const response = await fetch(`${URLProyectosPasados}/${categoria}`)
-        const data = await response.json()
-        return data;
+        try{
+            const response = await fetch(`${URLProyectosPasados}/${categoria}`)
+            const data = await response.json()
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
     }
     
     const fetchCategorias = async () => {
-        const response = await fetch(URLCategorias)
-        const data = await response.json()
-        return data
+        try{
+            const response = await fetch(URLCategorias)
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async function fetchLideres() {
-        const response = await fetch(URLLideres)
-        const data = await response.json()
-        let dataLider=[]
-        let index=1
-        for (let x of data ) {
-            dataLider.push({"id": index,"nombre":`${x.nombre}`})
-            index++
+        try{
+            const response = await fetch(URLLideres)
+            const data = await response.json()
+            let dataLider=[]
+            let index=1
+            for (let x of data ) {
+                dataLider.push({"id": index,"nombre":`${x.nombre}`})
+                index++
+            }
+            //dataLider.pop()
+            return dataLider;
+        } catch (error) {
+            console.log(error);
         }
-        //dataLider.pop()
-        return dataLider;
     }
 
     const obtenerParticipacionProyecto = async (idProyecto) => {
-        const idSesion = sessionStorage.getItem("id");
-        const response = await fetch(`${URLParticpaVoluntario}/${idProyecto}/sesion/${idSesion}`,
-        { 
-            method: 'GET'
-        });
-        const data = await response.json();
-        return data;
+        try{
+            const idSesion = sessionStorage.getItem("id");
+            const response = await fetch(`${URLParticpaVoluntario}/${idProyecto}/sesion/${idSesion}`,
+            { 
+                method: 'GET'
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const obtenerNumeroParticipantes = async (idProyecto) => {
-        const response = await fetch(`${URLNumeroParticipantes}/${idProyecto}`,
-        { 
-            method: 'GET'
-        });
-        const data = await response.json();
-        return data;
+        try{
+            const response = await fetch(`${URLNumeroParticipantes}/${idProyecto}`,
+            { 
+                method: 'GET'
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     /*async function fetchProyectosPasados() {
@@ -135,67 +183,86 @@ function VistaProyectos() {
     
     // CREATEs
     const crearProyecto = async (nuevoProyecto) => {
-        const response = await fetch(
-            URLCrearProy,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify(nuevoProyecto)
-            })
-        const data = await response.json()
-        setProyectos([...proyectos, data])
-        setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
-    
+        try{
+            const response = await fetch(
+                URLCrearProy,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify(nuevoProyecto)
+                })
+            const data = await response.json()
+            setProyectos([...proyectos, data])
+            setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
+        } catch (error) {
+            console.log(error);
+        }
     }
     
     // UPDATEs
     const editarProyecto = async (proyectoEditar) => {
-        //const response = 
-        await fetch(
-            `${URLEditarProy}/${proyectoEditar.id}`,
-            {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify(proyectoEditar)
-            })
-        //const data = await response.json()
-        //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
-        setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
+        try{
+            //const response = 
+            await fetch(
+                `${URLEditarProy}/${proyectoEditar.id}`,
+                {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify(proyectoEditar)
+                })
+            //const data = await response.json()
+            //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
+            setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const participarEnProyecto = async (id) => { 
         const idSesion = sessionStorage.getItem("id");
-        const response = await fetch(
-        `${URLParticiparProy}/${id}/sesion/${idSesion}`,
-        { 
-            method: 'PUT'
-        })
-        const data = await response.json()
-        //setActualizar(!actualizar)
-        return data
+        try{
+            const response = await fetch(
+            `${URLParticiparProy}/${id}/sesion/${idSesion}`,
+            { 
+                method: 'PUT'
+            })
+            const data = await response.json()
+            //setActualizar(!actualizar)
+            return data
+        } catch (error) {
+            console.log(error);
+        }
     }
     
     // DELETEs
     const cancelarParticipacionProyecto = async (id) => { 
         const idSesion = sessionStorage.getItem("id");
-        const response = await fetch(
-            `${URLCancelarParticipProy}/${id}/sesion/${idSesion}`,
-            { 
-                method: 'DELETE'
-            })
-        const data = await response.json()
-        //setActualizar(!actualizar)
-        return data
+        try{
+            const response = await fetch(
+                `${URLCancelarParticipProy}/${id}/sesion/${idSesion}`,
+                { 
+                    method: 'DELETE'
+                })
+            const data = await response.json()
+            //setActualizar(!actualizar)
+            return data
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const eliminarProyecto = async (id) => { 
-        await fetch(
-        `${URLEliminarProy}/${id}`,
-        { 
-            method: 'DELETE'
-        })
-    
-        setProyectos(proyectos.filter((proy) => proy.id !== id));
+        try{
+            await fetch(
+            `${URLEliminarProy}/${id}`,
+            { 
+                method: 'DELETE'
+            })
+        
+            setProyectos(proyectos.filter((proy) => proy.id !== id));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // ==== COMPONENTES: ====

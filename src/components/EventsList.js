@@ -104,13 +104,17 @@ class EventsList extends Component {
     this.setState({ abierto: !this.state.abierto });
   };
   getCategorias = async () => {
-    let data = await api.get("/categorias").then(({ data }) => data);
-    let aux = data.map((item) => {
-      return item.interes;
-    });
-    aux.unshift("Todas");
-    this.setState({ categoriaFiltrada: aux[0] });
-    this.setState({ categorias: aux });
+    try{
+      let data = await api.get("/categorias").then(({ data }) => data);
+      let aux = data.map((item) => {
+        return item.interes;
+      });
+      aux.unshift("Todas");
+      this.setState({ categoriaFiltrada: aux[0] });
+      this.setState({ categorias: aux });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   getEvents = async () => {
@@ -139,13 +143,17 @@ class EventsList extends Component {
     }
   };
   getCategorias = async () => {
-    let data = await api.get("/categorias").then(({ data }) => data);
-    let aux = data.map((item) => {
-      return item.interes;
-    });
-    aux.unshift("Todas");
-    this.setState({ categoriaFiltrada: aux[0] });
-    this.setState({ categorias: aux });
+    try{
+      let data = await api.get("/categorias").then(({ data }) => data);
+      let aux = data.map((item) => {
+        return item.interes;
+      });
+      aux.unshift("Todas");
+      this.setState({ categoriaFiltrada: aux[0] });
+      this.setState({ categorias: aux });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   getEventsArchivados = async () => {
@@ -176,16 +184,22 @@ class EventsList extends Component {
   };
 
   deleteEvento = async (event) => {
-    await axios.delete(urlDeploy + "/" + event.id);
-    this.getEvents();
-    this.abrirModal();
+      await axios.delete(urlDeploy + "/" + event.id)
+      .catch((error) => {
+        console.log(error.message);
+      });
+      this.getEvents();
+      this.abrirModal();
   };
 
   //Peticiones pertenecientes a Archivar y Motrar
   peticionArchivar = async (event) => {
-    await axios.put(urlDeploy + "/archivar_evento/" + event.id);
-    this.getEventsArchivados();
-    window.location.reload();
+      await axios.put(urlDeploy + "/archivar_evento/" + event.id)
+      .catch((error) => {
+        console.log(error.message);
+      });
+      this.getEventsArchivados();
+      window.location.reload();
   };
 
   peticionMostrar = async (event) => {
@@ -193,7 +207,10 @@ class EventsList extends Component {
     this.state.botonArchivar = true;
     this.state.botonMostrarEventosNoArchivados = false;
     this.state.botonMostrarEventosArchivados = true;
-    await axios.put(urlDeploy + "/mostrar_evento/" + event.id);
+    await axios.put(urlDeploy + "/mostrar_evento/" + event.id)
+    .catch((error) => {
+      console.log(error.message);
+    });
     this.getEvents();
   };
   sleep = async (ms) => {
