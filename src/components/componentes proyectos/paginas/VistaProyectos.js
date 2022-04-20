@@ -63,7 +63,7 @@ function VistaProyectos() {
             try{
                 const lideresDelServer = await fetchLideres()
                 mountedRef.current && setLideres(lideresDelServer)
-            } catch (err) {
+            } catch (error) {
                 console.log(error);
             }
         }
