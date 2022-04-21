@@ -5,7 +5,7 @@ import { Form, Field } from "react-final-form";
 import { useMediaQuery, Button, Grid } from "@material-ui/core";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import { TextField } from "final-form-material-ui";
-import { validEmail, validPassword } from "./RegEx";
+import { validName, validEmail, validPassword } from "./RegEx";
 import { useHistory } from "react-router-dom";
 import AxiosClient from "./AxiosClient";
 import LogoAndSlogan from "../components/LogoAndSlogan";
@@ -98,22 +98,22 @@ const RegisterForm = () => {
     setValidateButton(false);
     const errors = {};
     if (!validEmail.test(values.email)) {
-      errors.email = "Correo no valido";
+      errors.email = "Correo no válido";
     }
-    if (!values.username) {
-      errors.username = "Nombre req.";
+    if (!validName.test(values.username)) {
+      errors.username = "Nombre no válido";
     }
-    if (!values.lastname) {
-      errors.lastname = "Apellido req.";
+    if (!validName.test(values.lastname)) {
+      errors.lastname = "Apellido no válido";
     }
     if (phoneValue.replace(/\s+/g, '').length<7) {
-      errors.phoneValue = "Telefono req.";
+      errors.phoneValue = "Telefono requerido";
     }
     if (!validPassword.test(values.password)) {
-      errors.password = "Debe tener 6 caracteres y 1 número";
+      errors.password = "La contraseña debe tener mínimo 6 caracteres y 1 número";
     }
     if (values.confirmPassword !== values.password || !values.confirmPassword) {
-      errors.confirmPassword = "Contraseñas no coinciden";
+      errors.confirmPassword = "Las contraseñas no coinciden";
     }
     if (
       !errors.username &&

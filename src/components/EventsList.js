@@ -936,6 +936,7 @@ class EventsList extends Component {
             <TextField
               className="HoraInicioEventoCrear textInput"
               name="hora_inicio"
+              //type="time"
               type="time"
               onChange={this.handleChange}
             />

@@ -361,15 +361,16 @@ const Profile = ({sessionData}) => {
             id="apellido"
             type="text"
           />
-          
-          
+        
           <input
             className={classNamees.intputs}
             type="date"
+            placeholder="Fecha de nacimiento"
             name="fecha_de_nacimiento"
             value={datosEdit.fecha_de_nacimiento.split("T")[0]}
             onChange={handleInputChange}
           />
+          
 
           
           <select
@@ -378,6 +379,7 @@ const Profile = ({sessionData}) => {
             onChange={handleInputChange}
             className={classNamees.intputs}
           >
+            <option hidden selected>Ocupación</option>
             <option value="Colegio">Colegio</option>
             <option value="Universidad">Universidad</option>
             <option value="Trabajando">Trabajando</option>
@@ -414,6 +416,7 @@ const Profile = ({sessionData}) => {
             onChange={handleInputChange}
             className={classNamees.intputs}
           >
+            <option hidden selected>País</option>
             {getCountries().map(pais => (
               <option key={pais} value={pais}>{pais}</option>
             ))}
@@ -424,7 +427,7 @@ const Profile = ({sessionData}) => {
             onChange={handleInputChange}
             className={classNamees.intputs}
           >
-            <option value="">Género</option>
+            <option hidden selected>Género</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
             <option value="Otro">Otro</option>
