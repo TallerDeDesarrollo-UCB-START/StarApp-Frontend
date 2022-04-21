@@ -363,7 +363,7 @@ const EditarPerfil = ({ sessionData }) => {
                             size="small"
                         />
                         <FormControl className={classNames.formControl}>
-                            <InputLabel id="customized-select-label">País de recidencia:</InputLabel>
+                            <InputLabel id="customized-select-label">País de residencia:</InputLabel>
                             <Select
                                 id='customized-select'
                                 name="pais_de_recidencia"
