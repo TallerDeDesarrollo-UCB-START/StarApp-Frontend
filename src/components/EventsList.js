@@ -31,6 +31,7 @@ const urlDeploy = `${url}eventos`;
 const urlCrearEvento = `${url}eventos/crearevento`;
 const urlLideres = `${url}lideres`;
 const urlProyectos = `${url}get_proyectos`;
+const MAX_CHAR_SIZE = 200
 const apiLideres = axios.create({
   baseURL: urlLideres,
 });
@@ -327,6 +328,22 @@ class EventsList extends Component {
   }
 
   peticionPost = async () => {
+
+    let errors = ""
+    if (this.state.form.nombre_evento.length > MAX_CHAR_SIZE)
+      errors = " Nombre del evento "
+    if (this.state.form.descripcion_evento.length > MAX_CHAR_SIZE)
+      errors = errors + ((errors!="")?",":"") +" Descripcion "
+    if (this.state.form.lugar_evento.length > MAX_CHAR_SIZE)
+      errors = errors + ((errors!="")?",":"") + " Lugar "
+    if (errors != ""){
+      this.handleClick();
+      this.setState({
+        mensajeSnackbar: `El maximo de caracteres es ${MAX_CHAR_SIZE} para los campos: ${errors}`,
+        severidadSnackbar: `error`,
+      });
+      return false
+    }
     if (this.state.form.nombre_evento && this.state.form.fecha_evento) {
       if (this.state.form.nombre_evento.trim().length > 0) {
         await axios
@@ -344,6 +361,7 @@ class EventsList extends Component {
           mensajeSnackbar: "Nombre del evento vacío",
           severidadSnackbar: "error",
         });
+        return false
       }
     } else {
       // alert("Campos Nombre del Evento o Fecha del Evento vacio");
@@ -352,7 +370,9 @@ class EventsList extends Component {
         mensajeSnackbar: "Nombre del Evento o Fecha del Evento vacía",
         severidadSnackbar: "error",
       });
+      return false
     }
+    return true
   };
 
   getLideres = async () => {
