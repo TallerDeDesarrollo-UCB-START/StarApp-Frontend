@@ -18,10 +18,10 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           ls
-          echo"=="
+          echo "=="
           rm .env
           ls
-          echo"=="
+          echo "=="
           touch .env
           echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }} >> .env
           echo REACT_APP_APP_ID=${{ secrets.REACT_APP_APP_ID }} >> .env
@@ -31,7 +31,7 @@ jobs:
           echo REACT_APP_PROJECT_ID=${{ secrets.REACT_APP_PROJECT_ID }} >> .env
           echo REACT_APP_STORAGE_BUCKET=${{ secrets.REACT_APP_STORAGE_BUCKET }} >> .env
           cat .env
-          echo"=="
+          echo "=="
           ls
 
 
