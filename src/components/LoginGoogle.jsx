@@ -81,6 +81,10 @@ export default class LoginGoogle extends Component {
   
   login() {
     let provider = new fb.auth.GoogleAuthProvider();
+    console.log("entrada con firebase");
+    console.log("entrada con firebase");
+    console.log(process.env.REACT_APP_AUTH_DOMAIN);
+    console.log(process.env.REACT_APP_API_KEY);
     fb.auth()
       .signInWithPopup(provider)
       .then((result) => {
