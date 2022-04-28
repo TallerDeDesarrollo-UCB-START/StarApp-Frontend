@@ -46,6 +46,8 @@ jobs:
       - run: |
           rm .env
           touch .env
+          echo REACT_APP_API_AUTH=${{ secrets.REACT_APP_API_AUTH }} >> .env
+          echo REACT_APP_API=${{ secrets.REACT_APP_API }} >> .env
           echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }} >> .env
           echo REACT_APP_APP_ID=${{ secrets.REACT_APP_APP_ID }} >> .env
           echo REACT_APP_AUTH_DOMAIN=${{ secrets.REACT_APP_AUTH_DOMAIN }} >> .env
