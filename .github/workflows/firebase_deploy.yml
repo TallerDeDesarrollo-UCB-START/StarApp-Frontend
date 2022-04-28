@@ -17,6 +17,7 @@ jobs:
     steps:
       - run: |
           echo "prueba de texto"
+          echo $PATH
           rm .env
           touch .env
           echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }} >> .env
