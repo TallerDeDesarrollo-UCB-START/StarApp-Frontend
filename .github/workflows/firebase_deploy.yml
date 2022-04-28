@@ -9,6 +9,25 @@ name: Deploy to Firebase Hosting
       - test-env
 jobs:
 
+  read_secrets:
+    name: Read secrets from actions
+    enviroment:
+      name: desarrollo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          rm .env
+          touch .env
+          echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }} >> .env
+          echo REACT_APP_APP_ID=${{ secrets.REACT_APP_APP_ID }} >> .env
+          echo REACT_APP_AUTH_DOMAIN=${{ secrets.REACT_APP_AUTH_DOMAIN }} >> .env
+          echo REACT_APP_MEASUREMENT_ID=${{ secrets.REACT_APP_MEASUREMENT_ID }} >> .env
+          echo REACT_APP_MESSAGING_SENDER_ID=${{ secrets.REACT_APP_MESSAGING_SENDER_ID }} >> .env
+          echo REACT_APP_PROJECT_ID=${{ secrets.REACT_APP_PROJECT_ID }} >> .env
+          echo REACT_APP_STORAGE_BUCKET=${{ secrets.REACT_APP_STORAGE_BUCKET }} >> .env
+          cat .env
+
+
   build_and_deploy:
     name: Deploy to develop
     environment:
