@@ -12,7 +12,7 @@ jobs:
   read_secrets:
     name: Read secrets from actions
     enviroment:
-      name: desarrollo:
+      name: desarrollo
     runs-on: ubuntu-latest
     steps:
       - run: |
