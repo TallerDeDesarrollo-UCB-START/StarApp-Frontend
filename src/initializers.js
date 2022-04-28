@@ -11,11 +11,4 @@ const config = {
 };
 fb.initializeApp(config);
 
-console.log(process.env.REACT_APP_API_KEY)
-console.log("se leyo la variable api key")
-console.log("se leyo la variable api key")
-console.log("se leyo la variable api key")
-console.log("se leyo la variable api key")
-console.log("se leyo la variable api key")
-
 export default fb;
