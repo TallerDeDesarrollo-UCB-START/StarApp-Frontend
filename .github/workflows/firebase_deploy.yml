@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          ls
+          echo "prueba de texto"
           rm .env
           touch .env
           echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }} >> .env
@@ -31,6 +31,7 @@ jobs:
 
   build_and_deploy:
     name: Deploy to develop
+    needs: [read_secrets]
     environment:
       name: desarrollo
     runs-on: ubuntu-latest
