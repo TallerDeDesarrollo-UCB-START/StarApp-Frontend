@@ -55,6 +55,7 @@ jobs:
           echo REACT_APP_STORAGE_BUCKET=${{ secrets.REACT_APP_STORAGE_BUCKET }} >> .env
           cat .env
       - run: npm ci && npm run build
+      - run: cat .env
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -62,6 +63,7 @@ jobs:
           channelId: live
           projectId: dev-front-startamericas
       - run: npm test
+      - run: cat .env
 
   run_sonarqube:
     name: sonarqube
