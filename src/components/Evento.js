@@ -183,16 +183,58 @@ class Evento extends Component {
       });
   };
 
-  insertar = async () => {
-    this.handleClick();
+  // insertar = async () => {
+    // this.handleClick();
 
-    this.setState({
-      mensajeSnackbar: "Evento Actualizado",
-      severidadSnackbar: "success",
-    });
-    await this.sleep(2000);
-    this.cerrarModalEditarEvento();
-    window.location.reload();
+    // this.setState({
+    //   mensajeSnackbar: "Evento Actualizado",
+    //   severidadSnackbar: "success",
+    // });
+    // await this.sleep(2000);
+    // this.cerrarModalEditarEvento();
+    // window.location.reload();
+  // };
+
+  insertar = async () => {
+    if (this.state.formEditado.nombre_evento && this.state.formEditado.fecha_evento && this.state.formEditado.lider && this.state.formEditado.categoria && this.state.formEditado.hora_inicio && this.state.formEditado.hora_fin) {
+      if (this.state.formEditado.nombre_evento.trim().length > 0 && this.state.formEditado.nombre_evento.length < 100) {
+        this.handleClick();
+        this.setState({
+          mensajeSnackbar: "Evento Actualizado",
+          severidadSnackbar: "success",
+        });
+        await this.sleep(2000);
+        this.cerrarModalEditarEvento();
+        window.location.reload()
+      } else {
+        this.handleClick();
+        this.setState({
+          mensajeSnackbar: "El nombre del evento debe tener entre 1 y 100 caracteres.",
+          severidadSnackbar: "error",
+        });
+      } 
+      if (this.state.formEditado.descripcion_evento.length > 500) {
+        this.handleClick();
+        this.setState({
+          mensajeSnackbar: "La descripción debe tener máximo 500 caracteres.",
+          severidadSnackbar: "error",
+        });
+      } 
+      if (this.state.formEditado.lugar_evento.length > 100){
+        this.handleClick();
+        this.setState({
+          mensajeSnackbar: "El lugar debe tener máximo 100 caracteres.",
+          severidadSnackbar: "error",
+        });
+      } 
+    } else {
+      this.handleClick();
+      this.setState({
+        mensajeSnackbar: "Llenar todos los campos obligatorios",
+        severidadSnackbar: "error",
+      });
+    }
+    
   };
 
   getUserRol = async () => {
@@ -337,7 +379,7 @@ class Evento extends Component {
           </div>
           <form className="formularioEdicionEvento">
             <TextField
-              label="Nombre del evento"
+              label="Nombre del evento *"
               name="nombre_evento"
               className="nombreEventoEdicion textInput"
               type="text"
@@ -364,7 +406,7 @@ class Evento extends Component {
               </div>
               <div>
                 <select
-                  label="Lider"
+                  label="Lider *"
                   className="liderEventoEdicion textInput"
                   name="lider"
                   onChange={this.handleChange}
@@ -382,7 +424,7 @@ class Evento extends Component {
             </div>
 
             <TextField
-              label="Modalidad"
+              label="Modalidad *"
               select
               className="nombreEventoEdicion textInput"
               name="modalidad_evento"
@@ -407,7 +449,7 @@ class Evento extends Component {
             />
 
             <TextField
-              label="Fecha"
+              label="Fecha *"
               className="FechaEventoEdicion textInput"
               name="fecha_evento"
               type="date"
@@ -421,7 +463,7 @@ class Evento extends Component {
               </div>
               <div>
                 <select
-                  label="Categoria"
+                  label="Categoria *"
                   className="CategoriaEventoEdicion textInput"
                   name="categoria"
                   onChange={this.handleChange}
@@ -462,7 +504,7 @@ class Evento extends Component {
             </div>
 
             <TextField
-              label="Hora Inicio"
+              label="Hora Inicio *"
               className="HoraInicioEventoEdicion textInput"
               name="hora_inicio"
               type="time"
@@ -471,7 +513,7 @@ class Evento extends Component {
             />
 
             <TextField
-              label="Hora Fin"
+              label="Hora Fin *"
               className="HoraFinEventoEdicion textInput"
               name="hora_fin"
               type="time"
