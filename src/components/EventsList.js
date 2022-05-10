@@ -310,8 +310,8 @@ class EventsList extends Component {
   }
 
   peticionPost = async () => {
-    if (this.state.form.nombre_evento && this.state.form.fecha_evento) {
-      if (this.state.form.nombre_evento.trim().length > 0) {
+    if (this.state.form.nombre_evento && this.state.form.fecha_evento && this.state.form.lider && this.state.form.categoria && this.state.form.hora_inicio && this.state.form.hora_fin) {
+      if (this.state.form.nombre_evento.trim().length > 0 || this.state.form.nombre_evento.length < 100) {
         await axios
           .post(urlCrearEvento, this.state.form)
           .then((response) => {
@@ -327,15 +327,16 @@ class EventsList extends Component {
           mensajeSnackbar: "Nombre del evento vacío",
           severidadSnackbar: "error",
         });
-      }
+      } 
     } else {
       // alert("Campos Nombre del Evento o Fecha del Evento vacio");
       this.handleClick();
       this.setState({
-        mensajeSnackbar: "Nombre del Evento o Fecha del Evento vacía",
+        mensajeSnackbar: "LLenar todos los campos obligatorios",
         severidadSnackbar: "error",
       });
     }
+    
   };
 
   getLideres = async () => {
@@ -344,7 +345,7 @@ class EventsList extends Component {
       let aux = data.map((item) => {
         return item.nombre + " " + item.apellido;
       });
-      aux.unshift("Sin Lider");
+      aux.unshift("Sin Asignar");
       let result = aux.filter((item, index) => {
         return aux.indexOf(item) === index;
       });
@@ -468,7 +469,7 @@ class EventsList extends Component {
                   }}
                   className="span-align"
                 >
-                  Categoria:
+                  Categoría:
                 </span>
 
                 <select
@@ -498,7 +499,7 @@ class EventsList extends Component {
                   }}
                   className="span-align"
                 >
-                  Categoria:
+                  Categoría:
                 </span>
 
                 <select
@@ -773,7 +774,7 @@ class EventsList extends Component {
 
           <form className="FormularioCrearEvento">
             <TextField
-              label="Nombre del evento"
+              label="Nombre del evento *"
               placeholder="Nombre del evento"
               name="nombre_evento"
               className="nombreEventoCrear textInput"
@@ -797,11 +798,11 @@ class EventsList extends Component {
 
             <div>
               <div>
-                <label className="LabelLiderCrearEvento">Lider</label>
+                <label className="LabelLiderCrearEvento">Líder *</label>
               </div>
               <div>
                 <select
-                  label="Lider"
+                  label="Lider *"
                   className="liderEventoCrear textInput"
                   name="lider"
                   onChange={this.handleChange}
@@ -819,13 +820,13 @@ class EventsList extends Component {
 
             <div>
               <div>
-                <label className="LabelModalidadCrearEvento">Modalidad</label>
+                <label className="LabelModalidadCrearEvento">Modalidad *</label>
               </div>
               <select
                 className="nombreEventoCrear textInput"
                 name="modalidad_evento"
                 onChange={this.handleChange}
-                label="Modalidad"
+                label="Modalidad *"
               >
                 <option value="Presencial" name="modalidad_evento">
                   Presencial
@@ -835,7 +836,7 @@ class EventsList extends Component {
                 </option>
               </select>
             </div>
-
+        
             <TextField
               label="Lugar"
               className="LugarEventoCrear textInput"
@@ -846,6 +847,8 @@ class EventsList extends Component {
             />
 
             <TextField
+              label="Fecha *"
+              placeholder="Fecha *"
               className="FechaEventoCrear textInput"
               name="fecha_evento"
               type="date"
@@ -854,11 +857,11 @@ class EventsList extends Component {
 
             <div>
               <div>
-                <label className="LabelCategoriaCrearEvento">Categoria</label>
+                <label className="LabelCategoriaCrearEvento">Categoría *</label>
               </div>
               <div>
                 <select
-                  label="Categoria"
+                  label="Categoria *"
                   className="CategoriaEventoCrear textInput"
                   name="categoria"
                   onChange={this.handleChange}
@@ -896,15 +899,18 @@ class EventsList extends Component {
               </div>
             </div>
 
-            <TextField
-              className="HoraInicioEventoCrear textInput"
+            <TextField 
+              label="Hora Inicio *"
+              placeholder="Hora Inicio *"
+              className="HoraInicioEventoCrear textInput" 
               name="hora_inicio"
-              //type="time"
               type="time"
               onChange={this.handleChange}
-            />
+            /> 
 
             <TextField
+              label="Hora Fin *"
+              placeholder="Hora Fin *"
               className="HoraFinEventoCreae textInput"
               name="hora_fin"
               type="time"
