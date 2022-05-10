@@ -117,9 +117,12 @@ class crearEvento extends React.Component {
     });
   };
 
+  handleSubmit = (e) => {
+
+  };
+
   render() {
     return (
-      <>
         <Container className="Container">
           <form className="FormEvento">
             <Box className="evento" xs={6}>
@@ -131,7 +134,7 @@ class crearEvento extends React.Component {
                 onChange={this.handleChange}
               />
             </Box>
-
+           
             <Box className="descripcion" xs={6} mt={0.8}>
               <label>Descripción:</label>
               <textarea
@@ -272,7 +275,6 @@ class crearEvento extends React.Component {
             <Box xs={12} mt={2}></Box>
           </form>
         </Container>
-      </>
     );
   }
 }
