@@ -28,7 +28,7 @@ When('insert Data',{timeout: 10*1000}, async ()=> {
     driver.findElement(By.name('nombre_evento')).sendKeys('Esto_es_una_prueba');
     driver.findElement(By.name('descripcion_evento')).sendKeys('es una pruebita');
     driver.findElement(By.name('lugar_evento')).sendKeys('Plaza de la Revolución');
-    driver.findElement(By.name('fecha_evento')).sendKeys('05-08-2022');
+    driver.findElement(By.name('fecha_evento')).sendKeys('05-08-2023');
     driver.findElement(By.name('hora_inicio')).sendKeys('10:30AM');
     driver.findElement(By.name('hora_fin')).sendKeys('12:00PM');
     await driver.findElement(By.name('GuardarEvento')).click();
