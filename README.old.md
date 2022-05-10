@@ -8,8 +8,8 @@
 ## Comandos para instalar
 
 ```sh
-  Abrir una ventana de comandos CMD
-  Ejecutar los siguientes comandos para verificar la instalacion
+   Abrir una ventana de comandos CMD
+   Ejecutar los siguientes comandos para verificar la instalacion
     node --version
     npm --version
 Crear un proyecto con React Js
