@@ -282,7 +282,7 @@ class Evento extends Component {
                           <b>Categoría:</b> {event.categoria}
                         </p>
                         <p className="card-text">
-                          <b>Lider:</b> {event.lider}
+                          <b>Líder:</b> {event.lider}
                         </p>
                         <p className="card-text" name={'descripcion'+event.descripcion_evento}>
                           <b>Descripción:</b> 
@@ -360,7 +360,7 @@ class Evento extends Component {
             />
             <div>
               <div>
-                <label className="LabelLider">Lider</label>
+                <label className="LabelLider">Líder</label>
               </div>
               <div>
                 <select
@@ -417,7 +417,7 @@ class Evento extends Component {
 
             <div>
               <div>
-                <label className="LabelCategoria">Categoria</label>
+                <label className="LabelCategoria">Categoría</label>
               </div>
               <div>
                 <select

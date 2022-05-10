@@ -71,7 +71,7 @@ class EventsList extends Component {
     form: {
       nombre_evento: "",
       descripcion_evento: "",
-      lider: "",
+      lider: "Sin Asignar",
       modalidad_evento: "Presencial",
       lugar_evento: "",
       fecha_evento: "",
