@@ -327,32 +327,14 @@ class EventsList extends Component {
           severidadSnackbar: "error",
         });
       } 
-      if (this.state.form.descripcion_evento.length < 500) {
-        await axios
-          .post(urlCrearEvento, this.state.form)
-          .then((response) => {
-            this.insertar();
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
-      } else {
+      if (this.state.form.descripcion_evento.length > 500) {
         this.handleClick();
         this.setState({
           mensajeSnackbar: "La descripción debe tener máximo 500 caracteres.",
           severidadSnackbar: "error",
         });
       } 
-      if (this.state.form.lugar_evento.length < 100) {
-        await axios
-          .post(urlCrearEvento, this.state.form)
-          .then((response) => {
-            this.insertar();
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
-      } else {
+      if (this.state.form.lugar_evento.length > 100){
         this.handleClick();
         this.setState({
           mensajeSnackbar: "El lugar debe tener máximo 100 caracteres.",
@@ -360,7 +342,6 @@ class EventsList extends Component {
         });
       } 
     } else {
-      // alert("Campos Nombre del Evento o Fecha del Evento vacio");
       this.handleClick();
       this.setState({
         mensajeSnackbar: "Llenar todos los campos obligatorios",
