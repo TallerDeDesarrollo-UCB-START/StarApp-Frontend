@@ -208,14 +208,39 @@ const Profile = ({sessionData}) => {
     });
   };
   var peticionPost = async (asignaciones) => {
-    await axios
-      .post(urlTablaExtensa, asignaciones)
-      .then((response) => {
-        alert("actualizado correctamente");
-      })
-      .catch((error) => {
-        console.log(error.message);
+    // await axios
+    //   .post(urlTablaExtensa, asignaciones)
+    //   .then((response) => {
+    //     alert("actualizado correctamente");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   });
+    if (this.state.datosEdit.fecha_de_nacimiento && this.state.datosEdit.numero_contacto_de_emergencia) {
+      if (this.state.datosEdit.descripcion_personal.length < 100) {
+        await axios
+        .post(urlTablaExtensa, asignaciones)
+        .then((response) => {
+          alert("actualizado correctamente");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+      } else {
+        this.handleClick();
+        this.setState({
+          mensajeSnackbar: "El campo no puede tener más de 100 caracteres.",
+          severidadSnackbar: "error",
+        });
+      } 
+
+    } else {
+      this.handleClick();
+      this.setState({
+        mensajeSnackbar: "Llenar todos los campos obligatorios",
+        severidadSnackbar: "error",
       });
+    } 
   };
   var peticionPut = (asignaciones) => {
     axios
@@ -359,30 +384,33 @@ const Profile = ({sessionData}) => {
             type="text"
           />
         
+        <label>Fecha de nacimiento *</label>
           <input
             className={classNamees.intputs}
             type="date"
-            placeholder="Fecha de nacimiento"
+            placeholder="Fecha de nacimiento *"
             name="fecha_de_nacimiento"
             value={datosEdit.fecha_de_nacimiento.split("T")[0]}
             onChange={handleInputChange}
+            required
           />
           
-
           
+          <label>Ocupación</label>
           <select
             name="ocupacion"
+            placeholder="Ocupación"
             value={datosEdit.ocupacion}
             onChange={handleInputChange}
             className={classNamees.intputs}
           >
-            <option hidden selected>Ocupación</option>
+            {/* <option hidden selected>Ocupación</option> */}
             <option value="Colegio">Colegio</option>
             <option value="Universidad">Universidad</option>
             <option value="Trabajando">Trabajando</option>
           </select>
 
-          
+          <label>Profesión u Oficio</label>
           <input
             className={classNamees.intputs}
             value={datosEdit.carrera}
@@ -394,7 +422,7 @@ const Profile = ({sessionData}) => {
           />
           <br></br>
 
-          
+          <label>Ciudad de residencia</label>
           <input
             className={classNamees.intputs}
             value={datosEdit.ciudad_de_recidencia}
