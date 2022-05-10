@@ -27,8 +27,8 @@ When('click on the CREAR PROYECTO', async () => {
 });
 
 Then('insert Data of Project', async () => {
-    await driver.findElement(By.name('fecha_inicio')).sendKeys('05-08-2022');
-    await driver.findElement(By.name('fecha_fin')).sendKeys('05-09-2022');  
+    await driver.findElement(By.name('fecha_inicio')).sendKeys('05-08-2023');
+    await driver.findElement(By.name('fecha_fin')).sendKeys('05-09-2023');  
     await driver.findElement(By.name('titulo')).sendKeys('Esto_es_una_prueba');
     await driver.findElement(By.name('descripcion')).sendKeys('es una pruebita');
     //let xpath = '/html/body/div[2]/div[3]/form/div[2]/div[11]/input';
