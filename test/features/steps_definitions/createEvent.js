@@ -35,6 +35,7 @@ When('insert Data',{timeout: 10*1000}, async ()=> {
     await sleep(2000);
 });
 
+
 When('check the new event is created', async()=>{
     await sleep(3000);
     let AuxText1= await driver.findElement(By.name('Lugar_Esto_es_una_prueba')).getText();
