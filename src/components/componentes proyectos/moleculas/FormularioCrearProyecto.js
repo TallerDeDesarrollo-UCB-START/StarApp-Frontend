@@ -116,6 +116,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     nameId="fecha_inicio"
                                     value={fechaFin}
                                     onChange={onChangeFechaFin}
+                                    options={{required: true}}
                                     />
                         <InputTexto type="date"
                                     tituloLabel={"Fecha de Fin"}
@@ -129,7 +130,8 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     nameId="titulo"
                                     value={titulo}
                                     onChange={onChangeTitulo}
-                                    options={{required: true}}
+                                    options={{required: true, maxLength: 50, trim: true}}
+                                    
                                     />
                         <InputTexto type="text"
                                     placeHolder='Descripción'
@@ -137,7 +139,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     nameId="descripcion"
                                     value={descripcion}
                                     onChange={onChangeDescrip}
-                                    options={{required: true}}
+                                    options={{maxLength: 500}}
                                     />
                         <InputTexto type="text"
                                     tituloLabel={"Objetivo"}
@@ -145,6 +147,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     placeHolder='Objetivo'
                                     value={objetivo}
                                     onChange={onChangeObjetivo}
+                                    options={{maxLength: 100}}
                                     />
                         <DynamicDropdown titulo="Lideres"
                                         elements={lideres}
@@ -152,6 +155,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                         onChange={onChangeLider}
                                         idField={'id'}
                                         labelField={'nombre'}
+                                        options={{required: true}}
                         />
                         <DynamicDropdown titulo="Categorias"
                                         elements={categorias}
@@ -159,6 +163,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                         onChange={onChangeCategoria}
                                         idField={'id'}
                                         labelField={'tipo'}
+                                        options={{required: true}}
                         />
                         <DynamicDropdown titulo="Estados"
                                         elements={estados}
@@ -172,6 +177,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     placeHolder='Información Adicional'
                                     value={informacion_adicional}
                                     onChange={onChangeInfoAd}
+                                    options={{maxLength: 300}}
                                     />
                         <InputTexto type="text" 
                                     tituloLabel="Imagen por Link"
