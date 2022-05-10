@@ -59,12 +59,16 @@ function ListaProyectos () {
     const classes = useStyles()
     const [data, setData] = useState([])
     //const [originalData, setOriginalData] = useState([])
+    
+    const activeSnackbar = (message, severity, afterClose) => {
+        setSnackbar({ message, severity, afterClose, active: true })
+      }
     const smallScreen = useMediaQuery('(min-width:700px)')
     const obtenerParticipacionProyecto = async () => {
         const idSesion = sessionStorage.getItem("id");
         try{
             const response = await fetch(
-            `${baseURL}/${idSesion}/get_my_proyectos`,
+            `${baseURL}/${idSesion}/get_my_proyectosg`,
             {
                 method: "GET",
             }
@@ -74,7 +78,8 @@ function ListaProyectos () {
                 +element.fecha_inicio[4]+element.fecha_inicio[5]+element.fecha_inicio[6]+element.fecha_inicio[7]+element.fecha_inicio[8]+
                 element.fecha_inicio[9]);
         } catch (error) {
-            console.log(error);
+            let message = BadRequests(error.response.status);
+            activeSnackbar("No se pudo obtener los proyectos, "+ message, "error", () => {})
         }
         setData(data);
         //setOriginalData(data);
@@ -95,6 +100,7 @@ function ListaProyectos () {
                     pageSize={20}
                 /> 
             </div>
+            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </section>
         
     )

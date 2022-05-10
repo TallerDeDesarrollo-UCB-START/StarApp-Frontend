@@ -1,7 +1,7 @@
 //States
 import {useState, useEffect} from 'react'
 import PaginaProyectos from './Proyectos'
-
+import BadRequests from './redirect status/BadRequests'
 function ProyectosContainer() {
     const [proyectos, setProyectos] = useState([])
     // HTTP requests & functions
@@ -15,11 +15,17 @@ function ProyectosContainer() {
 
     async function fetchProyectos() {
       try{
+    
       const response = await fetch(URLProyectos)
       const data = await response.json()
       return data;
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        let message = BadRequests(error.response.status);
+        activeSnackbar(
+          "No se ha enviado el correo de recuperación, "+message,
+          "error",
+          () => {}
+        );
       }
     }
     //Elements

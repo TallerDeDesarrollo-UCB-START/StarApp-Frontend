@@ -102,8 +102,9 @@ class Evento extends Component {
     try {
       let data = await api.get(`/${id}`).then(({ data }) => data);
       this.setState({ events: data });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 
@@ -114,8 +115,9 @@ class Evento extends Component {
     try {
       let data = await api.get(`/participantes/${id}`).then(({ data }) => data);
       this.setState({ participants: data });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
   validarBotones(event) {
@@ -143,8 +145,9 @@ class Evento extends Component {
         return aux.indexOf(item) === index;
       });
       this.setState({ categorias: result });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 
@@ -159,8 +162,9 @@ class Evento extends Component {
         return aux.indexOf(item) === index;
       });
       this.setState({ lideres: result });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
   getProyectos = async () => {
@@ -171,8 +175,9 @@ class Evento extends Component {
       });
       aux.unshift("No Seleccionado");
       this.setState({ proyectos: aux });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 
@@ -188,6 +193,7 @@ class Evento extends Component {
       })
       .catch((error) => {
         console.log(error.message);
+        throw error;
       });
   };
 
@@ -210,8 +216,9 @@ class Evento extends Component {
       );
       let rol = await data.data.data.rol;
       this.setState({ user: rol });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
   sleep = async (ms) => {

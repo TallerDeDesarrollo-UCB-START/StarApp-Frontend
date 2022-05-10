@@ -4,7 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 //import CardEvento from './CardEvento'
 import ResumedCardEvento from "./ResumedCardEvento";
 import axios from "axios";
-
+import BadRequests from "../../components/redirect status/BadRequests";
+import SnackbarMessage from "../../components/templates/SnackbarMessage";
 const useStyles = makeStyles((theme) => ({
   root_container: {
     margin: "40px 10px",
@@ -32,10 +33,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const EventosProximos = ({ id, title }) => {
+  const [snackbar, setSnackbar] = React.useState({
+    message: "",
+    active: false,
+    severity: "success",
+    afterClose: () => {},
+  });
+  const activeSnackbar = (message, severity, afterClose) => {
+    setSnackbar({ message, severity, afterClose, active: true });
+  };
   const smallScreen = !useMediaQuery("(min-width:500px)");
   const [events, setEvents] = useState([]);
   const classes = useStyles();
   const baseURL = `${process.env.REACT_APP_API}sesion/${id}/get_my_eventos`;
+  console.log("efafwafadaf")
+  console.log(baseURL)
   useEffect(
     () =>
       axios
@@ -46,6 +58,14 @@ const EventosProximos = ({ id, title }) => {
           setEvents(resp);
         })
         .catch((error) => {
+          /*
+          let message = BadRequests(error.response.status);
+          activeSnackbar(
+            "No se pudo obtener los eventos, "+message,
+            "error",
+            () => {}
+          );
+          */
           console.log(error);
         }),
     [baseURL]
@@ -94,6 +114,7 @@ const EventosProximos = ({ id, title }) => {
           >
             Explorar eventos
           </Button>
+          <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>
       )}
     </div>

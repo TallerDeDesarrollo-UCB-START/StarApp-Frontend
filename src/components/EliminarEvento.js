@@ -8,6 +8,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
+import BadRequests from "./redirect status/BadRequests";
+import SnackbarMessage from "../components/templates/SnackbarMessage";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -19,6 +21,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 //const event = props.event;
 
 const EliminarEvento = (event) => {
+
+  const [snackbar, setSnackbar] = React.useState({
+    message: "",
+    active: false,
+    severity: "success",
+    afterClose: () => {},
+  });
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -29,18 +38,25 @@ const EliminarEvento = (event) => {
     setOpen(false);
   };
 
+  const activeSnackbar = (message, severity, afterClose) => {
+    setSnackbar({ message, severity, afterClose, active: true });
+  };
   const deleteEvento = async (event) => {
-    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
-    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
-    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
-    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+    let isEventError = false
     await axios.delete(urlDeploy + "/" + event.event.id)
     .catch((error) => {
-      console.log(error.message);
+      isEventError = true
+      let message = BadRequests(error.response.status);
+      activeSnackbar(
+          "No se pudo eliminar el evento, "+message,
+          "error",
+          () => {}
+      );
     });
-    console.log("Evento eliminado");
-    handleClose();
-    window.location.reload();
+    if (!isEventError){
+        handleClose();
+        window.location.reload();
+    }
   };
   return (
     <div>
@@ -85,6 +101,7 @@ const EliminarEvento = (event) => {
           </Button>
         </DialogActions>
       </Dialog>
+      <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
     </div>
   );
 };

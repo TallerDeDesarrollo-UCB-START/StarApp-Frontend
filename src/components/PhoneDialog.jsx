@@ -8,12 +8,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AxiosClient from "./AxiosClient";
 import SnackbarMessage from "./templates/SnackbarMessage"
-
+import { useHistory } from "react-router-dom";
+import redirectErrorPage from './redirect status/RedirectErrorPage';
+import BadRequests from './redirect status/BadRequests';
 const urlBase = process.env.REACT_APP_API
 
 export default function PhoneDialog({user}) {
   const [open, setOpen] = React.useState(false);
   const [NuevoTelefono, setTelefono]= React.useState("");
+  const history = useHistory();
   const [snackbar, setSnackbar] = React.useState({
     message:"",
     active:false,
@@ -29,7 +32,9 @@ export default function PhoneDialog({user}) {
                 handleClickOpen();
             }
         })
-      .catch((response) => { console.log(response)});
+      .catch((response) => { 
+        redirectErrorPage(response.status,history);
+      });
   },[user])
   const activeSnackbar = (message, severity, afterClose)=>{
     setSnackbar({message, severity, afterClose, active:true})
@@ -47,7 +52,10 @@ export default function PhoneDialog({user}) {
         if (response.status === 202)
             activeSnackbar("Se ha registrado el numero de telefono", "success", ()=>{})
         })
-      .catch((response) => { console.log(response)});
+      .catch((error) => { 
+        let message = BadRequests(error.response.status);
+        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
+      });
   };
 
   return (
@@ -77,6 +85,7 @@ export default function PhoneDialog({user}) {
         </DialogActions>
       </Dialog>
       <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
+      
     </div>
   );
 }

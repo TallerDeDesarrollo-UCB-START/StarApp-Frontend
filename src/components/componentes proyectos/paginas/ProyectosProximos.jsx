@@ -4,7 +4,10 @@ import { makeStyles } from "@material-ui/core/styles";
 //import CardEvento from './CardEvento'
 import axios from "axios";
 import ResumedCardProyect from "../organismos/ResumedCardProyect";
-
+import {useHistory} from "react-router-dom";
+import redirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
+import SnackbarMessage from "../../../components/templates/SnackbarMessage";
+import BadRequests from "../../../components/redirect status/BadRequests";
 const useStyles = makeStyles((theme) => ({
   root_container: {
     margin: "40px 10px",
@@ -32,11 +35,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProyectosProximos = ({ title }) => {
+  const history = useHistory();
   const smallScreen = !useMediaQuery("(min-width:500px)");
   const [events, setEvents] = useState([]);
   const classes = useStyles();
   const idSesion = sessionStorage.getItem("id");
   const baseURL = `${process.env.REACT_APP_API}sesion/${idSesion}/get_my_proyectos`;
+  const activeSnackbar = (message, severity, afterClose) => {
+    setSnackbar({ message, severity, afterClose, active: true });
+  };
+  const [snackbar, setSnackbar] = React.useState({
+    message: "",
+    active: false,
+    severity: "success",
+    afterClose: () => {},
+  });
   useEffect(
     () =>
       axios
@@ -47,7 +60,12 @@ const ProyectosProximos = ({ title }) => {
           setEvents(resp);
         })
         .catch((error) => {
-          console.log(error);
+          const message = BadRequests(error.response.status);
+          activeSnackbar(
+            "No se ha podido encontrar los proyectos, "+message,
+            "error",
+            () => {}
+          );
         }),
     [baseURL]
   );
@@ -97,6 +115,7 @@ const ProyectosProximos = ({ title }) => {
           </Button>
         </div>
       )}
+      <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
     </div>
   );
 };

@@ -12,6 +12,7 @@ import SnackbarMessage from "../components/templates/SnackbarMessage";
 import Card from "@material-ui/core/Card";
 import LoginGoogle from "./LoginGoogle";
 import { NavLink } from "react-router-dom";
+import BadRequests from "./redirect status/BadRequests";
 const useStyles = makeStyles((theme) => ({
   Container: {
     display: "flex",
@@ -106,6 +107,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
       tipo: "normal",
     };
     setActiveProgressBar(true);
+    console.log(`${URL_AUTH}api/auth/signin`)
     await AxiosClient.post(`${URL_AUTH}api/auth/signin`, body)
       .then((response) => {
         if (response.status === 200) {
@@ -118,12 +120,22 @@ const LoginForm = ({ sessionData, setSessionData }) => {
         }
       })
       .catch((error) => {
-        if (error.response.status === 405) {
-          setActiveProgressBar(false);
-          activeSnackbar("La cuenta no se ha validado.", "warning", () => {});
-        } else {
-          setActiveProgressBar(false);
-          activeSnackbar("Correo o contraseña inválidos.", "error", () => {});
+        switch(error.response.status)
+        {
+          case 401:
+            setActiveProgressBar(false);
+            activeSnackbar("Correo o contraseña inválidos.", "error", () => {});
+            break;
+          case 404:
+            setActiveProgressBar(false);
+            activeSnackbar("Correo o contraseña inválidos.", "error", () => {});
+            break;
+          case 405:
+            setActiveProgressBar(false);
+            activeSnackbar("La cuenta no se ha validado.", "warning", () => {});
+            break;
+          default:
+            activeSnackbar("Excepcion inesperada, "+BadRequests(error.response.status), "error", () => {});
         }
       });
   };

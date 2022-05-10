@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Button, Modal } from "@material-ui/core";
 import axios from "axios";
@@ -16,12 +16,12 @@ import Chip from "@material-ui/core/Chip";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import { useMediaQuery, Typography } from "@material-ui/core";
 import DialogConfirm from "./DialogConfirm"
+import redirectErrorPage from "./redirect status/RedirectErrorPage";
 
 const { getCountries } = require("country-list-spanish");
 
 const url = process.env.REACT_APP_API;
 const urlTablaExtensa = `${url}extended_form/`;
-
 
 //const urlTablaExtensa = "http://localhost:5000/extended_form/";
 
@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Profile = ({sessionData}) => {
 
-  
+  const history = useHistory();
   const [userExist, setUserExsit] = useState({
     userEx: false,
   });
@@ -214,7 +214,7 @@ const Profile = ({sessionData}) => {
         alert("actualizado correctamente");
       })
       .catch((error) => {
-        console.log(error.message);
+        redirectErrorPage(error.response.status,history);
       });
   };
   var peticionPut = (asignaciones) => {
@@ -224,7 +224,7 @@ const Profile = ({sessionData}) => {
       //   console.log("")
       // })
       .catch((error) => {
-        alert(error.message);
+        redirectErrorPage(error.response.status,history);
       });
   };
   
@@ -293,7 +293,7 @@ const Profile = ({sessionData}) => {
         }
       })
       .catch((error) => {
-        console.log(error.message);
+          redirectErrorPage(error.response.status,history);
       });
   }, [datos.id]);
 

@@ -47,7 +47,13 @@ export default function ProfileImage({ getDataProfile, setDataProfile, sessionDa
     axios
       .put(baseURL + getDataProfile.id_usuario, disponibilidad)
       .catch((error) => {
-        alert(error.message);
+        console.log(error);
+        throw error;
+        //activeSnackbar(
+        //  "No se pudo enviar la peticion, "+message,
+        //  "error",
+        //  () => {}
+        //);
       });
   };
   function sendAvailable() {

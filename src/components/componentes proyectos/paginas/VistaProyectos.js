@@ -6,21 +6,42 @@ import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
 import {useState, useEffect, useRef} from 'react'
-import {useLocation} from "react-router-dom";
-
+import {useLocation, useHistory} from "react-router-dom";
+import redirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
+import React from "react";
+import BadRequests from '../../redirect status/BadRequests';
+import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
 function VistaProyectos() {
     // ==== HOOKS ==== 
+    const history = useHistory();
     const [proyectos, setProyectos] = useState([])
     const [lideres, setLideres] = useState([])
     const [categorias, setCategorias] = useState([])
     const [proyectosPasadosCategoria, setProyectosPasadosCategoria] = useState([])
     const [actualizar, setActualizar] = useState(false)
     const mountedRef = useRef(false) // Bandera para saber si un componente esta desmontado o no, para evitar warning de cancelacion abrubta de llamadas asincronas
+    const [snackbar, setSnackbar] = React.useState({
+        message: "",
+        active: false,
+        severity: "success",
+        afterClose: () => {},
+      });  
+    const activeSnackbar = (message, severity, afterClose) => {
+        setSnackbar({ message, severity, afterClose, active: true });
+      };
 
+    const launchAlert = (problemMessage) => {
+        let message = BadRequests(500);
+        activeSnackbar(
+          problemMessage+message,
+          "error",
+          () => {}
+        );  
+    };
     // ==== VARIABLES ====
     let categoria = useQuery().get("categoria");
     let complementoHeader = categoria//categoria? categoria : tipoEstado
@@ -40,7 +61,7 @@ function VistaProyectos() {
                 const proyectosDelServer =  await fetchProyectos()
                 setProyectosCheck(proyectosDelServer, mountedRef.current)
             } catch (error) {
-                console.log(error);
+                launchAlert("No se pudo obtener los proyectos, ");
             }
         }
         const getProyectosPorCategoria = async () => {
@@ -48,7 +69,7 @@ function VistaProyectos() {
                 const proyectosFiltrados = await fetchProyectosPorCategoria(categoria)
                 setProyectosCheck(proyectosFiltrados, mountedRef.current)
             } catch (error) {
-                console.log(error);
+                launchAlert("No se pudo obtener los proyectos por categoria, ");
             }
         }
         const getProyectosPasadosPorCategoria = async () => {
@@ -57,6 +78,7 @@ function VistaProyectos() {
                 setProyectosCheck(proyectosPasados, mountedRef.current, true)
             } catch (error) {
                 console.log(error);
+                //launchAlert("No se pudo obtener los proyectos pasados por categoria, ");
             }
         }
         const getLideres = async ()=>{
@@ -64,7 +86,7 @@ function VistaProyectos() {
                 const lideresDelServer = await fetchLideres()
                 mountedRef.current && setLideres(lideresDelServer)
             } catch (error) {
-                console.log(error);
+                launchAlert("No se pudo obtener la lista de lideres o roles, ");
             }
         }
         const getCategorias = async () => {
@@ -72,7 +94,7 @@ function VistaProyectos() {
                 const categosServer = await fetchCategorias()
                 mountedRef.current && setCategorias(categosServer)
             } catch (error) {
-                console.log(error);
+                launchAlert("No se pudo obtener las categorias, ");
             }
         }
         
@@ -96,7 +118,7 @@ function VistaProyectos() {
             const data = await response.json()
             return data;
         } catch (error) {
-            console.log(error);
+            launchAlert("No se pudo obtener los proyectos, ");
         }
     }
 
@@ -107,7 +129,7 @@ function VistaProyectos() {
             return data
             //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
         } catch (error) {
-            console.log(error);
+            launchAlert("No se pudo obtener los proyectos por categoria, ");
         }
     }
 
@@ -117,7 +139,7 @@ function VistaProyectos() {
             const data = await response.json()
             return data;
         } catch (error) {
-            console.log(error);
+            launchAlert("No se pudo obtener los proyectos por categoria, ");
         }
     }
     
@@ -127,7 +149,7 @@ function VistaProyectos() {
             const data = await response.json()
             return data
         } catch (error) {
-            console.log(error);
+            launchAlert("No se pudo obtener las categorias, ");
         }
     }
 
@@ -144,7 +166,7 @@ function VistaProyectos() {
             //dataLider.pop()
             return dataLider;
         } catch (error) {
-            console.log(error);
+            launchAlert("No se pudo obtener los lideres, ");
         }
     }
 
@@ -158,7 +180,7 @@ function VistaProyectos() {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.log(error);
+            launchAlert("No se pudo obtener las participaciones del proyecto, ");
         }
     }
 
@@ -171,7 +193,7 @@ function VistaProyectos() {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.log(error);
+            launchAlert("No se pudo obtener el numero de participantes, ");
         }
     }
 
@@ -195,7 +217,7 @@ function VistaProyectos() {
             setProyectos([...proyectos, data])
             setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
         } catch (error) {
-            console.log(error);
+            redirectErrorPage(error.response.status,history);
         }
     }
     
@@ -214,7 +236,7 @@ function VistaProyectos() {
             //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
             setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
         } catch (error) {
-            console.log(error);
+            redirectErrorPage(error.response.status,history);
         }
     }
 
@@ -230,7 +252,7 @@ function VistaProyectos() {
             //setActualizar(!actualizar)
             return data
         } catch (error) {
-            console.log(error);
+            redirectErrorPage(error.response.status,history);
         }
     }
     
@@ -247,7 +269,7 @@ function VistaProyectos() {
             //setActualizar(!actualizar)
             return data
         } catch (error) {
-            console.log(error);
+            redirectErrorPage(error.response.status,history);
         }
     }
 
@@ -261,7 +283,7 @@ function VistaProyectos() {
         
             setProyectos(proyectos.filter((proy) => proy.id !== id));
         } catch (error) {
-            console.log(error);
+            redirectErrorPage(error.response.status,history);
         }
     }
 
@@ -298,6 +320,7 @@ function VistaProyectos() {
             <PuertaPermisos scopes={[SCOPES.canNotCrudProyectos]}>
                 {proyectosVoluntarios}
             </PuertaPermisos>
+            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </>
     );
 }
