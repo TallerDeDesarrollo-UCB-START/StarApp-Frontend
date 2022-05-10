@@ -40,7 +40,7 @@ function InputTexto({tituloLabel, type,  value, placeHolder, onChange, nameId, o
                                 style={{color: "black", border: "1px solid grey"}}
                                 autoComplete="off"
                             />
-                            {errors[nameId] && showErrorMessage(true, `Error: Campo ${errors[nameId].type}`)}
+                            {errors[nameId] && showErrorMessage(true, validations.title)}
                             {/*errors.titulo && estilosValidar()*/}
                             {/*errors[nameId] && console.log(`Error campo "${nameId}": ${errors[nameId].type}`)*/}
                         </div>

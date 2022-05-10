@@ -116,7 +116,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     nameId="fecha_inicio"
                                     value={fechaFin}
                                     onChange={onChangeFechaFin}
-                                    options={{required: true}}
+                                    options={{required: true, title:"Se requiere una Fecha de inicio"}}
                                     />
                         <InputTexto type="date"
                                     tituloLabel={"Fecha de Fin"}
@@ -130,7 +130,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     nameId="titulo"
                                     value={titulo}
                                     onChange={onChangeTitulo}
-                                    options={{required: true, maxLength: 50, trim: true}}
+                                    options={{required: true, maxLength: 50, trim: true, title:"Se requiere un nombre de Proyecto"}}
                                     
                                     />
                         <InputTexto type="text"
@@ -155,7 +155,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                         onChange={onChangeLider}
                                         idField={'id'}
                                         labelField={'nombre'}
-                                        options={{required: true}}
+                                        options={{required: true, title:"Se requiere un lider de Proyecto"}}
                         />
                         <DynamicDropdown titulo="Categorias"
                                         elements={categorias}
@@ -163,7 +163,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                         onChange={onChangeCategoria}
                                         idField={'id'}
                                         labelField={'tipo'}
-                                        options={{required: true}}
+                                        options={{required: true, title:"Se requiere una Categoria"}}
                         />
                         <DynamicDropdown titulo="Estados"
                                         elements={estados}
