@@ -311,7 +311,7 @@ class EventsList extends Component {
 
   peticionPost = async () => {
     if (this.state.form.nombre_evento && this.state.form.fecha_evento && this.state.form.lider && this.state.form.categoria && this.state.form.hora_inicio && this.state.form.hora_fin) {
-      if (this.state.form.nombre_evento.trim().length > 0 || this.state.form.nombre_evento.length < 100) {
+      if (this.state.form.nombre_evento.trim().length > 0 && this.state.form.nombre_evento.length < 100) {
         await axios
           .post(urlCrearEvento, this.state.form)
           .then((response) => {
@@ -321,10 +321,41 @@ class EventsList extends Component {
             console.log(error.message);
           });
       } else {
-        // alert("Nombre del Evento vacio");
         this.handleClick();
         this.setState({
-          mensajeSnackbar: "Nombre del evento vacío",
+          mensajeSnackbar: "El nombre del evento debe tener entre 1 y 100 caracteres.",
+          severidadSnackbar: "error",
+        });
+      } 
+      if (this.state.form.descripcion_evento.length < 500) {
+        await axios
+          .post(urlCrearEvento, this.state.form)
+          .then((response) => {
+            this.insertar();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        this.handleClick();
+        this.setState({
+          mensajeSnackbar: "La descripción debe tener máximo 500 caracteres.",
+          severidadSnackbar: "error",
+        });
+      } 
+      if (this.state.form.lugar_evento.length < 100) {
+        await axios
+          .post(urlCrearEvento, this.state.form)
+          .then((response) => {
+            this.insertar();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        this.handleClick();
+        this.setState({
+          mensajeSnackbar: "El lugar debe tener máximo 100 caracteres.",
           severidadSnackbar: "error",
         });
       } 
@@ -332,7 +363,7 @@ class EventsList extends Component {
       // alert("Campos Nombre del Evento o Fecha del Evento vacio");
       this.handleClick();
       this.setState({
-        mensajeSnackbar: "LLenar todos los campos obligatorios",
+        mensajeSnackbar: "Llenar todos los campos obligatorios",
         severidadSnackbar: "error",
       });
     }
