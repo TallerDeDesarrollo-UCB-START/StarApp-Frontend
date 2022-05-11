@@ -12,7 +12,6 @@ const config = {
 };
 fb.initializeApp(config);
 */
-
 const config = {
   apiKey: "AIzaSyDCikfkwlg_z6rYjtd5kq0wRMWx2tVqd_Y",
   authDomain: "dev-front-startamericas.firebaseapp.com",
