@@ -1,12 +1,12 @@
 import fb from "firebase";
 
 const config = {
-  apiKey: "AIzaSyBVkBZ6TKoobHmk4vcIWmPVehlOcLzP2QY",
-  authDomain: "startamericastogether.firebaseapp.com",
-  projectId: "startamericastogether",
-  storageBucket: "startamericastogether.appspot.com",
-  messagingSenderId: "706351017993",
-  appId: "1:706351017993:web:22db22b78e2441a65948d8"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 fb.initializeApp(config);
 
