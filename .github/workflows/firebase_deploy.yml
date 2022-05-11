@@ -13,6 +13,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: |
+          ls -al
+          touch .env
+          echo REACT_APP_API_AUTH=${{ secrets.REACT_APP_API_AUTH }} >> .env
+          echo REACT_APP_API=${{ secrets.REACT_APP_API }} >> .env
+          echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }} >> .env
+          echo REACT_APP_APP_ID=${{ secrets.REACT_APP_APP_ID }} >> .env
+          echo REACT_APP_AUTH_DOMAIN=${{ secrets.REACT_APP_AUTH_DOMAIN }} >> .env
+          echo REACT_APP_MEASUREMENT_ID=${{ secrets.REACT_APP_MEASUREMENT_ID }} >> .env
+          echo REACT_APP_MESSAGING_SENDER_ID=${{ secrets.REACT_APP_MESSAGING_SENDER_ID }} >> .env
+          echo REACT_APP_PROJECT_ID=${{ secrets.REACT_APP_PROJECT_ID }} >> .env
+          echo REACT_APP_STORAGE_BUCKET=${{ secrets.REACT_APP_STORAGE_BUCKET }} >> .env
+          cat .env
+          ls -al
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -21,6 +35,8 @@ jobs:
           channelId: live
           projectId: dev-front-startamericas
       - run: npm test
+
+
 
   run_sonarqube:
     name: sonarqube
@@ -45,5 +61,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-
