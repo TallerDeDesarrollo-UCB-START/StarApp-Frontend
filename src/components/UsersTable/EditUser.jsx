@@ -14,6 +14,9 @@ import { fields } from "./SearchByField"
 import { InputByCriteria } from "./InputsByFields"
 import axios from "axios"
 import SnackbarMessage from "../templates/SnackbarMessage"
+import BadRequests from "../redirect status/BadRequests"
+import redirectErrorPage from "../redirect status/RedirectErrorPage"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -94,6 +97,7 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
     severity: "success",
     afterClose: () => {},
   })
+  const history = useHistory();
   React.useEffect(() => {
     const URL = process.env.REACT_APP_API
     axios.get(`${URL}insignias/${rowToUpdate.id}`)
@@ -107,7 +111,8 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
         }
       })
       .catch((error)=>{
-        console.log(error)
+        let message = BadRequests(error.response.status);
+        activeSnackbar("Ha ocurrido un error, "+ message, "error", () => {})
       })
   }, [rowToUpdate.id])
   const handleOpen = () => {
@@ -145,7 +150,7 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
           }
         })
         .catch((error) => {
-          activeSnackbar("Ha ocurrido un error.", "error", () => {})
+          redirectErrorPage(error.response.status,history);
         })
     }
     else{
@@ -165,7 +170,7 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
         }
       })
       .catch((error) => {
-        activeSnackbar("Ha ocurrido un error.", "error", () => {})
+        redirectErrorPage(error.response.status,history);
       })
   }
 

@@ -67,6 +67,7 @@ class crearEvento extends React.Component {
       })
       .catch((error) => {
         console.log(error.message);
+        throw error;
       });
   };
 
@@ -78,8 +79,9 @@ class crearEvento extends React.Component {
       });
       aux.unshift("Sin Lider");
       this.setState({ lideres: aux });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
   getCategorias = async () => {
@@ -90,8 +92,9 @@ class crearEvento extends React.Component {
       });
       aux.unshift("Todas");
       this.setState({ categorias: aux });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
   getProyectos = async () => {
@@ -102,8 +105,9 @@ class crearEvento extends React.Component {
       });
       aux.unshift("No Seleccionado");
       this.setState({ proyectos: aux });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 

@@ -9,7 +9,7 @@ require("chromedriver");
 const capabilities = Capabilities.chrome();
 capabilities.set('chromeOptions', { "w3c": false });
 const driver = new Builder().withCapabilities(capabilities).build();
-let BaseUrl="https://dev-front-startamericas.web.app/login"
+let BaseUrl="http://localhost:3000/login"
 
 Given('I have browsed to the Start Americas Together homepage',async function () {
     await driver.get(BaseUrl);

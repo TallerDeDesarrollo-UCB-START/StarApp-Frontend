@@ -1,4 +1,5 @@
 // Componentes:
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import HeaderCategoriasProyectos from '../organismos/HeaderCategoriasProyectos'
 import FormularioCrearProyecto from '../moleculas/FormularioCrearProyecto'
@@ -6,7 +7,10 @@ import ContenidoCategoriasProyectos from '../organismos/ContenidoCategoriasProye
 import { Container } from '@material-ui/core';
 // Librerias-Paquetes:
 import {useState, useEffect, useRef} from 'react'
-
+import {useHistory} from "react-router-dom";
+import redirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
+import SnackbarMessage from "../../../components/templates/SnackbarMessage";
+import BadRequests from "../../../components/redirect status/BadRequests";
 const useStyles = makeStyles(() => ({
     container: {
         width: '98%',
@@ -15,23 +19,35 @@ const useStyles = makeStyles(() => ({
 
 function VistaCategoriasProyectos() {
     const classes = useStyles();
-
+    const history = useHistory();
     // Hooks:
     const [categorias, setCategorias] = useState([])
     const [lideres, setLideres] = useState([])
     const [mostrarFormCrear, setMostrarFormCrear] = useState(false)
     const mountedRef = useRef(false)
-
+    const activeSnackbar = (message, severity, afterClose) => {
+        setSnackbar({ message, severity, afterClose, active: true });
+      };
+      const [snackbar, setSnackbar] = React.useState({
+        message: "",
+        active: false,
+        severity: "success",
+        afterClose: () => {},
+      });
     useEffect(() => {
         mountedRef.current = true
         
         const getCategorias = async () => {
             try{
-                const response = await fetch(URLCategorias)
+                const response = await fetch(URLCategorias);
                 const data = await response.json()
                 mountedRef.current && setCategorias(data)
-            } catch (err) {
-                console.log(err);
+            } catch (error) {
+                const message = BadRequests(404);
+                activeSnackbar(
+                  "No se ha podido encontrar los proyectos, "+message,
+                  "error",
+                  () => {});
             }
         }
         const getLideres = async ()=>{
@@ -39,8 +55,12 @@ function VistaCategoriasProyectos() {
                 const lideresDelServer = await fetchLideres()
                 mountedRef.current && setLideres(lideresDelServer)
                 //console.log(lideresDelServer)
-            } catch (err) {
-                console.log(err);
+            } catch (error) {
+                const message = BadRequests(404);
+                activeSnackbar(
+                  "No se ha podido encontrar los proyectos, "+message,
+                  "error",
+                  () => {});
             }
         }
         getCategorias()
@@ -87,6 +107,7 @@ function VistaCategoriasProyectos() {
             <HeaderCategoriasProyectos  onActivarForm={activarFormCrear}/>
             {FormularioCrear}
             <ContenidoCategoriasProyectos categorias={categorias}/>
+            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </Container>
     );
 }

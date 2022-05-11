@@ -19,11 +19,12 @@ function useGetRole() {
             return () => mountedRef.current = false;// Desmontar componentes evitando warnings
         }catch(error){
             console.log(error);
+            throw error;
         };
     }, [])
 
     return rol
 }
 const url = process.env.REACT_APP_API;
-const URLObtenerRol = `${url}get_rol` //'http://localhost:5000/get_rol/'
+const URLObtenerRol = `${url}get_rol`;
 export default useGetRole

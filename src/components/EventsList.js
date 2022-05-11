@@ -113,8 +113,9 @@ class EventsList extends Component {
       aux.unshift("Todas");
       this.setState({ categoriaFiltrada: aux[0] });
       this.setState({ categorias: aux });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 
@@ -139,8 +140,9 @@ class EventsList extends Component {
       }
 
       this.setState({ events: data });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
   getCategorias = async () => {
@@ -152,8 +154,9 @@ class EventsList extends Component {
       aux.unshift("Todas");
       this.setState({ categoriaFiltrada: aux[0] });
       this.setState({ categorias: aux });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 
@@ -179,8 +182,9 @@ class EventsList extends Component {
         this.setState({ container: true });
       }
       this.setState({ events: data });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 
@@ -188,6 +192,7 @@ class EventsList extends Component {
       await axios.delete(urlDeploy + "/" + event.id)
       .catch((error) => {
         console.log(error.message);
+        throw error;
       });
       this.getEvents();
       this.abrirModal();
@@ -198,6 +203,7 @@ class EventsList extends Component {
       await axios.put(urlDeploy + "/archivar_evento/" + event.id)
       .catch((error) => {
         console.log(error.message);
+        throw error;
       });
       this.getEventsArchivados();
       window.location.reload();
@@ -211,6 +217,7 @@ class EventsList extends Component {
     await axios.put(urlDeploy + "/mostrar_evento/" + event.id)
     .catch((error) => {
       console.log(error.message);
+      throw error;
     });
     this.getEvents();
   };
@@ -233,6 +240,7 @@ class EventsList extends Component {
       })
       .catch((error) => {
         console.log(error.message);
+        throw error;
       });
   };
 
@@ -242,8 +250,9 @@ class EventsList extends Component {
         .get(`/participante/${window.sessionStorage.id}`)
         .then(({ data }) => data);
       this.setState({ participaciones: data });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 
@@ -277,6 +286,7 @@ class EventsList extends Component {
       })
       .catch((error) => {
         console.log(error.message);
+        throw error;
       });
   };
 
@@ -314,8 +324,9 @@ class EventsList extends Component {
       );
       let rol = await data.data.data.rol;
       this.setState({ user: rol });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 
@@ -353,6 +364,7 @@ class EventsList extends Component {
           })
           .catch((error) => {
             console.log(error.message);
+            throw error;
           });
       } else {
         // alert("Nombre del Evento vacio");
@@ -386,8 +398,9 @@ class EventsList extends Component {
         return aux.indexOf(item) === index;
       });
       this.setState({ lideres: result });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 
@@ -402,8 +415,9 @@ class EventsList extends Component {
         return aux.indexOf(item) === index;
       });
       this.setState({ proyectos: result });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   };
 

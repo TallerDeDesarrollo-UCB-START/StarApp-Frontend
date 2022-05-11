@@ -16,6 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Card from "@material-ui/core/Card";
+import redirectErrorPage from "./redirect status/RedirectErrorPage";
 
 const { getCountries  } = require("country-list-spanish");
 const url = process.env.REACT_APP_API;
@@ -202,7 +203,7 @@ const EditarPerfil = ({ sessionData }) => {
             alert("actualizado correctamente");
         })
           .catch((error) => {
-            console.log(error.message);
+            redirectErrorPage(error.response.status,history);
         });
     };
     var peticionPut = (asignaciones) => {
@@ -212,13 +213,13 @@ const EditarPerfil = ({ sessionData }) => {
         //   console.log("")
         // })
         .catch((error) => {
-        alert(error.message);
+            redirectErrorPage(error.response.status,history);
         });
     };
     function sendForm() {
         setDatos(datosEdit);
-        console.log("datosEdit")
-        console.log(datosEdit)
+        //console.log("datosEdit")
+        //console.log(datosEdit)
         const asignaciones = {
           fecha_de_nacimiento: datosEdit.fecha_de_nacimiento,
           pais_de_recidencia: datosEdit.pais_de_recidencia,

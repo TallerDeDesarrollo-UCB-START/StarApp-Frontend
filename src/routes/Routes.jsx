@@ -17,6 +17,7 @@ import VistaCategoriasProyectos from "../components/componentes proyectos/pagina
 import ValidateView from "../screens/ValidateView";
 import ResetPassword from "../screens/ResetPassword";
 import {ResetNewPassword} from "../screens/ResetNewPassword";
+import ErrorPage from "../components/redirect status/ErrorPage";
 const Routes = [
   {
     path: "/",
@@ -132,5 +133,11 @@ const Routes = [
     component: EditarPerfil,
     logginNeeded: true,
   },
+  {
+    path: "/error",
+    name: "RedireccionErrorPagina",
+    component: ErrorPage,
+    logginNeeded: false,
+  }
 ];
 export default Routes;

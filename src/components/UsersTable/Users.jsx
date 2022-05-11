@@ -8,6 +8,9 @@ import DownloadButton from "./DownloadExcelButton";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Popover } from "@material-ui/core";
 import EditUser from "./EditUser";
+import SnackbarMessage from "../../components/templates/SnackbarMessage"; 
+import BadRequests from "../redirect status/BadRequests";
+
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -118,7 +121,15 @@ const calculateAge = (birthday) => {
 function Users({sessionData}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [rowToUpdate, setRowToUpdate] = React.useState(null);
-
+  const [snackbar, setSnackbar] = React.useState({
+    message: "",
+    active: false,
+    severity: "success",
+    afterClose: () => {},
+  });
+  const activeSnackbar = (message, severity, afterClose) => {
+    setSnackbar({ message, severity, afterClose, active: true });
+  };
   const handleClick = (params) => {
     setRowToUpdate(params);
     const position = document.getElementById("position-popover");
@@ -206,7 +217,12 @@ function Users({sessionData}) {
         setOriginalData(resp);
       })
       .catch((error) => {
-        console.log(error);
+        let message = BadRequests(error.response.status);
+        activeSnackbar(
+          "No se pudo recuperar los usuarios, "+message,
+          "error",
+          () => {}
+        );
       });
 
   useEffect(() => {
@@ -265,6 +281,7 @@ function Users({sessionData}) {
           <EditUser rowToUpdate={rowToUpdate} setRowToUpdate={setRowToUpdate} handleCloseButton={handleClose}/>
         </div>
       </Popover>
+      <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
     </section>
   );
 }

@@ -1,7 +1,7 @@
 //import { cloneElement } from "react";
+import React from "react";
 import { PERMISSIONS } from "./map-permisos.js";
 import useGetRole from "./useGetRole";
-
 const hasPermission = ({ permissions, scopes }) => {
     const scopesMap = {};
     scopes.forEach((scope) => {
@@ -11,15 +11,17 @@ const hasPermission = ({ permissions, scopes }) => {
 };
 
 function PuertaPermisos({children, scopes = []}) {
-    const role = useGetRole();
-    //console.log(role)
-    const permissions = PERMISSIONS[role];
+    try{
+        const role = useGetRole();
+        //console.log(role)
+        const permissions = PERMISSIONS[role];
 
-    const permissionGranted = permissions? hasPermission({ permissions, scopes }) : false //Validacion para evitar errores
-
-    if (!permissionGranted) return <></>
-
-    return <>{children}</>;
+        const permissionGranted = permissions? hasPermission({ permissions, scopes }) : false //Validacion para evitar errores
+        if (!permissionGranted) return <></>
+            return <>{children}</>;
+    }catch(error){
+        console.log(error);
+    }
 }
 
 export default PuertaPermisos;

@@ -28,10 +28,10 @@ class ListaParticipantesProyecto extends Component{
         axios.get(`${process.env.REACT_APP_API}get_participantes_proyecto_simple/${id}`)
         .then(response => {
             this.setState({posts:response.data})
-            console.log(response.data)
+            //console.log(response.data)
             this.setState({inicio:"inicio: " + response.data[0].fecha_inicio.substring(0,10)})
             let fin = response.data[0].fecha_fin
-            console.log(fin)
+            //console.log(fin)
             if (fin==null) {
 
                 this.setState({fin:"fin: en progreso "})
@@ -42,7 +42,7 @@ class ListaParticipantesProyecto extends Component{
             
         })
         .catch(error => {
-            console.log(error)
+            console.log(error);
         })
 
     }

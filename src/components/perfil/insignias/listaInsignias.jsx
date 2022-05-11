@@ -31,6 +31,7 @@ function ListaInsignias() {
       setInsigniasUser(dataUsuario.data.data);
     } catch (error) {
       console.log(error);
+      throw error;
     }
   };
   const obtenerInsignias = async () => {
@@ -39,6 +40,7 @@ function ListaInsignias() {
       setInsignias(dataLocal.data.data);
     } catch (error) {
       console.log(error);
+      throw error;
     }
   };
 

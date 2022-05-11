@@ -27,7 +27,7 @@ class ListaParticipantesProyecto extends Component {
       .get(`${url}eventos/participantes/${id}`)
       .then((response) => {
         this.setState({ posts: response.data });
-        console.log(response.data);
+        //console.log(response.data);
         this.setState({
           inicio:
             "Hora inicio: " + response.data[0].hora_inicio.substring(0, 10),
@@ -42,6 +42,7 @@ class ListaParticipantesProyecto extends Component {
       })
       .catch((error) => {
         console.log(error);
+        throw error;
       });
   }
   getId(thisUrl) {
