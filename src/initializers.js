@@ -10,6 +10,7 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 fb.initializeApp(config);
+export default fb;
 
 // const config = {
 //   apiKey: "AIzaSyDCikfkwlg_z6rYjtd5kq0wRMWx2tVqd_Y",
