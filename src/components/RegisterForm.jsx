@@ -87,7 +87,7 @@ const RegisterForm = () => {
 
   const [activeProgressBar, setActiveProgressBar] = useState(false);
   const smallScreen = !useMediaQuery("(min-width:811px)");
-  const [phoneValue, setPhoneValue] = useState("591");
+  const [phoneValue, setPhoneValue] = useState("+");
   const [snackbar, setSnackbar] = useState({
     message: "",
     active: false,
@@ -98,15 +98,15 @@ const RegisterForm = () => {
     setValidateButton(false);
     const errors = {};
     if (!validEmail.test(values.email)) {
-      errors.email = "Correo no válido";
+      errors.email = "Correo debe tener formato 'email@email.com'";
     }
     if (!validName.test(values.username)) {
-      errors.username = "Nombre no válido";
+      errors.username = "Nombre debe contener solo letras y debe ser menor a 50 caracteres";
     }
     if (!validName.test(values.lastname)) {
-      errors.lastname = "Apellido no válido";
+      errors.lastname = "Apellido debe contener solo letras y debe ser menor a 50 caracteres";
     }
-    if (phoneValue.replace(/\s+/g, '').length<7) {
+    if (phoneValue.replace(/\s+/g, '').length < 7) {
       errors.phoneValue = "Telefono requerido";
     }
     if (!validPassword.test(values.password)) {

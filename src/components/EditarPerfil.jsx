@@ -5,7 +5,7 @@ import axios from "axios";
 import { useMediaQuery, Button, Grid } from "@material-ui/core";
 import { TextField } from "final-form-material-ui";
 import { useHistory } from "react-router-dom";
-
+import { validName } from "./RegEx";
 
 import Typography from "@material-ui/core/Typography";
 import ProfileImage from "./ProfileImage";
@@ -195,12 +195,31 @@ const EditarPerfil = ({ sessionData }) => {
           } 
         setDatosEdit({ ...datosEdit, [event.target.name]: nuevasAptitudes });
     };
+    const validate = (values) => {
+        const errors = {};
+        if (!validName.test(values.carrera)) {
+          errors.carrera = "Debe contener solo letras y debe ser menor a 50 caracteres";
+        }
+        if (!validName.test(values.nombre_contacto_de_emergencia)) {
+            errors.nombre_contacto_de_emergencia = "Debe contener solo letras y debe ser menor a 50 caracteres";
+        }
+        if (!validName.test(values.relacion_contacto_de_emergencia)) {
+            errors.relacion_contacto_de_emergencia = "Debe contener solo letras y debe ser menor a 50 caracteres";
+        }
+        if (
+          !errors.carrera &&
+          !errors.nombre_contacto_de_emergencia &&
+          !errors.relacion_contacto_de_emergencia
+        )
+        return errors;
+    };
+
     var peticionPost = async (asignaciones) => {
         
         await axios
           .post(urlTablaExtensa, asignaciones)
           .then((response) => {
-            alert("actualizado correctamente");
+            alert("Actualizado correctamente");
         })
           .catch((error) => {
             redirectErrorPage(error.response.status,history);
@@ -294,7 +313,7 @@ const EditarPerfil = ({ sessionData }) => {
           }
         >
             <Typography variant="subtitle1" style={{fontWeight: "bold", marginLeft: "10px"}}>Datos Personales</Typography>
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} validate={validate}>
                 {({ handleSubmit }) => (
                     <form className={classNames.root} onSubmit={handleSubmit} noValidate autoComplete="off">
                         <div className={classNames.nameContainer}>
@@ -326,13 +345,14 @@ const EditarPerfil = ({ sessionData }) => {
                             style={{ width: "95%" }}
                             name="fecha_de_nacimiento"
                             type="date"
-                            placeholder="Fecha de Nacimiento"
+                            placeholder="Fecha de Nacimiento *"
                             className={classNames.textField}
                             component={TextField}
                             onChange={handleInputChange}
                             value={datosEdit.fecha_de_nacimiento.split("T")[0]}
                             variant="outlined"
                             size="small"
+                            required
                         />
                         <FormControl className={classNames.formControl}>
                             <InputLabel id="customized-select-label">Ocupación:</InputLabel>

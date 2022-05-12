@@ -362,30 +362,33 @@ const Profile = ({sessionData}) => {
             type="text"
           />
         
+        <label>Fecha de nacimiento *</label>
           <input
             className={classNamees.intputs}
             type="date"
-            placeholder="Fecha de nacimiento"
+            placeholder="Fecha de nacimiento *"
             name="fecha_de_nacimiento"
             value={datosEdit.fecha_de_nacimiento.split("T")[0]}
             onChange={handleInputChange}
+            required
           />
           
-
           
+          <label>Ocupación</label>
           <select
             name="ocupacion"
+            placeholder="Ocupación"
             value={datosEdit.ocupacion}
             onChange={handleInputChange}
             className={classNamees.intputs}
           >
-            <option hidden selected>Ocupación</option>
+            {/* <option hidden selected>Ocupación</option> */}
             <option value="Colegio">Colegio</option>
             <option value="Universidad">Universidad</option>
             <option value="Trabajando">Trabajando</option>
           </select>
 
-          
+          <label>Profesión u Oficio</label>
           <input
             className={classNamees.intputs}
             value={datosEdit.carrera}
@@ -397,7 +400,7 @@ const Profile = ({sessionData}) => {
           />
           <br></br>
 
-          
+          <label>Ciudad de residencia</label>
           <input
             className={classNamees.intputs}
             value={datosEdit.ciudad_de_recidencia}

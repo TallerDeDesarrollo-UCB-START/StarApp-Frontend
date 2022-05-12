@@ -72,7 +72,7 @@ class EventsList extends Component {
     form: {
       nombre_evento: "",
       descripcion_evento: "",
-      lider: "",
+      lider: "Sin Asignar",
       modalidad_evento: "Presencial",
       lugar_evento: "",
       fecha_evento: "",
@@ -367,19 +367,17 @@ class EventsList extends Component {
             throw error;
           });
       } else {
-        // alert("Nombre del Evento vacio");
         this.handleClick();
         this.setState({
-          mensajeSnackbar: "Nombre del evento vacío",
+          mensajeSnackbar: "El nombre del evento debe tener entre 1 y 100 caracteres.",
           severidadSnackbar: "error",
         });
         return false
       }
     } else {
-      // alert("Campos Nombre del Evento o Fecha del Evento vacio");
       this.handleClick();
       this.setState({
-        mensajeSnackbar: "Nombre del Evento o Fecha del Evento vacía",
+        mensajeSnackbar: "Llenar todos los campos obligatorios",
         severidadSnackbar: "error",
       });
       return false
@@ -393,7 +391,7 @@ class EventsList extends Component {
       let aux = data.map((item) => {
         return item.nombre + " " + item.apellido;
       });
-      aux.unshift("Sin Lider");
+      aux.unshift("Sin Asignar");
       let result = aux.filter((item, index) => {
         return aux.indexOf(item) === index;
       });
@@ -519,7 +517,7 @@ class EventsList extends Component {
                   }}
                   className="span-align"
                 >
-                  Categoria:
+                  Categoría:
                 </span>
 
                 <select
@@ -549,7 +547,7 @@ class EventsList extends Component {
                   }}
                   className="span-align"
                 >
-                  Categoria:
+                  Categoría:
                 </span>
 
                 <select
@@ -824,7 +822,7 @@ class EventsList extends Component {
 
           <form className="FormularioCrearEvento">
             <TextField
-              label="Nombre del evento"
+              label="Nombre del evento *"
               placeholder="Nombre del evento"
               name="nombre_evento"
               className="nombreEventoCrear textInput"
@@ -848,11 +846,11 @@ class EventsList extends Component {
 
             <div>
               <div>
-                <label className="LabelLiderCrearEvento">Lider</label>
+                <label className="LabelLiderCrearEvento">Líder *</label>
               </div>
               <div>
                 <select
-                  label="Lider"
+                  label="Lider *"
                   className="liderEventoCrear textInput"
                   name="lider"
                   onChange={this.handleChange}
@@ -870,13 +868,13 @@ class EventsList extends Component {
 
             <div>
               <div>
-                <label className="LabelModalidadCrearEvento">Modalidad</label>
+                <label className="LabelModalidadCrearEvento">Modalidad *</label>
               </div>
               <select
                 className="nombreEventoCrear textInput"
                 name="modalidad_evento"
                 onChange={this.handleChange}
-                label="Modalidad"
+                label="Modalidad *"
               >
                 <option value="Presencial" name="modalidad_evento">
                   Presencial
@@ -886,7 +884,7 @@ class EventsList extends Component {
                 </option>
               </select>
             </div>
-
+        
             <TextField
               label="Lugar"
               className="LugarEventoCrear textInput"
@@ -897,6 +895,8 @@ class EventsList extends Component {
             />
 
             <TextField
+              label="Fecha *"
+              placeholder="Fecha *"
               className="FechaEventoCrear textInput"
               name="fecha_evento"
               type="date"
@@ -905,11 +905,11 @@ class EventsList extends Component {
 
             <div>
               <div>
-                <label className="LabelCategoriaCrearEvento">Categoria</label>
+                <label className="LabelCategoriaCrearEvento">Categoría *</label>
               </div>
               <div>
                 <select
-                  label="Categoria"
+                  label="Categoria *"
                   className="CategoriaEventoCrear textInput"
                   name="categoria"
                   onChange={this.handleChange}
@@ -947,15 +947,18 @@ class EventsList extends Component {
               </div>
             </div>
 
-            <TextField
-              className="HoraInicioEventoCrear textInput"
+            <TextField 
+              label="Hora Inicio *"
+              placeholder="Hora Inicio *"
+              className="HoraInicioEventoCrear textInput" 
               name="hora_inicio"
-              //type="time"
               type="time"
               onChange={this.handleChange}
-            />
+            /> 
 
             <TextField
+              label="Hora Fin *"
+              placeholder="Hora Fin *"
               className="HoraFinEventoCreae textInput"
               name="hora_fin"
               type="time"

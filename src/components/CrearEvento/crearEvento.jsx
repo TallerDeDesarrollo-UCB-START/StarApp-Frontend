@@ -37,7 +37,7 @@ class crearEvento extends React.Component {
     form: {
       nombre_evento: "",
       descripcion_evento: "",
-      lider: "",
+      lider: "Sin Asignar",
       modalidad_evento: "Presencial",
       lugar_evento: "",
       fecha_evento: "",
@@ -77,7 +77,7 @@ class crearEvento extends React.Component {
       let aux = data.map((item) => {
         return item.nombre + " " + item.apellido;
       });
-      aux.unshift("Sin Lider");
+      aux.unshift("Sin Asignar");
       this.setState({ lideres: aux });
     } catch (error) {
       console.log(error);
@@ -129,9 +129,12 @@ class crearEvento extends React.Component {
     });
   };
 
+  handleSubmit = (e) => {
+
+  };
+
   render() {
     return (
-      <>
         <Container className="Container">
           <form className="FormEvento">
             <Box className="evento" xs={6}>
@@ -143,7 +146,7 @@ class crearEvento extends React.Component {
                 onChange={this.handleChange}
               />
             </Box>
-
+           
             <Box className="descripcion" xs={6} mt={0.8}>
               <label>Descripción:</label>
               <textarea
@@ -157,7 +160,7 @@ class crearEvento extends React.Component {
             </Box>
 
             <Box className="lider" xs={6} mt={0.8}>
-              <label>Lider:</label>
+              <label>Líder:</label>
               <select
                 className=" form-control lider-input"
                 name="lider"
@@ -213,7 +216,7 @@ class crearEvento extends React.Component {
 
             <Box className="CamposMedios" xs={12} mt={0.8}>
               <Box className="InLine Categoria" xs={4}>
-                <label>Categoria</label>
+                <label>Categoría</label>
                 <select
                   className=" form-control categoria-input"
                   name="categoria"
@@ -284,7 +287,6 @@ class crearEvento extends React.Component {
             <Box xs={12} mt={2}></Box>
           </form>
         </Container>
-      </>
     );
   }
 }
