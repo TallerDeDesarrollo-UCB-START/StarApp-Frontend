@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import routes from "../../routes/Routes";
-const RedirectErrorPage = (status, history, message="") => 
+const RedirectErrorPage = (status, history, message="El servidor respondio:") => 
 {
     if (status === undefined) {
         status = 500;

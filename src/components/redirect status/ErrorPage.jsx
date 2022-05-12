@@ -24,13 +24,13 @@ const ErrorPage = () => {
     const classes = useStyles();
     const history = useHistory();
     let status = parseInt(sessionStorage.getItem("statusError"));
-    let errorMessage = parseInt(sessionStorage.getItem("errorMessage"));
+    const errorMessage = sessionStorage.getItem("errorMessage");
     const message = BadRequests(status)
     console.log(status)
     if (status == NaN)
         history.push(routes[0].path)
-    sessionStorage.removeItem("statusError")
-    sessionStorage.removeItem("errorMessage")
+    sessionStorage.removeItem("statusError");
+    sessionStorage.removeItem("errorMessage");
     return (
         <div className={classes.root}>
             <h2>OCURRIO ALGO INESPERADO</h2>
