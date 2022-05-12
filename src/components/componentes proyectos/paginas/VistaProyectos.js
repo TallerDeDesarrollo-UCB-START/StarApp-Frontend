@@ -139,7 +139,8 @@ function VistaProyectos() {
             const data = await response.json()
             return data;
         } catch (error) {
-            launchAlert("No se pudo obtener los proyectos por categoria, ");
+            console.log(error);
+            //launchAlert("No se pudo obtener los proyectos por categoria, ");
         }
     }
     
@@ -149,7 +150,8 @@ function VistaProyectos() {
             const data = await response.json()
             return data
         } catch (error) {
-            launchAlert("No se pudo obtener las categorias, ");
+            console.log(error);
+            //launchAlert("No se pudo obtener las categorias, ");
         }
     }
 
