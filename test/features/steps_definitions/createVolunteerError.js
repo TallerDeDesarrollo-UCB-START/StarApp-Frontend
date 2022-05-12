@@ -32,5 +32,5 @@ Then('Verify is correct data', async ()=> {
     await sleep(3000);
     let xpath = '/html/body/div/div[2]/div[1]/div/div/div[2]/div[3]/form/div[3]/p';
     let AuxText1= await driver.findElement(By.xpath(xpath)).getText();
-    expect(AuxText1).to.be.equal("Correo no válido");
+    expect(AuxText1).to.be.equal("Correo debe tener formato 'email@email.com'");
 });
