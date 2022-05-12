@@ -208,39 +208,14 @@ const Profile = ({sessionData}) => {
     });
   };
   var peticionPost = async (asignaciones) => {
-    // await axios
-    //   .post(urlTablaExtensa, asignaciones)
-    //   .then((response) => {
-    //     alert("actualizado correctamente");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   });
-    if (this.state.datosEdit.fecha_de_nacimiento && this.state.datosEdit.numero_contacto_de_emergencia) {
-      if (this.state.datosEdit.descripcion_personal.length < 100) {
-        await axios
-        .post(urlTablaExtensa, asignaciones)
-        .then((response) => {
-          alert("actualizado correctamente");
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-      } else {
-        this.handleClick();
-        this.setState({
-          mensajeSnackbar: "El campo no puede tener más de 100 caracteres.",
-          severidadSnackbar: "error",
-        });
-      } 
-
-    } else {
-      this.handleClick();
-      this.setState({
-        mensajeSnackbar: "Llenar todos los campos obligatorios",
-        severidadSnackbar: "error",
+    await axios
+      .post(urlTablaExtensa, asignaciones)
+      .then((response) => {
+        alert("actualizado correctamente");
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
-    } 
   };
   var peticionPut = (asignaciones) => {
     axios

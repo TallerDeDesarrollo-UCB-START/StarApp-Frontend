@@ -66,7 +66,6 @@ const EliminarEvento = (event) => {
             ¿Está seguro de eliminar el evento {event.event.nombre_evento}?
           </DialogContentText>
           <DialogContentText id="alert-dialog-slide-description" name='MensajeText'>
-            hola
           </DialogContentText>
         </DialogContent>
         <DialogActions>
