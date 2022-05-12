@@ -61,7 +61,8 @@ function VistaProyectos() {
                 const proyectosDelServer =  await fetchProyectos()
                 setProyectosCheck(proyectosDelServer, mountedRef.current)
             } catch (error) {
-                launchAlert("No se pudo obtener los proyectos, ");
+                console.log(error);
+                //launchAlert("No se pudo obtener los proyectos, ");
             }
         }
         const getProyectosPorCategoria = async () => {
@@ -86,7 +87,8 @@ function VistaProyectos() {
                 const lideresDelServer = await fetchLideres()
                 mountedRef.current && setLideres(lideresDelServer)
             } catch (error) {
-                launchAlert("No se pudo obtener la lista de lideres o roles, ");
+                console.log(error);
+                //launchAlert("No se pudo obtener la lista de lideres o roles, ");
             }
         }
         const getCategorias = async () => {
@@ -94,7 +96,8 @@ function VistaProyectos() {
                 const categosServer = await fetchCategorias()
                 mountedRef.current && setCategorias(categosServer)
             } catch (error) {
-                launchAlert("No se pudo obtener las categorias, ");
+                console.log(error);
+                //launchAlert("No se pudo obtener las categorias, ");
             }
         }
         
@@ -118,7 +121,8 @@ function VistaProyectos() {
             const data = await response.json()
             return data;
         } catch (error) {
-            launchAlert("No se pudo obtener los proyectos, ");
+            console.log(error);
+            //launchAlert("No se pudo obtener los proyectos, ");
         }
     }
 
@@ -129,7 +133,8 @@ function VistaProyectos() {
             return data
             //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
         } catch (error) {
-            launchAlert("No se pudo obtener los proyectos por categoria, ");
+            console.log(error);
+            //launchAlert("No se pudo obtener los proyectos por categoria, ");
         }
     }
 
@@ -168,7 +173,8 @@ function VistaProyectos() {
             //dataLider.pop()
             return dataLider;
         } catch (error) {
-            launchAlert("No se pudo obtener los lideres, ");
+            console.log(error);
+            //launchAlert("No se pudo obtener los lideres, ");
         }
     }
 
@@ -182,7 +188,8 @@ function VistaProyectos() {
             const data = await response.json();
             return data;
         } catch (error) {
-            launchAlert("No se pudo obtener las participaciones del proyecto, ");
+            console.log(error);
+            //launchAlert("No se pudo obtener las participaciones del proyecto, ");
         }
     }
 
@@ -195,7 +202,8 @@ function VistaProyectos() {
             const data = await response.json();
             return data;
         } catch (error) {
-            launchAlert("No se pudo obtener el numero de participantes, ");
+            console.log(error);
+            //launchAlert("No se pudo obtener el numero de participantes, ");
         }
     }
 
@@ -219,7 +227,8 @@ function VistaProyectos() {
             setProyectos([...proyectos, data])
             setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
         } catch (error) {
-            redirectErrorPage(error.response.status,history);
+            //redirectErrorPage(error.response.status,history);
+            console.log(error);
         }
     }
     
@@ -238,7 +247,8 @@ function VistaProyectos() {
             //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
             setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
         } catch (error) {
-            redirectErrorPage(error.response.status,history);
+            //redirectErrorPage(error.response.status,history);
+            console.log(error);
         }
     }
 
@@ -254,7 +264,8 @@ function VistaProyectos() {
             //setActualizar(!actualizar)
             return data
         } catch (error) {
-            redirectErrorPage(error.response.status,history);
+            //redirectErrorPage(error.response.status,history);
+            console.log(error);
         }
     }
     
@@ -271,7 +282,8 @@ function VistaProyectos() {
             //setActualizar(!actualizar)
             return data
         } catch (error) {
-            redirectErrorPage(error.response.status,history);
+            //redirectErrorPage(error.response.status,history);
+            console.log(error);
         }
     }
 
@@ -285,7 +297,8 @@ function VistaProyectos() {
         
             setProyectos(proyectos.filter((proy) => proy.id !== id));
         } catch (error) {
-            redirectErrorPage(error.response.status,history);
+            //redirectErrorPage(error.response.status,history);
+            console.log(error);
         }
     }
 
