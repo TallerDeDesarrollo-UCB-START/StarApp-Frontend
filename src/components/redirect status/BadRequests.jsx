@@ -8,7 +8,7 @@ const BadRequests = (status) => {
             message = "El servidor intento responder una solicitud invalida.";
             break;
         case 401:
-            message = "Acceso no autorizado pero, se require autenticar.";
+            message = "Acceso no autorizado se requiere una autentificacion.";
             break;
         case 403:
             message = "No cuenta con recursos para obtener el contenido.";

@@ -24,16 +24,17 @@ const ErrorPage = () => {
     const classes = useStyles();
     const history = useHistory();
     let status = parseInt(sessionStorage.getItem("statusError"));
+    let errorMessage = parseInt(sessionStorage.getItem("errorMessage"));
     const message = BadRequests(status)
     console.log(status)
     if (status == NaN)
         history.push(routes[0].path)
     sessionStorage.removeItem("statusError")
-    //if (message == "")
-    //    history.push(routes[0].path)
+    sessionStorage.removeItem("errorMessage")
     return (
         <div className={classes.root}>
-            <h2>OCURRIO UNA EXCEPCION</h2>
+            <h2>OCURRIO ALGO INESPERADO</h2>
+            <h2>{errorMessage}</h2>
             <h4>{message}</h4>
             <a className={classes.link} onClick={() => history.push(routes[0].path)} color="#f0f"><strong color="#f0f">VOLVER A LA PAGINA PRINCIPAL</strong></a>
         </div>

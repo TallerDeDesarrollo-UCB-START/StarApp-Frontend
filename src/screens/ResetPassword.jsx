@@ -43,15 +43,7 @@ const ResetPassword = () => {
         }
       })
       .catch((error) => {
-        //let message = BadRequests(error.response.status);
-        redirectErrorPage(error.response.status,history);
-        /*
-          activeSnackbar(
-            "No se ha enviado el correo de recuperación, "+message,
-            "error",
-            () => {}
-          );
-        */
+        redirectErrorPage(error.response.status,history, "No se pudo recuperar la contraseña de la cuenta.");
       });
   };
   
