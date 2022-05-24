@@ -6,6 +6,8 @@ import ResumedCardEvento from "./ResumedCardEvento";
 import axios from "axios";
 import BadRequests from "../../components/redirect status/BadRequests";
 import SnackbarMessage from "../../components/templates/SnackbarMessage";
+import RedirectErrorPage from "../redirect status/RedirectErrorPage";
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root_container: {
     margin: "40px 10px",
@@ -42,6 +44,7 @@ const EventosProximos = ({ id, title }) => {
   const activeSnackbar = (message, severity, afterClose) => {
     setSnackbar({ message, severity, afterClose, active: true });
   };
+  const history = useHistory();
   const smallScreen = !useMediaQuery("(min-width:500px)");
   const [events, setEvents] = useState([]);
   const classes = useStyles();
@@ -58,14 +61,11 @@ const EventosProximos = ({ id, title }) => {
           setEvents(resp);
         })
         .catch((error) => {
-          /*
-          let message = BadRequests(error.response.status);
-          activeSnackbar(
-            "No se pudo obtener los eventos, "+message,
-            "error",
-            () => {}
-          );
-          */
+          console.log(error.response);
+          if (error.message == "Network Error"){
+            RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+            return;
+          }
           console.log(error);
         }),
     [baseURL]

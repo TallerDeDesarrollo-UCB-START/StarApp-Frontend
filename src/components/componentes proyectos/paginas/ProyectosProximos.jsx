@@ -56,10 +56,10 @@ const ProyectosProximos = ({ title }) => {
         .get(baseURL)
         .then((response) => {
           var resp = response.data;
-          console.log(resp);
           setEvents(resp);
         })
         .catch((error) => {
+          console.log(error)
           const message = BadRequests(error.response.status);
           activeSnackbar(
             "No se ha podido encontrar los proyectos, "+message,

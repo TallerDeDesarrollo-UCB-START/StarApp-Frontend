@@ -2,7 +2,8 @@ import React from "react";
 import { makeStyles, Typography, Button, TextField } from "@material-ui/core";
 import axios from "axios";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
-
+import { useHistory } from "react-router-dom";
+import RedirectErrorPage from "../components/redirect status/RedirectErrorPage";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ResetNewPassword = () => {
+  const history = useHistory();
   const classes = useStyles();
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
@@ -43,6 +45,10 @@ export const ResetNewPassword = () => {
         }
       })
       .catch((error) => {
+        if (error.message == "Network Error"){
+          RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+          return;
+        }
         activeSnackbar(
           "Se ha producido un error",
           "error",

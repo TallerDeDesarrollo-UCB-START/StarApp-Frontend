@@ -17,6 +17,9 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Card from "@material-ui/core/Card";
 import redirectErrorPage from "./redirect status/RedirectErrorPage";
+import SnackbarMessage from "../components/templates/SnackbarMessage";
+
+import BadRequests from "./redirect status/BadRequests";
 
 const { getCountries  } = require("country-list-spanish");
 const url = process.env.REACT_APP_API;
@@ -99,6 +102,15 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const EditarPerfil = ({ sessionData }) => {
+    const [snackbar, setSnackbar] = useState({
+        message: "",
+        active: false,
+        severity: "success",
+        afterClose: () => {},
+      });
+    const activeSnackbar = (message, severity, afterClose) => {
+        setSnackbar({ message, severity, afterClose, active: true });
+    };
     const history = useHistory();
     const smallScreen = !useMediaQuery("(min-width:811px)")
     const classNames = useStyles();
@@ -222,7 +234,8 @@ const EditarPerfil = ({ sessionData }) => {
             alert("Actualizado correctamente");
         })
           .catch((error) => {
-            redirectErrorPage(error.response.status,history);
+            let message = BadRequests(error.response.status);
+            activeSnackbar("Ha ocurrido un error, "+ message, "error", () => {})
         });
     };
     var peticionPut = (asignaciones) => {
@@ -232,7 +245,8 @@ const EditarPerfil = ({ sessionData }) => {
         //   console.log("")
         // })
         .catch((error) => {
-            redirectErrorPage(error.response.status,history);
+            let message = BadRequests(error.response.status);
+            activeSnackbar("Ha ocurrido un error, "+ message, "error", () => {})
         });
     };
     function sendForm() {
@@ -741,6 +755,7 @@ const EditarPerfil = ({ sessionData }) => {
                 Guardar Cambios
             </Button>
         </Card>
+        <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>
     )
 }

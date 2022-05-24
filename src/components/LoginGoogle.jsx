@@ -3,17 +3,19 @@ import Button from "@material-ui/core/Button";
 import fb from "../initializers";
 import AxiosClient from "./AxiosClient";
 import Avatar from '@material-ui/core/Avatar';
-
+import RedirectErrorPage from "./redirect status/RedirectErrorPage";
+import { useHistory } from "react-router-dom";
 const URL_AUTH = process.env.REACT_APP_API_AUTH
 const URL = process.env.REACT_APP_API
 var telefonoContacto = null;
-const onSubmit = async (values) => {
+const   OnSubmit = async (values) => {
   telefonoContacto = values.user.phoneNumber;
   const bodyAuth = {
     email: values.additionalUserInfo.profile.email,
     tipo: "google",
     idGoogle: values.additionalUserInfo.profile.id,
   }
+  const history = useHistory();
   AxiosClient.post(`${URL_AUTH}api/auth/signup`, bodyAuth)
     .then((response) => {
       if (response.status === 200) {
@@ -38,7 +40,11 @@ const onSubmit = async (values) => {
           .catch((response) => {
             //setActiveProgressBar(false)
             //activeSnackbar(`${response}`, "error", ()=>{window.location.reload()})
-            console.log(response)
+            if (response.message == "Network Error"){
+              RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+            }
+            console.log(response);
+            throw response;
           })
       }
     }) 
@@ -62,12 +68,13 @@ const onSubmit = async (values) => {
           window.location.href = `/`;
         }
       })
-      .catch((response) => {
+      .catch((error) => {
         //setActiveProgressBar(false);
         //activeSnackbar("Correo o contraseña inválidos.", "error", () => {
         //  window.location.reload();
         //});
-        console.log(response)
+        console.log(error);
+        throw error;
       });
       //window.location.reload()
     })
@@ -83,8 +90,11 @@ export default class LoginGoogle extends Component {
     let provider = new fb.auth.GoogleAuthProvider();
     fb.auth()
       .signInWithPopup(provider)
-      .then((result) => {
-        onSubmit(result);
+      .then(async (result) => {
+        await OnSubmit(result);
+      }).catch((error) =>
+      {
+        console.log(error);
       });
   }
 

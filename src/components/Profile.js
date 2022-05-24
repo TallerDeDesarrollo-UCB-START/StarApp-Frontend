@@ -16,7 +16,9 @@ import Chip from "@material-ui/core/Chip";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import { useMediaQuery, Typography } from "@material-ui/core";
 import DialogConfirm from "./DialogConfirm"
-import redirectErrorPage from "./redirect status/RedirectErrorPage";
+import RedirectErrorPage from "./redirect status/RedirectErrorPage";
+import SnackbarMessage from "../components/templates/SnackbarMessage";
+import BadRequests from "./redirect status/BadRequests";
 
 const { getCountries } = require("country-list-spanish");
 
@@ -114,7 +116,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = ({sessionData}) => {
-
+  const [snackbar, setSnackbar] = useState({
+    message: "",
+    active: false,
+    severity: "success",
+    afterClose: () => {},
+  });
   const history = useHistory();
   const [userExist, setUserExsit] = useState({
     userEx: false,
@@ -157,6 +164,9 @@ const Profile = ({sessionData}) => {
     numero_contacto_de_emergencia: "",
     relacion_contacto_de_emergencia: "",
   });
+  const activeSnackbar = (message, severity, afterClose)=>{
+    setSnackbar({message, severity, afterClose, active:true})
+  }
   const handleChange = (event) => {
     
     var nuevosInt = [];
@@ -214,7 +224,8 @@ const Profile = ({sessionData}) => {
         alert("actualizado correctamente");
       })
       .catch((error) => {
-        redirectErrorPage(error.response.status,history);
+        let message = BadRequests(error.response.status);
+        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
       });
   };
   var peticionPut = (asignaciones) => {
@@ -224,7 +235,8 @@ const Profile = ({sessionData}) => {
       //   console.log("")
       // })
       .catch((error) => {
-        redirectErrorPage(error.response.status,history);
+        let message = BadRequests(error.response.status);
+        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
       });
   };
   
@@ -293,7 +305,12 @@ const Profile = ({sessionData}) => {
         }
       })
       .catch((error) => {
-          redirectErrorPage(error.response.status,history);
+        if (error.message == "Network Error"){
+          RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+          return;
+        }
+        let message = BadRequests(error.response.status);
+        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
       });
   }, [datos.id]);
 
@@ -822,6 +839,7 @@ const Profile = ({sessionData}) => {
           </div>
         )}
       </div>
+      <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
     </div>
   );
 };

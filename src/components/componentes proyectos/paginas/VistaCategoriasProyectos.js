@@ -8,7 +8,7 @@ import { Container } from '@material-ui/core';
 // Librerias-Paquetes:
 import {useState, useEffect, useRef} from 'react'
 import {useHistory} from "react-router-dom";
-import redirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
+import RedirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
 const useStyles = makeStyles(() => ({
@@ -80,18 +80,26 @@ function VistaCategoriasProyectos() {
             })
     }
     async function fetchLideres() {
-        const response = await fetch(URLLideres)
-        const data = await response.json()
-        let dataLider=[]
-        let index=1
-        for (let x of data ) {
-            dataLider.push({"id":`${index}`,"nombre":`${x.nombre}`})
-            index++
-            
+        try{
+            const response = await fetch(URLLideres);
+            const data = await response.json()
+            let dataLider=[]
+            let index=1
+            for (let x of data ) {
+                dataLider.push({"id":`${index}`,"nombre":`${x.nombre}`})
+                index++
+                
+            }
+            //dataLider.pop()
+            //console.log(dataLider)
+            return dataLider;
         }
-        //dataLider.pop()
-        //console.log(dataLider)
-        return dataLider;
+        catch(error){
+            if (error.message == "Network Error"){
+                RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+                return;
+            }
+        }
     }
 
     // Methods:

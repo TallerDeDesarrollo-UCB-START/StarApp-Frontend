@@ -68,7 +68,7 @@ function ListaProyectos () {
         const idSesion = sessionStorage.getItem("id");
         try{
             const response = await fetch(
-            `${baseURL}/${idSesion}/get_my_proyectosg`,
+            `${baseURL}/${idSesion}/get_my_proyectos`,
             {
                 method: "GET",
             }

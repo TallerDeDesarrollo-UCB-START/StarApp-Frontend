@@ -5,6 +5,7 @@ import ExportExcel from 'react-export-excel'
 import { withStyles } from '@material-ui/core';
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
+import { useHistory } from 'react-router-dom';
 
 const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;
@@ -25,6 +26,7 @@ class ListaParticipantesProyecto extends Component{
     componentDidMount(){
         let thisUrl = window.location.href;
         let id = this.getId(thisUrl);
+        //const history = useHistory();
         axios.get(`${process.env.REACT_APP_API}get_participantes_proyecto_simple/${id}`)
         .then(response => {
             this.setState({posts:response.data})

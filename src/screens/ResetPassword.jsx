@@ -5,7 +5,7 @@ import SnackbarMessage from "../components/templates/SnackbarMessage";
 import BadRequests from "../components/redirect status/BadRequests";
 //import ErrorPage from "../components/redirect status/ErrorPage";
 import { useHistory } from "react-router-dom";
-import redirectErrorPage from "../components/redirect status/RedirectErrorPage";
+import RedirectErrorPage from "../components/redirect status/RedirectErrorPage";
 //import BadRequests from "../components/redirect status/ErrorPage";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +43,15 @@ const ResetPassword = () => {
         }
       })
       .catch((error) => {
-        redirectErrorPage(error.response.status,history, "No se pudo recuperar la contraseña de la cuenta.");
+        if (error.message == "Network Error"){
+          RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+          return;
+        }
+        activeSnackbar(
+          "No se pudo recuperar la contraseña de la cuenta.",
+          "error",
+          () => {}
+        );
       });
   };
   

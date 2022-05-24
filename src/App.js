@@ -1,11 +1,13 @@
 import Routes from "./routes/Routes";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
 import Header from "./components/header/header.jsx";
 import { React, useState, useEffect } from "react";
 import AxiosClient from "./components/AxiosClient";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import RedirectErrorPage from "./components/redirect status/RedirectErrorPage";
 
 function App() {
+  var history = useHistory();
   const [sessionData, setSessionData] = useState({
     id: "",
     role: "voluntario",
@@ -30,7 +32,8 @@ function App() {
           });
         })
         .catch((response) => {
-          console.log(response);
+          //RedirectErrorPage(500,useHistory(),"fallo")
+          //useHistory()
           setActiveProgressBar(false);
         });
     }

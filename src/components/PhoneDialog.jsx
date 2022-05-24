@@ -33,7 +33,8 @@ export default function PhoneDialog({user}) {
             }
         })
       .catch((response) => { 
-        redirectErrorPage(response.status,history);
+        let message = BadRequests(response.status);
+        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
       });
   },[user])
   const activeSnackbar = (message, severity, afterClose)=>{

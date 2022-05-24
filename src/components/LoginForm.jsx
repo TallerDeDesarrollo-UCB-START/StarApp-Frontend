@@ -13,6 +13,7 @@ import Card from "@material-ui/core/Card";
 import LoginGoogle from "./LoginGoogle";
 import { NavLink } from "react-router-dom";
 import BadRequests from "./redirect status/BadRequests";
+import RedirectErrorPage from "./redirect status/RedirectErrorPage";
 const useStyles = makeStyles((theme) => ({
   Container: {
     display: "flex",
@@ -120,6 +121,10 @@ const LoginForm = ({ sessionData, setSessionData }) => {
         }
       })
       .catch((error) => {
+        if (error.message == "Network Error"){
+          RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+          return;
+        }
         switch(error.response.status)
         {
           case 401:

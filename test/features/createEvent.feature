@@ -10,11 +10,8 @@ Background:
     And I press the "Iniciar Sesión" button
 
 Scenario: Create Event
-    When the welcome message should be dispayed on the screen
-    And click on the eventos button
-    And the EVENTOS VIGENTES message should appear on the screen
+    Given I visit the Events section of main menu 
     And click on the CREAR EVENTO
-    And insert Data
-    And check the new event is created
+    When complete the form to create the event 
+    Then check the new event is created
     And delete the event
-    Then click button

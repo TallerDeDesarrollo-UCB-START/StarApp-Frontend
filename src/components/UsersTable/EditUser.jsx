@@ -150,7 +150,8 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
           }
         })
         .catch((error) => {
-          redirectErrorPage(error.response.status,history);
+          let message = BadRequests(error.response.status);
+        activeSnackbar("Ha ocurrido un error, "+ message, "error", () => {})
         })
     }
     else{
@@ -170,7 +171,8 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
         }
       })
       .catch((error) => {
-        redirectErrorPage(error.response.status,history);
+        let message = BadRequests(error.response.status);
+        activeSnackbar("Ha ocurrido un error, "+ message, "error", () => {})
       })
   }
 
