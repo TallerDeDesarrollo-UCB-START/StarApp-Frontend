@@ -41,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     marginBottom: "10px",
   },
+  smallLoginContainer: {
+    width: "92vw",
+    color: "white",
+    fontWeight: "bold",
+    marginBottom: "10px",
+  },
   pregunta: {
     marginTop: "10px",
     fontSize: 16,
@@ -153,7 +159,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
           }}
           color="secondary"
         />
-        <Grid className={classes.loginContainer}>
+        <Grid className={smallScreen ? classes.smallLoginContainer : classes.loginContainer}>
           <Card
             className={
               smallScreen ? classes.smallRegisterCard : classes.registerCard
@@ -193,6 +199,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                       variant="outlined"
                       size="small"
                     />
+            
                     <Button
                       className={classes.buttonContainer}
                       variant="contained"
@@ -202,6 +209,8 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                     >
                       Iniciar Sesión
                     </Button>
+               
+ 
                     <div className={classes.buttonContainer}>
                       <LoginGoogle name = "Iniciar con Google"/>
                     </div>
