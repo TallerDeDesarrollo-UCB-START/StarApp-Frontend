@@ -1,9 +1,4 @@
-// Componentes:
-import './EliminarProjectoBtn.css'
-// Librerias-Paquetes-Estilos:
-import { withStyles } from "@material-ui/core/styles";
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -12,6 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
+import MyButton from '../../../shared/components/Button';
 
 
 function TransitionDown(props) {
@@ -57,8 +53,11 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
 
     return (
       <div>
-        
-        <DeleteProy name='eliminarproyecto' variant="contained" onClick={handleClickOpen}>Eliminar</DeleteProy>
+        <MyButton
+          className="delete"
+          onClick={handleClickOpen}>
+            Eliminar
+        </MyButton>
         <Dialog
             open={open}
             onClose={handleClose}
@@ -73,9 +72,11 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-            <DeleteButton name='eliminarproyecto1' onClick={peticionDelete} style={{ height: "30px",margin: "7px",}}     variant="contained">
+            <MyButton
+              className="delete"
+              onClick={peticionDelete}>
                 Eliminar 
-            </DeleteButton>
+            </MyButton>
             
             <Snackbar
                 anchorOrigin={{ vertical, horizontal }}
@@ -89,41 +90,15 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
                     Se eliminó el proyecto!
                 </Alert>
             </Snackbar>
-            <CancelButton onClick={handleClose}  style={{ height: "30px",margin: "7px",}} color="primary" autoFocus>
+            <MyButton
+              className="cancel"
+              onClick={handleClose}>
                 Cancelar
-            </CancelButton>
+            </MyButton>
             </DialogActions>
           </Dialog>
       </div>
     )
 }
-const DeleteProy = withStyles((theme) => ({
-  root: {
-   // marginRight: 10,
-   // marginLeft: 10,
-    //width: '10%',
-    background: 'red',
-    color:'white'
-  },
-}))(Button);
 
-const DeleteButton = withStyles((theme) => ({
-  root: {
-    backgroundColor: "#ED2020",
-    color: "#FFFFFF",
-    "&:hover": {
-      backgroundColor: "#a90e0e",
-    },
-  },
-}))(Button);
-
-const CancelButton = withStyles((theme) => ({
-    root: {
-      color: "white",
-      backgroundColor: "#a8a8a8",
-      "&:hover": {
-        backgroundColor: "#818181",
-      },
-    },
-  }))(Button);
 export default EliminarProjectoBtn

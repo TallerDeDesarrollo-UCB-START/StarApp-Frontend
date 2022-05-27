@@ -8,6 +8,8 @@ import BadRequests from "../../components/redirect status/BadRequests";
 import SnackbarMessage from "../../components/templates/SnackbarMessage";
 import RedirectErrorPage from "../redirect status/RedirectErrorPage";
 import { useHistory } from "react-router-dom";
+import MyButton from "../../shared/components/Button";
+
 const useStyles = makeStyles((theme) => ({
   root_container: {
     margin: "40px 10px",
@@ -113,14 +115,9 @@ const EventosProximos = ({ id, title }) => {
             registrado a alguno de nuestros eventos, aparecerán en tu página de
             inicio.
           </Typography>
-          <Button
-            onClick={() => (window.location.href = "/eventos")}
-            variant="contained"
-            color="primary"
-            style={{ margin: "20px 0" }}
-          >
-            Explorar eventos
-          </Button>
+          <MyButton className="create" onClick={() => (window.location.href = "/eventos")}>
+            Explorar proyectos
+          </MyButton>
           <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>
       )}

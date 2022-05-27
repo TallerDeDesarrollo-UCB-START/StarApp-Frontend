@@ -8,6 +8,7 @@ import {useHistory} from "react-router-dom";
 import redirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
+
 const useStyles = makeStyles((theme) => ({
   root_container: {
     margin: "40px 10px",

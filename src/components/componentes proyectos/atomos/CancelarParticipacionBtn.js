@@ -1,19 +1,7 @@
-// Componentes:
-import './ParticiparEnProyectoBtn.css';
-// Librerias-Paquetes:
 import React from "react";
-import { Button } from '@material-ui/core';
-import { withStyles } from "@material-ui/core/styles";
+import MyButton from '../../../shared/components/Button';
 
-
-// Merce Vic
 function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignarSnackbarStatus, onAsignarParticipacion, onAvisoAccion}) {
-
-    // States
-    //const [snackbar, setSnackbar] = React.useState()
-    /*useEffect(function () {
-        onAsignarParticipacion()
-    }, [snackbar, participacion])*/
 
     const onClick = async (event) => {
         const cancelResponse = await onCancelarParticipacion(proyecto.id);
@@ -29,28 +17,12 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
     }
 
     return (
-                <CancelParticipationButton variant="contained" color="primary"
-                onClick={onClick}
-                >
-                    Dejar Proyecto
-                </CancelParticipationButton>
+      <MyButton
+				className="cancel"
+				onClick={onClick}>
+					Dejar Proyecto
+			</MyButton>
     );
 }
-
-const CancelParticipationButton = withStyles((theme) => ({
-    root: {
-        backgroundColor: "#E3E3E3",
-        fontSize: "16px",
-        color: "#545454",
-        "&:hover": {
-            color: 'whitesmoke',
-            backgroundColor: "#818181",
-        },
-        //height: "51px", <---
-        minWidth: "119px",
-        // display: "none" <---
-    },
-    
-}))(Button);
 
 export default CancelarParticipacionBtn

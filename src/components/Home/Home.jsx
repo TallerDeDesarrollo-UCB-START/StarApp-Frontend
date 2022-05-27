@@ -2,7 +2,7 @@ import RecordatorioLlenarDatos from "../RecordatorioLlenarDatos"
 import EventosProximos from './EventosProximos';
 import React from 'react'
 import LandingView from './LandingView';
-import PhoneDialog from '../PhoneDialog'
+import PhoneDialog from '../PhoneDialog';
 
 const Home = ({sessionData}) =>{
     return(

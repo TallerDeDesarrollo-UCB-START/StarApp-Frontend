@@ -1,20 +1,9 @@
-// Componentes:
-//import './ParticiparEnProyectoBtn.css';
 import React from "react";
-import { Button, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import {VARIABLES} from '../organismos/variables-compartidas'
-// Librerias-Paquetes:
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-
-const ParticipateButton = withStyles((theme) => ({
-    root: {
-        backgroundColor: "#269BD5",
-        height: "100%",//51, heigth: 51 NOTE: perjudica a la vista individual del ptoyecto.
-        width: 119,
-        //fontSize: 16, NOTE: perjudica a la vista individual del ptoyecto.
-    },
-}))(Button);
+import { makeStyles } from "@material-ui/core/styles";
+import MyButton from "../../../shared/components/Button";
 
 const useStyles = makeStyles({
     contenedorBtn: {
@@ -62,21 +51,18 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
     const estilosBtnPasado = proyecto && proyecto.estado === varProyectos.estadoAcabado? classes.contenedorBtnPasado : ""
     return (
         <div>
-            <div id={proyecto.id}>
-                <ParticipateButton variant="contained"
-                                    color="primary"
-                                    className={estilosBtnPasado}
-                                    onClick={onClick}>
-                    <Box className={classes.contenedorBtn}>
-                        Unirme
-                        {candado}
-                    </Box>
-                </ParticipateButton>
-            </div>
+					<div id={proyecto.id}>
+						<MyButton
+							className="create"
+							onClick={onClick}>
+								<Box className={classes.contenedorBtn}>
+									Unirme
+									{candado}
+								</Box>
+						</MyButton>
+					</div>
         </div>
     );
 }
-
-
 
 export default ParticiparEnProyectoBtn
