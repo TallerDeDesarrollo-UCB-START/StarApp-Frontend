@@ -7,6 +7,7 @@ import RedirectErrorPage from "./redirect status/RedirectErrorPage";
 import { useHistory } from "react-router-dom";
 const URL_AUTH = process.env.REACT_APP_API_AUTH
 const URL = process.env.REACT_APP_API
+var history = null;
 var telefonoContacto = null;
 const   OnSubmit = async (values) => {
   telefonoContacto = values.user.phoneNumber;
@@ -15,7 +16,6 @@ const   OnSubmit = async (values) => {
     tipo: "google",
     idGoogle: values.additionalUserInfo.profile.id,
   }
-  const history = useHistory();
   AxiosClient.post(`${URL_AUTH}api/auth/signup`, bodyAuth)
     .then((response) => {
       if (response.status === 200) {
@@ -69,10 +69,9 @@ const   OnSubmit = async (values) => {
         }
       })
       .catch((error) => {
-        //setActiveProgressBar(false);
-        //activeSnackbar("Correo o contraseña inválidos.", "error", () => {
-        //  window.location.reload();
-        //});
+        if (response.message == "Network Error"){
+          RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        }
         console.log(error);
         throw error;
       });
@@ -80,7 +79,7 @@ const   OnSubmit = async (values) => {
     })
 }
 
-export default class LoginGoogle extends Component {
+class LoginGoogleClass extends Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
@@ -114,3 +113,9 @@ export default class LoginGoogle extends Component {
     );
   }
 }
+const LoginGoogle = ()=>{
+  history = useHistory();
+  const login = new LoginGoogleClass();
+  return login;
+}
+export default LoginGoogle;

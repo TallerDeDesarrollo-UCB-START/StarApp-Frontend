@@ -11,6 +11,7 @@ import {useHistory} from "react-router-dom";
 import RedirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
+import { th } from "date-fns/locale";
 const useStyles = makeStyles(() => ({
     container: {
         width: '98%',
@@ -71,13 +72,32 @@ function VistaCategoriasProyectos() {
 
     // Endpoint fetch
     const crearProyecto = async (nuevoProyecto) => {
-        await fetch(
-            URLCrearProy,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify(nuevoProyecto)
-            })
+        try{
+            await fetch(
+                URLCrearProy,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify(nuevoProyecto)
+                }).catch((error)=>{
+                    console.log(error);
+                    if (error.message == "Failed to fetch")
+                        throw new Error("Network Error");
+                    throw error;
+                })
+            }
+            catch(error){
+                if (error.message == "Network Error"){
+                    RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+                    return;
+                }
+                const message = BadRequests(404);
+                activeSnackbar(
+                    "No se ha podido crear el proyecto, "+message,
+                    "error",
+                    () => {});
+                throw error;
+            }
     }
     async function fetchLideres() {
         try{

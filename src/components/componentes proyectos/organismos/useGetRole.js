@@ -15,6 +15,10 @@ function useGetRole() {
                     method: 'GET'
                 }).catch((error)=>
                 {
+                    console.log(error);
+                    if (error.message == "Network Error"){
+                        throw new Error("Network Error");
+                    }
                     throw error;
                 });
                 const data = await response.json();
@@ -23,6 +27,10 @@ function useGetRole() {
             await obtenerRol()
             return () => mountedRef.current = false;// Desmontar componentes evitando warnings
         }catch(error){
+            if (error.message == "Network Error"){
+                RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+                return;
+            }
             console.log(error);
             throw error;
         };

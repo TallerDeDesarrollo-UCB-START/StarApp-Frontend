@@ -11,4 +11,3 @@ const config = {
 };
 fb.initializeApp(config);
 export default fb;
-

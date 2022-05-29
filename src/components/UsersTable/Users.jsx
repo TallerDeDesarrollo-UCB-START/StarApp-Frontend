@@ -10,7 +10,8 @@ import { Popover } from "@material-ui/core";
 import EditUser from "./EditUser";
 import SnackbarMessage from "../../components/templates/SnackbarMessage"; 
 import BadRequests from "../redirect status/BadRequests";
-
+import { useHistory } from "react-router-dom";
+import RedirectErrorPage from "../redirect status/BadRequests";
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -182,7 +183,7 @@ function Users({sessionData}) {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-
+  const history = useHistory();
   const classes = useStyles();
   const [data, setData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
@@ -217,6 +218,11 @@ function Users({sessionData}) {
         setOriginalData(resp);
       })
       .catch((error) => {
+        if (error.message == "Network Error"){
+          console.log("sssssssssssssssssssss");
+          RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+          return;
+        }
         let message = BadRequests(error.response.status);
         activeSnackbar(
           "No se pudo recuperar los usuarios, "+message,

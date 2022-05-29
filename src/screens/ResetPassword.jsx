@@ -44,7 +44,7 @@ const ResetPassword = () => {
       })
       .catch((error) => {
         if (error.message == "Network Error"){
-          RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+          RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
           return;
         }
         activeSnackbar(
