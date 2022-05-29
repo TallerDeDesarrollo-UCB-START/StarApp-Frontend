@@ -5,7 +5,7 @@ import { Container, Card, Modal, Button, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./EventsList.css";
 import TextField from "@mui/material/TextField";
-import { Snackbar } from "@material-ui/core";
+import { MenuItem, Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import EliminarEvento from "./EliminarEvento";
 import Typography from "@material-ui/core/Typography";
@@ -27,6 +27,7 @@ import { withRouter } from "react-router";
 import Routes from "../routes/Routes";
 import { useHistory } from "react-router-dom";
 import MyButton from "../shared/components/Button";
+import MySelect from "../shared/components/Select";
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -538,66 +539,17 @@ class EventsListClass extends Component {
 
               <div className="Menu-Bar-Evento">
                 <div className="header-filtro-eventos">
-                  <span
-                    style={{
-                      display:
-                        this.state.botonMostrarEventosArchivados === true
-                          ? "block"
-                          : "none",
-                    }}
-                    className="span-align"
-                  >
-                    Categoría:
-                  </span>
-
-                  <select
-                    style={{
-                      display: this.state.botonMostrarEventosArchivados
-                        ? "block"
-                        : "none",
-                    }}
+                  <MySelect
+                    placeholder="Categoría"
                     value={this.state.categoriaFiltrada}
-                    onChange={this.filterChangeHandler}
+                    onChange={this.state.botonMostrarEventosArchivados ? this.filterChangeHandler : this.filterPastEventsChangeHandler}
                   >
-                    {this.state.categorias.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
-
-                  <span
-                    style={{
-                      display:
-                        this.state.botonMostrarEventosArchivados === false
-                          ? "block"
-                          : "none",
-                    }}
-                    className="span-align"
-                  >
-                    Categoría:
-                  </span>
-
-                  <select
-                    style={{
-                      display:
-                        this.state.botonMostrarEventosArchivados === false
-                          ? "block"
-                          : "none",
-                    }}
-                    value={this.state.categoriaFiltrada}
-                    onChange={this.filterPastEventsChangeHandler}
-                  >
-                    {this.state.categorias.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
+                    {this.state.categorias.map((item) => (
+                      <MenuItem key={item} value={item}>
+                        {item}
+                      </MenuItem>
+                    ))}
+                  </MySelect>
                 </div>
 
                 <div
@@ -770,46 +722,32 @@ class EventsListClass extends Component {
                 onChange={this.handleChange}
               />
 
-              <div>
-                <div>
-                  <label className="LabelLiderCrearEvento">Líder *</label>
-                </div>
-                <div>
-                  <select
-                    label="Lider *"
-                    className="liderEventoCrear textInput"
-                    name="lider"
-                    onChange={this.handleChange}
-                  >
-                    {this.state.lideres.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
+              <MySelect
+                placeholder="Líder *"
+                name="lider"
+                onChange={this.handleChange}
+              >
+                {this.state.lideres.map((item) => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </MySelect>
 
-              <div>
-                <div>
-                  <label className="LabelModalidadCrearEvento">Modalidad *</label>
-                </div>
-                <select
-                  className="nombreEventoCrear textInput"
-                  name="modalidad_evento"
-                  onChange={this.handleChange}
-                  label="Modalidad *"
-                >
-                  <option value="Presencial" name="modalidad_evento">
-                    Presencial
-                  </option>
-                  <option value="Virtual" name="modalidad_evento">
-                    Virtual
-                  </option>
-                </select>
-              </div>
+              <br />
+
+              <MySelect
+                placeholder="Modalidad *"
+                name="modalidad_evento"
+                onChange={this.handleChange}
+              >
+                <MenuItem value="Presencial" name="modalidad_evento">
+                  Presencial
+                </MenuItem>
+                <MenuItem value="Virtual" name="modalidad_evento">
+                  Virtual
+                </MenuItem>
+              </MySelect>
           
               <TextField
                 label="Lugar"
@@ -829,49 +767,33 @@ class EventsListClass extends Component {
                 onChange={this.handleChange}
               />
 
-              <div>
-                <div>
-                  <label className="LabelCategoriaCrearEvento">Categoría *</label>
-                </div>
-                <div>
-                  <select
-                    label="Categoría *"
-                    className="CategoriaEventoCrear textInput"
-                    name="categoria"
-                    onChange={this.handleChange}
-                  >
-                    {this.state.categorias.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
+              <MySelect
+                placeholder="Categoría *"
+                name="categoria"
+                onChange={this.handleChange}
+              >
+                {this.state.categorias.map((item) => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </MySelect>
 
-              <div>
-                <div>
-                  <label className="LabelProyectoCrearEvento">Proyecto</label>
-                </div>
-                <div>
-                  <select
-                    className="ProyectoEventoCrear textInput"
-                    name="proyecto"
-                    onChange={this.handleChange}
-                    label="Proyecto"
-                  >
-                    {this.state.proyectos.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
+              <br />
+
+              <MySelect
+                placeholder="Proyecto"
+                name="proyecto"
+                onChange={this.handleChange}
+              >
+                {this.state.proyectos.map((item) => {
+                  return (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </MySelect>
 
               <TextField 
                 label="Hora Inicio *"

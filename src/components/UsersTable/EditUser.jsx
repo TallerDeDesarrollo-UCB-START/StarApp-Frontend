@@ -5,19 +5,17 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  Button,
   useMediaQuery,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import EditIcon from "@material-ui/icons/Edit"
 import { fields } from "./SearchByField"
 import { InputByCriteria } from "./InputsByFields"
 import axios from "axios"
 import SnackbarMessage from "../templates/SnackbarMessage"
 import BadRequests from "../redirect status/BadRequests"
-import redirectErrorPage from "../redirect status/RedirectErrorPage"
 import { useHistory } from "react-router-dom"
 import MyButton from "../../shared/components/Button"
+import MySelect from "../../shared/components/Select"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -183,27 +181,23 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
       className={wideScreen ? classes.paper : classes.respPaper}
     >
       <div className={wideScreen ? classes.modalBody : classes.respModalBody}>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Criterio</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={criteria}
-            onChange={handleChange}
-          >
-            {Object.keys(fieldsToEdit).map((field) => {
-              if (field !== "Edad") {
-                return (
-                  <MenuItem key={`${field}-edit`} value={field}>
-                    {field}
-                  </MenuItem>
-                )
-              } else {
-                return <div key="none" style={{ display: "none" }} />
-              }
-            })}
-          </Select>
-        </FormControl>
+        <MySelect
+          placeholder="Criterio"
+          value={criteria}
+          onChange={handleChange}
+        >
+          {Object.keys(fieldsToEdit).map((field) => {
+            if (field !== "Edad") {
+              return (
+                <MenuItem key={`${field}-edit`} value={field}>
+                  {field}
+                </MenuItem>
+              )
+            } else {
+              return <div key="none" style={{ display: "none" }} />
+            }
+          })}
+        </MySelect>
         <InputByCriteria
           criteria={criteria}
           newValue={newValue}

@@ -3,7 +3,6 @@ import Register from "../screens/Register";
 import EventsList from "../components/EventsList";
 import Home from "../components/Home/Home";
 import Profile from "../components/Profile";
-import Event from "../components/Event";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
 import Evento from "../components/Evento";
 import Users from "../components/UsersTable/Users"
@@ -57,9 +56,15 @@ const Routes = [
     logginNeeded: true,
   },
   {
-    path: "/eventos/event",
+    path: "/estarutanosirve",
+    name: "CreateProject",
+    component: Users,
+    logginNeeded: true,
+  },
+  {
+    path: "/estarutanosirve",
     name: "Evento",
-    component: Event,
+    component: Users,
     logginNeeded: true,
   },
   {

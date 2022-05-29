@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { Button, Modal } from "@material-ui/core";
+import { Button, MenuItem, Modal } from "@material-ui/core";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,6 +20,7 @@ import RedirectErrorPage from "./redirect status/RedirectErrorPage";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 import BadRequests from "./redirect status/BadRequests";
 import MyButton from "../shared/components/Button";
+import MySelect from "../shared/components/Select";
 
 const { getCountries } = require("country-list-spanish");
 
@@ -398,20 +399,18 @@ const Profile = ({sessionData}) => {
           />
           
           
-          <label>Ocupación</label>
-          <select
+          <label>Ocupación</label> 
+          <br />
+          <MySelect
             name="ocupacion"
-            placeholder="Ocupación"
             value={datosEdit.ocupacion}
             onChange={handleInputChange}
-            className={classNamees.intputs}
           >
-            {/* <option hidden selected>Ocupación</option> */}
-            <option value="Colegio">Colegio</option>
-            <option value="Universidad">Universidad</option>
-            <option value="Trabajando">Trabajando</option>
-          </select>
-
+            <MenuItem value="Colegio">Colegio</MenuItem>
+            <MenuItem value="Universidad">Universidad</MenuItem>
+            <MenuItem value="Trabajando">Trabajando</MenuItem>
+          </MySelect>
+          <br />
           <label>Profesión u Oficio</label>
           <input
             className={classNamees.intputs}
@@ -435,31 +434,28 @@ const Profile = ({sessionData}) => {
             type="text"
           />
           <br></br>
-
-          
-          <select
+          <MySelect
             name="pais_de_recidencia"
             value={datosEdit.pais_de_recidencia}
             onChange={handleInputChange}
-            className={classNamees.intputs}
           >
-            <option hidden selected>País</option>
+            <MenuItem hidden selected>País</MenuItem>
             {getCountries().map(pais => (
-              <option key={pais} value={pais}>{pais}</option>
+              <MenuItem key={pais} value={pais}>{pais}</MenuItem>
             ))}
-          </select>
-          <select
+          </MySelect>
+          <br />
+          <MySelect
             name="genero"
             value={datosEdit.genero}
             onChange={handleInputChange}
-            className={classNamees.intputs}
           >
-            <option hidden selected>Género</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
-            <option value="Otro">Otro</option>
-            <option value="Prefiero no decirlo">Prefiero no decirlo</option>
-          </select>
+            <MenuItem hidden selected>Género</MenuItem>
+            <MenuItem value="Masculino">Masculino</MenuItem>
+            <MenuItem value="Femenino">Femenino</MenuItem>
+            <MenuItem value="Otro">Otro</MenuItem>
+            <MenuItem value="Prefiero no decirlo">Prefiero no decirlo</MenuItem>
+          </MySelect>
           
           <input
             className={classNamees.intputs}

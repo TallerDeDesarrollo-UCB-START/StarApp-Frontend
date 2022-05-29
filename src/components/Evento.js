@@ -11,6 +11,7 @@ import "./Evento.css";
 import ParticipantesEventosBtn from "./ParticipantesEventosBtn";
 import EventoImagen from "../assets/event_picture.png";
 import MyButton from "../shared/components/Button";
+import MySelect from "../shared/components/Select";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -123,6 +124,8 @@ class Evento extends Component {
     });
   }
   handleChange = (e) => {
+    console.log("asddsaadsasdasdasdasdasdasddasads");
+    console.log(e);
     this.setState({
       formEditado: {
         ...this.state.formEditado,
@@ -397,36 +400,25 @@ class Evento extends Component {
               value={this.state.formEditado["descripcion_evento"]}
               onChange={this.handleChange}
             />
-            <div>
-              <div>
-                <label className="LabelLider">Líder</label>
-              </div>
-              <div>
-                <select
-                  label="Lider *"
-                  className="liderEventoEdicion textInput"
-                  name="lider"
-                  onChange={this.handleChange}
-                  value={this.state.formEditado.lider}
-                >
-                  {this.state.lideres.map((item) => {
-                    return (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </div>
-
-            <TextField
-              label="Modalidad *"
-              select
-              className="nombreEventoEdicion textInput"
-              name="modalidad_evento"
+            <MySelect
+              value={this.state.formEditado.lider}
               onChange={this.handleChange}
+              placeholder="Líder"
+              name="lider"
+            >
+              {this.state.lideres.map((item) => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+            </MySelect>
+            <br />
+            <br />
+            <MySelect
               value={"" || this.state.formEditado["modalidad_evento"]}
+              onChange={this.handleChange}
+              placeholder="Modalidad *"
+              name="modalidad_evento"
             >
               <MenuItem value="Presencial" name="modalidad_evento">
                 Presencial
@@ -434,7 +426,7 @@ class Evento extends Component {
               <MenuItem value="Virtual" name="modalidad_evento">
                 Virtual
               </MenuItem>
-            </TextField>
+            </MySelect>
 
             <TextField
               label="Lugar"
@@ -454,51 +446,32 @@ class Evento extends Component {
               onChange={this.handleChange}
             />
 
-            <div>
-              <div>
-                <label className="LabelCategoria">Categoría</label>
-              </div>
-              <div>
-                <select
-                  label="Categoría *"
-                  className="CategoriaEventoEdicion textInput"
-                  name="categoria"
-                  onChange={this.handleChange}
-                  value={this.state.formEditado.categoria}
-                >
-                  {this.state.categorias.map((item) => {
-                    return (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <div>
-                <label className="LabelProyecto">Proyecto</label>
-              </div>
-              <div>
-                <select
-                  label="Proyecto"
-                  className="ProyectoEventoEdicion textInput"
-                  name="proyecto"
-                  onChange={this.handleChange}
-                  value={this.state.formEditado.proyecto}
-                >
-                  {this.state.proyectos.map((item) => {
-                    return (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </div>
+            <MySelect
+              value={this.state.formEditado.categoria}
+              onChange={this.handleChange}
+              placeholder="Categoría"
+              name="categoria"
+            >
+              {this.state.categorias.map((item) => (
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </MySelect>
+            <br />
+            <br />
+            <MySelect
+              value={this.state.formEditado.proyecto}
+              onChange={this.handleChange}
+              placeholder="Proyecto"
+              name="proyecto"
+            >
+              {this.state.proyectos.map((item) => (
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </MySelect>
 
             <TextField
               label="Hora Inicio *"
