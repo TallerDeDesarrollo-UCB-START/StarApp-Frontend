@@ -604,51 +604,29 @@ class EventsListClass extends Component {
                   className="header-botones-eventos"
                   style={{ display: "flex" }}
                 >
-                  {rolUser !== "voluntario" ? (
-                    <Fragment>
-                      <MyButton onClick={async () => await this.mostrarModalInsertar()} className="default">
-                        CREAR EVENTO
-                      </MyButton>
-                      <Button
-                        style={{
-                          display: this.state.botonMostrarEventosArchivados
-                            ? "block"
-                            : "none",
-                          borderRadius: 4,
-                          height: 51,
-                          backgroundColor: "#3B3B3B",
-                          fontSize: "16px",
-                          margin: "5px",
-                          padding: "4px",
-                          borderColor: "#3B3B3B",
-                        }}
-                        onClick={async () => await this.getEventsArchivados()}
-                      >
-                        EVENTOS PASADOS
-                      </Button>
-                    </Fragment>
-                  ) : (
-                    <Fragment>
-                      <Button
-                        style={{
-                          display: this.state.botonMostrarEventosArchivados
-                            ? "block"
-                            : "none",
-
-                          borderRadius: 4,
-                          height: 51,
-                          backgroundColor: "#3B3B3B",
-                          fontSize: "16px",
-                          margin: "5px",
-                          padding: "4px",
-                          borderColor: "#3B3B3B",
-                        }}
-                        onClick={async () => await this.getEventsArchivados()}
-                      >
-                        Eventos Pasados
-                      </Button>
-                    </Fragment>
+                  {rolUser !== "voluntario" && (
+                    <MyButton onClick={async () => await this.mostrarModalInsertar()} className="default">
+                      CREAR EVENTO
+                    </MyButton>
                   )}
+                  <Button
+                    style={{
+                      display: this.state.botonMostrarEventosArchivados
+                        ? "block"
+                        : "none",
+
+                      borderRadius: 4,
+                      height: 51,
+                      backgroundColor: "#3B3B3B",
+                      fontSize: "16px",
+                      margin: "5px",
+                      padding: "4px",
+                      borderColor: "#3B3B3B",
+                    }}
+                    onClick={async () => await this.getEventsArchivados()}
+                  >
+                    Eventos Pasados
+                  </Button>
                   <Button
                     href="/eventos"
                     style={{

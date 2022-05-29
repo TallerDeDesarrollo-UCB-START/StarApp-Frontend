@@ -78,7 +78,6 @@ export default function MyButton({children, onClick, className, disabled}) {
 					{children}&nbsp;&nbsp;<FontAwesomeIcon size="lg" icon={faTrash}/> 
 				</Button>
 			)}
-
 			{(className === "cancel") && (
 				<Button
 					onClick={onClick}
@@ -89,7 +88,6 @@ export default function MyButton({children, onClick, className, disabled}) {
 					{children}
 				</Button>
 			)}
-
 
 			{(className === "cancel-icon") && (
 				<Button

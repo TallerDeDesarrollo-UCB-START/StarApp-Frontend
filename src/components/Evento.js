@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Card, Modal, Tooltip } from "reactstrap";
+import { Container, Card, Modal } from "reactstrap";
 import { Button } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-//import GoogleCalendar from "./googleCalendar.jsx";
 import "./Evento.css";
 import ParticipantesEventosBtn from "./ParticipantesEventosBtn";
 import EventoImagen from "../assets/event_picture.png";
@@ -520,12 +519,12 @@ class Evento extends Component {
             />
 
             <div className="CamposBotones">
-              <Button
-                className="botonActualizar"
-                onClick={() => this.guardarNuevaData()}
-              >
-                Guardar Cambios{" "}
-              </Button>
+              <MyButton className="cancel" onClick={() => this.cerrarModalEditarEvento()}>
+                Cancelar
+              </MyButton>
+              <MyButton className="default" onClick={() => this.guardarNuevaData()}>
+                Guardar Cambios
+              </MyButton>
               <Snackbar
                 anchorOrigin={{
                   vertical: "top",
@@ -544,13 +543,6 @@ class Evento extends Component {
                   {this.state.mensajeSnackbar}
                 </MuiAlert>
               </Snackbar>
-              <Button
-                className="botonCancelar"
-                onClick={() => this.cerrarModalEditarEvento()}
-              >
-                {" "}
-                Cancelar{" "}
-              </Button>
             </div>
           </form>
         </Modal>

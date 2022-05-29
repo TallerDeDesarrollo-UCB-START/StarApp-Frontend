@@ -4,9 +4,7 @@ import EventsList from "../components/EventsList";
 import Home from "../components/Home/Home";
 import Profile from "../components/Profile";
 import Event from "../components/Event";
-import Attendance from "../components/Attendance";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
-import FormularioProyecto from "../components/Formulario";
 import Evento from "../components/Evento";
 import Users from "../components/UsersTable/Users"
 import VistaProyectoIndividual from "../components/componentes proyectos/paginas/VistaProyectoIndividual"
@@ -59,21 +57,9 @@ const Routes = [
     logginNeeded: true,
   },
   {
-    path: "/createproject",
-    name: "CreateProject",
-    component: FormularioProyecto,
-    logginNeeded: true,
-  },
-  {
     path: "/eventos/event",
     name: "Evento",
     component: Event,
-    logginNeeded: true,
-  },
-  {
-    path: "/events/event/attendance",
-    name: "Attendace",
-    component: Attendance,
     logginNeeded: true,
   },
   {
