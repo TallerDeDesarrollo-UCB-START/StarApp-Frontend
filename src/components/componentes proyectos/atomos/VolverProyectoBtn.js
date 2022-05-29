@@ -7,9 +7,8 @@ function VolverProyectoBtn() {
   return (
     <MyButton
       className="go-back"
-      onClick={() => history.goBack()}>
-        {"< Volver "}
-    </MyButton>
+      onClick={() => history.goBack()}
+    />
   )
 }
 

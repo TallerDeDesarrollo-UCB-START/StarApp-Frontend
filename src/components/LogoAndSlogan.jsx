@@ -3,8 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import LogoStart from "../images/logoStart.png";
 import { Typography } from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
-import Chip from "@material-ui/core/Chip";
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import MyButton from "../shared/components/Button";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -40,15 +39,10 @@ const LogoAndSlogan = () => {
   const smallScreen = !useMediaQuery("(min-width:700px)");
   return (
     <div className={classes.logoContainer}>
-      <div
-        className={smallScreen ? classes.backButtonMobile : classes.backButton}
-      >
-        <Chip
-          variant="outlined"
-          icon={<NavigateBeforeIcon />}
-          label="Volver"
-          clickable
+      <div className={smallScreen ? classes.backButtonMobile : classes.backButton}>
+        <MyButton
           onClick={() => window.history.back()}
+          className="go-back"
         />
       </div>
       <img

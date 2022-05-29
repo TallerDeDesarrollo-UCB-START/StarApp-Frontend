@@ -4,6 +4,7 @@ import {Button, Fade, Paper, Popper} from '@material-ui/core'
 import { useHistory } from 'react-router'
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
+import MyButton from '../../shared/components/Button';
 
 const useStyles = makeStyles((theme)=> ({
     registerButton: {
@@ -24,13 +25,9 @@ const LogoutButton = ({logged, sessionData}) => {
       };
     return (
         (!logged)?(
-            <Button 
-                className={classes.registerButton} 
-                variant="contained"
-                color="primary"
-                onClick={()=>history.push("/login")}>
-                    Iniciar Sesión
-            </Button>
+            <MyButton className="default" onClick={()=>history.push("/login")}>
+                Iniciar Sesión
+            </MyButton>
         ):(
             <div>
                 <Popper open={open} anchorEl={anchorEl} placement={placement} transition>

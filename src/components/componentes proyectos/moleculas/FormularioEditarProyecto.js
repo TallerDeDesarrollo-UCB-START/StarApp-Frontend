@@ -5,11 +5,10 @@ import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
 //import { makeStyles } from '@material-ui/core/styles'
-import { Button, Modal } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Modal } from '@material-ui/core';
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
+import MyButton from '../../../shared/components/Button'
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
 
@@ -140,10 +139,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     }
 
     // COMPONENTS:
-    const botonCancelarFormulario = 
-        <Button onClick={onActivarForm}>
-            <FontAwesomeIcon className="cancel-icon" icon={faTimes}/>
-        </Button>;	
+    const botonCancelarFormulario = <MyButton onClick={onActivarForm} className="cancel-icon" />;	
         
     const body = (
         <div style={modalStyle} className="paper-crear">

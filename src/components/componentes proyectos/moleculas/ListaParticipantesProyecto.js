@@ -76,7 +76,7 @@ class ListaParticipantesProyecto extends Component{
                 }
                 </List>
                 <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-                    <ExcelFile element={<MyButton className="rename2">Exportar Lista</MyButton>} filename="ListaParticipantes">
+                    <ExcelFile element={<MyButton className="excel">Exportar Participantes</MyButton>} filename="ListaParticipantes">
                         <ExcelSheet data={posts} name="Participantes">
                             <ExcelColumn name="inicio" label={inicio}/>
                             <ExcelColumn label={fin}/>

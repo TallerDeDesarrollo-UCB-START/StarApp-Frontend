@@ -19,6 +19,7 @@ import DialogConfirm from "./DialogConfirm"
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 import BadRequests from "./redirect status/BadRequests";
+import MyButton from "../shared/components/Button";
 
 const { getCountries } = require("country-list-spanish");
 
@@ -778,15 +779,9 @@ const Profile = ({sessionData}) => {
         </form>
       </div>
       <div className={classNamees.containerbuttons}>
-        <Button
-          onClick={sendForm}
-          color="primary"
-          className={classNamees.buttons}
-          variant="contained"
-          borderradius="20%"
-        >
+        <MyButton onClick={sendForm} className="default">
           Guardar Cambios
-        </Button>
+        </MyButton>
         
         
       </div>
@@ -813,19 +808,10 @@ const Profile = ({sessionData}) => {
       <div>
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
-            <div className={classNamees.userPanel}>
-              {smallScreen? <Typography variant="h2" style={{padding : "10px", textAlign: "center"}}>Cuenta</Typography>: "" }
-              <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
-              
-              <Chip
-                className ={smallScreen? classNamees.chipRootSmall: classNamees.chipRoot}
-                variant="outlined"
-                icon={<EditTwoToneIcon />}
-                label="Editar Perfil"
-                clickable
-                onClick={handleOpen}
-              />
-            </div>
+            {smallScreen? <Typography variant="h2" style={{padding : "10px"}}>Cuenta</Typography>: "" }
+            <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
+            <MyButton className="edit" onClick={handleOpen}
+            />
             <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen} sessionData={sessionData}/>
             <Modal
               open={open}

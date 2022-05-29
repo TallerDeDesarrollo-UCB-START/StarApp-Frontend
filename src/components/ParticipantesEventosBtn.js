@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { Component } from "react";
 import ExportExcel from "react-export-excel";
 import { withStyles } from "@material-ui/core";
+import MyButton from "../shared/components/Button";
 
 const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;
@@ -58,9 +59,7 @@ class ListaParticipantesProyecto extends Component {
     return (
       <Box>
         <ExcelFile
-          element={
-            <ExportarButton variant="contained">Exportar Lista</ExportarButton>
-          }
+          element={<MyButton className="excel">Exportar Participantes</MyButton>}
           filename="ListaParticipantes"
         >
           <ExcelSheet data={posts} name="Participantes">
@@ -77,13 +76,5 @@ class ListaParticipantesProyecto extends Component {
     );
   }
 }
-const ExportarButton = withStyles((theme) => ({
-  root: {
-    marginRight: 10,
-    marginLeft: 10,
-    width: "25%",
-    background: "green",
-    color: "white",
-  },
-}))(Button);
+
 export default ListaParticipantesProyecto;

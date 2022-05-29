@@ -2,7 +2,7 @@ import MyButton from '../../../shared/components/Button';
 
 function CrearProyectoBtn({onActivarForm}) {
 	return (
-		<MyButton className="create" onClick={onActivarForm}>
+		<MyButton className="default" onClick={onActivarForm}>
 			Crear proyecto
 		</MyButton>
 	)

@@ -14,6 +14,7 @@ import SnackbarMessage from "../components/templates/SnackbarMessage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import LoginGoogle from "./LoginGoogle";
 import Typography from "@material-ui/core/Typography";
+import MyButton from "../shared/components/Button";
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
@@ -296,15 +297,9 @@ const RegisterForm = () => {
                   required
                 />
                 <div className={classes.buttonContainer}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.registerButton}
-                    type="submit"
-                    disabled={validateButton ? false : true}
-                  >
+                  <MyButton onClick={handleSubmit} className="default" disabled={validateButton ? false : true}>
                     Crea tu cuenta de start
-                  </Button>
+                  </MyButton>
                   <Typography variant="h6">
                     o
                   </Typography>           

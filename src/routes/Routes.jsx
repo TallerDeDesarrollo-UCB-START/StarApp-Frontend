@@ -4,12 +4,9 @@ import EventsList from "../components/EventsList";
 import Home from "../components/Home/Home";
 import Profile from "../components/Profile";
 import Event from "../components/Event";
-import Formulario from "../components/Formulario-evento.component/Formulario";
 import Attendance from "../components/Attendance";
-import crearEvento from "../components/CrearEvento/crearEvento";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
 import FormularioProyecto from "../components/Formulario";
-import EditarPerfil from "../components/EditarPerfil";
 import Evento from "../components/Evento";
 import Users from "../components/UsersTable/Users"
 import VistaProyectoIndividual from "../components/componentes proyectos/paginas/VistaProyectoIndividual"
@@ -74,22 +71,10 @@ const Routes = [
     logginNeeded: true,
   },
   {
-    path: "/events/event/registroAEvento",
-    name: "Formulario",
-    component: Formulario,
-    logginNeeded: true,
-  },
-  {
     path: "/events/event/attendance",
     name: "Attendace",
     component: Attendance,
     logginNeeded: true,
-  },
-  {
-    path: "/eventos/crearevento",
-    name: "crearEvento",
-    logginNeeded: true,
-    component: crearEvento,
   },
   {
     path: "/eventos/:id",
@@ -126,12 +111,6 @@ const Routes = [
     name: "RecuperarNuevaContrasena",
     component: ResetNewPassword,
     logginNeeded: false,
-  },
-  {
-    path: "/EditarPerfil",
-    name: "EditarPerfil",
-    component: EditarPerfil,
-    logginNeeded: true,
   },
   {
     path: "/error",

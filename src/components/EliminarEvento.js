@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import BadRequests from "./redirect status/BadRequests";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
+import MyButton from "../shared/components/Button";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -60,22 +61,9 @@ const EliminarEvento = (event) => {
   };
   return (
     <div>
-      <Button
-        variant="contained"
-        name={"Eliminar_" + event.event.nombre_evento}
-        style={{
-          borderRadius: 4,
-          height: 51,
-          backgroundColor: "#f00",
-          fontSize: "16px",
-          margin: "3px",
-          textTransform: "none",
-          width: "110px",
-        }}
-        onClick={handleClickOpen}
-      >
+      <MyButton onClick={handleClickOpen} className="delete">
         Eliminar
-      </Button>
+      </MyButton>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -92,12 +80,12 @@ const EliminarEvento = (event) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button name={"eliminarevento" + event.event.nombre_evento} variant="contained" onClick={() => deleteEvento(event)}>
-            Confimar
-          </Button>
-          <Button variant="contained" color="error" onClick={handleClose}>
+          <MyButton className="cancel" onClick={handleClose}>
             Cancelar
-          </Button>
+          </MyButton>
+          <MyButton className="delete" onClick={() => deleteEvento(event)}>
+            Confimar
+          </MyButton>
         </DialogActions>
       </Dialog>
       <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />

@@ -4,14 +4,12 @@ import axios from "axios";
 import { Container, Card, Modal, Button, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./EventsList.css";
-import Chip from "@material-ui/core/Chip";
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import TextField from "@mui/material/TextField";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import EliminarEvento from "./EliminarEvento";
 import Typography from "@material-ui/core/Typography";
-import { Grid, Box, CardHeader } from "@material-ui/core/";
+import { CardHeader } from "@material-ui/core/";
 import { CardContent, CardMedia } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -28,6 +26,7 @@ import RedirectErrorPage from "./redirect status/RedirectErrorPage";
 import { withRouter } from "react-router";
 import Routes from "../routes/Routes";
 import { useHistory } from "react-router-dom";
+import MyButton from "../shared/components/Button";
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -499,16 +498,9 @@ class EventsListClass extends Component {
           <Container className="container1">
             <div>
               <div className="Chip-Eventos">
-                <Chip
-                  style={{
-                    marginTop: "20px",
-                    left: "10px",
-                  }}
-                  variant="outlined"
-                  icon={<NavigateBeforeIcon />}
-                  label="Volver"
-                  clickable
+                <MyButton
                   onClick={() => window.history.back()}
+                  className="go-back"
                 />
               </div>
 
@@ -614,21 +606,9 @@ class EventsListClass extends Component {
                 >
                   {rolUser !== "voluntario" ? (
                     <Fragment>
-                      <Button
-                        name= "crear_evento"
-                        style={{
-                          borderRadius: 4,
-                          height: 51,
-                          backgroundColor: "#269BD5",
-                          fontSize: "16px",
-                          margin: "5px",
-                          padding: "2px",
-                          borderColor: "#269BD5",
-                        }}
-                        onClick={async () => await this.mostrarModalInsertar()}
-                      >
+                      <MyButton onClick={async () => await this.mostrarModalInsertar()} className="default">
                         CREAR EVENTO
-                      </Button>
+                      </MyButton>
                       <Button
                         style={{
                           display: this.state.botonMostrarEventosArchivados
@@ -733,90 +713,20 @@ class EventsListClass extends Component {
 
                     <CardBody className="CardBody-Eventos">
                       <div class="btn-container-dus">
-                        {this.validarBotones(event) ? (
-                          <Button
-                            variant="contained"
-                            name={"participar_" + event.nombre_evento}
-                            onClick={async () => {
-                              await this.postParticipacion(event);
-                            }}
-                            style={{
-                              borderRadius: 4,
-                              height: 51,
-                              backgroundColor: "#269BD5",
-                              fontSize: "16px",
-                              margin: "3px",
-                              width: "110px",
-                              display:
-                                this.state.botonMostrarEventosArchivados === true
-                                  ? "block"
-                                  : "none",
-                            }}
-                          >
-                            {" "}
-                            Participar
-                          </Button>
+                        {this.validarBotones(event) && this.state.botonMostrarEventosArchivados ? (
+                          <MyButton onClick={async () => { await this.postParticipacion(event); }} className="default">
+                            ParticipaR
+                          </MyButton>
                         ) : (
-                          <Button
-                            name={"DejarParticipar_" + event.nombre_evento}
-                            onClick={async () => {
-                              await this.eliminarParticipacion(event);
-                            }}
-                            style={{
-                              color: "3B3B3B",
-                              borderRadius: 4,
-                              height: 51,
-                              fontSize: "13.5px",
-                              margin: "3px",
-                              width: "110px",
-                              display:
-                                this.state.botonMostrarEventosArchivados === true
-                                  ? "block"
-                                  : "none",
-                            }}
-                          >
-                            {" "}
+                          <MyButton className="leave" onClick={async () => { await this.eliminarParticipacion(event); }}>
                             Dejar de Participar
-                          </Button>
+                          </MyButton>
                         )}
-                        {rolUser !== "voluntario" ? (
-                          <Fragment>
-                            <Button
-                              name={"Detalles_" + event.nombre_evento}
-                              style={{
-                                borderRadius: 4,
-                                height: 51,
-                                backgroundColor: "#B3DA3F",
-                                fontSize: "16px",
-                                width: "110px",
-                                margin: "3px",
-                              }}
-                            >
-                              {" "}
-                              <Link to={"eventos/" + event.id}>
-                                Detalles
-                              </Link>{" "}
-                            </Button>
-                          </Fragment>
-                        ) : (
-                          <Fragment>
-                            <Button
-                              style={{
-                                borderRadius: 4,
-                                height: 51,
-                                backgroundColor: "#B3DA3F",
-                                fontSize: "16px",
-                                margin: "3px",
-                                width: "110px",
-                              }}
-                            >
-                              {" "}
-                              <Link to={"eventos/" + event.id}>
-                                Detalles
-                              </Link>{" "}
-                            </Button>
-                          </Fragment>
-                        )}
+                        <MyButton className="see-details">
+                          <Link to={"eventos/" + event.id}>
+                            Detalles
+                          </Link>{" "}
+                        </MyButton>
                         {rolUser !== "voluntario" ? (
                           <Fragment>
                             <EliminarEvento event={event} />
@@ -1004,14 +914,12 @@ class EventsListClass extends Component {
               />
 
               <div className="CamposBotones">
-                <Button
-                  name="GuardarEvento"
-                  className="botonCrear"
-                  // disabled={this.state.form.nombre_evento && this.state.form.fecha_evento? false:true}
-                  onClick={async () => await this.peticionPost()}
-                >
+                <MyButton className="cancel" onClick={async () => await this.cerrarModalInsertar()}>
+                  Cancelar
+                </MyButton>
+                <MyButton onClick={async () => await this.peticionPost()} className="default">
                   Guardar Evento{" "}
-                </Button>
+                </MyButton>
                 <Snackbar
                   anchorOrigin={{
                     vertical: "bottom",
@@ -1030,14 +938,6 @@ class EventsListClass extends Component {
                     {this.state.mensajeSnackbar}
                   </MuiAlert>
                 </Snackbar>
-
-                <Button
-                  className="botonCancelar"
-                  onClick={async () => await this.cerrarModalInsertar()}
-                >
-                  {" "}
-                  Cancelar{" "}
-                </Button>
               </div>
             </form>
             <Snackbar

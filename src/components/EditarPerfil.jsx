@@ -20,6 +20,7 @@ import redirectErrorPage from "./redirect status/RedirectErrorPage";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 
 import BadRequests from "./redirect status/BadRequests";
+import MyButton from "../shared/components/Button";
 
 const { getCountries  } = require("country-list-spanish");
 const url = process.env.REACT_APP_API;
@@ -746,14 +747,9 @@ const EditarPerfil = ({ sessionData }) => {
                     </form>
                 )}
             </Form>
-            <Button
-                onClick={sendForm}
-                className={classNames.buttons}
-                variant="contained"
-                borderradius="20%"
-                >
+            <MyButton onClick={sendForm} className="default">
                 Guardar Cambios
-            </Button>
+            </MyButton>
         </Card>
         <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>

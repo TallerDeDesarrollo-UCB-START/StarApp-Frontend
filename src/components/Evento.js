@@ -9,10 +9,9 @@ import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 //import GoogleCalendar from "./googleCalendar.jsx";
 import "./Evento.css";
-import Chip from "@material-ui/core/Chip";
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import ParticipantesEventosBtn from "./ParticipantesEventosBtn";
 import EventoImagen from "../assets/event_picture.png";
+import MyButton from "../shared/components/Button";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -209,7 +208,7 @@ class Evento extends Component {
   // };
 
   insertar = async () => {
-    if (this.state.formEditado.nombre_evento && this.state.formEditado.fecha_evento && this.state.formEditado.lider && this.state.formEditado.categoria && this.state.formEditado.hora_inicio && this.state.formEditado.hora_fin) {
+    if (this.state.formEditado && this.state.formEditado.nombre_evento && this.state.formEditado.fecha_evento && this.state.formEditado.lider && this.state.formEditado.categoria && this.state.formEditado.hora_inicio && this.state.formEditado.hora_fin) {
       if (this.state.formEditado.nombre_evento.trim().length > 0 && this.state.formEditado.nombre_evento.length < 100) {
         this.handleClick();
         this.setState({
@@ -281,14 +280,7 @@ class Evento extends Component {
     const { snackbarAbierto } = this.state;
     return (
       <Container>
-        <Chip
-          style={{ marginTop: "20px" }}
-          variant="outlined"
-          icon={<NavigateBeforeIcon />}
-          label="Volver"
-          clickable
-          onClick={() => window.history.back()}
-        />
+        <MyButton onClick={() => window.history.back()} className="go-back"/>
         <Card>
           {this.state.events.map((event) => (
             <div key={event.id}>
@@ -355,15 +347,7 @@ class Evento extends Component {
         </Card>
         <br></br>
         {rolUser !== "voluntario" ? (
-          <Button
-            className="botonEditarEvento"
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={() => this.abrilModalEditarEvento()}
-          >
-            Editar
-          </Button>
+          <MyButton className="edit" onClick={() => this.abrilModalEditarEvento()} />
         ) : (
           <></>
         )}

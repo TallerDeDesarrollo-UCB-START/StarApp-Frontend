@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Typography, useMediaQuery, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-//import CardEvento from './CardEvento'
 import ResumedCardEvento from "./ResumedCardEvento";
 import axios from "axios";
 import BadRequests from "../../components/redirect status/BadRequests";
@@ -115,7 +114,7 @@ const EventosProximos = ({ id, title }) => {
             registrado a alguno de nuestros eventos, aparecerán en tu página de
             inicio.
           </Typography>
-          <MyButton className="create" onClick={() => (window.location.href = "/eventos")}>
+          <MyButton className="default" onClick={() => (window.location.href = "/eventos")}>
             Explorar proyectos
           </MyButton>
           <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />

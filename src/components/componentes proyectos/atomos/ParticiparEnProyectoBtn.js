@@ -47,19 +47,15 @@ function ParticiparEnProyectoBtn( {proyecto,  onPartiparProy, onAsignarSnackbarS
         }
     }
     /*OPCIONALMENTE MOVER EL BOTON DE VOLVER ATRAS DE KEVIN*/
-    const candado = proyecto && proyecto.estado === varProyectos.estadoAcabado? <LockIcon/> : ""
-    const estilosBtnPasado = proyecto && proyecto.estado === varProyectos.estadoAcabado? classes.contenedorBtnPasado : ""
+    const isPastProject = proyecto && proyecto.estado === varProyectos.estadoAcabado
     return (
         <div>
 					<div id={proyecto.id}>
-						<MyButton
-							className="create"
-							onClick={onClick}>
-								<Box className={classes.contenedorBtn}>
-									Unirme
-									{candado}
-								</Box>
-						</MyButton>
+						{!isPastProject && (
+							<MyButton className="default" onClick={onClick}>
+								Unirme
+							</MyButton>
+						)}
 					</div>
         </div>
     );

@@ -1,38 +1,17 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
+import MyButton from '../shared/components/Button';
 
 const url = process.env.REACT_APP_API;
 const urlEliminarCuenta=`${url}disable_user/`
-
-const DeleteButton = withStyles((theme) => ({
-        root: {
-          backgroundColor: "#ED2020",
-          color: "#FFFFFF",
-          "&:hover": {
-            backgroundColor: "#a90e0e",
-          },
-        },
-      }))(Button);
-
-const CancelButton = withStyles((theme) => ({
-        root: {
-          color: "white",
-          backgroundColor: "#a8a8a8",
-          "&:hover": {
-            backgroundColor: "#818181",
-          },
-        },
-      }))(Button);
       
 function TransitionDown(props) {
     return <Slide {...props} direction="down" />;
@@ -100,11 +79,12 @@ export default function AlertDialog() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-
-          
-        <DeleteButton onClick={peticionDelete} style={{ height: "30px",margin: "7px",}}     variant="contained">
-            Eliminar 
-        </DeleteButton>
+        <MyButton className="cancel" onClick={handleClose}>
+          Cancelar
+        </MyButton>
+        <MyButton className="delete" onClick={peticionDelete}>
+          Eliminar 
+        </MyButton>
 
 
         <Snackbar
@@ -119,9 +99,6 @@ export default function AlertDialog() {
                 Se eliminó su cuenta correctamente!
             </Alert>
         </Snackbar>
-        <CancelButton onClick={handleClose}  style={{ height: "30px",margin: "7px",}} color="primary" autoFocus>
-            Cancelar
-        </CancelButton>
         </DialogActions>
       </Dialog>
     </div>

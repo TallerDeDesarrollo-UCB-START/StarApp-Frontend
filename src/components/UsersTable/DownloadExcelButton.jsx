@@ -1,6 +1,6 @@
-import React from 'react'
-import { Button } from '@material-ui/core'
-import XLSX from 'xlsx'
+import React from 'react';
+import XLSX from 'xlsx';
+import MyButton from '../../shared/components/Button';
 
 
 const DownloadExcelButton = ({data}) => {
@@ -15,9 +15,9 @@ const DownloadExcelButton = ({data}) => {
         XLSX.writeFile(wb, "usuarios.xlsx")
     }
     return (
-        <Button variant="contained" color="secondary" onClick={writeIntoFile} style={{margin:'15px 0'}}>
+        <MyButton className="excel" onClick={writeIntoFile}>
             Descargar
-        </Button>
+        </MyButton>
     )
 }
 

@@ -5,12 +5,11 @@ import '../moleculas/FormularioCrearProyecto.css'
 //import {VARIABLES} from '../organismos/variables-compartidas'
 import { useState } from "react"
 import React from 'react';
-import { Button, Modal} from '@material-ui/core';
+import { Modal} from '@material-ui/core';
 //import { Button, Modal, FormData, FormControl, MenuItem, Select, InputLabel} from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useForm, /*SubmitHandler,*/ FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
+import MyButton from "../../../shared/components/Button";
 const estados = [
     {value: 10, label: "CONCLUIDO", bool: false},
     {value: 20, label: "EN CURSO", bool: true}
@@ -98,9 +97,10 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     
     // COMPONENTES:
     const botonCancelarFormulario =
-        <Button onClick={onActivarForm}>
-            <FontAwesomeIcon className="cancel-icon" icon={faTimes}/>
-        </Button>;
+        <MyButton
+            onClick={onActivarForm}
+            className="cancel-icon">
+        </MyButton>;
     
     const body = (
         <div style={modalStyle} className="paper-crear">
@@ -187,7 +187,9 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     onChange={onChangeImagenUrl}
                                     />
                         <div className="btn-crear-container">
-                            <input  name='crearProyecto1' type='submit' value='CREAR PROYECTO' className='btn-proy-crear btn-proy-block'/>
+                            <MyButton onClick={methods.handleSubmit(onSubmit)} className="default">
+                                CREAR PROYECTO
+                            </MyButton>
                         </div>
                     </div>
                 </form>

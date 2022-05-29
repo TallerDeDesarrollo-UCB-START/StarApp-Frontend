@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Typography, useMediaQuery, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-//import CardEvento from './CardEvento'
 import axios from "axios";
 import ResumedCardEvento from "../../Home/ResumedCardEvento";
 import {useHistory} from "react-router-dom";
@@ -107,7 +106,7 @@ const EventosProyecto = ({ id, title }) => {
             inicio.
           </Typography>
           <MyButton
-            className="create"
+            className="default"
             onClick={() => (window.location.href = "/eventos")}>
               Explorar eventos
           </MyButton>

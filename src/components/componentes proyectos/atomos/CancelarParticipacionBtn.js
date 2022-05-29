@@ -17,11 +17,9 @@ function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignar
     }
 
     return (
-      <MyButton
-				className="cancel"
-				onClick={onClick}>
-					Dejar Proyecto
-			</MyButton>
+        <MyButton className="leave" onClick={onClick}>
+            Dejar Proyecto
+        </MyButton>
     );
 }
 

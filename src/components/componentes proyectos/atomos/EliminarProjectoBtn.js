@@ -72,6 +72,9 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
+            <MyButton className="cancel" onClick={handleClose}>
+                Cancelar
+            </MyButton>
             <MyButton
               className="delete"
               onClick={peticionDelete}>
@@ -86,15 +89,10 @@ function EliminarProjectoBtn({proyecto, onEliminarProy}) {
                 TransitionComponent={transition}
                 key={transition ? transition.name : ''}
             >
-                <Alert onClose={handleCloseSnakbar} severity="success" variant="filled">
-                    Se eliminó el proyecto!
-                </Alert>
+            <Alert onClose={handleCloseSnakbar} severity="success" variant="filled">
+                Se eliminó el proyecto!
+            </Alert>
             </Snackbar>
-            <MyButton
-              className="cancel"
-              onClick={handleClose}>
-                Cancelar
-            </MyButton>
             </DialogActions>
           </Dialog>
       </div>

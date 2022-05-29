@@ -17,6 +17,7 @@ import SnackbarMessage from "../templates/SnackbarMessage"
 import BadRequests from "../redirect status/BadRequests"
 import redirectErrorPage from "../redirect status/RedirectErrorPage"
 import { useHistory } from "react-router-dom"
+import MyButton from "../../shared/components/Button"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -213,36 +214,19 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
         />
       </div>
       <div className={classes.modalButtons} style={{ marginTop: "20px" }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            if(criteria === "Insignias") {updateInsigniasField()}
-            else {updateUserField()}
-          }}
-          style={{ marginRight: "20px" }}
-        >
-          Confirmar
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => handleClose()}
-        >
+        <MyButton className="cancel" onClick={() => handleClose()}>
           Cancelar
-        </Button>
+        </MyButton>
+        <MyButton className="default" onClick={() => { if(criteria === "Insignias") {updateInsigniasField()} else {updateUserField()} }}>
+          Confirmar
+        </MyButton>
       </div>
     </div>
   )
 
   return (
     <div>
-      <button
-        onClick={handleOpen}
-        color="primary"
-        className={classes.logoButton}
-      >
-        <EditIcon />
-      </button>
+      <MyButton className="edit" onClick={handleOpen} />
       <Modal
         open={open}
         onClose={handleClose}
