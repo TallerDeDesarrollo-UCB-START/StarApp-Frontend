@@ -24,13 +24,15 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(15),
     height: theme.spacing(15),
     margin: "auto",
-    marginLeft: "5px"
   },
   switchStyle: {
     marginRight: "10%",
   },
   chipStyle: {
     marginRight: "28%",
+  },
+  profileText: {
+    height: "auto",
   },
 }));
 
@@ -101,7 +103,7 @@ export default function ProfileImage({ getDataProfile, setDataProfile, sessionDa
       </div>
       <Box textAlign={smallScreen? "left": "center"} sx={smallScreen? {marginLeft: "10px"}: {margin:"10px"}}>
         <Grid>
-        {smallScreen? <Typography variant="subtitle1" style={{fontWeight: "bold"}}>
+        {smallScreen? <Typography variant="subtitle1" className={`${classes.small} ${classes.profileText}`} style={{fontWeight: "bold"}}>
             {getDataProfile.nombre? getDataProfile.nombre.split(" ")[0]: " "} {getDataProfile.apellido? getDataProfile.apellido.split(" ")[0]: " "} 
           </Typography>:
           <Typography variant="subtitle1" style={{fontWeight: "bold"}}>
@@ -109,7 +111,7 @@ export default function ProfileImage({ getDataProfile, setDataProfile, sessionDa
           </Typography>}
         </Grid>
         <Grid container justifyContent={smallScreen? "flex-start": "center"}>
-          <Grid container justifyContent={smallScreen? "flex-start": "center"}>
+          <Grid container justifyContent={smallScreen? "flex-start": "center"} className={`${classes.small} ${classes.profileText}`}>
             <Chip label={getDataProfile.rol} color="secondary" />
           </Grid>
           <Grid

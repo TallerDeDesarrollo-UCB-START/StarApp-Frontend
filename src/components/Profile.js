@@ -105,14 +105,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   chipRootSmall:{
-    position: "absolute",
-    right: "2%",
-    top: "37.2%",
+    margin: "10px",
+    alignSelf: "center",
   },
   chipRoot:{
+    margin:"20px",
     float: "right",
-    marginRight: "12%"
-    }
+    marginRight: "12%",
+    },
+    name:{
+      flexDirection: "column",
+    },
+    userPanel:{
+      flexDirection: "column",
+    },
 }));
 
 const Profile = ({sessionData}) => {
@@ -769,15 +775,6 @@ const Profile = ({sessionData}) => {
               
             </Grid>
           </div>
-         
-
-          
-
-          
-
-          
-
-          
         </form>
       </div>
       <div className={classNamees.containerbuttons}>
@@ -816,18 +813,20 @@ const Profile = ({sessionData}) => {
       <div>
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
-            {smallScreen? <Typography variant="h2" style={{padding : "10px"}}>Cuenta</Typography>: "" }
-            <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
-            <Chip
-              className ={smallScreen? classNamees.chipRootSmall: classNamees.chipRoot}
-              variant="outlined"
-              icon={<EditTwoToneIcon />}
-              label="Editar Perfil"
-              clickable
-              onClick={handleOpen}
-            />
+            <div className={classNamees.userPanel}>
+              {smallScreen? <Typography variant="h2" style={{padding : "10px", textAlign: "center"}}>Cuenta</Typography>: "" }
+              <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
+              
+              <Chip
+                className ={smallScreen? classNamees.chipRootSmall: classNamees.chipRoot}
+                variant="outlined"
+                icon={<EditTwoToneIcon />}
+                label="Editar Perfil"
+                clickable
+                onClick={handleOpen}
+              />
+            </div>
             <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen} sessionData={sessionData}/>
-
             <Modal
               open={open}
               onClose={handleClose}

@@ -92,7 +92,7 @@ const ProyectosProximos = ({ title }) => {
           ))}
         </div>
       ) : (
-        <div className={classes.noEvents}>
+        <div className={smallScreen?  classes.resp_no_events :classes.noEvents}>
           <Typography
             color="textSecondary"
             className={

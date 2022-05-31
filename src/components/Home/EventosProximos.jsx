@@ -15,14 +15,14 @@ const useStyles = makeStyles((theme) => ({
   resp_root_container: {
     margin: "10px 15px",
   },
-  containerEvents: {
+  container_events: {
     margin: "20px 0",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "flex-start",
     gap: "30px 30px",
   },
-  noEvents: {
+  no_events: {
     margin: "200px 0",
     display: "flex",
     flexDirection: "column",
@@ -31,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
   },
   resp_noevents_message: {
     fontSize: "16px",
+  },
+  resp_no_events:{
+    margin: "10px 0",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));
 
@@ -85,7 +92,7 @@ const EventosProximos = ({ id, title }) => {
       )}
       {events.length ? (
         <div
-          className={classes.containerEvents}
+          className={classes.container_events}
           style={smallScreen ? { gap: "10px" } : {}}
         >
           {events.map((event) => (
@@ -93,7 +100,7 @@ const EventosProximos = ({ id, title }) => {
           ))}
         </div>
       ) : (
-        <div className={classes.noEvents}>
+        <div className={`${smallScreen? classes.resp_no_events : classes.no_events}`}>
           <Typography
             color="textSecondary"
             className={

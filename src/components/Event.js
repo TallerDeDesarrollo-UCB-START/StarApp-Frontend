@@ -19,7 +19,6 @@ import EventsList from "./EventsList";
 // };
 class Event extends React.Component {
   render() {
-    try{
       return (
         <div>
           <div>
@@ -38,11 +37,6 @@ class Event extends React.Component {
           </div>
         </div>
       );
-    }
-    catch(error){
-      console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
-      console.log("readyyyyyyyyyyyyyyy")
-    }
   }
 }
 
