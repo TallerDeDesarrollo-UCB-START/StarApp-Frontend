@@ -122,7 +122,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     
     const onSubmit = data => {
         const estadoActual = estados.find(estado => estado.value === estadoId)
-        const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoriaId)
+        const categoriaActual = categorias.find(catego => catego.id === categoriaId)
         const liderActual = lideres.find(lid=> lid.id===liderId)
         data.id = proyecto.id
         data.estado = estadoActual.bool
@@ -144,7 +144,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const body = (
         <div style={modalStyle} className="paper-crear">
             <FormProvider {...methods}>
-                <form  onSubmit={methods.handleSubmit(onSubmit)}>
+                <form>
                     {botonCancelarFormulario}
                     {/*NOTE: FORM TITLE*/}
                     <div className="crear-container-title">
@@ -223,7 +223,9 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     onChange={onChangeImagenUrl}
                                     />
                         <div className="btn-crear-container">
-                            <input type='submit' value='GUARDAR CAMBIOS' className='btn-proy-editar btn-proy-block'/>
+                            <MyButton className="default" onClick={methods.handleSubmit(onSubmit)}>
+                                GUARDAR CAMBIOS
+                            </MyButton>
                         </div>
                     </div>
                 </form>
