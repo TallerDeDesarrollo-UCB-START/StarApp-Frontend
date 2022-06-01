@@ -14,6 +14,7 @@ import EventosProyecto from '../paginas/EventosProyecto';
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
 import {useState, useRef, useEffect } from 'react';
+import MySwitch from "../../../shared/components/Switch";
 
 function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin? proyecto.fecha_fin.substring(0, 10) : "En Progreso"
@@ -24,7 +25,7 @@ function ContenidoProyectoDetalle ({proyecto}) {
     const [visualizarP, setVisualizarP] = useState(proyecto.visualizar)
     let history = useHistory();
 
-    const Onchange = async () => {
+    const OnClick = async () => {
         //debugger
         setVisualizarP(!visualizarP)
        // visualizarP = !visualizarP
@@ -48,11 +49,9 @@ function ContenidoProyectoDetalle ({proyecto}) {
         
 
     const listaPartipantes = <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-                                    <Switch
-                                    onClick={Onchange}
-                                    checked={!visualizarP} 
+
+                                    <MySwitch checked={!visualizarP} onClick={OnClick}/>                                    
                                     
-                                    />
                                 </PuertaPermisos>
 
     //CANCELAR

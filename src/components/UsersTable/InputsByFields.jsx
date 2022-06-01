@@ -15,6 +15,7 @@ import {
 import { fields } from "./SearchByField";
 import MaskedInput from "react-text-mask";
 import MySelect from "../../shared/components/Select";
+import MySwitch from "../../shared/components/Switch";
 
 function TextMaskCustom(props) {
   const { inputRef, ...other } = props;
@@ -172,24 +173,17 @@ export function InputByCriteria({
     "Relación con Contacto": rehusableTextField(),
     "Número de contacto": rehusableTextField(),
     Disponibilidad: (
-      <FormControlLabel
-        control={
-          <Switch
-            checked={newValue[fields[criteria]] === "disponible"}
-            onChange={(event) =>
+      <MySwitch 
+        checked={newValue[fields[criteria]] === "disponible"} 
+        onClick={
+          (event) =>
               setNewValue({
                 ...newValue,
                 [fields[criteria]]: event.target.checked
                   ? "disponible"
                   : "no disponible",
               })
-            }
-            name="disponibilidad"
-            color="secondary"
-          />
-        }
-        label={newValue[fields[criteria]]}
-      />
+        }/> 
     ),
     Insignias: (
       <FormControl>
