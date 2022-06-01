@@ -46,7 +46,7 @@ function VistaCategoriasProyectos() {
             } catch (error) {
                 const message = BadRequests(404);
                 activeSnackbar(
-                  "No se ha podido encontrar los proyectos, "+message,
+                  "No se pudo encontrar los proyectos, "+message,
                   "error",
                   () => {});
             }
@@ -59,7 +59,7 @@ function VistaCategoriasProyectos() {
             } catch (error) {
                 const message = BadRequests(404);
                 activeSnackbar(
-                  "No se ha podido encontrar los proyectos, "+message,
+                  "No se pudo encontrar los proyectos, "+message,
                   "error",
                   () => {});
             }
@@ -93,7 +93,7 @@ function VistaCategoriasProyectos() {
                 }
                 const message = BadRequests(404);
                 activeSnackbar(
-                    "No se ha podido crear el proyecto, "+message,
+                    "No se pudo crear el proyecto, "+message,
                     "error",
                     () => {});
                 throw error;
