@@ -27,7 +27,7 @@ const ErrorPage = () => {
     const errorMessage = sessionStorage.getItem("errorMessage");
     const message = BadRequests(status)
     console.log(status)
-    if (status == NaN)
+    if (isNaN(status))
         history.push(routes[0].path)
     sessionStorage.removeItem("statusError");
     sessionStorage.removeItem("errorMessage");

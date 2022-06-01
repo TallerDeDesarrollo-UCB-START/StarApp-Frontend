@@ -16,7 +16,7 @@ function useGetRole() {
                 }).catch((error)=>
                 {
                     console.log(error);
-                    if (error.message == "Network Error"){
+                    if (error.message == "Failed to fetch"){
                         throw new Error("Network Error");
                     }
                     throw error;
