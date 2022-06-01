@@ -107,7 +107,7 @@ const RegisterForm = () => {
       errors.lastname = "Apellido debe contener solo letras y debe ser menor a 50 caracteres";
     }
     if (phoneValue.replace(/\s+/g, '').length < 7) {
-      errors.phoneValue = "Telefono requerido";
+      errors.phoneValue = "Teléfono requerido";
     }
     if (!validPassword.test(values.password)) {
       errors.password = "La contraseña debe tener mínimo 6 caracteres y 1 número";

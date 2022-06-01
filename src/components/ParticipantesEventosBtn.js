@@ -70,7 +70,7 @@ class ListaParticipantesProyecto extends Component {
             <ExcelColumn label="Nombre" value="nombre" />
             <ExcelColumn label="Apellido" value="apellido" />
             <ExcelColumn label="Rol" value="rol" />
-            <ExcelColumn label="Telefono" value="telefono" />
+            <ExcelColumn label="Teléfono" value="telefono" />
           </ExcelSheet>
         </ExcelFile>
       </Box>
