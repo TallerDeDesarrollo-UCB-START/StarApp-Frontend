@@ -16,20 +16,3 @@ export default function MyInputText({label, name, className, value, onChange, pl
         </>
     );
 }
-
-{/* <TextField
-    label="Nombre del evento *"
-    name="nombre_evento"
-    className="nombreEventoEdicion textInput"
-    type="text"
-    value={this.state.formEditado["nombre_evento"]}
-    onChange={this.handleChange}
-/>
-<TextField
-    label="Lugar"
-    className="LugarEventoEdicion textInput"
-    name="lugar_evento"
-    type="text"
-    value={this.state.formEditado["lugar_evento"]}
-    onChange={this.handleChange}
-/> */}
