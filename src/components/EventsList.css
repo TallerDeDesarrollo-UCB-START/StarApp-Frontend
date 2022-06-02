@@ -247,3 +247,10 @@ h1 {
   padding-right: 5px;
 }
 
+.asr{
+  text-align: left;
+  text-transform: uppercase;
+  color: #7a7a7a;
+  text-decoration: underline;
+
+}

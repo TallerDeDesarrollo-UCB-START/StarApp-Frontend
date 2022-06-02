@@ -731,7 +731,7 @@ class EventsListClass extends Component {
                       </CardContent>
                     </div>
 
-                    <CardBody className="CardBody-Eventos">
+                    {/*<CardBody className="CardBody-Eventos">
                       <div class="btn-container-dus">
                         {this.validarBotones(event) ? (
                           <Button
@@ -815,6 +815,106 @@ class EventsListClass extends Component {
                                 Detalles
                               </Link>{" "}
                             </Button>
+                          </Fragment>
+                        )}
+                        {rolUser !== "voluntario" ? (
+                          <Fragment>
+                            <EliminarEvento event={event} />
+                          </Fragment>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                        </CardBody>*/}
+                    <CardBody className="CardBody-Eventos">
+                      <div class="btn-container-dus">
+                        {this.validarBotones(event) ? (
+                          <Button
+                            variant="contained"
+                            name={"participar_" + event.nombre_evento}
+                            onClick={() => {
+                              this.postParticipacion(event);
+                            }}
+                            style={{
+                              borderRadius: 4,
+                              height: 30,
+                              backgroundColor: "#269BD5",
+                              fontSize: "16px",
+                              margin: "3px",
+                              width: "90px",
+                              display:
+                                this.state.botonMostrarEventosArchivados === true
+                                  ? "block"
+                                  : "none",
+                            }}
+                          >
+                            {" "}
+                            Participar
+                          </Button>
+                        ) : (
+                          <Button
+                            name={"DejarParticipar_" + event.nombre_evento}
+                            onClick={() => {
+                              this.eliminarParticipacion(event);
+                            }}
+                            style={{
+                              color: "3B3B3B",
+                              borderRadius: 4,
+                              height: 51,
+                              fontSize: "13.5px",
+                              margin: "3px",
+                              width: "110px",
+                              display:
+                                this.state.botonMostrarEventosArchivados === true
+                                  ? "block"
+                                  : "none",
+                            }}
+                          >
+                            {" "}
+                            Dejar de Participar
+                          </Button>
+                        )}
+                        {rolUser !== "voluntario" ? (
+                          <Fragment>
+                            <a class="asr"
+                            href={"eventos/" + event.id}
+                              name={"Detalles_" + event.nombre_evento}
+                              style={{
+                      
+                                // borderRadius: 4,
+                                // height: 51,
+                                // backgroundColor: "#B3DA3F",
+                                // fontSize: "16px",
+                                // width: "110px",
+                                // margin: "3px",
+                                // style:""
+                              }}
+                            >
+                              Detalles
+                            </a>
+                          </Fragment>
+                        ) : (
+                          <Fragment>
+                            <a class="asr"
+                            href={"eventos/" + event.id}
+                              name={"Detalles_" + event.nombre_evento}
+                              style={{
+                      
+                                // borderRadius: 4,
+                                // height: 51,
+                                // backgroundColor: "#B3DA3F",
+                                // fontSize: "16px",
+                                // width: "110px",
+                                // margin: "3px",
+                                // style:""
+                              }}
+                            >
+                            
+                            
+                            
+                                Detalles
+                              
+                            </a>
                           </Fragment>
                         )}
                         {rolUser !== "voluntario" ? (

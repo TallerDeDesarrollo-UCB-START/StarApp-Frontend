@@ -65,12 +65,12 @@ const EliminarEvento = (event) => {
         name={"Eliminar_" + event.event.nombre_evento}
         style={{
           borderRadius: 4,
-          height: 51,
+          height: 35,
           backgroundColor: "#f00",
           fontSize: "16px",
           margin: "3px",
           textTransform: "none",
-          width: "110px",
+          width: "90px",
         }}
         onClick={handleClickOpen}
       >
