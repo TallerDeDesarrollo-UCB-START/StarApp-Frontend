@@ -34,7 +34,7 @@ export default function PhoneDialog({user}) {
         })
       .catch((response) => { 
         let message = BadRequests(response.status);
-        activeSnackbar("No se ha registrado el numero de teléfono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el número de teléfono, "+message, "error", ()=>{})
       });
   },[user])
   const activeSnackbar = (message, severity, afterClose)=>{
@@ -64,14 +64,16 @@ export default function PhoneDialog({user}) {
       <Dialog disableEscapeKeyDown="true" onBackdropClick="false" open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Completa tus Datos</DialogTitle>
         <DialogContent>
-          <DialogContentText>Por favor agrega tu número de teléfono para continuar con la navegación. </DialogContentText>
+          <DialogContentText>
+            Por favor agrega tu número de teléfono para continuar con la navegación
+          </DialogContentText>
           <TextField
             value = {NuevoTelefono}
             onChange = {(event)=>{setTelefono(event.target.value)}}
             autoFocus
             margin="dense"
             id="telefono"
-            label="Número de Contacto"
+            label="Numero de Contacto"
             type="text"
             placeholder="(+591) ********"
             fullWidth
