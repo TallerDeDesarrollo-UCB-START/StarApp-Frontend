@@ -10,6 +10,8 @@ import { Modal} from '@material-ui/core';
 import { useForm, /*SubmitHandler,*/ FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from "../../../shared/components/Button";
+import MyInputText from "../../../shared/components/InputText";
+
 const estados = [
     {value: 10, label: "CONCLUIDO", bool: false},
     {value: 20, label: "EN CURSO", bool: true}
@@ -124,31 +126,24 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     value={fechaInicio}
                                     onChange={onChangeFechaInicio}
                                     />
-                        <InputTexto type="text"
-                                    tituloLabel={"Nombre del Proyecto"}
-                                    placeHolder='Nombre del proyecto'
-                                    nameId="titulo"
-                                    value={titulo}
-                                    onChange={onChangeTitulo}
-                                    options={{required: true, maxLength: 50, trim: true, title:"Se requiere un nombre de Proyecto"}}
-                                    
-                                    />
-                        <InputTexto type="text"
-                                    placeHolder='Descripción'
-                                    tituloLabel={"Descripción"}
-                                    nameId="descripcion"
-                                    value={descripcion}
-                                    onChange={onChangeDescrip}
-                                    options={{maxLength: 500}}
-                                    />
-                        <InputTexto type="text"
-                                    tituloLabel={"Objetivo"}
-                                    nameId="objetivo"
-                                    placeHolder='Objetivo'
-                                    value={objetivo}
-                                    onChange={onChangeObjetivo}
-                                    options={{maxLength: 100}}
-                                    />
+                        <MyInputText
+                            id="titulo"
+                            value={titulo}
+                            onChange={onChangeTitulo}
+                            placeholder='Nombre del proyecto'
+                            />
+                        <MyInputText
+                            id="descripcion"
+                            value={descripcion}
+                            onChange={onChangeDescrip}
+                            placeholder='Descripción'
+                            />
+                        <MyInputText
+                            id="objetivo"
+                            value={objetivo}
+                            onChange={onChangeObjetivo}
+                            placeholder='Objetivo'
+                            />
                         <DynamicDropdown titulo="Lideres"
                                         elements={lideres}
                                         value={lider}
@@ -179,13 +174,12 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     onChange={onChangeInfoAd}
                                     options={{maxLength: 300}}
                                     />
-                        <InputTexto type="text" 
-                                    tituloLabel="Imagen por Link"
-                                    nameId="image_url"
-                                    name="image" 
-                                    value={url_imagen}
-                                    onChange={onChangeImagenUrl}
-                                    />
+                        <MyInputText
+                            id="image_url"
+                            value={url_imagen}
+                            onChange={onChangeImagenUrl}
+                            placeholder='Imagen por Link'
+                            />
                         <div className="btn-crear-container">
                             <MyButton onClick={methods.handleSubmit(onSubmit)} className="default">
                                 CREAR PROYECTO

@@ -28,6 +28,7 @@ import Routes from "../routes/Routes";
 import { useHistory } from "react-router-dom";
 import MyButton from "../shared/components/Button";
 import MySelect from "../shared/components/Select";
+import MyInputText from "../shared/components/InputText";
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -699,14 +700,13 @@ class EventsListClass extends Component {
             </div>
 
             <form className="FormularioCrearEvento">
-              <TextField
-                label="Nombre del evento *"
-                placeholder="Nombre del evento"
-                name="nombre_evento"
-                className="nombreEventoCrear textInput"
-                type="text"
-                onChange={this.handleChange}
-              />
+            <MyInputText
+              label="Nombre del evento *"
+              className="nombreEventoCrear textInput"
+              name="nombre_evento"
+              onChange={this.handleChange}
+            />
+              
 
               <br></br>
 
@@ -749,12 +749,10 @@ class EventsListClass extends Component {
                 </MenuItem>
               </MySelect>
           
-              <TextField
+              <MyInputText
                 label="Lugar"
                 className="LugarEventoCrear textInput"
-                placeholder="Lugar"
                 name="lugar_evento"
-                type="text"
                 onChange={this.handleChange}
               />
 

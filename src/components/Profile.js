@@ -21,6 +21,7 @@ import SnackbarMessage from "../components/templates/SnackbarMessage";
 import BadRequests from "./redirect status/BadRequests";
 import MyButton from "../shared/components/Button";
 import MySelect from "../shared/components/Select";
+import MyInputText from "../shared/components/InputText";
 
 const { getCountries } = require("country-list-spanish");
 
@@ -412,28 +413,27 @@ const Profile = ({sessionData}) => {
           </MySelect>
           <br />
           <label>Profesión u Oficio</label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.carrera}
-            onChange={handleInputChange}
-            placeholder="Profesión u Oficio"
-            name="carrera"
-            id="carrera"
-            type="text"
-          />
+            <MyInputText
+              name="carrera"
+              className={classNamees.intputs}
+              value={datosEdit.carrera}
+              id="carrera"
+              placeholder="Profesión u Oficio"
+              onChange={handleInputChange}
+            />
           <br></br>
 
           <label>Ciudad de residencia</label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.ciudad_de_recidencia}
-            onChange={handleInputChange}
-            placeholder="Ciudad de residencia"
-            name="ciudad_de_recidencia"
-            id="ciudad_de_recidencia"
-            type="text"
-          />
+          <MyInputText
+              name="ciudad_de_recidencia"
+              className={classNamees.intputs}
+              value={datosEdit.ciudad_de_recidencia}
+              id="ciudad_de_recidencia"
+              placeholder="Ciudad de residencia"
+              onChange={handleInputChange}
+            />
           <br></br>
+
           <MySelect
             name="pais_de_recidencia"
             value={datosEdit.pais_de_recidencia}
@@ -475,36 +475,33 @@ const Profile = ({sessionData}) => {
           <span className={classNamees.titulos} style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}>
             Contacto de emergencia:
           </span>
-          
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.nombre_contacto_de_emergencia}
-            onChange={handleInputChange}
-            placeholder="Nombre de contacto de emergencia"
-            name="nombre_contacto_de_emergencia"
-            id="nombre_contacto_de_emergencia"
-            type="text"
-          />
-          
-          <input
+
+          <MyInputText
+              name="nombre_contacto_de_emergencia"
+              className={classNamees.intputs}
+              value={datosEdit.nombre_contacto_de_emergencia}
+              id="nombre_contacto_de_emergencia"
+              onChange={handleInputChange}
+              placeholder="Nombre de contacto de emergencia"
+            />
+          <br></br>
+          <MyInputText
+            name="relacion_contacto_de_emergencia"
+            id="relacion_contacto_de_emergencia"
             className={classNamees.intputs}
             value={datosEdit.relacion_contacto_de_emergencia}
             onChange={handleInputChange}
             placeholder="Relación de contacto de emergencia"
-            name="relacion_contacto_de_emergencia"
-            id="relacion_contacto_de_emergencia"
-            type="text"
-          />
-          
-          <input
+            />
+          <br></br>
+          <MyInputText
+            name="numero_contacto_de_emergencia"
+            id="numero_contacto_de_emergencia"
             className={classNamees.intputs}
             value={datosEdit.numero_contacto_de_emergencia}
             onChange={handleInputChange}
             placeholder="Número de contacto de emergencia"
-            name="numero_contacto_de_emergencia"
-            id="numero_contacto_de_emergencia"
-            type="text"
-          />
+            />
           <br></br>
           <label className={classNamees.titulos} 
             style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}

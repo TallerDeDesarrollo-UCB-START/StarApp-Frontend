@@ -9,6 +9,7 @@ import { Modal } from '@material-ui/core';
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from '../../../shared/components/Button'
+import MyInputText from "../../../shared/components/InputText";
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
 
@@ -167,31 +168,26 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     onChange={onChangeFechaFin}
                                     />
                         {/*NOTE: TITULO*/}
-                        <InputTexto type="text"
-                                    tituloLabel={"Nombre del Proyecto"}
-                                    placeHolder="Nombre del Proyecto"
-                                    nameId="titulo"
-                                    value={titulo}
-                                    onChange={onChangeTitulo}
-                                    options={{required: true}}
-                                    />
+                        <MyInputText
+                            id="titulo"
+                            value={titulo}
+                            onChange={onChangeTitulo}
+                            placeholder="Nombre del Proyecto"
+                            />
                         {/*NOTE: DESCRIPCION*/}
-                        <InputTexto type="text"
-                                    tituloLabel={"Descripción"}
-                                    placeHolder="Descripción"
-                                    nameId="descripcion"
-                                    value={descripcion}
-                                    onChange={onChangeDescrip}
-                                    options={{required: true}}
-                                    />
+                        <MyInputText
+                            id="descripcion"
+                            value={descripcion}
+                            onChange={onChangeDescrip}
+                            placeholder="Descripción"
+                            />
                         {/*NOTE: OBJETIVO*/}
-                        <InputTexto type="text"
-                                    tituloLabel={"Objetivo"}
-                                    placeHolder="Objetivo"
-                                    nameId="objetivo"
-                                    value={objetivo}
-                                    onChange={onChangeObjetivo}
-                                    />
+                        <MyInputText
+                            id="objetivo"
+                            value={objetivo}
+                            onChange={onChangeObjetivo}
+                            placeholder="Objetivo"
+                            />
                         {/*NOTE: Dropwdown LIDER*/}
                         <DynamicDropdown titulo="Lideres"
                                         elements={lideres}
@@ -215,13 +211,12 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                         onChange={onChangeEstado}
                                         idField={'value'}
                                         labelField={'label'}/>
-    
-                        <InputTexto type="text" 
-                                    tituloLabel="Imagen por Link"
-                                    nameId="url_imagen" 
-                                    value={url_imagen}
-                                    onChange={onChangeImagenUrl}
-                                    />
+                        <MyInputText
+                            id="url_imagen"
+                            value={url_imagen}
+                            onChange={onChangeImagenUrl}
+                            placeholder="Imagen por Link"
+                            />
                         <div className="btn-crear-container">
                             <MyButton className="default" onClick={methods.handleSubmit(onSubmit)}>
                                 GUARDAR CAMBIOS

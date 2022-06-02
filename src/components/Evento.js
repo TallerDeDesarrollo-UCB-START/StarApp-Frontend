@@ -12,6 +12,7 @@ import ParticipantesEventosBtn from "./ParticipantesEventosBtn";
 import EventoImagen from "../assets/event_picture.png";
 import MyButton from "../shared/components/Button";
 import MySelect from "../shared/components/Select";
+import MyInputText from "../shared/components/InputText";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -378,16 +379,13 @@ class Evento extends Component {
             <strong>Editar Evento</strong>
           </div>
           <form className="formularioEdicionEvento">
-            <TextField
+            <MyInputText
               label="Nombre del evento *"
               name="nombre_evento"
               className="nombreEventoEdicion textInput"
-              type="text"
               value={this.state.formEditado["nombre_evento"]}
               onChange={this.handleChange}
-            />
-
-            <br></br>
+            />  
 
             <TextField
               id="filled-multiline-flexible"
@@ -427,12 +425,10 @@ class Evento extends Component {
                 Virtual
               </MenuItem>
             </MySelect>
-
-            <TextField
+            <MyInputText
               label="Lugar"
               className="LugarEventoEdicion textInput"
               name="lugar_evento"
-              type="text"
               value={this.state.formEditado["lugar_evento"]}
               onChange={this.handleChange}
             />
