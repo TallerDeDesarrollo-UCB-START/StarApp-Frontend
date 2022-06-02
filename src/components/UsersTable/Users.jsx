@@ -225,7 +225,7 @@ function Users({sessionData}) {
         }
         let message = BadRequests(error.response.status);
         activeSnackbar(
-          "No se pudo recuperar los usuarios, "+message,
+          "No se pudo recuperar los usuarios. "+message,
           "error",
           () => {}
         );

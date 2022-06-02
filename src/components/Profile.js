@@ -601,7 +601,7 @@ const Profile = ({sessionData}) => {
                 <input
                   checked={datosEdit.intereses.includes("Educacion")}
                   onChange={handleChange}
-                  value="Educacion"
+                  value="Educación"
                   name="intereses"
                   id="educacionCheck"
                   type="checkbox"
