@@ -61,7 +61,7 @@ const EventosProyecto = ({ id, title }) => {
         .catch((error) => {
           const message = BadRequests(error.response.status);
           activeSnackbar(
-            "No se ha podido enviar los eventos de proyecto, "+message,
+            "No se enviarón los eventos de proyecto. "+message,
             "error",
             () => {}
           );

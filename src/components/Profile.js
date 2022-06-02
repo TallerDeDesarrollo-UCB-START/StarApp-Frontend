@@ -231,7 +231,7 @@ const Profile = ({sessionData}) => {
       })
       .catch((error) => {
         let message = BadRequests(error.response.status);
-        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el numero de teléfono, "+message, "error", ()=>{})
       });
   };
   var peticionPut = (asignaciones) => {
@@ -242,7 +242,7 @@ const Profile = ({sessionData}) => {
       // })
       .catch((error) => {
         let message = BadRequests(error.response.status);
-        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el numero de teléfono, "+message, "error", ()=>{})
       });
   };
   
@@ -465,7 +465,7 @@ const Profile = ({sessionData}) => {
             value={datosEdit.telefono}
             disabled
             style={{background:"transparent"}}
-            placeholder="Telefono"
+            placeholder="Teléfono"
             name="telefono"
             id="telefono"
             type="text"
@@ -601,7 +601,7 @@ const Profile = ({sessionData}) => {
                 <input
                   checked={datosEdit.intereses.includes("Educacion")}
                   onChange={handleChange}
-                  value="Educacion"
+                  value="Educación"
                   name="intereses"
                   id="educacionCheck"
                   type="checkbox"
