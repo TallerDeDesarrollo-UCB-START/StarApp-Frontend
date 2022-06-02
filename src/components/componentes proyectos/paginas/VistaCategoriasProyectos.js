@@ -59,7 +59,7 @@ function VistaCategoriasProyectos() {
             } catch (error) {
                 const message = BadRequests(404);
                 activeSnackbar(
-                  "No se pudo encontrar los proyectos. "+message,
+                    "No se encontraron los proyectos. "+message,
                   "error",
                   () => {});
             }

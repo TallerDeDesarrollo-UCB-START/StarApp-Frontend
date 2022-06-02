@@ -62,7 +62,7 @@ const ProyectosProximos = ({ title }) => {
           console.log(error)
           const message = BadRequests(error.response.status);
           activeSnackbar(
-            "No se pudo encontrar los proyectos, "+message,
+            "No se encontraron los proyectos. "+message,
             "error",
             () => {}
           );
