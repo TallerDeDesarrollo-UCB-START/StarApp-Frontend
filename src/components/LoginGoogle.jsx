@@ -33,13 +33,9 @@ const   OnSubmit = async (values) => {
               sessionStorage.setItem("jwt", values.credential.accessToken);
               sessionStorage.setItem("id", id_auth);
               window.location.href = `/`;
-              //setActiveProgressBar(false)
-              //activeSnackbar("Se ha registrado el usuario correctamente.", "success", ()=>{history.push(`/login`)})
             }
           })
           .catch((response) => {
-            //setActiveProgressBar(false)
-            //activeSnackbar(`${response}`, "error", ()=>{window.location.reload()})
             if (response.message == "Network Error"){
               RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
             }
@@ -49,8 +45,6 @@ const   OnSubmit = async (values) => {
       }
     }) 
     .catch((response) => {
-      //setActiveProgressBar(false)
-      //activeSnackbar(`El correo: ${values.email} ya ha sido registrado.`, "error", ()=>{window.location.reload()})
       const body = {
         email: bodyAuth.email,
         tipo: "google",
@@ -63,8 +57,6 @@ const   OnSubmit = async (values) => {
           const id_auth = response.data.id;
           sessionStorage.setItem("jwt", jwt);
           sessionStorage.setItem("id", id_auth);
-          //debugger;
-          //setActiveProgressBar(false);
           window.location.href = `/`;
         }
       })
@@ -75,7 +67,6 @@ const   OnSubmit = async (values) => {
         console.log(error);
         throw error;
       });
-      //window.location.reload()
     })
 }
 
