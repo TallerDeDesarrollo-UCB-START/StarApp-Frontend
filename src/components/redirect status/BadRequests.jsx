@@ -2,7 +2,7 @@ const BadRequests = (status) => {
     let message = "Sucedio un error.";
     switch (status) {
         case 400:
-            message = "El servidor intento responder una solicitud inválida.";
+            message = "El servidor intentó responder una solicitud inválida.";
             break;
         case 401:
             message = "Acceso no autorizado se requiere una autentificación.";
@@ -11,7 +11,7 @@ const BadRequests = (status) => {
             message = "No cuenta con recursos para obtener el contenido.";
             break;
         case 404:
-            message = "El servidor no hallo el contenido solicitado.";
+            message = "No se encuentra el contenido solicitado.";
             break;
         case 405:
             message = "Método deshabilitado por el servidor.";

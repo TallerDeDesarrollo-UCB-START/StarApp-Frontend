@@ -48,7 +48,7 @@ const EliminarEvento = (event) => {
       isEventError = true
       let message = BadRequests(error.response.status);
       activeSnackbar(
-          "No se pudo eliminar el evento, "+message,
+          "No se pudo eliminar el evento. "+message,
           "error",
           () => {}
       );

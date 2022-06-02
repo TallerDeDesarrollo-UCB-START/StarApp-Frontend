@@ -17,7 +17,7 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
-    margin: "150px 0",
+    margin: "100px 0",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
@@ -65,13 +65,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "700 !important",
     fontStyle: "normal",
     lineHeight: "31px",
-    marginLeft: "5%",
+    marginLeft: "4%",
+    // marginBottom: "5px",
   },
   fontSize12: {
     marginTop: "10px",
     fontSize: 12,
     fontFamily: "'DM Sans', sans-serif !important",
     color: "#545454",
+    marginLeft: "4%"
   },
   preguntaIni: {
     marginTop: "10px",
@@ -107,7 +109,7 @@ const RegisterForm = () => {
       errors.lastname = "Apellido debe contener solo letras y debe ser menor a 50 caracteres";
     }
     if (phoneValue.replace(/\s+/g, '').length < 7) {
-      errors.phoneValue = "Telefono requerido";
+      errors.phoneValue = "Teléfono requerido";
     }
     if (!validPassword.test(values.password)) {
       errors.password = "La contraseña debe tener mínimo 6 caracteres y 1 número";
@@ -211,7 +213,7 @@ const RegisterForm = () => {
           <Form onSubmit={onSubmit} validate={validate}>
             {({ handleSubmit }) => (
               <form onSubmit={handleSubmit} noValidate>
-                <div style={{ marginBottom: "15px" }}>
+                <div style={{ marginBottom: "25px" }}>
                   Regístrate para participar de proyectos y eventos
                 </div>
                 <div className={classes.nameContainer}>

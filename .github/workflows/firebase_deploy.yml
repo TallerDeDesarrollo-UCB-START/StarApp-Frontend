@@ -1,10 +1,11 @@
-name: Deploy to Firebase Hosting
+name: Deploy to Firebase
 'on':
   push:
     branches:
-      - develop
+      - master
     pull_request:
-      - develop
+      - master
+
 jobs:
   build_and_deploy:
     name: Deploy to develop
@@ -38,15 +39,15 @@ jobs:
       - run: npm test
 
 
-
   run_sonarqube:
     name: sonarqube
-    needs: [build_and_deploy]
+    needs: [build_and_deploy_develop]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          ref: 'develop'
       - uses: actions/setup-node@v2
         with:
           node-version: '15'

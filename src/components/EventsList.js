@@ -947,7 +947,7 @@ class EventsListClass extends Component {
                 </div>
                 <div>
                   <select
-                    label="Categoria *"
+                    label="Categoría *"
                     className="CategoriaEventoCrear textInput"
                     name="categoria"
                     onChange={this.handleChange}

@@ -34,7 +34,7 @@ export default function PhoneDialog({user}) {
         })
       .catch((response) => { 
         let message = BadRequests(response.status);
-        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el número de teléfono, "+message, "error", ()=>{})
       });
   },[user])
   const activeSnackbar = (message, severity, afterClose)=>{
@@ -51,11 +51,11 @@ export default function PhoneDialog({user}) {
     AxiosClient.put(`${urlBase}extended_form/${user}`, to_send)
       .then((response) => {
         if (response.status === 202)
-            activeSnackbar("Se ha registrado el numero de telefono", "success", ()=>{})
+            activeSnackbar("Se ha registrado el número de teléfono", "success", ()=>{})
         })
       .catch((error) => { 
         let message = BadRequests(error.response.status);
-        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el número de teléfono, "+message, "error", ()=>{})
       });
   };
 
@@ -65,7 +65,7 @@ export default function PhoneDialog({user}) {
         <DialogTitle id="form-dialog-title">Completa tus Datos</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Porfavor agrega tu número de teléfono para continuar con la navegación
+            Por favor agrega tu número de teléfono para continuar con la navegación
           </DialogContentText>
           <TextField
             value = {NuevoTelefono}
