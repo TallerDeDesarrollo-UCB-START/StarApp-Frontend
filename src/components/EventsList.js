@@ -784,16 +784,6 @@ class EventsListClass extends Component {
                             <a class="asr"
                             href={"eventos/" + event.id}
                               name={"Detalles_" + event.nombre_evento}
-                              style={{
-                      
-                                // borderRadius: 4,
-                                // height: 51,
-                                // backgroundColor: "#B3DA3F",
-                                // fontSize: "16px",
-                                // width: "110px",
-                                // margin: "3px",
-                                // style:""
-                              }}
                             >
                               Detalles
                             </a>
@@ -803,16 +793,6 @@ class EventsListClass extends Component {
                             <a class="asr"
                             href={"eventos/" + event.id}
                               name={"Detalles_" + event.nombre_evento}
-                              style={{
-                      
-                                // borderRadius: 4,
-                                // height: 51,
-                                // backgroundColor: "#B3DA3F",
-                                // fontSize: "16px",
-                                // width: "110px",
-                                // margin: "3px",
-                                // style:""
-                              }}
                             >
                             
                             
