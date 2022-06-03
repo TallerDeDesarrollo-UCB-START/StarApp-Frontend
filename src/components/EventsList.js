@@ -11,20 +11,7 @@ import EliminarEvento from "./EliminarEvento";
 import Typography from "@material-ui/core/Typography";
 import { CardHeader } from "@material-ui/core/";
 import { CardContent, CardMedia } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBoxOpen,
-  faInbox,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import GoogleCalendar from "./googleCalendar.jsx";
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
-import { withRouter } from "react-router";
-import Routes from "../routes/Routes";
 import { useHistory } from "react-router-dom";
 import MyButton from "../shared/components/Button";
 import MySelect from "../shared/components/Select";
