@@ -57,8 +57,7 @@ const EventosProximos = ({ id, title }) => {
   const [events, setEvents] = useState([]);
   const classes = useStyles();
   const baseURL = `${process.env.REACT_APP_API}sesion/${id}/get_my_eventos`;
-  console.log("efafwafadaf")
-  console.log(baseURL)
+
   useEffect(
     () =>
       axios
