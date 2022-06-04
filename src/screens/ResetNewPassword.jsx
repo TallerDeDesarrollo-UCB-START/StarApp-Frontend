@@ -1,9 +1,10 @@
 import React from "react";
-import { makeStyles, Typography, Button, TextField } from "@material-ui/core";
+import { makeStyles, Typography, TextField } from "@material-ui/core";
 import axios from "axios";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 import { useHistory } from "react-router-dom";
 import RedirectErrorPage from "../components/redirect status/RedirectErrorPage";
+import MyButton from "../shared/components/Button";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -88,15 +89,9 @@ export const ResetNewPassword = () => {
         onChange={(event) => setConfirmPassword(event.target.value)}
         style={{ width: "300px" }}
       />
-      <Button
-        disabled={password!==confirmPassword || password===""}
-        variant="contained"
-        color="primary"
-        style={{ margin: "20px 0" }}
-        onClick={() => sendPassword()}
-      >
+      <MyButton className="default" onClick={() => sendPassword()} disabled={password!==confirmPassword || password===""}>
         Confirmar
-      </Button>
+      </MyButton>
       <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
     </div>
   );

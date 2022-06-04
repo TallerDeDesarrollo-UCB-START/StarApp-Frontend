@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
 import { makeStyles, Typography, Button } from '@material-ui/core'
+import MyButton from '../shared/components/Button'
 
 const useStyles = makeStyles((theme) => ({
     root:{
@@ -36,13 +37,9 @@ const ValidateView = () => {
             <Typography style={{color:"Black", marginBottom:"50px", paddingLeft:"0" }} variant="h1">
                 ¡Tu cuenta ha sido validada!
             </Typography>
-            <Button 
-                variant = "contained" 
-                style={{color:"Black", marginBottom:"20px"}}
-                onClick={()=>window.location.href="/login"}
-                >
+            <MyButton className="default" onClick={()=>window.location.href="/login"} >
                 Iniciar Sesión
-                </Button>
+            </MyButton>
             <Typography style={{fontSize:"18px"}} color="textSecondary">
                 Ahora que tu cuenta ha sido validada puedes iniciar sesión
             </Typography>

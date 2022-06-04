@@ -75,12 +75,6 @@ export default function TabsProfile({ getDataProfile, handleOpenprop, sessionDat
           </Tabs>
         </Paper>
       </AppBar>
-      
-      {/* <TabPanel  value={value} index={0} style={{background: "#F2F2F2"}}>
-        <DatosPersonales 
-        getDataProfile={getDataProfile}
-        handleOpenprop={handleOpenprop}/>
-      </TabPanel> */}
       <TabPanel value={value} index={0}>
         <EventosProximos id={sessionData.id} title={false}/>
       </TabPanel>

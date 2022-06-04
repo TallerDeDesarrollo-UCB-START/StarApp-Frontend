@@ -6,6 +6,7 @@ import BadRequests from "../components/redirect status/BadRequests";
 //import ErrorPage from "../components/redirect status/ErrorPage";
 import { useHistory } from "react-router-dom";
 import RedirectErrorPage from "../components/redirect status/RedirectErrorPage";
+import MyButton from "../shared/components/Button";
 //import BadRequests from "../components/redirect status/ErrorPage";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,14 +76,9 @@ const ResetPassword = () => {
         onChange={(event) => setEmail(event.target.value)}
         style={{width:"300px"}}
       />
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ margin: "20px 0" }}
-        onClick={() => sendEmail()}
-      >
+      <MyButton className="default" onClick={() => sendEmail()}>
         Enviar Correo
-      </Button>
+      </MyButton>
       <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
     </div>
   );

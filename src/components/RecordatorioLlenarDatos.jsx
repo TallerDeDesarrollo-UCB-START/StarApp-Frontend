@@ -98,16 +98,18 @@ const RecordatorioLlenarDatos=()=>{
         
       }, [datos.id, islogged]);
       
-      return(  
-            <div className ={(open)?classes.recordatorioStyle:classes.noneRecordatorioStyle}>
-                <ErrorIcon className = {classes.marginRL5} color="error"/>
-                <span>Completa tus datos</span>
-                <Button className = {classes.closeIco} color="inherit" size="small" 
-                    onClick={() => history.push(islogged ? routes[3].path : routes[4].path)}> completar  </Button>
-                <IconButton className = {classes.closeIco} size="small" aria-label="close" color="inherit" onClick={handleClose}>
-                    <CloseIcon fontSize="small" />
-                </IconButton>
-            </div>        
+      return(
+            <>
+                <div className ={(open)?classes.recordatorioStyle:classes.recordatorioStyle}>
+                    <ErrorIcon className = {classes.marginRL5} color="error"/>
+                    <span>Completa tus datos</span>
+                    <Button className = {classes.closeIco} color="inherit" size="small" 
+                        onClick={() => history.push(islogged ? routes[3].path : routes[4].path)}> completar  </Button>
+                    <IconButton className = {classes.closeIco} size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                        <CloseIcon fontSize="small" />
+                    </IconButton>
+                </div>
+            </>
         )
 }
 export default RecordatorioLlenarDatos;

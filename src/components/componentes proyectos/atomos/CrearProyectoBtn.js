@@ -1,22 +1,11 @@
-// Componentes:
-import './CrearProyectoBtn.css';
-// Librerias-Paquetes-Estilos:
-import { Button } from '@material-ui/core';
-import {withStyles} from "@material-ui/core/styles";
+import MyButton from '../../../shared/components/Button';
 
 function CrearProyectoBtn({onActivarForm}) {
-    return (
-        <CrearButton name='crearProyecto' variant="contained" onClick={onActivarForm}>
-            Crear proyecto
-        </CrearButton>
-    )
+	return (
+		<MyButton className="default" onClick={onActivarForm}>
+			Crear proyecto
+		</MyButton>
+	)
 }
-
-const CrearButton = withStyles((theme) => ({
-    root: {
-      color: "#FFFFFF",
-      backgroundColor: "#269BD5",
-    },
-}))(Button);
 
 export default CrearProyectoBtn

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Typography, useMediaQuery, Button } from "@material-ui/core";
+import { Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-//import CardEvento from './CardEvento'
 import axios from "axios";
 import ResumedCardProyect from "../organismos/ResumedCardProyect";
 import {useHistory} from "react-router-dom";
 import redirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
+import MyButton from "../../../shared/components/Button";
+
 const useStyles = makeStyles((theme) => ({
   root_container: {
     margin: "40px 10px",
@@ -105,14 +106,12 @@ const ProyectosProximos = ({ title }) => {
             registrado a alguno de nuestros proyectos, aparecerán en tu página de
             inicio.
           </Typography>
-          <Button
+          <MyButton
             onClick={() => (window.location.href = "/projects/categories")}
-            variant="contained"
-            color="primary"
-            style={{ margin: "20px 0" }}
+            className="default"
           >
             Explorar proyectos
-          </Button>
+          </MyButton>
         </div>
       )}
       <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />

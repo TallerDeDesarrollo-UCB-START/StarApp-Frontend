@@ -12,6 +12,7 @@ import {
   Badge,
 } from "@material-ui/core/";
 import axios from "axios";
+import MySwitch from "../shared/components/Switch";
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -76,8 +77,6 @@ export default function ProfileImage({ getDataProfile, setDataProfile, sessionDa
 
   }
 
-  const handleChange = () => {};
-
   return (
     <Grid>
       <div className={smallScreen? classes.small: classes.large}>
@@ -119,23 +118,13 @@ export default function ProfileImage({ getDataProfile, setDataProfile, sessionDa
             container
             justifyContent={smallScreen? "flex-start": "flex-end"}
           >
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={
-                    getDataProfile.estado_de_disponibilidad === "disponible"
-                  }
-                  onClick={sendAvailable}
-                  onChange={handleChange}
-                  color="secondary"
-                />
-              }
-              label={`${
+            <MySwitch
+              checked={
                 getDataProfile.estado_de_disponibilidad === "disponible"
-                  ? "Estoy disponible"
-                  : "No disponible"
-              }`}
-            />
+              }
+              onClick={sendAvailable}
+            ></MySwitch>
+            
           </Grid>
         </Grid>
       </Box>

@@ -1,12 +1,10 @@
 import React, {useState} from 'react'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
 import { makeStyles} from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import {useMediaQuery} from '@material-ui/core'
-
+import MySelect from '../../shared/components/Select'
+import MenuItem from "@mui/material/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
   container:{
@@ -60,24 +58,12 @@ const SearchByField = ({data, setData, originalData}) => {
     }
     return (
         <section className={(smallScreen)?classes.container:classes.smallContainer}>
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="outlined-age-native-simple">Criterio</InputLabel>
-              <Select
-                native
-                value={fieldSelected}
-                onChange={handleChange}
-                label="Buscar por"
-                inputProps={{
-                  name: 'searchBy',
-                  id: 'outlined-age-native-simple',
-                }}
-              >
-                <option aria-label="Ninguno" value="" />
+            <MySelect id="outlined-age-native-simple" placeholder="Criterio" value={fieldSelected} onChange={handleChange}>
+                <MenuItem value="">Ninguno</MenuItem>
                 {Object.keys(fields).map((field)=>(
-                    <option key={field} value={field}>{field}</option>
+                    <MenuItem value={field}>{field}</MenuItem>
                 ))}
-              </Select>
-            </FormControl>
+            </MySelect>
             <Autocomplete
                 className={classes.searchField}
                 id={idSearchInput}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { Button, Modal } from "@material-ui/core";
+import { Button, MenuItem, Modal } from "@material-ui/core";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,6 +19,9 @@ import DialogConfirm from "./DialogConfirm"
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 import BadRequests from "./redirect status/BadRequests";
+import MyButton from "../shared/components/Button";
+import MySelect from "../shared/components/Select";
+import MyInputText from "../shared/components/InputText";
 
 const { getCountries } = require("country-list-spanish");
 
@@ -397,68 +400,62 @@ const Profile = ({sessionData}) => {
           />
           
           
-          <label>Ocupación</label>
-          <select
+          <label>Ocupación</label> 
+          <br />
+          <MySelect
             name="ocupacion"
-            placeholder="Ocupación"
             value={datosEdit.ocupacion}
             onChange={handleInputChange}
-            className={classNamees.intputs}
           >
-            {/* <option hidden selected>Ocupación</option> */}
-            <option value="Colegio">Colegio</option>
-            <option value="Universidad">Universidad</option>
-            <option value="Trabajando">Trabajando</option>
-          </select>
-
+            <MenuItem value="Colegio">Colegio</MenuItem>
+            <MenuItem value="Universidad">Universidad</MenuItem>
+            <MenuItem value="Trabajando">Trabajando</MenuItem>
+          </MySelect>
+          <br />
           <label>Profesión u Oficio</label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.carrera}
-            onChange={handleInputChange}
-            placeholder="Profesión u Oficio"
-            name="carrera"
-            id="carrera"
-            type="text"
-          />
+            <MyInputText
+              name="carrera"
+              className={classNamees.intputs}
+              value={datosEdit.carrera}
+              id="carrera"
+              placeholder="Profesión u Oficio"
+              onChange={handleInputChange}
+            />
           <br></br>
 
           <label>Ciudad de residencia</label>
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.ciudad_de_recidencia}
-            onChange={handleInputChange}
-            placeholder="Ciudad de residencia"
-            name="ciudad_de_recidencia"
-            id="ciudad_de_recidencia"
-            type="text"
-          />
+          <MyInputText
+              name="ciudad_de_recidencia"
+              className={classNamees.intputs}
+              value={datosEdit.ciudad_de_recidencia}
+              id="ciudad_de_recidencia"
+              placeholder="Ciudad de residencia"
+              onChange={handleInputChange}
+            />
           <br></br>
 
-          
-          <select
+          <MySelect
             name="pais_de_recidencia"
             value={datosEdit.pais_de_recidencia}
             onChange={handleInputChange}
-            className={classNamees.intputs}
           >
-            <option hidden selected>País</option>
+            <MenuItem hidden selected>País</MenuItem>
             {getCountries().map(pais => (
-              <option key={pais} value={pais}>{pais}</option>
+              <MenuItem key={pais} value={pais}>{pais}</MenuItem>
             ))}
-          </select>
-          <select
+          </MySelect>
+          <br />
+          <MySelect
             name="genero"
             value={datosEdit.genero}
             onChange={handleInputChange}
-            className={classNamees.intputs}
           >
-            <option hidden selected>Género</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
-            <option value="Otro">Otro</option>
-            <option value="Prefiero no decirlo">Prefiero no decirlo</option>
-          </select>
+            <MenuItem hidden selected>Género</MenuItem>
+            <MenuItem value="Masculino">Masculino</MenuItem>
+            <MenuItem value="Femenino">Femenino</MenuItem>
+            <MenuItem value="Otro">Otro</MenuItem>
+            <MenuItem value="Prefiero no decirlo">Prefiero no decirlo</MenuItem>
+          </MySelect>
           
           <input
             className={classNamees.intputs}
@@ -478,36 +475,33 @@ const Profile = ({sessionData}) => {
           <span className={classNamees.titulos} style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}>
             Contacto de emergencia:
           </span>
-          
-          <input
-            className={classNamees.intputs}
-            value={datosEdit.nombre_contacto_de_emergencia}
-            onChange={handleInputChange}
-            placeholder="Nombre de contacto de emergencia"
-            name="nombre_contacto_de_emergencia"
-            id="nombre_contacto_de_emergencia"
-            type="text"
-          />
-          
-          <input
+
+          <MyInputText
+              name="nombre_contacto_de_emergencia"
+              className={classNamees.intputs}
+              value={datosEdit.nombre_contacto_de_emergencia}
+              id="nombre_contacto_de_emergencia"
+              onChange={handleInputChange}
+              placeholder="Nombre de contacto de emergencia"
+            />
+          <br></br>
+          <MyInputText
+            name="relacion_contacto_de_emergencia"
+            id="relacion_contacto_de_emergencia"
             className={classNamees.intputs}
             value={datosEdit.relacion_contacto_de_emergencia}
             onChange={handleInputChange}
             placeholder="Relación de contacto de emergencia"
-            name="relacion_contacto_de_emergencia"
-            id="relacion_contacto_de_emergencia"
-            type="text"
-          />
-          
-          <input
+            />
+          <br></br>
+          <MyInputText
+            name="numero_contacto_de_emergencia"
+            id="numero_contacto_de_emergencia"
             className={classNamees.intputs}
             value={datosEdit.numero_contacto_de_emergencia}
             onChange={handleInputChange}
             placeholder="Número de contacto de emergencia"
-            name="numero_contacto_de_emergencia"
-            id="numero_contacto_de_emergencia"
-            type="text"
-          />
+            />
           <br></br>
           <label className={classNamees.titulos} 
             style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}
@@ -778,15 +772,9 @@ const Profile = ({sessionData}) => {
         </form>
       </div>
       <div className={classNamees.containerbuttons}>
-        <Button
-          onClick={sendForm}
-          color="primary"
-          className={classNamees.buttons}
-          variant="contained"
-          borderradius="20%"
-        >
+        <MyButton onClick={sendForm} className="default">
           Guardar Cambios
-        </Button>
+        </MyButton>
         
         
       </div>
@@ -813,19 +801,10 @@ const Profile = ({sessionData}) => {
       <div>
         {location.pathname !== "/" && (
           <div className={classNamees.name}>
-            <div className={classNamees.userPanel}>
-              {smallScreen? <Typography variant="h2" style={{padding : "10px", textAlign: "center"}}>Cuenta</Typography>: "" }
-              <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
-              
-              <Chip
-                className ={smallScreen? classNamees.chipRootSmall: classNamees.chipRoot}
-                variant="outlined"
-                icon={<EditTwoToneIcon />}
-                label="Editar Perfil"
-                clickable
-                onClick={handleOpen}
-              />
-            </div>
+            {smallScreen? <Typography variant="h2" style={{padding : "10px"}}>Cuenta</Typography>: "" }
+            <ProfileImage getDataProfile={datosEdit} setDataProfile={setDatosEdit} sessionData={sessionData}/>
+            <MyButton className="edit" onClick={handleOpen}
+            />
             <ProfileCard getDataProfile={datosEdit} handleOpenprop={handleOpen} sessionData={sessionData}/>
             <Modal
               open={open}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography, useMediaQuery, Card, CardActions, CardContent, Button } from '@material-ui/core'
+import MyButton from '../../shared/components/Button'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -45,8 +46,10 @@ const LandingView = () => {
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.card_actions}>
-                    <Button variant="contained" color="primary" onClick={()=>window.location.href="/register"}>Únete a Start</Button>
-                    <Button style={{textTransform:"none", textDecorationLine:"underline"}} onClick={()=>window.location.href="/"}>Explora nuestros proyectos</Button>
+                    <MyButton className="default" onClick={()=>window.location.href="/register"}>
+                        Únete a Start
+                    </MyButton>
+                    <Button style={{textTransform:"none", textDecorationLine:"underline"}} onClick={()=>window.location.href="/projects/categories"}>Explora nuestros proyectos</Button>
                 </CardActions>
             </Card>
         </div>

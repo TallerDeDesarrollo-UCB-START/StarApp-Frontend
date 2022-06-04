@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,15 +7,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AxiosClient from "./AxiosClient";
 import SnackbarMessage from "./templates/SnackbarMessage"
-import { useHistory } from "react-router-dom";
-import redirectErrorPage from './redirect status/RedirectErrorPage';
 import BadRequests from './redirect status/BadRequests';
+import MyButton from '../shared/components/Button';
 const urlBase = process.env.REACT_APP_API
 
 export default function PhoneDialog({user}) {
   const [open, setOpen] = React.useState(false);
   const [NuevoTelefono, setTelefono]= React.useState("");
-  const history = useHistory();
   const [snackbar, setSnackbar] = React.useState({
     message:"",
     active:false,
@@ -80,9 +77,9 @@ export default function PhoneDialog({user}) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <MyButton onClick={handleClose} className="default">
             Registrar
-          </Button>
+          </MyButton>
         </DialogActions>
       </Dialog>
       <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>

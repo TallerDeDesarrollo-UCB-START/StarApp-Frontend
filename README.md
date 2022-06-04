@@ -122,7 +122,7 @@ Si está usando Bootstrap 4, necesitará usar Reactstrap v8
     - **componentes proyectos**: (ordenadas de mayor a menor tamaño o por jerarquia de componentes)
 
            - paginas: Este folder contiene las vistas de las páginas de proyectos.
-           - organismos: Este folder contiene como componentes principales un Body, su Header y otros componentes que sean bastante amplios, que sirven como parte del layout de cada página, dependiendo del rol en el caso de "ProyectosAdmins" y "ProyectosVoluntarios". También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios dependiendo del rol.
+           - organismos: Este folder contiene como componentes principales un Body, su AppStructure y otros componentes que sean bastante amplios, que sirven como parte del layout de cada página, dependiendo del rol en el caso de "ProyectosAdmins" y "ProyectosVoluntarios". También se tiene "PuertaPermisos" que gestiona los accesos a los usuarios dependiendo del rol.
            - moleculas: Este folder "hijos" de un organismo o a otras "moleculas" como ser los Banners de cada vista, el contenido de los mismos, los formularios de crear y editar, entre otros.
            - atomos: Este folder contiene los componentes más pequeños como ser los botones.
                (Esta division es algo subjetiva, sujeta al tamaño, dependencias y jerarquia de cada componente)
@@ -130,7 +130,7 @@ Si está usando Bootstrap 4, necesitará usar Reactstrap v8
     - **CrearEvento**: Este folder contiene el componente "crearEvento.jsx" y el estilo del componente.
     - **footer**: el footer inicial actualmente no usado
     - **Formulario-evento.component**: Este folder contiene los archivos para el componente del Formulario de Crear Evento, que también es reutilizado en el Formulario de Editar Evento.
-    - **Header**:
+    - **AppStructure**:
       - header.jsx: contiene el componente principal de header
     - **Home**:
       - Home.jsx: componente principal que contiene los demas componentes, home presenta LandingView si no se esta loggeado o EventosProximos en caso contrario

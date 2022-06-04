@@ -14,6 +14,8 @@ import SnackbarMessage from "../components/templates/SnackbarMessage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import LoginGoogle from "./LoginGoogle";
 import Typography from "@material-ui/core/Typography";
+import MyButton from "../shared/components/Button";
+import MyInputText from "../shared/components/InputText";
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
@@ -217,41 +219,23 @@ const RegisterForm = () => {
                   Regístrate para participar de proyectos y eventos
                 </div>
                 <div className={classes.nameContainer}>
-                  <Field
-                    style={{ width: "48%" }}
+                <MyInputText
                     name="username"
-                    type="text"
+                    className={classes.textField}
                     placeholder="Nombre *"
-                    className={classes.textField}
-                    component={TextField}
-                    variant="outlined"
-                    size="small"
-                    required
                   />
-
-                  <Field
-                    style={{ width: "48%" }}
+                <MyInputText
                     name="lastname"
-                    type="text"
-                    placeholder="Apellido *"
                     className={classes.textField}
-                    component={TextField}
-                    variant="outlined"
-                    size="small"
-                    required
+                    placeholder="Apellido *"
                   />
                 </div>
-                <Field
-                  fullWidth
-                  name="email"
-                  type="text"
-                  placeholder="Correo *"
-                  className={classes.textField}
-                  component={TextField}
-                  variant="outlined"
-                  size="small"
-                  required
-                />
+                <MyInputText
+                    name="email"
+                    className={classes.textField}
+                    placeholder="Correo *"
+                  />
+                
                 <div
                   style={{
                     display: "flex",
@@ -296,15 +280,9 @@ const RegisterForm = () => {
                   required
                 />
                 <div className={classes.buttonContainer}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.registerButton}
-                    type="submit"
-                    disabled={validateButton ? false : true}
-                  >
+                  <MyButton onClick={handleSubmit} className="default" disabled={validateButton ? false : true}>
                     Crea tu cuenta de start
-                  </Button>
+                  </MyButton>
                   <Typography variant="h6">
                     o
                   </Typography>           

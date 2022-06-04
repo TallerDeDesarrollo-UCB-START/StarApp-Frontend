@@ -14,6 +14,8 @@ import {
 } from "@material-ui/core";
 import { fields } from "./SearchByField";
 import MaskedInput from "react-text-mask";
+import MySelect from "../../shared/components/Select";
+import MySwitch from "../../shared/components/Switch";
 
 function TextMaskCustom(props) {
   const { inputRef, ...other } = props;
@@ -120,59 +122,49 @@ export function InputByCriteria({
       />
     ),
     Género: (
-      <FormControl variant="outlined">
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={newValue[fields[criteria]]}
-          onChange={(event) =>
-            setNewValue({ ...newValue, [fields[criteria]]: event.target.value })
-          }
-          label="Género"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem key="Masculino" value={"Masculino"}>
-            Masculino
-          </MenuItem>
-          <MenuItem key="Femenino" value={"Femenino"}>
-            Femenino
-          </MenuItem>
-          <MenuItem key="Otro" value={"Otro"}>
-            Otro
-          </MenuItem>
-          <MenuItem key="Prefiero" value={"Prefiero no decirlo"}>
-            Prefiero no decirlo
-          </MenuItem>
-        </Select>
-      </FormControl>
+      <MySelect
+        value={newValue[fields[criteria]]}
+        onChange={(event) =>
+          setNewValue({ ...newValue, [fields[criteria]]: event.target.value })
+        }
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem key="Masculino" value={"Masculino"}>
+          Masculino
+        </MenuItem>
+        <MenuItem key="Femenino" value={"Femenino"}>
+          Femenino
+        </MenuItem>
+        <MenuItem key="Otro" value={"Otro"}>
+          Otro
+        </MenuItem>
+        <MenuItem key="Prefiero" value={"Prefiero no decirlo"}>
+          Prefiero no decirlo
+        </MenuItem>
+      </MySelect>
     ),
     Ocupación: (
-      <FormControl variant="outlined">
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={newValue[fields[criteria]]}
-          onChange={(event) =>
-            setNewValue({ ...newValue, [fields[criteria]]: event.target.value })
-          }
-          label="Ocupación"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem key="Colegio" value={"Colegio"}>
-            Colegio
-          </MenuItem>
-          <MenuItem key="Universidad" value={"Universidad"}>
-            Universidad
-          </MenuItem>
-          <MenuItem key="Trabajando" value={"Trabajando"}>
-            Trabajando
-          </MenuItem>
-        </Select>
-      </FormControl>
+      <MySelect
+        value={newValue[fields[criteria]]}
+        onChange={(event) =>
+          setNewValue({ ...newValue, [fields[criteria]]: event.target.value })
+        }
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem key="Colegio" value={"Colegio"}>
+          Colegio
+        </MenuItem>
+        <MenuItem key="Universidad" value={"Universidad"}>
+          Universidad
+        </MenuItem>
+        <MenuItem key="Trabajando" value={"Trabajando"}>
+          Trabajando
+        </MenuItem>
+      </MySelect>
     ),
     Carrera: rehusableTextField(),
     "Ciudad de Residencia": rehusableTextField(),
@@ -181,24 +173,17 @@ export function InputByCriteria({
     "Relación con Contacto": rehusableTextField(),
     "Número de contacto": rehusableTextField(),
     Disponibilidad: (
-      <FormControlLabel
-        control={
-          <Switch
-            checked={newValue[fields[criteria]] === "disponible"}
-            onChange={(event) =>
+      <MySwitch 
+        checked={newValue[fields[criteria]] === "disponible"} 
+        onClick={
+          (event) =>
               setNewValue({
                 ...newValue,
                 [fields[criteria]]: event.target.checked
                   ? "disponible"
                   : "no disponible",
               })
-            }
-            name="disponibilidad"
-            color="secondary"
-          />
-        }
-        label={newValue[fields[criteria]]}
-      />
+        }/> 
     ),
     Insignias: (
       <FormControl>

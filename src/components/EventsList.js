@@ -4,30 +4,18 @@ import axios from "axios";
 import { Container, Card, Modal, Button, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./EventsList.css";
-import Chip from "@material-ui/core/Chip";
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import TextField from "@mui/material/TextField";
-import { Snackbar } from "@material-ui/core";
+import { MenuItem, Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import EliminarEvento from "./EliminarEvento";
 import Typography from "@material-ui/core/Typography";
-import { Grid, Box, CardHeader } from "@material-ui/core/";
+import { CardHeader } from "@material-ui/core/";
 import { CardContent, CardMedia } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBoxOpen,
-  faInbox,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import GoogleCalendar from "./googleCalendar.jsx";
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
-import { withRouter } from "react-router";
-import Routes from "../routes/Routes";
 import { useHistory } from "react-router-dom";
+import MyButton from "../shared/components/Button";
+import MySelect from "../shared/components/Select";
+import MyInputText from "../shared/components/InputText";
 
 const url = process.env.REACT_APP_API;
 //const urlLocal = `http://localhost:5000/eventos`;
@@ -499,16 +487,9 @@ class EventsListClass extends Component {
           <Container className="container1">
             <div>
               <div className="Chip-Eventos">
-                <Chip
-                  style={{
-                    marginTop: "20px",
-                    left: "10px",
-                  }}
-                  variant="outlined"
-                  icon={<NavigateBeforeIcon />}
-                  label="Volver"
-                  clickable
+                <MyButton
                   onClick={() => window.history.back()}
+                  className="go-back"
                 />
               </div>
 
@@ -546,129 +527,46 @@ class EventsListClass extends Component {
 
               <div className="Menu-Bar-Evento">
                 <div className="header-filtro-eventos">
-                  <span
-                    style={{
-                      display:
-                        this.state.botonMostrarEventosArchivados === true
-                          ? "block"
-                          : "none",
-                    }}
-                    className="span-align"
-                  >
-                    Categoría:
-                  </span>
-
-                  <select
-                    style={{
-                      display: this.state.botonMostrarEventosArchivados
-                        ? "block"
-                        : "none",
-                    }}
+                  <MySelect
+                    placeholder="Categoría"
                     value={this.state.categoriaFiltrada}
-                    onChange={this.filterChangeHandler}
+                    onChange={this.state.botonMostrarEventosArchivados ? this.filterChangeHandler : this.filterPastEventsChangeHandler}
                   >
-                    {this.state.categorias.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
-
-                  <span
-                    style={{
-                      display:
-                        this.state.botonMostrarEventosArchivados === false
-                          ? "block"
-                          : "none",
-                    }}
-                    className="span-align"
-                  >
-                    Categoría:
-                  </span>
-
-                  <select
-                    style={{
-                      display:
-                        this.state.botonMostrarEventosArchivados === false
-                          ? "block"
-                          : "none",
-                    }}
-                    value={this.state.categoriaFiltrada}
-                    onChange={this.filterPastEventsChangeHandler}
-                  >
-                    {this.state.categorias.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
+                    {this.state.categorias.map((item) => (
+                      <MenuItem key={item} value={item}>
+                        {item}
+                      </MenuItem>
+                    ))}
+                  </MySelect>
                 </div>
 
                 <div
                   className="header-botones-eventos"
                   style={{ display: "flex" }}
                 >
-                  {rolUser !== "voluntario" ? (
-                    <Fragment>
-                      <Button
-                        name= "crear_evento"
-                        style={{
-                          borderRadius: 4,
-                          height: 51,
-                          backgroundColor: "#269BD5",
-                          fontSize: "16px",
-                          margin: "5px",
-                          padding: "2px",
-                          borderColor: "#269BD5",
-                        }}
-                        onClick={async () => await this.mostrarModalInsertar()}
-                      >
-                        CREAR EVENTO
-                      </Button>
-                      <Button
-                        style={{
-                          display: this.state.botonMostrarEventosArchivados
-                            ? "block"
-                            : "none",
-                          borderRadius: 4,
-                          height: 51,
-                          backgroundColor: "#3B3B3B",
-                          fontSize: "16px",
-                          margin: "5px",
-                          padding: "4px",
-                          borderColor: "#3B3B3B",
-                        }}
-                        onClick={async () => await this.getEventsArchivados()}
-                      >
-                        EVENTOS PASADOS
-                      </Button>
-                    </Fragment>
-                  ) : (
-                    <Fragment>
-                      <Button
-                        style={{
-                          display: this.state.botonMostrarEventosArchivados
-                            ? "block"
-                            : "none",
-
-                          borderRadius: 4,
-                          height: 51,
-                          backgroundColor: "#3B3B3B",
-                          fontSize: "16px",
-                          margin: "5px",
-                          padding: "4px",
-                          borderColor: "#3B3B3B",
-                        }}
-                        onClick={async () => await this.getEventsArchivados()}
-                      >
-                        Eventos Pasados
-                      </Button>
-                    </Fragment>
+                  {rolUser !== "voluntario" && (
+                    <MyButton onClick={async () => await this.mostrarModalInsertar()} className="default">
+                      CREAR EVENTO
+                    </MyButton>
                   )}
+                  <Button
+                    style={{
+                      display: this.state.botonMostrarEventosArchivados
+                        ? "block"
+                        : "none",
+
+                      borderRadius: 4,
+                      height: 51,
+                      backgroundColor: "#3B3B3B",
+                      fontSize: "16px",
+                      margin: "5px",
+                      padding: "4px",
+                      borderColor: "#3B3B3B",
+                    }}
+                    onClick={async () => await this.getEventsArchivados()}
+                  >
+                    Eventos Pasados
+                  </Button>
                   <Button
                     href="/eventos"
                     style={{
@@ -733,90 +631,20 @@ class EventsListClass extends Component {
 
                     <CardBody className="CardBody-Eventos">
                       <div class="btn-container-dus">
-                        {this.validarBotones(event) ? (
-                          <Button
-                            variant="contained"
-                            name={"participar_" + event.nombre_evento}
-                            onClick={async () => {
-                              await this.postParticipacion(event);
-                            }}
-                            style={{
-                              borderRadius: 4,
-                              height: 51,
-                              backgroundColor: "#269BD5",
-                              fontSize: "16px",
-                              margin: "3px",
-                              width: "110px",
-                              display:
-                                this.state.botonMostrarEventosArchivados === true
-                                  ? "block"
-                                  : "none",
-                            }}
-                          >
-                            {" "}
-                            Participar
-                          </Button>
+                        {this.validarBotones(event) && this.state.botonMostrarEventosArchivados ? (
+                          <MyButton onClick={async () => { await this.postParticipacion(event); }} className="default">
+                            ParticipaR
+                          </MyButton>
                         ) : (
-                          <Button
-                            name={"DejarParticipar_" + event.nombre_evento}
-                            onClick={async () => {
-                              await this.eliminarParticipacion(event);
-                            }}
-                            style={{
-                              color: "3B3B3B",
-                              borderRadius: 4,
-                              height: 51,
-                              fontSize: "13.5px",
-                              margin: "3px",
-                              width: "110px",
-                              display:
-                                this.state.botonMostrarEventosArchivados === true
-                                  ? "block"
-                                  : "none",
-                            }}
-                          >
-                            {" "}
+                          <MyButton className="leave" onClick={async () => { await this.eliminarParticipacion(event); }}>
                             Dejar de Participar
-                          </Button>
+                          </MyButton>
                         )}
-                        {rolUser !== "voluntario" ? (
-                          <Fragment>
-                            <Button
-                              name={"Detalles_" + event.nombre_evento}
-                              style={{
-                                borderRadius: 4,
-                                height: 51,
-                                backgroundColor: "#B3DA3F",
-                                fontSize: "16px",
-                                width: "110px",
-                                margin: "3px",
-                              }}
-                            >
-                              {" "}
-                              <Link to={"eventos/" + event.id}>
-                                Detalles
-                              </Link>{" "}
-                            </Button>
-                          </Fragment>
-                        ) : (
-                          <Fragment>
-                            <Button
-                              style={{
-                                borderRadius: 4,
-                                height: 51,
-                                backgroundColor: "#B3DA3F",
-                                fontSize: "16px",
-                                margin: "3px",
-                                width: "110px",
-                              }}
-                            >
-                              {" "}
-                              <Link to={"eventos/" + event.id}>
-                                Detalles
-                              </Link>{" "}
-                            </Button>
-                          </Fragment>
-                        )}
+                        <MyButton className="see-details">
+                          <Link to={"eventos/" + event.id}>
+                            Detalles
+                          </Link>{" "}
+                        </MyButton>
                         {rolUser !== "voluntario" ? (
                           <Fragment>
                             <EliminarEvento event={event} />
@@ -859,14 +687,13 @@ class EventsListClass extends Component {
             </div>
 
             <form className="FormularioCrearEvento">
-              <TextField
-                label="Nombre del evento *"
-                placeholder="Nombre del evento"
-                name="nombre_evento"
-                className="nombreEventoCrear textInput"
-                type="text"
-                onChange={this.handleChange}
-              />
+            <MyInputText
+              label="Nombre del evento *"
+              className="nombreEventoCrear textInput"
+              name="nombre_evento"
+              onChange={this.handleChange}
+            />
+              
 
               <br></br>
 
@@ -882,53 +709,37 @@ class EventsListClass extends Component {
                 onChange={this.handleChange}
               />
 
-              <div>
-                <div>
-                  <label className="LabelLiderCrearEvento">Líder *</label>
-                </div>
-                <div>
-                  <select
-                    label="Lider *"
-                    className="liderEventoCrear textInput"
-                    name="lider"
-                    onChange={this.handleChange}
-                  >
-                    {this.state.lideres.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
+              <MySelect
+                placeholder="Líder *"
+                name="lider"
+                onChange={this.handleChange}
+              >
+                {this.state.lideres.map((item) => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </MySelect>
 
-              <div>
-                <div>
-                  <label className="LabelModalidadCrearEvento">Modalidad *</label>
-                </div>
-                <select
-                  className="nombreEventoCrear textInput"
-                  name="modalidad_evento"
-                  onChange={this.handleChange}
-                  label="Modalidad *"
-                >
-                  <option value="Presencial" name="modalidad_evento">
-                    Presencial
-                  </option>
-                  <option value="Virtual" name="modalidad_evento">
-                    Virtual
-                  </option>
-                </select>
-              </div>
+              <br />
+
+              <MySelect
+                placeholder="Modalidad *"
+                name="modalidad_evento"
+                onChange={this.handleChange}
+              >
+                <MenuItem value="Presencial" name="modalidad_evento">
+                  Presencial
+                </MenuItem>
+                <MenuItem value="Virtual" name="modalidad_evento">
+                  Virtual
+                </MenuItem>
+              </MySelect>
           
-              <TextField
+              <MyInputText
                 label="Lugar"
                 className="LugarEventoCrear textInput"
-                placeholder="Lugar"
                 name="lugar_evento"
-                type="text"
                 onChange={this.handleChange}
               />
 
@@ -941,49 +752,33 @@ class EventsListClass extends Component {
                 onChange={this.handleChange}
               />
 
-              <div>
-                <div>
-                  <label className="LabelCategoriaCrearEvento">Categoría *</label>
-                </div>
-                <div>
-                  <select
-                    label="Categoría *"
-                    className="CategoriaEventoCrear textInput"
-                    name="categoria"
-                    onChange={this.handleChange}
-                  >
-                    {this.state.categorias.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
+              <MySelect
+                placeholder="Categoría *"
+                name="categoria"
+                onChange={this.handleChange}
+              >
+                {this.state.categorias.map((item) => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </MySelect>
 
-              <div>
-                <div>
-                  <label className="LabelProyectoCrearEvento">Proyecto</label>
-                </div>
-                <div>
-                  <select
-                    className="ProyectoEventoCrear textInput"
-                    name="proyecto"
-                    onChange={this.handleChange}
-                    label="Proyecto"
-                  >
-                    {this.state.proyectos.map((item) => {
-                      return (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
+              <br />
+
+              <MySelect
+                placeholder="Proyecto"
+                name="proyecto"
+                onChange={this.handleChange}
+              >
+                {this.state.proyectos.map((item) => {
+                  return (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </MySelect>
 
               <TextField 
                 label="Hora Inicio *"
@@ -1004,14 +799,12 @@ class EventsListClass extends Component {
               />
 
               <div className="CamposBotones">
-                <Button
-                  name="GuardarEvento"
-                  className="botonCrear"
-                  // disabled={this.state.form.nombre_evento && this.state.form.fecha_evento? false:true}
-                  onClick={async () => await this.peticionPost()}
-                >
+                <MyButton className="cancel" onClick={async () => await this.cerrarModalInsertar()}>
+                  Cancelar
+                </MyButton>
+                <MyButton onClick={async () => await this.peticionPost()} className="default">
                   Guardar Evento{" "}
-                </Button>
+                </MyButton>
                 <Snackbar
                   anchorOrigin={{
                     vertical: "bottom",
@@ -1030,14 +823,6 @@ class EventsListClass extends Component {
                     {this.state.mensajeSnackbar}
                   </MuiAlert>
                 </Snackbar>
-
-                <Button
-                  className="botonCancelar"
-                  onClick={async () => await this.cerrarModalInsertar()}
-                >
-                  {" "}
-                  Cancelar{" "}
-                </Button>
               </div>
             </form>
             <Snackbar

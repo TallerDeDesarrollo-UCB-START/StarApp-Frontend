@@ -1,26 +1,15 @@
 
-// Librerias-Paquetes-Estilos:
-import { Button} from '@material-ui/core';
 import {useHistory} from "react-router-dom"
-import {withStyles} from "@material-ui/core/styles";
-
+import MyButton from "../../../shared/components/Button";
 
 function VolverProyectoBtn() {
-    let history = useHistory();
-    const texto="< Volver"
-    return (
-        <AtrasButton variant="outlined" onClick={() => history.goBack()}> {texto}</AtrasButton>
-    )
+  let history = useHistory();
+  return (
+    <MyButton
+      className="go-back"
+      onClick={() => history.goBack()}
+    />
+  )
 }
-const AtrasButton = withStyles((theme) => ({
-    root: {
-      color: "black",
-      whiteSpace: 'nowrap',
-      minWidth: "100px",
-      width: '10%',
-      textAlign: 'center',
-      borderRadius: 20,
-      marginTop: "10px",
-    },
-  }))(Button);
+
 export default VolverProyectoBtn

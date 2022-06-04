@@ -1,12 +1,11 @@
-// Componentes:
-import './VerProyectoBtn.css';
-// Librerias-Paquetes-Estilos:
-import { Link } from "react-router-dom";
+import MyButton from '../../../shared/components/Button';
 
 function VerProyectoBtn({proyecto}) {
-    return (
-        <Link name={"detalle" + proyecto.titulo} className="ver-button" to={"projects/" + proyecto.id}>Ver detalles</Link>
-    )
+	return (
+		<MyButton className="see-details" onClick={() => (window.location.href = "/projects/" + proyecto.id)}>
+			Ver detalles
+		</MyButton>
+	)
 }
 
 export default VerProyectoBtn

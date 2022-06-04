@@ -5,11 +5,11 @@ import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
 //import { makeStyles } from '@material-ui/core/styles'
-import { Button, Modal } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Modal } from '@material-ui/core';
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
+import MyButton from '../../../shared/components/Button'
+import MyInputText from "../../../shared/components/InputText";
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
 
@@ -123,7 +123,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     
     const onSubmit = data => {
         const estadoActual = estados.find(estado => estado.value === estadoId)
-        const categoriaActual = categorias.find(catego => parseInt(catego.id) === categoriaId)
+        const categoriaActual = categorias.find(catego => catego.id === categoriaId)
         const liderActual = lideres.find(lid=> lid.id===liderId)
         data.id = proyecto.id
         data.estado = estadoActual.bool
@@ -140,15 +140,12 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     }
 
     // COMPONENTS:
-    const botonCancelarFormulario = 
-        <Button onClick={onActivarForm}>
-            <FontAwesomeIcon className="cancel-icon" icon={faTimes}/>
-        </Button>;	
+    const botonCancelarFormulario = <MyButton onClick={onActivarForm} className="cancel-icon" />;	
         
     const body = (
         <div style={modalStyle} className="paper-crear">
             <FormProvider {...methods}>
-                <form  onSubmit={methods.handleSubmit(onSubmit)}>
+                <form>
                     {botonCancelarFormulario}
                     {/*NOTE: FORM TITLE*/}
                     <div className="crear-container-title">
@@ -171,31 +168,26 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     onChange={onChangeFechaFin}
                                     />
                         {/*NOTE: TITULO*/}
-                        <InputTexto type="text"
-                                    tituloLabel={"Nombre del Proyecto"}
-                                    placeHolder="Nombre del Proyecto"
-                                    nameId="titulo"
-                                    value={titulo}
-                                    onChange={onChangeTitulo}
-                                    options={{required: true}}
-                                    />
+                        <MyInputText
+                            id="titulo"
+                            value={titulo}
+                            onChange={onChangeTitulo}
+                            placeholder="Nombre del Proyecto"
+                            />
                         {/*NOTE: DESCRIPCION*/}
-                        <InputTexto type="text"
-                                    tituloLabel={"Descripción"}
-                                    placeHolder="Descripción"
-                                    nameId="descripcion"
-                                    value={descripcion}
-                                    onChange={onChangeDescrip}
-                                    options={{required: true}}
-                                    />
+                        <MyInputText
+                            id="descripcion"
+                            value={descripcion}
+                            onChange={onChangeDescrip}
+                            placeholder="Descripción"
+                            />
                         {/*NOTE: OBJETIVO*/}
-                        <InputTexto type="text"
-                                    tituloLabel={"Objetivo"}
-                                    placeHolder="Objetivo"
-                                    nameId="objetivo"
-                                    value={objetivo}
-                                    onChange={onChangeObjetivo}
-                                    />
+                        <MyInputText
+                            id="objetivo"
+                            value={objetivo}
+                            onChange={onChangeObjetivo}
+                            placeholder="Objetivo"
+                            />
                         {/*NOTE: Dropwdown LIDER*/}
                         <DynamicDropdown titulo="Lideres"
                                         elements={lideres}
@@ -219,15 +211,16 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                         onChange={onChangeEstado}
                                         idField={'value'}
                                         labelField={'label'}/>
-    
-                        <InputTexto type="text" 
-                                    tituloLabel="Imagen por Link"
-                                    nameId="url_imagen" 
-                                    value={url_imagen}
-                                    onChange={onChangeImagenUrl}
-                                    />
+                        <MyInputText
+                            id="url_imagen"
+                            value={url_imagen}
+                            onChange={onChangeImagenUrl}
+                            placeholder="Imagen por Link"
+                            />
                         <div className="btn-crear-container">
-                            <input type='submit' value='GUARDAR CAMBIOS' className='btn-proy-editar btn-proy-block'/>
+                            <MyButton className="default" onClick={methods.handleSubmit(onSubmit)}>
+                                GUARDAR CAMBIOS
+                            </MyButton>
                         </div>
                     </div>
                 </form>

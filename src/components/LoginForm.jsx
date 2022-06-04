@@ -14,6 +14,7 @@ import LoginGoogle from "./LoginGoogle";
 import { NavLink } from "react-router-dom";
 import BadRequests from "./redirect status/BadRequests";
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
+import MyButton from "../shared/components/Button";
 const useStyles = makeStyles((theme) => ({
   Container: {
     display: "flex",
@@ -172,7 +173,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
           >
             <Form onSubmit={onSubmit} validate={validate}>
               {({ handleSubmit }) => (
-                <form onSubmit={handleSubmit} noValidate>
+                <form noValidate>
                   <Grid>
                     <Typography
                       style={{
@@ -205,15 +206,13 @@ const LoginForm = ({ sessionData, setSessionData }) => {
                       size="small"
                     />
             
-                    <Button
-                      className={classes.buttonContainer}
-                      variant="contained"
-                      color="primary"
-                      type="submit"
+                    <MyButton
+                      onClick={handleSubmit}
+                      className="default"
                       disabled={validateButton ? false : true}
                     >
                       Iniciar Sesión
-                    </Button>
+                    </MyButton>
                
  
                     <div className={classes.buttonContainer}>

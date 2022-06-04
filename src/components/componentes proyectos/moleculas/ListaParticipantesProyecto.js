@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core';
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
 import { useHistory } from 'react-router-dom';
+import MyButton from '../../../shared/components/Button';
 
 const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;
@@ -75,7 +76,7 @@ class ListaParticipantesProyecto extends Component{
                 }
                 </List>
                 <PuertaPermisos scopes={[SCOPES.canCrudProyectos]}>
-                    <ExcelFile element={<ExportarButton variant="contained" >Exportar Lista</ExportarButton>} filename="ListaParticipantes">
+                    <ExcelFile element={<MyButton className="excel">Exportar Participantes</MyButton>} filename="ListaParticipantes">
                         <ExcelSheet data={posts} name="Participantes">
                             <ExcelColumn name="inicio" label={inicio}/>
                             <ExcelColumn label={fin}/>
@@ -92,13 +93,5 @@ class ListaParticipantesProyecto extends Component{
         )
     }
 }
-const ExportarButton = withStyles((theme) => ({
-    root: {
-      marginRight: 10,
-      marginLeft: 10,
-      width: '25%',
-      background: 'green',
-      color:'white'
-    },
-  }))(Button);
+
 export default ListaParticipantesProyecto
