@@ -3,13 +3,16 @@ import "./header.css";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import routes from "../../routes/Routes";
-import LoggoutButton from "./logoutButton";
 import verifier from "../../routes/AuthRoutesVerifier";
 import NavigationBar from "./NavigationBar";
 import useStyles from "./Header.styles";
+import { Chip } from '@material-ui/core';
+import LogoutIcon from "@material-ui/icons/ExitToApp";
+import { IconButton } from "@mui/material";
+import MyButton from "../../shared/components/Button";
 
 const Header = ({ sessionData, children }) => {
-  const isSmallScreen = true;
+  const isMobile = false;
   const classes = useStyles();
   const location = useLocation();
   const history = useHistory();
@@ -38,6 +41,11 @@ const Header = ({ sessionData, children }) => {
     return size;
   }
 
+  function logout() {
+    sessionStorage.removeItem("jwt");
+    window.location.reload();
+  }
+
   const windowWidth = useWindowSize();
 
   function showHeader() {
@@ -50,7 +58,7 @@ const Header = ({ sessionData, children }) => {
     );
   }
 
-  const {header, headerLogo, containerLogo, headerMenu} = classes;
+  const {header, headerLogo, containerLogo} = classes;
 
   return (
     <>
@@ -60,21 +68,29 @@ const Header = ({ sessionData, children }) => {
             <div className={containerLogo}>
               <img src={"https://i1.wp.com/www.startamericastogether.org/wp-content/uploads/2021/03/LOGO_2020_2.0_STARTER_Horizontal-01-01-1.png?fit=1307%2C435&ssl=1"} alt=" " className="header-image" />
             </div>
-            <div>
-              <LoggoutButton logged={logged} sessionData={sessionData} />
-            </div>
+            {logged ? (
+              <IconButton onClick={logout}>
+                <LogoutIcon style={{ color: 'white' }} />
+              </IconButton>
+            ) : (
+              <MyButton className="default" onClick={()=>history.push("/login")}>
+                Iniciar Sesión
+              </MyButton>
+            )}
           </div>
-          <NavigationBar
-            currentPath={location.pathname}
-            routes={routes}
-            logged={logged}
-            sessionData={sessionData}
-            pagesize={"wide"}
-          />
         </header>
       )}
+      {showHeader() && !isMobile && (
+        <NavigationBar
+          currentPath={location.pathname}
+          routes={routes}
+          logged={logged}
+          sessionData={sessionData}
+          pagesize={"wide"}
+        />
+      )}
       <div className={classes.children} style={{marginBottom:"70px", minHeight:"250px"}}>{children}</div>
-      <div className={classes.responsiveHeader}>
+      {showHeader() && isMobile && (
         <NavigationBar
           currentPath={location.pathname}
           routes={routes}
@@ -82,7 +98,7 @@ const Header = ({ sessionData, children }) => {
           sessionData={sessionData}
           isMobile={true}
         />
-      </div>
+      )}
     </>
   );
 };

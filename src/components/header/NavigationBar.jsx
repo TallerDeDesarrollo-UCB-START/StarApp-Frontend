@@ -24,10 +24,11 @@ const NavigationBar = ({ currentPath, logged, sessionData, isMobile }) => {
 
   const [value, setValue] = useState(getState(currentPath));
 
-  const { navContainer } = classes;
+  const { mobileNavigationContainer, webNavigationContainer } = classes;
+
   return (
     <BottomNavigation
-      className={navContainer}
+      className={isMobile ? mobileNavigationContainer : webNavigationContainer}
       value={value}
       onChange={(event, newValue) => { setValue(newValue); }}
       showLabels={!isMobile}
