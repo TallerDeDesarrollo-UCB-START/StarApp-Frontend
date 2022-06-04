@@ -1,6 +1,6 @@
 import Routes from "./routes/Routes";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "./components/header";
+import AppStructure from "./components/app-structure";
 import { React, useState, useEffect } from "react";
 import AxiosClient from "./components/AxiosClient";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -46,7 +46,7 @@ function App() {
         }}
         color="secondary"
       />
-      <Header sessionData={sessionData} setSessionData={setSessionData}>
+      <AppStructure sessionData={sessionData} setSessionData={setSessionData}>
         <Switch>
           {Routes.map((route) => (
             <Route exact path={route.path} key={route.path}>
@@ -57,7 +57,7 @@ function App() {
             </Route>
           ))}
         </Switch>
-      </Header>
+      </AppStructure>
     </Router>
   );
 }

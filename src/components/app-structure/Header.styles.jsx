@@ -7,15 +7,12 @@ const useStyles = makeStyles((theme) => ({
 		position: "sticky",
 		backgroundColor: "#074d81",
 	},
+	headerImage: {
+		width: "200px"
+	},
 	headerLogo: {
 		display: "flex",
 		height: "80px",
-		alignItems: "center",
-		justifyContent: "center"
-	},
-	headerMenu: {
-		marginTop: "60px",
-		display: "flex",
 		alignItems: "center",
 		justifyContent: "center"
 	},
