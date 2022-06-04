@@ -3,7 +3,7 @@ import { Container } from "@mui/material";
 
 const PageContainer = ({ children }) => {
   return (
-    <Container style={{backgroundColor: "lightgray"}} maxWidth="lg">
+    <Container style={{backgroundColor: "#F3F2F2"}} maxWidth="lg">
       {children}
     </Container>
   );
