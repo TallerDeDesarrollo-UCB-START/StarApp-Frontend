@@ -13,14 +13,7 @@ function SnackBarProyectos({infoSnackbar}) {
         message:"",
         active:false,
         severity:"success",
-        afterClose:()=>{},
     })
-    /*const [snackbarStatus, setSnackbarStatus] = useState({
-        message: infoSnackbar && infoSnackbar.message,
-        active: infoSnackbar && infoSnackbar.active,//false,
-        status: infoSnackbar && infoSnackbar.status,
-    })*/
-
     const mountedRef = useRef(false)
 
     useEffect(() => {
@@ -33,9 +26,9 @@ function SnackBarProyectos({infoSnackbar}) {
             
             if(!activar) return
             if(estado){
-                activeSnackbar(mensaje, "success", ()=>{})
+                activeSnackbar(mensaje, "success");
             } else{
-                activeSnackbar(mensaje, "error", ()=>{})
+                activeSnackbar(mensaje, "error");
             }
             //asignarSnackbarStatus(mensaje, false, estado); // reset para que no reaparezca indebidamente
         }

@@ -79,7 +79,7 @@ function ListaProyectos () {
                 element.fecha_inicio[9]);
         } catch (error) {
             let message = BadRequests(error.response.status);
-            activeSnackbar("No se pudo obtener los proyectos. "+ message, "error", () => {})
+            activeSnackbar("No se pudo obtener los proyectos. "+ message, "error");
         }
         setData(data);
         //setOriginalData(data);

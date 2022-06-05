@@ -47,11 +47,8 @@ const EventosProximos = ({ id, title }) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose: () => {console.log("acabado")},
   });
-  const activeSnackbar = (message, severity, afterClose) => {
-    setSnackbar({ message, severity, afterClose, active: true });
-  };
   const history = useHistory();
   const smallScreen = !useMediaQuery("(min-width:500px)");
   const [events, setEvents] = useState([]);
@@ -101,7 +98,7 @@ const EventosProximos = ({ id, title }) => {
           ))}
         </div>
       ) : (
-        <div className={`${smallScreen? classes.resp_no_events : classes.no_events}`}>
+        <div className={`${(smallScreen? classes.resp_no_events : classes.no_events)}`}>
           <Typography
             color="textSecondary"
             className={

@@ -83,7 +83,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose: () => {console.log("acabado")},
   });
   const [activeProgressBar, setActiveProgressBar] = useState(false);
 
@@ -136,18 +136,18 @@ const LoginForm = ({ sessionData, setSessionData }) => {
         {
           case 401:
             setActiveProgressBar(false);
-            activeSnackbar("Correo o contraseña inválidos.", "error", () => {});
+            activeSnackbar("Correo o contraseña inválidos.", "error");
             break;
           case 404:
             setActiveProgressBar(false);
-            activeSnackbar("Correo o contraseña inválidos.", "error", () => {});
+            activeSnackbar("El correo o contraseña es inválido.", "error");
             break;
           case 405:
             setActiveProgressBar(false);
-            activeSnackbar("La cuenta no se ha validado.", "warning", () => {});
+            activeSnackbar("La cuenta no se ha validado.", "warning");
             break;
           default:
-            activeSnackbar("Excepcion inesperada, "+BadRequests(error.response.status), "error", () => {});
+            activeSnackbar("Excepcion inesperada, "+BadRequests(error.response.status), "error");
         }
       });
   };

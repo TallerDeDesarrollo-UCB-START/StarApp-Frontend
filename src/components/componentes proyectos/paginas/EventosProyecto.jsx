@@ -41,17 +41,18 @@ const EventosProyecto = ({ id, title }) => {
   const [events, setEvents] = useState([]);
   const classes = useStyles();
   const baseURL = `${process.env.REACT_APP_API}eventos_de_proyecto/${id.titulo}`;
+  
   const activeSnackbar = (message, severity, afterClose) => {
     setSnackbar({ message, severity, afterClose, active: true });
   };
   const [snackbar, setSnackbar] = React.useState({
     message: "",
     active: false,
-    severity: "success",
-    afterClose: () => {},
+    severity: "success"
   });
   useEffect(
     () =>
+    
       axios
         .get(baseURL)
         .then((response) => {
@@ -63,8 +64,7 @@ const EventosProyecto = ({ id, title }) => {
           const message = BadRequests(error.response.status);
           activeSnackbar(
             "No se enviarón los eventos de proyecto. "+message,
-            "error",
-            () => {}
+            "error"
           );
         }),
     [baseURL]

@@ -96,7 +96,7 @@ const RegisterForm = () => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose: () => {console.log("acabado")},
   });
   const validate = (values) => {
     setValidateButton(false);
@@ -176,7 +176,7 @@ const RegisterForm = () => {
       .catch((response) => {
         setActiveProgressBar(false);
         activeSnackbar(
-          `El correo: ${values.email} ya ha sido registrado.`,
+          `El correo: ${values.email} no ha sido registrado.`,
           "error",
           () => {
             window.location.reload();

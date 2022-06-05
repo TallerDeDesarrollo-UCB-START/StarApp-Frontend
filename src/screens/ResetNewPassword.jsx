@@ -52,9 +52,7 @@ export const ResetNewPassword = () => {
         }
         activeSnackbar(
           "Se ha producido un error",
-          "error",
-          () => {}
-        );
+          "error");
       });
   };
   const activeSnackbar = (message, severity, afterClose) => {

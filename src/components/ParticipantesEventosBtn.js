@@ -9,7 +9,6 @@ const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;
 const ExcelColumn = ExportExcel.ExcelColumn;
 const url = process.env.REACT_APP_API;
-// const url = `http://localhost:5000/`;
 class ListaParticipantesProyecto extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +27,6 @@ class ListaParticipantesProyecto extends Component {
       .get(`${url}eventos/participantes/${id}`)
       .then((response) => {
         this.setState({ posts: response.data });
-        //console.log(response.data);
         this.setState({
           inicio:
             "Hora inicio: " + response.data[0].hora_inicio.substring(0, 10),

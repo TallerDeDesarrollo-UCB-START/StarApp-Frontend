@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 const url = process.env.REACT_APP_API;
 const baseURL = `${url}extended_form/`;
 
-//const baseURL = "http://localhost:5000/extended_form/";
 
 export default function ProfileImage({ getDataProfile, setDataProfile, sessionData }) {
   const classes = useStyles();
@@ -52,11 +51,6 @@ export default function ProfileImage({ getDataProfile, setDataProfile, sessionDa
       .catch((error) => {
         console.log(error);
         throw error;
-        //activeSnackbar(
-        //  "No se pudo enviar la peticion, "+message,
-        //  "error",
-        //  () => {}
-        //);
       });
   };
   function sendAvailable() {

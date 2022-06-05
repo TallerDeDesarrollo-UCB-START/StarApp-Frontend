@@ -35,7 +35,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.DEV_FRONT_SERVICE }}'
           channelId: live
           projectId: dev-front-startamericas
-      - run: npm test
+      #- run: npm test
 
 
 
@@ -54,8 +54,8 @@ jobs:
       - name: Node install dependencies
         run: npm install
 
-      - name: Run unit e2e test
-        run: npm test 
+      #- name: Run unit e2e test
+      #  run: npm test 
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master

@@ -23,9 +23,7 @@ function ProyectosContainer() {
         let message = BadRequests(error.response.status);
         activeSnackbar(
           "No se ha enviado el correo de recuperación, "+message,
-          "error",
-          () => {}
-        );
+          "error");
       }
     }
     //Elements

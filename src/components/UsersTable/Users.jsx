@@ -126,7 +126,7 @@ function Users({sessionData}) {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose: () => {console.log("acabado")},
   });
   const activeSnackbar = (message, severity, afterClose) => {
     setSnackbar({ message, severity, afterClose, active: true });
@@ -226,9 +226,7 @@ function Users({sessionData}) {
         let message = BadRequests(error.response.status);
         activeSnackbar(
           "No se pudo recuperar los usuarios. "+message,
-          "error",
-          () => {}
-        );
+          "error");
       });
 
   useEffect(() => {

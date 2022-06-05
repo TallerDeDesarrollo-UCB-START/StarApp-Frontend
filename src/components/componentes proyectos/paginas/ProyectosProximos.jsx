@@ -49,7 +49,7 @@ const ProyectosProximos = ({ title }) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose: () => {console.log("acabado")},
   });
   useEffect(
     () =>
@@ -64,8 +64,7 @@ const ProyectosProximos = ({ title }) => {
           const message = BadRequests(error.response.status);
           activeSnackbar(
             "No se encontraron los proyectos. "+message,
-            "error",
-            () => {}
+            "error"
           );
         }),
     [baseURL]

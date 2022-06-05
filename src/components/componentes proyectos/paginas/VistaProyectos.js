@@ -26,7 +26,7 @@ function VistaProyectos() {
         message: "",
         active: false,
         severity: "success",
-        afterClose: () => {},
+        afterClose: () => {console.log("acabado")},
       });
     const activeSnackbar = (message, severity, afterClose) => {
         setSnackbar({ message, severity, afterClose, active: true });
@@ -45,8 +45,7 @@ function VistaProyectos() {
     {
         activeSnackbar(
             message,
-            "error",
-            () => {}
+            "error"
           );
     }
     // USE EFFECT

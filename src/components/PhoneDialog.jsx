@@ -31,7 +31,7 @@ export default function PhoneDialog({user}) {
         })
       .catch((response) => { 
         let message = BadRequests(response.status);
-        activeSnackbar("No se ha registrado el número de teléfono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el número de teléfono, "+message, "error");
       });
   },[user])
   const activeSnackbar = (message, severity, afterClose)=>{
@@ -48,11 +48,11 @@ export default function PhoneDialog({user}) {
     AxiosClient.put(`${urlBase}extended_form/${user}`, to_send)
       .then((response) => {
         if (response.status === 202)
-            activeSnackbar("Se ha registrado el número de teléfono", "success", ()=>{})
+            activeSnackbar("Se ha registrado el número de teléfono", "success");
         })
       .catch((error) => { 
         let message = BadRequests(error.response.status);
-        activeSnackbar("No se ha registrado el número de teléfono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el número de teléfono, "+message, "error");
       });
   };
 

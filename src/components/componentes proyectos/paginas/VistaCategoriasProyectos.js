@@ -33,7 +33,7 @@ function VistaCategoriasProyectos() {
         message: "",
         active: false,
         severity: "success",
-        afterClose: () => {},
+        afterClose: () => {console.log("acabado")},
       });
     useEffect(() => {
         mountedRef.current = true
@@ -47,8 +47,7 @@ function VistaCategoriasProyectos() {
                 const message = BadRequests(404);
                 activeSnackbar(
                   "No se pudo encontrar los proyectos. "+message,
-                  "error",
-                  () => {});
+                  "error");
             }
         }
         const getLideres = async ()=>{
@@ -60,8 +59,7 @@ function VistaCategoriasProyectos() {
                 const message = BadRequests(404);
                 activeSnackbar(
                     "No se encontraron los proyectos. "+message,
-                  "error",
-                  () => {});
+                  "error");
             }
         }
         getCategorias()
@@ -94,8 +92,7 @@ function VistaCategoriasProyectos() {
                 const message = BadRequests(404);
                 activeSnackbar(
                     "No se pudo crear el proyecto. "+message,
-                    "error",
-                    () => {});
+                    "error");
                 throw error;
             }
     }

@@ -38,9 +38,7 @@ const ResetPassword = () => {
         if (response.status === 200) {
           activeSnackbar(
             "Se le ha enviado el correo de recuperación.",
-            "success",
-            () => {}
-          );
+            "success");
         }
       })
       .catch((error) => {
@@ -50,9 +48,7 @@ const ResetPassword = () => {
         }
         activeSnackbar(
           "No se pudo recuperar la contraseña de la cuenta.",
-          "error",
-          () => {}
-        );
+          "error");
       });
   };
   

@@ -234,7 +234,7 @@ const Profile = ({sessionData}) => {
       })
       .catch((error) => {
         let message = BadRequests(error.response.status);
-        activeSnackbar("No se ha registrado el numero de teléfono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el numero de teléfono, "+message, "error");
       });
   };
   var peticionPut = (asignaciones) => {
@@ -245,7 +245,7 @@ const Profile = ({sessionData}) => {
       // })
       .catch((error) => {
         let message = BadRequests(error.response.status);
-        activeSnackbar("No se ha registrado el numero de teléfono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el numero de teléfono, "+message, "error");
       });
   };
   
@@ -319,7 +319,7 @@ const Profile = ({sessionData}) => {
           return;
         }
         let message = BadRequests(error.response.status);
-        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error", ()=>{})
+        activeSnackbar("No se ha registrado el numero de telefono, "+message, "error");
       });
   }, [datos.id]);
 

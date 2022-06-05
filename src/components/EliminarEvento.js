@@ -19,7 +19,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-//const event = props.event;
 
 const EliminarEvento = (event) => {
 
@@ -27,7 +26,7 @@ const EliminarEvento = (event) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose: () => {console.log("acabado")},
   });
   const [open, setOpen] = React.useState(false);
 
@@ -50,9 +49,7 @@ const EliminarEvento = (event) => {
       let message = BadRequests(error.response.status);
       activeSnackbar(
           "No se pudo eliminar el evento. "+message,
-          "error",
-          () => {}
-      );
+          "error");
     });
     if (!isEventError){
         handleClose();

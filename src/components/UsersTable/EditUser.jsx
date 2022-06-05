@@ -94,7 +94,7 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose: () => {console.log("acabado")},
   })
   const history = useHistory();
   React.useEffect(() => {
@@ -111,7 +111,7 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
       })
       .catch((error)=>{
         let message = BadRequests(error.response.status);
-        activeSnackbar("Ha ocurrido un error, "+ message, "error", () => {})
+        activeSnackbar("Ha ocurrido un error, "+ message, "error");
       })
   }, [rowToUpdate.id])
   const handleOpen = () => {

@@ -222,8 +222,9 @@ class EventsListClass extends Component {
     this.state.botonMostrarEventosArchivados = true;
     await axios.put(urlDeploy + "/mostrar_evento/" + event.id)
     .catch((error) => {
-      if (error.message == "Network Error")
+      if (error.message == "Network Error") {
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+      }
       console.log(error.message);
       throw error;
     });
@@ -545,7 +546,7 @@ class EventsListClass extends Component {
                   style={{ display: "flex" }}
                 >
                   {rolUser !== "voluntario" && (
-                    <MyButton onClick={async () => await this.mostrarModalInsertar()} className="default">
+                    <MyButton onClick={() => this.mostrarModalInsertar()} className="default">
                       CREAR EVENTO
                     </MyButton>
                   )}
@@ -799,7 +800,7 @@ class EventsListClass extends Component {
               />
 
               <div className="CamposBotones">
-                <MyButton className="cancel" onClick={async () => await this.cerrarModalInsertar()}>
+                <MyButton className="cancel" onClick={() => this.cerrarModalInsertar()}>
                   Cancelar
                 </MyButton>
                 <MyButton onClick={async () => await this.peticionPost()} className="default">
