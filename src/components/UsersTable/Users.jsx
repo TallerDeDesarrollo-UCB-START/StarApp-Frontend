@@ -9,9 +9,9 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Popover } from "@material-ui/core";
 import EditUser from "./EditUser";
 import SnackbarMessage from "../../components/templates/SnackbarMessage"; 
+import RedirectErrorPage from "../redirect status/RedirectErrorPage";
 import BadRequests from "../redirect status/BadRequests";
 import { useHistory } from "react-router-dom";
-import RedirectErrorPage from "../redirect status/BadRequests";
 
 const useStyles = makeStyles((theme) => ({
   section: {

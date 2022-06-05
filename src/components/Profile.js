@@ -226,7 +226,7 @@ const Profile = ({sessionData}) => {
       [event.target.name]: event.target.value,
     });
   };
-  var peticionPost = async (asignaciones) => {
+  let peticionPost = async (asignaciones) => {
     await axios
       .post(urlTablaExtensa, asignaciones)
       .then((response) => {
@@ -237,7 +237,7 @@ const Profile = ({sessionData}) => {
         activeSnackbar("No se ha registrado el numero de teléfono, "+message, "error");
       });
   };
-  var peticionPut = (asignaciones) => {
+  let peticionPut = (asignaciones) => {
     axios
       .put(urlTablaExtensa + datos.id_usuario, asignaciones)
       // .then((response) => {

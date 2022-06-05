@@ -13,7 +13,6 @@ import { InputByCriteria } from "./InputsByFields"
 import axios from "axios"
 import SnackbarMessage from "../templates/SnackbarMessage"
 import BadRequests from "../redirect status/BadRequests"
-import { useHistory } from "react-router-dom"
 import MyButton from "../../shared/components/Button"
 import MySelect from "../../shared/components/Select"
 
@@ -149,11 +148,11 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
         })
         .catch((error) => {
           let message = BadRequests(error.response.status);
-        activeSnackbar("Ha ocurrido un error, "+ message, "error", () => {})
+        activeSnackbar("Ha ocurrido un error, "+ message, "error")
         })
     }
     else{
-        activeSnackbar("Ingrese valores en el campo.", "warning", () => {})
+        activeSnackbar("Ingrese valores en el campo.", "warning")
     }
   }
   const updateInsigniasField= () => {

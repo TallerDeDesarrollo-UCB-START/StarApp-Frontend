@@ -3,8 +3,6 @@ import { Typography, useMediaQuery, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import ResumedCardEvento from "../../Home/ResumedCardEvento";
-import {useHistory} from "react-router-dom";
-import redirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
 import MyButton from "../../../shared/components/Button";

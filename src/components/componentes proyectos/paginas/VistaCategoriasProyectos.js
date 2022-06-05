@@ -11,7 +11,6 @@ import {useHistory} from "react-router-dom";
 import RedirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
-import { th } from "date-fns/locale";
 const useStyles = makeStyles(() => ({
     container: {
         width: '98%',

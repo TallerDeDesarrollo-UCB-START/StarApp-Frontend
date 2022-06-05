@@ -5,9 +5,8 @@ import ProyectosVoluntarios from './ProyectosVoluntarios'
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef, React} from 'react'
 import {useLocation} from "react-router-dom";
-import React from "react";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 
 function useQuery() {
@@ -112,6 +111,7 @@ function VistaProyectos() {
             const data = await response.json()
             return data;
         } catch (error) {
+            console.log(error);
             throw error;
         }
     }
@@ -123,6 +123,7 @@ function VistaProyectos() {
             return data
             //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
         } catch (error) {
+            console.log(error);
             throw error;
         }
     }
@@ -133,6 +134,7 @@ function VistaProyectos() {
             const data = response && response.status === 204? [] : await response.json();
             return data;
         } catch (error) {
+            console.log(error);
             throw error;
         }
     }
@@ -143,6 +145,7 @@ function VistaProyectos() {
             const data = await response.json()
             return data
         } catch (error) {
+            console.log(error);
             throw error;
         }
     }
@@ -160,6 +163,7 @@ function VistaProyectos() {
             //dataLider.pop()
             return dataLider;
         } catch (error) {
+            console.log(error);
             throw error;
         }
     }

@@ -107,7 +107,6 @@ class LoginGoogleClass extends Component {
 }
 const LoginGoogle = ()=>{
   history = useHistory();
-  const login = new LoginGoogleClass();
-  return login;
+  return new LoginGoogleClass();
 }
 export default LoginGoogle;

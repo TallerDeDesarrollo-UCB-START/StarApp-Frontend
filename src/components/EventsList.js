@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 //import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Modal, Button, CardBody } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./EventsList.css";
 import TextField from "@mui/material/TextField";
 import { MenuItem, Snackbar } from "@material-ui/core";
@@ -12,7 +12,6 @@ import Typography from "@material-ui/core/Typography";
 import { CardHeader } from "@material-ui/core/";
 import { CardContent, CardMedia } from "@mui/material";
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
-import { useHistory } from "react-router-dom";
 import MyButton from "../shared/components/Button";
 import MySelect from "../shared/components/Select";
 import MyInputText from "../shared/components/InputText";
@@ -107,8 +106,10 @@ class EventsListClass extends Component {
       this.setState({ categoriaFiltrada: aux[0] });
       this.setState({ categorias: aux });
     } catch (error) {
-      if (error.message == "Network Error")
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
+      }
       console.log(error);
       throw error;
     }
@@ -137,8 +138,10 @@ class EventsListClass extends Component {
       this.setState({ events: data });
       return true;
     } catch (error) {
-      if (error.message == "Network Error")
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
+      }
       console.log(error);
       throw error;
     }
@@ -153,8 +156,10 @@ class EventsListClass extends Component {
       this.setState({ categoriaFiltrada: aux[0] });
       this.setState({ categorias: aux });
     } catch (error) {
-      if (error.message == "Network Error")
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
+      }
       console.log(error);
       throw error;
     }
@@ -183,8 +188,10 @@ class EventsListClass extends Component {
       }
       this.setState({ events: data });
     } catch (error) {
-      if (error.message == "Network Error")
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
+      }
       console.log(error);
       throw error;
     }
@@ -195,6 +202,7 @@ class EventsListClass extends Component {
       .catch((error) => {
         if (error.message == "Network Error"){
           RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+          return;
         }
         console.log(error);
         throw error;
@@ -207,8 +215,10 @@ class EventsListClass extends Component {
   peticionArchivar = async (event) => {
       await axios.put(urlDeploy + "/archivar_evento/" + event.id)
       .catch((error) => {
-        if (error.message == "Network Error")
+        if (error.message == "Network Error"){
           RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+          return;
+        }
         console.log(error);
         throw error;
       });
@@ -223,8 +233,9 @@ class EventsListClass extends Component {
     this.state.botonMostrarEventosArchivados = true;
     await axios.put(urlDeploy + "/mostrar_evento/" + event.id)
     .catch((error) => {
-      if (error.message == "Network Error") {
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
       }
       console.log(error.message);
       throw error;
@@ -249,8 +260,10 @@ class EventsListClass extends Component {
         await this.mensajeConfirmacionParticipacion(event);
       })
       .catch((error) => {
-        if (error.message == "Network Error")
+        if (error.message == "Network Error"){
           RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+          return;
+        }
         console.log(error.message);
         throw error;
       });
@@ -263,8 +276,10 @@ class EventsListClass extends Component {
         .then(({ data }) => data);
       this.setState({ participaciones: data });
     } catch (error) {
-      if (error.message == "Network Error")
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
+      }
       console.log(error);
       throw error;
     }
@@ -299,8 +314,10 @@ class EventsListClass extends Component {
         this.mensajeConfirmacionEliminacionParticipacion(event);
       })
       .catch((error) => {
-        if (error.message == "Network Error")
+        if (error.message == "Network Error"){
           RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+          return;
+        }
         console.log(error.message);
         throw error;
       });
@@ -345,8 +362,10 @@ class EventsListClass extends Component {
       let rol = await data.data.data.rol;
       this.setState({ user: rol });
     } catch (error) {
-      if (error.message == "Network Error")
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
+      }
       console.log(error);
       throw error;
     }
@@ -385,8 +404,10 @@ class EventsListClass extends Component {
             this.insertar();
           })
           .catch((error) => {
-            if (error.message == "Network Error")
+            if (error.message == "Network Error"){
               RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+              return;
+            }
             console.log(error.message);
             throw error;
           });
@@ -421,8 +442,10 @@ class EventsListClass extends Component {
       });
       this.setState({ lideres: result });
     } catch (error) {
-      if (error.message == "Network Error")
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
+      }
       console.log(error);
       throw error;
     }
@@ -440,8 +463,10 @@ class EventsListClass extends Component {
       });
       this.setState({ proyectos: result });
     } catch (error) {
-      if (error.message == "Network Error")
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
+      }
       console.log(error);
       throw error;
     }
@@ -565,7 +590,7 @@ class EventsListClass extends Component {
                       padding: "4px",
                       borderColor: "#3B3B3B",
                     }}
-                    onClick={async () => await this.getEventsArchivados()}
+                    onClick={() => this.getEventsArchivados()}
                   >
                     Eventos Pasados
                   </Button>
@@ -849,8 +874,10 @@ class EventsListClass extends Component {
         </div>
       );
     }catch(error){
-      if (error.message == "Network Error")
+      if (error.message == "Network Error"){
         RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        return;
+      }
       console.log(error);
       throw error;
     }
@@ -859,7 +886,6 @@ class EventsListClass extends Component {
 const EventsList = ()=>{
   history = useHistory();
   console.log(history);
-  const eventList = new EventsListClass();
-  return eventList;
+  return new EventsListClass();
 }
 export default EventsList;

@@ -45,7 +45,7 @@ export default function ProfileImage({ getDataProfile, setDataProfile, sessionDa
   const classes = useStyles();
   const smallScreen = !useMediaQuery("(min-width:760px)")
 
-  var peticionPut = (disponibilidad) => {
+  let peticionPut = (disponibilidad) => {
     axios
       .put(baseURL + getDataProfile.id_usuario, disponibilidad)
       .catch((error) => {

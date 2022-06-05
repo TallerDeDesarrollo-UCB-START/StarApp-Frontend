@@ -1,11 +1,9 @@
 import { Box ,List, ListItem,ListItemIcon,ListItemText,Button} from '@material-ui/core';
-import axios from 'axios'
-import React,{Component} from 'react'
-import ExportExcel from 'react-export-excel'
-import { withStyles } from '@material-ui/core';
+import axios from 'axios';
+import React,{Component} from 'react';
+import ExportExcel from 'react-export-excel';
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
-import { useHistory } from 'react-router-dom';
 import MyButton from '../../../shared/components/Button';
 
 const ExcelFile = ExportExcel.ExcelFile;
@@ -27,14 +25,11 @@ class ListaParticipantesProyecto extends Component{
     componentDidMount(){
         let thisUrl = window.location.href;
         let id = this.getId(thisUrl);
-        //const history = useHistory();
         axios.get(`${process.env.REACT_APP_API}get_participantes_proyecto_simple/${id}`)
         .then(response => {
-            this.setState({posts:response.data})
-            //console.log(response.data)
-            this.setState({inicio:"inicio: " + response.data[0].fecha_inicio.substring(0,10)})
-            let fin = response.data[0].fecha_fin
-            //console.log(fin)
+            this.setState({posts:response.data});
+            this.setState({inicio:"inicio: " + response.data[0].fecha_inicio.substring(0,10)});
+            let fin = response.data[0].fecha_fin;
             if (fin==null) {
 
                 this.setState({fin:"fin: en progreso "})

@@ -33,7 +33,7 @@ function useGetRole() {
             }
             console.log(error);
             throw error;
-        };
+        }
     }, [])
 
     return rol

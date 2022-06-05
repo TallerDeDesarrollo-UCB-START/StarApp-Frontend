@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles, Typography, Button, TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import routes from "../../routes/Routes";
 import BadRequests from './BadRequests';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
       display: "flex",
       flexDirection: "column",
