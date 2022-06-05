@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import ResumedCardProyect from "../organismos/ResumedCardProyect";
 import {useHistory} from "react-router-dom";
-import redirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
+import RedirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
 import MyButton from "../../../shared/components/Button";
@@ -60,7 +60,16 @@ const ProyectosProximos = ({ title }) => {
           setEvents(resp);
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
+          if (error.message == "Network Error"){
+            RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+            return;
+          }
+
+          if (error.response.status == 204){
+            return;
+          }
+          
           const message = BadRequests(error.response.status);
           activeSnackbar(
             "No se encontraron los proyectos. "+message,
