@@ -126,7 +126,7 @@ function Users({sessionData}) {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {console.log("acabado")},
+    afterClose:()=>{console.log("despues del mensaje");},
   });
   const activeSnackbar = (message, severity, afterClose) => {
     setSnackbar({ message, severity, afterClose, active: true });

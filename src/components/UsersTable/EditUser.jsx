@@ -94,9 +94,8 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {console.log("acabado")},
+    afterClose:()=>{console.log("despues del mensaje");},
   })
-  const history = useHistory();
   React.useEffect(() => {
     const URL = process.env.REACT_APP_API
     axios.get(`${URL}insignias/${rowToUpdate.id}`)

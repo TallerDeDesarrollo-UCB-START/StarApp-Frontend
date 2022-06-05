@@ -47,7 +47,7 @@ const EventosProximos = ({ id, title }) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {console.log("acabado")},
+    afterClose:()=>{console.log("despues del mensaje");},
   });
   const history = useHistory();
   const smallScreen = !useMediaQuery("(min-width:500px)");

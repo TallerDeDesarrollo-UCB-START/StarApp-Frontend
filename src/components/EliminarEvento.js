@@ -26,7 +26,7 @@ const EliminarEvento = (event) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {console.log("acabado")},
+    afterClose:()=>{console.log("despues del mensaje");},
   });
   const [open, setOpen] = React.useState(false);
 

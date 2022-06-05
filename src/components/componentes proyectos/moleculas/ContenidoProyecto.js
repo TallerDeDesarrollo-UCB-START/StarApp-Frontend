@@ -23,7 +23,7 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
         message:"",
         active:false,
         severity:"success",
-        afterClose:()=>{console.log("acabado")},
+        afterClose:()=>{console.log("despues del mensaje");},
     })
     const [snackbarStatus, setSnackbarStatus] = useState({
         message: "",
@@ -33,7 +33,6 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
     })
     const [participacion, setParticipacion] = useState(false)
     const [actualizar, setActualizar] = useState(false)
-    //const [numberParticipants, setNumber] = useState(0)
     const mountedRef = useRef(false)
     
     function avisoAccion() {
@@ -60,16 +59,10 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
     
     // Functions:
     async function asignarParticipacion() {
-        //debugger
         const participa = await onGetParticipacion(proyecto.id)
         const p = participa === true? true : false
         return p
     }
-/*
-    async function getNumberParticipants() {
-        const numberParticipants = await onNumeroParticipantes(proyecto.id);
-        setNumber(numberParticipants);
-    }*/
 
     function asignarSnackbarStatus(message, active, status){
         setSnackbarStatus({
@@ -82,13 +75,11 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
         setSnackbar({message, severity, afterClose, active:true})
     }
     const activateSnackBar = () => {
-        //debugger
         let activar = snackbarStatus.active
         let estado = snackbarStatus.status
         let mensaje = snackbarStatus.message
         if(activar){
             if(estado){
-                //debugger
                 activeSnackbar(mensaje, "success");
             } else{
                 activeSnackbar(mensaje, "error");
@@ -141,16 +132,6 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
         }
         
         return resp;
-        /*
-        if( proyecto.descripcion.length > 85 ) {
-            for(var i=0; i < 85; i++){
-                resp += proyecto.descripcion[i];
-            }
-            resp += '...';
-        } else {
-            resp = proyecto.descripcion;
-        }
-        return resp;*/
     }
 
     function title (){
@@ -173,17 +154,6 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
             resp += '...';
         }
         return resp;
-        /*
-        if( proyecto.titulo.length > 29 ) {
-            for(var i=0; i < 29; i++){
-                resp += proyecto.titulo[i];
-            }
-            resp += '...';
-        } else {
-            resp = proyecto.titulo;
-        }
-        return resp;
-        */
     }
     
     return (
@@ -208,26 +178,4 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
     );
 }
 
-/*
-<Box className="content-container">
-            
-            <p> <b>Proyecto:</b> {proyecto.titulo}</p>
-            <p> <b>Objetivo:</b> {proyecto.objetivo}</p>
-            <p> <b>Descripción:</b> {proyecto.descripcion}</p>
-            <p> <b>Lider:</b> {proyecto.lider}</p>
-            <p> <b>Número de Participantes:</b> {numberParticipants.count}</p>
-
-            <div className="button-container">
-                <VerProyectoBtn proyecto={proyecto}/>
-                <div className="space-button"></div>
-                {tagParticipacion}
-                {botonParticiparProyecto}
-                {botonCancelarParticipacion}
-                {botonEditarProyecto}
-                {botonEliminarProyecto}
-            </div>
-
-            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar}/>
-        </Box>
-*/
 export default ContenidoProyecto

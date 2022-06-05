@@ -129,7 +129,7 @@ const Profile = ({sessionData}) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose:()=>{console.log("despues del mensaje");},
   });
   const history = useHistory();
   const [userExist, setUserExsit] = useState({

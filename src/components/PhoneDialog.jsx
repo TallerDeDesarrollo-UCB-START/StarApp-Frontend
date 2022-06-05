@@ -18,7 +18,7 @@ export default function PhoneDialog({user}) {
     message:"",
     active:false,
     severity:"success",
-    afterClose:()=>{},
+    afterClose:()=>{console.log("despues del mensaje");},
 })
   React.useEffect(()=>{
     AxiosClient.get(`${urlBase}extended_form/${user}`)

@@ -2,12 +2,10 @@ import React from "react";
 import { makeStyles, Typography, Button, TextField } from "@material-ui/core";
 import axios from "axios";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
-import BadRequests from "../components/redirect status/BadRequests";
-//import ErrorPage from "../components/redirect status/ErrorPage";
 import { useHistory } from "react-router-dom";
 import RedirectErrorPage from "../components/redirect status/RedirectErrorPage";
 import MyButton from "../shared/components/Button";
-//import BadRequests from "../components/redirect status/ErrorPage";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -26,7 +24,7 @@ const ResetPassword = () => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose:()=>{console.log("despues del mensaje");},
   });
   
   const sendEmail = () => {

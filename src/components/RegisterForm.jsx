@@ -96,7 +96,7 @@ const RegisterForm = () => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {console.log("acabado")},
+    afterClose:()=>{console.log("despues del mensaje");},
   });
   const validate = (values) => {
     setValidateButton(false);

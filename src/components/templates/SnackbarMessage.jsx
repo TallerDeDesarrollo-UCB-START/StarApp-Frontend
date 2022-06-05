@@ -10,7 +10,8 @@ function TransitionDown(props) {
 const SnackbarMessage = ({snackbar,setActive}) => {
     const handleClose = () => {
         setActive({...snackbar, active:false})
-        snackbar.afterClose()
+        if (snackbar.afterClose)
+            snackbar.afterClose()
     }
     return (
     <div >

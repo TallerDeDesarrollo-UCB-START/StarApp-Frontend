@@ -24,7 +24,7 @@ export const ResetNewPassword = () => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {},
+    afterClose:()=>{console.log("despues del mensaje");},
   });
   const sendPassword = () => {
     const URL_API = process.env.REACT_APP_API_AUTH

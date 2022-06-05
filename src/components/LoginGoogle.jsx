@@ -8,8 +8,8 @@ import { useHistory } from "react-router-dom";
 import MyButton from "../shared/components/Button";
 const URL_AUTH = process.env.REACT_APP_API_AUTH
 const URL = process.env.REACT_APP_API
-var history = null;
-var telefonoContacto = null;
+let history = null;
+let telefonoContacto = null;
 const   OnSubmit = async (values) => {
   telefonoContacto = values.user.phoneNumber;
   const bodyAuth = {

@@ -83,7 +83,7 @@ const LoginForm = ({ sessionData, setSessionData }) => {
     message: "",
     active: false,
     severity: "success",
-    afterClose: () => {console.log("acabado")},
+    afterClose:()=>{console.log("despues del mensaje");},
   });
   const [activeProgressBar, setActiveProgressBar] = useState(false);
 

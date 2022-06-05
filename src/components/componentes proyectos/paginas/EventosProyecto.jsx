@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const EventosProyecto = ({ id, title }) => {
-  const history = useHistory();
   const smallScreen = !useMediaQuery("(min-width:500px)");
   const [events, setEvents] = useState([]);
   const classes = useStyles();
@@ -48,7 +47,8 @@ const EventosProyecto = ({ id, title }) => {
   const [snackbar, setSnackbar] = React.useState({
     message: "",
     active: false,
-    severity: "success"
+    severity: "success",
+    afterClose:()=>{console.log("despues del mensaje");},
   });
   useEffect(
     () =>

@@ -13,6 +13,7 @@ function SnackBarProyectos({infoSnackbar}) {
         message:"",
         active:false,
         severity:"success",
+        afterClose:()=>{console.log("despues del mensaje");},
     })
     const mountedRef = useRef(false)
 

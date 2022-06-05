@@ -33,7 +33,7 @@ const apiProyectos = axios.create({
 });
 
 const current = new Date();
-var history = null
+let history = null
 
 //const currentDate = `${current.getFullYear()}-${current.getMonth() + 1}-${("0" + current.getDate()).slice(-2)}`;
 const currentDate = `${current.getFullYear()}-${(
@@ -193,8 +193,9 @@ class EventsListClass extends Component {
   deleteEvento = async (event) => {
       await axios.delete(urlDeploy + "/" + event.id)
       .catch((error) => {
-        if (error.message == "Network Error")
+        if (error.message == "Network Error"){
           RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.");
+        }
         console.log(error);
         throw error;
       });
