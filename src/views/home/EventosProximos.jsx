@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EventosProximos = ({ id, title }) => {
+const EventosProximos = ({ id }) => {
   const [snackbar, setSnackbar] = React.useState({
     message: "",
     active: false,
@@ -79,13 +79,6 @@ const EventosProximos = ({ id, title }) => {
         smallScreen ? classes.resp_root_container : classes.root_container
       }
     >
-      {title ? (
-        <Typography variant="h2" component="h2" gutterBottom>
-          Tus Próximos Eventos
-        </Typography>
-      ) : (
-        <div style={{ display: "none" }}></div>
-      )}
       {events.length ? (
         <div
           className={classes.container_events}
