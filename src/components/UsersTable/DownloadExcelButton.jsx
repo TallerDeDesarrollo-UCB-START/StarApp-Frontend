@@ -1,6 +1,6 @@
 import React from 'react';
 import XLSX from 'xlsx';
-import MyButton from '../../shared/components/Button';
+import MyButton from '../button';
 
 
 const DownloadExcelButton = ({data}) => {

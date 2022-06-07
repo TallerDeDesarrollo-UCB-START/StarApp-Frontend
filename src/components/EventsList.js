@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-//import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Card, Modal, Button, CardBody } from "reactstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Container, Modal, Button, CardBody } from "reactstrap";
+import { Link } from "react-router-dom";
 import "./EventsList.css";
 import TextField from "@mui/material/TextField";
 import { MenuItem, Snackbar } from "@material-ui/core";
@@ -12,12 +11,12 @@ import Typography from "@material-ui/core/Typography";
 import { CardHeader } from "@material-ui/core/";
 import { CardContent, CardMedia } from "@mui/material";
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
-import MyButton from "../shared/components/Button";
-import MySelect from "../shared/components/Select";
-import MyInputText from "../shared/components/InputText";
+import { useHistory } from "react-router-dom";
+import MyButton from "./button";
+import MySelect from "./select";
+import MyInputText from "./inputText";
 
 const url = process.env.REACT_APP_API;
-//const urlLocal = `http://localhost:5000/eventos`;
 const urlDeploy = `${url}eventos`;
 const urlCrearEvento = `${url}eventos/crearevento`;
 const urlLideres = `${url}lideres`;

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
 import fb from "../initializers";
 import AxiosClient from "./AxiosClient";
 import Avatar from '@material-ui/core/Avatar';
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
 import { useHistory } from "react-router-dom";
-import MyButton from "../shared/components/Button";
+import MyButton from "./button";
+
 const URL_AUTH = process.env.REACT_APP_API_AUTH
 const URL = process.env.REACT_APP_API
 let history = null;

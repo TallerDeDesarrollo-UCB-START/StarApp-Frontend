@@ -4,7 +4,7 @@ import axios from "axios";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 import { useHistory } from "react-router-dom";
 import RedirectErrorPage from "../components/redirect status/RedirectErrorPage";
-import MyButton from "../shared/components/Button";
+import MyButton from "../components/button";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",

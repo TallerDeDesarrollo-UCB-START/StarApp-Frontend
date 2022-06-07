@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ExitIcon from "@material-ui/icons/ExitToApp";
-import MyButton from "../../shared/components/Button";
+import MyButton from "../button";
 import useStyles from "./Header.styles";
 
 const Header = ({ logged }) => {

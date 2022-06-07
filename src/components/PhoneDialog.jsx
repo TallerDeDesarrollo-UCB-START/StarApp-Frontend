@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import AxiosClient from "./AxiosClient";
 import SnackbarMessage from "./templates/SnackbarMessage"
 import BadRequests from './redirect status/BadRequests';
-import MyButton from '../shared/components/Button';
+import MyButton from './button';
 const urlBase = process.env.REACT_APP_API
 
 export default function PhoneDialog({user}) {

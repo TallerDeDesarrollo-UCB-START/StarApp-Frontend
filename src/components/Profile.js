@@ -12,23 +12,19 @@ import ProfileImage from "./ProfileImage";
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
-import Chip from "@material-ui/core/Chip";
-import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import { useMediaQuery, Typography } from "@material-ui/core";
 import DialogConfirm from "./DialogConfirm"
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
 import BadRequests from "./redirect status/BadRequests";
-import MyButton from "../shared/components/Button";
-import MySelect from "../shared/components/Select";
-import MyInputText from "../shared/components/InputText";
+import MyButton from "./button";
+import MySelect from "./select";
+import MyInputText from "./inputText";
 
 const { getCountries } = require("country-list-spanish");
 
 const url = process.env.REACT_APP_API;
 const urlTablaExtensa = `${url}extended_form/`;
-
-//const urlTablaExtensa = "http://localhost:5000/extended_form/";
 
 function getModalStyle() {
   const top = 50;

@@ -7,14 +7,13 @@ import EliminarProjectoBtn from '../atomos/EliminarProjectoBtn'
 import {useHistory} from "react-router-dom"
 import './ContenidoProyectoDetalle.css';
 import { Box } from '@material-ui/core';
-import { Switch } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
 import EventosProyecto from '../paginas/EventosProyecto';
 // Permisos/Roles:
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
 import {useState, useRef, useEffect } from 'react';
-import MySwitch from "../../../shared/components/Switch";
+import MySwitch from "../../switch";
 
 function ContenidoProyectoDetalle ({proyecto}) {
     const fechaFin = proyecto.fecha_fin? proyecto.fecha_fin.substring(0, 10) : "En Progreso"

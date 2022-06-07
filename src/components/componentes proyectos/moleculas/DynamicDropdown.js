@@ -1,6 +1,6 @@
 import '../moleculas/FormularioCrearProyecto.css'
-import { FormControl, MenuItem, Select, InputLabel } from '@material-ui/core';
-import MySelect from '../../../shared/components/Select';
+import { MenuItem } from '@material-ui/core';
+import MySelect from '../../select';
 
 function DynamicDropdown({ elements, value, onChange, idField, labelField, titulo }) {
     // FUNCIONES:

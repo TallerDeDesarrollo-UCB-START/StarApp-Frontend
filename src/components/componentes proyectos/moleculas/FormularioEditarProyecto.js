@@ -1,15 +1,12 @@
-// Componentes:
 import InputTexto from '../moleculas/InputTexto'
-// Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
-//import { makeStyles } from '@material-ui/core/styles'
 import { Modal } from '@material-ui/core';
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
-import MyButton from '../../../shared/components/Button'
-import MyInputText from "../../../shared/components/InputText";
+import MyButton from '../../button'
+import MyInputText from "../../inputText";
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
 

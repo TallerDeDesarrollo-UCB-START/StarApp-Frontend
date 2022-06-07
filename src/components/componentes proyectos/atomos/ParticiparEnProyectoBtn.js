@@ -1,9 +1,7 @@
 import React from "react";
-import { Box } from '@material-ui/core';
-import LockIcon from '@material-ui/icons/Lock';
-import {VARIABLES} from '../organismos/variables-compartidas'
+import { VARIABLES } from '../organismos/variables-compartidas'
 import { makeStyles } from "@material-ui/core/styles";
-import MyButton from "../../../shared/components/Button";
+import MyButton from "../../button";
 
 const useStyles = makeStyles({
     contenedorBtn: {

@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Form, Field } from "react-final-form";
 import { TextField } from "final-form-material-ui";
-import { useMediaQuery, Button, Typography, Grid } from "@material-ui/core";
+import { useMediaQuery, Typography, Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { validEmail } from "./RegEx";
 import AxiosClient from "./AxiosClient";
@@ -14,7 +14,7 @@ import LoginGoogle from "./LoginGoogle";
 import { NavLink } from "react-router-dom";
 import BadRequests from "./redirect status/BadRequests";
 import RedirectErrorPage from "./redirect status/RedirectErrorPage";
-import MyButton from "../shared/components/Button";
+import MyButton from "./button";
 const useStyles = makeStyles((theme) => ({
   Container: {
     display: "flex",

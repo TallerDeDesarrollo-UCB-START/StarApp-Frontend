@@ -7,7 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
-import MyButton from '../../../shared/components/Button';
+import MyButton from '../../button';
 
 
 function TransitionDown(props) {

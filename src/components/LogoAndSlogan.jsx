@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import LogoStart from "../images/logoStart.png";
+import LogoStart from "../assets/images/start_logo.png";
 import { Typography } from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
-import MyButton from "../shared/components/Button";
+import MyButton from "./button";
 
 const useStyles = makeStyles((theme) => ({
   logo: {

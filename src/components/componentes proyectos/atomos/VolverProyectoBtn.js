@@ -1,6 +1,6 @@
 
 import {useHistory} from "react-router-dom"
-import MyButton from "../../../shared/components/Button";
+import MyButton from "../../button";
 
 function VolverProyectoBtn() {
   let history = useHistory();

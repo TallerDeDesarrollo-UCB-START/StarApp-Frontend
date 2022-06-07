@@ -7,12 +7,10 @@ import {
   Chip,
   Grid,
   Box,
-  Switch,
-  FormControlLabel,
   Badge,
 } from "@material-ui/core/";
 import axios from "axios";
-import MySwitch from "../shared/components/Switch";
+import MySwitch from "./switch";
 
 const useStyles = makeStyles((theme) => ({
   large: {

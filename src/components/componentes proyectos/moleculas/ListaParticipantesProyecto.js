@@ -1,10 +1,10 @@
-import { Box ,List, ListItem,ListItemIcon,ListItemText,Button} from '@material-ui/core';
-import axios from 'axios';
-import React,{Component} from 'react';
-import ExportExcel from 'react-export-excel';
+import { Box ,List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import axios from 'axios'
+import React,{Component} from 'react'
+import ExportExcel from 'react-export-excel'
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
-import MyButton from '../../../shared/components/Button';
+import MyButton from '../../button';
 
 const ExcelFile = ExportExcel.ExcelFile;
 const ExcelSheet = ExportExcel.ExcelSheet;

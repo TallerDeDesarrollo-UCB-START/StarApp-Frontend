@@ -6,16 +6,14 @@ import {
   FormControlLabel,
   OutlinedInput,
   FormControl,
-  Select,
   MenuItem,
-  Switch,
   FormGroup,
   Checkbox,
 } from "@material-ui/core";
 import { fields } from "./SearchByField";
 import MaskedInput from "react-text-mask";
-import MySelect from "../../shared/components/Select";
-import MySwitch from "../../shared/components/Switch";
+import MySelect from "../select";
+import MySwitch from "../switch";
 
 function TextMaskCustom(props) {
   const { inputRef, ...other } = props;
