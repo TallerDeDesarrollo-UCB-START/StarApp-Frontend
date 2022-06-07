@@ -5,7 +5,7 @@ import ProyectosVoluntarios from './ProyectosVoluntarios'
 import PuertaPermisos from '../organismos/PuertaPermisos';
 import {SCOPES} from '../organismos/map-permisos';
 // Librerias-Paquetes:
-import {useState, useEffect, useRef, React} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {useLocation} from "react-router-dom";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 
@@ -21,7 +21,7 @@ function VistaProyectos() {
     const [proyectosPasadosCategoria, setProyectosPasadosCategoria] = useState([])
     const [actualizar, setActualizar] = useState(false)
     const mountedRef = useRef(false) // Bandera para saber si un componente esta desmontado o no, para evitar warning de cancelacion abrubta de llamadas asincronas
-    const [snackbar, setSnackbar] = React.useState({
+    const [snackbar, setSnackbar] = useState({
         message: "",
         active: false,
         severity: "success",

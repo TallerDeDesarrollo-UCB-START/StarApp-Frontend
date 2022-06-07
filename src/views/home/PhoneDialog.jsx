@@ -5,10 +5,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import AxiosClient from "./AxiosClient";
-import SnackbarMessage from "./templates/SnackbarMessage"
-import BadRequests from './redirect status/BadRequests';
-import MyButton from './button';
+import AxiosClient from "../../components/AxiosClient";
+import SnackbarMessage from "../../components/templates/SnackbarMessage"
+import BadRequests from '../../components/redirect status/BadRequests';
+import MyButton from '../../components/button';
+
 const urlBase = process.env.REACT_APP_API
 
 export default function PhoneDialog({user}) {
@@ -23,11 +24,13 @@ export default function PhoneDialog({user}) {
   React.useEffect(()=>{
     AxiosClient.get(`${urlBase}extended_form/${user}`)
       .then((response) => {
-        if (response.status === 200)
-            if (response.data.data.telefono === null || response.data.data.telefono === "")
-            {
-                handleClickOpen();
-            }
+        if (response.status === 200) {
+          //response.data.data.telefono = null;
+          if (response.data.data.telefono === null || response.data.data.telefono === "")
+          {
+              handleClickOpen();
+          }
+        }
         })
       .catch((response) => { 
         let message = BadRequests(response.status);
@@ -55,7 +58,7 @@ export default function PhoneDialog({user}) {
         activeSnackbar("No se ha registrado el número de teléfono, "+message, "error");
       });
   };
-
+  
   return (
     <div>
       <Dialog disableEscapeKeyDown="true" onBackdropClick="false" open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
