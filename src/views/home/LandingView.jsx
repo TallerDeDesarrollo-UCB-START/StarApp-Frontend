@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography, useMediaQuery, Card, CardActions, CardContent, Button } from '@material-ui/core'
-import MyButton from '../button'
+import MyButton from '../../components/button'
 
 const useStyles = makeStyles(theme => ({
     root: {

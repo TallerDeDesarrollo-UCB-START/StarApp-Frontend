@@ -4,9 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import ResumedCardEvento from "./ResumedCardEvento";
 import axios from "axios";
 import SnackbarMessage from "../../components/templates/SnackbarMessage";
-import RedirectErrorPage from "../redirect status/RedirectErrorPage";
+import RedirectErrorPage from "../../components/redirect status/RedirectErrorPage";
 import { useHistory } from "react-router-dom";
-import MyButton from "../button";
+import MyButton from "../../components/button";
 
 const useStyles = makeStyles((theme) => ({
   root_container: {

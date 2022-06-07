@@ -1,7 +1,7 @@
 import LoginForm from "../components/LoginForm";
 import Register from "../screens/Register";
 import EventsList from "../components/EventsList";
-import Home from "../components/Home/Home";
+import Home from "../views/home/Home";
 import Profile from "../components/Profile";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
 import Evento from "../components/Evento";

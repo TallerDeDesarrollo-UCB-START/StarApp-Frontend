@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from "@material-ui/core/Paper";
 import ProyectosProximos from '../components/componentes proyectos/paginas/ProyectosProximos';
-import EventosProximos from './Home/EventosProximos';
+import EventosProximos from '../views/home/EventosProximos';
 import ListaInsignias from './perfil/insignias/listaInsignias.jsx';
 
 function TabPanel(props) {
