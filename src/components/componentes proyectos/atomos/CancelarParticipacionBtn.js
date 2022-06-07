@@ -1,5 +1,5 @@
 import React from "react";
-import MyButton from '../../../shared/components/Button';
+import MyButton from '../../button';
 
 function CancelarParticipacionBtn( {proyecto, onCancelarParticipacion, onAsignarSnackbarStatus, onAsignarParticipacion, onAvisoAccion}) {
 

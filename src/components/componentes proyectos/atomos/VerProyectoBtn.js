@@ -1,4 +1,4 @@
-import MyButton from '../../../shared/components/Button';
+import MyButton from '../../button';
 
 function VerProyectoBtn({proyecto}) {
 	return (

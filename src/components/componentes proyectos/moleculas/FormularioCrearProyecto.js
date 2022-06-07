@@ -1,16 +1,12 @@
-// Componentes: 
 import InputTexto from '../moleculas/InputTexto'
-// Librerias-Paquetes:
 import '../moleculas/FormularioCrearProyecto.css'
-//import {VARIABLES} from '../organismos/variables-compartidas'
 import { useState } from "react"
 import React from 'react';
 import { Modal} from '@material-ui/core';
-//import { Button, Modal, FormData, FormControl, MenuItem, Select, InputLabel} from '@material-ui/core';
-import { useForm, /*SubmitHandler,*/ FormProvider } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
-import MyButton from "../../../shared/components/Button";
-import MyInputText from "../../../shared/components/InputText";
+import MyButton from "../../button";
+import MyInputText from "../../inputText";
 
 const estados = [
     {value: 10, label: "CONCLUIDO", bool: false},

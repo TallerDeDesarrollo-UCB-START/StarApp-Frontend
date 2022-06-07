@@ -1,7 +1,6 @@
 //aca viene el eliminar evento
 import React from "react";
 import axios from "axios";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -10,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import BadRequests from "./redirect status/BadRequests";
 import SnackbarMessage from "../components/templates/SnackbarMessage";
-import MyButton from "../shared/components/Button";
+import MyButton from "./button";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;

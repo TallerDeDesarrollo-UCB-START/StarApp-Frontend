@@ -10,8 +10,9 @@ import VistaProyectoIndividual from "../components/componentes proyectos/paginas
 import VistaCategoriasProyectos from "../components/componentes proyectos/paginas/VistaCategoriasProyectos"
 import ValidateView from "../screens/ValidateView";
 import ResetPassword from "../screens/ResetPassword";
-import {ResetNewPassword} from "../screens/ResetNewPassword";
+import { ResetNewPassword } from "../screens/ResetNewPassword";
 import ErrorPage from "../components/redirect status/ErrorPage";
+
 const Routes = [
   {
     path: "/",

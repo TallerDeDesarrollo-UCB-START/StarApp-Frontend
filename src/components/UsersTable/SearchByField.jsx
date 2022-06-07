@@ -3,7 +3,7 @@ import { makeStyles} from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import {useMediaQuery} from '@material-ui/core'
-import MySelect from '../../shared/components/Select'
+import MySelect from '../select'
 import MenuItem from "@mui/material/MenuItem";
 
 const useStyles = makeStyles((theme) => ({

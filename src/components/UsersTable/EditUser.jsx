@@ -1,9 +1,6 @@
 import React from "react"
 import {
   Modal,
-  FormControl,
-  Select,
-  InputLabel,
   MenuItem,
   useMediaQuery,
 } from "@material-ui/core"
@@ -13,8 +10,8 @@ import { InputByCriteria } from "./InputsByFields"
 import axios from "axios"
 import SnackbarMessage from "../templates/SnackbarMessage"
 import BadRequests from "../redirect status/BadRequests"
-import MyButton from "../../shared/components/Button"
-import MySelect from "../../shared/components/Select"
+import MyButton from "../button"
+import MySelect from "../select"
 
 const useStyles = makeStyles((theme) => ({
   paper: {

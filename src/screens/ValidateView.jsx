@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
-import { makeStyles, Typography, Button } from '@material-ui/core'
-import MyButton from '../shared/components/Button'
+import { makeStyles, Typography } from '@material-ui/core'
+import MyButton from '../components/button'
 
 const useStyles = makeStyles((theme) => ({
     root:{

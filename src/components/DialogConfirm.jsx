@@ -8,7 +8,7 @@ import axios from "axios";
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
-import MyButton from '../shared/components/Button';
+import MyButton from './button';
 
 const url = process.env.REACT_APP_API;
 const urlEliminarCuenta=`${url}disable_user/`

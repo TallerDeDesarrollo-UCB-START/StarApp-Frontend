@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import { Form, Field } from "react-final-form";
-import { useMediaQuery, Button, Grid } from "@material-ui/core";
+import { useMediaQuery, Grid } from "@material-ui/core";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import { TextField } from "final-form-material-ui";
 import { validName, validEmail, validPassword } from "./RegEx";
@@ -14,8 +14,8 @@ import SnackbarMessage from "../components/templates/SnackbarMessage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import LoginGoogle from "./LoginGoogle";
 import Typography from "@material-ui/core/Typography";
-import MyButton from "../shared/components/Button";
-import MyInputText from "../shared/components/InputText";
+import MyButton from "./button";
+import MyInputText from "./inputText";
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Typography, useMediaQuery, Button } from "@material-ui/core";
+import { Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import ResumedCardEvento from "../../Home/ResumedCardEvento";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
-import MyButton from "../../../shared/components/Button";
+import MyButton from "../../button";
 
 const useStyles = makeStyles((theme) => ({
   root_container: {

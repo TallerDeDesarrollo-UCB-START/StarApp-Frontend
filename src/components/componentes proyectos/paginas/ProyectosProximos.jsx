@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 import RedirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
-import MyButton from "../../../shared/components/Button";
+import MyButton from "../../button";
 
 const useStyles = makeStyles((theme) => ({
   root_container: {
