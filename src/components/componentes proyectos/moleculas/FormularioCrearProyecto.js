@@ -7,7 +7,8 @@ import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from "../../button";
 import MyInputText from "../../inputText";
-
+import axios from 'axios';
+import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 const estados = [
     {value: 10, label: "CONCLUIDO", bool: false},
     {value: 20, label: "EN CURSO", bool: true}
@@ -31,8 +32,32 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const [url_imagen, setImagenUrl] = useState('')
     // Modal/popup styles:
     const [modalStyle] = React.useState(getModalStyle);
-
-
+    const [snackbar, setSnackbar] = React.useState({
+        message: "",
+        active: false,
+        severity: "success",
+        afterClose:()=>{console.log("despues del mensaje");},
+      });
+    const activeSnackbar = (message, severity, afterClose) => {
+        setSnackbar({ message, severity, afterClose, active: true });
+    };
+    const isImageFormatValid = (imageType) =>
+    {
+        return imageType == "image/png" || imageType == "image/jpeg" || imageType == "image/jpg";
+    }
+    let state = null;
+    let onFileChange = event => {
+        const image = event.target.files[0];
+        if (isImageFormatValid(image.type))
+            state =  image;
+        else{
+            document.getElementById('imageFile').value = ''
+            activeSnackbar(
+                "Solo se puede añadir imagenes png y jpeg",
+                "error"
+              );
+        }
+    };
     // FUNCIONES:
     function resetStates() {
         setFechaInicio('')
@@ -109,6 +134,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                         <h4>Crear Proyecto</h4>
                     </div>
                     <div style={{padding: "1% 3% 0 5%"}}>
+                        <input id="imageFile" type="file" onChange={onFileChange} />
                         <InputTexto type="date"
                                     tituloLabel={"Fecha de Inicio"}
                                     nameId="fecha_inicio"
@@ -184,7 +210,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                     </div>
                 </form>
             </FormProvider>
-            
+            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>);
     
     return (
