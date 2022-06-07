@@ -1,19 +1,8 @@
-// Componentes:
 import './HeaderProyectos.css';
 import VolverProyectoBtn from '../atomos/VolverProyectoBtn';
-// Librerias-Paquetes:
 import { Container, Grid, Box, Typography } from '@material-ui/core';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
-//import { makeStyles } from '@material-ui/core/styles';
 
-/*const useStyles = makeStyles({
-    far_right: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        gap: '3%'
-    },
-});*/
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
