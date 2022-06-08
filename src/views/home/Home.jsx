@@ -7,6 +7,7 @@ import PhoneDialog from './PhoneDialog';
 import useStyles from "./Home.styles";
 
 const Home = ({ sessionData }) => {
+	const islogged = Boolean(sessionStorage.getItem("jwt"));
 	const classes = useStyles();
 	const { fillDataReminder } = classes;
 	return (
@@ -21,9 +22,11 @@ const Home = ({ sessionData }) => {
 					</>
 				)
 			}
-			<div className={fillDataReminder}>
-				<FillDataReminder/>
-			</div>
+			{islogged && (
+				<div className={fillDataReminder}>
+					<FillDataReminder/>
+				</div>
+			)}
 		</>
 	)
 }

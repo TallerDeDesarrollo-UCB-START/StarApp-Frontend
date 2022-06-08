@@ -42,6 +42,5 @@ const FillDataReminder = () => {
 		</>
 	)
 }
+
 export default FillDataReminder;
-
-
