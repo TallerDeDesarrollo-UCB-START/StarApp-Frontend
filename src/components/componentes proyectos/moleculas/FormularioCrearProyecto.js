@@ -28,7 +28,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const [categoria, setCategoria] = useState('1')
     const [estado, setEstado] = useState(20)
     const [informacion_adicional, setInfoAd] = useState('')
-    //const [image, setImagen] = useState('')
+    const [picture, setPicture] = useState(null)
     const [url_imagen, setImagenUrl] = useState('')
     // Modal/popup styles:
     const [modalStyle] = React.useState(getModalStyle);
@@ -45,19 +45,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     {
         return imageType == "image/png" || imageType == "image/jpeg" || imageType == "image/jpg";
     }
-    let state = null;
-    let onFileChange = event => {
-        const image = event.target.files[0];
-        if (isImageFormatValid(image.type))
-            state =  image;
-        else{
-            document.getElementById('imageFile').value = ''
-            activeSnackbar(
-                "Solo se puede añadir imagenes png y jpeg",
-                "error"
-              );
-        }
-    };
+
     // FUNCIONES:
     function resetStates() {
         setFechaInicio('')
@@ -69,7 +57,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
         setCategoria('')
         setEstado('')
         setInfoAd('')
-        //setImagen('')
+        setPicture('')
         setImagenUrl('')
     }
 
@@ -101,17 +89,34 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const onChangeCategoria = (e) => {setCategoria(e.target.value);}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
-    //const onChangeImagen = (e) => {setImagen(e.target.value)}
     const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
-    
+    const onChangeImagen = (e) => {
+        const img = e.target.files[0];
+        if (isImageFormatValid(img.type)){
+            setPicture(img)
+        }
+        else{
+            e.target.value = ''
+            activeSnackbar(
+                "Solo se puede añadir imagenes png y jpeg",
+                "error"
+              );
+        }
+        console.log(img)
+    }
+
     const onSubmit = (data) => {
         const estadoActual = estados.find(est => est.value === estado)
         const categoriaActual = categorias.find(catego => catego.id === categoria)
         const liderActual = lideres.find(lid=> lid.id===lider)
+        data.titulo = titulo
+        data.objetivo = objetivo
+        data.descripcion = descripcion
         data.estado = estadoActual.bool
         data.categoria = categoriaActual.tipo
         data.lider = liderActual.nombre
-        
+        data.image = picture
+        console.log(data);
         onCrearProy(data) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario
@@ -134,7 +139,11 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                         <h4>Crear Proyecto</h4>
                     </div>
                     <div style={{padding: "1% 3% 0 5%"}}>
-                        <input id="imageFile" type="file" onChange={onFileChange} />
+                    <input
+                            type="file"
+                            onChange={onChangeImagen}
+                            />
+                        
                         <InputTexto type="date"
                                     tituloLabel={"Fecha de Inicio"}
                                     nameId="fecha_inicio"
@@ -231,6 +240,17 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
 export default FormularioCrearProyecto
 
 /*
+<InputTexto type="file"
+                                    id="imageFile" 
+                                    name="image" 
+                                    value={picture}
+                                    onChange={onChangeImagen}
+                                     />
+<input
+                            type="file"
+                            //style={{ display: 'none' }}
+                            onChange={onChangeImagen}
+                            />
 <label>
                         Imagen por archivo
                     </label>

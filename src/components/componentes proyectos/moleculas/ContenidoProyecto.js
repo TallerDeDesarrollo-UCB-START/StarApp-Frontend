@@ -117,21 +117,27 @@ function ContenidoProyecto({proyecto, /*rol,*/ onActivarForm, onPartiparProy, on
                                 </PuertaPermisos>
 
     function content (){
-        var resp="";
-        var cont=true;
-        var i=0;
-        for(i=0; i < 100 && cont; i++){
-            if(proyecto.descripcion[i]!==undefined){
-                resp += proyecto.descripcion[i];
-            }else {
-                cont=false;
+        try{
+            var resp="";
+            var cont=true;
+            var i=0;
+            for(i=0; i < 100 && cont; i++){
+                if(proyecto.descripcion[i]!==undefined){
+                    resp += proyecto.descripcion[i];
+                }else {
+                    cont=false;
+                }
             }
+            if(i >= 85) {
+                resp += '...';
+            }
+            
+            return resp;
+        }catch(error)
+        {
+            console.log(error);
+            throw error;
         }
-        if(i >= 85) {
-            resp += '...';
-        }
-        
-        return resp;
     }
 
     function title (){
