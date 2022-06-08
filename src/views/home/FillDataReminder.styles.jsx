@@ -8,10 +8,10 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: "center",
 		[theme.breakpoints.up('xs')]: {
 			gap: "100px",
-    },
-    [theme.breakpoints.down('xs')]: {
+    	},
+    	[theme.breakpoints.down('xs')]: {
 			gap: "10px",
-    },
+    	},
 		paddingLeft: "10px",
 		paddingRight: "10px",
 		position: "fixed",

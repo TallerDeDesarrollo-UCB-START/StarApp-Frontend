@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   card_container: {
-    width: 345,
+    width: 340,
     cursor: "pointer",
     "&:hover": {
       boxShadow:
