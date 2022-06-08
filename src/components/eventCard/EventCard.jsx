@@ -1,7 +1,8 @@
 import React from "react";
-import { Typography, Card, CardContent } from "@material-ui/core";
+import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import useStyles from "./EventCard.styles";
+import event_picture from "../../assets/images/event_picture.png";
 
 const months = {
   1: "Ene",
@@ -29,10 +30,12 @@ const EventCard = ({ event }) => {
   const { id, fecha_evento, hora_inicio, hora_fin, nombre_evento, lugar_evento } = event;
   const { card_container, card_content, left_card_content, right_card_content, icon_and_text } = classes;
   return (
-    <Card
-      className={card_container}
-      onClick={() => (window.location.href = `/eventos/${id}`)}
-    >
+    <Card className={card_container} onClick={() => (window.location.href = `/eventos/${id}`)}>
+      <CardMedia
+        component="img"
+        height="180"
+        src={event_picture}
+      />
       <CardContent className={card_content}>
         <div className={left_card_content}>
           <Typography variant="h6">

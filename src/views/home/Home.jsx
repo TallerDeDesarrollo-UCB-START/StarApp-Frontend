@@ -7,26 +7,26 @@ import PhoneDialog from './PhoneDialog';
 import useStyles from "./Home.styles";
 
 const Home = ({ sessionData }) => {
-	const islogged = Boolean(sessionStorage.getItem("jwt"));
+	const isLogged = false; //Boolean(sessionStorage.getItem("jwt"));
 	const classes = useStyles();
 	const { fillDataReminder } = classes;
 	return (
 		<>
-			{(!sessionData.id) ? <LandingView /> : (
+			{(isLogged && sessionData.id) ? (
 					<>
 						<Typography variant="h2" component="h2" gutterBottom>
 							Tus Próximos Eventos
 						</Typography>
 						<EventosProximos id={sessionData.id} />
 						<PhoneDialog user={sessionData.id} />
+						<div className={fillDataReminder}>
+							<FillDataReminder/>
+						</div>
 					</>
+				) : (
+					<LandingView />
 				)
 			}
-			{islogged && (
-				<div className={fillDataReminder}>
-					<FillDataReminder/>
-				</div>
-			)}
 		</>
 	)
 }
