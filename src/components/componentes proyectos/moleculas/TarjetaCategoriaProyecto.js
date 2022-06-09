@@ -17,9 +17,10 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(() => ({
     container: {
-      width: '100%',//'90%',
-      height: '100%',//'75%',
+      width: '70%',//'90%',
+      height: '110%',//'75%',
       margin: 'auto',
+
     },
     card: {
         borderRadius: '1rem',
@@ -46,30 +47,9 @@ const useStyles = makeStyles(() => ({
       position: 'absolute',
       top: '0%',
       right: '0%',
-    },
-    typography: {
-      textTransform: 'uppercase',
-      '@media only screen and (max-width: 675px) ': {
-        fontSize: '1.7rem',
-      },
-      '@media only screen and (max-width: 610px) ': {
-        fontSize: '1.5rem',
-      },
-      '@media only screen and (max-width: 530px) ': {
-        fontSize: '1.2rem',
-      },
-      '@media only screen and (max-width: 445px) ': {
-        fontSize: '1rem',
-      },
-      '@media only screen and (max-width: 380px) ': {
-        fontSize: '0.95rem',
-      },
-      '@media only screen and (max-width: 370px) ': {
-        fontSize: '0.88rem',
-        wordBreak: 'break-all',
-      },
       
-    }
+    },
+    
   }));
 
 function TarjetaCategoriaProyecto({imagen, categoria}) {
@@ -83,17 +63,11 @@ function TarjetaCategoriaProyecto({imagen, categoria}) {
                   <CardMedia
                     component="img"
                     alt={categoria}
-                    height="300"
+                    height="200"
                     image={imagen}
                     title={categoria}
                     className={classes.media}
                   />
-                  <Box  className={classes.content}>
-                    <Typography gutterBottom variant="h5" component="h3" className={classes.typography}>
-                      {categoria}
-                    </Typography>
-                  </Box>
-                  
                 </CardActionArea>
               </Link>
               
