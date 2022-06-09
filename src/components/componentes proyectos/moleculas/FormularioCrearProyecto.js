@@ -99,7 +99,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                 "error"
               );
         }
-        console.log(img)
     }
 
     const onSubmit = (data) => {
@@ -113,7 +112,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
         data.categoria = categoriaActual.tipo
         data.lider = liderActual.nombre
         data.image = picture
-        console.log(data);
         onCrearProy(data) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario

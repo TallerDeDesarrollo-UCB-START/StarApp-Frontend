@@ -80,7 +80,7 @@ function VistaCategoriasProyectos() {
                 }
             )
             const linkImage = await response.json()
-            return linkImage.links[0]
+            return linkImage.links
         }catch(error)
         {
             console.log(error);
