@@ -90,9 +90,9 @@ function VistaCategoriasProyectos() {
     // Endpoint fetch
     const crearProyecto = async (nuevoProyecto) => {
         try{
-            const urlImage = await createImage(nuevoProyecto.image);
-            nuevoProyecto.url_imagen = urlImage;
-            console.log(urlImage);
+            if (nuevoProyecto.image){
+                nuevoProyecto.url_imagen = await createImage(nuevoProyecto.image);
+            }
             await fetch(
                 URLCrearProy,
                 {

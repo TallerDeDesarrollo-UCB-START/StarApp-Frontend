@@ -7,8 +7,8 @@ import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from "../../button";
 import MyInputText from "../../inputText";
-import axios from 'axios';
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
+
 const estados = [
     {value: 10, label: "CONCLUIDO", bool: false},
     {value: 20, label: "EN CURSO", bool: true}
@@ -29,7 +29,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const [estado, setEstado] = useState(20)
     const [informacion_adicional, setInfoAd] = useState('')
     const [picture, setPicture] = useState(null)
-    const [url_imagen, setImagenUrl] = useState('')
     // Modal/popup styles:
     const [modalStyle] = React.useState(getModalStyle);
     const [snackbar, setSnackbar] = React.useState({
@@ -58,7 +57,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
         setEstado('')
         setInfoAd('')
         setPicture('')
-        setImagenUrl('')
     }
 
     function getModalStyle() {
@@ -89,7 +87,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const onChangeCategoria = (e) => {setCategoria(e.target.value);}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
-    const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
     const onChangeImagen = (e) => {
         const img = e.target.files[0];
         if (isImageFormatValid(img.type)){
@@ -138,12 +135,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                     <div className="crear-container-title" >
                         <h4>Crear Proyecto</h4>
                     </div>
-                    <div style={{padding: "1% 3% 0 5%"}}>
-                    <input
-                            type="file"
-                            onChange={onChangeImagen}
-                            />
-                        
+                    <div style={{padding: "1% 3% 0 5%"}}>                        
                         <InputTexto type="date"
                                     tituloLabel={"Fecha de Inicio"}
                                     nameId="fecha_inicio"
@@ -205,12 +197,11 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     onChange={onChangeInfoAd}
                                     options={{maxLength: 300}}
                                     />
-                        <MyInputText
-                            id="image_url"
-                            value={url_imagen}
-                            onChange={onChangeImagenUrl}
-                            placeholder='Imagen por Link'
-                            />
+                        <input
+                            style={{fontSize: "17px", padding:"10px 0px 20px 10px"}}
+                            type="file"
+                            onChange={onChangeImagen}
+                                    />
                         <div className="btn-crear-container">
                             <MyButton onClick={methods.handleSubmit(onSubmit)} className="default">
                                 CREAR PROYECTO

@@ -218,10 +218,34 @@ function VistaProyectos() {
             launchError(`No se pudo crear el proyecto. Ocurrio un error en el servidor.`);
         }
     }
-    
+    const createImage = async (image)=>{
+        try{///https://dev-back-startamericas.herokuapp.com/
+            let formData = new FormData();
+            formData.append("photos",image);
+            const response = await fetch(
+                    URLImages,
+                {
+                    method: 'POST',
+                    body: formData,
+                    headers:{
+                        'Accept' : 'application/json'
+                    }
+                }
+            )
+            const linkImage = await response.json()
+            return linkImage.links[0]
+        }catch(error)
+        {
+            console.log(error);
+            throw error;
+        }
+    }
     // UPDATEs
     const editarProyecto = async (proyectoEditar) => {
         try{
+            if (proyectoEditar.image){
+                proyectoEditar.url_imagen = await createImage(proyectoEditar.image);
+            }
             //const response = 
             await fetch(
                 `${URLEditarProy}/${proyectoEditar.id}`,
@@ -325,14 +349,15 @@ function VistaProyectos() {
 
 const url = process.env.REACT_APP_API;
 const URLLideres = `${url}get_lideres`
-const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
-const URLProyectos = `${url}get_proyectos`//'http://localhost:5000/get_proyectos'
-const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//
-const URLEditarProy = `${url}update_proyecto`//'http://localhost:5000/update_proyecto'//
-const URLEliminarProy = `${url}delete_proyecto`//'http://localhost:5000/delete_proyecto'//
-const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
-const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
-const URLNumeroParticipantes = `${url}get_numero_participantes` //'http://localhost:5000/get_rol/'
+const URLParticiparProy = `${url}participate_proyecto`
+const URLProyectos = `${url}get_proyectos`
+const URLCrearProy = `${url}create_proyecto`
+const URLEditarProy = `${url}update_proyecto`
+const URLEliminarProy = `${url}delete_proyecto`
+const URLParticpaVoluntario = `${url}participate`
+const URLCancelarParticipProy = `${url}cancel_participate_proyecto`
+const URLNumeroParticipantes = `${url}get_numero_participantes` 
 const URLProyectosPasados = `${url}get_proyectos_acabado`
-const URLCategorias = `${url}get_categoria_proyectos`//``http://localhost:5000/get_categorias`//`
+const URLCategorias = `${url}get_categoria_proyectos`
+const URLImages = `${url}uploadPhotos`
 export default VistaProyectos;
