@@ -1,4 +1,5 @@
 import InputTexto from '../moleculas/InputTexto'
+import InputFile from '../moleculas/InputFile'
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
@@ -89,15 +90,25 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
     const onChangeImagen = (e) => {
         const img = e.target.files[0];
+        let imageName = document.getElementById("nameOfImage");
+        let errorMessage = document.getElementById("inputMessageError");
         if (isImageFormatValid(img.type)){
-            setPicture(img)
+            setPicture(img);
+            imageName.style.display = "block";
+            imageName.textContent = img.name;
+            errorMessage.textContent = "";
+            errorMessage.style.display = "none";
         }
         else{
-            e.target.value = ''
-            activeSnackbar(
-                "Solo se puede añadir imagenes png y jpeg",
-                "error"
-              );
+            e.target.value = "";
+            imageName.textContent = "";
+            imageName.style.display = "none";
+            errorMessage.style.display = "block";
+            errorMessage.textContent = "Solo se puede añadir imagenes png, jpg y jpeg.";
+            //activeSnackbar(
+            //    "Solo se puede añadir imagenes png y jpeg",
+            //    "error"
+            //  );
         }
     }
 
@@ -188,18 +199,20 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                         idField={'value'}
                                         labelField={'label'}/>
                         <InputTexto type="link"
-                                        tituloLabel="Información Adicional"
-                                        nameId="informacion_adicional"
+                                    tituloLabel="Información Adicional"
+                                    nameId="informacion_adicional"
                                     placeHolder='Información Adicional'
                                     value={informacion_adicional}
                                     onChange={onChangeInfoAd}
                                     options={{maxLength: 300}}
                                     />
-                        <input
-                            style={{fontSize: "17px", padding:"10px 0px 20px 10px"}}
-                            type="file"
-                            onChange={onChangeImagen}
+                        <InputFile
+                                    tituloLabel="Imagen"
+                                    nameId="Imagen"
+                                    onChangeImagen={onChangeImagen}
+                                    filesAllowed={"image/png, image/jpg, image/jpeg"}
                                     />
+                        
                         <div className="btn-crear-container">
                             <MyButton onClick={methods.handleSubmit(onSubmit)} className="default">
                                 CREAR PROYECTO
@@ -249,4 +262,20 @@ export default FormularioCrearProyecto
                         value={image}
                         onChange={onChangeImagen}
                     />
+<input
+                            style={{fontSize: "17px", padding:"10px 0px 20px 10px"}}
+                            type="file"
+                            onChange={onChangeImagen}
+                                    />
+*/
+
+/*
+<label for="imageField">Imagen</label><br></br>
+                        <label id="nameOfImage" for="imageField" style={{"display":"none"}}></label>
+                        <input
+                            id="imageField"
+                            style={{fontSize: "17px", padding:"10px 0px 20px 10px",color: "transparent"}}
+                            type="file"
+                            onChange={onChangeImagen}
+                                    />
 */

@@ -1,4 +1,5 @@
 import InputTexto from '../moleculas/InputTexto'
+import InputFile from '../moleculas/InputFile'
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
@@ -130,17 +131,26 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeEstado = (e) => {setEstadoId(e.target.value)}
     const onChangeImagen = (e) => {
         const img = e.target.files[0];
+        let imageName = document.getElementById("nameOfImage");
+        let errorMessage = document.getElementById("inputMessageError");
         if (isImageFormatValid(img.type)){
-            setPicture(img)
+            setPicture(img);
+            imageName.style.display = "block";
+            imageName.textContent = img.name;
+            errorMessage.textContent = "";
+            errorMessage.style.display = "none";
         }
         else{
-            e.target.value = ''
-            activeSnackbar(
-                "Solo se puede añadir imagenes png y jpeg",
-                "error"
-              );
+            e.target.value = "";
+            imageName.textContent = "";
+            imageName.style.display = "none";
+            errorMessage.style.display = "block";
+            errorMessage.textContent = "Solo se puede añadir imagenes png, jpg y jpeg.";
+            //activeSnackbar(
+            //    "Solo se puede añadir imagenes png y jpeg",
+            //    "error"
+            //  );
         }
-        console.log(img)
     }
     const onSubmit = data => {
         const estadoActual = estados.find(estado => estado.value === estadoId)
@@ -235,10 +245,11 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                         onChange={onChangeEstado}
                                         idField={'value'}
                                         labelField={'label'}/>
-                        <input
-                            style={{fontSize: "17px", padding:"10px 0px 20px 10px"}}
-                            type="file"
-                            onChange={onChangeImagen}
+                        <InputFile
+                                    tituloLabel="Imagen"
+                                    nameId="Imagen"
+                                    onChangeImagen={onChangeImagen}
+                                    filesAllowed={"image/png, image/jpg, image/jpeg"}
                                     />
                         <div className="btn-crear-container">
                             <MyButton className="default" onClick={methods.handleSubmit(onSubmit)}>
