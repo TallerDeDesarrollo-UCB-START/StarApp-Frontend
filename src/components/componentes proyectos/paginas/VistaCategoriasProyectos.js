@@ -90,15 +90,24 @@ function VistaCategoriasProyectos() {
     // Endpoint fetch
     const crearProyecto = async (nuevoProyecto) => {
         try{
+            let formData = new FormData();
             if (nuevoProyecto.image){
-                nuevoProyecto.url_imagen = await createImage(nuevoProyecto.image);
+                formData.append("photos",nuevoProyecto.image);
             }
+            formData.append("titulo",nuevoProyecto.titulo);
+            formData.append("descripcion",nuevoProyecto.descripcion);
+            formData.append("objetivo",nuevoProyecto.objetivo);
+            formData.append("lider",nuevoProyecto.lider);
+            formData.append("fecha_inicio",nuevoProyecto.fecha_inicio);
+            formData.append("fecha_fin",nuevoProyecto.fecha_fin);
+            formData.append("estado",nuevoProyecto.estado);
+            formData.append("categoria",nuevoProyecto.categoria);
+            formData.append("informacion_adicional",nuevoProyecto.informacion_adicional);
             await fetch(
                 URLCrearProy,
                 {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json'},
-                    body: JSON.stringify(nuevoProyecto)
+                    body: formData
                 }).catch((error)=>{
                     console.log(error);
                     if (error.message == "Failed to fetch")

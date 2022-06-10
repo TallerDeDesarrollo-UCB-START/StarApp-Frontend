@@ -102,7 +102,23 @@ function VistaProyectos() {
         }
     }, [actualizar, categoria, /*proyectosPasadosCategoria*/] )
 
-    
+    const formDataProyect =(proyect) =>
+    {
+        let formData = new FormData();
+        if (proyect.image){
+            formData.append("photos",proyect.image);
+        }
+        formData.append("titulo",proyect.titulo);
+        formData.append("descripcion",proyect.descripcion);
+        formData.append("objetivo",proyect.objetivo);
+        formData.append("lider",proyect.lider);
+        formData.append("fecha_inicio",proyect.fecha_inicio);
+        formData.append("fecha_fin",proyect.fecha_fin);
+        formData.append("estado",proyect.estado);
+        formData.append("categoria",proyect.categoria);
+        formData.append("informacion_adicional",proyect.informacion_adicional);
+        return formData;
+    }
     // ==== HTTP REQUESTS & FUNCIONES ====
     // GETs
     async function fetchProyectos() {
@@ -204,12 +220,12 @@ function VistaProyectos() {
     // CREATEs
     const crearProyecto = async (nuevoProyecto) => {
         try{
+            let formData = formDataProyect(nuevoProyecto);
             const response = await fetch(
                 URLCrearProy,
                 {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json'},
-                    body: JSON.stringify(nuevoProyecto)
+                    body: formData
                 })
             const data = await response.json()
             setProyectos([...proyectos, data])
@@ -243,16 +259,12 @@ function VistaProyectos() {
     // UPDATEs
     const editarProyecto = async (proyectoEditar) => {
         try{
-            if (proyectoEditar.image){
-                proyectoEditar.url_imagen = await createImage(proyectoEditar.image);
-            }
-            //const response = 
+            let formData = formDataProyect(proyectoEditar);
             await fetch(
                 `${URLEditarProy}/${proyectoEditar.id}`,
                 {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json'},
-                    body: JSON.stringify(proyectoEditar)
+                    body: formData
                 })
             //const data = await response.json()
             //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
