@@ -69,6 +69,7 @@ export default function MyButton({children, onClick, className, disabled, varian
 			{(className === "leave") && (
 				<Button
 					onClick={onClick}
+					variant="contained"
 					style={{backgroundColor: "black", color: "white"}}
 					size={size}
 					disabled={disabled}

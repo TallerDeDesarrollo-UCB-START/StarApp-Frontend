@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography } from "@material-ui/core";
 import MyButton from "../../components/button";
 import EventCard from "../../components/eventCard";
