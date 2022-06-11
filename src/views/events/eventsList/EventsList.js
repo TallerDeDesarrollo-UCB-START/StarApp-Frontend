@@ -546,7 +546,7 @@ class EventsListClass extends Component {
 
             <div className="Container-Body">
               {this.state.events.map((event) => (
-                <EventCard event={event} />
+                <EventCard event={event} hasActions={true}/>
               ))}
             </div>
 

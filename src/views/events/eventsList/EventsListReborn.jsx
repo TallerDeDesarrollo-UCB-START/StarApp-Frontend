@@ -111,7 +111,7 @@ const EventsListReborn = () => {
 			<br />
 			<div className={cards_container}>
 				{filteredEvents.map((event) => (
-					<EventCard event={event} />
+					<EventCard event={event} hasActions={true}/>
 				))}
 			</div>
 		</>
