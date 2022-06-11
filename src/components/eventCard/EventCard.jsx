@@ -20,10 +20,8 @@ const months = {
   12: "Dic",
 };
 
-const EventCard = ({ event, hasActions }) => {
+const EventCard = ({ event, hasActions, isParticipating, onClick }) => {
   const classes = useStyles();
-  console.log("hasActions")
-  console.log(hasActions)
   function getEventDateString(date) {
     const splittedDate = date.split("-");
     return months[parseInt(splittedDate[1])] + " " + splittedDate[2];
@@ -65,12 +63,15 @@ const EventCard = ({ event, hasActions }) => {
           </Typography>
           {hasActions && (
             <>
-              <MyButton className="default" onClick={() => console.log("aaaaaa")}>
-                Participar
-              </MyButton>
-              <MyButton className="leave" onClick={() => console.log("aaaaaa")}>
-                Dejar de participar
-              </MyButton>
+              {isParticipating ? (
+                <MyButton className="leave" onClick={onClick}>
+                  Dejar de participar
+                </MyButton>
+              ) : (
+                <MyButton className="default" onClick={onClick}>
+                  Participar
+                </MyButton>
+              )}
             </>
           )}
         </div>

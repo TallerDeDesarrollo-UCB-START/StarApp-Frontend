@@ -16,6 +16,7 @@ const EventsListReborn = () => {
 	const [categories, setCategories] = useState([]);
 	const [filteredCategory, setFilteredCategory] = useState("");
 	const [arePastEvents, setArePastEvents] = useState(false);
+	const [isParticipating, setIsParticipating] = useState(false);
 
 	const currentDate = DateTime.now();
 
@@ -41,9 +42,14 @@ const EventsListReborn = () => {
 		callGetMyUserRole();
 	}, []);
 
+	function onClickEventButton() {
+		setIsParticipating(!isParticipating);
+	}
+
 	function handleSelectChange({ target }) {
 		setFilteredCategory(target.value)
 	}
+
 
 	function filterByCategory(events) {
 		if (filteredCategory === "Todas") {
@@ -111,7 +117,7 @@ const EventsListReborn = () => {
 			<br />
 			<div className={cards_container}>
 				{filteredEvents.map((event) => (
-					<EventCard event={event} hasActions={true}/>
+					<EventCard event={event} hasActions={true} isParticipating={isParticipating} onClick={onClickEventButton}/>
 				))}
 			</div>
 		</>
