@@ -6,7 +6,7 @@ import Select from '@mui/material/Select';
 export default function MySelect({id, name, placeholder, value, onChange, children}) {
   return (
 		<>
-			<FormControl size="small" fullWidth>
+			<FormControl size="small" autoWidth>
         <InputLabel id={id}>{placeholder}</InputLabel>
         <Select
           id={id}
