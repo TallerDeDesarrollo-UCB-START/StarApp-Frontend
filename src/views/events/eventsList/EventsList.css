@@ -113,11 +113,6 @@
   .card1 {
     width: 80%;
   }
-  .Menu-Bar-Evento {
-    flex-direction: column;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-  }
   .header-botones-eventos {
     width: 100%;
     justify-content: center;

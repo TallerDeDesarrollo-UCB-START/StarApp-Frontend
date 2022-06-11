@@ -1,20 +1,17 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import axios from "axios";
-import { Container, Modal, Button, CardBody } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Modal } from "reactstrap";
 import "./EventsList.css";
 import TextField from "@mui/material/TextField";
 import { MenuItem, Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-import EliminarEvento from "./EliminarEvento";
 import Typography from "@material-ui/core/Typography";
-import { CardHeader } from "@material-ui/core/";
-import { CardContent, CardMedia } from "@mui/material";
-import RedirectErrorPage from "./redirect status/RedirectErrorPage";
+import RedirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
 import { useHistory } from "react-router-dom";
-import MyButton from "./button";
-import MySelect from "./select";
-import MyInputText from "./inputText";
+import MyButton from "../../../components/button";
+import MySelect from "../../../components/select";
+import MyInputText from "../../../components/inputText";
+import EventCard from "../../../components/eventCard"
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -509,182 +506,49 @@ class EventsListClass extends Component {
     const { snackbarAbierto } = this.state;
     try{
       return (
-        <div>
-          <Container className="container1">
+        <>
+        <MyButton
+          onClick={() => window.history.back()}
+          className="go-back"
+        />
+        <Typography variant="h2" component="h2">
+          {this.state.botonMostrarEventosArchivados ? "EVENTOS VIGENTES" : "EVENTOS PASADOS"}
+        </Typography>
+          <div>
             <div>
-              <div className="Chip-Eventos">
-                <MyButton
-                  onClick={() => window.history.back()}
-                  className="go-back"
-                />
-              </div>
-
-              <div className="Titulo-Eventos">
-                <h1
-                  style={{
-                    paddingLeft: "50px",
-                    paddingTop: "15px",
-                    display:
-                      this.state.botonMostrarEventosArchivados === true
-                        ? "block"
-                        : "none",
-                  }}
-                >
-                  <Typography gutterBottom variant="h2" component="h3" name='eventosVigentes'>
-                    EVENTOS VIGENTES
-                  </Typography>
-                </h1>
-
-                <h1
-                  style={{
-                    paddingLeft: "50px",
-                    paddingTop: "15px",
-                    display:
-                      this.state.botonMostrarEventosArchivados === false
-                        ? "block"
-                        : "none",
-                  }}
-                >
-                  <Typography gutterBottom variant="h2" component="h3">
-                    EVENTOS PASADOS
-                  </Typography>
-                </h1>
-              </div>
-
-              <div className="Menu-Bar-Evento">
-                <div className="header-filtro-eventos">
-                  <MySelect
-                    placeholder="Categoría"
-                    value={this.state.categoriaFiltrada}
-                    onChange={this.state.botonMostrarEventosArchivados ? this.filterChangeHandler : this.filterPastEventsChangeHandler}
-                  >
-                    {this.state.categorias.map((item) => (
-                      <MenuItem key={item} value={item}>
-                        {item}
-                      </MenuItem>
-                    ))}
-                  </MySelect>
-                </div>
-
-                <div
-                  className="header-botones-eventos"
-                  style={{ display: "flex" }}
-                >
-                  {rolUser !== "voluntario" && (
-                    <MyButton onClick={() => this.mostrarModalInsertar()} className="default">
-                      CREAR EVENTO
-                    </MyButton>
-                  )}
-                  <Button
-                    style={{
-                      display: this.state.botonMostrarEventosArchivados
-                        ? "block"
-                        : "none",
-
-                      borderRadius: 4,
-                      height: 51,
-                      backgroundColor: "#3B3B3B",
-                      fontSize: "16px",
-                      margin: "5px",
-                      padding: "4px",
-                      borderColor: "#3B3B3B",
-                    }}
-                    onClick={() => this.getEventsArchivados()}
-                  >
-                    Eventos Pasados
-                  </Button>
-                  <Button
-                    href="/eventos"
-                    style={{
-                      display: this.state.botonMostrarEventosNoArchivados
-                        ? "block"
-                        : "none",
-                      borderRadius: 4,
-                      height: 51,
-                      backgroundColor: "#3B3B3B",
-                      fontSize: "16px",
-                      margin: "5px",
-                      padding: "4px",
-                      paddingTop: "1vmax",
-                      borderColor: "#3B3B3B",
-                    }}
-                  >
-                    EVENTOS VIGENTES
-                  </Button>
-                </div>
-              </div>
+              <MySelect
+                placeholder="Categoría"
+                value={this.state.categoriaFiltrada}
+                onChange={this.state.botonMostrarEventosArchivados ? this.filterChangeHandler : this.filterPastEventsChangeHandler}
+              >
+                {this.state.categorias.map((item) => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </MySelect>
+              <MyButton className="filter" variant={"outlined"} onClick={() => this.getEvents()}>
+                EVENTOS VIGENTES
+              </MyButton>
+              <MyButton className="filter" variant={"outlined"} onClick={() => this.getEventsArchivados()}>
+                EVENTOS PASADOS
+              </MyButton>
             </div>
+
+            <div>
+              {rolUser !== "voluntario" && (
+                <MyButton onClick={() => this.mostrarModalInsertar()} className="default">
+                  CREAR EVENTO
+                </MyButton>
+              )}
+            </div>
+          </div>
 
             <div className="Container-Body">
               {this.state.events.map((event) => (
-                <div
-                  className="Tarjeta-Principal-Evento"
-                  key={event.id}
-                  name={event.nombre_evento}
-                >
-                  <div className="card1">
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="https://www.startamericastogether.org/wp-content/uploads/2021/03/main-banner.jpg"
-                      className="img-fluid"
-                    />
-
-                    <div
-                      className="CardScroll">
-                      <CardHeader
-                        title={event.nombre_evento}
-                        subheader={event.descripcion_evento}
-                        titleTypographyProps={{ gutterBottom: true }}
-                      />
-                      <CardContent>
-                        <p className="card-info">
-                          <b>La Modalidad del Evento es:</b>{" "}
-                          {event.modalidad_evento}
-                        </p>
-                        <p className="card-info">
-                          <b>Fecha:</b> {event.fecha_evento}{" "}
-                        </p>
-                        <p className="card-info" name={"Lugar_" + event.nombre_evento}>
-                          <b>Lugar:</b> {event.lugar_evento}{" "}
-                        </p>
-                        <p className="card-info">
-                          {" "}
-                          <b>Categoría:</b> {event.categoria}{" "}
-                        </p>
-                      </CardContent>
-                    </div>
-
-                    <CardBody className="CardBody-Eventos">
-                      <div class="btn-container-dus">
-                        {this.validarBotones(event) && this.state.botonMostrarEventosArchivados ? (
-                          <MyButton onClick={async () => { await this.postParticipacion(event); }} className="default">
-                            ParticipaR
-                          </MyButton>
-                        ) : (
-                          <MyButton className="leave" onClick={async () => { await this.eliminarParticipacion(event); }}>
-                            Dejar de Participar
-                          </MyButton>
-                        )}
-                        <MyButton className="see-details">
-                          <Link to={"eventos/" + event.id}>
-                            Detalles
-                          </Link>{" "}
-                        </MyButton>
-                        {rolUser !== "voluntario" ? (
-                          <Fragment>
-                            <EliminarEvento event={event} />
-                          </Fragment>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </CardBody>
-                  </div>
-                </div>
+                <EventCard event={event} />
               ))}
             </div>
-          </Container>
 
           <div>
             <Snackbar
@@ -870,7 +734,7 @@ class EventsListClass extends Component {
               </MuiAlert>
             </Snackbar>
           </Modal>
-        </div>
+        </>
       );
     }catch(error){
       if (error.message == "Network Error"){
