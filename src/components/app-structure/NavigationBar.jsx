@@ -40,7 +40,7 @@ const NavigationBar = ({ currentPath, logged, sessionData, isMobile }) => {
       />
       <BottomNavigationAction
         icon={<BusinessCenterIcon />}
-        label="Categorías"
+        label="Proyectos"
         onClick={() => history.push(logged ? "/projects/categories" : "/login")}
       />
       <BottomNavigationAction
