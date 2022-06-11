@@ -1,4 +1,5 @@
 import InputTexto from '../moleculas/InputTexto'
+import InputFile from '../moleculas/InputFile'
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
@@ -7,6 +8,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from "../../button";
 import MyInputText from "../../inputText";
+import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 
 const estados = [
     {value: 10, label: "CONCLUIDO", bool: false},
@@ -27,11 +29,22 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const [categoria, setCategoria] = useState('1')
     const [estado, setEstado] = useState(20)
     const [informacion_adicional, setInfoAd] = useState('')
-    //const [image, setImagen] = useState('')
-    const [url_imagen, setImagenUrl] = useState('')
+    const [picture, setPicture] = useState(null)
     // Modal/popup styles:
     const [modalStyle] = React.useState(getModalStyle);
-
+    const [snackbar, setSnackbar] = React.useState({
+        message: "",
+        active: false,
+        severity: "success",
+        afterClose:()=>{console.log("despues del mensaje");},
+      });
+    const activeSnackbar = (message, severity, afterClose) => {
+        setSnackbar({ message, severity, afterClose, active: true });
+    };
+    const isImageFormatValid = (imageType) =>
+    {
+        return imageType == "image/png" || imageType == "image/jpeg" || imageType == "image/jpg";
+    }
 
     // FUNCIONES:
     function resetStates() {
@@ -44,8 +57,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
         setCategoria('')
         setEstado('')
         setInfoAd('')
-        //setImagen('')
-        setImagenUrl('')
+        setPicture('')
     }
 
     function getModalStyle() {
@@ -76,17 +88,41 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const onChangeCategoria = (e) => {setCategoria(e.target.value);}
     const onChangeEstado = (e) => {setEstado(e.target.value)}
     const onChangeInfoAd = (e) => {setInfoAd(e.target.value)}
-    //const onChangeImagen = (e) => {setImagen(e.target.value)}
-    const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
-    
+    const onChangeImagen = (e) => {
+        const img = e.target.files[0];
+        let imageName = document.getElementById("nameOfImage");
+        let errorMessage = document.getElementById("inputMessageError");
+        if (isImageFormatValid(img.type)){
+            setPicture(img);
+            imageName.style.display = "block";
+            imageName.textContent = img.name;
+            errorMessage.textContent = "";
+            errorMessage.style.display = "none";
+        }
+        else{
+            e.target.value = "";
+            imageName.textContent = "";
+            imageName.style.display = "none";
+            errorMessage.style.display = "block";
+            errorMessage.textContent = "Solo se puede añadir imagenes png, jpg y jpeg.";
+            //activeSnackbar(
+            //    "Solo se puede añadir imagenes png y jpeg",
+            //    "error"
+            //  );
+        }
+    }
+
     const onSubmit = (data) => {
         const estadoActual = estados.find(est => est.value === estado)
         const categoriaActual = categorias.find(catego => catego.id === categoria)
         const liderActual = lideres.find(lid=> lid.id===lider)
+        data.titulo = titulo
+        data.objetivo = objetivo
+        data.descripcion = descripcion
         data.estado = estadoActual.bool
         data.categoria = categoriaActual.tipo
         data.lider = liderActual.nombre
-        
+        data.image = picture
         onCrearProy(data) // callback invocation
         resetStates()
         onActivarForm() // Oculta el formulario
@@ -108,7 +144,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                     <div className="crear-container-title" >
                         <h4>Crear Proyecto</h4>
                     </div>
-                    <div style={{padding: "1% 3% 0 5%"}}>
+                    <div style={{padding: "1% 3% 0 5%"}}>                        
                         <InputTexto type="date"
                                     tituloLabel={"Fecha de Inicio"}
                                     nameId="fecha_inicio"
@@ -163,19 +199,20 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                         idField={'value'}
                                         labelField={'label'}/>
                         <InputTexto type="link"
-                                        tituloLabel="Información Adicional"
-                                        nameId="informacion_adicional"
+                                    tituloLabel="Información Adicional"
+                                    nameId="informacion_adicional"
                                     placeHolder='Información Adicional'
                                     value={informacion_adicional}
                                     onChange={onChangeInfoAd}
                                     options={{maxLength: 300}}
                                     />
-                        <MyInputText
-                            id="image_url"
-                            value={url_imagen}
-                            onChange={onChangeImagenUrl}
-                            placeholder='Imagen por Link'
-                            />
+                        <InputFile
+                                    tituloLabel="Imagen"
+                                    nameId="Imagen"
+                                    onChangeImagen={onChangeImagen}
+                                    filesAllowed={"image/png, image/jpg, image/jpeg"}
+                                    />
+                        
                         <div className="btn-crear-container">
                             <MyButton onClick={methods.handleSubmit(onSubmit)} className="default">
                                 CREAR PROYECTO
@@ -184,7 +221,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                     </div>
                 </form>
             </FormProvider>
-            
+            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>);
     
     return (
@@ -205,6 +242,17 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
 export default FormularioCrearProyecto
 
 /*
+<InputTexto type="file"
+                                    id="imageFile" 
+                                    name="image" 
+                                    value={picture}
+                                    onChange={onChangeImagen}
+                                     />
+<input
+                            type="file"
+                            //style={{ display: 'none' }}
+                            onChange={onChangeImagen}
+                            />
 <label>
                         Imagen por archivo
                     </label>
@@ -214,4 +262,20 @@ export default FormularioCrearProyecto
                         value={image}
                         onChange={onChangeImagen}
                     />
+<input
+                            style={{fontSize: "17px", padding:"10px 0px 20px 10px"}}
+                            type="file"
+                            onChange={onChangeImagen}
+                                    />
+*/
+
+/*
+<label for="imageField">Imagen</label><br></br>
+                        <label id="nameOfImage" for="imageField" style={{"display":"none"}}></label>
+                        <input
+                            id="imageField"
+                            style={{fontSize: "17px", padding:"10px 0px 20px 10px",color: "transparent"}}
+                            type="file"
+                            onChange={onChangeImagen}
+                                    />
 */

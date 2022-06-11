@@ -1,4 +1,5 @@
 import InputTexto from '../moleculas/InputTexto'
+import InputFile from '../moleculas/InputFile'
 import '../moleculas/FormularioCrearProyecto.css'
 import { useState } from "react"
 import React from 'react';
@@ -7,6 +8,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from '../../button'
 import MyInputText from "../../inputText";
+import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
 
@@ -28,14 +30,22 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [titulo, setTitulo] = useState(proyecto.titulo)
     const [descripcion, setDescripcion] = useState(proyecto.descripcion)
     const [objetivo, setObjetivo] = useState(proyecto.objetivo)//objetivo es un array en backend que esta nesteado 3 veces "{{{}}}"", pero obtenemos su string y es lo que se envia al request
-    const [url_imagen, setImagenUrl] = useState(proyecto.url_imagen)
+    const [picture, setPicture] = useState(null)
     // States dropwdown values
     const [estadoId, setEstadoId] = useState(findValue("estado"))
-    const [categoriaId, setCategoriaId] = useState(findValue("categoria"))/*parseInt(categorias[0].id)*/
-    const [liderId, setLiderId] = useState(findValue("lider"))/*parseInt(categorias[0].id)*/
+    const [categoriaId, setCategoriaId] = useState(findValue("categoria"))
+    const [liderId, setLiderId] = useState(findValue("lider"))
     // Modal popup styles
     const [modalStyle] = React.useState(getModalStyle);
-    
+    const [snackbar, setSnackbar] = React.useState({
+        message: "",
+        active: false,
+        severity: "success",
+        afterClose:()=>{console.log("despues del mensaje");},
+      });
+    const activeSnackbar = (message, severity, afterClose) => {
+        setSnackbar({ message, severity, afterClose, active: true });
+    };
 
     // FUNCIONES:
     function resetStates() {
@@ -44,7 +54,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         setTitulo('')
         setDescripcion('')
         setObjetivo('')
-        setImagenUrl('')
+        setPicture('')
     }
     function getModalStyle() {
         const top = 50;
@@ -107,7 +117,10 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         // NOTE: Validacion provisional para que no se pueda actualizar una fecha_fin > fecha_inicio
         // i = inicio, f = fin
     }
-    
+    const isImageFormatValid = (imageType) =>
+    {
+        return imageType == "image/png" || imageType == "image/jpeg" || imageType == "image/jpg";
+    }
     const onChangeFechaInicio = (e) => {setFechaInicio(e.target.value)}
     const onChangeFechaFin = (e) => {setFechaFin(e.target.value)}
     const onChangeTitulo = (e) => {setTitulo(e.target.value)}
@@ -116,17 +129,41 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const onChangeLider = (e) => {setLiderId(e.target.value)}
     const onChangeCategoria = (e) => {setCategoriaId(e.target.value)}
     const onChangeEstado = (e) => {setEstadoId(e.target.value)}
-    const onChangeImagenUrl = (e) => {setImagenUrl(e.target.value)}
-    
+    const onChangeImagen = (e) => {
+        const img = e.target.files[0];
+        let imageName = document.getElementById("nameOfImage");
+        let errorMessage = document.getElementById("inputMessageError");
+        if (isImageFormatValid(img.type)){
+            setPicture(img);
+            imageName.style.display = "block";
+            imageName.textContent = img.name;
+            errorMessage.textContent = "";
+            errorMessage.style.display = "none";
+        }
+        else{
+            e.target.value = "";
+            imageName.textContent = "";
+            imageName.style.display = "none";
+            errorMessage.style.display = "block";
+            errorMessage.textContent = "Solo se puede añadir imagenes png, jpg y jpeg.";
+            //activeSnackbar(
+            //    "Solo se puede añadir imagenes png y jpeg",
+            //    "error"
+            //  );
+        }
+    }
     const onSubmit = data => {
         const estadoActual = estados.find(estado => estado.value === estadoId)
         const categoriaActual = categorias.find(catego => catego.id === categoriaId)
         const liderActual = lideres.find(lid=> lid.id===liderId)
         data.id = proyecto.id
+        data.titulo = titulo
+        data.objetivo = objetivo
+        data.descripcion = descripcion
         data.estado = estadoActual.bool
         data.categoria = categoriaActual.tipo
         data.lider = liderActual.nombre
-        
+        data.image = picture
         if(validarFechas(data.estado)) return
 
         onEditarProy(data) // callback editar proyecto
@@ -208,12 +245,12 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                         onChange={onChangeEstado}
                                         idField={'value'}
                                         labelField={'label'}/>
-                        <MyInputText
-                            id="url_imagen"
-                            value={url_imagen}
-                            onChange={onChangeImagenUrl}
-                            placeholder="Imagen por Link"
-                            />
+                        <InputFile
+                                    tituloLabel="Imagen"
+                                    nameId="Imagen"
+                                    onChangeImagen={onChangeImagen}
+                                    filesAllowed={"image/png, image/jpg, image/jpeg"}
+                                    />
                         <div className="btn-crear-container">
                             <MyButton className="default" onClick={methods.handleSubmit(onSubmit)}>
                                 GUARDAR CAMBIOS
@@ -222,6 +259,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                     </div>
                 </form>
             </FormProvider>
+            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>);
         
     // RENDER:

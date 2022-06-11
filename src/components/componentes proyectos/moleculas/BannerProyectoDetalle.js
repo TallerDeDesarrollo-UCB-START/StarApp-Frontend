@@ -3,10 +3,10 @@ import { Box } from '@material-ui/core';
 import './BannerProyectoDetalle.css';
 
 
-function BannerProyectoDetalle() {
+function BannerProyectoDetalle(urlImage) {
     return (
         <Box className="banner-container-detalle">
-            <img className="banner-header-detalle"src={Banner} alt=" "/>
+            <img className="banner-header-detalle"src={((urlImage.urlImage)? urlImage.urlImage : Banner)} alt=" "/>
         </Box>
     );
 }

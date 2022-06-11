@@ -214,9 +214,9 @@ const BoxButtons = withStyles((theme) => ({
   }))(Box);
 
 const url = process.env.REACT_APP_API;
-const URLCancelarParticipProy = `${url}cancel_participate_proyecto`//http://localhost:5000/cancel_participate_proyecto/37/sesion/24
-const URLParticpaVoluntario = `${url}participate`//'http://localhost:5000/participate'//
-const URLParticiparProy = `${url}participate_proyecto`//`http://localhost:5000/participate_proyecto`
+const URLCancelarParticipProy = `${url}cancel_participate_proyecto`
+const URLParticpaVoluntario = `${url}participate`
+const URLParticiparProy = `${url}participate_proyecto`
 
 export default ContenidoProyectoDetalle
 

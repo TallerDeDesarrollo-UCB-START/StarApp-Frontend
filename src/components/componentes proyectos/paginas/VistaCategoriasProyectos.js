@@ -53,7 +53,6 @@ function VistaCategoriasProyectos() {
             try{
                 const lideresDelServer = await fetchLideres()
                 mountedRef.current && setLideres(lideresDelServer)
-                //console.log(lideresDelServer)
             } catch (error) {
                 const message = BadRequests(404);
                 activeSnackbar(
@@ -66,16 +65,49 @@ function VistaCategoriasProyectos() {
 
         return () => mountedRef.current = false;// Desmontar componentes evitando warnings
     }, [] )
-
+    const createImage = async (image)=>{
+        try{///https://dev-back-startamericas.herokuapp.com/
+            let formData = new FormData();
+            formData.append("photos",image);
+            const response = await fetch(
+                    URLImages,
+                {
+                    method: 'POST',
+                    body: formData,
+                    headers:{
+                        'Accept' : 'application/json'
+                    }
+                }
+            )
+            const linkImage = await response.json()
+            return linkImage.links
+        }catch(error)
+        {
+            console.log(error);
+            throw error;
+        }
+    }
     // Endpoint fetch
     const crearProyecto = async (nuevoProyecto) => {
         try{
+            let formData = new FormData();
+            if (nuevoProyecto.image){
+                formData.append("photos",nuevoProyecto.image);
+            }
+            formData.append("titulo",nuevoProyecto.titulo);
+            formData.append("descripcion",nuevoProyecto.descripcion);
+            formData.append("objetivo",nuevoProyecto.objetivo);
+            formData.append("lider",nuevoProyecto.lider);
+            formData.append("fecha_inicio",nuevoProyecto.fecha_inicio);
+            formData.append("fecha_fin",nuevoProyecto.fecha_fin);
+            formData.append("estado",nuevoProyecto.estado);
+            formData.append("categoria",nuevoProyecto.categoria);
+            formData.append("informacion_adicional",nuevoProyecto.informacion_adicional);
             await fetch(
                 URLCrearProy,
                 {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json'},
-                    body: JSON.stringify(nuevoProyecto)
+                    body: formData
                 }).catch((error)=>{
                     console.log(error);
                     if (error.message == "Failed to fetch")
@@ -106,8 +138,6 @@ function VistaCategoriasProyectos() {
                 index++
                 
             }
-            //dataLider.pop()
-            //console.log(dataLider)
             return dataLider;
         }
         catch(error){
@@ -137,6 +167,7 @@ function VistaCategoriasProyectos() {
 }
 
 const url = process.env.REACT_APP_API;
+const URLImages = `${url}uploadPhotos`
 const URLLideres = `${url}get_lideres`
 const URLCategorias = `${url}get_categoria_proyectos`//``http://localhost:5000/get_categorias`//`
 const URLCrearProy = `${url}create_proyecto`//'http://localhost:5000/create_proyecto'//
