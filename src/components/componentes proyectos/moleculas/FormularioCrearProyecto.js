@@ -9,6 +9,7 @@ import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from "../../button";
 import MyInputText from "../../inputText";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
+import MyDatePicker from '../../datePicker';
 
 const estados = [
     {value: 10, label: "CONCLUIDO", bool: false},
@@ -144,7 +145,17 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                     <div className="crear-container-title" >
                         <h4>Crear Proyecto</h4>
                     </div>
-                    <div style={{padding: "1% 3% 0 5%"}}>                        
+                    <div style={{padding: "1% 3% 0 5%"}}>   
+                        {/* <MyDatePicker
+                                    label={"Fecha de Inicio"}
+                                    value={fechaFin}
+                                    onChange={onChangeFechaFin}>
+                        </MyDatePicker>  
+                        <MyDatePicker
+                                    label={"Fecha de Fin"}
+                                    value={fechaInicio}
+                                    onChange={onChangeFechaInicio}>
+                        </MyDatePicker>                     */}
                         <InputTexto type="date"
                                     tituloLabel={"Fecha de Inicio"}
                                     nameId="fecha_inicio"
@@ -158,7 +169,7 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     value={fechaInicio}
                                     onChange={onChangeFechaInicio}
                                     />
-                        <MyInputText
+                           <MyInputText
                             id="titulo"
                             value={titulo}
                             onChange={onChangeTitulo}
