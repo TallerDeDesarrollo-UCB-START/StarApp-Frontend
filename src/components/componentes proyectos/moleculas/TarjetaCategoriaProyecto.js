@@ -69,6 +69,7 @@ function TarjetaCategoriaProyecto({imagen, categoria}) {
 }
 export default TarjetaCategoriaProyecto;
 
+
 /* style={{backgroundImage: image}}*/
 
 /* CARD STYLES descartados:
