@@ -65,28 +65,6 @@ function VistaCategoriasProyectos() {
 
         return () => mountedRef.current = false;// Desmontar componentes evitando warnings
     }, [] )
-    const createImage = async (image)=>{
-        try{///https://dev-back-startamericas.herokuapp.com/
-            let formData = new FormData();
-            formData.append("photos",image);
-            const response = await fetch(
-                    URLImages,
-                {
-                    method: 'POST',
-                    body: formData,
-                    headers:{
-                        'Accept' : 'application/json'
-                    }
-                }
-            )
-            const linkImage = await response.json()
-            return linkImage.links
-        }catch(error)
-        {
-            console.log(error);
-            throw error;
-        }
-    }
     // Endpoint fetch
     const crearProyecto = async (nuevoProyecto) => {
         try{
