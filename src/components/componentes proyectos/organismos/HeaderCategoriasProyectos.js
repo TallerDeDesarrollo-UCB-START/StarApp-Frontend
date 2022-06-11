@@ -27,7 +27,7 @@ function HeaderCategoriasProyectos({onActivarForm}) {
             <Grid container justifyContent="center" alignItems={"center"} style= {{padding: "5px 0px 10px 0px"}}>
                     <Grid item xs={5} md={7}>
                         <Typography gutterBottom variant="h2" component="h3" >
-                            PROYECTOS
+                            CATEGORÍAS
                         </Typography>
                     </Grid>
                     <Grid item xs={7} md={5} className={classes.far_right}>
