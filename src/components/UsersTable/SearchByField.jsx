@@ -84,7 +84,7 @@ const SearchByField = ({data, setData, originalData}) => {
                 freeSolo
                 options={[...new Set(data.map((option) => (option[fields[fieldSelected]])?option[fields[fieldSelected]]:'Sin Datos'))]}
                 renderInput={(params) => (
-                <TextField {...params} label="buscar" margin="normal" variant="outlined"/>
+                <TextField {...params} label="Buscar" margin="normal" variant="outlined"/>
                 )}
             />
         </section>
