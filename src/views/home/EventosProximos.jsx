@@ -40,7 +40,24 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
 }));
-
+const resizeCSSOfContainer = (smallScreen, classes)=>{
+  if (smallScreen)
+  {
+    return classes.resp_noevents_message;
+  }
+  else{
+    return classes.noevents_message;
+  }
+}
+const resizeCSSOfDescriptionProyects = (smallScreen, classes)=>{
+  if (smallScreen)
+  {
+    return classes.resp_no_events;
+  }
+  else{
+    return classes.no_events;
+  }
+}
 const EventosProximos = ({ id, title }) => {
   const [snackbar, setSnackbar] = React.useState({
     message: "",
@@ -95,13 +112,11 @@ const EventosProximos = ({ id, title }) => {
           ))}
         </div>
       ) : (
-        <div className={`${(smallScreen? classes.resp_no_events : classes.no_events)}`}>
+        <div className={resizeCSSOfDescriptionProyects(smallScreen,classes)}>
           <Typography
             color="textSecondary"
             className={
-              smallScreen
-                ? classes.resp_noevents_message
-                : classes.noevents_message
+              resizeCSSOfContainer(smallScreen, classes)
             }
           >
             Aún no te has registrado a ningún evento. Una vez te hayas registrado a alguno de nuestros eventos, aparecerán en tu página de inicio.

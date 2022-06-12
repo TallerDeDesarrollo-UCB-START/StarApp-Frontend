@@ -123,9 +123,8 @@ function VistaProyectos() {
     // GETs
     async function fetchProyectos() {
         try{
-            const response = await fetch(URLProyectos)
-            const data = await response.json()
-            return data;
+            const response = await fetch(URLProyectos);
+            return await response.json();
         } catch (error) {
             console.log(error);
             throw error;
@@ -135,9 +134,7 @@ function VistaProyectos() {
     const fetchProyectosPorCategoria = async(categoria) => {
         try{
             const response= await fetch(`${URLProyectos}/${categoria}`);
-            const data = response && response.status === 204? [] : await response.json(); //FIXME: Evita un warning, pero backend deberia hacer esta validacion del status 204 y no frontend
-            return data
-            //setProyectos(proyectos.filter((proy) => proy.categoria == categoria));
+            return response && response.status === 204? [] : await response.json();
         } catch (error) {
             console.log(error);
             throw error;
@@ -147,8 +144,7 @@ function VistaProyectos() {
     async function fetchProyectosPasadosPorCategoria(categoria) {
         try{
             const response = await fetch(`${URLProyectosPasados}/${categoria}`);
-            const data = response && response.status === 204? [] : await response.json();
-            return data;
+            return response && response.status === 204? [] : await response.json();
         } catch (error) {
             console.log(error);
             throw error;
@@ -157,9 +153,8 @@ function VistaProyectos() {
     
     const fetchCategorias = async () => {
         try{
-            const response = await fetch(URLCategorias)
-            const data = await response.json()
-            return data
+            const response = await fetch(URLCategorias);
+            return await response.json();
         } catch (error) {
             console.log(error);
             throw error;
@@ -191,8 +186,7 @@ function VistaProyectos() {
             { 
                 method: 'GET'
             });
-            const data = await response.json();
-            return data;
+            return await response.json();
         } catch (error) {
             launchError(`No se pudo obtener las participaciones del proyecto. Ocurrió un error en el servidor.`);
         }
@@ -204,18 +198,11 @@ function VistaProyectos() {
             { 
                 method: 'GET'
             });
-            const data = await response.json();
-            return data;
+            return await response.json();
         } catch (error) {
             launchError(`No se pudo obtener el numero de participantes del proyecto. Ocurrió un error en el servidor.`);
         }
     }
-
-    /*async function fetchProyectosPasados() {
-        const response = await fetch(URLProyectosPasados)
-        const data = await response.json()
-        return data;
-    }*/
     
     // CREATEs
     const crearProyecto = async (nuevoProyecto) => {

@@ -8,7 +8,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from "../../button";
 import MyInputText from "../../inputText";
-import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import MyDatePicker from '../../datePicker';
 
 const estados = [
@@ -33,15 +32,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const [picture, setPicture] = useState(null)
     // Modal/popup styles:
     const [modalStyle] = React.useState(getModalStyle);
-    const [snackbar, setSnackbar] = React.useState({
-        message: "",
-        active: false,
-        severity: "success",
-        afterClose:()=>{console.log("despues del mensaje");},
-      });
-    const activeSnackbar = (message, severity, afterClose) => {
-        setSnackbar({ message, severity, afterClose, active: true });
-    };
     const isImageFormatValid = (imageType) =>
     {
         return imageType == "image/png" || imageType == "image/jpeg" || imageType == "image/jpg";
@@ -228,7 +218,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                     </div>
                 </form>
             </FormProvider>
-            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>);
     
     return (
