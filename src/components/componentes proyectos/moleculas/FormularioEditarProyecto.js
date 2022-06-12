@@ -7,7 +7,7 @@ import { Modal } from '@material-ui/core';
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from '../../button'
-import MyInputText from "../../inputText";
+import MyTextField from "../../../components/textField";
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
 

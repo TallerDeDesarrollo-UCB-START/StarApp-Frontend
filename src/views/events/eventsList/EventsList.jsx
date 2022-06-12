@@ -17,7 +17,7 @@ import { DateTime } from "luxon";
 import MyModal from "../../../components/myModal";
 import EventForm from "../eventForm/EventForm";
 
-const EventsListReborn = () => {
+const EventsList = () => {
 	const classes = useStyles();
 
 	const [userRole, setUserRole] = useState("");
@@ -170,4 +170,4 @@ const EventsListReborn = () => {
 	);
 }
 
-export default EventsListReborn;
+export default EventsList;

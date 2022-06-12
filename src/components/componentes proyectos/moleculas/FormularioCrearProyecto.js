@@ -7,8 +7,7 @@ import { Modal} from '@material-ui/core';
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from "../../button";
-import MyInputText from "../../inputText";
-import MyDatePicker from '../../datePicker';
+import MyTextField from "../../../components/textField";
 
 const estados = [
     {value: 10, label: "CONCLUIDO", bool: false},
