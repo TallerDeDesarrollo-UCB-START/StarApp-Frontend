@@ -12,14 +12,14 @@ const useStyles = makeStyles(() => ({
       width: '70%',//'90%',
       height: '110%',//'75%',
       margin: 'auto',
-      borderRadius: '1rem',
+      borderRadius: '5px',
       '&:hover':{
         'box-shadow': '8px 8px 10px 0 rgba(0,0,0,0.5)',
         'transform': 'translateX(-6px)',
       }
     },
     card: {
-        borderRadius: '1rem',
+        borderRadius: '5px',
         position: 'relative',
         width: '100%',
         height: '100%',
