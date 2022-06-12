@@ -884,7 +884,6 @@ class EventsListClass extends Component {
 }
 const EventsList = ()=>{
   history = useHistory();
-  console.log(history);
   return new EventsListClass();
 }
 export default EventsList;

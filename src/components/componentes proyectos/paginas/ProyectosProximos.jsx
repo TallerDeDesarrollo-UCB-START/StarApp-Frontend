@@ -33,8 +33,32 @@ const useStyles = makeStyles((theme) => ({
   resp_noevents_message: {
     fontSize: "16px",
   },
+  resp_no_events:{
+    margin: "10px 0",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));
-
+const resizeCSSOfContainer = (smallScreen, classes)=>{
+  if (smallScreen)
+  {
+    return classes.resp_noevents_message;
+  }
+  else{
+    return classes.noevents_message;
+  }
+}
+const resizeCSSOfDescriptionProyects = (smallScreen, classes)=>{
+  if (smallScreen)
+  {
+    return classes.resp_no_events;
+  }
+  else{
+    return classes.noEvents;
+  }
+}
 const ProyectosProximos = ({ title }) => {
   const history = useHistory();
   const smallScreen = !useMediaQuery("(min-width:500px)");
@@ -101,13 +125,11 @@ const ProyectosProximos = ({ title }) => {
           ))}
         </div>
       ) : (
-        <div className={smallScreen?  classes.resp_no_events :classes.noEvents}>
+        <div className={resizeCSSOfDescriptionProyects(smallScreen,classes)}>
           <Typography
             color="textSecondary"
             className={
-              smallScreen
-                ? classes.resp_noevents_message
-                : classes.noevents_message
+              resizeCSSOfContainer(smallScreen, classes)
             }
           >
             Aún no te has registrado a ningún proyecto. Una vez te hayas

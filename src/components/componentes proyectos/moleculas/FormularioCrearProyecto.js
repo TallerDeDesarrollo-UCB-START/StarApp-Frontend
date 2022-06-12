@@ -8,7 +8,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from "../../button";
 import MyInputText from "../../inputText";
-import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import MyDatePicker from '../../datePicker';
 
 const estados = [
@@ -33,15 +32,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
     const [picture, setPicture] = useState(null)
     // Modal/popup styles:
     const [modalStyle] = React.useState(getModalStyle);
-    const [snackbar, setSnackbar] = React.useState({
-        message: "",
-        active: false,
-        severity: "success",
-        afterClose:()=>{console.log("despues del mensaje");},
-      });
-    const activeSnackbar = (message, severity, afterClose) => {
-        setSnackbar({ message, severity, afterClose, active: true });
-    };
     const isImageFormatValid = (imageType) =>
     {
         return imageType == "image/png" || imageType == "image/jpeg" || imageType == "image/jpg";
@@ -106,10 +96,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
             imageName.style.display = "none";
             errorMessage.style.display = "block";
             errorMessage.textContent = "Solo se puede añadir imagenes png, jpg y jpeg.";
-            //activeSnackbar(
-            //    "Solo se puede añadir imagenes png y jpeg",
-            //    "error"
-            //  );
         }
     }
 
@@ -232,7 +218,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                     </div>
                 </form>
             </FormProvider>
-            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>);
     
     return (
@@ -251,42 +236,3 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
 }
 
 export default FormularioCrearProyecto
-
-/*
-<InputTexto type="file"
-                                    id="imageFile" 
-                                    name="image" 
-                                    value={picture}
-                                    onChange={onChangeImagen}
-                                     />
-<input
-                            type="file"
-                            //style={{ display: 'none' }}
-                            onChange={onChangeImagen}
-                            />
-<label>
-                        Imagen por archivo
-                    </label>
-                    <InputTexto
-                        type="file" 
-                        name="image" 
-                        value={image}
-                        onChange={onChangeImagen}
-                    />
-<input
-                            style={{fontSize: "17px", padding:"10px 0px 20px 10px"}}
-                            type="file"
-                            onChange={onChangeImagen}
-                                    />
-*/
-
-/*
-<label for="imageField">Imagen</label><br></br>
-                        <label id="nameOfImage" for="imageField" style={{"display":"none"}}></label>
-                        <input
-                            id="imageField"
-                            style={{fontSize: "17px", padding:"10px 0px 20px 10px",color: "transparent"}}
-                            type="file"
-                            onChange={onChangeImagen}
-                                    />
-*/

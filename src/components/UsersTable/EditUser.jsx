@@ -166,7 +166,7 @@ const EditUser = ({ rowToUpdate, setRowToUpdate, handleCloseButton }) => {
       })
       .catch((error) => {
         let message = BadRequests(error.response.status);
-        activeSnackbar("Ha ocurrido un error, "+ message, "error", () => {})
+        activeSnackbar("Ha ocurrido un error, "+ message, "error");
       })
   }
 

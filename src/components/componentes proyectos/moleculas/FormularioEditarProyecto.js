@@ -8,7 +8,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from '../../button'
 import MyInputText from "../../inputText";
-import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
 
@@ -37,15 +36,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
     const [liderId, setLiderId] = useState(findValue("lider"))
     // Modal popup styles
     const [modalStyle] = React.useState(getModalStyle);
-    const [snackbar, setSnackbar] = React.useState({
-        message: "",
-        active: false,
-        severity: "success",
-        afterClose:()=>{console.log("despues del mensaje");},
-      });
-    const activeSnackbar = (message, severity, afterClose) => {
-        setSnackbar({ message, severity, afterClose, active: true });
-    };
 
     // FUNCIONES:
     function resetStates() {
@@ -75,13 +65,17 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
 
 
     function findValue(tipo){
+        //console.log(tipo)
         if(tipo==="estado"){
             const selectEstado = proyecto.estado===true?  estadoEnCursoValor : estadoAcabadoValor
+            //console.log(selectEstado)
             return selectEstado
         }
         if(tipo === "categoria"){
             const foundCategoria = categorias.find(catego => catego.tipo === proyecto.categoria)
+            //console.log(foundCategoria)
             const selectCategoria = parseInt(foundCategoria.id)
+            //console.log(selectCategoria)
             return selectCategoria
         }
         if(tipo === "lider"){
@@ -89,6 +83,7 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             if (foundLider)
             {
                 const selectLider = foundLider.id
+                //console.log(selectLider)
                 return selectLider
             }
             return 1  
@@ -146,15 +141,11 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
             imageName.style.display = "none";
             errorMessage.style.display = "block";
             errorMessage.textContent = "Solo se puede añadir imagenes png, jpg y jpeg.";
-            //activeSnackbar(
-            //    "Solo se puede añadir imagenes png y jpeg",
-            //    "error"
-            //  );
         }
     }
     const onSubmit = data => {
         const estadoActual = estados.find(estado => estado.value === estadoId)
-        const categoriaActual = categorias.find(catego => catego.id === categoriaId)
+        const categoriaActual = categorias.find(catego => catego.id === categoriaId.toString())
         const liderActual = lideres.find(lid=> lid.id===liderId)
         data.id = proyecto.id
         data.titulo = titulo
@@ -165,7 +156,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
         data.lider = liderActual.nombre
         data.image = picture
         if(validarFechas(data.estado)) return
-
         onEditarProy(data) // callback editar proyecto
         resetStates()
         onActivarForm() // Oculta/Activa el formulario
@@ -259,7 +249,6 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                     </div>
                 </form>
             </FormProvider>
-            <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>);
         
     // RENDER:
