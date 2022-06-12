@@ -55,7 +55,7 @@ function VistaProyectos() {
                 const proyectosDelServer =  await fetchProyectos()
                 setProyectosCheck(proyectosDelServer, mountedRef.current)
             } catch (error) {
-                launchError(`No se pudo obtener los proyectos. Ocurrio un error en el servidor.`);
+                launchError(`No se pudo obtener los proyectos. Ocurrió un error en el servidor.`);
             }
         }
         const getProyectosPorCategoria = async () => {
@@ -63,7 +63,7 @@ function VistaProyectos() {
                 const proyectosFiltrados = await fetchProyectosPorCategoria(categoria)
                 setProyectosCheck(proyectosFiltrados, mountedRef.current)
             } catch (error) {
-                launchError(`No se pudo obtener los proyectos con la categoria ${categoria}. Ocurrio un error en el servidor.`);
+                launchError(`No se pudo obtener los proyectos con la categoría ${categoria}. Ocurrió un error en el servidor.`);
             }
         }
         const getProyectosPasadosPorCategoria = async () => {
@@ -71,7 +71,7 @@ function VistaProyectos() {
                 const proyectosPasados =  await fetchProyectosPasadosPorCategoria(categoria)
                 setProyectosCheck(proyectosPasados, mountedRef.current, true)
             } catch (error) {
-                launchError(`No se pudo obtener los proyectos pasados con la categoria ${categoria}. Ocurrio un error en el servidor.`);
+                launchError(`No se pudo obtener los proyectos pasados con la categoría ${categoria}. Ocurrió un error en el servidor.`);
             }
         }
         const getLideres = async ()=>{
@@ -79,7 +79,7 @@ function VistaProyectos() {
                 const lideresDelServer = await fetchLideres()
                 mountedRef.current && setLideres(lideresDelServer)
             } catch (error) {
-                launchError(`No se pudo obtener los lideres. Ocurrio un error en el servidor.`);
+                launchError(`No se pudo obtener los lideres. Ocurrió un error en el servidor.`);
             }
         }
         const getCategorias = async () => {
@@ -87,7 +87,7 @@ function VistaProyectos() {
                 const categosServer = await fetchCategorias()
                 mountedRef.current && setCategorias(categosServer)
             } catch (error) {
-                launchError(`No se pudo obtener las categorias. Ocurrio un error en el servidor.`);
+                launchError(`No se pudo obtener las categorias. Ocurrió un error en el servidor.`);
             }
         }
         
@@ -194,7 +194,7 @@ function VistaProyectos() {
             const data = await response.json();
             return data;
         } catch (error) {
-            launchError(`No se pudo obtener las participaciones del proyecto. Ocurrio un error en el servidor.`);
+            launchError(`No se pudo obtener las participaciones del proyecto. Ocurrió un error en el servidor.`);
         }
     }
 
@@ -207,7 +207,7 @@ function VistaProyectos() {
             const data = await response.json();
             return data;
         } catch (error) {
-            launchError(`No se pudo obtener el numero de participantes del proyecto. Ocurrio un error en el servidor.`);
+            launchError(`No se pudo obtener el numero de participantes del proyecto. Ocurrió un error en el servidor.`);
         }
     }
 
@@ -231,7 +231,7 @@ function VistaProyectos() {
             setProyectos([...proyectos, data])
             setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
         } catch (error) {
-            launchError(`No se pudo crear el proyecto. Ocurrio un error en el servidor.`);
+            launchError(`No se pudo crear el proyecto. Ocurrió un error en el servidor.`);
         }
     }
     const createImage = async (image)=>{
@@ -270,7 +270,7 @@ function VistaProyectos() {
             //setProyectos([...proyectos.filter((proy) => proy.id !== proyectoEditar.id), data]) actualizar proyecto manualmente
             setActualizar(!actualizar) //Para activar useEffect sin causar loop infinito
         } catch (error) {
-            launchError(`No se pudo editar el proyecto. Ocurrio un error en el servidor.`);
+            launchError(`No se pudo editar el proyecto. Ocurrió un error en el servidor.`);
         }
     }
 
@@ -286,7 +286,7 @@ function VistaProyectos() {
             //setActualizar(!actualizar)
             return data
         } catch (error) {
-            launchError(`No se pudo participar en el proyecto. Ocurrio un error en el servidor.`);
+            launchError(`No se pudo participar en el proyecto. Ocurrió un error en el servidor.`);
         }
     }
     
@@ -303,7 +303,7 @@ function VistaProyectos() {
             //setActualizar(!actualizar)
             return data
         } catch (error) {
-            launchError(`No se pudo cancelar la participacion en el proyecto. Ocurrio un error en el servidor.`);
+            launchError(`No se pudo cancelar la participación en el proyecto. Ocurrió un error en el servidor.`);
         }
     }
 
@@ -317,7 +317,7 @@ function VistaProyectos() {
         
             setProyectos(proyectos.filter((proy) => proy.id !== id));
         } catch (error) {
-            launchError(`No se pudo eliminar el proyecto. Ocurrio un error en el servidor.`);
+            launchError(`No se pudo eliminar el proyecto. Ocurrió un error en el servidor.`);
         }
     }
 

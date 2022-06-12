@@ -33,7 +33,7 @@ const ErrorPage = () => {
     sessionStorage.removeItem("errorMessage");
     return (
         <div className={classes.root}>
-            <h2>OCURRIO ALGO INESPERADO</h2>
+            <h2>OCURRIÓ ALGO INESPERADO</h2>
             <h2>{errorMessage}</h2>
             <h4>{message}</h4>
             <a className={classes.link} onClick={() => history.push(routes[0].path)} color="#f0f"><strong color="#f0f">VOLVER A LA PAGINA PRINCIPAL</strong></a>

@@ -105,12 +105,11 @@ const EventosProximos = ({ id, title }) => {
                 : classes.noevents_message
             }
           >
-            Aún no te has registrado a ningún evento. Una vez te hayas
-            registrado a alguno de nuestros eventos, aparecerán en tu página de
-            inicio.
+            Aún no te has registrado a ningún evento. Una vez te hayas registrado a alguno de nuestros eventos, aparecerán en tu página de inicio.
+          
           </Typography>
           <MyButton className="default" onClick={() => (window.location.href = "/eventos")}>
-            Explorar proyectos
+            Explorar Eventos
           </MyButton>
           <SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
         </div>
