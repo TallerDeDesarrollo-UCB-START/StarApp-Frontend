@@ -20,14 +20,14 @@ const months = {
   12: "Dic",
 };
 
-const EventCard = ({ event, hasActions, isParticipating, onClick }) => {
+const EventCard = ({ event, hasActions, onClick }) => {
   const classes = useStyles();
   function getEventDateString(date) {
     const splittedDate = date.split("-");
     return months[parseInt(splittedDate[1])] + " " + splittedDate[2];
   }
 
-  const { id, fecha_evento, hora_inicio, hora_fin, nombre_evento, lugar_evento } = event;
+  const { id, fecha_evento, hora_inicio, hora_fin, nombre_evento, lugar_evento, isParticipating } = event;
   const { card_container, card_media, card_content, left_card_content, right_card_content, icon_and_text } = classes;
   return (
     <Card className={card_container}>
