@@ -155,19 +155,19 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     value={fechaInicio}
                                     onChange={onChangeFechaInicio}
                                     />
-                           <MyInputText
+                           <MyTextField
                             id="titulo"
                             value={titulo}
                             onChange={onChangeTitulo}
                             placeholder='Nombre del proyecto'
                             />
-                        <MyInputText
+                        <MyTextField
                             id="descripcion"
                             value={descripcion}
                             onChange={onChangeDescrip}
                             placeholder='Descripción'
                             />
-                        <MyInputText
+                        <MyTextField
                             id="objetivo"
                             value={objetivo}
                             onChange={onChangeObjetivo}

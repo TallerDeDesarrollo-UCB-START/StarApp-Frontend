@@ -1,7 +1,6 @@
 import LoginForm from "../components/LoginForm";
 import Register from "../screens/Register";
 import EventsList from "../views/events/eventsList";
-import EventsListReborn from "../views/events/eventsList/EventsListReborn";
 import Home from "../views/home/Home";
 import Profile from "../components/Profile";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
@@ -31,12 +30,6 @@ const Routes = [
     path: "/eventos",
     name: "EventsList",
     component: EventsList,
-    logginNeeded: true,
-  },
-  {
-    path: "/eventosTest",
-    name: "EventsListReborn",
-    component: EventsListReborn,
     logginNeeded: true,
   },
   {

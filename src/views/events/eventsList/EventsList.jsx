@@ -11,9 +11,11 @@ import {
 } from "../../../api/rename/renameAPI";
 import MyButton from "../../../components/button";
 import MySelect from "../../../components/select";
-import EventCard from "../../../components/eventCard"
-import useStyles from "./EventsListReborn.styles";
+import EventCard from "../../../components/eventCard";
+import useStyles from "./EventsList.styles";
 import { DateTime } from "luxon";
+import MyModal from "../../../components/myModal";
+import EventForm from "../eventForm/EventForm";
 
 const EventsListReborn = () => {
 	const classes = useStyles();
@@ -23,49 +25,51 @@ const EventsListReborn = () => {
 	const [categories, setCategories] = useState([]);
 	const [filteredCategory, setFilteredCategory] = useState("");
 	const [arePastEvents, setArePastEvents] = useState(false);
+	const [isOpenForm, setIsOpenForm] = useState(false);
 
 	const currentDate = DateTime.now();
 
 	useEffect(() => {
-		const callGetEvents = async () => {
-			const response = await getEvents();
-			setEvents(response.data);
-			await callGetGetMyParticipations(response.data);
-		}
-		const callGetCategories = async () => {
-			const response = await getCategories();
-			const categoryNames = response.data.map((category) => category.interes);
-			categoryNames.unshift("Todas");
-			setFilteredCategory(categoryNames[0]);
-			setCategories(categoryNames);
-		}
-		const callGetMyUserRole = async () => {
-			const response = await getMyUserRole();
-			setUserRole(response.data.data.rol);
-		}
-
-		const callGetGetMyParticipations = async (events) => {
-			const addMyParticipations = (myParticipations) => {
-				myParticipations = myParticipations.map((participation) => participation.id_evento)
-				const eventsWithMyParticipations = [];
-				events.map((event) => {
-					if (myParticipations.includes(event.id)) {
-						event.isParticipating = true;
-					} else {
-						event.isParticipating = false;
-					}
-					eventsWithMyParticipations.push(event);
-				})
-				return eventsWithMyParticipations;
-			}
-			const response = await getGetMyParticipations();
-			setEvents(addMyParticipations(response.data));
-		}
-
 		callGetEvents();
 		callGetCategories();
 		callGetMyUserRole();
 	}, []);
+	
+	const callGetEvents = async () => {
+		const response = await getEvents();
+		setEvents(response.data);
+		await callGetGetMyParticipations(response.data);
+	}
+
+	const callGetCategories = async () => {
+		const response = await getCategories();
+		const categoryNames = response.data.map((category) => category.interes);
+		categoryNames.unshift("Todas");
+		setFilteredCategory(categoryNames[0]);
+		setCategories(categoryNames);
+	}
+	const callGetMyUserRole = async () => {
+		const response = await getMyUserRole();
+		setUserRole(response.data.data.rol);
+	}
+
+	const callGetGetMyParticipations = async (events) => {
+		const addMyParticipations = (myParticipations) => {
+			myParticipations = myParticipations.map((participation) => participation.id_evento)
+			const eventsWithMyParticipations = [];
+			events.map((event) => {
+				if (myParticipations.includes(event.id)) {
+					event.isParticipating = true;
+				} else {
+					event.isParticipating = false;
+				}
+				eventsWithMyParticipations.push(event);
+			})
+			return eventsWithMyParticipations;
+		}
+		const response = await getGetMyParticipations();
+		setEvents(addMyParticipations(response.data));
+	}
 
 	async function onClickEventButton(eventId, isParticipating) {
 		if (isParticipating) {
@@ -138,7 +142,7 @@ const EventsListReborn = () => {
 				</div>
 				<div>
 					{userRole !== "voluntario" && (
-						<MyButton onClick={() => console.log('click crear evento')} className="default">
+						<MyButton onClick={() => setIsOpenForm(true)} className="default">
 							CREAR EVENTO&nbsp;<AddIcon fontSize="small"/>
 						</MyButton>
 					)}
@@ -158,6 +162,10 @@ const EventsListReborn = () => {
 					<EventCard key={"eventCard-pastEvent-" + event.id} event={event}/>
 				))}
 			</div>
+
+			<MyModal isOpen={isOpenForm} onClose={() => setIsOpenForm(false)}>
+				<EventForm />
+			</MyModal>
 		</>
 	);
 }

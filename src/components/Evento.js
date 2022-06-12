@@ -11,7 +11,7 @@ import ParticipantesEventosBtn from "./ParticipantesEventosBtn";
 import EventoImagen from "../assets/images/event_picture.png";
 import MyButton from "./button";
 import MySelect from "./select";
-import MyInputText from "./inputText";
+import MyTextField from "./textField";
 
 const url = process.env.REACT_APP_API;
 const urlDeploy = `${url}eventos`;
@@ -378,7 +378,7 @@ class Evento extends Component {
             <strong>Editar Evento</strong>
           </div>
           <form className="formularioEdicionEvento">
-            <MyInputText
+            <MyTextField
               label="Nombre del evento *"
               name="nombre_evento"
               className="nombreEventoEdicion textInput"
@@ -424,7 +424,7 @@ class Evento extends Component {
                 Virtual
               </MenuItem>
             </MySelect>
-            <MyInputText
+            <MyTextField
               label="Lugar"
               className="LugarEventoEdicion textInput"
               name="lugar_evento"
