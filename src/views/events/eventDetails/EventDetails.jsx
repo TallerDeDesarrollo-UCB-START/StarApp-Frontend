@@ -9,7 +9,10 @@ import MyButton from "../../../components/button";
 import MyDeleteModal from "../../../components/deleteModal";
 import { Grid, Box, Typography } from '@mui/material';
 import useStyles from "./EventDetails.styles";
+import MyModal from "../../../components/myModal";
+import EventForm from "../eventForm/EventForm";
 import ExportExcel from "react-export-excel";
+
 const { ExcelFile, ExcelSheet, ExcelColumn } = ExportExcel;
 
 const EventDetails = () => {
@@ -31,6 +34,7 @@ const EventDetails = () => {
 	const [participants, setParticipants] = useState([]);
 	const [participantsToDownload, setParticipantsToDownload] = useState([]);
 
+	const [isOpenForm, setIsOpenForm] = useState(false);
 	const [isOpenDelete, setIsOpenDelete] = useState(false);
 
 	useEffect(() => {
@@ -39,9 +43,9 @@ const EventDetails = () => {
 	}, [])
 
 	function getIdFromURL(currentUrl) {
-    currentUrl.substring(currentUrl.indexOf("/") + 1);
-    return currentUrl.split("/").pop();
-  }
+		currentUrl.substring(currentUrl.indexOf("/") + 1);
+		return currentUrl.split("/").pop();
+	}
 
 	const callGetEventById = async () => {
 		let currentUrl = window.location.href;
@@ -72,8 +76,6 @@ const EventDetails = () => {
 
 	const { image_container, details_container, description_container } = classes;
 
-	console.log(participantsToDownload);
-	console.log(participants);
 	return (
 		<>
 			<MyButton onClick={() => window.history.back()} className="go-back"/>
@@ -84,7 +86,7 @@ const EventDetails = () => {
 					</Typography>
 				</Grid>
 				<Grid item xs={4} align="right">
-					<MyButton className="edit" />
+					<MyButton className="edit" onClick={() => setIsOpenForm(true)}/>
 					<MyButton className="delete-icon" onClick={() => setIsOpenDelete(true)}/>
 				</Grid>
 				<Grid className={image_container} item xs={8}>
@@ -193,6 +195,10 @@ const EventDetails = () => {
 					</Grid>
 				))}
 			</Grid>
+
+			<MyModal isOpen={isOpenForm} onClose={() => setIsOpenForm(false)}>
+				<EventForm isEditMode={true} event={event}/>
+			</MyModal>
 
 			<MyDeleteModal
 				nameToDelete={event.nombre_evento}
