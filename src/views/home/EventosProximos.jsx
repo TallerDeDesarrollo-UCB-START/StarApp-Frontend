@@ -64,7 +64,6 @@ const EventosProximos = ({ id, title }) => {
           setEvents(resp);
         })
         .catch((error) => {
-          console.log(error.response);
           if (error.message == "Network Error"){
             RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
             return;

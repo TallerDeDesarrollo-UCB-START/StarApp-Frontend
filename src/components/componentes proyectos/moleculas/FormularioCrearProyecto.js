@@ -106,10 +106,6 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
             imageName.style.display = "none";
             errorMessage.style.display = "block";
             errorMessage.textContent = "Solo se puede añadir imagenes png, jpg y jpeg.";
-            //activeSnackbar(
-            //    "Solo se puede añadir imagenes png y jpeg",
-            //    "error"
-            //  );
         }
     }
 
@@ -251,42 +247,3 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
 }
 
 export default FormularioCrearProyecto
-
-/*
-<InputTexto type="file"
-                                    id="imageFile" 
-                                    name="image" 
-                                    value={picture}
-                                    onChange={onChangeImagen}
-                                     />
-<input
-                            type="file"
-                            //style={{ display: 'none' }}
-                            onChange={onChangeImagen}
-                            />
-<label>
-                        Imagen por archivo
-                    </label>
-                    <InputTexto
-                        type="file" 
-                        name="image" 
-                        value={image}
-                        onChange={onChangeImagen}
-                    />
-<input
-                            style={{fontSize: "17px", padding:"10px 0px 20px 10px"}}
-                            type="file"
-                            onChange={onChangeImagen}
-                                    />
-*/
-
-/*
-<label for="imageField">Imagen</label><br></br>
-                        <label id="nameOfImage" for="imageField" style={{"display":"none"}}></label>
-                        <input
-                            id="imageField"
-                            style={{fontSize: "17px", padding:"10px 0px 20px 10px",color: "transparent"}}
-                            type="file"
-                            onChange={onChangeImagen}
-                                    />
-*/
