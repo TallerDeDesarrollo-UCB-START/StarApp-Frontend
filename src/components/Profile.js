@@ -408,7 +408,6 @@ const Profile = ({sessionData}) => {
             <MenuItem value="Trabajando">Trabajando</MenuItem>
           </MySelect>
           <br />
-          <label>Profesión u Oficio</label>
             <MyTextField
               name="carrera"
               className={classNamees.intputs}
@@ -419,7 +418,6 @@ const Profile = ({sessionData}) => {
             />
           <br></br>
 
-          <label>Ciudad de residencia</label>
           <MyTextField
               name="ciudad_de_recidencia"
               className={classNamees.intputs}
@@ -471,7 +469,7 @@ const Profile = ({sessionData}) => {
           <span className={classNamees.titulos} style={{fontWeight:"bold", fontSize:"1.2em",color:"#545454"}}>
             Contacto de emergencia:
           </span>
-
+          <br></br>
           <MyTextField
               name="nombre_contacto_de_emergencia"
               className={classNamees.intputs}

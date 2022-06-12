@@ -32,7 +32,7 @@ export default function MyButton({children, onClick, className, disabled, varian
 					color="primary"
 					disabled={disabled}
 				>
-					<FontAwesomeIcon size="lg" icon={faArrowCircleLeft}/>&nbsp;Atras
+					<FontAwesomeIcon size="lg" icon={faArrowCircleLeft}/>&nbsp;Atrás
 				</Button>
 			)}
 			{(className === "excel") && (

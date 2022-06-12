@@ -40,7 +40,7 @@ const Home = ({ sessionData }) => {
 										inicio.
 									</Typography>
 									<MyButton className="default" onClick={() => (window.location.href = "/eventos")}>
-										Explorar proyectos
+										Explorar Eventos
 									</MyButton>
 								</>
 							) : (
