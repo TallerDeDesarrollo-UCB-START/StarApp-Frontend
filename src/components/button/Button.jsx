@@ -38,11 +38,11 @@ export default function MyButton({children, onClick, className, disabled, varian
 			{(className === "excel") && (
 				<Button
 					onClick={onClick}
-					style={{backgroundColor: "green", color: "white"}}
+					style={{backgroundColor: "transparent", color: "green"}}
 					size={size}
 					disabled={disabled}
 				>
-					{children}&nbsp;&nbsp;<FontAwesomeIcon size="lg" icon={faDownload}/>
+					<FontAwesomeIcon size="lg" icon={faDownload}/>
 				</Button>
 			)}
 			{(className === "edit") && (
@@ -80,11 +80,22 @@ export default function MyButton({children, onClick, className, disabled, varian
 			{(className === "delete") && (
 				<Button
 					onClick={onClick}
+					variant="contained"
 					style={{backgroundColor: "red", color: "white"}}
 					size={size}
 					disabled={disabled}
 				>
-					{children}&nbsp;&nbsp;<FontAwesomeIcon size="lg" icon={faTrash}/> 
+					{children} 
+				</Button>
+			)}
+			{(className === "delete-icon") && (
+				<Button
+					onClick={onClick}
+					style={{backgroundColor: "transparent", color: "red"}}
+					size={size}
+					disabled={disabled}
+				>
+					<FontAwesomeIcon size="lg" icon={faTrash}/> 
 				</Button>
 			)}
 			{(className === "cancel") && (

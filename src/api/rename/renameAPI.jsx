@@ -19,6 +19,18 @@ export function getEvents() {
 	return axios.get(url + "eventos");
 }
 
+export function getEventById(eventId) {
+	return axios.get(url + "eventos/" + eventId);
+}
+
+export function deleteEventById(eventId) {
+	return axios.delete(url + "eventos/" + eventId);
+}
+
+export function getEventParticipants(eventId) {
+	return axios.get(url + "eventos/participantes/" + eventId);
+}
+
 export function createEvent(body) {
 	return axios.post(url + "eventos/crearevento", body);
 }
