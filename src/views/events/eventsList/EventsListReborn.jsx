@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { MenuItem, Typography } from "@material-ui/core";
 import { Add as AddIcon } from "@material-ui/icons";
-import { getMyUserRole, getEvents, getCategories } from "../../../api/rename/renameAPI";
+import { 
+	getMyUserRole,
+	getEvents,
+	getCategories,
+	getGetMyParticipations,
+	participateInEvent,
+	stopParticipatingInEvent
+} from "../../../api/rename/renameAPI";
 import MyButton from "../../../components/button";
 import MySelect from "../../../components/select";
 import EventCard from "../../../components/eventCard"
@@ -16,7 +23,6 @@ const EventsListReborn = () => {
 	const [categories, setCategories] = useState([]);
 	const [filteredCategory, setFilteredCategory] = useState("");
 	const [arePastEvents, setArePastEvents] = useState(false);
-	const [isParticipating, setIsParticipating] = useState(false);
 
 	const currentDate = DateTime.now();
 
@@ -24,6 +30,7 @@ const EventsListReborn = () => {
 		const callGetEvents = async () => {
 			const response = await getEvents();
 			setEvents(response.data);
+			await callGetGetMyParticipations(response.data);
 		}
 		const callGetCategories = async () => {
 			const response = await getCategories();
@@ -37,13 +44,36 @@ const EventsListReborn = () => {
 			setUserRole(response.data.data.rol);
 		}
 
+		const callGetGetMyParticipations = async (events) => {
+			const addMyParticipations = (myParticipations) => {
+				myParticipations = myParticipations.map((participation) => participation.id_evento)
+				const eventsWithMyParticipations = [];
+				events.map((event) => {
+					if (myParticipations.includes(event.id)) {
+						event.isParticipating = true;
+					} else {
+						event.isParticipating = false;
+					}
+					eventsWithMyParticipations.push(event);
+				})
+				return eventsWithMyParticipations;
+			}
+			const response = await getGetMyParticipations();
+			setEvents(addMyParticipations(response.data));
+		}
+
 		callGetEvents();
 		callGetCategories();
 		callGetMyUserRole();
 	}, []);
 
-	function onClickEventButton() {
-		setIsParticipating(!isParticipating);
+	async function onClickEventButton(eventId, isParticipating) {
+		if (isParticipating) {
+			const response = await stopParticipatingInEvent(eventId);
+		} else {
+			const response = await participateInEvent(eventId);
+		}
+		window.location.reload();
 	}
 
 	function handleSelectChange({ target }) {
@@ -116,8 +146,16 @@ const EventsListReborn = () => {
 			</div>
 			<br />
 			<div className={cards_container}>
-				{filteredEvents.map((event) => (
-					<EventCard event={event} hasActions={true} isParticipating={isParticipating} onClick={onClickEventButton}/>
+				{!arePastEvents && filteredEvents.map((event) => (
+					<EventCard
+						key={"eventCard-currentEvent-" + event.id}
+						event={event}
+						hasActions={true}
+						onClick={async () => await onClickEventButton(event.id, event.isParticipating)}
+					/>
+				))}
+				{arePastEvents && filteredEvents.map((event) => (
+					<EventCard key={"eventCard-pastEvent-" + event.id} event={event}/>
 				))}
 			</div>
 		</>
