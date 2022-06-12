@@ -2,33 +2,45 @@ import axios from "axios";
 const url = process.env.REACT_APP_API;
 const urlTablaExtensa = `${url}extended_form/`;
 
-export async function getNeedToFillData(userId) {
+export function getNeedToFillData(userId) {
 	return Promise.resolve({data: { needToFill: true }});
 }
 
-export async function getMyEvents(userId) {
+export function getMyEvents(userId) {
 	const baseURL = `${process.env.REACT_APP_API}sesion/${userId}/get_my_eventos`;
 	return axios.get(baseURL);
 }
 
-export async function getMyUserRole() {
-	return await axios.get(url + "extended_form/" + window.sessionStorage.id);
+export function getMyUserRole() {
+	return axios.get(url + "extended_form/" + window.sessionStorage.id);
 }
 
-export async function getEvents() {
-	return await axios.get(url + "eventos");
+export function getEvents() {
+	return axios.get(url + "eventos");
 }
 
-export async function getCategories() {
-	return await axios.get(url + "eventos/categorias");
+export function createEvent(body) {
+	return axios.post(url + "eventos/crearevento", body);
 }
 
-export async function getGetMyParticipations() {
-	return await axios.get(url + "eventos/participante/" + window.sessionStorage.id);
+export function getProjects() {
+	return axios.get(url + "get_proyectos");
 }
 
-export async function participateInEvent(eventId) {
-	return await axios.post(
+export function getCategories() {
+	return axios.get(url + "eventos/categorias");
+}
+
+export function getLeaders() {
+	return axios.get(url + "lideres");
+}
+
+export function getGetMyParticipations() {
+	return axios.get(url + "eventos/participante/" + window.sessionStorage.id);
+}
+
+export function participateInEvent(eventId) {
+	return axios.post(
 		url + "eventos/participate_evento/" + eventId + "/sesion/" + window.sessionStorage.id,
 		{
 			id: eventId,
@@ -37,6 +49,6 @@ export async function participateInEvent(eventId) {
 	);
 }
 
-export async function stopParticipatingInEvent(eventId) {
-	return await axios.delete(url + "eventos/eliminar_participacion/" + eventId + "/" + window.sessionStorage.id);
+export function stopParticipatingInEvent(eventId) {
+	return axios.delete(url + "eventos/eliminar_participacion/" + eventId + "/" + window.sessionStorage.id);
 }

@@ -7,7 +7,7 @@ import { Modal} from '@material-ui/core';
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from "../../button";
-import MyInputText from "../../inputText";
+import MyTextField from "../../textField";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import MyDatePicker from '../../datePicker';
 
@@ -169,19 +169,19 @@ function FormularioCrearProyecto({ onCrearProy, onActivarForm, mostrarFormCrear,
                                     value={fechaInicio}
                                     onChange={onChangeFechaInicio}
                                     />
-                           <MyInputText
+                           <MyTextField
                             id="titulo"
                             value={titulo}
                             onChange={onChangeTitulo}
                             placeholder='Nombre del proyecto'
                             />
-                        <MyInputText
+                        <MyTextField
                             id="descripcion"
                             value={descripcion}
                             onChange={onChangeDescrip}
                             placeholder='Descripción'
                             />
-                        <MyInputText
+                        <MyTextField
                             id="objetivo"
                             value={objetivo}
                             onChange={onChangeObjetivo}
