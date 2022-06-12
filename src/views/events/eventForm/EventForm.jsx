@@ -12,6 +12,7 @@ import MySelect from "../../../components/select";
 import MyTextField from "../../../components/textField";
 import MyTimePicker from "../../../components/timePicker/TimePicker";
 import MyDatePicker from "../../../components/datePicker/DatePicker";
+import { getIdFromURL } from "../../../utils/Url.util"
 
 const EventForm = ({ isEditMode, event }) => {
 	const [leaders, setLeaders] = useState([]);
@@ -108,14 +109,8 @@ const EventForm = ({ isEditMode, event }) => {
 		}
 	}
 
-	function getIdFromURL(currentUrl) {
-		currentUrl.substring(currentUrl.indexOf("/") + 1);
-		return currentUrl.split("/").pop();
-	}
-
 	async function handleClickEventAction() {
-		let currentUrl = window.location.href;
-    	let eventId = getIdFromURL(currentUrl);
+    	let eventId = getIdFromURL();
 		const eventDTO = prepareCreateEventDTO();
 		if (isEditMode) {
 			const response = await updateEventById(eventId, eventDTO);

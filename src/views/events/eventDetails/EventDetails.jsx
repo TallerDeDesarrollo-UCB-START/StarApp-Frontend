@@ -12,6 +12,8 @@ import useStyles from "./EventDetails.styles";
 import MyModal from "../../../components/myModal";
 import EventForm from "../eventForm/EventForm";
 import ExportExcel from "react-export-excel";
+import { formatDate, formatTime } from "../../../utils/DateTime.util";
+import { getIdFromURL } from "../../../utils/Url.util";
 
 const { ExcelFile, ExcelSheet, ExcelColumn } = ExportExcel;
 
@@ -42,21 +44,14 @@ const EventDetails = () => {
 		callGetEventParticipants();
 	}, [])
 
-	function getIdFromURL(currentUrl) {
-		currentUrl.substring(currentUrl.indexOf("/") + 1);
-		return currentUrl.split("/").pop();
-	}
-
 	const callGetEventById = async () => {
-		let currentUrl = window.location.href;
-    let eventId = getIdFromURL(currentUrl);
+    	let eventId = getIdFromURL();
 		const response = await getEventById(eventId);
 		setEvent(response.data[0]);
 	}
 
 	const callGetEventParticipants = async () => {
-		let currentUrl = window.location.href;
-    	let eventId = getIdFromURL(currentUrl);
+    	let eventId = getIdFromURL();
 		const response = await getEventParticipants(eventId);
 		setParticipantsToDownload([...response.data]);
 		const participantsData = response.data;
@@ -68,8 +63,7 @@ const EventDetails = () => {
 	}
 
 	async function handleDeleteEvent() {
-		let currentUrl = window.location.href;
-    	let eventId = getIdFromURL(currentUrl);
+    	let eventId = getIdFromURL();
 		const response = await deleteEventById(eventId);
 		history.push("/eventos");
 	}
@@ -107,19 +101,19 @@ const EventDetails = () => {
 							<strong>Fecha:</strong>
 						</Grid>
 						<Grid item container xs={7}>
-							{event.fecha_evento}
+							{formatDate(event.fecha_evento)}
 						</Grid>
 						<Grid item xs={5} align="right">
 							<strong>Hora inicio:</strong>
 						</Grid>
 						<Grid item container xs={7}>
-							{event.hora_inicio}
+							{formatTime(event.hora_inicio)}
 						</Grid>
 						<Grid item xs={5} align="right">
 							<strong>Hora fin:</strong>
 						</Grid>
 						<Grid item container xs={7}>
-							{event.hora_fin}
+							{formatTime(event.hora_fin)}
 						</Grid>
 						<Grid item xs={5} align="right">
 							<strong>Modalidad:</strong>
