@@ -10,7 +10,8 @@ const useStyles = makeStyles(() => ({
         padding: '0 10px',
     },
     item: {
-        height: '200px',
+        height: '340px',
+        width: '340px',
     },
 }));
 
