@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
     container: {
-      width: '70%',//'90%',
-      height: '110%',//'75%',
+      width: '100%',//'90%',
+      height: '100%',//'75%',
       margin: 'auto',
       borderRadius: '5px',
       '&:hover':{
@@ -59,7 +59,7 @@ function TarjetaCategoriaProyecto({imagen, categoria}) {
                   <CardMedia
                     component="img"
                     alt={categoria}
-                    height="200"
+                    height="340"
                     image={imagen}
                     title={categoria}
                     className={classes.media}
