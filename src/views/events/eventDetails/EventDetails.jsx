@@ -9,6 +9,8 @@ import MyButton from "../../../components/button";
 import MyDeleteModal from "../../../components/deleteModal";
 import { Grid, Box, Typography } from '@mui/material';
 import useStyles from "./EventDetails.styles";
+import ExportExcel from "react-export-excel";
+const { ExcelFile, ExcelSheet, ExcelColumn } = ExportExcel;
 
 const EventDetails = () => {
 	const classes = useStyles();
@@ -27,6 +29,7 @@ const EventDetails = () => {
 	}
 	const [event, setEvent] = useState(eventInitialState);
 	const [participants, setParticipants] = useState([]);
+	const [participantsToDownload, setParticipantsToDownload] = useState([]);
 
 	const [isOpenDelete, setIsOpenDelete] = useState(false);
 
@@ -51,6 +54,7 @@ const EventDetails = () => {
 		let currentUrl = window.location.href;
     	let eventId = getIdFromURL(currentUrl);
 		const response = await getEventParticipants(eventId);
+		setParticipantsToDownload([...response.data]);
 		const participantsData = response.data;
 		const participantBlocks = [];
 		while(participantsData.length) {
@@ -62,12 +66,14 @@ const EventDetails = () => {
 	async function handleDeleteEvent() {
 		let currentUrl = window.location.href;
     	let eventId = getIdFromURL(currentUrl);
-		await deleteEventById(eventId);
+		const response = await deleteEventById(eventId);
 		history.push("/eventos");
 	}
 
 	const { image_container, details_container, description_container } = classes;
 
+	console.log(participantsToDownload);
+	console.log(participants);
 	return (
 		<>
 			<MyButton onClick={() => window.history.back()} className="go-back"/>
@@ -155,7 +161,22 @@ const EventDetails = () => {
 			<br />
 			<Grid container spacing={3}>
 				<Grid item xs={12} align="right">
-					<MyButton className="excel" />
+					<ExcelFile
+						element={
+							<MyButton className="excel" />
+						}
+						filename="Lista_De_Participantes"
+						>
+						<ExcelSheet data={participantsToDownload} name="Participantes">
+							<ExcelColumn label="Nombre" value="nombre" />
+							<ExcelColumn label="Apellido" value="apellido" />
+							<ExcelColumn label="Evento" value="nombre_evento" />
+							<ExcelColumn label="Hora Inicio" value="hora_inicio" />
+							<ExcelColumn label="Hora Fin" value="hora_fin" />
+							<ExcelColumn label="Telefono" value="telefono" />
+							<ExcelColumn label="Rol" value="rol" />
+						</ExcelSheet>
+					</ExcelFile>
 				</Grid>
 				<Grid item xs={12} align="center">
 					<Typography variant="h5">
