@@ -1,6 +1,6 @@
 import Routes from "./routes/Routes";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AppStructure from "./components/app-structure";
+import AppStructure from "./views/app-structure";
 import { React, useState, useEffect } from "react";
 import AxiosClient from "./components/AxiosClient";
 import CircularProgress from "@material-ui/core/CircularProgress";

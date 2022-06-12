@@ -1,7 +1,8 @@
+// This component will be deleted later.
 import React, { useState, useEffect } from "react";
 import { Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ResumedCardEvento from "./ResumedCardEvento";
+import EventCard from "../../components/eventCard";
 import axios from "axios";
 import SnackbarMessage from "../../components/templates/SnackbarMessage";
 import RedirectErrorPage from "../../components/redirect status/RedirectErrorPage";
@@ -95,20 +96,13 @@ const EventosProximos = ({ id, title }) => {
         smallScreen ? classes.resp_root_container : classes.root_container
       }
     >
-      {title ? (
-        <Typography variant="h2" component="h2" gutterBottom>
-          Tus Próximos Eventos
-        </Typography>
-      ) : (
-        <div style={{ display: "none" }}></div>
-      )}
       {events.length ? (
         <div
           className={classes.container_events}
           style={smallScreen ? { gap: "10px" } : {}}
         >
           {events.map((event) => (
-            <ResumedCardEvento event={event} enlisted={true} key={event.id} />
+            <EventCard event={event}/>
           ))}
         </div>
       ) : (

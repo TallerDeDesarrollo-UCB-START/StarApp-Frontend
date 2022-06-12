@@ -15,7 +15,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import LoginGoogle from "./LoginGoogle";
 import Typography from "@material-ui/core/Typography";
 import MyButton from "./button";
-import MyInputText from "./inputText";
+import MyTextField from "./textField";
 
 const useStyles = makeStyles((theme) => ({
   registerContainer: {
@@ -219,18 +219,18 @@ const RegisterForm = () => {
                   Regístrate para participar de proyectos y eventos
                 </div>
                 <div className={classes.nameContainer}>
-                <MyInputText
+                <MyTextField
                     name="username"
                     className={classes.textField}
                     placeholder="Nombre *"
                   />
-                <MyInputText
+                <MyTextField
                     name="lastname"
                     className={classes.textField}
                     placeholder="Apellido *"
                   />
                 </div>
-                <MyInputText
+                <MyTextField
                     name="email"
                     className={classes.textField}
                     placeholder="Correo *"

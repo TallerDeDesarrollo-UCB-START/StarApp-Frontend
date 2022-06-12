@@ -1,10 +1,10 @@
 import LoginForm from "../components/LoginForm";
 import Register from "../screens/Register";
-import EventsList from "../components/EventsList";
+import EventsList from "../views/events/eventsList";
 import Home from "../views/home/Home";
 import Profile from "../components/Profile";
 import VistaProyectos from "../components/componentes proyectos/paginas/VistaProyectos";
-import Evento from "../components/Evento";
+import EventDetails from "../views/events/eventDetails";
 import Users from "../components/UsersTable/Users"
 import VistaProyectoIndividual from "../components/componentes proyectos/paginas/VistaProyectoIndividual"
 import VistaCategoriasProyectos from "../components/componentes proyectos/paginas/VistaCategoriasProyectos"
@@ -71,7 +71,7 @@ const Routes = [
   {
     path: "/eventos/:id",
     name: "Evento",
-    component: Evento,
+    component: EventDetails,
     logginNeeded: true,
   },
   {

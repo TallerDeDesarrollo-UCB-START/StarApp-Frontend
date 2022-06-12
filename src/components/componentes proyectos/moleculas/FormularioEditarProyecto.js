@@ -7,7 +7,7 @@ import { Modal } from '@material-ui/core';
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicDropdown from '../moleculas/DynamicDropdown'
 import MyButton from '../../button'
-import MyInputText from "../../inputText";
+import MyTextField from "../../../components/textField";
 
 function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostrarFormEditar, lideres, categorias }) {
 
@@ -192,21 +192,21 @@ function FormularioEditarProyecto({ onEditarProy, onActivarForm, proyecto, mostr
                                     onChange={onChangeFechaFin}
                                     />
                         {/*NOTE: TITULO*/}
-                        <MyInputText
+                        <MyTextField
                             id="titulo"
                             value={titulo}
                             onChange={onChangeTitulo}
                             placeholder="Nombre del Proyecto"
                             />
                         {/*NOTE: DESCRIPCION*/}
-                        <MyInputText
+                        <MyTextField
                             id="descripcion"
                             value={descripcion}
                             onChange={onChangeDescrip}
                             placeholder="Descripción"
                             />
                         {/*NOTE: OBJETIVO*/}
-                        <MyInputText
+                        <MyTextField
                             id="objetivo"
                             value={objetivo}
                             onChange={onChangeObjetivo}

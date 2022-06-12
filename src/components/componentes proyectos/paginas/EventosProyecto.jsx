@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import ResumedCardEvento from "../../../views/home/ResumedCardEvento";
+import EventCard from "../../eventCard";
 import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 import BadRequests from "../../../components/redirect status/BadRequests";
 import MyButton from "../../button";
@@ -86,7 +86,7 @@ const EventosProyecto = ({ id, title }) => {
           style={smallScreen ? { gap: "10px" } : {}}
         >
           {events.map((event) => (
-            <ResumedCardEvento event={event} enlisted={true} key={event.id} />
+            <EventCard event={event}/>
           ))}
         </div>
       ) : (

@@ -1,11 +1,13 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { IconButton } from "@mui/material";
+import { useMediaQuery } from "@material-ui/core";
 import ExitIcon from "@material-ui/icons/ExitToApp";
-import MyButton from "../button";
+import MyButton from "../../components/button";
 import useStyles from "./Header.styles";
 
 const Header = ({ logged }) => {
+	const isMobile = !useMediaQuery('(min-width:900px)');
 	const history = useHistory();
   const classes = useStyles();
 
@@ -28,7 +30,7 @@ const Header = ({ logged }) => {
 				</IconButton>
 			) : (
 				<MyButton className="default" onClick={() => history.push("/login")}>
-					Iniciar Sesión
+					{isMobile ? "Iniciar" : "Iniciar Sesión"}
 				</MyButton>
 			)}
 			</div>

@@ -19,7 +19,7 @@ import SnackbarMessage from "../components/templates/SnackbarMessage";
 import BadRequests from "./redirect status/BadRequests";
 import MyButton from "./button";
 import MySelect from "./select";
-import MyInputText from "./inputText";
+import MyTextField from "./textField";
 
 const { getCountries } = require("country-list-spanish");
 
@@ -409,7 +409,7 @@ const Profile = ({sessionData}) => {
           </MySelect>
           <br />
           <label>Profesión u Oficio</label>
-            <MyInputText
+            <MyTextField
               name="carrera"
               className={classNamees.intputs}
               value={datosEdit.carrera}
@@ -420,7 +420,7 @@ const Profile = ({sessionData}) => {
           <br></br>
 
           <label>Ciudad de residencia</label>
-          <MyInputText
+          <MyTextField
               name="ciudad_de_recidencia"
               className={classNamees.intputs}
               value={datosEdit.ciudad_de_recidencia}
@@ -472,7 +472,7 @@ const Profile = ({sessionData}) => {
             Contacto de emergencia:
           </span>
 
-          <MyInputText
+          <MyTextField
               name="nombre_contacto_de_emergencia"
               className={classNamees.intputs}
               value={datosEdit.nombre_contacto_de_emergencia}
@@ -481,7 +481,7 @@ const Profile = ({sessionData}) => {
               placeholder="Nombre de contacto de emergencia"
             />
           <br></br>
-          <MyInputText
+          <MyTextField
             name="relacion_contacto_de_emergencia"
             id="relacion_contacto_de_emergencia"
             className={classNamees.intputs}
@@ -490,7 +490,7 @@ const Profile = ({sessionData}) => {
             placeholder="Relación de contacto de emergencia"
             />
           <br></br>
-          <MyInputText
+          <MyTextField
             name="numero_contacto_de_emergencia"
             id="numero_contacto_de_emergencia"
             className={classNamees.intputs}
