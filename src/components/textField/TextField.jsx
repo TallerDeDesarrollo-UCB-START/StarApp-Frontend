@@ -1,7 +1,7 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 
-const MyTextField = ({ label, name, value, onChange, placeholder, multilineRows }) => {
+const MyTextField = ({ label, name, value, onChange, placeholder, multilineRows, fullWidth, disabled }) => {
 	let isMultiline = false;
 	if (multilineRows) {
 		isMultiline = true;
@@ -18,6 +18,8 @@ const MyTextField = ({ label, name, value, onChange, placeholder, multilineRows 
 				multiline={isMultiline}
 				rows={multilineRows}
 				size="small"
+				fullWidth={fullWidth}
+				disabled={disabled}
 			/>
 		</>
 	);
