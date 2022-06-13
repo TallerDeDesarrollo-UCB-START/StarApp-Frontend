@@ -14,13 +14,14 @@ import EventForm from "../eventForm/EventForm";
 import ExportExcel from "react-export-excel";
 import { formatDate, formatTime } from "../../../utils/DateTime.util";
 import { getIdFromURL } from "../../../utils/Url.util";
+import { useMediaQuery } from '@material-ui/core';
 
 const { ExcelFile, ExcelSheet, ExcelColumn } = ExportExcel;
 
 const EventDetails = () => {
 	const classes = useStyles();
 	const history = useHistory();
-
+	const smallScreen = !useMediaQuery("(min-width:760px)")
 	const eventInitialState = {
 		nombre_evento: "",
 		fecha_evento: "",
@@ -68,22 +69,22 @@ const EventDetails = () => {
 		history.push("/eventos");
 	}
 
-	const { image_container, details_container, description_container } = classes;
+	const { card_event, image_container, details_container, information_container,description_container,values_grid } = classes;
 
 	return (
 		<>
 			<MyButton onClick={() => window.history.back()} className="go-back"/>
-			<Grid container>
-				<Grid item xs={8}>
+			<Grid container className={card_event}>
+				<Grid item xs={(smallScreen? 12 : 8)}>
 					<Typography variant="h4">
 						{event.nombre_evento}
 					</Typography>
 				</Grid>
-				<Grid item xs={4} align="right">
+				<Grid item xs={(smallScreen? 12 : 4)} align="right">
 					<MyButton className="edit" onClick={() => setIsOpenForm(true)}/>
 					<MyButton className="delete-icon" onClick={() => setIsOpenDelete(true)}/>
 				</Grid>
-				<Grid className={image_container} item xs={8}>
+				<Grid className={image_container} item xs={(smallScreen? 12 : 8)} style={{background:"blue"}}>
 					<Box
 						component="img"
 						sx={{
@@ -95,51 +96,51 @@ const EventDetails = () => {
 						src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
 					/>
 				</Grid>
-				<Grid className={details_container} item xs={4}>
-					<Grid container spacing={2}>
-						<Grid item xs={5} align="right">
+				<Grid className={details_container} item xs={(smallScreen? 12 : 4)}>
+					<Grid container className={information_container}>
+						<Grid item xs={4} align="right">
 							<strong>Fecha:</strong>
 						</Grid>
-						<Grid item container xs={7}>
+						<Grid item container xs={7} className={values_grid}>
 							{formatDate(event.fecha_evento)}
 						</Grid>
-						<Grid item xs={5} align="right">
+						<Grid item xs={4} align="right">
 							<strong>Hora inicio:</strong>
 						</Grid>
-						<Grid item container xs={7}>
+						<Grid item container xs={7} className={values_grid}>
 							{formatTime(event.hora_inicio)}
 						</Grid>
-						<Grid item xs={5} align="right">
+						<Grid item xs={4} align="right">
 							<strong>Hora fin:</strong>
 						</Grid>
 						<Grid item container xs={7}>
 							{formatTime(event.hora_fin)}
 						</Grid>
-						<Grid item xs={5} align="right">
+						<Grid item xs={4} align="right">
 							<strong>Modalidad:</strong>
 						</Grid>
 						<Grid item container xs={7}>
 							{event.modalidad_evento}
 						</Grid>
-						<Grid item xs={5} align="right">
+						<Grid item xs={4} align="right">
 							<strong>Lugar:</strong>
 						</Grid>
 						<Grid item container xs={7}>
 							{event.lugar_evento}
 						</Grid>
-						<Grid item xs={5} align="right">
+						<Grid item xs={4} align="right">
 							<strong>Lider:</strong>
 						</Grid>
 						<Grid item container xs={7}>
 							{event.lider}
 						</Grid>
-						<Grid item xs={5} align="right">
+						<Grid item xs={4} align="right">
 							<strong>Proyecto:</strong>
 						</Grid>
 						<Grid item container xs={7}>
 							{event.proyecto}
 						</Grid>
-						<Grid item xs={5} align="right">
+						<Grid item xs={4} align="right">
 							<strong>Categoria:</strong>
 						</Grid>
 						<Grid item container xs={7}>
