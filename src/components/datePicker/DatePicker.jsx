@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { getDateFormat } from '../../utils/DateTime.util';
 
 
 const MyDatePicker = ({ value, onChange, label }) => {
@@ -11,6 +12,7 @@ const MyDatePicker = ({ value, onChange, label }) => {
       <DesktopDatePicker
         label={label}
         value={value}
+        inputFormat={getDateFormat()}
         onChange={onChange}
         renderInput={(params) => <TextField {...params} />}
       />

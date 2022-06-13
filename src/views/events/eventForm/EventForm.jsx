@@ -4,15 +4,17 @@ import {
 	getLeaders,
 	getCategories,
 	getProjects,
-	createEvent
+	createEvent,
+	updateEventById
 } from "../../../api/rename/renameAPI";
 import MyButton from "../../../components/button";
 import MySelect from "../../../components/select";
 import MyTextField from "../../../components/textField";
 import MyTimePicker from "../../../components/timePicker/TimePicker";
 import MyDatePicker from "../../../components/datePicker/DatePicker";
+import { getIdFromURL } from "../../../utils/Url.util"
 
-const EventForm = () => {
+const EventForm = ({ isEditMode, event }) => {
 	const [leaders, setLeaders] = useState([]);
 	const [categories, setCategories] = useState([]);
 	const [projects, setProjects] = useState([]);
@@ -29,10 +31,47 @@ const EventForm = () => {
 	const [endTime, setEndTime] = useState(null);
 
 	useEffect(() => {
+		if(isEditMode) {
+			setEditMode();	
+		}
 		callGetLeaders();
 		callGetCategories();
 		callGetProjects();
 	}, []);
+
+	function setEditMode() {
+		console.log(event);
+		if(event.nombre_evento) {
+			setName(event.nombre_evento);
+		}
+		if(event.descripcion_evento) {
+			setDescription(event.descripcion_evento);
+		}
+		if(event.lider) {
+			setLeader(event.lider);
+		}
+		if(event.modalidad_evento) {
+			setMode(event.modalidad_evento);
+		}
+		if(event.lugar_evento) {
+			setLocation(event.lugar_evento);
+		}
+		if(event.categoria) {
+			setCategory(event.categoria);
+		}
+		if(event.proyecto) {
+			setProject(event.proyecto);
+		}
+		if(event.fecha_evento) {
+			setDate(event.fecha_evento);
+		}
+		if(event.hora_inicio) {
+			setStartTime(event.hora_inicio);
+		}
+		if(event.hora_fin) {
+			setEndTime(event.hora_fin);
+		}
+	}
 
 	const callGetLeaders = async () => {
 		const response = await getLeaders();
@@ -56,30 +95,35 @@ const EventForm = () => {
 
 	function prepareCreateEventDTO() {
 		return {
-      nombre_evento: name,
-      descripcion_evento: description,
-      lider: leader,
-      modalidad_evento: mode,
-      lugar_evento: location,
-      categoria: category,
-      proyecto: "Ninguno",
-      fecha_evento: date.toString(),
-      hora_inicio: startTime.toString(),
-      hora_fin: endTime.toString(),
-      estado: "1",
-    }
+			nombre_evento: name,
+			descripcion_evento: description,
+			lider: leader,
+			modalidad_evento: mode,
+			lugar_evento: location,
+			categoria: category,
+			proyecto: project,
+			fecha_evento: date.toString(),
+			hora_inicio: startTime.toString(),
+			hora_fin: endTime.toString(),
+			estado: "1",
+		}
 	}
 
-	async function handleCreateEvent() {
+	async function handleClickEventAction() {
+    	let eventId = getIdFromURL();
 		const eventDTO = prepareCreateEventDTO();
-		const response = await createEvent(eventDTO);
+		if (isEditMode) {
+			const response = await updateEventById(eventId, eventDTO);
+		} else {
+			const response = await createEvent(eventDTO);
+		}
 		window.location.reload();
 	}
 
-  return (
+  	return (
 		<>
 			<Typography variant="h6" component="h2">
-				Crear evento
+				{isEditMode ? "Editar evento": "Crear evento"}
 			</Typography>
 			<MyTextField
 				label="Nombre del evento *"
@@ -162,9 +206,9 @@ const EventForm = () => {
 
 			<MyButton
 				className="default"
-				onClick={async () => handleCreateEvent()}
+				onClick={async () => handleClickEventAction()}
 			>
-				Crear evento
+				{isEditMode ? "Actualizar evento" : "Crear evento"}
 			</MyButton>
 		</>
 	);

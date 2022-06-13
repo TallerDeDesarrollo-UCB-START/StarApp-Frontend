@@ -9,6 +9,13 @@ import MyButton from "../../../components/button";
 import MyDeleteModal from "../../../components/deleteModal";
 import { Grid, Box, Typography } from '@mui/material';
 import useStyles from "./EventDetails.styles";
+import MyModal from "../../../components/myModal";
+import EventForm from "../eventForm/EventForm";
+import ExportExcel from "react-export-excel";
+import { formatDate, formatTime } from "../../../utils/DateTime.util";
+import { getIdFromURL } from "../../../utils/Url.util";
+
+const { ExcelFile, ExcelSheet, ExcelColumn } = ExportExcel;
 
 const EventDetails = () => {
 	const classes = useStyles();
@@ -27,7 +34,9 @@ const EventDetails = () => {
 	}
 	const [event, setEvent] = useState(eventInitialState);
 	const [participants, setParticipants] = useState([]);
+	const [participantsToDownload, setParticipantsToDownload] = useState([]);
 
+	const [isOpenForm, setIsOpenForm] = useState(false);
 	const [isOpenDelete, setIsOpenDelete] = useState(false);
 
 	useEffect(() => {
@@ -35,22 +44,16 @@ const EventDetails = () => {
 		callGetEventParticipants();
 	}, [])
 
-	function getIdFromURL(currentUrl) {
-    currentUrl.substring(currentUrl.indexOf("/") + 1);
-    return currentUrl.split("/").pop();
-  }
-
 	const callGetEventById = async () => {
-		let currentUrl = window.location.href;
-    let eventId = getIdFromURL(currentUrl);
+    	let eventId = getIdFromURL();
 		const response = await getEventById(eventId);
 		setEvent(response.data[0]);
 	}
 
 	const callGetEventParticipants = async () => {
-		let currentUrl = window.location.href;
-    	let eventId = getIdFromURL(currentUrl);
+    	let eventId = getIdFromURL();
 		const response = await getEventParticipants(eventId);
+		setParticipantsToDownload([...response.data]);
 		const participantsData = response.data;
 		const participantBlocks = [];
 		while(participantsData.length) {
@@ -60,9 +63,8 @@ const EventDetails = () => {
 	}
 
 	async function handleDeleteEvent() {
-		let currentUrl = window.location.href;
-    	let eventId = getIdFromURL(currentUrl);
-		await deleteEventById(eventId);
+    	let eventId = getIdFromURL();
+		const response = await deleteEventById(eventId);
 		history.push("/eventos");
 	}
 
@@ -78,7 +80,7 @@ const EventDetails = () => {
 					</Typography>
 				</Grid>
 				<Grid item xs={4} align="right">
-					<MyButton className="edit" />
+					<MyButton className="edit" onClick={() => setIsOpenForm(true)}/>
 					<MyButton className="delete-icon" onClick={() => setIsOpenDelete(true)}/>
 				</Grid>
 				<Grid className={image_container} item xs={8}>
@@ -99,19 +101,19 @@ const EventDetails = () => {
 							<strong>Fecha:</strong>
 						</Grid>
 						<Grid item container xs={7}>
-							{event.fecha_evento}
+							{formatDate(event.fecha_evento)}
 						</Grid>
 						<Grid item xs={5} align="right">
 							<strong>Hora inicio:</strong>
 						</Grid>
 						<Grid item container xs={7}>
-							{event.hora_inicio}
+							{formatTime(event.hora_inicio)}
 						</Grid>
 						<Grid item xs={5} align="right">
 							<strong>Hora fin:</strong>
 						</Grid>
 						<Grid item container xs={7}>
-							{event.hora_fin}
+							{formatTime(event.hora_fin)}
 						</Grid>
 						<Grid item xs={5} align="right">
 							<strong>Modalidad:</strong>
@@ -155,7 +157,22 @@ const EventDetails = () => {
 			<br />
 			<Grid container spacing={3}>
 				<Grid item xs={12} align="right">
-					<MyButton className="excel" />
+					<ExcelFile
+						element={
+							<MyButton className="excel" />
+						}
+						filename="Lista_De_Participantes"
+						>
+						<ExcelSheet data={participantsToDownload} name="Participantes">
+							<ExcelColumn label="Nombre" value="nombre" />
+							<ExcelColumn label="Apellido" value="apellido" />
+							<ExcelColumn label="Evento" value="nombre_evento" />
+							<ExcelColumn label="Hora Inicio" value="hora_inicio" />
+							<ExcelColumn label="Hora Fin" value="hora_fin" />
+							<ExcelColumn label="Telefono" value="telefono" />
+							<ExcelColumn label="Rol" value="rol" />
+						</ExcelSheet>
+					</ExcelFile>
 				</Grid>
 				<Grid item xs={12} align="center">
 					<Typography variant="h5">
@@ -172,6 +189,10 @@ const EventDetails = () => {
 					</Grid>
 				))}
 			</Grid>
+
+			<MyModal isOpen={isOpenForm} onClose={() => setIsOpenForm(false)}>
+				<EventForm isEditMode={true} event={event}/>
+			</MyModal>
 
 			<MyDeleteModal
 				nameToDelete={event.nombre_evento}

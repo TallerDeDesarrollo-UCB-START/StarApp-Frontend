@@ -27,6 +27,10 @@ export function deleteEventById(eventId) {
 	return axios.delete(url + "eventos/" + eventId);
 }
 
+export function updateEventById(eventId, body) {
+	return axios.put(url + "actualizar_evento/" + eventId, body);
+}
+
 export function getEventParticipants(eventId) {
 	return axios.get(url + "eventos/participantes/" + eventId);
 }
