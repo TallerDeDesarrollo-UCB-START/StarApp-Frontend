@@ -7,16 +7,19 @@ import {
 	createEvent,
 	updateEventById
 } from "../../../api/rename/renameAPI";
+import { useHistory } from "react-router-dom";
 import MyButton from "../../../components/button";
 import MySelect from "../../../components/select";
 import MyTextField from "../../../components/textField";
 import MyTimePicker from "../../../components/timePicker/TimePicker";
 import MyDatePicker from "../../../components/datePicker/DatePicker";
 import { getIdFromURL } from "../../../utils/Url.util"
-import { makeStyles } from '@material-ui/core/styles';
 import { useForm, FormProvider } from "react-hook-form";
-
+import BadRequests from "../../../components/redirect status/BadRequests";
+import RedirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
+import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 const EventForm = ({ isEditMode, event }) => {
+	const history = useHistory();
 	const [leaders, setLeaders] = useState([]);
 	const [categories, setCategories] = useState([]);
 	const [projects, setProjects] = useState([]);
@@ -31,18 +34,37 @@ const EventForm = ({ isEditMode, event }) => {
 	const [date, setDate] = useState(null);
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
-	useEffect(() => {
+	const [snackbar, setSnackbar] = useState({
+		message: "",
+		active: false,
+		severity: "success",
+		afterClose:()=>{console.log("despues del mensaje");},
+	  });
+	const activeSnackbar = (message, severity, afterClose) => {
+		setSnackbar({ message, severity, afterClose, active: true });
+	  };
+	useEffect(async () => {
 		if(isEditMode) {
 			setEditMode();	
 		}
-		callGetLeaders();
-		callGetCategories();
-		callGetProjects();
+		try{
+			await callGetLeaders();
+			await callGetCategories();
+			await callGetProjects();
+		}catch(error)
+		{
+			console.log(error);
+			if (error.message == "Network Error"){
+				RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+				return;
+			}
+			let message = BadRequests(404);
+        	activeSnackbar("No se pudo recuperar los datos del evento, "+message, "error");
+			console.log(error);
+		}
 	}, []);
 
 	function getModalStyle() {
-        const top = 0;
-        const left = 0;
         return {
 			display:"flex",
 			flexDirection:"column", 
@@ -88,23 +110,41 @@ const EventForm = ({ isEditMode, event }) => {
 	}
 
 	const callGetLeaders = async () => {
-		const response = await getLeaders();
-		const leaderNames = response.data.map((leader) => leader.nombre + " " + leader.apellido);
-		leaderNames.unshift("Sin Asignar");
-		setLeaders(leaderNames);
+		try{
+			const response = await getLeaders();
+			const leaderNames = response.data.map((leader) => leader.nombre + " " + leader.apellido);
+			leaderNames.unshift("Sin Asignar");
+			setLeaders(leaderNames);
+		}catch(error)
+		{
+			console.log(error);
+			throw error;
+		}
 	}
 
 	const callGetCategories = async () => {
-		const response = await getCategories();
-		const categoryNames = response.data.map((category) => category.interes);
-		setCategories(categoryNames);
+		try{
+			const response = await getCategories();
+			const categoryNames = response.data.map((category) => category.interes);
+			setCategories(categoryNames);
+		}catch(error)
+		{
+			console.log(error);
+			throw error;
+		}
 	}
 
 	const callGetProjects = async () => {
-		const response = await getProjects();
-		const projectNames = response.data.map((project) => project.titulo);
-		projectNames.unshift("No Seleccionado");
-		setProjects(projectNames);
+		try{
+			const response = await getProjects();
+			const projectNames = response.data.map((project) => project.titulo);
+			projectNames.unshift("No Seleccionado");
+			setProjects(projectNames);
+		}catch(error)
+		{
+			console.log(error);
+			throw error;
+		}
 	}
 
 	function prepareCreateEventDTO() {
@@ -225,6 +265,7 @@ const EventForm = ({ isEditMode, event }) => {
 						{isEditMode ? "Actualizar evento" : "Crear evento"}
 					</MyButton>
 				</FormProvider>
+				<SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
 			</div>
 	);
 }
