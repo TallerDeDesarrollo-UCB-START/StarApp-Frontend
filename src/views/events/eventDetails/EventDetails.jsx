@@ -62,6 +62,7 @@ const EventDetails = () => {
 	async function handleDeleteEvent() {
 		let currentUrl = window.location.href;
     	let eventId = getIdFromURL(currentUrl);
+		await deleteEventById(eventId);
 		history.push("/eventos");
 	}
 
