@@ -70,21 +70,29 @@ const EventDetails = () => {
 	}
 
 	const { card_event, image_container, details_container, information_container,description_container,values_grid } = classes;
-
+	const resizeGrids=(maxSize, minSize)=>
+	{
+		if (smallScreen){
+			return maxSize;
+		}
+		else{
+			minSize;
+		}
+	}
 	return (
 		<>
 			<MyButton onClick={() => window.history.back()} className="go-back"/>
 			<Grid container className={card_event}>
-				<Grid item xs={(smallScreen? 12 : 8)}>
+				<Grid item xs={resizeGrids(12, 8)}>
 					<Typography variant="h4">
 						{event.nombre_evento}
 					</Typography>
 				</Grid>
-				<Grid item xs={(smallScreen? 12 : 4)} align="right">
+				<Grid item xs={resizeGrids(12, 4)} align="right">
 					<MyButton className="edit" onClick={() => setIsOpenForm(true)}/>
 					<MyButton className="delete-icon" onClick={() => setIsOpenDelete(true)}/>
 				</Grid>
-				<Grid className={image_container} item xs={(smallScreen? 12 : 8)} style={{background:"blue"}}>
+				<Grid className={image_container} item xs={resizeGrids(12, 8)} style={{background:"blue"}}>
 					<Box
 						component="img"
 						sx={{
@@ -96,7 +104,7 @@ const EventDetails = () => {
 						src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
 					/>
 				</Grid>
-				<Grid className={details_container} item xs={(smallScreen? 12 : 4)}>
+				<Grid className={details_container} item xs={resizeGrids(12, 4)}>
 					<Grid container className={information_container}>
 						<Grid item xs={4} align="right">
 							<strong>Fecha:</strong>
