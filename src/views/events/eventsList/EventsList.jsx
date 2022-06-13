@@ -26,7 +26,6 @@ const EventsList = () => {
 	const [filteredCategory, setFilteredCategory] = useState("");
 	const [arePastEvents, setArePastEvents] = useState(false);
 	const [isOpenForm, setIsOpenForm] = useState(false);
-
 	const currentDate = DateTime.now();
 
 	useEffect(() => {
@@ -162,10 +161,9 @@ const EventsList = () => {
 					<EventCard key={"eventCard-pastEvent-" + event.id} event={event}/>
 				))}
 			</div>
-
-			<MyModal isOpen={isOpenForm} onClose={() => setIsOpenForm(false)}>
-				<EventForm />
-			</MyModal>
+				<MyModal isOpen={isOpenForm} onClose={() => setIsOpenForm(false)} >
+					<EventForm/>
+				</MyModal>
 		</>
 	);
 }

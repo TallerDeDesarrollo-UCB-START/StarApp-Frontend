@@ -15,7 +15,9 @@ import ExportExcel from "react-export-excel";
 import { formatDate, formatTime } from "../../../utils/DateTime.util";
 import { getIdFromURL } from "../../../utils/Url.util";
 import { useMediaQuery } from '@material-ui/core';
-
+import BadRequests from "../../../components/redirect status/BadRequests";
+import RedirectErrorPage from "../../../components/redirect status/RedirectErrorPage";
+import SnackbarMessage from "../../../components/templates/SnackbarMessage";
 const { ExcelFile, ExcelSheet, ExcelColumn } = ExportExcel;
 
 const EventDetails = () => {
@@ -33,6 +35,15 @@ const EventDetails = () => {
 		proyecto: "",
 		categoria: ""
 	}
+	const [snackbar, setSnackbar] = useState({
+		message: "",
+		active: false,
+		severity: "success",
+		afterClose:()=>{console.log("despues del mensaje");},
+	  });
+	const activeSnackbar = (message, severity, afterClose) => {
+		setSnackbar({ message, severity, afterClose, active: true });
+	  };
 	const [event, setEvent] = useState(eventInitialState);
 	const [participants, setParticipants] = useState([]);
 	const [participantsToDownload, setParticipantsToDownload] = useState([]);
@@ -40,27 +51,50 @@ const EventDetails = () => {
 	const [isOpenForm, setIsOpenForm] = useState(false);
 	const [isOpenDelete, setIsOpenDelete] = useState(false);
 
-	useEffect(() => {
-		callGetEventById();
-		callGetEventParticipants();
+	useEffect(async () => {
+		try{
+			await callGetEventById();
+			await callGetEventParticipants();
+		}catch(error)
+		{
+			console.log(error);
+			if (error.message == "Network Error"){
+				RedirectErrorPage(500,history,"Hubo un error en la conexión con los datos.")
+				return;
+			}
+			let message = BadRequests(404);
+        	activeSnackbar("No se pudo recuperar los datos del evento, "+message, "error");
+		}
 	}, [])
 
 	const callGetEventById = async () => {
-    	let eventId = getIdFromURL();
-		const response = await getEventById(eventId);
-		setEvent(response.data[0]);
+		try{
+			let eventId = getIdFromURL();
+			const response = await getEventById(eventId);
+			setEvent(response.data[0]);
+		}catch(error)
+		{
+			console.log(error);
+			throw error;
+		}
 	}
 
 	const callGetEventParticipants = async () => {
-    	let eventId = getIdFromURL();
-		const response = await getEventParticipants(eventId);
-		setParticipantsToDownload([...response.data]);
-		const participantsData = response.data;
-		const participantBlocks = [];
-		while(participantsData.length) {
-			participantBlocks.push(participantsData.splice(0,5));
+		try{
+			let eventId = getIdFromURL();
+			const response = await getEventParticipants(eventId);
+			setParticipantsToDownload([...response.data]);
+			const participantsData = response.data;
+			const participantBlocks = [];
+			while(participantsData.length) {
+				participantBlocks.push(participantsData.splice(0,5));
+			}
+			setParticipants(participantBlocks);
+		}catch(error)
+		{
+			console.log(error);
+			throw error;
 		}
-		setParticipants(participantBlocks);
 	}
 
 	async function handleDeleteEvent() {
@@ -76,7 +110,7 @@ const EventDetails = () => {
 			return maxSize;
 		}
 		else{
-			minSize;
+			return minSize;
 		}
 	}
 	return (
@@ -209,6 +243,7 @@ const EventDetails = () => {
 				onClose={() => setIsOpenDelete(false)}
 				onDelete={handleDeleteEvent}
 			/>
+			<SnackbarMessage snackbar={snackbar} setActive={setSnackbar} />
 		</>
 	);
 }

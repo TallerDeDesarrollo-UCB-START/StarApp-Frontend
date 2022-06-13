@@ -13,12 +13,14 @@ import MyTextField from "../../../components/textField";
 import MyTimePicker from "../../../components/timePicker/TimePicker";
 import MyDatePicker from "../../../components/datePicker/DatePicker";
 import { getIdFromURL } from "../../../utils/Url.util"
+import { makeStyles } from '@material-ui/core/styles';
+import { useForm, FormProvider } from "react-hook-form";
 
 const EventForm = ({ isEditMode, event }) => {
 	const [leaders, setLeaders] = useState([]);
 	const [categories, setCategories] = useState([]);
 	const [projects, setProjects] = useState([]);
-
+	const methods = useForm();
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [leader, setLeader] = useState("");
@@ -29,7 +31,6 @@ const EventForm = ({ isEditMode, event }) => {
 	const [date, setDate] = useState(null);
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
-
 	useEffect(() => {
 		if(isEditMode) {
 			setEditMode();	
@@ -39,6 +40,19 @@ const EventForm = ({ isEditMode, event }) => {
 		callGetProjects();
 	}, []);
 
+	function getModalStyle() {
+        const top = 0;
+        const left = 0;
+        return {
+			display:"flex",
+			flexDirection:"column", 
+			rowGap: "10px",
+			alignSelf:"center",
+			alignItems: "stretch",
+			width:"90%"
+        };
+    }
+	const [modalStyle] = React.useState(getModalStyle);
 	function setEditMode() {
 		console.log(event);
 		if(event.nombre_evento) {
@@ -121,96 +135,97 @@ const EventForm = ({ isEditMode, event }) => {
 	}
 
   	return (
-		<>
-			<Typography variant="h6" component="h2">
-				{isEditMode ? "Editar evento": "Crear evento"}
-			</Typography>
-			<MyTextField
-				label="Nombre del evento *"
-				value={name}
-				onChange={({ target }) => setName(target.value)}
-			/>
-			<MyTextField
-				label="Descripción"
-				value={description}
-				onChange={({ target }) => setDescription(target.value)}
-				multilineRows={4}
-			/>
-			<MySelect
-				placeholder="Líder *"
-				value={leader}
-				onChange={({ target }) => setLeader(target.value)}
-			>
-				{leaders.map((item) => (
-					<MenuItem key={item} value={item}>
-						{item}
-					</MenuItem>
-				))}
-			</MySelect>
-			<MySelect
-				placeholder="Modalidad *"
-				value={mode}
-				onChange={({ target }) => setMode(target.value)}
-			>
-				<MenuItem value="Presencial">
-					Presencial
-				</MenuItem>
-				<MenuItem value="Virtual">
-					Virtual
-				</MenuItem>
-			</MySelect>
-			<MyTextField
-				label="Lugar"
-				value={location}
-				onChange={({ target }) => setLocation(target.value)}
-			/>
-			<MySelect
-				placeholder="Categoría *"
-				value={category}
-				onChange={({ target }) => setCategory(target.value)}
-			>
-				{categories.map((item) => (
-					<MenuItem key={item} value={item}>
-						{item}
-					</MenuItem>
-				))}
-			</MySelect>
-			<MySelect
-				placeholder="Proyecto"
-				value={project}
-				onChange={({ target }) => setProject(target.value)}
-			>
-				{projects.map((item) => {
-					return (
-						<MenuItem key={item} value={item}>
-							{item}
+			<div style={modalStyle}>
+				<FormProvider {...methods}>
+					<Typography variant="h6" component="h2">
+						{isEditMode ? "Editar evento": "Crear evento"}
+					</Typography>
+					<MyTextField
+						label="Nombre del evento *"
+						value={name}
+						onChange={({ target }) => setName(target.value)}
+					/>
+					<MyTextField
+						label="Descripción"
+						value={description}
+						onChange={({ target }) => setDescription(target.value)}
+						multilineRows={4}
+					/>
+					<MySelect
+						placeholder="Líder *"
+						value={leader}
+						onChange={({ target }) => setLeader(target.value)}
+					>
+						{leaders.map((item) => (
+							<MenuItem key={item} value={item}>
+								{item}
+							</MenuItem>
+						))}
+					</MySelect>
+					<MySelect
+						placeholder="Modalidad *"
+						value={mode}
+						onChange={({ target }) => setMode(target.value)}
+					>
+						<MenuItem value="Presencial">
+							Presencial
 						</MenuItem>
-					);
-				})}
-			</MySelect>
-			<MyDatePicker
-				label="Fecha *"
-				value={date}
-				onChange={(value) => setDate(value)}
-			/>
-			<MyTimePicker 
-				label="Hora Inicio *"
-				value={startTime}
-				onChange={(value) => setStartTime(value)}
-			/> 
-			<MyTimePicker
-				label="Hora Fin *"
-				value={endTime}
-				onChange={(value) => setEndTime(value)}
-			/>
-
-			<MyButton
-				className="default"
-				onClick={async () => handleClickEventAction()}
-			>
-				{isEditMode ? "Actualizar evento" : "Crear evento"}
-			</MyButton>
-		</>
+						<MenuItem value="Virtual">
+							Virtual
+						</MenuItem>
+					</MySelect>
+					<MyTextField
+						label="Lugar"
+						value={location}
+						onChange={({ target }) => setLocation(target.value)}
+					/>
+					<MySelect
+						placeholder="Categoría *"
+						value={category}
+						onChange={({ target }) => setCategory(target.value)}
+					>
+						{categories.map((item) => (
+							<MenuItem key={item} value={item}>
+								{item}
+							</MenuItem>
+						))}
+					</MySelect>
+					<MySelect
+						placeholder="Proyecto"
+						value={project}
+						onChange={({ target }) => setProject(target.value)}
+					>
+						{projects.map((item) => {
+							return (
+								<MenuItem key={item} value={item}>
+									{item}
+								</MenuItem>
+							);
+						})}
+					</MySelect>
+					<MyDatePicker
+						label="Fecha *"
+						value={date}
+						onChange={(value) => setDate(value)}
+					/>
+					<MyTimePicker 
+						label="Hora Inicio *"
+						value={startTime}
+						onChange={(value) => setStartTime(value)}
+					/> 
+					<MyTimePicker
+						label="Hora Fin *"
+						value={endTime}
+						onChange={(value) => setEndTime(value)}
+					/>
+					<MyButton
+						className="default"
+						onClick={async () => handleClickEventAction()}
+					>
+						{isEditMode ? "Actualizar evento" : "Crear evento"}
+					</MyButton>
+				</FormProvider>
+			</div>
 	);
 }
 

@@ -11,9 +11,11 @@ const useStyles = makeStyles(() => ({
       alignItems: "center",
       justifyContent: "center",
       marginTop: "15%",
-      fontSize:"50px",
-      
+      fontSize:"30px"
     },  
+    error_message:{
+        alignSelf: "center"
+    },
     link:{
         color:"rgb(35, 0, 108)",
     }
@@ -25,8 +27,7 @@ const ErrorPage = () => {
     const history = useHistory();
     let status = parseInt(sessionStorage.getItem("statusError"));
     const errorMessage = sessionStorage.getItem("errorMessage");
-    const message = BadRequests(status)
-    console.log(status)
+    const message = BadRequests(status);
     if (isNaN(status))
         history.push(routes[0].path)
     sessionStorage.removeItem("statusError");
@@ -35,7 +36,7 @@ const ErrorPage = () => {
         <div className={classes.root}>
             <h2>OCURRIÓ ALGO INESPERADO</h2>
             <h2>{errorMessage}</h2>
-            <h4>{message}</h4>
+            <h4 className={classes.error_message}>{message}</h4>
             <a className={classes.link} onClick={() => history.push(routes[0].path)} color="#f0f"><strong color="#f0f">VOLVER A LA PAGINA PRINCIPAL</strong></a>
         </div>
     );
