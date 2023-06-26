@@ -1,4 +1,4 @@
-# StarApp Frontend
+# StarApp Frontend [Deprecated]
 
 <img alt="Logo" align="right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu1tfJ2N0SENG9G86Avbt6qN59vXLDAFYggA5IrspoOX4Q_irRB18laR-At4dTKZyG6VI&usqp=CAU" width="20%" />
 
